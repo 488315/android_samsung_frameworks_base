@@ -1,9 +1,9 @@
 package android.hardware.biometrics.common;
 
-import android.p009os.BadParcelableException;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.ParcelableHolder;
+import android.os.BadParcelableException;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.ParcelableHolder;
 
 /* loaded from: classes.dex */
 public final class AuthenticateReason implements Parcelable {
@@ -110,12 +110,12 @@ public final class AuthenticateReason implements Parcelable {
     _set(2, Integer.valueOf(_value));
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final int getStability() {
     return 1;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
     _aidl_parcel.writeInt(this._tag);
     switch (this._tag) {
@@ -151,7 +151,7 @@ public final class AuthenticateReason implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     switch (getTag()) {
       case 0:
@@ -215,12 +215,12 @@ public final class AuthenticateReason implements Parcelable {
         };
     public final ParcelableHolder extension = new ParcelableHolder(1);
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public final int getStability() {
       return 1;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
       int _aidl_start_pos = _aidl_parcel.dataPosition();
       _aidl_parcel.writeInt(0);
@@ -261,7 +261,7 @@ public final class AuthenticateReason implements Parcelable {
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       int _mask = 0 | describeContents(this.extension);
       return _mask;

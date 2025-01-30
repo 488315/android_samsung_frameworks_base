@@ -4,7 +4,7 @@ import android.app.ResourcesManager;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.p009os.IBinder;
+import android.os.IBinder;
 
 /* loaded from: classes4.dex */
 public class ConfigurationHelper {

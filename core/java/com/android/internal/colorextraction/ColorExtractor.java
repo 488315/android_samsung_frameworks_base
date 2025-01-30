@@ -4,7 +4,7 @@ import android.app.WallpaperColors;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.AsyncTask;
+import android.os.AsyncTask;
 import android.util.SparseArray;
 import com.android.internal.colorextraction.types.ExtractionType;
 import com.android.internal.colorextraction.types.Tonal;
@@ -80,7 +80,7 @@ public class ColorExtractor implements WallpaperManager.OnColorsChangedListener 
     private LoadWallpaperColors() {}
 
     /* JADX INFO: Access modifiers changed from: protected */
-    @Override // android.p009os.AsyncTask
+    @Override // android.os.AsyncTask
     public Void doInBackground(WallpaperManager... params) {
       this.mSystemColors = params[0].getWallpaperColors(1);
       this.mLockColors = params[0].getWallpaperColors(2);
@@ -88,7 +88,7 @@ public class ColorExtractor implements WallpaperManager.OnColorsChangedListener 
     }
 
     /* JADX INFO: Access modifiers changed from: protected */
-    @Override // android.p009os.AsyncTask
+    @Override // android.os.AsyncTask
     public void onPostExecute(Void b) {
       ColorExtractor.this.mSystemColors = this.mSystemColors;
       ColorExtractor.this.mLockColors = this.mLockColors;

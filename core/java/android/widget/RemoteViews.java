@@ -20,8 +20,8 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.res.ApkAssets;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
@@ -40,15 +40,15 @@ import android.graphics.drawable.RippleDrawable;
 import android.graphics.drawable.VectorDrawable;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
-import android.p009os.AsyncTask;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.CancellationSignal;
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.Parcelable;
-import android.p009os.StrictMode;
-import android.p009os.UserHandle;
+import android.os.AsyncTask;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.CancellationSignal;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
+import android.os.Parcelable;
+import android.os.StrictMode;
+import android.os.UserHandle;
 import android.system.Os;
 import android.telecom.Logging.Session;
 import android.text.TextUtils;
@@ -377,7 +377,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         private Action() {
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public int describeContents() {
             return 0;
         }
@@ -418,7 +418,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             return 0;
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public final void writeToParcel(Parcel dest, int flags) {
             throw new UnsupportedOperationException();
         }
@@ -565,7 +565,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.emptyViewId = in.readInt();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel out, int flags) {
             out.writeInt(this.viewId);
             out.writeInt(this.emptyViewId);
@@ -606,7 +606,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.pendingIntentTemplate = PendingIntent.readPendingIntentOrNullFromParcel(parcel);
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             PendingIntent.writePendingIntentOrNullToParcel(this.pendingIntentTemplate, dest);
@@ -687,7 +687,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.list = parcel.createTypedArrayList(RemoteViews.CREATOR);
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             dest.writeInt(this.viewTypeCount);
@@ -807,7 +807,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.mItems.setHierarchyRootData(rootData);
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             this.mItems.writeToParcel(dest, flags, true);
@@ -875,7 +875,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.intent = (Intent) parcel.readTypedObject(Intent.CREATOR);
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             dest.writeTypedObject(this.intent, flags);
@@ -951,7 +951,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             remoteResponse.readFromParcel(parcel);
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             this.mResponse.writeToParcel(dest, flags);
@@ -1029,7 +1029,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             remoteResponse.readFromParcel(parcel);
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             this.mResponse.writeToParcel(dest, flags);
@@ -1229,7 +1229,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.filterMode = PorterDuff.intToMode(parcel.readInt());
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel parcel, int i) {
             parcel.writeInt(this.viewId);
             parcel.writeInt(this.targetBackground ? 1 : 0);
@@ -1279,7 +1279,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.mColorFilter = parcel.readInt();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             dest.writeString(this.mTargetPathName);
@@ -1337,7 +1337,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.color = parcel.readInt();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             dest.writeFloat(this.radius);
@@ -1375,7 +1375,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.mColorStateList = (ColorStateList) parcel.readParcelable(null, ColorStateList.class);
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             dest.writeParcelable(this.mColorStateList, 0);
@@ -1415,7 +1415,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.mNext = in.readBoolean();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel out, int flags) {
             out.writeInt(this.viewId);
             out.writeBoolean(this.mNext);
@@ -1531,7 +1531,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.bitmap = RemoteViews.this.mBitmapCache.getBitmapForId(this.bitmapId);
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             dest.writeString8(this.methodName);
@@ -1593,7 +1593,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.type = in.readInt();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel out, int flags) {
             out.writeInt(this.viewId);
             out.writeString8(this.methodName);
@@ -1773,7 +1773,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             }
         }
 
-        @Override // android.widget.RemoteViews.BaseReflectionAction, android.p009os.Parcelable
+        @Override // android.widget.RemoteViews.BaseReflectionAction, android.os.Parcelable
         public void writeToParcel(Parcel out, int flags) {
             super.writeToParcel(out, flags);
             switch (this.type) {
@@ -1854,7 +1854,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.mResId = in.readInt();
         }
 
-        @Override // android.widget.RemoteViews.BaseReflectionAction, android.p009os.Parcelable
+        @Override // android.widget.RemoteViews.BaseReflectionAction, android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             super.writeToParcel(dest, flags);
             dest.writeInt(this.mResourceType);
@@ -1936,7 +1936,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.mAttrId = in.readInt();
         }
 
-        @Override // android.widget.RemoteViews.BaseReflectionAction, android.p009os.Parcelable
+        @Override // android.widget.RemoteViews.BaseReflectionAction, android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             super.writeToParcel(dest, flags);
             dest.writeInt(this.mResourceType);
@@ -2015,7 +2015,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.mUnit = in.readInt();
         }
 
-        @Override // android.widget.RemoteViews.BaseReflectionAction, android.p009os.Parcelable
+        @Override // android.widget.RemoteViews.BaseReflectionAction, android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             super.writeToParcel(dest, flags);
             dest.writeFloat(this.mValue);
@@ -2082,7 +2082,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             }
         }
 
-        @Override // android.widget.RemoteViews.BaseReflectionAction, android.p009os.Parcelable
+        @Override // android.widget.RemoteViews.BaseReflectionAction, android.os.Parcelable
         public void writeToParcel(Parcel out, int flags) {
             super.writeToParcel(out, flags);
             switch (this.type) {
@@ -2215,7 +2215,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.mIsAnimationEnd = parcel.readBoolean();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.mViewId);
             dest.writeInt(this.mAnimatorId);
@@ -2286,7 +2286,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             remoteViews.addFlags(RemoteViews.this.mApplyFlags);
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             dest.writeInt(this.mIndex);
@@ -2506,7 +2506,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.mViewIdToKeep = parcel.readInt();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             dest.writeInt(this.mViewIdToKeep);
@@ -2620,7 +2620,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.viewId = parcel.readInt();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
         }
@@ -2757,7 +2757,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.f610d4 = parcel.readInt();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel parcel, int i) {
             parcel.writeInt(this.viewId);
             parcel.writeInt(this.isRelative ? 1 : 0);
@@ -2890,7 +2890,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.size = parcel.readFloat();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             dest.writeInt(this.units);
@@ -2936,7 +2936,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.bottom = parcel.readInt();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             dest.writeInt(this.left);
@@ -3015,7 +3015,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.mIsAnimationEnd = parcel.readBoolean();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             dest.writeInt(this.mProperty);
@@ -3213,7 +3213,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.remoteInputs = (Parcelable[]) parcel.createTypedArray(RemoteInput.CREATOR);
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             dest.writeTypedArray(this.remoteInputs, flags);
@@ -3247,7 +3247,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.textColor = parcel.readInt();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.textColor);
         }
@@ -3297,7 +3297,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.mTag = parcel.readInt();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.mViewId);
             dest.writeInt(this.mKey);
@@ -3334,7 +3334,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.mChecked = in.readBoolean();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             dest.writeBoolean(this.mChecked);
@@ -3382,7 +3382,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.mCheckedId = in.readInt();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             dest.writeInt(this.mCheckedId);
@@ -3449,7 +3449,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.mValue = in.readInt();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             dest.writeInt(this.mValueType);
@@ -4683,7 +4683,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         }
 
         /* JADX INFO: Access modifiers changed from: protected */
-        @Override // android.p009os.AsyncTask
+        @Override // android.os.AsyncTask
         public ViewTree doInBackground(Void... params) {
             try {
                 if (this.mResult == null) {
@@ -4707,7 +4707,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         }
 
         /* JADX INFO: Access modifiers changed from: protected */
-        @Override // android.p009os.AsyncTask
+        @Override // android.os.AsyncTask
         public void onPostExecute(ViewTree viewTree) {
             this.mCancelSignal.setOnCancelListener(null);
             if (this.mError == null) {
@@ -5033,12 +5033,12 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
         return clazz.isAnnotationPresent(RemoteView.class);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
         return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
         boolean prevSquashingAllowed = dest.allowSquashing();
         if (!hasMultipleLayouts()) {
@@ -5538,12 +5538,12 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             }
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public int describeContents() {
             return 0;
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             writeToParcel(dest, flags, false);
         }
@@ -5734,7 +5734,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.viewId = parcel.readInt();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
         }
@@ -5789,7 +5789,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.blendingOpacity = parcel.readFloat();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             dest.writeFloat(this.angle);
@@ -5850,7 +5850,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.blendingOpacity = parcel.readFloat();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             dest.writeFloat(this.angle);
@@ -5905,7 +5905,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.blendingOpacity = parcel.readFloat();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             dest.writeFloat(this.size);
@@ -5967,7 +5967,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.blendingOpacity = parcel.readFloat();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             dest.writeFloat(this.angle);
@@ -6022,7 +6022,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.blendingOpacity = parcel.readFloat();
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             dest.writeFloat(this.size);
@@ -6093,7 +6093,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.longClickPendingIntent = PendingIntent.readPendingIntentOrNullFromParcel(parcel);
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             this.longClickPendingIntent.writeToParcel(dest, 0);
@@ -6142,7 +6142,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.pendingIntentTemplate = PendingIntent.readPendingIntentOrNullFromParcel(parcel);
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             this.pendingIntentTemplate.writeToParcel(dest, 0);
@@ -6244,7 +6244,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             }
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel parcel, int i) {
             Log.m96e(RemoteViews.LOG_TAG, "SetOnLongClickDragable - writeToParcel:" + parcel.toString());
             parcel.writeInt(102);
@@ -6359,7 +6359,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.pendingIntent = PendingIntent.readPendingIntentOrNullFromParcel(parcel);
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             PendingIntent.writePendingIntentOrNullToParcel(this.pendingIntent, dest);
@@ -6440,7 +6440,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.pendingIntent = PendingIntent.readPendingIntentOrNullFromParcel(parcel);
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             PendingIntent.writePendingIntentOrNullToParcel(this.pendingIntent, dest);
@@ -6502,7 +6502,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             this.blurInfo = SemBlurInfo.CREATOR.createFromParcel(parcel);
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.viewId);
             this.blurInfo.writeToParcel(dest, flags);
@@ -6577,7 +6577,7 @@ public class RemoteViews implements Parcelable, LayoutInflater.Filter {
             }
         }
 
-        @Override // android.p009os.Parcelable
+        @Override // android.os.Parcelable
         public void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(this.animationType);
             switch (this.animationType) {

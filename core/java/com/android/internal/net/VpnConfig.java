@@ -4,17 +4,17 @@ import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ResolveInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.net.IpPrefix;
 import android.net.LinkAddress;
 import android.net.Network;
 import android.net.ProxyInfo;
 import android.net.RouteInfo;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.UserHandle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.UserHandle;
 import android.util.Log;
 import com.android.internal.C4337R;
 import com.samsung.android.ims.options.SemCapabilities;
@@ -349,12 +349,12 @@ public class VpnConfig implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeString(this.user);
     parcel.writeString(this.interfaze);

@@ -6,8 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Xml;
@@ -1130,7 +1130,7 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
     return (which & 2) == 2;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mWhich);
     dest.writeInt(this.mDataList.size());
@@ -1183,7 +1183,7 @@ public class SemWallpaperColors implements Parcelable, Cloneable {
     return result.toString();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

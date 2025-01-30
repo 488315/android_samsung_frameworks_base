@@ -4,12 +4,12 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p002pm.ActivityInfo;
-import android.content.p002pm.ResolveInfo;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ResolveInfo;
 import android.database.DataSetObservable;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.AsyncTask;
-import android.p009os.Process;
+import android.os.AsyncTask;
+import android.os.Process;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Xml;
@@ -581,7 +581,7 @@ public class ActivityChooserModel extends DataSetObservable {
 
     /* JADX WARN: Removed duplicated region for block: B:43:0x0129 A[EXC_TOP_SPLITTER, SYNTHETIC] */
     /* JADX WARN: Removed duplicated region for block: B:49:? A[SYNTHETIC] */
-    @Override // android.p009os.AsyncTask
+    @Override // android.os.AsyncTask
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */

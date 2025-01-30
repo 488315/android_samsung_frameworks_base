@@ -7,7 +7,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import com.samsung.android.knox.analytics.database.Contract;
 import com.samsung.android.knox.analytics.model.Event;
 import com.samsung.android.knox.analytics.model.EventList;

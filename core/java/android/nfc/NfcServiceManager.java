@@ -1,8 +1,8 @@
 package android.nfc;
 
 import android.annotation.SystemApi;
-import android.p009os.IBinder;
-import android.p009os.ServiceManager;
+import android.os.IBinder;
+import android.os.ServiceManager;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
 /* loaded from: classes3.dex */

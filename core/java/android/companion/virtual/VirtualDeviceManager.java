@@ -21,7 +21,7 @@ import android.hardware.input.VirtualNavigationTouchpad;
 import android.hardware.input.VirtualNavigationTouchpadConfig;
 import android.hardware.input.VirtualTouchscreen;
 import android.hardware.input.VirtualTouchscreenConfig;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.util.Log;
 import android.view.Surface;
 import java.lang.annotation.ElementType;

@@ -15,8 +15,8 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.net.Uri;
-import android.p009os.RemoteException;
-import android.p009os.StrictMode;
+import android.os.RemoteException;
+import android.os.StrictMode;
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes3.dex */

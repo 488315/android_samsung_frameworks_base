@@ -1,7 +1,7 @@
 package android.service.oemlock;
 
 import android.annotation.SystemApi;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 
 @SystemApi
 /* loaded from: classes3.dex */

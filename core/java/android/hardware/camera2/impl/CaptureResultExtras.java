@@ -1,7 +1,7 @@
 package android.hardware.camera2.impl;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class CaptureResultExtras implements Parcelable {
@@ -68,12 +68,12 @@ public class CaptureResultExtras implements Parcelable {
     this.readoutTimestamp = readoutTimestamp;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.requestId);
     dest.writeInt(this.subsequenceId);

@@ -5,17 +5,17 @@ import android.annotation.SystemApi;
 import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ServiceInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ServiceInfo;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Message;
-import android.p009os.PersistableBundle;
-import android.p009os.RemoteException;
-import android.p009os.UserHandle;
-import android.p009os.UserManager;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.PersistableBundle;
+import android.os.RemoteException;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.util.Log;
 import android.util.Slog;
 import com.android.internal.infra.AndroidFuture;
@@ -63,7 +63,7 @@ public class TrustAgentService extends Service {
   private final Object mLock = new Object();
   private Handler mHandler =
       new Handler() { // from class: android.service.trust.TrustAgentService.1
-        @Override // android.p009os.Handler
+        @Override // android.os.Handler
         public void handleMessage(Message msg) {
           switch (msg.what) {
             case 1:

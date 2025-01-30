@@ -2,8 +2,8 @@ package android.telephony;
 
 import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -64,12 +64,12 @@ public final class CallForwardingInfo implements Parcelable {
     return this.mTimeSeconds;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeString(this.mNumber);
     out.writeBoolean(this.mEnabled);

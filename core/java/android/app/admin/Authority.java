@@ -1,7 +1,7 @@
 package android.app.admin;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcelable;
+import android.os.Parcelable;
 
 @SystemApi
 /* loaded from: classes.dex */
@@ -19,7 +19,7 @@ public abstract class Authority implements Parcelable {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

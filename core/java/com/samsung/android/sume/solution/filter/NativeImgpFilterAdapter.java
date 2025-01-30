@@ -1,6 +1,6 @@
 package com.samsung.android.sume.solution.filter;
 
-import android.p009os.BatteryManager;
+import android.os.BatteryManager;
 import android.util.Log;
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBuffer;

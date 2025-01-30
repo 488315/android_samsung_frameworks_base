@@ -6,7 +6,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.os.Binder;
 import android.os.Environment;
 import android.os.FileObserver;

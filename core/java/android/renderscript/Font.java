@@ -3,7 +3,7 @@ package android.renderscript;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Typeface;
-import android.p009os.Environment;
+import android.os.Environment;
 import java.io.File;
 import java.io.InputStream;
 import java.util.HashMap;

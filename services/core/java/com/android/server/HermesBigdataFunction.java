@@ -92,7 +92,7 @@ public final class HermesBigdataFunction {
   /* JADX WARN: Code restructure failed: missing block: B:27:0x0055, code lost:
 
      android.util.Slog.d("HERMES#BigDataFunction", "[unZipDumpstate] extract files : " + r7.getAbsolutePath());
-     r7 = new byte[android.p005os.IInstalld.FLAG_USE_QUOTA];
+     r7 = new byte[android.os.IInstalld.FLAG_USE_QUOTA];
   */
   /* JADX WARN: Code restructure failed: missing block: B:28:0x0071, code lost:
 

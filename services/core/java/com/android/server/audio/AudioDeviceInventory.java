@@ -29,7 +29,7 @@ import android.os.Bundle;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.os.SystemProperties;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;

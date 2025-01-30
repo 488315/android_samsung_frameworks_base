@@ -1,7 +1,7 @@
 package android.view;
 
-import android.p009os.Looper;
-import android.p009os.MessageQueue;
+import android.os.Looper;
+import android.os.MessageQueue;
 import android.util.Log;
 import dalvik.system.CloseGuard;
 import java.lang.ref.WeakReference;

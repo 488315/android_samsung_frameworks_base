@@ -1,9 +1,9 @@
 package com.android.internal.telephony.vzwavslibrary;
 
 import android.content.Context;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ProviderInfo;
-import android.content.p002pm.Signature;
+import android.content.pm.PackageManager;
+import android.content.pm.ProviderInfo;
+import android.content.pm.Signature;
 import android.database.Cursor;
 import android.net.Uri;
 import java.util.Arrays;

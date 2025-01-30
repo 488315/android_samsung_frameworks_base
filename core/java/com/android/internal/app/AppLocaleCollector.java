@@ -2,11 +2,11 @@ package com.android.internal.app;
 
 import android.app.LocaleManager;
 import android.content.Context;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
-import android.p009os.Build;
-import android.p009os.LocaleList;
-import android.p009os.SystemProperties;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.os.LocaleList;
+import android.os.SystemProperties;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.inputmethod.InputMethodInfo;

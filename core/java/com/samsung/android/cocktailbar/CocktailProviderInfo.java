@@ -2,14 +2,14 @@ package com.samsung.android.cocktailbar;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ResolveInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
-import android.p009os.Binder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.UserHandle;
+import android.os.Binder;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
 import java.util.ArrayList;
@@ -308,7 +308,7 @@ public class CocktailProviderInfo implements Parcelable {
     this.landLayout = in.readByte() == 1;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     if (this.provider != null) {
       out.writeInt(1);
@@ -441,7 +441,7 @@ public class CocktailProviderInfo implements Parcelable {
     return value2;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

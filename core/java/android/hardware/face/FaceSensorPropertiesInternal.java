@@ -2,8 +2,8 @@ package android.hardware.face;
 
 import android.hardware.biometrics.ComponentInfoInternal;
 import android.hardware.biometrics.SensorPropertiesInternal;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.List;
 
 /* loaded from: classes2.dex */
@@ -56,12 +56,12 @@ public class FaceSensorPropertiesInternal extends SensorPropertiesInternal {
     this.supportsSelfIllumination = in.readBoolean();
   }
 
-  @Override // android.hardware.biometrics.SensorPropertiesInternal, android.p009os.Parcelable
+  @Override // android.hardware.biometrics.SensorPropertiesInternal, android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.hardware.biometrics.SensorPropertiesInternal, android.p009os.Parcelable
+  @Override // android.hardware.biometrics.SensorPropertiesInternal, android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     super.writeToParcel(dest, flags);
     dest.writeInt(this.sensorType);

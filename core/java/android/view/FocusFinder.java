@@ -1,6 +1,6 @@
 package android.view;
 
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.util.ArrayMap;
 import android.util.ArraySet;

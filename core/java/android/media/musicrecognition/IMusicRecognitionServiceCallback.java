@@ -1,12 +1,12 @@
 package android.media.musicrecognition;
 
 import android.media.MediaMetadata;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
-import android.p009os.IInterface;
-import android.p009os.Parcel;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.IInterface;
+import android.os.Parcel;
+import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IMusicRecognitionServiceCallback extends IInterface {
@@ -25,7 +25,7 @@ public interface IMusicRecognitionServiceCallback extends IInterface {
     @Override // android.media.musicrecognition.IMusicRecognitionServiceCallback
     public void onRecognitionFailed(int failureCode) throws RemoteException {}
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return null;
     }
@@ -50,7 +50,7 @@ public interface IMusicRecognitionServiceCallback extends IInterface {
       return new Proxy(obj);
     }
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return this;
     }
@@ -66,12 +66,12 @@ public interface IMusicRecognitionServiceCallback extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public String getTransactionName(int transactionCode) {
       return getDefaultTransactionName(transactionCode);
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
         throws RemoteException {
       if (code >= 1 && code <= 16777215) {
@@ -107,7 +107,7 @@ public interface IMusicRecognitionServiceCallback extends IInterface {
         this.mRemote = remote;
       }
 
-      @Override // android.p009os.IInterface
+      @Override // android.os.IInterface
       public IBinder asBinder() {
         return this.mRemote;
       }
@@ -143,7 +143,7 @@ public interface IMusicRecognitionServiceCallback extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public int getMaxTransactionId() {
       return 1;
     }

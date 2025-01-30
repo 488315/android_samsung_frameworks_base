@@ -8,7 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Message;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Slog;
 import android.view.KeyEvent;
 import android.view.WindowManager;

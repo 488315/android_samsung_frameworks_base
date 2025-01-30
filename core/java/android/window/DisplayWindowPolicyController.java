@@ -2,7 +2,7 @@ package android.window;
 
 import android.content.ComponentName;
 import android.content.Intent;
-import android.content.p002pm.ActivityInfo;
+import android.content.pm.ActivityInfo;
 import android.util.ArraySet;
 import java.io.PrintWriter;
 import java.util.List;

@@ -2,14 +2,14 @@ package android.app;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.p002pm.ActivityInfo;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ProviderInfo;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ProviderInfo;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.UserHandle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.UserHandle;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
@@ -290,12 +290,12 @@ public final class SearchableInfo implements Parcelable {
       return this.mSuggestActionMsgColumn;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeInt(this.mKeyCode);
       dest.writeString(this.mQueryActionMsg);
@@ -545,12 +545,12 @@ public final class SearchableInfo implements Parcelable {
     this.mCategoryFilters = in.readString();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeInt(this.mLabelId);
     this.mSearchActivity.writeToParcel(parcel, i);

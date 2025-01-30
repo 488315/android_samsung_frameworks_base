@@ -1,18 +1,18 @@
 package android.media.session;
 
 import android.app.PendingIntent;
-import android.content.p002pm.ParceledListSlice;
+import android.content.pm.ParceledListSlice;
 import android.media.MediaMetadata;
 import android.media.Rating;
-import android.media.p008tv.interactive.TvInteractiveAppService;
+import android.media.tv.interactive.TvInteractiveAppService;
 import android.net.Uri;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
-import android.p009os.IInterface;
-import android.p009os.Parcel;
-import android.p009os.RemoteException;
-import android.p009os.ResultReceiver;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.IInterface;
+import android.os.Parcel;
+import android.os.RemoteException;
+import android.os.ResultReceiver;
 import android.speech.tts.TextToSpeech;
 import android.text.TextUtils;
 import android.view.KeyEvent;
@@ -244,7 +244,7 @@ public interface ISessionController extends IInterface {
       return 0;
     }
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return null;
     }
@@ -305,7 +305,7 @@ public interface ISessionController extends IInterface {
       return new Proxy(obj);
     }
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return this;
     }
@@ -391,12 +391,12 @@ public interface ISessionController extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public String getTransactionName(int transactionCode) {
       return getDefaultTransactionName(transactionCode);
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
         throws RemoteException {
       if (code >= 1 && code <= 16777215) {
@@ -668,7 +668,7 @@ public interface ISessionController extends IInterface {
         this.mRemote = remote;
       }
 
-      @Override // android.p009os.IInterface
+      @Override // android.os.IInterface
       public IBinder asBinder() {
         return this.mRemote;
       }
@@ -1291,7 +1291,7 @@ public interface ISessionController extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public int getMaxTransactionId() {
       return 36;
     }

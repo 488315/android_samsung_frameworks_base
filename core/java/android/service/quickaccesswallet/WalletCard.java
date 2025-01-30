@@ -3,8 +3,8 @@ package android.service.quickaccesswallet;
 import android.app.PendingIntent;
 import android.graphics.drawable.Icon;
 import android.location.Location;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import com.android.internal.util.Preconditions;
 import java.lang.annotation.Retention;
@@ -57,12 +57,12 @@ public final class WalletCard implements Parcelable {
     this.mCardLocations = builder.mCardLocations;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.mCardId);
     dest.writeInt(this.mCardType);

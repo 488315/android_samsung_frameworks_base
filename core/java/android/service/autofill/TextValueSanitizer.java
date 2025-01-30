@@ -1,8 +1,8 @@
 package android.service.autofill;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Slog;
 import android.view.autofill.AutofillValue;
 import android.view.autofill.Helper;
@@ -77,12 +77,12 @@ public final class TextValueSanitizer extends InternalSanitizer implements Sanit
             + NavigationBarInflaterView.SIZE_MOD_END;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeSerializable(this.mRegex);
     parcel.writeString(this.mSubst);

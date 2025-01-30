@@ -2,8 +2,8 @@ package android.location;
 
 import android.content.Context;
 import android.hardware.scontext.SContextConstants;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import com.android.internal.util.Preconditions;
 import java.io.IOException;
 import java.util.Collections;

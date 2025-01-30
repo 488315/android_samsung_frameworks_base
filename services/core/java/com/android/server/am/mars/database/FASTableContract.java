@@ -1,7 +1,7 @@
 package com.android.server.am.mars.database;
 
 import android.net.Uri;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 
 /* loaded from: classes.dex */
 public abstract class FASTableContract {

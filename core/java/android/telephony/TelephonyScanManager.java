@@ -1,15 +1,15 @@
 package android.telephony;
 
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.HandlerThread;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.Messenger;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.Parcelable;
+import android.os.RemoteException;
 import android.util.SparseArray;
 import com.android.internal.telephony.ITelephony;
 import com.android.internal.util.Preconditions;
@@ -78,7 +78,7 @@ public final class TelephonyScanManager {
       super(looper);
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message message) {
       NetworkScanInfo nsi;
       Preconditions.checkNotNull(message, "message cannot be null");

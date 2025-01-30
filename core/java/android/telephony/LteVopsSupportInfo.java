@@ -1,8 +1,8 @@
 package android.telephony;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -64,12 +64,12 @@ public final class LteVopsSupportInfo extends VopsSupportInfo {
     return false;
   }
 
-  @Override // android.telephony.VopsSupportInfo, android.p009os.Parcelable
+  @Override // android.telephony.VopsSupportInfo, android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.telephony.VopsSupportInfo, android.p009os.Parcelable
+  @Override // android.telephony.VopsSupportInfo, android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     super.writeToParcel(out, flags, 3);
     out.writeInt(this.mVopsSupport);

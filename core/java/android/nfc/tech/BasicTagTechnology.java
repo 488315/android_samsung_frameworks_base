@@ -2,7 +2,7 @@ package android.nfc.tech;
 
 import android.nfc.Tag;
 import android.nfc.TransceiveResult;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.util.Log;
 import java.io.IOException;
 

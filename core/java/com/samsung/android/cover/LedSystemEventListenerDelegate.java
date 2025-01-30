@@ -1,11 +1,11 @@
 package com.samsung.android.cover;
 
 import android.content.Context;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.RemoteException;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 class LedSystemEventListenerDelegate extends INfcLedCoverTouchListenerCallback.Stub {
@@ -55,7 +55,7 @@ class LedSystemEventListenerDelegate extends INfcLedCoverTouchListenerCallback.S
       this.mListener = listener;
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       if (this.mListener != null) {
         switch (msg.what) {

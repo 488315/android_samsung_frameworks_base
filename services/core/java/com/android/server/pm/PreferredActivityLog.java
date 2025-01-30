@@ -4,7 +4,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.ResolveInfo;
 import android.os.Binder;
 import com.android.server.enterprise.vpn.knoxvpn.KnoxVpnFirewallHelper;
-import com.samsung.android.server.p025pm.PmLog;
+import com.samsung.android.server.pm.PmLog;
 import java.util.List;
 
 /* loaded from: classes3.dex */

@@ -2,8 +2,8 @@ package android.telephony.ims.feature;
 
 import android.annotation.SystemApi;
 import android.content.Context;
-import android.p009os.IInterface;
-import android.p009os.RemoteException;
+import android.os.IInterface;
+import android.os.RemoteException;
 import android.telephony.ims.aidl.IImsCapabilityCallback;
 import android.util.Log;
 import com.android.ims.internal.IImsFeatureStatusCallback;

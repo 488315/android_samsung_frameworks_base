@@ -17,8 +17,8 @@ import android.content.Intent;
 import android.content.UndoManager;
 import android.content.UndoOperation;
 import android.content.UndoOwner;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ResolveInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -38,13 +38,13 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.AudioManager;
-import android.p009os.Bundle;
-import android.p009os.LocaleList;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.ParcelableParcel;
-import android.p009os.SemSystemProperties;
-import android.p009os.SystemClock;
+import android.os.Bundle;
+import android.os.LocaleList;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.ParcelableParcel;
+import android.os.SemSystemProperties;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.telecom.TelecomManager;
 import android.text.DynamicLayout;
@@ -8183,7 +8183,7 @@ public class Editor {
       this.mIsComposition = src.readInt() == 1;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       parcel.writeInt(this.mType);
       parcel.writeString(this.mOldText);

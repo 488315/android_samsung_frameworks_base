@@ -5,7 +5,7 @@ import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.DataSetObserver;
-import android.p009os.Handler;
+import android.os.Handler;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;

@@ -4,7 +4,7 @@ import android.net.resolv.aidl.IDnsResolverUnsolicitedEventListener;
 import android.util.SparseArray;
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.location.gnss.hal.GnssNative;
-import com.att.iqi.lib.metrics.p019hw.HwConstants;
+import com.att.iqi.lib.metrics.hw.HwConstants;
 
 /* loaded from: classes2.dex */
 public abstract class HdmiCecMessageValidator {

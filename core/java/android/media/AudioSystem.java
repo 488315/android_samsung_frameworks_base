@@ -1,13 +1,13 @@
 package android.media;
 
 import android.content.Context;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.audio.common.AidlConversion;
 import android.media.audiofx.AudioEffect;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Vibrator;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Vibrator;
 import android.service.timezone.TimeZoneProviderService;
 import android.telephony.TelephonyManager;
 import android.util.Log;

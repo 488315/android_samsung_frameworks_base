@@ -1,7 +1,7 @@
 package android.hardware.face;
 
-import android.p009os.Bundle;
-import android.p009os.RemoteException;
+import android.os.Bundle;
+import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public class FaceServiceReceiver extends IFaceServiceReceiver.Stub {

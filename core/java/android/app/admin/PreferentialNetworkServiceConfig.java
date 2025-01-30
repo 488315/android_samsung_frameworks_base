@@ -1,7 +1,7 @@
 package android.app.admin;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.IndentingPrintWriter;
 import android.util.Log;
 import com.android.modules.utils.TypedXmlPullParser;
@@ -219,7 +219,7 @@ public final class PreferentialNetworkServiceConfig implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeBoolean(this.mIsEnabled);
     dest.writeBoolean(this.mAllowFallbackToDefaultConnection);
@@ -382,7 +382,7 @@ public final class PreferentialNetworkServiceConfig implements Parcelable {
     pw.println(Arrays.toString(this.mExcludedUids));
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

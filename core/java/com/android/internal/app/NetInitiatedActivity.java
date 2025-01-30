@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManagerInternal;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.Message;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import com.android.internal.C4337R;
 import com.android.internal.location.GpsNetInitiatedHandler;
@@ -25,7 +25,7 @@ public class NetInitiatedActivity extends AlertActivity implements DialogInterfa
   private int default_response_timeout = 6;
   private final Handler mHandler =
       new Handler() { // from class: com.android.internal.app.NetInitiatedActivity.1
-        @Override // android.p009os.Handler
+        @Override // android.os.Handler
         public void handleMessage(Message msg) {
           switch (msg.what) {
             case 1:

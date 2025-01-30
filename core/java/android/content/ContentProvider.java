@@ -3,30 +3,30 @@ package android.content;
 import android.Manifest;
 import android.annotation.SystemApi;
 import android.app.AppOpsManager;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.PathPermission;
-import android.content.p002pm.ProviderInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PathPermission;
+import android.content.pm.ProviderInfo;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
-import android.p009os.AsyncTask;
-import android.p009os.Binder;
-import android.p009os.Build;
-import android.p009os.Bundle;
-import android.p009os.CancellationSignal;
-import android.p009os.IBinder;
-import android.p009os.ICancellationSignal;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.ParcelableException;
-import android.p009os.Process;
-import android.p009os.RemoteCallback;
-import android.p009os.RemoteException;
-import android.p009os.Trace;
-import android.p009os.UserHandle;
-import android.p009os.UserManager;
+import android.os.AsyncTask;
+import android.os.Binder;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.CancellationSignal;
+import android.os.IBinder;
+import android.os.ICancellationSignal;
+import android.os.ParcelFileDescriptor;
+import android.os.ParcelableException;
+import android.os.Process;
+import android.os.RemoteCallback;
+import android.os.RemoteException;
+import android.os.Trace;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseBooleanArray;
@@ -1305,7 +1305,7 @@ public abstract class ContentProvider implements ContentInterface, ComponentCall
       final ParcelFileDescriptor[] fds = ParcelFileDescriptor.createPipe();
       AsyncTask<Object, Object, Object> task =
           new AsyncTask<Object, Object, Object>() { // from class: android.content.ContentProvider.1
-            @Override // android.p009os.AsyncTask
+            @Override // android.os.AsyncTask
             protected Object doInBackground(Object... params) {
               func.writeDataToPipe(fds[1], uri, mimeType, opts, args);
               try {

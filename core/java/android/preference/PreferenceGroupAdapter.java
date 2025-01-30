@@ -1,7 +1,7 @@
 package android.preference;
 
 import android.graphics.drawable.Drawable;
-import android.p009os.Handler;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;

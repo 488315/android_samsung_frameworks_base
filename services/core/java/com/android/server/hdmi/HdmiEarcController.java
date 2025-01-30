@@ -1,7 +1,7 @@
 package com.android.server.hdmi;
 
-import android.hardware.p002tv.hdmi.earc.IEArc;
-import android.hardware.p002tv.hdmi.earc.IEArcCallback;
+import android.hardware.tv.hdmi.earc.IEArc;
+import android.hardware.tv.hdmi.earc.IEArcCallback;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
@@ -167,14 +167,14 @@ public final class HdmiEarcController {
   }
 
   public final class EarcAidlCallback extends IEArcCallback.Stub {
-    @Override // android.hardware.p002tv.hdmi.earc.IEArcCallback
+    @Override // android.hardware.tv.hdmi.earc.IEArcCallback
     public int getInterfaceVersion() {
       return 1;
     }
 
     public EarcAidlCallback() {}
 
-    @Override // android.hardware.p002tv.hdmi.earc.IEArcCallback
+    @Override // android.hardware.tv.hdmi.earc.IEArcCallback
     public void onStateChange(final byte b, final int i) {
       HdmiEarcController.this.runOnServiceThread(
           new Runnable() { // from class:
@@ -191,7 +191,7 @@ public final class HdmiEarcController {
       HdmiEarcController.this.mService.handleEarcStateChange(b, i);
     }
 
-    @Override // android.hardware.p002tv.hdmi.earc.IEArcCallback
+    @Override // android.hardware.tv.hdmi.earc.IEArcCallback
     public void onCapabilitiesReported(final byte[] bArr, final int i) {
       HdmiEarcController.this.runOnServiceThread(
           new Runnable() { // from class:
@@ -208,7 +208,7 @@ public final class HdmiEarcController {
       HdmiEarcController.this.mService.handleEarcCapabilitiesReported(bArr, i);
     }
 
-    @Override // android.hardware.p002tv.hdmi.earc.IEArcCallback
+    @Override // android.hardware.tv.hdmi.earc.IEArcCallback
     public synchronized String getInterfaceHash() {
       return "101230f18c7b8438921e517e80eea4ccc7c1e463";
     }

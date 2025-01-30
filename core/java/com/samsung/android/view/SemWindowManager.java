@@ -4,20 +4,20 @@ import android.app.PendingIntent$$ExternalSyntheticLambda1;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p002pm.ActivityInfo;
+import android.content.pm.ActivityInfo;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.hardware.devicestate.DeviceStateManagerGlobal;
 import android.hardware.devicestate.DeviceStateRequest;
-import android.p009os.Binder;
-import android.p009os.Debug;
-import android.p009os.Handler;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
-import android.p009os.UserHandle;
+import android.os.Binder;
+import android.os.Debug;
+import android.os.Handler;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.IWindowManager;
@@ -396,12 +396,12 @@ public class SemWindowManager {
 
     public VisibleWindowInfo() {}
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       parcel.writeString(this.packageName);
       parcel.writeString(this.name);
@@ -731,12 +731,12 @@ public class SemWindowManager {
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeInt(this.press);
       dest.writeInt(this.f3073id);

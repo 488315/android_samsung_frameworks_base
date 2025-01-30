@@ -3,15 +3,15 @@ package android.service.dataloader;
 import android.annotation.SystemApi;
 import android.app.Service;
 import android.content.Intent;
-import android.content.p002pm.DataLoaderParams;
-import android.content.p002pm.DataLoaderParamsParcel;
-import android.content.p002pm.FileSystemControlParcel;
-import android.content.p002pm.IDataLoader;
-import android.content.p002pm.IDataLoaderStatusListener;
-import android.content.p002pm.InstallationFile;
-import android.content.p002pm.InstallationFileParcel;
-import android.p009os.IBinder;
-import android.p009os.ParcelFileDescriptor;
+import android.content.pm.DataLoaderParams;
+import android.content.pm.DataLoaderParamsParcel;
+import android.content.pm.FileSystemControlParcel;
+import android.content.pm.IDataLoader;
+import android.content.pm.IDataLoaderStatusListener;
+import android.content.pm.InstallationFile;
+import android.content.pm.InstallationFileParcel;
+import android.os.IBinder;
+import android.os.ParcelFileDescriptor;
 import android.util.ExceptionUtils;
 import android.util.Slog;
 import java.io.IOException;
@@ -69,7 +69,7 @@ public abstract class DataLoaderService extends Service {
     private DataLoaderBinderService() {}
 
     /* JADX WARN: Finally extract failed */
-    @Override // android.content.p002pm.IDataLoader
+    @Override // android.content.pm.IDataLoader
     public void create(
         int id,
         DataLoaderParamsParcel params,
@@ -101,28 +101,28 @@ public abstract class DataLoaderService extends Service {
       }
     }
 
-    @Override // android.content.p002pm.IDataLoader
+    @Override // android.content.pm.IDataLoader
     public void start(int id) {
       if (!DataLoaderService.this.nativeStartDataLoader(id)) {
         Slog.m115e(DataLoaderService.TAG, "Failed to start loader: " + id);
       }
     }
 
-    @Override // android.content.p002pm.IDataLoader
+    @Override // android.content.pm.IDataLoader
     public void stop(int id) {
       if (!DataLoaderService.this.nativeStopDataLoader(id)) {
         Slog.m121w(DataLoaderService.TAG, "Failed to stop loader: " + id);
       }
     }
 
-    @Override // android.content.p002pm.IDataLoader
+    @Override // android.content.pm.IDataLoader
     public void destroy(int id) {
       if (!DataLoaderService.this.nativeDestroyDataLoader(id)) {
         Slog.m121w(DataLoaderService.TAG, "Failed to destroy loader: " + id);
       }
     }
 
-    @Override // android.content.p002pm.IDataLoader
+    @Override // android.content.pm.IDataLoader
     public void prepareImage(int id, InstallationFileParcel[] addedFiles, String[] removedFiles) {
       if (!DataLoaderService.this.nativePrepareImage(id, addedFiles, removedFiles)) {
         Slog.m121w(DataLoaderService.TAG, "Failed to prepare image for data loader: " + id);

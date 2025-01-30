@@ -1,7 +1,7 @@
 package com.samsung.android.sume.core.evaluate;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.samsung.android.sume.core.Def;
 import java.util.stream.Stream;
 
@@ -35,7 +35,7 @@ public class LessThan<T extends Comparable<T>> extends GenericEvaluator<T> {
     return super.compareTo(evaluator);
   }
 
-  @Override // com.samsung.android.sume.core.evaluate.GenericEvaluator, android.p009os.Parcelable
+  @Override // com.samsung.android.sume.core.evaluate.GenericEvaluator, android.os.Parcelable
   public /* bridge */ /* synthetic */ int describeContents() {
     return super.describeContents();
   }
@@ -70,7 +70,7 @@ public class LessThan<T extends Comparable<T>> extends GenericEvaluator<T> {
     return super.toString();
   }
 
-  @Override // com.samsung.android.sume.core.evaluate.GenericEvaluator, android.p009os.Parcelable
+  @Override // com.samsung.android.sume.core.evaluate.GenericEvaluator, android.os.Parcelable
   public /* bridge */ /* synthetic */ void writeToParcel(Parcel parcel, int i) {
     super.writeToParcel(parcel, i);
   }

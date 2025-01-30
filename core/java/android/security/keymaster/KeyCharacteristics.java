@@ -1,7 +1,7 @@
 package android.security.keymaster;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,12 +38,12 @@ public class KeyCharacteristics implements Parcelable {
     this.hwEnforced = other.hwEnforced;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     this.swEnforced.writeToParcel(out, flags);
     this.hwEnforced.writeToParcel(out, flags);

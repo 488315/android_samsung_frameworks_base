@@ -1,13 +1,13 @@
 package android.webkit;
 
-import android.content.p002pm.PackageInfo;
-import android.p009os.Build;
-import android.p009os.ChildZygoteProcess;
-import android.p009os.Process;
-import android.p009os.ZygoteProcess;
+import android.content.pm.PackageInfo;
+import android.os.Build;
+import android.os.ChildZygoteProcess;
+import android.os.Process;
+import android.os.ZygoteProcess;
 import android.text.TextUtils;
 import android.util.Log;
-import com.android.internal.p029os.Zygote;
+import com.android.internal.os.Zygote;
 
 /* loaded from: classes4.dex */
 public class WebViewZygote {

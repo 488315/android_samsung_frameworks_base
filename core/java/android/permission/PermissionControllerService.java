@@ -4,13 +4,13 @@ import android.Manifest;
 import android.annotation.SystemApi;
 import android.app.Service;
 import android.content.Intent;
-import android.content.p002pm.PackageInfo;
-import android.content.p002pm.PackageManager;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.UserHandle;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.ParcelFileDescriptor;
+import android.os.UserHandle;
 import android.util.ArrayMap;
 import android.util.Log;
 import com.android.internal.infra.AndroidFuture;
@@ -406,7 +406,7 @@ public abstract class PermissionControllerService extends Service {
           (String) Preconditions.checkNotNull(packageName, "packageName cannot be null"));
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     protected void dump(FileDescriptor fd, PrintWriter writer, String[] args) {
       Preconditions.checkNotNull(fd, "fd");
       Preconditions.checkNotNull(writer, "writer");

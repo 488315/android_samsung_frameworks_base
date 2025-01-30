@@ -3,7 +3,7 @@ package android.util;
 import android.content.ContentResolver;
 import android.database.ContentObserver;
 import android.net.Uri;
-import android.p009os.Handler;
+import android.os.Handler;
 
 /* loaded from: classes4.dex */
 public abstract class KeyValueSettingObserver {

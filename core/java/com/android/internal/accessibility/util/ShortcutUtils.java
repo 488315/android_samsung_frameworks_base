@@ -1,8 +1,8 @@
 package com.android.internal.accessibility.util;
 
 import android.content.Context;
-import android.p009os.VibrationEffect;
-import android.p009os.Vibrator;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.HapticFeedbackConstants;

@@ -1,9 +1,9 @@
 package android.view.textservice;
 
 import android.content.Context;
-import android.content.p002pm.ApplicationInfo;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.content.pm.ApplicationInfo;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Slog;
 import com.android.internal.inputmethod.SubtypeLocaleUtils;
@@ -160,12 +160,12 @@ public final class SpellCheckerSubtype implements Parcelable {
     return localeStr;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int parcelableFlags) {
     dest.writeInt(this.mSubtypeNameResId);
     dest.writeString(this.mSubtypeLocale);

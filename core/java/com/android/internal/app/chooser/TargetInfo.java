@@ -4,10 +4,10 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p002pm.ResolveInfo;
+import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
-import android.p009os.Bundle;
-import android.p009os.UserHandle;
+import android.os.Bundle;
+import android.os.UserHandle;
 import com.android.internal.app.ResolverActivity;
 import java.util.List;
 

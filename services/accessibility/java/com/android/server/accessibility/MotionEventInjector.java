@@ -7,7 +7,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteException;
 import android.os.SystemClock;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.IntArray;
 import android.util.Slog;
 import android.util.SparseArray;

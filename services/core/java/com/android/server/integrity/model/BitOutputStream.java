@@ -1,6 +1,6 @@
 package com.android.server.integrity.model;
 
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import java.io.OutputStream;
 import java.util.Arrays;
 

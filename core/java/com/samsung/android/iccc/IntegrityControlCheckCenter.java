@@ -1,6 +1,6 @@
 package com.samsung.android.iccc;
 
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.util.Log;
 import java.nio.charset.Charset;
 

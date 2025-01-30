@@ -16,7 +16,7 @@ import android.os.PersistableBundle;
 import android.os.Process;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
-import android.p005os.IVoldTaskListener;
+import android.os.IVoldTaskListener;
 import android.sec.enterprise.auditlog.AuditLog;
 import android.system.ErrnoException;
 import android.system.Os;
@@ -54,7 +54,7 @@ public class DirEncryptService extends IDirEncryptService.Stub {
   public final int PRESCAN_FULL_ERR = 686;
   public final IVoldTaskListener mListener =
       new IVoldTaskListener.Stub() { // from class: com.android.server.DirEncryptService.1
-        @Override // android.p005os.IVoldTaskListener
+        @Override // android.os.IVoldTaskListener
         public void onStatus(final int i, final PersistableBundle persistableBundle) {
           if (i == 686) {
             AuditLog.log(
@@ -106,7 +106,7 @@ public class DirEncryptService extends IDirEncryptService.Stub {
           }
         }
 
-        @Override // android.p005os.IVoldTaskListener
+        @Override // android.os.IVoldTaskListener
         public void onFinished(int i, PersistableBundle persistableBundle) {
           Log.i("DirEncryptService", "onFinished ::" + i);
         }

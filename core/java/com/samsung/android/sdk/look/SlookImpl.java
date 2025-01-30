@@ -2,15 +2,15 @@ package com.samsung.android.sdk.look;
 
 import android.app.ActivityThread;
 import android.content.Intent;
-import android.content.p002pm.ActivityInfo;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.IPackageManager;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ResolveInfo;
-import android.p009os.Bundle;
-import android.p009os.RemoteException;
-import android.p009os.SystemProperties;
-import android.p009os.UserHandle;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.IPackageManager;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.os.Bundle;
+import android.os.RemoteException;
+import android.os.SystemProperties;
+import android.os.UserHandle;
 import com.samsung.android.cocktailbar.CocktailBarManager;
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.samsung.android.hardware.context;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class SemContext implements Parcelable {
@@ -278,12 +278,12 @@ public class SemContext implements Parcelable {
     this.mType = type;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mType);
   }

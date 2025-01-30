@@ -1,7 +1,7 @@
 package com.samsung.android.multiwindow.splitactivity;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.ArraySet;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -110,12 +110,12 @@ public class SplitActivityPackageInfo implements Parcelable {
     return Objects.hash(this.mPackageName, this.mInfos, this.mFullscreenActivities);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.mPackageName);
     dest.writeTypedList(this.mInfos);

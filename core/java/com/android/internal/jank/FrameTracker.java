@@ -1,8 +1,8 @@
 package com.android.internal.jank;
 
 import android.graphics.HardwareRendererObserver;
-import android.p009os.Handler;
-import android.p009os.Trace;
+import android.os.Handler;
+import android.os.Trace;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;

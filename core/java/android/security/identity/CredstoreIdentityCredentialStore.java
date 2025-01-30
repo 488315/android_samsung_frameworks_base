@@ -1,11 +1,11 @@
 package android.security.identity;
 
 import android.content.Context;
-import android.content.p002pm.FeatureInfo;
-import android.content.p002pm.PackageManager;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
-import android.p009os.ServiceSpecificException;
+import android.content.pm.FeatureInfo;
+import android.content.pm.PackageManager;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.ServiceSpecificException;
 
 /* loaded from: classes3.dex */
 class CredstoreIdentityCredentialStore extends IdentityCredentialStore {

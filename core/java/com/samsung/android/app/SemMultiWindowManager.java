@@ -1,6 +1,6 @@
 package com.samsung.android.app;
 
-import android.content.p002pm.ResolveInfo;
+import android.content.pm.ResolveInfo;
 import com.samsung.android.multiwindow.MultiWindowManager;
 
 /* loaded from: classes5.dex */

@@ -2,8 +2,8 @@ package com.android.internal.util;
 
 import android.app.AlarmManager;
 import android.content.Context;
-import android.p009os.Handler;
-import android.p009os.Message;
+import android.os.Handler;
+import android.os.Message;
 
 /* loaded from: classes5.dex */
 public class WakeupMessage implements AlarmManager.OnAlarmListener {

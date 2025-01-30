@@ -4,13 +4,13 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p002pm.ActivityInfo;
-import android.content.p002pm.ResolveInfo;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.UserHandle;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.UserHandle;
 import com.android.internal.app.ResolverActivity;
 import com.android.internal.app.ResolverListAdapter;
 import java.util.ArrayList;
@@ -228,12 +228,12 @@ public class DisplayResolveInfo implements TargetInfo, Parcelable {
     this.mPinned = pinned;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeCharSequence(this.mDisplayLabel);
     dest.writeCharSequence(this.mExtendedInfo);

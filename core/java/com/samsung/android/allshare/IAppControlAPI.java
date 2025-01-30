@@ -1,6 +1,6 @@
 package com.samsung.android.allshare;
 
-import android.p009os.Message;
+import android.os.Message;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 

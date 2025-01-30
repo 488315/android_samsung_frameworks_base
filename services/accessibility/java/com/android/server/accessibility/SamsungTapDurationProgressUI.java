@@ -10,7 +10,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Handler;
 import android.os.RemoteException;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.provider.Settings;
 import android.util.Property;
 import android.view.Display;

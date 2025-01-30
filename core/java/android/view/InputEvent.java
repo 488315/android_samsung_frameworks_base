@@ -1,7 +1,7 @@
 package android.view;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /* loaded from: classes4.dex */
@@ -90,7 +90,7 @@ public abstract class InputEvent implements Parcelable {
     return this.mSeq;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

@@ -12,7 +12,7 @@ import android.content.PeriodicSync;
 import android.content.SyncInfo;
 import android.content.SyncRequest;
 import android.content.SyncStatusInfo;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;

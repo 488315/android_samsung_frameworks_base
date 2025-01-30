@@ -3,11 +3,11 @@ package android.app;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ResolveInfo;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.SystemProperties;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.SystemProperties;
 import android.provider.Settings;
 import android.util.Printer;
 import com.android.internal.util.FastPrintWriter;
@@ -133,7 +133,7 @@ public class ApplicationErrorReport implements Parcelable {
         && (packageName.startsWith(START_WITH_SEC) || packageName.startsWith(START_WITH_SAMSUNG));
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeInt(this.type);
     parcel.writeString(this.packageName);
@@ -334,7 +334,7 @@ public class ApplicationErrorReport implements Parcelable {
       super(in);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -418,7 +418,7 @@ public class ApplicationErrorReport implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

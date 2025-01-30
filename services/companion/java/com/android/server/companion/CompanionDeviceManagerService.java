@@ -18,7 +18,7 @@ import android.companion.utils.FeatureUtils;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.UserInfo;

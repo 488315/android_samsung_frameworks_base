@@ -2,11 +2,11 @@ package android.app;
 
 import android.content.Intent;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Handler;
-import android.p009os.HandlerThread;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Message;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
 
 @Deprecated
 /* loaded from: classes.dex */
@@ -23,7 +23,7 @@ public abstract class IntentService extends Service {
       super(looper);
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       IntentService.this.onHandleIntent((Intent) msg.obj);
       IntentService.this.stopSelf(msg.arg1);

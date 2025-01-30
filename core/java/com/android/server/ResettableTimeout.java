@@ -1,7 +1,7 @@
 package com.android.server;
 
-import android.p009os.ConditionVariable;
-import android.p009os.SystemClock;
+import android.os.ConditionVariable;
+import android.os.SystemClock;
 
 /* loaded from: classes5.dex */
 abstract class ResettableTimeout {

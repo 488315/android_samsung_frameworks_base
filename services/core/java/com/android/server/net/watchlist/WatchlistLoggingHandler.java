@@ -13,7 +13,7 @@ import android.os.Message;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.incremental.IncrementalManager;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Slog;

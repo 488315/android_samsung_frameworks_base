@@ -2,8 +2,8 @@ package android.telephony.data;
 
 import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import java.lang.annotation.Retention;
@@ -326,7 +326,7 @@ public final class DataProfile implements Parcelable {
     return this.mSetupTimestamp;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -347,7 +347,7 @@ public final class DataProfile implements Parcelable {
         + NavigationBarInflaterView.SIZE_MOD_END;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mType);
     dest.writeParcelable(this.mApnSetting, flags);

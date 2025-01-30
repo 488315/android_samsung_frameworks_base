@@ -2,8 +2,8 @@ package android.widget;
 
 import android.content.Context;
 import android.database.ContentObserver;
-import android.p009os.Handler;
-import android.p009os.SystemClock;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;

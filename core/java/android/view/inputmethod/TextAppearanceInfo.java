@@ -1,9 +1,9 @@
 package android.view.inputmethod;
 
 import android.graphics.Typeface;
-import android.p009os.LocaleList;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.LocaleList;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.format.DateFormat;
@@ -130,12 +130,12 @@ public final class TextAppearanceInfo implements Parcelable {
     return builder.build();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeFloat(this.mTextSize);
     this.mTextLocales.writeToParcel(dest, flags);

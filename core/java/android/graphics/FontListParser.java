@@ -4,7 +4,7 @@ import android.graphics.fonts.FontCustomizationParser;
 import android.graphics.fonts.FontStyle;
 import android.graphics.fonts.FontVariationAxis;
 import android.graphics.fonts.SystemFonts;
-import android.p009os.LocaleList;
+import android.os.LocaleList;
 import android.text.FontConfig;
 import android.util.ArraySet;
 import android.util.Xml;

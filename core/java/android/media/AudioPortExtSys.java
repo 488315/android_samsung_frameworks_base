@@ -1,7 +1,7 @@
 package android.media;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class AudioPortExtSys implements Parcelable {
@@ -103,7 +103,7 @@ public final class AudioPortExtSys implements Parcelable {
     _set(3, Integer.valueOf(_value));
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
     _aidl_parcel.writeInt(this._tag);
     switch (this._tag) {
@@ -148,7 +148,7 @@ public final class AudioPortExtSys implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     switch (getTag()) {
       case 1:

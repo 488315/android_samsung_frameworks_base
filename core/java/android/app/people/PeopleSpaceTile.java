@@ -2,17 +2,17 @@ package android.app.people;
 
 import android.app.Person;
 import android.content.Intent;
-import android.content.p002pm.LauncherApps;
-import android.content.p002pm.ShortcutInfo;
+import android.content.pm.LauncherApps;
+import android.content.pm.ShortcutInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.net.Uri;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.UserHandle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.UserHandle;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -434,12 +434,12 @@ public class PeopleSpaceTile implements Parcelable {
     this.mContactAffinity = in.readFloat();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.mId);
     dest.writeCharSequence(this.mUserName);

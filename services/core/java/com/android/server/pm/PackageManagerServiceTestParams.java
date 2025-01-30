@@ -1,7 +1,7 @@
 package com.android.server.pm;
 
 import android.content.ComponentName;
-import android.content.p000pm.TestUtilityService;
+import android.content.pm.TestUtilityService;
 import android.os.Build;
 import android.os.incremental.IncrementalManager;
 import android.util.ArrayMap;

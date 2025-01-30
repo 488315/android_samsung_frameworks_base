@@ -1,6 +1,6 @@
 package com.samsung.ucm.keystore;
 
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.sec.enterprise.EnterpriseDeviceManager;
 import android.sec.enterprise.IEDMProxy;
 import android.util.Log;

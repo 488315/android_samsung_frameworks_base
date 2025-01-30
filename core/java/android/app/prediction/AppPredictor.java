@@ -2,11 +2,11 @@ package android.app.prediction;
 
 import android.annotation.SystemApi;
 import android.content.Context;
-import android.content.p002pm.ParceledListSlice;
-import android.p009os.Binder;
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.content.pm.ParceledListSlice;
+import android.os.Binder;
+import android.os.IBinder;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.util.ArrayMap;
 import android.util.Log;
 import dalvik.system.CloseGuard;

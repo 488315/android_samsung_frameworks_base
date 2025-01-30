@@ -1,9 +1,9 @@
 package com.samsung.android.ims.options;
 
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.RemoteException;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.os.RemoteException;
 import android.util.Log;
 import android.util.Pair;
 import com.samsung.android.ims.util.SemImsUri;
@@ -22,7 +22,7 @@ public class SemCapabilityListener {
           Looper
               .getMainLooper()) { // from class:
                                   // com.samsung.android.ims.options.SemCapabilityListener.1
-        @Override // android.p009os.Handler
+        @Override // android.os.Handler
         public void handleMessage(Message msg) {
           switch (msg.what) {
             case 1:

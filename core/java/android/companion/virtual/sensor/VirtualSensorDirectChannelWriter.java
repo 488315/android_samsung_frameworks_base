@@ -1,7 +1,7 @@
 package android.companion.virtual.sensor;
 
 import android.annotation.SystemApi;
-import android.p009os.SharedMemory;
+import android.os.SharedMemory;
 import android.system.ErrnoException;
 import android.util.Log;
 import android.util.SparseArray;

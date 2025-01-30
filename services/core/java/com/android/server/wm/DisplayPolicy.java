@@ -23,7 +23,7 @@ import android.os.Message;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.ArraySet;
 import android.util.DisplayMetrics;
 import android.util.PrintWriterPrinter;

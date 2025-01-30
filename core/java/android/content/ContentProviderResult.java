@@ -2,10 +2,10 @@ package android.content;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.ParcelableException;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.ParcelableException;
 import java.util.Objects;
 
 /* loaded from: classes.dex */
@@ -83,7 +83,7 @@ public class ContentProviderResult implements Parcelable {
     this.exception = cpr.exception;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     if (this.uri != null) {
       dest.writeInt(1);
@@ -111,7 +111,7 @@ public class ContentProviderResult implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

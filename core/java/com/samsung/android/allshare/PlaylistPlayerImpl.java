@@ -3,7 +3,7 @@ package com.samsung.android.allshare;
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import com.samsung.android.allshare.media.Playlist;
 import com.samsung.android.allshare.media.PlaylistPlayer;
 import com.sec.android.allshare.iface.CVMessage;

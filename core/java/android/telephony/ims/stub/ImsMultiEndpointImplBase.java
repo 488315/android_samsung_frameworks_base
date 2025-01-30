@@ -2,7 +2,7 @@ package android.telephony.ims.stub;
 
 import android.annotation.SystemApi;
 import android.app.PendingIntent$$ExternalSyntheticLambda1;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.telephony.ims.ImsExternalCallState;
 import android.util.Log;
 import com.android.ims.internal.IImsExternalCallStateListener;

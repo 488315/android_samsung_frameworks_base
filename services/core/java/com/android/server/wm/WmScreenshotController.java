@@ -20,7 +20,7 @@ import android.os.Messenger;
 import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;

@@ -1,7 +1,7 @@
 package com.samsung.android.allshare.extension;
 
-import android.p009os.Bundle;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcelable;
 import com.samsung.android.allshare.DLog;
 import com.samsung.android.allshare.IAllShareConnector;
 import com.samsung.android.allshare.Item;

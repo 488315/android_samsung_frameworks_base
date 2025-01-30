@@ -3,8 +3,8 @@ package com.samsung.android.multiwindow;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 /* loaded from: classes5.dex */
@@ -119,7 +119,7 @@ public class SurfaceFreezerSnapshot implements Parcelable {
     return bitmap2;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     if (this.mSnapshotBitmap != null) {
       parcel.writeInt(1);
@@ -140,7 +140,7 @@ public class SurfaceFreezerSnapshot implements Parcelable {
     parcel.writeInt(this.mFreeformHeaderColor);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

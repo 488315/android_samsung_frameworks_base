@@ -44,7 +44,7 @@ import com.android.server.autofill.AutofillManagerService;
 import com.android.server.autofill.RemoteAugmentedAutofillService;
 import com.android.server.autofill.RemoteInlineSuggestionRenderService;
 import com.android.server.autofill.Session;
-import com.android.server.autofill.p008ui.AutoFillUI;
+import com.android.server.autofill.ui.AutoFillUI;
 import com.android.server.contentcapture.ContentCaptureManagerInternal;
 import com.android.server.display.DisplayPowerController2;
 import com.android.server.infra.AbstractMasterSystemService;

@@ -2,9 +2,9 @@ package com.samsung.android.knox.analytics.util;
 
 import android.Manifest;
 import android.content.Context;
-import android.p009os.Process;
-import android.p009os.SemSystemProperties;
-import android.p009os.SystemProperties;
+import android.os.Process;
+import android.os.SemSystemProperties;
+import android.os.SystemProperties;
 
 /* loaded from: classes5.dex */
 public class SecurityUtils {

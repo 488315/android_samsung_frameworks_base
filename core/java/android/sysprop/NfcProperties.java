@@ -1,6 +1,6 @@
 package android.sysprop;
 
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.util.Log;
 import java.util.ArrayList;
 import java.util.Iterator;

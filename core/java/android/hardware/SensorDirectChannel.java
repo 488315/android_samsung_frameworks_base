@@ -1,6 +1,6 @@
 package android.hardware;
 
-import android.p009os.MemoryFile;
+import android.os.MemoryFile;
 import dalvik.system.CloseGuard;
 import java.io.IOException;
 import java.lang.annotation.Retention;

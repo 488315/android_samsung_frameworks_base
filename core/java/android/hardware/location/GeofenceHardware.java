@@ -2,7 +2,7 @@ package android.hardware.location;
 
 import android.annotation.SystemApi;
 import android.location.Location;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 

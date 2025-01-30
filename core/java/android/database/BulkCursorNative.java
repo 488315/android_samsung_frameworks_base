@@ -1,10 +1,10 @@
 package android.database;
 
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public abstract class BulkCursorNative extends Binder implements IBulkCursor {
@@ -23,7 +23,7 @@ public abstract class BulkCursorNative extends Binder implements IBulkCursor {
     return new BulkCursorProxy(obj);
   }
 
-  @Override // android.p009os.Binder
+  @Override // android.os.Binder
   public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
     try {
       switch (code) {
@@ -85,7 +85,7 @@ public abstract class BulkCursorNative extends Binder implements IBulkCursor {
     }
   }
 
-  @Override // android.p009os.IInterface
+  @Override // android.os.IInterface
   public IBinder asBinder() {
     return this;
   }

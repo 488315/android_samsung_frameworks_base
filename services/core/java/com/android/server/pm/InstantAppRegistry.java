@@ -17,7 +17,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.UserHandle;
 import android.os.storage.StorageManager;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.permission.PermissionManager;
 import android.provider.Settings;
 import android.util.ArrayMap;

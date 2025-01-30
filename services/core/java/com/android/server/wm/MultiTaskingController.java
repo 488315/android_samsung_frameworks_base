@@ -32,7 +32,7 @@ import android.os.Message;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.os.SystemProperties;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.provider.Settings;
 import android.util.Slog;
 import android.view.InsetsSource;

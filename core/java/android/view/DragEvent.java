@@ -2,8 +2,8 @@ package android.view;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.view.IDragAndDropPermissions;
 
 /* loaded from: classes4.dex */
@@ -314,12 +314,12 @@ public class DragEvent implements Parcelable {
         + "}";
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeInt(this.mAction);
     parcel.writeFloat(this.f541mX);

@@ -1,8 +1,8 @@
 package com.samsung.android.core;
 
 import android.app.ActivityTaskManager;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ParceledListSlice;
+import android.content.pm.PackageManager;
+import android.content.pm.ParceledListSlice;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import java.io.PrintWriter;
 import java.util.ArrayList;

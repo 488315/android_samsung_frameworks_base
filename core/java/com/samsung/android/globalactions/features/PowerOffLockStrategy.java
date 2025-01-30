@@ -1,6 +1,6 @@
 package com.samsung.android.globalactions.features;
 
-import android.p009os.CancellationSignal;
+import android.os.CancellationSignal;
 import com.samsung.android.globalactions.presentation.SamsungGlobalActions;
 import com.samsung.android.globalactions.presentation.strategies.SecureConfirmStrategy;
 import com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel;

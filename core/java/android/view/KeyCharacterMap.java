@@ -1,8 +1,8 @@
 package android.view;
 
 import android.hardware.input.InputManagerGlobal;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.AndroidRuntimeException;
 import android.util.SparseIntArray;
 import com.android.internal.logging.nano.MetricsProto;
@@ -346,7 +346,7 @@ public class KeyCharacterMap implements Parcelable {
     return InputManagerGlobal.getInstance().deviceHasKeys(keyCodes);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     if (out == null) {
       throw new IllegalArgumentException("parcel must not be null");
@@ -354,7 +354,7 @@ public class KeyCharacterMap implements Parcelable {
     nativeWriteToParcel(this.mPtr, out);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

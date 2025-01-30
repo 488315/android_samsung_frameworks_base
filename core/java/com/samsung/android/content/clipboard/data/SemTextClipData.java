@@ -2,8 +2,8 @@ package com.samsung.android.content.clipboard.data;
 
 import android.content.ClipData;
 import android.content.Context;
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
 import android.sec.clipboard.util.HtmlUtils;
 import android.sec.clipboard.util.Log;
 import android.text.Html;
@@ -155,7 +155,7 @@ public class SemTextClipData extends SemClipData {
     return this.mText.toString().compareTo(trgData.getText().toString()) == 0;
   }
 
-  @Override // com.samsung.android.content.clipboard.data.SemClipData, android.p009os.Parcelable
+  @Override // com.samsung.android.content.clipboard.data.SemClipData, android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     Log.secI(TAG, "text write to parcel");
     dest.writeInt(1);

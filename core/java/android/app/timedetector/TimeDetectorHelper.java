@@ -1,7 +1,7 @@
 package android.app.timedetector;
 
-import android.p009os.Build;
-import android.p009os.Environment;
+import android.os.Build;
+import android.os.Environment;
 import java.time.Instant;
 
 /* loaded from: classes.dex */

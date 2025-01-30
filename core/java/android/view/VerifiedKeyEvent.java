@@ -1,7 +1,7 @@
 package android.view;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.AnnotationValidations;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
@@ -135,7 +135,7 @@ public final class VerifiedKeyEvent extends VerifiedInputEvent implements Parcel
         + this.mRepeatCount;
   }
 
-  @Override // android.view.VerifiedInputEvent, android.p009os.Parcelable
+  @Override // android.view.VerifiedInputEvent, android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     super.writeToParcel(dest, flags);
     dest.writeInt(this.mAction);
@@ -147,7 +147,7 @@ public final class VerifiedKeyEvent extends VerifiedInputEvent implements Parcel
     dest.writeInt(this.mRepeatCount);
   }
 
-  @Override // android.view.VerifiedInputEvent, android.p009os.Parcelable
+  @Override // android.view.VerifiedInputEvent, android.os.Parcelable
   public int describeContents() {
     return 0;
   }

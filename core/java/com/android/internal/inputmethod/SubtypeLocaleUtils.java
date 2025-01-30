@@ -1,6 +1,6 @@
 package com.android.internal.inputmethod;
 
-import android.content.p001om.SamsungThemeConstants;
+import android.content.om.SamsungThemeConstants;
 import android.telecom.Logging.Session;
 import android.text.TextUtils;
 import java.util.Locale;

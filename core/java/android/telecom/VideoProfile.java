@@ -1,8 +1,8 @@
 package android.telecom;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -61,12 +61,12 @@ public class VideoProfile implements Parcelable {
     return this.mQuality;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mVideoState);
     dest.writeInt(this.mQuality);
@@ -163,12 +163,12 @@ public class VideoProfile implements Parcelable {
       this.mMaxZoom = maxZoom;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       parcel.writeInt(getWidth());
       parcel.writeInt(getHeight());

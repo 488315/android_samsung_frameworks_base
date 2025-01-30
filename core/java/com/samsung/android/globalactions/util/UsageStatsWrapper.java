@@ -2,9 +2,9 @@ package com.samsung.android.globalactions.util;
 
 import android.app.usage.IUsageStatsManager;
 import android.content.Context;
-import android.p009os.Binder;
-import android.p009os.Debug;
-import android.p009os.ServiceManager;
+import android.os.Binder;
+import android.os.Debug;
+import android.os.ServiceManager;
 
 /* loaded from: classes5.dex */
 public class UsageStatsWrapper {

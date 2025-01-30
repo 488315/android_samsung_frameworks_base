@@ -1,8 +1,8 @@
 package android.media;
 
-import android.p009os.Handler;
-import android.p009os.HandlerThread;
-import android.p009os.Message;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Message;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
@@ -39,7 +39,7 @@ class AudioPortEventHandler {
             new Handler(
                 this.mHandlerThread
                     .getLooper()) { // from class: android.media.AudioPortEventHandler.1
-              @Override // android.p009os.Handler
+              @Override // android.os.Handler
               public void handleMessage(Message msg) {
                 ArrayList<AudioManager.OnAudioPortUpdateListener> listeners;
                 synchronized (AudioPortEventHandler.this.mLock) {

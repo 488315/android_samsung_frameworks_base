@@ -13,7 +13,7 @@ import android.net.TelephonyNetworkSpecifier;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.PowerManager;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.provider.Telephony;
 import android.telephony.PhoneStateListener;
 import android.telephony.PreciseCallState;

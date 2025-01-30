@@ -1,6 +1,6 @@
 package android.graphics;
 
-import android.p009os.SystemClock;
+import android.os.SystemClock;
 
 /* loaded from: classes.dex */
 public class Interpolator {

@@ -26,12 +26,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
-import android.content.p002pm.ActivityInfo;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ResolveInfo;
-import android.content.p002pm.ShortcutInfo;
-import android.content.p002pm.ShortcutManager;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.pm.ShortcutInfo;
+import android.content.pm.ShortcutManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.database.Cursor;
@@ -45,16 +45,16 @@ import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.metrics.LogMaker;
 import android.net.Uri;
-import android.p009os.AsyncTask;
-import android.p009os.Bundle;
-import android.p009os.Environment;
-import android.p009os.Handler;
-import android.p009os.Message;
-import android.p009os.Parcelable;
-import android.p009os.ResultReceiver;
-import android.p009os.UserHandle;
-import android.p009os.UserManager;
-import android.p009os.storage.StorageManager;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Parcelable;
+import android.os.ResultReceiver;
+import android.os.UserHandle;
+import android.os.UserManager;
+import android.os.storage.StorageManager;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.service.chooser.ChooserTarget;
@@ -222,7 +222,7 @@ public class ChooserActivity extends ResolverActivity
     private final Handler mHandler =
         new Handler() { // from class:
                         // com.android.internal.app.ChooserActivity.ContentPreviewCoordinator.1
-          @Override // android.p009os.Handler
+          @Override // android.os.Handler
           public void handleMessage(Message msg) {
             switch (msg.what) {
               case 1:
@@ -387,7 +387,7 @@ public class ChooserActivity extends ResolverActivity
       removeMessages(7);
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       ChooserListAdapter adapterForUserHandle;
       if (ChooserActivity.this.mChooserMultiProfilePagerAdapter.getActiveListAdapter() == null
@@ -3954,7 +3954,7 @@ public class ChooserActivity extends ResolverActivity
       this.mSelectedTarget = target;
     }
 
-    @Override // android.p009os.ResultReceiver
+    @Override // android.os.ResultReceiver
     protected void onReceiveResult(int resultCode, Bundle resultData) {
       ChooserActivity chooserActivity = this.mChooserActivity;
       if (chooserActivity == null) {

@@ -8,11 +8,11 @@ import android.content.IntentSender;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.p009os.Bundle;
-import android.p009os.Looper;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.UserHandle;
+import android.os.Bundle;
+import android.os.Looper;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.UserHandle;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.transition.TransitionSet;
@@ -131,12 +131,12 @@ public class Fragment implements ComponentCallbacks2, View.OnCreateContextMenuLi
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeBundle(this.mState);
     }

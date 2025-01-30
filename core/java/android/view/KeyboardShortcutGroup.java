@@ -1,7 +1,7 @@
 package android.view;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.Preconditions;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -73,12 +73,12 @@ public final class KeyboardShortcutGroup implements Parcelable {
     this.mItems.add(item);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeCharSequence(this.mLabel);
     parcel.writeTypedList(this.mItems);

@@ -1,7 +1,7 @@
 package android.media;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -40,13 +40,13 @@ public final class AudioTimestamp implements Parcelable {
     return "AudioTimeStamp: framePos=" + this.framePosition + " nanoTime=" + this.nanoTime;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeLong(this.framePosition);
     dest.writeLong(this.nanoTime);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

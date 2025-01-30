@@ -6,9 +6,9 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.metrics.LogMaker;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -1180,7 +1180,7 @@ public class ResolverDrawerLayout extends ViewGroup {
     }
 
     @Override // android.view.View.BaseSavedState, android.view.AbsSavedState,
-              // android.p009os.Parcelable
+              // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       super.writeToParcel(parcel, i);
       parcel.writeInt(this.open ? 1 : 0);

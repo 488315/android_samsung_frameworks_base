@@ -40,7 +40,7 @@ import com.samsung.android.knox.container.KnoxContainerManager;
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 import com.samsung.android.knox.dar.ddar.DualDarManager;
 import com.samsung.android.knox.ddar.IDualDARPolicy;
-import com.samsung.android.server.p025pm.PmServerUtils;
+import com.samsung.android.server.pm.PmServerUtils;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;

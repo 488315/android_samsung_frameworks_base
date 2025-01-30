@@ -1,9 +1,9 @@
 package android.view.textclassifier;
 
-import android.p009os.LocaleList;
-import android.p009os.Looper;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.LocaleList;
+import android.os.Looper;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.URLSpan;
@@ -200,7 +200,7 @@ public interface TextClassifier {
       this.mIncludeTypesFromTextClassifier = in.readByte() != 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       parcel.writeStringList(this.mIncludedTypes);
       parcel.writeStringList(this.mExcludedTypes);
@@ -252,7 +252,7 @@ public interface TextClassifier {
       return this.mIncludeTypesFromTextClassifier;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }

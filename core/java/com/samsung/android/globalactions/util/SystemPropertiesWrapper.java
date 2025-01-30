@@ -1,8 +1,8 @@
 package com.samsung.android.globalactions.util;
 
 import android.content.Context;
-import android.p009os.Build;
-import android.p009os.SystemProperties;
+import android.os.Build;
+import android.os.SystemProperties;
 import com.android.internal.C4337R;
 import com.samsung.android.wallpaperbackup.BnRConstants;
 

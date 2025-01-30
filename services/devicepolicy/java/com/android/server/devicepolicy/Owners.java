@@ -5,7 +5,7 @@ import android.app.AppOpsManagerInternal;
 import android.app.admin.SystemUpdateInfo;
 import android.app.admin.SystemUpdatePolicy;
 import android.content.ComponentName;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.UserInfo;
 import android.os.Binder;
 import android.os.UserManager;

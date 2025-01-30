@@ -14,7 +14,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Process;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Log;
 import android.util.Slog;
 import com.android.internal.app.AppLockPolicy;

@@ -12,7 +12,7 @@ import android.app.WallpaperInfo;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.graphics.BLASTBufferQueue;
 import android.graphics.Bitmap;
@@ -23,17 +23,17 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.hardware.HardwareBuffer;
 import android.hardware.display.DisplayManager;
-import android.media.p008tv.TvContract;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.HandlerThread;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.Process;
-import android.p009os.RemoteException;
-import android.p009os.SystemClock;
-import android.p009os.Trace;
+import android.media.tv.TvContract;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
+import android.os.Process;
+import android.os.RemoteException;
+import android.os.SystemClock;
+import android.os.Trace;
 import android.provider.Settings;
 import android.telecom.Logging.Session;
 import android.util.ArrayMap;
@@ -62,7 +62,7 @@ import android.view.WindowManagerGlobal;
 import android.window.ClientWindowFrames;
 import android.window.ScreenCapture;
 import com.android.internal.C4337R;
-import com.android.internal.p029os.HandlerCaller;
+import com.android.internal.os.HandlerCaller;
 import com.android.internal.view.BaseIWindow;
 import com.android.internal.view.BaseSurfaceHolder;
 import com.samsung.android.wallpaper.Rune;
@@ -319,7 +319,7 @@ public abstract class WallpaperService extends Service {
               Looper.myLooper(),
               null,
               true) { // from class: android.service.wallpaper.WallpaperService.Engine.1
-            @Override // android.p009os.Handler
+            @Override // android.os.Handler
             public void handleMessage(Message msg) {
               switch (msg.what) {
                 case 1:

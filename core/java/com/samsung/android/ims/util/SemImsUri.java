@@ -1,8 +1,8 @@
 package com.samsung.android.ims.util;
 
-import android.p009os.Build;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.telecom.PhoneAccount;
 import android.util.Log;
 import gov.nist.javax.sip.address.SipUri;
@@ -211,12 +211,12 @@ public class SemImsUri implements Parcelable {
     this.mUriToString = in.readString();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.mUser);
     dest.writeString(this.mMsisdn);

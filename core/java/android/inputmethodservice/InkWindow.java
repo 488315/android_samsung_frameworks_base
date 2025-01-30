@@ -1,7 +1,7 @@
 package android.inputmethodservice;
 
 import android.content.Context;
-import android.p009os.IBinder;
+import android.os.IBinder;
 import android.util.Slog;
 import android.view.MotionEvent;
 import android.view.View;

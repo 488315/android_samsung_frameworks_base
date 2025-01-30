@@ -1,16 +1,16 @@
 package android.view.translation;
 
 import android.content.Context;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.CancellationSignal;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.ICancellationSignal;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.CancellationSignal;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.ICancellationSignal;
+import android.os.RemoteException;
 import android.service.translation.ITranslationCallback;
 import android.util.Log;
-import com.android.internal.p029os.IResultReceiver;
+import com.android.internal.os.IResultReceiver;
 import java.io.PrintWriter;
 import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
@@ -61,7 +61,7 @@ public class Translator {
       }
     }
 
-    @Override // com.android.internal.p029os.IResultReceiver
+    @Override // com.android.internal.os.IResultReceiver
     public void send(int resultCode, Bundle resultData) {
       IBinder binder;
       if (resultCode == 2) {

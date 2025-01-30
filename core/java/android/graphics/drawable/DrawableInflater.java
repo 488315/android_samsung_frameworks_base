@@ -1,9 +1,9 @@
 package android.graphics.drawable;
 
 import android.content.Context;
-import android.content.p002pm.PackageParser;
+import android.content.pm.PackageParser;
 import android.content.res.Resources;
-import android.p009os.BatteryManager;
+import android.os.BatteryManager;
 import android.util.AttributeSet;
 import android.view.InflateException;
 import com.samsung.android.content.smartclip.SemSmartClipMetaTagType;

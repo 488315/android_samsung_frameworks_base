@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.drm.DrmManagerClient;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.security.keystore.KeyProperties;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.SmsManager;

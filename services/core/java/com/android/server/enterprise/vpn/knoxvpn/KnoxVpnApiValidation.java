@@ -16,7 +16,7 @@ import com.android.server.enterprise.vpn.knoxvpn.profile.VpnProfileInfo;
 import com.samsung.android.knox.IEnterpriseDeviceManager;
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knox.net.vpn.KnoxVpnContext;
-import com.samsung.android.knox.p024zt.devicetrust.EndpointMonitorConst;
+import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.security.KeyStore;

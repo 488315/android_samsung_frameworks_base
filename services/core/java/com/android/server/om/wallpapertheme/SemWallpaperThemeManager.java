@@ -8,7 +8,7 @@ import android.content.om.OverlayIdentifier;
 import android.content.om.OverlayInfo;
 import android.content.om.OverlayManagerTransaction;
 import android.content.om.WallpaperThemeConstants;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.IPackageManager;
 import android.net.Uri;
 import android.os.Binder;

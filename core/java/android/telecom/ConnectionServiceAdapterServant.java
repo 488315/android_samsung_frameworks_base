@@ -1,13 +1,13 @@
 package android.telecom;
 
 import android.net.Uri;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.Message;
-import android.p009os.RemoteException;
-import android.p009os.ResultReceiver;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.RemoteException;
+import android.os.ResultReceiver;
 import android.telecom.Logging.Session;
-import com.android.internal.p029os.SomeArgs;
+import com.android.internal.os.SomeArgs;
 import com.android.internal.telecom.IConnectionServiceAdapter;
 import com.android.internal.telecom.IVideoProvider;
 import com.android.internal.telecom.RemoteServiceCallback;
@@ -57,7 +57,7 @@ final class ConnectionServiceAdapterServant {
   private final IConnectionServiceAdapter mDelegate;
   private final Handler mHandler =
       new Handler() { // from class: android.telecom.ConnectionServiceAdapterServant.1
-        @Override // android.p009os.Handler
+        @Override // android.os.Handler
         public void handleMessage(Message msg) {
           try {
             internalHandleMessage(msg);

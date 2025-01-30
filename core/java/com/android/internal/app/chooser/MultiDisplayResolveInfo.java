@@ -1,8 +1,8 @@
 package com.android.internal.app.chooser;
 
 import android.app.Activity;
-import android.p009os.Bundle;
-import android.p009os.UserHandle;
+import android.os.Bundle;
+import android.os.UserHandle;
 import com.android.internal.app.ResolverActivity;
 import java.util.ArrayList;
 

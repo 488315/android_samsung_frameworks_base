@@ -5,8 +5,8 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.LeakyTypefaceStorage;
 import android.graphics.Typeface;
-import android.p009os.LocaleList;
-import android.p009os.Parcel;
+import android.os.LocaleList;
+import android.os.Parcel;
 import android.text.ParcelableSpan;
 import android.text.TextPaint;
 import android.text.format.DateFormat;
@@ -165,12 +165,12 @@ public class TextAppearanceSpan extends MetricAffectingSpan implements Parcelabl
     return 17;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     writeToParcelInternal(dest, flags);
   }

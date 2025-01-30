@@ -1,7 +1,7 @@
 package android.service.controls.templates;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes3.dex */
@@ -30,7 +30,7 @@ public final class ControlTemplateWrapper implements Parcelable {
     this.mControlTemplate = template;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -39,7 +39,7 @@ public final class ControlTemplateWrapper implements Parcelable {
     return this.mControlTemplate;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeBundle(this.mControlTemplate.getDataBundle());
   }

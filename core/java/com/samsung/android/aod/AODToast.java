@@ -1,9 +1,9 @@
 package com.samsung.android.aod;
 
-import android.p009os.Binder;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Binder;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -122,12 +122,12 @@ public class AODToast implements Parcelable {
         + ")]";
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeStrongBinder(this.mToken);
     dest.writeString(this.mText);

@@ -2,11 +2,11 @@ package com.android.internal.app;
 
 import android.app.LocaleConfig;
 import android.content.Context;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.InstallSourceInfo;
-import android.content.p002pm.PackageManager;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.InstallSourceInfo;
+import android.content.pm.PackageManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.LocaleList;
+import android.os.LocaleList;
 import android.util.Log;
 import java.util.HashSet;
 import java.util.Iterator;

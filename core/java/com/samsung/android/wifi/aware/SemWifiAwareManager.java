@@ -1,7 +1,7 @@
 package com.samsung.android.wifi.aware;
 
 import android.content.Context;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 
 /* loaded from: classes6.dex */
 public class SemWifiAwareManager {

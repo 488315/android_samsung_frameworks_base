@@ -11,7 +11,7 @@ import android.filterfw.core.ShaderProgram;
 import android.filterfw.format.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.opengl.Matrix;
-import android.p009os.ConditionVariable;
+import android.os.ConditionVariable;
 import android.util.Log;
 
 /* loaded from: classes.dex */

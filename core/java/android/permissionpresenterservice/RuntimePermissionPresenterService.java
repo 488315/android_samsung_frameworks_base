@@ -4,12 +4,12 @@ import android.annotation.SystemApi;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p002pm.permission.IRuntimePermissionPresenter;
-import android.content.p002pm.permission.RuntimePermissionPresentationInfo;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.RemoteCallback;
+import android.content.pm.permission.IRuntimePermissionPresenter;
+import android.content.pm.permission.RuntimePermissionPresentationInfo;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.RemoteCallback;
 import com.android.internal.util.Preconditions;
 import com.android.internal.util.function.TriConsumer;
 import com.android.internal.util.function.pooled.PooledLambda;
@@ -37,7 +37,7 @@ public abstract class RuntimePermissionPresenterService extends Service {
   class BinderC24631 extends IRuntimePermissionPresenter.Stub {
     BinderC24631() {}
 
-    @Override // android.content.p002pm.permission.IRuntimePermissionPresenter
+    @Override // android.content.pm.permission.IRuntimePermissionPresenter
     public void getAppPermissions(String packageName, RemoteCallback callback) {
       Preconditions.checkNotNull(packageName, "packageName");
       Preconditions.checkNotNull(callback, "callback");

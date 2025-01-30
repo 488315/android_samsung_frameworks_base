@@ -2,7 +2,7 @@ package com.samsung.android.allshare;
 
 import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import android.sec.clipboard.data.ClipboardConstants;
 import com.samsung.android.allshare.file.FileDeviceFinder;
 import com.sec.android.allshare.iface.CVMessage;

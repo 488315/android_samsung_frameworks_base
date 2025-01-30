@@ -1,8 +1,8 @@
 package android.location;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 @SystemApi
 @Deprecated
@@ -231,7 +231,7 @@ public class GpsClock implements Parcelable {
     this.mDriftUncertaintyInNsPerSec = Double.NaN;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeInt(this.mFlags);
     parcel.writeInt(this.mLeapSecond);
@@ -245,7 +245,7 @@ public class GpsClock implements Parcelable {
     parcel.writeDouble(this.mDriftUncertaintyInNsPerSec);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

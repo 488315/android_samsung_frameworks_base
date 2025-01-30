@@ -1,6 +1,6 @@
 package android.sec.clipboard.util;
 
-import android.p009os.FileUtils;
+import android.os.FileUtils;
 import android.sec.clipboard.data.ClipboardConstants;
 import java.io.File;
 import java.io.FileInputStream;

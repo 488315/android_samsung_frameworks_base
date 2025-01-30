@@ -1,7 +1,7 @@
 package android.util;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.SystemClock;
+import android.os.SystemClock;
 import android.text.format.DateFormat;
 import com.android.i18n.timezone.CountryTimeZones;
 import com.android.i18n.timezone.TimeZoneFinder;

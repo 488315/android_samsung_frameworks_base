@@ -10,7 +10,7 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.p009os.SystemClock;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.IntProperty;
 import android.util.MathUtils;

@@ -21,7 +21,7 @@ import android.os.storage.DiskInfo;
 import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
 import android.os.storage.VolumeInfo;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.provider.Settings;
 import android.security.SystemKeyStore;
 import android.text.TextUtils;

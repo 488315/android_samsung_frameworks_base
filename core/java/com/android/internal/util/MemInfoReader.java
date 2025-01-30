@@ -1,7 +1,7 @@
 package com.android.internal.util;
 
-import android.p009os.Debug;
-import android.p009os.StrictMode;
+import android.os.Debug;
+import android.os.StrictMode;
 
 /* loaded from: classes5.dex */
 public final class MemInfoReader {

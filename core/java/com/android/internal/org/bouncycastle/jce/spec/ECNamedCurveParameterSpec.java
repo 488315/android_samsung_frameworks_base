@@ -1,7 +1,7 @@
 package com.android.internal.org.bouncycastle.jce.spec;
 
-import com.android.internal.org.bouncycastle.math.p026ec.ECCurve;
-import com.android.internal.org.bouncycastle.math.p026ec.ECPoint;
+import com.android.internal.org.bouncycastle.math.ec.ECCurve;
+import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */

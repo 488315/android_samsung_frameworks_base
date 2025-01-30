@@ -3,12 +3,12 @@ package android.service.notification;
 import android.app.Notification;
 import android.app.Person;
 import android.content.Context;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.metrics.LogMaker;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.UserHandle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.NtpTrustedTime;
 import com.android.internal.content.NativeLibraryHelper;
@@ -218,7 +218,7 @@ public class StatusBarNotification implements Parcelable {
     return false;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeString(this.pkg);
     out.writeString(this.opPkg);
@@ -248,7 +248,7 @@ public class StatusBarNotification implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

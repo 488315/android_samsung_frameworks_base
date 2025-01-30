@@ -11,14 +11,14 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.Message;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.StrictMode;
-import android.p009os.SystemProperties;
-import android.p009os.Trace;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.StrictMode;
+import android.os.SystemProperties;
+import android.os.Trace;
 import android.provider.Settings;
 import android.text.Editable;
 import android.text.MultiSelection;
@@ -68,7 +68,7 @@ import android.widget.Filter;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsAdapter;
 import com.android.internal.C4337R;
-import com.samsung.android.p042os.SemPerfManager;
+import com.samsung.android.os.SemPerfManager;
 import com.samsung.android.widget.SemHorizontalFastScroller;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -1330,7 +1330,7 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             }
         }
 
-        @Override // android.view.View.BaseSavedState, android.view.AbsSavedState, android.p009os.Parcelable
+        @Override // android.view.View.BaseSavedState, android.view.AbsSavedState, android.os.Parcelable
         public void writeToParcel(Parcel parcel, int i) {
             super.writeToParcel(parcel, i);
             parcel.writeLong(this.selectedId);
@@ -7226,7 +7226,7 @@ public abstract class SemHorizontalAbsListView extends AdapterView<ListAdapter> 
             this.mListView = new WeakReference<>(sv);
         }
 
-        @Override // android.p009os.Handler
+        @Override // android.os.Handler
         public void handleMessage(Message msg) {
             SemHorizontalAbsListView sv = this.mListView.get();
             if (sv != null) {

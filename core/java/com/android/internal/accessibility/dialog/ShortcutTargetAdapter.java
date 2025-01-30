@@ -2,7 +2,7 @@ package com.android.internal.accessibility.dialog;
 
 import android.accessibilityservice.AccessibilityShortcutInfo;
 import android.content.Context;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.LayoutInflater;

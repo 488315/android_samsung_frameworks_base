@@ -1,6 +1,6 @@
 package com.samsung.android.knox.tima.attestation;
 
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.util.Log;
 
 /* loaded from: classes5.dex */

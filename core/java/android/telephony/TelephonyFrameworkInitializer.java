@@ -2,7 +2,7 @@ package android.telephony;
 
 import android.app.SystemServiceRegistry;
 import android.content.Context;
-import android.p009os.TelephonyServiceManager;
+import android.os.TelephonyServiceManager;
 import android.telephony.euicc.EuiccCardManager;
 import android.telephony.euicc.EuiccManager;
 import android.telephony.ims.ImsManager;

@@ -15,12 +15,12 @@ import android.graphics.Rect;
 import android.graphics.RenderNode;
 import android.graphics.drawable.Drawable;
 import android.media.TtmlUtils;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.Message;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.StrictMode;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.StrictMode;
 import android.provider.Settings;
 import android.text.MultiSelection;
 import android.util.AttributeSet;
@@ -2352,7 +2352,7 @@ public class ScrollView extends FrameLayout {
     }
 
     @Override // android.view.View.BaseSavedState, android.view.AbsSavedState,
-              // android.p009os.Parcelable
+              // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       super.writeToParcel(dest, flags);
       dest.writeInt(this.scrollPosition);
@@ -2374,7 +2374,7 @@ public class ScrollView extends FrameLayout {
       this.mScrollView = new WeakReference<>(sv);
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       ScrollView sv = this.mScrollView.get();
       if (sv != null) {

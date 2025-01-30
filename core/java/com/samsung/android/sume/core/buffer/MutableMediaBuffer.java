@@ -1,7 +1,7 @@
 package com.samsung.android.sume.core.buffer;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.UniExifInterface;
 import com.samsung.android.sume.core.format.MediaFormat;
@@ -540,7 +540,7 @@ public final class MutableMediaBuffer extends MediaBufferBase implements PlaceHo
     return 0L;
   }
 
-  @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, android.p009os.Parcelable
+  @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     super.writeToParcel(dest, flags);
     if (this.buffer != null) {
@@ -558,7 +558,7 @@ public final class MutableMediaBuffer extends MediaBufferBase implements PlaceHo
     }
   }
 
-  @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, android.p009os.Parcelable
+  @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, android.os.Parcelable
   public int describeContents() {
     return 0;
   }

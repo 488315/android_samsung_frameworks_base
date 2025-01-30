@@ -1,11 +1,11 @@
 package android.hardware.input;
 
-import android.p009os.Binder;
-import android.p009os.CombinedVibration;
-import android.p009os.NullVibrator;
-import android.p009os.VibrationAttributes;
-import android.p009os.Vibrator;
-import android.p009os.VibratorManager;
+import android.os.Binder;
+import android.os.CombinedVibration;
+import android.os.NullVibrator;
+import android.os.VibrationAttributes;
+import android.os.Vibrator;
+import android.os.VibratorManager;
 import android.util.SparseArray;
 import android.view.InputDevice;
 
@@ -55,7 +55,7 @@ public class InputDeviceVibratorManager extends VibratorManager
     }
   }
 
-  @Override // android.p009os.VibratorManager
+  @Override // android.os.VibratorManager
   public int[] getVibratorIds() {
     int[] vibratorIds;
     synchronized (this.mVibrators) {
@@ -67,7 +67,7 @@ public class InputDeviceVibratorManager extends VibratorManager
     return vibratorIds;
   }
 
-  @Override // android.p009os.VibratorManager
+  @Override // android.os.VibratorManager
   public Vibrator getVibrator(int vibratorId) {
     synchronized (this.mVibrators) {
       if (this.mVibrators.contains(vibratorId)) {
@@ -77,7 +77,7 @@ public class InputDeviceVibratorManager extends VibratorManager
     }
   }
 
-  @Override // android.p009os.VibratorManager
+  @Override // android.os.VibratorManager
   public Vibrator getDefaultVibrator() {
     synchronized (this.mVibrators) {
       if (this.mVibrators.size() > 0) {
@@ -87,7 +87,7 @@ public class InputDeviceVibratorManager extends VibratorManager
     }
   }
 
-  @Override // android.p009os.VibratorManager
+  @Override // android.os.VibratorManager
   public void vibrate(
       int uid,
       String opPkg,
@@ -97,27 +97,27 @@ public class InputDeviceVibratorManager extends VibratorManager
     this.mGlobal.vibrate(this.mDeviceId, effect, this.mToken);
   }
 
-  @Override // android.p009os.VibratorManager
+  @Override // android.os.VibratorManager
   public void cancel() {
     this.mGlobal.cancelVibrate(this.mDeviceId, this.mToken);
   }
 
-  @Override // android.p009os.VibratorManager
+  @Override // android.os.VibratorManager
   public void cancel(int usageFilter) {
     cancel();
   }
 
-  @Override // android.p009os.VibratorManager
+  @Override // android.os.VibratorManager
   public int semGetSupportedVibrationType() {
     return 0;
   }
 
-  @Override // android.p009os.VibratorManager
+  @Override // android.os.VibratorManager
   public int semGetNumberOfSupportedPatterns() {
     return 0;
   }
 
-  @Override // android.p009os.VibratorManager
+  @Override // android.os.VibratorManager
   public String executeVibrationDebugCommand(int param) {
     return "";
   }

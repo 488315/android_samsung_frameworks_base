@@ -1,6 +1,6 @@
 package com.samsung.android.sume.core.buffer;
 
-import android.p009os.ParcelFileDescriptor;
+import android.os.ParcelFileDescriptor;
 import com.samsung.android.sume.core.format.MediaFormat;
 import com.samsung.android.sume.core.message.Message;
 import java.nio.ByteBuffer;

@@ -1,8 +1,8 @@
 package com.samsung.android.globalactions.util;
 
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 
 /* loaded from: classes5.dex */
 public class HandlerUtil {

@@ -6,8 +6,8 @@ import android.animation.ArgbEvaluator;
 import android.animation.FloatEvaluator;
 import android.animation.IntEvaluator;
 import android.animation.ValueAnimator;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,12 +93,12 @@ public class SemRemoteViewsValueAnimation extends SemRemoteViewsAnimation {
     this.mIsValidArgument = in.readBoolean();
   }
 
-  @Override // android.widget.SemRemoteViewsAnimation, android.p009os.Parcelable
+  @Override // android.widget.SemRemoteViewsAnimation, android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.widget.SemRemoteViewsAnimation, android.p009os.Parcelable
+  @Override // android.widget.SemRemoteViewsAnimation, android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     super.writeToParcel(dest, flags);
     dest.writeString(this.mAnimationType);

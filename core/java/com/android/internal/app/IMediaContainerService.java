@@ -1,13 +1,13 @@
 package com.android.internal.app;
 
-import android.content.p002pm.PackageInfoLite;
+import android.content.pm.PackageInfoLite;
 import android.content.res.ObbInfo;
-import android.p009os.Binder;
-import android.p009os.IBinder;
-import android.p009os.IInterface;
-import android.p009os.Parcel;
-import android.p009os.RemoteException;
-import com.android.internal.p029os.IParcelFileDescriptorFactory;
+import android.os.Binder;
+import android.os.IBinder;
+import android.os.IInterface;
+import android.os.Parcel;
+import android.os.RemoteException;
+import com.android.internal.os.IParcelFileDescriptorFactory;
 
 /* loaded from: classes4.dex */
 public interface IMediaContainerService extends IInterface {
@@ -44,7 +44,7 @@ public interface IMediaContainerService extends IInterface {
       return 0L;
     }
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return null;
     }
@@ -72,7 +72,7 @@ public interface IMediaContainerService extends IInterface {
       return new Proxy(obj);
     }
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return this;
     }
@@ -92,12 +92,12 @@ public interface IMediaContainerService extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public String getTransactionName(int transactionCode) {
       return getDefaultTransactionName(transactionCode);
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
         throws RemoteException {
       if (code >= 1 && code <= 16777215) {
@@ -155,7 +155,7 @@ public interface IMediaContainerService extends IInterface {
         this.mRemote = remote;
       }
 
-      @Override // android.p009os.IInterface
+      @Override // android.os.IInterface
       public IBinder asBinder() {
         return this.mRemote;
       }
@@ -241,7 +241,7 @@ public interface IMediaContainerService extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public int getMaxTransactionId() {
       return 3;
     }

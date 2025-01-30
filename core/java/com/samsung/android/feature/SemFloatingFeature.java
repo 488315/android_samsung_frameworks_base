@@ -1,6 +1,6 @@
 package com.samsung.android.feature;
 
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.util.Log;
 import java.io.File;
 import java.io.FileInputStream;

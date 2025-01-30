@@ -1,7 +1,7 @@
 package com.android.server.am;
 
 import android.app.ApplicationErrorReport;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.system.ErrnoException;
 import android.system.Os;
 import android.system.OsConstants;

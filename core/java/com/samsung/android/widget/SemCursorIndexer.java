@@ -1,7 +1,7 @@
 package com.samsung.android.widget;
 
 import android.database.Cursor;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import android.util.Log;
 
 /* loaded from: classes6.dex */

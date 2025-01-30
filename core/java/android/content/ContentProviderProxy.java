@@ -6,14 +6,14 @@ import android.database.BulkCursorToCursorAdaptor;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.net.Uri;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
-import android.p009os.ICancellationSignal;
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.RemoteCallback;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.ICancellationSignal;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
+import android.os.RemoteCallback;
+import android.os.RemoteException;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -27,7 +27,7 @@ final class ContentProviderProxy implements IContentProvider {
     this.mRemote = remote;
   }
 
-  @Override // android.p009os.IInterface
+  @Override // android.os.IInterface
   public IBinder asBinder() {
     return this.mRemote;
   }

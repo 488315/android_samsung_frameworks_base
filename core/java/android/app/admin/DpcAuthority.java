@@ -1,8 +1,8 @@
 package android.app.admin;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 @SystemApi
 /* loaded from: classes.dex */
@@ -40,11 +40,11 @@ public final class DpcAuthority extends Authority {
     return 0;
   }
 
-  @Override // android.app.admin.Authority, android.p009os.Parcelable
+  @Override // android.app.admin.Authority, android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {}
 }

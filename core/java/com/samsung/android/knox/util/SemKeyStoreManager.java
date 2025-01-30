@@ -1,8 +1,8 @@
 package com.samsung.android.knox.util;
 
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.IBinder;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 
 /* loaded from: classes5.dex */
 public class SemKeyStoreManager {

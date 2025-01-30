@@ -2,7 +2,7 @@ package com.android.server.am;
 
 import android.app.AppOpsManager;
 import android.content.Context;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.os.Handler;

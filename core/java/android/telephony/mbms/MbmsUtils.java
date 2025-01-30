@@ -4,10 +4,10 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.ComponentInfo;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ResolveInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.ComponentInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.telecom.Logging.Session;
 import android.telephony.MbmsDownloadSession;
 import android.telephony.MbmsGroupCallSession;
@@ -93,7 +93,7 @@ public class MbmsUtils {
     }
   }
 
-  public static android.content.p002pm.ServiceInfo getMiddlewareServiceInfo(
+  public static android.content.pm.ServiceInfo getMiddlewareServiceInfo(
       Context context, String serviceAction) {
     List<ResolveInfo> services;
     PackageManager packageManager = context.getPackageManager();
@@ -120,7 +120,7 @@ public class MbmsUtils {
   public static int startBinding(
       Context context, String serviceAction, ServiceConnection serviceConnection) {
     Intent bindIntent = new Intent();
-    android.content.p002pm.ServiceInfo mbmsServiceInfo =
+    android.content.pm.ServiceInfo mbmsServiceInfo =
         getMiddlewareServiceInfo(context, serviceAction);
     if (mbmsServiceInfo == null) {
       return 1;

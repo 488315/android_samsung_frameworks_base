@@ -1,9 +1,9 @@
 package android.database;
 
-import android.p009os.Bundle;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.RemoteException;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.RemoteException;
 
 /* compiled from: BulkCursorNative.java */
 /* loaded from: classes.dex */
@@ -15,7 +15,7 @@ final class BulkCursorProxy implements IBulkCursor {
     this.mRemote = remote;
   }
 
-  @Override // android.p009os.IInterface
+  @Override // android.os.IInterface
   public IBinder asBinder() {
     return this.mRemote;
   }

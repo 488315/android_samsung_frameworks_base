@@ -1,8 +1,8 @@
 package android.telephony;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import java.util.Objects;
 import java.util.UUID;
@@ -89,7 +89,7 @@ public abstract class CellIdentity implements Parcelable {
     this.mAlphaShort = alphas;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -161,7 +161,7 @@ public abstract class CellIdentity implements Parcelable {
         this.mAlphaLong, this.mAlphaShort, this.mMccStr, this.mMncStr, Integer.valueOf(this.mType));
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int type) {
     dest.writeInt(type);
     dest.writeString(this.mMccStr);

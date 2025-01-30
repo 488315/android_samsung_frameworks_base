@@ -6,17 +6,17 @@ import android.app.Service;
 import android.content.Intent;
 import android.media.AudioAttributes;
 import android.net.Uri;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.HandlerThread;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.MessageQueue;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.RemoteCallbackList;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
+import android.os.MessageQueue;
+import android.os.ParcelFileDescriptor;
+import android.os.RemoteCallbackList;
+import android.os.RemoteException;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
@@ -429,7 +429,7 @@ public abstract class TextToSpeechService extends Service {
       this.mFirstIdle = true;
     }
 
-    @Override // android.p009os.HandlerThread
+    @Override // android.os.HandlerThread
     protected void onLooperPrepared() {
       getLooper().getQueue().addIdleHandler(this);
     }
@@ -1259,7 +1259,7 @@ public abstract class TextToSpeechService extends Service {
       }
     }
 
-    @Override // android.p009os.RemoteCallbackList
+    @Override // android.os.RemoteCallbackList
     public void onCallbackDied(ITextToSpeechCallback callback, Object cookie) {
       IBinder caller = (IBinder) cookie;
       synchronized (this.mCallerToCallback) {
@@ -1268,7 +1268,7 @@ public abstract class TextToSpeechService extends Service {
       TextToSpeechService.this.mSynthHandler.stopForApp(caller);
     }
 
-    @Override // android.p009os.RemoteCallbackList
+    @Override // android.os.RemoteCallbackList
     public void kill() {
       synchronized (this.mCallerToCallback) {
         this.mCallerToCallback.clear();

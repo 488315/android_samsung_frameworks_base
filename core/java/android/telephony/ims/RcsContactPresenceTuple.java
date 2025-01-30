@@ -2,9 +2,9 @@ package android.telephony.ims;
 
 import android.annotation.SystemApi;
 import android.net.Uri;
-import android.p009os.Build;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import com.samsung.android.ims.options.SemCapabilities;
 import java.lang.annotation.Retention;
@@ -149,7 +149,7 @@ public final class RcsContactPresenceTuple implements Parcelable {
       in.readStringList(arrayList2);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel out, int flags) {
       out.writeBoolean(this.mIsAudioCapable);
       out.writeBoolean(this.mIsVideoCapable);
@@ -157,7 +157,7 @@ public final class RcsContactPresenceTuple implements Parcelable {
       out.writeStringList(this.mUnsupportedDuplexModeList);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -242,7 +242,7 @@ public final class RcsContactPresenceTuple implements Parcelable {
                 ServiceCapabilities.class.getClassLoader(), ServiceCapabilities.class);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeParcelable(this.mContactUri, flags);
     out.writeString(convertInstantToStringFormat(this.mTimestamp));
@@ -253,7 +253,7 @@ public final class RcsContactPresenceTuple implements Parcelable {
     out.writeParcelable(this.mServiceCapabilities, flags);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

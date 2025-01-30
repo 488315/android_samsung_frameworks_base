@@ -1,8 +1,8 @@
 package android.hardware.location;
 
 import android.content.Context;
-import android.p009os.RemoteCallbackList;
-import android.p009os.RemoteException;
+import android.os.RemoteCallbackList;
+import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
 import java.lang.reflect.Array;
@@ -220,7 +220,7 @@ public class ActivityRecognitionHardware extends IActivityRecognitionHardware.St
   private class SinkList extends RemoteCallbackList<IActivityRecognitionHardwareSink> {
     private SinkList() {}
 
-    @Override // android.p009os.RemoteCallbackList
+    @Override // android.os.RemoteCallbackList
     public void onCallbackDied(IActivityRecognitionHardwareSink callback) {
       int callbackCount = ActivityRecognitionHardware.this.mSinks.getRegisteredCallbackCount();
       if (ActivityRecognitionHardware.DEBUG) {

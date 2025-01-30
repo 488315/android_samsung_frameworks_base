@@ -1,8 +1,8 @@
 package com.android.internal.statusbar;
 
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.ArrayMap;
 import com.android.internal.view.AppearanceRegion;
 
@@ -105,12 +105,12 @@ public final class RegisterStatusBarResult implements Parcelable {
     this.mLetterboxDetails = letterboxDetails;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeTypedArrayMap(this.mIcons, flags);
     dest.writeInt(this.mDisabledFlags1);

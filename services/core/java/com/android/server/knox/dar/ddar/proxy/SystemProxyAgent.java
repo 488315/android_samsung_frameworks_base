@@ -7,7 +7,7 @@ import com.android.server.knox.dar.ddar.DDLog;
 import com.android.server.knox.dar.ddar.core.DualDarManagerProxy;
 import com.android.server.knox.dar.ddar.fsm.StateMachineProxy;
 import com.android.server.knox.dar.ddar.nativedaemon.DualDARDaemonProxy;
-import com.android.server.knox.dar.ddar.p009ta.TAProxy;
+import com.android.server.knox.dar.ddar.ta.TAProxy;
 import com.samsung.android.knox.dar.ddar.proxy.KnoxProxyAgent;
 
 /* loaded from: classes2.dex */

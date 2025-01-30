@@ -5,9 +5,9 @@ import android.app.smartspace.uitemplatedata.BaseTemplateData;
 import android.appwidget.AppWidgetProviderInfo;
 import android.content.ComponentName;
 import android.net.Uri;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.UserHandle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.UserHandle;
 import android.text.format.DateFormat;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -240,7 +240,7 @@ public final class SmartspaceTarget implements Parcelable {
     return this.mTemplateData;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.mSmartspaceTargetId);
     dest.writeTypedObject(this.mHeaderAction, flags);
@@ -262,7 +262,7 @@ public final class SmartspaceTarget implements Parcelable {
     dest.writeParcelable(this.mTemplateData, flags);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

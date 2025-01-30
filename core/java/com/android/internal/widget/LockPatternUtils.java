@@ -11,20 +11,20 @@ import android.app.trust.TrustManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.UserInfo;
-import android.p009os.Binder;
-import android.p009os.Debug;
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.Process;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
-import android.p009os.SystemClock;
-import android.p009os.UserHandle;
-import android.p009os.UserManager;
-import android.p009os.storage.StorageManager;
+import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
+import android.os.Binder;
+import android.os.Debug;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.os.Process;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.SystemClock;
+import android.os.UserHandle;
+import android.os.UserManager;
+import android.os.storage.StorageManager;
 import android.provider.Settings;
 import android.sec.enterprise.EnterpriseDeviceManager;
 import android.sec.enterprise.auditlog.AuditEvents;
@@ -1572,7 +1572,7 @@ public class LockPatternUtils {
         super(looper);
       }
 
-      @Override // android.p009os.Handler
+      @Override // android.os.Handler
       public void handleMessage(Message msg) {
         switch (msg.what) {
           case 1:

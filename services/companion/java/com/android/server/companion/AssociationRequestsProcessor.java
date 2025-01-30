@@ -9,7 +9,7 @@ import android.companion.IAssociationRequestCallback;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.PackageManager;
 import android.net.MacAddress;
 import android.os.Binder;

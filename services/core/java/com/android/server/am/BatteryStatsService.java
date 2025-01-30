@@ -48,7 +48,7 @@ import android.os.connectivity.WifiBatteryStats;
 import android.os.health.HealthStatsParceler;
 import android.os.health.HealthStatsWriter;
 import android.os.health.UidHealthStats;
-import android.p005os.BatteryStatsInternal;
+import android.os.BatteryStatsInternal;
 import android.power.PowerStatsInternal;
 import android.provider.Settings;
 import android.telephony.ModemActivityInfo;
@@ -443,28 +443,28 @@ public final class BatteryStatsService extends IBatteryStats.Stub
   public final class LocalService extends BatteryStatsInternal {
     public LocalService() {}
 
-    @Override // android.p005os.BatteryStatsInternal
+    @Override // android.os.BatteryStatsInternal
     public String[] getWifiIfaces() {
       return (String[]) BatteryStatsService.this.mStats.getWifiIfaces().clone();
     }
 
-    @Override // android.p005os.BatteryStatsInternal
+    @Override // android.os.BatteryStatsInternal
     public String[] getMobileIfaces() {
       return (String[]) BatteryStatsService.this.mStats.getMobileIfaces().clone();
     }
 
-    @Override // android.p005os.BatteryStatsInternal
+    @Override // android.os.BatteryStatsInternal
     public SystemServerCpuThreadReader.SystemServiceCpuThreadTimes
         getSystemServiceCpuThreadTimes() {
       return BatteryStatsService.this.mStats.getSystemServiceCpuThreadTimes();
     }
 
-    @Override // android.p005os.BatteryStatsInternal
+    @Override // android.os.BatteryStatsInternal
     public List getBatteryUsageStats(List list) {
       return BatteryStatsService.this.getBatteryUsageStats(list);
     }
 
-    @Override // android.p005os.BatteryStatsInternal
+    @Override // android.os.BatteryStatsInternal
     public void noteJobsDeferred(int i, int i2, long j) {
       BatteryStatsService.this.noteJobsDeferred(i, i2, j);
     }
@@ -476,7 +476,7 @@ public final class BatteryStatsService extends IBatteryStats.Stub
       return networkCapabilities.hasTransport(0) ? 5 : -1;
     }
 
-    @Override // android.p005os.BatteryStatsInternal
+    @Override // android.os.BatteryStatsInternal
     public void noteCpuWakingNetworkPacket(Network network, long j, int i) {
       if (i < 0) {
         Slog.e("BatteryStatsService", "Invalid uid for waking network packet: " + i);
@@ -499,7 +499,7 @@ public final class BatteryStatsService extends IBatteryStats.Stub
       BatteryStatsService.this.noteCpuWakingActivity(transportToSubsystem, j, i);
     }
 
-    @Override // android.p005os.BatteryStatsInternal
+    @Override // android.os.BatteryStatsInternal
     public void noteBinderCallStats(int i, long j, Collection collection) {
       synchronized (BatteryStatsService.this.mLock) {
         Handler handler = BatteryStatsService.this.mHandler;
@@ -527,19 +527,19 @@ public final class BatteryStatsService extends IBatteryStats.Stub
       }
     }
 
-    @Override // android.p005os.BatteryStatsInternal
+    @Override // android.os.BatteryStatsInternal
     public void noteBinderThreadNativeIds(int[] iArr) {
       synchronized (BatteryStatsService.this.mLock) {
         BatteryStatsService.this.mStats.noteBinderThreadNativeIds(iArr);
       }
     }
 
-    @Override // android.p005os.BatteryStatsInternal
+    @Override // android.os.BatteryStatsInternal
     public void noteWakingSoundTrigger(long j, int i) {
       BatteryStatsService.this.noteCpuWakingActivity(3, j, i);
     }
 
-    @Override // android.p005os.BatteryStatsInternal
+    @Override // android.os.BatteryStatsInternal
     public void noteWakingAlarmBatch(long j, int... iArr) {
       BatteryStatsService.this.noteCpuWakingActivity(1, j, iArr);
     }

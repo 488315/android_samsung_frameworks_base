@@ -1,7 +1,7 @@
 package android.accessibilityservice;
 
-import android.p009os.RemoteException;
-import android.p009os.Trace;
+import android.os.RemoteException;
+import android.os.Trace;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;

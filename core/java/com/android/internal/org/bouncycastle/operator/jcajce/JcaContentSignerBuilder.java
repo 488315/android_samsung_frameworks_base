@@ -11,7 +11,7 @@ import com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.pkcs.RSASSAPSSparams;
 import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import com.android.internal.org.bouncycastle.jcajce.CompositePrivateKey;
-import com.android.internal.org.bouncycastle.jcajce.p022io.OutputStreamFactory;
+import com.android.internal.org.bouncycastle.jcajce.io.OutputStreamFactory;
 import com.android.internal.org.bouncycastle.jcajce.spec.CompositeAlgorithmSpec;
 import com.android.internal.org.bouncycastle.jcajce.util.DefaultJcaJceHelper;
 import com.android.internal.org.bouncycastle.jcajce.util.NamedJcaJceHelper;
@@ -23,7 +23,7 @@ import com.android.internal.org.bouncycastle.operator.DigestAlgorithmIdentifierF
 import com.android.internal.org.bouncycastle.operator.OperatorCreationException;
 import com.android.internal.org.bouncycastle.operator.RuntimeOperatorException;
 import com.android.internal.org.bouncycastle.operator.SignatureAlgorithmIdentifierFinder;
-import com.android.internal.org.bouncycastle.util.p028io.TeeOutputStream;
+import com.android.internal.org.bouncycastle.util.io.TeeOutputStream;
 import com.samsung.android.ims.options.SemCapabilities;
 import java.io.IOException;
 import java.io.OutputStream;

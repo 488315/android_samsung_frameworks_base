@@ -1,9 +1,9 @@
 package com.samsung.android.hardware.context;
 
-import android.media.p008tv.TvContract;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.media.tv.TvContract;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 @Deprecated(forRemoval = true, since = "15.5")

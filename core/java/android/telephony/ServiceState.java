@@ -3,10 +3,10 @@ package android.telephony;
 import android.annotation.SystemApi;
 import android.content.Intent;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Build;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.provider.Telephony;
 import android.text.TextUtils;
 import com.android.internal.telephony.DctConstants;
@@ -333,7 +333,7 @@ public class ServiceState implements Parcelable {
     this.mIsVoiceCallAvailable = in.readInt() != 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeInt(this.mVoiceRegState);
     parcel.writeInt(this.mDataRegState);
@@ -370,7 +370,7 @@ public class ServiceState implements Parcelable {
     parcel.writeInt(this.mIsVoiceCallAvailable ? 1 : 0);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

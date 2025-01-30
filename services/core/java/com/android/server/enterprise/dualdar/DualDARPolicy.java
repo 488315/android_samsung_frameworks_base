@@ -16,7 +16,7 @@ import android.os.Process;
 import android.os.RemoteException;
 import android.os.SystemProperties;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.sec.enterprise.auditlog.AuditLog;
 import com.android.internal.util.FunctionalUtils;
 import com.android.internal.widget.LockPatternUtils;

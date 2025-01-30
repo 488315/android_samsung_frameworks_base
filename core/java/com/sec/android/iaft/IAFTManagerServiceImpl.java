@@ -2,15 +2,15 @@ package com.sec.android.iaft;
 
 import android.content.Context;
 import android.content.Intent;
-import android.p009os.CountDownTimer;
-import android.p009os.Handler;
-import android.p009os.HandlerThread;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.RemoteException;
+import android.os.CountDownTimer;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.Message;
+import android.os.RemoteException;
 import android.util.Log;
 import com.android.internal.logging.nano.MetricsProto;
-import com.samsung.android.core.p036pm.runtimemanifest.RuntimeManifestUtils;
+import com.samsung.android.core.pm.runtimemanifest.RuntimeManifestUtils;
 import com.samsung.android.media.AudioParameter;
 import com.sec.android.iaft.callback.IIAFTCallback;
 
@@ -43,7 +43,7 @@ class IAFTManagerServiceImpl extends IIAFTManagerService.Stub {
       super(looper);
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       switch (msg.what) {
         case 1:
@@ -61,10 +61,10 @@ class IAFTManagerServiceImpl extends IIAFTManagerService.Stub {
                   IAFTManagerServiceImpl.mTraceMaxTime
                       * 1000) { // from class:
                                 // com.sec.android.iaft.IAFTManagerServiceImpl.ServiceHandler.1
-                @Override // android.p009os.CountDownTimer
+                @Override // android.os.CountDownTimer
                 public void onTick(long duration) {}
 
-                @Override // android.p009os.CountDownTimer
+                @Override // android.os.CountDownTimer
                 public void onFinish() {
                   Log.m94d(IAFTManagerServiceImpl.TAG, "traceTimer onfinish");
                   if (IAFTManagerServiceImpl.this.mSystemReady) {

@@ -2,10 +2,10 @@ package com.android.net.module.util;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.p002pm.PackageInfo;
+import android.content.pm.PackageInfo;
 import android.media.MediaMetrics;
 import android.net.NetworkStack;
-import android.p009os.Binder;
+import android.os.Binder;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;

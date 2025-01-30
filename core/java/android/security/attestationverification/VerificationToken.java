@@ -1,9 +1,9 @@
 package android.security.attestationverification;
 
 import android.annotation.NonNull;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Parcelling;
 import java.lang.annotation.Annotation;
@@ -105,7 +105,7 @@ public final class VerificationToken implements Parcelable {
         };
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeTypedObject(this.mAttestationProfile, flags);
     dest.writeInt(this.mLocalBindingType);
@@ -116,7 +116,7 @@ public final class VerificationToken implements Parcelable {
     dest.writeInt(this.mUid);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

@@ -1,7 +1,7 @@
 package com.samsung.android.ims;
 
-import android.media.p008tv.interactive.TvInteractiveAppService;
-import android.p009os.RemoteException;
+import android.media.tv.interactive.TvInteractiveAppService;
+import android.os.RemoteException;
 import android.util.Log;
 import com.samsung.android.ims.cmc.ISemCmcRecordingListener;
 import com.samsung.android.ims.cmc.SemCmcRecordingInfo;

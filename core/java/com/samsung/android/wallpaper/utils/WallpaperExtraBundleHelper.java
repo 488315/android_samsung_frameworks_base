@@ -1,6 +1,6 @@
 package com.samsung.android.wallpaper.utils;
 
-import android.p009os.Bundle;
+import android.os.Bundle;
 
 /* loaded from: classes5.dex */
 public class WallpaperExtraBundleHelper {

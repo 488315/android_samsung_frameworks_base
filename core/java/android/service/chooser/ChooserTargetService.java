@@ -4,8 +4,8 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
+import android.os.IBinder;
+import android.os.RemoteException;
 import java.util.List;
 
 @Deprecated

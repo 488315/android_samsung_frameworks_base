@@ -1,9 +1,9 @@
 package android.security;
 
 import android.hardware.security.keymint.HardwareAuthToken;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
-import android.p009os.ServiceSpecificException;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.ServiceSpecificException;
 import android.security.authorization.IKeystoreAuthorization;
 import android.util.Log;
 

@@ -1,9 +1,9 @@
 package com.samsung.android.rune;
 
-import android.p009os.Build;
-import android.p009os.Debug;
-import android.p009os.SemSystemProperties;
-import android.p009os.SystemProperties;
+import android.os.Build;
+import android.os.Debug;
+import android.os.SemSystemProperties;
+import android.os.SystemProperties;
 import com.samsung.android.feature.SemFloatingFeature;
 
 /* loaded from: classes5.dex */

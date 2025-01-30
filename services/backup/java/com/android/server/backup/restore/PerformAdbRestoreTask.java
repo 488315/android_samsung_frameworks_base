@@ -1,7 +1,7 @@
 package com.android.server.backup.restore;
 
 import android.app.backup.IFullBackupRestoreObserver;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.os.ParcelFileDescriptor;
 import android.util.Slog;
 import com.android.server.LocalServices;

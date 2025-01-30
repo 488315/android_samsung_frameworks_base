@@ -2,9 +2,9 @@ package com.android.internal.inputmethod;
 
 import android.annotation.NonNull;
 import android.content.ComponentName;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.autofill.AutofillId;
 import com.android.internal.util.AnnotationValidations;
 import java.util.Objects;
@@ -88,14 +88,14 @@ public final class InlineSuggestionsRequestInfo implements Parcelable {
         + Objects.hashCode(this.mUiExtras);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeTypedObject(this.mComponentName, flags);
     dest.writeTypedObject(this.mAutofillId, flags);
     dest.writeBundle(this.mUiExtras);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

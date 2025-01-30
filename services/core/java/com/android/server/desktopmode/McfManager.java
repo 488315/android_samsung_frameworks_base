@@ -15,7 +15,7 @@ import android.provider.Settings;
 import android.util.IndentingPrintWriter;
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.server.ServiceThread;
-import com.att.iqi.lib.metrics.p019hw.HwConstants;
+import com.att.iqi.lib.metrics.hw.HwConstants;
 import com.samsung.android.desktopmode.DesktopModeFeature;
 import com.samsung.android.mcf.McfAdapter;
 import com.samsung.android.mcf.McfBleAdapter;

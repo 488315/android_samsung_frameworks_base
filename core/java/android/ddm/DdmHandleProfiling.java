@@ -1,6 +1,6 @@
 package android.ddm;
 
-import android.p009os.Debug;
+import android.os.Debug;
 import android.util.Log;
 import java.nio.ByteBuffer;
 import org.apache.harmony.dalvik.ddmc.Chunk;

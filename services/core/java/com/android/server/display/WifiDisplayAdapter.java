@@ -25,7 +25,7 @@ import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SystemProperties;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.provider.Settings;
 import android.util.Slog;
 import android.view.Display;

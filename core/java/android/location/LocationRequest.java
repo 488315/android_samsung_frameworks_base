@@ -2,9 +2,9 @@ package android.location;
 
 import android.annotation.SystemApi;
 import android.hardware.scontext.SContextConstants;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.WorkSource;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.WorkSource;
 import android.provider.Telephony;
 import android.util.TimeUtils;
 import com.android.internal.util.Preconditions;
@@ -409,12 +409,12 @@ public final class LocationRequest implements Parcelable {
     return this.mWorkSource;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeString(this.mProvider);
     parcel.writeLong(this.mIntervalMillis);

@@ -1,9 +1,9 @@
 package android.telephony.ims;
 
 import android.annotation.SystemApi;
-import android.p009os.Binder;
-import android.p009os.RemoteException;
-import android.p009os.ServiceSpecificException;
+import android.os.Binder;
+import android.os.RemoteException;
+import android.os.ServiceSpecificException;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyFrameworkInitializer;
 import android.telephony.ims.aidl.IFeatureProvisioningCallback;

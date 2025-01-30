@@ -5,7 +5,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.p009os.Parcel;
+import android.os.Parcel;
 import android.provider.Browser;
 import android.text.ParcelableSpan;
 import android.text.format.DateFormat;
@@ -32,7 +32,7 @@ public class URLSpan extends ClickableSpan implements ParcelableSpan {
     return 11;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

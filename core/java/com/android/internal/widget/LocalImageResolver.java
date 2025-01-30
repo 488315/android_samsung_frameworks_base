@@ -1,8 +1,8 @@
 package com.android.internal.widget;
 
 import android.content.Context;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.ImageDecoder;

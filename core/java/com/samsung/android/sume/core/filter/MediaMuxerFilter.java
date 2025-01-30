@@ -6,7 +6,7 @@ import android.media.MediaCodec;
 import android.media.MediaExtractor;
 import android.media.MediaFormat;
 import android.media.MediaMuxer;
-import android.p009os.ConditionVariable;
+import android.os.ConditionVariable;
 import android.system.ErrnoException;
 import android.system.Int64Ref;
 import android.system.Os;

@@ -43,7 +43,7 @@ import android.os.ShellCallback;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.sysprop.HdmiProperties;

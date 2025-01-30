@@ -1,6 +1,6 @@
 package com.samsung.android.camera.manager;
 
-import android.p009os.IBinder;
+import android.os.IBinder;
 import android.util.Log;
 
 /* loaded from: classes5.dex */

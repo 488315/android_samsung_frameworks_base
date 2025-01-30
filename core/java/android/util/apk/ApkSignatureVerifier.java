@@ -1,11 +1,11 @@
 package android.util.apk;
 
-import android.content.p002pm.Signature;
-import android.content.p002pm.SigningDetails;
-import android.content.p002pm.parsing.result.ParseInput;
-import android.content.p002pm.parsing.result.ParseResult;
-import android.p009os.Trace;
-import android.p009os.incremental.V4Signature;
+import android.content.pm.Signature;
+import android.content.pm.SigningDetails;
+import android.content.pm.parsing.result.ParseInput;
+import android.content.pm.parsing.result.ParseResult;
+import android.os.Trace;
+import android.os.incremental.V4Signature;
 import android.util.Pair;
 import android.util.jar.StrictJarFile;
 import com.android.internal.util.ArrayUtils;

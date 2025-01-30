@@ -8,9 +8,9 @@ import android.filterfw.core.FrameManager;
 import android.filterfw.core.GraphRunner;
 import android.filterfw.core.RoundRobinScheduler;
 import android.filterfw.core.SyncRunner;
-import android.filterfw.p004io.GraphIOException;
-import android.filterfw.p004io.GraphReader;
-import android.filterfw.p004io.TextGraphReader;
+import android.filterfw.io.GraphIOException;
+import android.filterfw.io.GraphReader;
+import android.filterfw.io.TextGraphReader;
 import java.util.ArrayList;
 
 /* loaded from: classes.dex */

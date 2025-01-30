@@ -1,7 +1,7 @@
 package android.hardware.scontext;
 
-import android.p009os.Bundle;
-import android.p009os.Parcel;
+import android.os.Bundle;
+import android.os.Parcel;
 import com.samsung.android.hardware.context.SemContextEventContext;
 
 @Deprecated
@@ -12,7 +12,7 @@ public class SContextEventContext extends SemContextEventContext {
   public SContextEventContext(Parcel src) {}
 
   @Override // com.samsung.android.hardware.context.SemContextEventContext,
-            // android.p009os.Parcelable
+            // android.os.Parcelable
   public int describeContents() {
     return super.describeContents();
   }

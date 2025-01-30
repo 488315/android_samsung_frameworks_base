@@ -1,12 +1,12 @@
 package android.content;
 
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
-import android.p009os.Bundle;
-import android.p009os.PersistableBundle;
-import android.p009os.RemoteException;
+import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.os.RemoteException;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Xml;

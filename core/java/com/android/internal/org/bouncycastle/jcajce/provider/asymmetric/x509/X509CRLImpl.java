@@ -22,7 +22,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.IssuingDistributionPoint;
 import com.android.internal.org.bouncycastle.asn1.x509.TBSCertList;
 import com.android.internal.org.bouncycastle.asn1.x509.Time;
 import com.android.internal.org.bouncycastle.jcajce.CompositePublicKey;
-import com.android.internal.org.bouncycastle.jcajce.p022io.OutputStreamFactory;
+import com.android.internal.org.bouncycastle.jcajce.io.OutputStreamFactory;
 import com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper;
 import com.android.internal.org.bouncycastle.jce.X509Principal;
 import com.android.internal.org.bouncycastle.util.Arrays;

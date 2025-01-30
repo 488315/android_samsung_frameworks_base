@@ -1,7 +1,7 @@
 package com.samsung.android.allshare;
 
 import android.net.Uri;
-import android.p009os.Bundle;
+import android.os.Bundle;
 
 /* loaded from: classes5.dex */
 class IconImpl extends Icon {

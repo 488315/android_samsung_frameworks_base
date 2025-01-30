@@ -1,7 +1,7 @@
 package com.samsung.android.allshare;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* compiled from: IAppControlAPI.java */
 /* loaded from: classes5.dex */
@@ -35,12 +35,12 @@ class NetworkSocketInfo implements Parcelable {
 
   NetworkSocketInfo() {}
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel arg0, int arg1) {
     arg0.writeInt(this.mProtocol);
     arg0.writeString(this.mIpAddress);

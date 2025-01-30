@@ -2,7 +2,7 @@ package com.android.internal.telephony.uicc;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.text.format.DateFormat;

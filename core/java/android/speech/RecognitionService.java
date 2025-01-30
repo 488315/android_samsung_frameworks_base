@@ -8,12 +8,12 @@ import android.content.Context;
 import android.content.ContextParams;
 import android.content.Intent;
 import android.content.PermissionChecker;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.RemoteException;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
+import android.os.RemoteException;
 import android.util.Log;
 import com.android.internal.util.function.pooled.PooledLambda;
 import java.lang.ref.WeakReference;
@@ -39,7 +39,7 @@ public abstract class RecognitionService extends Service {
   private final RecognitionServiceBinder mBinder = new RecognitionServiceBinder(this);
   private final Handler mHandler =
       new Handler() { // from class: android.speech.RecognitionService.1
-        @Override // android.p009os.Handler
+        @Override // android.os.Handler
         public void handleMessage(Message msg) {
           switch (msg.what) {
             case 1:

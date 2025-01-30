@@ -1,7 +1,7 @@
 package android.telephony;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.security.keystore.KeyProperties;
 import com.android.internal.telephony.DctConstants;
 import java.util.Objects;
@@ -73,7 +73,7 @@ public final class TelephonyDisplayInfo implements Parcelable {
     return this.mIsRoaming;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mNetworkType);
     dest.writeInt(this.mOverrideNetworkType);
@@ -81,7 +81,7 @@ public final class TelephonyDisplayInfo implements Parcelable {
     dest.writeBoolean(this.mIsRoaming);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

@@ -1,7 +1,7 @@
 package com.android.framework.protobuf.nano;
 
 import android.hardware.graphics.common.BufferUsage;
-import android.p009os.BatteryStats;
+import android.os.BatteryStats;
 import com.samsung.android.transcode.constants.EncodeConstants;
 import java.io.IOException;
 import java.nio.BufferOverflowException;

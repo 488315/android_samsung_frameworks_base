@@ -1,8 +1,8 @@
 package android.telephony;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.PersistableBundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.PersistableBundle;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
@@ -168,7 +168,7 @@ public final class CellSignalStrengthTdscdma extends CellSignalStrength implemen
         + this.mLevel;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mRssi);
     dest.writeInt(this.mBitErrorRate);
@@ -183,7 +183,7 @@ public final class CellSignalStrengthTdscdma extends CellSignalStrength implemen
     this.mLevel = in.readInt();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

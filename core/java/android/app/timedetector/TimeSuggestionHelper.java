@@ -1,8 +1,8 @@
 package android.app.timedetector;
 
 import android.app.time.UnixEpochTime;
-import android.p009os.Parcel;
-import android.p009os.ShellCommand;
+import android.os.Parcel;
+import android.os.ShellCommand;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,8 +1,8 @@
 package android.app;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.Preconditions;
 
 @SystemApi
@@ -68,12 +68,12 @@ public final class GameModeConfiguration implements Parcelable {
     this.mFpsOverride = in.readInt();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeFloat(this.mScalingFactor);
     dest.writeInt(this.mFpsOverride);

@@ -2,9 +2,9 @@ package android.telephony.ims.stub;
 
 import android.annotation.SystemApi;
 import android.app.PendingIntent$$ExternalSyntheticLambda1;
-import android.p009os.Bundle;
-import android.p009os.Message;
-import android.p009os.RemoteException;
+import android.os.Bundle;
+import android.os.Message;
+import android.os.RemoteException;
 import android.telephony.ims.ImsCallProfile;
 import android.telephony.ims.ImsCallSessionListener;
 import android.telephony.ims.ImsStreamMediaProfile;

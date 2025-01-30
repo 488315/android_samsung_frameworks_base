@@ -1,8 +1,8 @@
 package com.samsung.android.motionphoto.core;
 
 import android.hardware.HardwareBuffer;
-import android.p009os.Handler;
-import android.p009os.Looper;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.Surface;
 import java.lang.ref.WeakReference;

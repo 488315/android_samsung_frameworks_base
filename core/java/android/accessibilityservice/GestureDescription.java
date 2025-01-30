@@ -3,8 +3,8 @@ package android.accessibilityservice;
 import android.graphics.Path;
 import android.graphics.PathMeasure;
 import android.graphics.RectF;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.Preconditions;
 import java.util.ArrayList;
 import java.util.List;
@@ -316,12 +316,12 @@ public final class GestureDescription {
           + '}';
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       parcel.writeInt(this.mStrokeId);
       parcel.writeInt(this.mContinuedStrokeId);
@@ -375,12 +375,12 @@ public final class GestureDescription {
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeLong(this.timeSinceGestureStart);
       dest.writeParcelableArray(this.touchPoints, flags);

@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.hardware.gnss.GnssSignalType;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Bundle;
-import android.p009os.SystemProperties;
-import android.p009os.UserHandle;
+import android.os.Bundle;
+import android.os.SystemProperties;
+import android.os.UserHandle;
 import java.util.HashMap;
 
 /* loaded from: classes5.dex */

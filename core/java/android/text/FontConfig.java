@@ -3,9 +3,9 @@ package android.text;
 import android.annotation.SystemApi;
 import android.graphics.fonts.FontStyle;
 import android.graphics.fonts.FontVariationAxis;
-import android.p009os.LocaleList;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.LocaleList;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.format.DateFormat;
 import java.io.File;
 import java.lang.annotation.Retention;
@@ -92,12 +92,12 @@ public final class FontConfig implements Parcelable {
     return (FontFamily[]) this.mFamilies.toArray(new FontFamily[0]);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeTypedList(this.mFamilies, flags);
     dest.writeTypedList(this.mAliases, flags);
@@ -199,12 +199,12 @@ public final class FontConfig implements Parcelable {
       this.mFontFamilyName = fontFamilyName;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeString8(this.mFile.getAbsolutePath());
       File file = this.mOriginalFile;
@@ -348,12 +348,12 @@ public final class FontConfig implements Parcelable {
       return this.mWeight;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeString8(this.mName);
       dest.writeString8(this.mOriginal);
@@ -445,12 +445,12 @@ public final class FontConfig implements Parcelable {
       return this.mVariant;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeTypedList(this.mFonts, flags);
       dest.writeString8(this.mLocaleList.toLanguageTags());
@@ -540,12 +540,12 @@ public final class FontConfig implements Parcelable {
       return this.mName;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeTypedList(this.mFamilies, flags);
       dest.writeString8(this.mName);

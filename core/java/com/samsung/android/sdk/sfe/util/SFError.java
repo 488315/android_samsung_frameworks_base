@@ -1,6 +1,6 @@
 package com.samsung.android.sdk.sfe.util;
 
-import android.p009os.Build;
+import android.os.Build;
 
 /* loaded from: classes5.dex */
 public class SFError {

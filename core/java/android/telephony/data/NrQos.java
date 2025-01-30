@@ -1,7 +1,7 @@
 package android.telephony.data;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
@@ -59,7 +59,7 @@ public final class NrQos extends Qos implements Parcelable {
     return this.averagingWindowMs;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     super.writeToParcel(2, dest, flags);
     dest.writeInt(this.qosFlowId);
@@ -67,7 +67,7 @@ public final class NrQos extends Qos implements Parcelable {
     dest.writeInt(this.averagingWindowMs);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

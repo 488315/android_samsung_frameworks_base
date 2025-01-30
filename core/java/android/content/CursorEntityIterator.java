@@ -1,7 +1,7 @@
 package android.content;
 
 import android.database.Cursor;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public abstract class CursorEntityIterator implements EntityIterator {

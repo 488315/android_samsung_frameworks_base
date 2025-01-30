@@ -1,8 +1,8 @@
 package android.credentials;
 
 import android.app.PendingIntent;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.ArraySet;
 import java.util.Set;
 
@@ -61,7 +61,7 @@ public final class PrepareGetCredentialResponseInternal implements Parcelable {
     return this.mHasRemoteResults;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeBoolean(this.mHasQueryApiPermission);
     dest.writeArraySet(this.mCredentialResultTypes);
@@ -70,7 +70,7 @@ public final class PrepareGetCredentialResponseInternal implements Parcelable {
     dest.writeTypedObject(this.mPendingIntent, flags);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

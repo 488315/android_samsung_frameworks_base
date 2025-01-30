@@ -18,7 +18,7 @@ import android.content.om.OverlayInfo;
 import android.content.om.OverlayInfoExt;
 import android.content.om.OverlayManagerTransaction;
 import android.content.om.OverlayableInfo;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.IPackageManager;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;

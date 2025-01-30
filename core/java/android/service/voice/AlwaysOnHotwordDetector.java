@@ -9,17 +9,17 @@ import android.hardware.soundtrigger.KeyphraseMetadata;
 import android.hardware.soundtrigger.SoundTrigger;
 import android.media.AudioFormat;
 import android.media.permission.Identity;
-import android.p009os.AsyncTask;
-import android.p009os.Binder;
-import android.p009os.Handler;
-import android.p009os.HandlerExecutor;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.PersistableBundle;
-import android.p009os.RemoteException;
-import android.p009os.SharedMemory;
+import android.os.AsyncTask;
+import android.os.Binder;
+import android.os.Handler;
+import android.os.HandlerExecutor;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
+import android.os.ParcelFileDescriptor;
+import android.os.PersistableBundle;
+import android.os.RemoteException;
+import android.os.SharedMemory;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Slog;
@@ -956,7 +956,7 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
       super(looper);
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       synchronized (AlwaysOnHotwordDetector.this.mLock) {
         if (AlwaysOnHotwordDetector.this.mAvailability == -3) {
@@ -1042,7 +1042,7 @@ public class AlwaysOnHotwordDetector extends AbstractDetector {
   class RefreshAvailabilityTask extends AsyncTask<Void, Void, Void> {
     RefreshAvailabilityTask() {}
 
-    @Override // android.p009os.AsyncTask
+    @Override // android.os.AsyncTask
     public Void doInBackground(Void... params) {
       try {
         int availability = internalGetInitialAvailability();

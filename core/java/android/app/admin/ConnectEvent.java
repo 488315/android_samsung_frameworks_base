@@ -1,7 +1,7 @@
 package android.app.admin;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -63,12 +63,12 @@ public final class ConnectEvent extends NetworkEvent implements Parcelable {
         this.mPackageName);
   }
 
-  @Override // android.app.admin.NetworkEvent, android.p009os.Parcelable
+  @Override // android.app.admin.NetworkEvent, android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.app.admin.NetworkEvent, android.p009os.Parcelable
+  @Override // android.app.admin.NetworkEvent, android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeInt(2);
     out.writeString(this.mIpAddress);

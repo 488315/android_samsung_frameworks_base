@@ -2,8 +2,8 @@ package android.media;
 
 import android.annotation.SystemApi;
 import android.media.audiofx.AudioEffect;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
@@ -232,12 +232,12 @@ public final class AudioRecordingConfiguration implements Parcelable {
         Integer.valueOf(this.mClientSessionId), Integer.valueOf(this.mClientSource));
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mClientSessionId);
     dest.writeInt(this.mClientSource);

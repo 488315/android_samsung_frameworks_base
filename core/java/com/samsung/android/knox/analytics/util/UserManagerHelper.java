@@ -3,11 +3,11 @@ package com.samsung.android.knox.analytics.util;
 import android.app.admin.IDevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.p002pm.UserInfo;
+import android.content.pm.UserInfo;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
-import android.p009os.UserManager;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.UserManager;
 import com.samsung.android.knox.SemPersonaManager;
 import java.util.List;
 

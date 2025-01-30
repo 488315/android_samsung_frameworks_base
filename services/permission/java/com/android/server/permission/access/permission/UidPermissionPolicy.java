@@ -4,7 +4,7 @@ import android.content.pm.PermissionGroupInfo;
 import android.content.pm.PermissionInfo;
 import android.content.pm.SigningDetails;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;

@@ -3,7 +3,7 @@ package com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.dsa;
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 import com.android.internal.org.bouncycastle.asn1.oiw.OIWObjectIdentifiers;
-import com.android.internal.org.bouncycastle.asn1.p019x9.X9ObjectIdentifiers;
+import com.android.internal.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
 import com.android.internal.org.bouncycastle.crypto.params.AsymmetricKeyParameter;
 import com.android.internal.org.bouncycastle.crypto.params.DSAParameters;

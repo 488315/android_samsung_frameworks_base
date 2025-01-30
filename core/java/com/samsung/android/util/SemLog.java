@@ -1,6 +1,6 @@
 package com.samsung.android.util;
 
-import android.p009os.SemSystemProperties;
+import android.os.SemSystemProperties;
 import android.util.Log;
 import android.util.Slog;
 

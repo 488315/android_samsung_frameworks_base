@@ -6,7 +6,7 @@ import com.samsung.android.sume.core.descriptor.CodecDescriptor;
 import com.samsung.android.sume.core.descriptor.ImgpDescriptor;
 import com.samsung.android.sume.core.descriptor.MediaMuxerDescriptor;
 import com.samsung.android.sume.core.descriptor.MediaParserDescriptor;
-import com.samsung.android.sume.core.descriptor.p044nn.NNDescriptor;
+import com.samsung.android.sume.core.descriptor.nn.NNDescriptor;
 import com.samsung.android.sume.core.evaluate.Evaluator;
 import com.samsung.android.sume.core.format.MediaFormat;
 import com.samsung.android.sume.core.functional.PlaceHolder;
@@ -15,8 +15,8 @@ import com.samsung.android.sume.core.service.ServiceProxySupplier;
 import com.samsung.android.sume.core.types.DataType;
 import com.samsung.android.sume.core.types.HwUnit;
 import com.samsung.android.sume.core.types.MediaType;
-import com.samsung.android.sume.core.types.p045nn.Model;
-import com.samsung.android.sume.core.types.p045nn.NNFW;
+import com.samsung.android.sume.core.types.nn.Model;
+import com.samsung.android.sume.core.types.nn.NNFW;
 import com.samsung.android.sume.solution.Option;
 
 /* loaded from: classes4.dex */

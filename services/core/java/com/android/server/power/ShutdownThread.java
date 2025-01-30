@@ -7,7 +7,7 @@ import android.app.admin.SecurityLog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.hardware.input.IInputManager;
 import android.hardware.usb.UsbManager;
 import android.media.AudioAttributes;

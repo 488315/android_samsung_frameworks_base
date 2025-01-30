@@ -1,12 +1,12 @@
 package com.samsung.android.sepunion;
 
 import android.content.Context;
-import android.p009os.Binder;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
+import android.os.RemoteException;
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -55,7 +55,7 @@ public class SemGoodCatchManager {
             Looper
                 .getMainLooper()) { // from class:
                                     // com.samsung.android.sepunion.SemGoodCatchManager.2
-          @Override // android.p009os.Handler
+          @Override // android.os.Handler
           public void handleMessage(Message msg) {
             switch (msg.what) {
               case 0:
@@ -105,7 +105,7 @@ public class SemGoodCatchManager {
             Looper
                 .getMainLooper()) { // from class:
                                     // com.samsung.android.sepunion.SemGoodCatchManager.2
-          @Override // android.p009os.Handler
+          @Override // android.os.Handler
           public void handleMessage(Message msg) {
             switch (msg.what) {
               case 0:

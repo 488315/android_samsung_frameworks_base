@@ -4,13 +4,13 @@ import android.app.usage.UsageStatsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ResolveInfo;
-import android.p009os.BadParcelableException;
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.UserHandle;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.os.BadParcelableException;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.os.UserHandle;
 import android.util.Log;
 import com.android.internal.app.chooser.TargetInfo;
 import com.google.android.collect.Lists;
@@ -66,7 +66,7 @@ public abstract class AbstractResolverComparator
             Looper
                 .getMainLooper()) { // from class:
                                     // com.android.internal.app.AbstractResolverComparator.1
-          @Override // android.p009os.Handler
+          @Override // android.os.Handler
           public void handleMessage(Message msg) {
             switch (msg.what) {
               case 0:

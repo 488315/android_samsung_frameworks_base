@@ -1,7 +1,7 @@
 package com.android.internal.app;
 
 import android.content.Context;
-import android.p009os.LocaleList;
+import android.os.LocaleList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;

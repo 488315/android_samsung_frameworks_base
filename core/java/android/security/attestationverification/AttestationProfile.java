@@ -1,8 +1,8 @@
 package android.security.attestationverification;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.service.timezone.TimeZoneProviderService;
 import android.util.Log;
 import com.android.internal.util.AnnotationValidations;
@@ -114,7 +114,7 @@ public final class AttestationProfile implements Parcelable {
         + Objects.hashCode(this.mProfileName);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     byte flg = this.mPackageName != null ? (byte) (0 | 2) : (byte) 0;
     if (this.mProfileName != null) {
@@ -132,7 +132,7 @@ public final class AttestationProfile implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

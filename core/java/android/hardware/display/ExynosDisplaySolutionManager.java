@@ -1,6 +1,6 @@
 package android.hardware.display;
 
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.util.Log;
 
 /* loaded from: classes2.dex */

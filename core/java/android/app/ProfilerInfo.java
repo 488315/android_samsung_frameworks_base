@@ -1,8 +1,8 @@
 package android.app;
 
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
+import android.os.Parcelable;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
 import java.io.IOException;
@@ -105,7 +105,7 @@ public class ProfilerInfo implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     ParcelFileDescriptor parcelFileDescriptor = this.profileFd;
     if (parcelFileDescriptor != null) {
@@ -114,7 +114,7 @@ public class ProfilerInfo implements Parcelable {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeString(this.profileFile);
     if (this.profileFd != null) {

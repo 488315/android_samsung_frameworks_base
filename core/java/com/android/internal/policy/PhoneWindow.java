@@ -6,8 +6,8 @@ import android.app.SearchManager;
 import android.app.WindowConfiguration;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p001om.WallpaperThemeUtils;
-import android.content.p002pm.PackageManager;
+import android.content.om.WallpaperThemeUtils;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -19,13 +19,13 @@ import android.media.AudioManager;
 import android.media.session.MediaController;
 import android.media.session.MediaSessionManager;
 import android.net.Uri;
-import android.p009os.Bundle;
-import android.p009os.Debug;
-import android.p009os.Handler;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.Bundle;
+import android.os.Debug;
+import android.os.Handler;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.transition.Scene;
@@ -3099,12 +3099,12 @@ public class PhoneWindow extends Window implements MenuBuilder.Callback {
 
       private SavedState() {}
 
-      @Override // android.p009os.Parcelable
+      @Override // android.os.Parcelable
       public int describeContents() {
         return 0;
       }
 
-      @Override // android.p009os.Parcelable
+      @Override // android.os.Parcelable
       public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(this.featureId);
         parcel.writeInt(this.isOpen ? 1 : 0);

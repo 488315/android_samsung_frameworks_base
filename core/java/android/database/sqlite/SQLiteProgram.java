@@ -1,7 +1,7 @@
 package android.database.sqlite;
 
 import android.database.DatabaseUtils;
-import android.p009os.CancellationSignal;
+import android.os.CancellationSignal;
 import java.util.Arrays;
 
 /* loaded from: classes.dex */

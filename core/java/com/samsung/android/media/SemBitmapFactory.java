@@ -2,7 +2,7 @@ package com.samsung.android.media;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.p009os.Trace;
+import android.os.Trace;
 import android.util.Log;
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;

@@ -6,7 +6,7 @@ import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ParceledListSlice;
 import android.content.pm.ShortcutServiceInternal;

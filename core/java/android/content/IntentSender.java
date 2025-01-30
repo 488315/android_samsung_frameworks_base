@@ -4,13 +4,13 @@ import android.app.ActivityManager;
 import android.app.ActivityThread;
 import android.app.IActivityManager;
 import android.app.IApplicationThread;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
-import android.p009os.UserHandle;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
+import android.os.UserHandle;
 import android.util.AndroidException;
 
 /* loaded from: classes.dex */
@@ -205,12 +205,12 @@ public class IntentSender implements Parcelable {
     return sb.toString();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeStrongBinder(this.mTarget.asBinder());
   }

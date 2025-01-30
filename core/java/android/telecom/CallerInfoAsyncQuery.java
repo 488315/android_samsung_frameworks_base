@@ -4,16 +4,16 @@ import android.app.ActivityManager;
 import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.net.Uri;
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.SystemClock;
-import android.p009os.UserHandle;
-import android.p009os.UserManager;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.os.SystemClock;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.ContactsContract;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.SubscriptionManager;
@@ -83,7 +83,7 @@ public class CallerInfoAsyncQuery {
         super(looper);
       }
 
-      @Override // android.content.AsyncQueryHandler.WorkerHandler, android.p009os.Handler
+      @Override // android.content.AsyncQueryHandler.WorkerHandler, android.os.Handler
       public void handleMessage(Message msg) {
         AsyncQueryHandler.WorkerArgs args = (AsyncQueryHandler.WorkerArgs) msg.obj;
         CookieWrapper cw = (CookieWrapper) args.cookie;

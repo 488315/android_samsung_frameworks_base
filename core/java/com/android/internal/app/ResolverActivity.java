@@ -18,11 +18,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.PermissionChecker;
-import android.content.p002pm.ActivityInfo;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ResolveInfo;
-import android.content.p002pm.UserInfo;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.pm.UserInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
@@ -31,14 +31,14 @@ import android.graphics.Insets;
 import android.graphics.drawable.Drawable;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
-import android.p009os.AsyncTask;
-import android.p009os.Bundle;
-import android.p009os.PatternMatcher;
-import android.p009os.RemoteException;
-import android.p009os.StrictMode;
-import android.p009os.Trace;
-import android.p009os.UserHandle;
-import android.p009os.UserManager;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.PatternMatcher;
+import android.os.RemoteException;
+import android.os.StrictMode;
+import android.os.Trace;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
@@ -1942,7 +1942,7 @@ public class ResolverActivity extends Activity
       /* JADX INFO: Access modifiers changed from: protected */
       /* JADX WARN: Can't rename method to resolve collision */
       @Override // com.android.internal.app.ResolverListAdapter.LoadIconTask,
-                // android.p009os.AsyncTask
+                // android.os.AsyncTask
       public void onPostExecute(Drawable drawable) {
         if (!ResolverActivity.this.isDestroyed()) {
           this.val$otherProfileResolveInfo.setDisplayIcon(drawable);

@@ -63,7 +63,7 @@ import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
 import android.os.storage.StorageManager;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.provider.Settings;
 import android.sec.enterprise.auditlog.AuditLog;
 import android.service.voice.VoiceInteractionServiceInfo;

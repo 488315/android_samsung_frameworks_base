@@ -1,9 +1,9 @@
 package android.view.textclassifier;
 
 import android.icu.util.ULocale;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.ArrayMap;
 import java.util.Locale;
 import java.util.Map;
@@ -66,12 +66,12 @@ public final class TextLanguage implements Parcelable {
         this.mBundle);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.mId);
     this.mEntityConfidence.writeToParcel(dest, flags);
@@ -165,12 +165,12 @@ public final class TextLanguage implements Parcelable {
       return this.mExtra;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeCharSequence(this.mText);
       dest.writeBundle(this.mExtra);

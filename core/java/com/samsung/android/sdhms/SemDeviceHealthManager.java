@@ -2,9 +2,9 @@ package com.samsung.android.sdhms;
 
 import android.app.PendingIntent;
 import android.content.Context;
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.IBinder;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import com.sec.android.sdhms.ISamsungDeviceHealthManager;
 import java.util.Collections;
 import java.util.List;

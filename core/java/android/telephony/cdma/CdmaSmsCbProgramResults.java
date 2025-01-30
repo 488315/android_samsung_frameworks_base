@@ -1,7 +1,7 @@
 package android.telephony.cdma;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class CdmaSmsCbProgramResults implements Parcelable {
@@ -46,7 +46,7 @@ public class CdmaSmsCbProgramResults implements Parcelable {
     this.mCategoryResult = in.readInt();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mCategory);
     dest.writeInt(this.mLanguage);
@@ -75,7 +75,7 @@ public class CdmaSmsCbProgramResults implements Parcelable {
         + '}';
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

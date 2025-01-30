@@ -1,7 +1,7 @@
 package com.samsung.android.content.smartclip;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class SmartClipRemoteRequestInfo implements Parcelable {
@@ -63,12 +63,12 @@ public class SmartClipRemoteRequestInfo implements Parcelable {
     this.mWindowTargetingType = windowTargetingType;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeInt(this.mCallerPid);
     out.writeInt(this.mCallerUid);

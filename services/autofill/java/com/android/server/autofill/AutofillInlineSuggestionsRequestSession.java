@@ -14,7 +14,7 @@ import com.android.internal.inputmethod.IInlineSuggestionsResponseCallback;
 import com.android.internal.inputmethod.InlineSuggestionsRequestInfo;
 import com.android.internal.util.function.QuadConsumer;
 import com.android.internal.util.function.pooled.PooledLambda;
-import com.android.server.autofill.p008ui.InlineFillUi;
+import com.android.server.autofill.ui.InlineFillUi;
 import com.android.server.inputmethod.InputMethodManagerInternal;
 import java.lang.ref.WeakReference;
 import java.util.List;

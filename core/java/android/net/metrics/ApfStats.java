@@ -1,8 +1,8 @@
 package android.net.metrics;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 @SystemApi
 @Deprecated
@@ -147,7 +147,7 @@ public final class ApfStats implements IpConnectivityLog.Event {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeLong(this.durationMs);
     out.writeInt(this.receivedRas);
@@ -161,7 +161,7 @@ public final class ApfStats implements IpConnectivityLog.Event {
     out.writeInt(this.maxProgramSize);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

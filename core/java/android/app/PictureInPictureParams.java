@@ -2,8 +2,8 @@ package android.app;
 
 import android.graphics.Rect;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Rational;
 import java.util.ArrayList;
 import java.util.List;
@@ -398,12 +398,12 @@ public final class PictureInPictureParams implements Parcelable {
         this.mIsLaunchIntoPip);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     writeRationalToParcel(this.mAspectRatio, out);
     writeRationalToParcel(this.mExpandedAspectRatio, out);

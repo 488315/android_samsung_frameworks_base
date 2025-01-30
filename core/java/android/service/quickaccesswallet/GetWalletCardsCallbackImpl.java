@@ -1,11 +1,11 @@
 package android.service.quickaccesswallet;
 
 import android.content.Context;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Icon;
-import android.p009os.Handler;
-import android.p009os.RemoteException;
+import android.os.Handler;
+import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
 

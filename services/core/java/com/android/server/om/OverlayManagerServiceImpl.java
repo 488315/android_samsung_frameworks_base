@@ -21,7 +21,7 @@ import com.android.server.enterprise.vpn.knoxvpn.KnoxVpnFirewallHelper;
 import com.android.server.pm.pkg.AndroidPackage;
 import com.android.server.pm.pkg.AndroidPackageSplit;
 import com.android.server.pm.pkg.PackageState;
-import com.samsung.android.server.p025pm.p026mm.MaintenanceModeManager;
+import com.samsung.android.server.pm.mm.MaintenanceModeManager;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

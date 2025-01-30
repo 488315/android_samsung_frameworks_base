@@ -1,8 +1,8 @@
 package com.android.ims;
 
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.telephony.ims.ImsService;
 import android.telephony.ims.aidl.IImsConfig;
 import android.telephony.ims.aidl.IImsRegistration;
@@ -119,12 +119,12 @@ public final class ImsFeatureContainer implements Parcelable {
         + '}';
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeStrongBinder(this.imsFeature);
     dest.writeStrongInterface(this.imsConfig);

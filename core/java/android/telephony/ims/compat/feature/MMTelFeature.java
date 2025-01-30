@@ -1,8 +1,8 @@
 package android.telephony.ims.compat.feature;
 
 import android.app.PendingIntent;
-import android.p009os.Message;
-import android.p009os.RemoteException;
+import android.os.Message;
+import android.os.RemoteException;
 import android.telephony.ims.ImsCallProfile;
 import android.telephony.ims.aidl.IImsSmsListener;
 import android.telephony.ims.stub.ImsEcbmImplBase;

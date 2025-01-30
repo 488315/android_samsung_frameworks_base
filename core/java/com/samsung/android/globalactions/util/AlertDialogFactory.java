@@ -3,7 +3,7 @@ package com.samsung.android.globalactions.util;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.p009os.IBinder;
+import android.os.IBinder;
 import android.text.method.PasswordTransformationMethod;
 import android.view.ContextThemeWrapper;
 import android.widget.EditText;

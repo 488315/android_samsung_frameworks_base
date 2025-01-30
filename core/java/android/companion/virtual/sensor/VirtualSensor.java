@@ -2,10 +2,10 @@ package android.companion.virtual.sensor;
 
 import android.annotation.SystemApi;
 import android.companion.virtual.IVirtualDevice;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
 
 @SystemApi
 /* loaded from: classes.dex */
@@ -68,12 +68,12 @@ public final class VirtualSensor implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeInt(this.mHandle);
     parcel.writeInt(this.mType);

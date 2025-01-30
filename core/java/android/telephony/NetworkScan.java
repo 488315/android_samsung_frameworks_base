@@ -1,6 +1,6 @@
 package android.telephony;
 
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import com.android.internal.telephony.ITelephony;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

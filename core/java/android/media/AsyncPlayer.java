@@ -2,8 +2,8 @@ package android.media;
 
 import android.content.Context;
 import android.net.Uri;
-import android.p009os.PowerManager;
-import android.p009os.SystemClock;
+import android.os.PowerManager;
+import android.os.SystemClock;
 import android.util.Log;
 import java.util.LinkedList;
 

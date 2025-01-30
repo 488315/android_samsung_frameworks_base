@@ -1,7 +1,7 @@
 package com.android.internal.telephony;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.telephony.Rlog;
 import java.util.ArrayList;
 
@@ -342,7 +342,7 @@ public class PublishDialog implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mCallCount);
     ArrayList<Integer> arrayList = this.mCallId;
@@ -431,7 +431,7 @@ public class PublishDialog implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

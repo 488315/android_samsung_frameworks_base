@@ -1,9 +1,9 @@
 package android.webkit;
 
 import android.annotation.SystemApi;
-import android.content.p002pm.Signature;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.content.pm.Signature;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Base64;
 
 @SystemApi
@@ -58,12 +58,12 @@ public final class WebViewProviderInfo implements Parcelable {
     this.signatures = (Signature[]) in.createTypedArray(Signature.CREATOR);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeString(this.packageName);
     parcel.writeString(this.description);

@@ -2,10 +2,10 @@ package com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util;
 
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
-import com.android.internal.org.bouncycastle.asn1.p019x9.ECNamedCurveTable;
-import com.android.internal.org.bouncycastle.asn1.p019x9.X962Parameters;
-import com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParameters;
-import com.android.internal.org.bouncycastle.crypto.p020ec.CustomNamedCurves;
+import com.android.internal.org.bouncycastle.asn1.x9.ECNamedCurveTable;
+import com.android.internal.org.bouncycastle.asn1.x9.X962Parameters;
+import com.android.internal.org.bouncycastle.asn1.x9.X9ECParameters;
+import com.android.internal.org.bouncycastle.crypto.ec.CustomNamedCurves;
 import com.android.internal.org.bouncycastle.crypto.params.ECDomainParameters;
 import com.android.internal.org.bouncycastle.jcajce.provider.config.ProviderConfiguration;
 import com.android.internal.org.bouncycastle.jce.provider.BouncyCastleProvider;
@@ -14,8 +14,8 @@ import com.android.internal.org.bouncycastle.jce.spec.ECNamedCurveSpec;
 import com.android.internal.org.bouncycastle.math.field.FiniteField;
 import com.android.internal.org.bouncycastle.math.field.Polynomial;
 import com.android.internal.org.bouncycastle.math.field.PolynomialExtensionField;
-import com.android.internal.org.bouncycastle.math.p026ec.ECAlgorithms;
-import com.android.internal.org.bouncycastle.math.p026ec.ECCurve;
+import com.android.internal.org.bouncycastle.math.ec.ECAlgorithms;
+import com.android.internal.org.bouncycastle.math.ec.ECCurve;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import java.math.BigInteger;
 import java.security.spec.ECField;
@@ -191,7 +191,7 @@ public class EC5Util {
   public static com.android.internal.org.bouncycastle.jce.spec.ECParameterSpec convertSpec(
       ECParameterSpec ecSpec) {
     ECCurve curve = convertCurve(ecSpec.getCurve());
-    com.android.internal.org.bouncycastle.math.p026ec.ECPoint g =
+    com.android.internal.org.bouncycastle.math.ec.ECPoint g =
         convertPoint(curve, ecSpec.getGenerator());
     BigInteger n = ecSpec.getOrder();
     BigInteger h = BigInteger.valueOf(ecSpec.getCofactor());
@@ -203,19 +203,19 @@ public class EC5Util {
     return new com.android.internal.org.bouncycastle.jce.spec.ECParameterSpec(curve, g, n, h, seed);
   }
 
-  public static com.android.internal.org.bouncycastle.math.p026ec.ECPoint convertPoint(
+  public static com.android.internal.org.bouncycastle.math.ec.ECPoint convertPoint(
       ECParameterSpec ecSpec, ECPoint point) {
     return convertPoint(convertCurve(ecSpec.getCurve()), point);
   }
 
-  public static com.android.internal.org.bouncycastle.math.p026ec.ECPoint convertPoint(
+  public static com.android.internal.org.bouncycastle.math.ec.ECPoint convertPoint(
       ECCurve curve, ECPoint point) {
     return curve.createPoint(point.getAffineX(), point.getAffineY());
   }
 
   public static ECPoint convertPoint(
-      com.android.internal.org.bouncycastle.math.p026ec.ECPoint point) {
-    com.android.internal.org.bouncycastle.math.p026ec.ECPoint point2 = point.normalize();
+      com.android.internal.org.bouncycastle.math.ec.ECPoint point) {
+    com.android.internal.org.bouncycastle.math.ec.ECPoint point2 = point.normalize();
     return new ECPoint(
         point2.getAffineXCoord().toBigInteger(), point2.getAffineYCoord().toBigInteger());
   }

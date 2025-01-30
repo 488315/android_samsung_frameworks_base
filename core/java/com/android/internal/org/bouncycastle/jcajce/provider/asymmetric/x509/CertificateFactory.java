@@ -10,7 +10,7 @@ import com.android.internal.org.bouncycastle.asn1.pkcs.SignedData;
 import com.android.internal.org.bouncycastle.asn1.x509.CertificateList;
 import com.android.internal.org.bouncycastle.jcajce.util.BCJcaJceHelper;
 import com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper;
-import com.android.internal.org.bouncycastle.util.p028io.Streams;
+import com.android.internal.org.bouncycastle.util.io.Streams;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

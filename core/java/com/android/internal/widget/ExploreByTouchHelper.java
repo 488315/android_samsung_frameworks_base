@@ -2,7 +2,7 @@ package com.android.internal.widget;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import android.util.IntArray;
 import android.view.MotionEvent;
 import android.view.View;

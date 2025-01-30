@@ -1,9 +1,9 @@
 package android.view.textclassifier;
 
-import android.p009os.Binder;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Binder;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.UUID;
@@ -64,13 +64,13 @@ public final class TextClassificationSessionId implements Parcelable {
     return String.format(Locale.US, "TextClassificationSessionId {%s}", this.mValue);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeString(this.mValue);
     parcel.writeStrongBinder(this.mToken);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

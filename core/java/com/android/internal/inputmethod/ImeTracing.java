@@ -1,7 +1,7 @@
 package com.android.internal.inputmethod;
 
 import android.app.ActivityThread;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.util.Log;
 import android.util.proto.ProtoOutputStream;
 import android.view.inputmethod.InputMethodManager;

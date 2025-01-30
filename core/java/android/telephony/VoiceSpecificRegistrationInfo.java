@@ -1,7 +1,7 @@
 package android.telephony;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
@@ -49,7 +49,7 @@ public class VoiceSpecificRegistrationInfo implements Parcelable {
     this.defaultRoamingIndicator = source.readInt();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeBoolean(this.cssSupported);
     dest.writeInt(this.roamingIndicator);
@@ -57,7 +57,7 @@ public class VoiceSpecificRegistrationInfo implements Parcelable {
     dest.writeInt(this.defaultRoamingIndicator);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

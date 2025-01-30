@@ -1,8 +1,8 @@
 package android.webkit;
 
-import android.content.p002pm.PackageInfo;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.content.pm.PackageInfo;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public final class WebViewProviderResponse implements Parcelable {
@@ -34,12 +34,12 @@ public final class WebViewProviderResponse implements Parcelable {
     this.status = in.readInt();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeTypedObject(this.packageInfo, flags);
     out.writeInt(this.status);

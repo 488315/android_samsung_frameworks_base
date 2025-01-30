@@ -2,10 +2,10 @@ package android.view.accessibility;
 
 import android.graphics.Rect;
 import android.graphics.Region;
-import android.p009os.Bundle;
-import android.p009os.LocaleList;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.LocaleList;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.LongArray;
 import android.util.Pools;
@@ -317,12 +317,12 @@ public final class AccessibilityWindowInfo implements Parcelable {
     return true;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeInt(this.mDisplayId);
     parcel.writeInt(this.mType);
@@ -567,12 +567,12 @@ public final class AccessibilityWindowInfo implements Parcelable {
           }
         };
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       int count = size();
       dest.writeInt(count);

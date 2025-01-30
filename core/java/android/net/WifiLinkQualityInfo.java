@@ -1,6 +1,6 @@
 package android.net;
 
-import android.p009os.Parcel;
+import android.os.Parcel;
 
 /* loaded from: classes2.dex */
 public class WifiLinkQualityInfo extends LinkQualityInfo {
@@ -10,7 +10,7 @@ public class WifiLinkQualityInfo extends LinkQualityInfo {
   private long mTxGood = Long.MAX_VALUE;
   private long mTxBad = Long.MAX_VALUE;
 
-  @Override // android.net.LinkQualityInfo, android.p009os.Parcelable
+  @Override // android.net.LinkQualityInfo, android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     super.writeToParcel(dest, flags, 2);
     dest.writeInt(this.mType);

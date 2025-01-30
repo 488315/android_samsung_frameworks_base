@@ -1,7 +1,7 @@
 package com.samsung.android.hardware.secinputdev;
 
 import android.content.Context;
-import android.p009os.IBinder;
+import android.os.IBinder;
 import android.util.Slog;
 import dalvik.system.PathClassLoader;
 import java.lang.reflect.Constructor;

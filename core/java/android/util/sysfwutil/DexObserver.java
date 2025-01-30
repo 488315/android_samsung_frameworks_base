@@ -2,7 +2,7 @@ package android.util.sysfwutil;
 
 import android.app.job.JobInfo;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.UEventObserver;
+import android.os.UEventObserver;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,7 +28,7 @@ public class DexObserver {
   public DexObserver() {
     UEventObserver uEventObserver =
         new UEventObserver() { // from class: android.util.sysfwutil.DexObserver.1
-          @Override // android.p009os.UEventObserver
+          @Override // android.os.UEventObserver
           public void onUEvent(UEventObserver.UEvent event) {
             try {
               Slog.m147d(DexObserver.TAG, "UEventObserver, event : " + event);

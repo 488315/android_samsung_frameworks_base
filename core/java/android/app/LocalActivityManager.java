@@ -2,9 +2,9 @@ package android.app;
 
 import android.app.servertransaction.PendingTransactionActions;
 import android.content.Intent;
-import android.content.p002pm.ActivityInfo;
-import android.p009os.Binder;
-import android.p009os.Bundle;
+import android.content.pm.ActivityInfo;
+import android.os.Binder;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 import com.android.internal.content.ReferrerIntent;

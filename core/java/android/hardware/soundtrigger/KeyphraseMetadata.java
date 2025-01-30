@@ -1,8 +1,8 @@
 package android.hardware.soundtrigger;
 
 import android.annotation.NonNull;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.ArraySet;
 import com.android.internal.util.AnnotationValidations;
 import java.util.Locale;
@@ -100,7 +100,7 @@ public final class KeyphraseMetadata implements Parcelable {
         + this.mRecognitionModeFlags;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mId);
     dest.writeString(this.mKeyphrase);
@@ -108,7 +108,7 @@ public final class KeyphraseMetadata implements Parcelable {
     dest.writeInt(this.mRecognitionModeFlags);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

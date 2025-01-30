@@ -2,8 +2,8 @@ package com.android.internal.net;
 
 import android.net.ProxyInfo;
 import android.net.Uri;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
 import android.security.keystore2.AndroidKeyStoreProvider;
@@ -219,7 +219,7 @@ public final class KnoxVpnProfile implements Parcelable {
     this.mAllowedAlgorithms = allowedAlgorithms;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeString(this.key);
     parcel.writeString(this.name);
@@ -506,7 +506,7 @@ public final class KnoxVpnProfile implements Parcelable {
         && this.isRestrictedToTestNetworks == other.isRestrictedToTestNetworks;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

@@ -1,7 +1,7 @@
 package com.android.ims.internal.uce.presence;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.ims.internal.uce.common.CapInfo;
 
 /* loaded from: classes4.dex */
@@ -45,12 +45,12 @@ public class PresCapInfo implements Parcelable {
     this.mCapInfo = new CapInfo();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.mContactUri);
     dest.writeParcelable(this.mCapInfo, flags);

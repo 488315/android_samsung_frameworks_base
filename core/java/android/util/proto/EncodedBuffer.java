@@ -1,7 +1,7 @@
 package android.util.proto;
 
 import android.hardware.graphics.common.BufferUsage;
-import android.p009os.BatteryStats;
+import android.os.BatteryStats;
 import android.util.Log;
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import java.util.ArrayList;

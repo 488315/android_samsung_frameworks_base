@@ -1,10 +1,10 @@
 package com.samsung.android.rune;
 
-import android.p009os.Build;
-import android.p009os.SystemProperties;
+import android.os.Build;
+import android.os.SystemProperties;
 import android.util.ArraySet;
-import com.samsung.android.core.p036pm.PmUtils;
-import com.samsung.android.core.p036pm.multiuser.MultiUserSupportsHelper;
+import com.samsung.android.core.pm.PmUtils;
+import com.samsung.android.core.pm.multiuser.MultiUserSupportsHelper;
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.feature.SemFloatingFeature;
 import java.util.Arrays;

@@ -8,11 +8,11 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.media.TtmlUtils;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.Message;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -1718,7 +1718,7 @@ public class HorizontalScrollView extends FrameLayout {
     }
 
     @Override // android.view.View.BaseSavedState, android.view.AbsSavedState,
-              // android.p009os.Parcelable
+              // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       super.writeToParcel(dest, flags);
       dest.writeInt(this.scrollOffsetFromStart);
@@ -1740,7 +1740,7 @@ public class HorizontalScrollView extends FrameLayout {
       this.mScrollView = new WeakReference<>(sv);
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       HorizontalScrollView sv = this.mScrollView.get();
       if (sv != null) {

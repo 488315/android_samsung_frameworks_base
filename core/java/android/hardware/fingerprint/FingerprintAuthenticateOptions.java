@@ -2,8 +2,8 @@ package android.hardware.fingerprint;
 
 import android.annotation.NonNull;
 import android.hardware.biometrics.AuthenticateOptions;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.AnnotationValidations;
 import java.lang.annotation.Annotation;
 import java.util.Objects;
@@ -160,7 +160,7 @@ public final class FingerprintAuthenticateOptions implements AuthenticateOptions
         + Objects.hashCode(this.mAttributionTag);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     byte flg = this.mIgnoreEnrollmentState ? (byte) (0 | 4) : (byte) 0;
     if (this.mAttributionTag != null) {
@@ -177,7 +177,7 @@ public final class FingerprintAuthenticateOptions implements AuthenticateOptions
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

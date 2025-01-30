@@ -1,6 +1,6 @@
 package android.util.secutil;
 
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 
 /* loaded from: classes4.dex */
 public final class LogSwitcher {

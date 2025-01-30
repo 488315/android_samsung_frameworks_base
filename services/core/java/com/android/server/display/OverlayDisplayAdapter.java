@@ -7,7 +7,7 @@ import android.graphics.SurfaceTexture;
 import android.hardware.display.DisplayManager;
 import android.os.Handler;
 import android.os.IBinder;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Slog;

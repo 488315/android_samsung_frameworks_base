@@ -7,7 +7,7 @@ import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.os.Build;
 import android.os.Bundle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.ArrayMap;
 import android.util.Slog;
 import com.android.internal.util.XmlUtils;

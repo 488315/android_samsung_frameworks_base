@@ -1,8 +1,8 @@
 package android.telecom;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -35,12 +35,12 @@ public final class CallEndpointException extends RuntimeException implements Par
   @Retention(RetentionPolicy.SOURCE)
   public @interface CallEndpointErrorCode {}
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString8(this.mMessage);
     dest.writeInt(this.mCode);

@@ -5,9 +5,9 @@ import android.graphics.Bitmap;
 import android.media.session.MediaSession;
 import android.media.session.MediaSessionLegacyHelper;
 import android.media.session.PlaybackState;
-import android.p009os.Bundle;
-import android.p009os.Looper;
-import android.p009os.SystemClock;
+import android.os.Bundle;
+import android.os.Looper;
+import android.os.SystemClock;
 
 @Deprecated
 /* loaded from: classes2.dex */

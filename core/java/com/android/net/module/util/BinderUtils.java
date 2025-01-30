@@ -1,6 +1,6 @@
 package com.android.net.module.util;
 
-import android.p009os.Binder;
+import android.os.Binder;
 
 /* loaded from: classes5.dex */
 public class BinderUtils {

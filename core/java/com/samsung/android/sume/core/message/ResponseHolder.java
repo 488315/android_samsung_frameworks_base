@@ -1,6 +1,6 @@
 package com.samsung.android.sume.core.message;
 
-import android.p009os.ConditionVariable;
+import android.os.ConditionVariable;
 import com.samsung.android.sume.core.functional.PlaceHolder;
 import java.lang.ref.WeakReference;
 import java.util.concurrent.TimeUnit;

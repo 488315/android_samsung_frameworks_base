@@ -1,8 +1,8 @@
 package android.telephony.satellite.stub;
 
-import android.p009os.BadParcelableException;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.BadParcelableException;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.telephony.satellite.AntennaPosition;
 
 /* loaded from: classes3.dex */
@@ -31,7 +31,7 @@ public class SatelliteCapabilities implements Parcelable {
   public int maxBytesPerOutgoingDatagram = 0;
   public int[] supportedRadioTechnologies;
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
     int _aidl_start_pos = _aidl_parcel.dataPosition();
     _aidl_parcel.writeInt(0);
@@ -107,7 +107,7 @@ public class SatelliteCapabilities implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     int _mask = 0 | describeContents(this.antennaPositionValues);
     return _mask;

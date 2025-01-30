@@ -3,16 +3,16 @@ package com.sec.android.sdhms;
 import android.Manifest;
 import android.app.ActivityThread;
 import android.app.PendingIntent;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.CoolingDevice;
-import android.p009os.IBinder;
-import android.p009os.IInterface;
-import android.p009os.IThermalEventListener;
-import android.p009os.Parcel;
-import android.p009os.PermissionEnforcer;
-import android.p009os.RemoteException;
-import android.p009os.Temperature;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.CoolingDevice;
+import android.os.IBinder;
+import android.os.IInterface;
+import android.os.IThermalEventListener;
+import android.os.Parcel;
+import android.os.PermissionEnforcer;
+import android.os.RemoteException;
+import android.os.Temperature;
 import com.samsung.android.sdhms.SemBatteryEventHistory;
 import com.samsung.android.sdhms.SemBatteryStats;
 import com.samsung.android.sdhms.SemNetworkUsageStats;
@@ -378,7 +378,7 @@ public interface ISamsungDeviceHealthManager extends IInterface {
       return false;
     }
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return null;
     }
@@ -466,7 +466,7 @@ public interface ISamsungDeviceHealthManager extends IInterface {
       return new Proxy(obj);
     }
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return this;
     }
@@ -584,12 +584,12 @@ public interface ISamsungDeviceHealthManager extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public String getTransactionName(int transactionCode) {
       return getDefaultTransactionName(transactionCode);
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
         throws RemoteException {
       if (code >= 1 && code <= 16777215) {
@@ -970,7 +970,7 @@ public interface ISamsungDeviceHealthManager extends IInterface {
         this.mRemote = remote;
       }
 
-      @Override // android.p009os.IInterface
+      @Override // android.os.IInterface
       public IBinder asBinder() {
         return this.mRemote;
       }
@@ -1906,7 +1906,7 @@ public interface ISamsungDeviceHealthManager extends IInterface {
       this.mEnforcer.enforcePermission(Manifest.permission.DUMP, getCallingPid(), getCallingUid());
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public int getMaxTransactionId() {
       return 52;
     }

@@ -1,7 +1,7 @@
 package android.text.style;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.View;
 import android.view.accessibility.AccessibilityNodeInfo;
 
@@ -29,7 +29,7 @@ public class AccessibilityURLSpan extends URLSpan implements Parcelable {
     return 26;
   }
 
-  @Override // android.text.style.URLSpan, android.p009os.Parcelable
+  @Override // android.text.style.URLSpan, android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     writeToParcelInternal(dest, flags);
   }

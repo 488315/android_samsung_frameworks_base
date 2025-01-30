@@ -3,8 +3,8 @@ package android.hardware.camera2.marshal.impl;
 import android.hardware.camera2.marshal.MarshalQueryable;
 import android.hardware.camera2.marshal.Marshaler;
 import android.hardware.camera2.utils.TypeReference;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.nio.ByteBuffer;
 
 /* loaded from: classes.dex */

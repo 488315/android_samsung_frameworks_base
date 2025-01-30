@@ -1,6 +1,6 @@
 package android.telephony.mbms;
 
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.telephony.MbmsGroupCallSession;
 import android.telephony.mbms.vendor.IMbmsGroupCallService;
 import android.util.Log;

@@ -7,7 +7,7 @@ import android.hardware.display.VirtualDisplay;
 import android.media.AudioFormat;
 import android.media.AudioPlaybackConfiguration;
 import android.media.AudioRecordingConfiguration;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import java.io.Closeable;
 import java.util.List;
 import java.util.Objects;

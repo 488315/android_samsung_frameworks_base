@@ -7,7 +7,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerExecutor;
 import android.os.SystemProperties;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.util.IndentingPrintWriter;

@@ -1,7 +1,7 @@
 package com.samsung.android.desktopmode;
 
 import android.content.res.Configuration;
-import android.p009os.Bundle;
+import android.os.Bundle;
 
 /* loaded from: classes5.dex */
 public abstract class DesktopModeManagerInternal {

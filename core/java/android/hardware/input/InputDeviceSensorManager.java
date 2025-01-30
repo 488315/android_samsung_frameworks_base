@@ -8,17 +8,17 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.hardware.TriggerEventListener;
-import android.p009os.Build;
-import android.p009os.Handler;
-import android.p009os.HandlerThread;
-import android.p009os.Looper;
-import android.p009os.MemoryFile;
-import android.p009os.Message;
-import android.p009os.RemoteException;
+import android.os.Build;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.MemoryFile;
+import android.os.Message;
+import android.os.RemoteException;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.view.InputDevice;
-import com.android.internal.p029os.SomeArgs;
+import com.android.internal.os.SomeArgs;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -275,7 +275,7 @@ public class InputDeviceSensorManager implements InputManager.InputDeviceListene
       obtainMessage(1, deviceId, sensorType, Integer.valueOf(accuracy)).sendToTarget();
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       switch (msg.what) {
         case 1:

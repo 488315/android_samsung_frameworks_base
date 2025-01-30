@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.RestrictionsManager;
-import android.p009os.PersistableBundle;
+import android.os.PersistableBundle;
 
 /* loaded from: classes3.dex */
 public abstract class RestrictionsReceiver extends BroadcastReceiver {

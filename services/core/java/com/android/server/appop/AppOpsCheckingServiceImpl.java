@@ -3,7 +3,7 @@ package com.android.server.appop;
 import android.app.AppGlobals;
 import android.app.AppOpsManager;
 import android.content.Context;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.UserPackage;
 import android.os.AsyncTask;
 import android.os.Binder;

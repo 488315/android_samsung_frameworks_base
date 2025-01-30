@@ -7,7 +7,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.net.Uri;
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.provider.Telephony;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.SubscriptionInfo;

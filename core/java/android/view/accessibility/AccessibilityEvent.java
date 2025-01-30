@@ -1,8 +1,8 @@
 package android.view.accessibility;
 
-import android.p009os.Build;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 import com.android.internal.util.BitUtils;
@@ -497,7 +497,7 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
     record.mSealed = parcel.readInt() == 1;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeInt(isSealed() ? 1 : 0);
     parcel.writeInt(this.mEventType);
@@ -543,7 +543,7 @@ public final class AccessibilityEvent extends AccessibilityRecord implements Par
     parcel.writeInt(accessibilityRecord.mSealed ? 1 : 0);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

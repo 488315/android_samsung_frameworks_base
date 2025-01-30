@@ -1,7 +1,7 @@
 package android.provider;
 
 import android.media.ExifInterface;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;

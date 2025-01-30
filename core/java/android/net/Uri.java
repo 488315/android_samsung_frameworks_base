@@ -4,10 +4,10 @@ import android.annotation.SystemApi;
 import android.content.Context;
 import android.content.Intent;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Environment;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.StrictMode;
+import android.os.Environment;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.StrictMode;
 import android.telecom.PhoneAccount;
 import android.util.Log;
 import com.android.internal.accessibility.common.ShortcutConstants;
@@ -225,12 +225,12 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
       return new StringUri(parcel.readString8());
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int flags) {
       parcel.writeInt(1);
       parcel.writeString8(this.uriString);
@@ -548,12 +548,12 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
           stringUri.parseScheme(), stringUri.getSsp(), stringUri.getFragmentPart());
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int flags) {
       parcel.writeInt(2);
       parcel.writeString8(toString());
@@ -891,12 +891,12 @@ public abstract class Uri implements Parcelable, Comparable<Uri> {
           stringUri.getFragmentPart());
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int flags) {
       parcel.writeInt(3);
       parcel.writeString8(toString());

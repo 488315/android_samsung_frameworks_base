@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.ViewConfiguration;
 import android.view.animation.AnimationUtils;
 import android.view.animation.Interpolator;
-import com.samsung.android.p042os.SemPerfManager;
+import com.samsung.android.os.SemPerfManager;
 import java.lang.reflect.Array;
 
 /* loaded from: classes4.dex */

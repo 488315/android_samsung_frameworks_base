@@ -2,7 +2,7 @@ package android.filterfw.core;
 
 import android.graphics.SurfaceTexture;
 import android.media.MediaRecorder;
-import android.p009os.Looper;
+import android.os.Looper;
 import android.util.Log;
 import android.view.Surface;
 

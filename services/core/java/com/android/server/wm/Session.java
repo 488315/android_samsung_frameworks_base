@@ -18,7 +18,7 @@ import android.os.RemoteCallback;
 import android.os.RemoteException;
 import android.os.Trace;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.MergedConfiguration;

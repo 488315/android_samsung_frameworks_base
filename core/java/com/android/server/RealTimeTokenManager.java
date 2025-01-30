@@ -1,7 +1,7 @@
 package com.android.server;
 
-import android.p009os.IBinder;
-import android.p009os.ServiceManager;
+import android.os.IBinder;
+import android.os.ServiceManager;
 import android.util.Slog;
 
 /* loaded from: classes5.dex */

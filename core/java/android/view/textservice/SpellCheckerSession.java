@@ -1,11 +1,11 @@
 package android.view.textservice;
 
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.HandlerThread;
-import android.p009os.Message;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Message;
+import android.os.RemoteException;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 import com.android.internal.textservice.ISpellCheckerSession;
@@ -298,7 +298,7 @@ public class SpellCheckerSession {
                       this.mThread
                           .getLooper()) { // from class:
                                           // android.view.textservice.SpellCheckerSession.SpellCheckerSessionListenerImpl.1
-                    @Override // android.p009os.Handler
+                    @Override // android.os.Handler
                     public void handleMessage(Message msg) {
                       SpellCheckerParams scp = (SpellCheckerParams) msg.obj;
                       SpellCheckerSessionListenerImpl.this.processTask(scp.mSession, scp, true);

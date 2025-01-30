@@ -2,7 +2,7 @@ package com.android.internal.org.bouncycastle.jcajce.provider.symmetric;
 
 import com.android.internal.org.bouncycastle.asn1.cms.GCMParameters;
 import com.android.internal.org.bouncycastle.asn1.nist.NISTObjectIdentifiers;
-import com.android.internal.org.bouncycastle.asn1.p017bc.BCObjectIdentifiers;
+import com.android.internal.org.bouncycastle.asn1.bc.BCObjectIdentifiers;
 import com.android.internal.org.bouncycastle.crypto.BlockCipher;
 import com.android.internal.org.bouncycastle.crypto.BufferedBlockCipher;
 import com.android.internal.org.bouncycastle.crypto.CipherKeyGenerator;

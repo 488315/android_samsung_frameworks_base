@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.SurfaceTexture;
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.util.Log;
 import android.view.Surface;
 import java.io.File;

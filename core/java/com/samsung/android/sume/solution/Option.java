@@ -1,7 +1,7 @@
 package com.samsung.android.sume.solution;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.samsung.android.sume.core.graph.Graph;
 import com.samsung.android.sume.core.types.OptionBase;
 

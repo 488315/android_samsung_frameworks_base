@@ -2,7 +2,7 @@ package com.android.server.display;
 
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.ArraySet;
 import android.util.SparseArray;
 import android.view.Display;

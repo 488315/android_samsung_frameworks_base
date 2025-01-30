@@ -6,7 +6,7 @@ import android.net.INetworkStackConnector;
 import android.net.Network;
 import android.net.dhcp.DhcpServingParamsParcel;
 import android.net.dhcp.IDhcpServerCallbacks;
-import android.net.p003ip.IIpClientCallbacks;
+import android.net.ip.IIpClientCallbacks;
 import android.os.RemoteException;
 import java.util.ArrayList;
 import java.util.Iterator;

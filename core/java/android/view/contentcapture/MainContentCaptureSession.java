@@ -1,14 +1,14 @@
 package android.view.contentcapture;
 
 import android.content.ComponentName;
-import android.content.p002pm.ParceledListSlice;
+import android.content.pm.ParceledListSlice;
 import android.graphics.Insets;
 import android.graphics.Rect;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.text.Selection;
 import android.text.Spannable;
 import android.text.TextUtils;
@@ -17,7 +17,7 @@ import android.util.Log;
 import android.util.TimeUtils;
 import android.view.autofill.AutofillId;
 import android.view.inputmethod.BaseInputConnection;
-import com.android.internal.p029os.IResultReceiver;
+import com.android.internal.os.IResultReceiver;
 import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -58,7 +58,7 @@ public final class MainContentCaptureSession extends ContentCaptureSession {
       this.mMainSession = new WeakReference<>(session);
     }
 
-    @Override // com.android.internal.p029os.IResultReceiver
+    @Override // com.android.internal.os.IResultReceiver
     public void send(final int resultCode, Bundle resultData) {
       final IBinder binder;
       final MainContentCaptureSession mainSession = this.mMainSession.get();

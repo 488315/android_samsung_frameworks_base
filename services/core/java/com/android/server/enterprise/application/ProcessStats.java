@@ -3,7 +3,7 @@ package com.android.server.enterprise.application;
 import android.os.Process;
 import android.os.StrictMode;
 import android.os.SystemClock;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Log;
 import android.util.SparseArray;
 import com.android.internal.util.FrameworkStatsLog;

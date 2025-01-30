@@ -2,7 +2,7 @@ package android.preference;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import com.android.internal.C4337R;

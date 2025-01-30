@@ -1,12 +1,12 @@
 package android.app;
 
-import android.content.p002pm.InstantAppRequestInfo;
-import android.p009os.Binder;
-import android.p009os.IBinder;
-import android.p009os.IInterface;
-import android.p009os.IRemoteCallback;
-import android.p009os.Parcel;
-import android.p009os.RemoteException;
+import android.content.pm.InstantAppRequestInfo;
+import android.os.Binder;
+import android.os.IBinder;
+import android.os.IInterface;
+import android.os.IRemoteCallback;
+import android.os.Parcel;
+import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface IInstantAppResolver extends IInterface {
@@ -28,7 +28,7 @@ public interface IInstantAppResolver extends IInterface {
     public void getInstantAppIntentFilterList(
         InstantAppRequestInfo request, IRemoteCallback callback) throws RemoteException {}
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return null;
     }
@@ -54,7 +54,7 @@ public interface IInstantAppResolver extends IInterface {
       return new Proxy(obj);
     }
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return this;
     }
@@ -70,12 +70,12 @@ public interface IInstantAppResolver extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public String getTransactionName(int transactionCode) {
       return getDefaultTransactionName(transactionCode);
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
         throws RemoteException {
       if (code >= 1 && code <= 16777215) {
@@ -115,7 +115,7 @@ public interface IInstantAppResolver extends IInterface {
         this.mRemote = remote;
       }
 
-      @Override // android.p009os.IInterface
+      @Override // android.os.IInterface
       public IBinder asBinder() {
         return this.mRemote;
       }
@@ -155,7 +155,7 @@ public interface IInstantAppResolver extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public int getMaxTransactionId() {
       return 1;
     }

@@ -3,11 +3,11 @@ package com.android.server;
 import android.app.Service;
 import android.content.Intent;
 import android.drm.DrmManagerClient;
-import android.p009os.Handler;
-import android.p009os.HandlerThread;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Message;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 
 /* loaded from: classes5.dex */
@@ -79,7 +79,7 @@ public class DrmEventService extends Service {
       super(looper);
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       if (DrmEventService.isLogEnabled) {
         Log.m98i(DrmEventService.TAG, "DrmEventService : handleMessage msg received");

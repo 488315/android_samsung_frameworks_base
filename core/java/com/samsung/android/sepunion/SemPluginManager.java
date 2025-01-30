@@ -1,8 +1,8 @@
 package com.samsung.android.sepunion;
 
 import android.content.Context;
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
+import android.os.IBinder;
+import android.os.RemoteException;
 import com.samsung.android.cover.CoverState;
 
 /* loaded from: classes5.dex */

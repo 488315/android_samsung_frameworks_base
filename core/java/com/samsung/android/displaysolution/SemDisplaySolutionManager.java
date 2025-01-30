@@ -1,6 +1,6 @@
 package com.samsung.android.displaysolution;
 
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.util.Slog;
 
 /* loaded from: classes5.dex */

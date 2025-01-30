@@ -2,9 +2,9 @@ package android.media.midi;
 
 import android.app.Service;
 import android.content.Intent;
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.IBinder;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.util.Log;
 
 /* loaded from: classes2.dex */

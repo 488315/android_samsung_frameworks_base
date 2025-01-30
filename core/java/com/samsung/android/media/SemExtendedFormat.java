@@ -1,8 +1,8 @@
 package com.samsung.android.media;
 
 import android.content.Context;
-import android.content.p002pm.PackageManager;
-import android.p009os.ParcelFileDescriptor;
+import android.content.pm.PackageManager;
+import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import java.io.File;
 import java.io.FileInputStream;

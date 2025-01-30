@@ -2,7 +2,7 @@ package android.security.net.config;
 
 import android.app.slice.SliceProvider;
 import android.content.Context;
-import android.content.p002pm.ApplicationInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;
 import android.util.ArraySet;

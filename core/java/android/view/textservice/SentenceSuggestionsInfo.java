@@ -1,7 +1,7 @@
 package android.view.textservice;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Arrays;
 
 /* loaded from: classes4.dex */
@@ -52,7 +52,7 @@ public final class SentenceSuggestionsInfo implements Parcelable {
     source.readIntArray(iArr2);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     int infoSize = this.mSuggestionsInfos.length;
     dest.writeInt(infoSize);
@@ -61,7 +61,7 @@ public final class SentenceSuggestionsInfo implements Parcelable {
     dest.writeIntArray(this.mLengths);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

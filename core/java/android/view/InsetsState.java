@@ -2,8 +2,8 @@ package android.view;
 
 import android.graphics.Insets;
 import android.graphics.Rect;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.SparseArray;
 import android.util.SparseIntArray;
 import android.util.proto.ProtoOutputStream;
@@ -687,12 +687,12 @@ public class InsetsState implements Parcelable {
     this.mSources = readFromParcel(in);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     this.mDisplayFrame.writeToParcel(dest, flags);
     this.mDisplayCutout.writeToParcel(dest, flags);

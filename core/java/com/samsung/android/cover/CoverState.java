@@ -2,8 +2,8 @@ package com.samsung.android.cover;
 
 import android.content.res.Resources;
 import android.graphics.Rect;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import com.android.internal.C4337R;
@@ -205,13 +205,13 @@ public class CoverState implements Parcelable {
     readFromParcel(src);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   @Deprecated
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   @Deprecated
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeInt(this.switchState ? 1 : 0);

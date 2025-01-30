@@ -4,7 +4,7 @@ import android.annotation.SystemApi;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.provider.DeviceConfig;
 import android.util.Log;
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 package com.samsung.android.allshare;
 
 import android.content.ContentResolver;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import com.sec.android.allshare.iface.CVMessage;
 
 /* loaded from: classes5.dex */

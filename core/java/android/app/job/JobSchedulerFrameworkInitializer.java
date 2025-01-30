@@ -6,11 +6,11 @@ import android.app.SystemServiceRegistry;
 import android.app.tare.EconomyManager;
 import android.app.tare.IEconomyManager;
 import android.content.Context;
-import android.p009os.DeviceIdleManager;
-import android.p009os.IBinder;
-import android.p009os.IDeviceIdleController;
-import android.p009os.PowerExemptionManager;
-import android.p009os.PowerWhitelistManager;
+import android.os.DeviceIdleManager;
+import android.os.IBinder;
+import android.os.IDeviceIdleController;
+import android.os.PowerExemptionManager;
+import android.os.PowerWhitelistManager;
 
 @SystemApi
 /* loaded from: classes.dex */

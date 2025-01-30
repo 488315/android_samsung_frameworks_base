@@ -3,8 +3,8 @@ package android.hardware.fingerprint;
 import android.hardware.biometrics.ComponentInfoInternal;
 import android.hardware.biometrics.SensorLocationInternal;
 import android.hardware.biometrics.SensorPropertiesInternal;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.logging.nano.MetricsProto;
 import java.util.List;
 
@@ -78,12 +78,12 @@ public class FingerprintSensorPropertiesInternal extends SensorPropertiesInterna
     this.mSensorLocations = in.createTypedArrayList(SensorLocationInternal.CREATOR);
   }
 
-  @Override // android.hardware.biometrics.SensorPropertiesInternal, android.p009os.Parcelable
+  @Override // android.hardware.biometrics.SensorPropertiesInternal, android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.hardware.biometrics.SensorPropertiesInternal, android.p009os.Parcelable
+  @Override // android.hardware.biometrics.SensorPropertiesInternal, android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     super.writeToParcel(dest, flags);
     dest.writeInt(this.sensorType);

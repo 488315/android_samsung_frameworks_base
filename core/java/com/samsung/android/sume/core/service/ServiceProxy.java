@@ -1,7 +1,7 @@
 package com.samsung.android.sume.core.service;
 
 import android.content.Context;
-import android.p009os.IBinder;
+import android.os.IBinder;
 import com.samsung.android.sume.core.controller.MediaController;
 import com.samsung.android.sume.core.functional.ExceptionHandler;
 import com.samsung.android.sume.core.message.Request;

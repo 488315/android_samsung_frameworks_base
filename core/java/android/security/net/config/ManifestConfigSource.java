@@ -1,7 +1,7 @@
 package android.security.net.config;
 
 import android.content.Context;
-import android.content.p002pm.ApplicationInfo;
+import android.content.pm.ApplicationInfo;
 import android.util.Pair;
 import java.util.Set;
 

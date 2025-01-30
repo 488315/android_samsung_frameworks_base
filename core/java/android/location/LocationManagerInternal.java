@@ -1,7 +1,7 @@
 package android.location;
 
 import android.location.util.identity.CallerIdentity;
-import android.p009os.PackageTagsList;
+import android.os.PackageTagsList;
 
 /* loaded from: classes2.dex */
 public abstract class LocationManagerInternal {

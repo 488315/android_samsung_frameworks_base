@@ -2,9 +2,9 @@ package com.samsung.android.allshare;
 
 import android.location.Location;
 import android.net.Uri;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.sec.android.allshare.iface.IBundleHolder;
 import com.sec.android.allshare.iface.message.AllShareKey;
 import java.util.ArrayList;
@@ -134,12 +134,12 @@ final class AudioItemImpl extends Item implements IBundleHolder, Parcelable {
     return this.mItemImpl.getBundle();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeBundle(getBundle());
   }

@@ -8,7 +8,7 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.p009os.Parcelable;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.IntProperty;
 import android.util.Log;

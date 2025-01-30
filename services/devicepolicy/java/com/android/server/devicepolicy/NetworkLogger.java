@@ -3,7 +3,7 @@ package com.android.server.devicepolicy;
 import android.app.admin.ConnectEvent;
 import android.app.admin.DnsEvent;
 import android.app.admin.NetworkEvent;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.net.IIpConnectivityMetrics;
 import android.net.INetdEventCallback;
 import android.os.Bundle;

@@ -3,9 +3,9 @@ package android.mtp;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.MediaFile;
 import android.media.MediaMetrics;
-import android.p009os.FileObserver;
-import android.p009os.SystemProperties;
-import android.p009os.storage.StorageVolume;
+import android.os.FileObserver;
+import android.os.SystemProperties;
+import android.os.storage.StorageVolume;
 import android.system.ErrnoException;
 import android.system.Os;
 import android.system.StructStat;
@@ -93,7 +93,7 @@ public class MtpStorageManager {
 
        return;
     */
-    @Override // android.p009os.FileObserver
+    @Override // android.os.FileObserver
     /*
         Code decompiled incorrectly, please refer to instructions dump.
     */
@@ -126,7 +126,7 @@ public class MtpStorageManager {
       }
     }
 
-    @Override // android.p009os.FileObserver
+    @Override // android.os.FileObserver
     public void finalize() {}
   }
 

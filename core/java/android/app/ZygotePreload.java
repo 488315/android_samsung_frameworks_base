@@ -1,6 +1,6 @@
 package android.app;
 
-import android.content.p002pm.ApplicationInfo;
+import android.content.pm.ApplicationInfo;
 
 /* loaded from: classes.dex */
 public interface ZygotePreload {

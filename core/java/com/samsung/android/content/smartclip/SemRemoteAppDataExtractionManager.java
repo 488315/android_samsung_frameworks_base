@@ -2,8 +2,8 @@ package com.samsung.android.content.smartclip;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
+import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.InputEvent;
 import java.util.ArrayList;

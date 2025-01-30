@@ -1,8 +1,8 @@
 package android.util;
 
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
+import android.os.Parcelable;
 import java.io.Closeable;
 import java.io.IOException;
 import java.util.UUID;
@@ -126,12 +126,12 @@ public final class MemoryIntArray implements Parcelable, Closeable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 1;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     try {
       ParcelFileDescriptor pfd = ParcelFileDescriptor.fromFd(this.mFd);

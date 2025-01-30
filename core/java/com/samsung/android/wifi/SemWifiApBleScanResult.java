@@ -1,7 +1,7 @@
 package com.samsung.android.wifi;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.format.DateFormat;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
@@ -79,12 +79,12 @@ public class SemWifiApBleScanResult implements Parcelable {
     this.isMobileDataLimitReached = isMobileDataLimitReached;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     if (this.mDevice != null) {
       dest.writeInt(1);

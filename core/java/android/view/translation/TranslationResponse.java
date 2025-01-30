@@ -2,8 +2,8 @@ package android.view.translation;
 
 import android.annotation.NonNull;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.SparseArray;
 import com.android.internal.util.AnnotationValidations;
 import java.lang.annotation.Retention;
@@ -144,7 +144,7 @@ public final class TranslationResponse implements Parcelable {
         + " }";
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     byte flg = this.mFinalResponse ? (byte) (0 | 8) : (byte) 0;
     dest.writeByte(flg);
@@ -153,7 +153,7 @@ public final class TranslationResponse implements Parcelable {
     dest.writeSparseArray(this.mViewTranslationResponses);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

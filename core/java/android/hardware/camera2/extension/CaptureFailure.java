@@ -1,9 +1,9 @@
 package android.hardware.camera2.extension;
 
 import android.hardware.camera2.CaptureRequest;
-import android.p009os.BadParcelableException;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.BadParcelableException;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class CaptureFailure implements Parcelable {
@@ -31,7 +31,7 @@ public class CaptureFailure implements Parcelable {
   public int sequenceId = 0;
   public long frameNumber = 0;
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
     int _aidl_start_pos = _aidl_parcel.dataPosition();
     _aidl_parcel.writeInt(0);
@@ -115,7 +115,7 @@ public class CaptureFailure implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     int _mask = 0 | describeContents(this.request);
     return _mask;

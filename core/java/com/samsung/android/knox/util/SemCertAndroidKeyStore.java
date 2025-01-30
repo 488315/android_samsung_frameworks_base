@@ -1,7 +1,7 @@
 package com.samsung.android.knox.util;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.security.cert.Certificate;
 
 /* loaded from: classes5.dex */
@@ -30,14 +30,14 @@ public class SemCertAndroidKeyStore implements Parcelable {
     this.certs = (Certificate[]) source.readSerializable();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
   /* JADX WARN: Multi-variable type inference failed */
   /* JADX WARN: Type inference failed for: r0v0, types: [java.io.Serializable, java.security.cert.Certificate[]] */
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeSerializable(this.certs);
   }

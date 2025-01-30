@@ -2,7 +2,7 @@ package android.content.rollback;
 
 import android.app.SystemServiceRegistry;
 import android.content.Context;
-import android.p009os.IBinder;
+import android.os.IBinder;
 
 /* loaded from: classes.dex */
 public class RollbackManagerFrameworkInitializer {

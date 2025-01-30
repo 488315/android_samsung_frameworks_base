@@ -13,7 +13,7 @@ import android.os.PowerExemptionManager;
 import android.os.SystemClock;
 import android.os.UidBatteryConsumer;
 import android.os.UserHandle;
-import android.p005os.BatteryStatsInternal;
+import android.os.BatteryStatsInternal;
 import android.provider.DeviceConfig;
 import android.util.ArraySet;
 import android.util.Pair;

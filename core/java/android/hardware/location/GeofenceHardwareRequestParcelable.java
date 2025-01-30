@@ -1,8 +1,8 @@
 package android.hardware.location;
 
-import android.p009os.BadParcelableException;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.BadParcelableException;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class GeofenceHardwareRequestParcelable implements Parcelable {
@@ -106,12 +106,12 @@ public final class GeofenceHardwareRequestParcelable implements Parcelable {
         + this.mRequest.getSourceTechnologies();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeInt(getType());
     parcel.writeDouble(getLatitude());

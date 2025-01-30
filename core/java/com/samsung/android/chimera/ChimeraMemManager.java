@@ -2,8 +2,8 @@ package com.samsung.android.chimera;
 
 import android.annotation.SystemApi;
 import android.content.Context;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.util.Log;
 import java.util.List;
 

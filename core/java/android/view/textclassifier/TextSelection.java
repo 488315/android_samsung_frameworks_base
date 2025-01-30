@@ -1,9 +1,9 @@
 package android.view.textclassifier;
 
-import android.p009os.Bundle;
-import android.p009os.LocaleList;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.LocaleList;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.SpannedString;
 import android.util.ArrayMap;
 import com.android.internal.util.Preconditions;
@@ -293,12 +293,12 @@ public final class TextSelection implements Parcelable {
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeCharSequence(this.mText);
       dest.writeInt(this.mStartIndex);
@@ -328,12 +328,12 @@ public final class TextSelection implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mStartIndex);
     dest.writeInt(this.mEndIndex);

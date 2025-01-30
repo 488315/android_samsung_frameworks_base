@@ -2,8 +2,8 @@ package android.preference;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.View;
@@ -186,7 +186,7 @@ public class SeekBarPreference extends Preference implements SeekBar.OnSeekBarCh
       this.max = source.readInt();
     }
 
-    @Override // android.view.AbsSavedState, android.p009os.Parcelable
+    @Override // android.view.AbsSavedState, android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       super.writeToParcel(dest, flags);
       dest.writeInt(this.progress);

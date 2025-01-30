@@ -2,8 +2,8 @@ package android.app;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.provider.Settings;
 import android.service.dreams.DreamService;
 import android.service.dreams.IDreamManager;

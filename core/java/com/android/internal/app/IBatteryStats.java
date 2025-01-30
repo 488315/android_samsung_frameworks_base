@@ -4,29 +4,29 @@ import android.Manifest;
 import android.app.ActivityThread;
 import android.bluetooth.BluetoothActivityEnergyInfo;
 import android.net.NetworkStack;
-import android.p009os.BatteryUsageStats;
-import android.p009os.BatteryUsageStatsQuery;
-import android.p009os.Binder;
-import android.p009os.BluetoothBatteryStats;
-import android.p009os.ForegroundAppEnergyInfo;
-import android.p009os.IBinder;
-import android.p009os.IInterface;
-import android.p009os.Parcel;
-import android.p009os.PermissionEnforcer;
-import android.p009os.RemoteException;
-import android.p009os.SemBatterySipper;
-import android.p009os.SemModemActivityInfo;
-import android.p009os.SpeakerOutEnergyInfo;
-import android.p009os.WakeLockStats;
-import android.p009os.WorkSource;
-import android.p009os.connectivity.CellularBatteryStats;
-import android.p009os.connectivity.GpsBatteryStats;
-import android.p009os.connectivity.WifiActivityEnergyInfo;
-import android.p009os.connectivity.WifiBatteryStats;
-import android.p009os.health.HealthStatsParceler;
+import android.os.BatteryUsageStats;
+import android.os.BatteryUsageStatsQuery;
+import android.os.Binder;
+import android.os.BluetoothBatteryStats;
+import android.os.ForegroundAppEnergyInfo;
+import android.os.IBinder;
+import android.os.IInterface;
+import android.os.Parcel;
+import android.os.PermissionEnforcer;
+import android.os.RemoteException;
+import android.os.SemBatterySipper;
+import android.os.SemModemActivityInfo;
+import android.os.SpeakerOutEnergyInfo;
+import android.os.WakeLockStats;
+import android.os.WorkSource;
+import android.os.connectivity.CellularBatteryStats;
+import android.os.connectivity.GpsBatteryStats;
+import android.os.connectivity.WifiActivityEnergyInfo;
+import android.os.connectivity.WifiBatteryStats;
+import android.os.health.HealthStatsParceler;
 import android.telephony.ModemActivityInfo;
 import android.telephony.SignalStrength;
-import com.samsung.android.p042os.SemCompanionDeviceBatteryInfo;
+import com.samsung.android.os.SemCompanionDeviceBatteryInfo;
 import java.util.List;
 
 /* loaded from: classes4.dex */
@@ -795,7 +795,7 @@ public interface IBatteryStats extends IInterface {
     @Override // com.android.internal.app.IBatteryStats
     public void unsetDeviceBatteryInfo(String address) throws RemoteException {}
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return null;
     }
@@ -963,7 +963,7 @@ public interface IBatteryStats extends IInterface {
       return new Proxy(obj);
     }
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return this;
     }
@@ -1221,12 +1221,12 @@ public interface IBatteryStats extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public String getTransactionName(int transactionCode) {
       return getDefaultTransactionName(transactionCode);
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
         throws RemoteException {
       if (code >= 1 && code <= 16777215) {
@@ -2059,7 +2059,7 @@ public interface IBatteryStats extends IInterface {
         this.mRemote = remote;
       }
 
-      @Override // android.p009os.IInterface
+      @Override // android.os.IInterface
       public IBinder asBinder() {
         return this.mRemote;
       }
@@ -4783,7 +4783,7 @@ public interface IBatteryStats extends IInterface {
           Manifest.permission.UPDATE_DEVICE_STATS, getCallingPid(), getCallingUid());
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public int getMaxTransactionId() {
       return 122;
     }

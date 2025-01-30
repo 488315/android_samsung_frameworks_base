@@ -5,9 +5,9 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.p009os.Bundle;
-import android.p009os.Debug;
-import android.p009os.ResultReceiver;
+import android.os.Bundle;
+import android.os.Debug;
+import android.os.ResultReceiver;
 import android.text.TextUtils;
 import android.transition.Transition;
 import android.transition.TransitionListenerAdapter;
@@ -258,7 +258,7 @@ class EnterTransitionCoordinator extends ActivityTransitionCoordinator {
     return isReturning ? activity.mExitTransitionListener : activity.mEnterTransitionListener;
   }
 
-  @Override // android.p009os.ResultReceiver
+  @Override // android.os.ResultReceiver
   protected void onReceiveResult(int resultCode, Bundle resultData) {
     switch (resultCode) {
       case 103:

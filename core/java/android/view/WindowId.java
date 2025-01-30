@@ -1,11 +1,11 @@
 package android.view;
 
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Message;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
 import java.util.HashMap;
 
 /* loaded from: classes4.dex */
@@ -72,7 +72,7 @@ public class WindowId implements Parcelable {
     class HandlerC3750H extends Handler {
       HandlerC3750H() {}
 
-      @Override // android.p009os.Handler
+      @Override // android.os.Handler
       public void handleMessage(Message msg) {
         switch (msg.what) {
           case 1:
@@ -143,12 +143,12 @@ public class WindowId implements Parcelable {
     return sb.toString();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeStrongBinder(this.mToken.asBinder());
   }

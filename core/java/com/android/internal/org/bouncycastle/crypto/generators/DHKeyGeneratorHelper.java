@@ -1,7 +1,7 @@
 package com.android.internal.org.bouncycastle.crypto.generators;
 
 import com.android.internal.org.bouncycastle.crypto.params.DHParameters;
-import com.android.internal.org.bouncycastle.math.p026ec.WNafUtil;
+import com.android.internal.org.bouncycastle.math.ec.WNafUtil;
 import com.android.internal.org.bouncycastle.util.BigIntegers;
 import java.math.BigInteger;
 import java.security.SecureRandom;

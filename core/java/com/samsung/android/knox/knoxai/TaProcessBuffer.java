@@ -1,7 +1,7 @@
 package com.samsung.android.knox.knoxai;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class TaProcessBuffer implements Parcelable {
@@ -77,7 +77,7 @@ public class TaProcessBuffer implements Parcelable {
     return bArr.length;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flag) {
     out.writeInt(this.processBufferType);
     out.writeByteArray(this.buffer);
@@ -88,7 +88,7 @@ public class TaProcessBuffer implements Parcelable {
     this.buffer = in.createByteArray();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

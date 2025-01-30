@@ -1,6 +1,6 @@
 package android.view;
 
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.graphics.Insets;
 import android.graphics.Rect;
 import com.android.internal.util.Preconditions;

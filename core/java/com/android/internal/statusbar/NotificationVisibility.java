@@ -1,7 +1,7 @@
 package com.android.internal.statusbar;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class NotificationVisibility implements Parcelable {
@@ -107,12 +107,12 @@ public class NotificationVisibility implements Parcelable {
     return (str == null && thatViz.key == null) || str.equals(thatViz.key);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeString(this.key);
     parcel.writeInt(this.rank);

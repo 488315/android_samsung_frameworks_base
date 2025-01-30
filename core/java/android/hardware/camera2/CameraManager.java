@@ -3,7 +3,7 @@ package android.hardware.camera2;
 import android.annotation.SystemApi;
 import android.app.compat.CompatChanges;
 import android.content.Context;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.hardware.CameraExtensionSessionStats;
 import android.hardware.CameraStatus;
@@ -21,16 +21,16 @@ import android.hardware.camera2.utils.CameraIdAndSessionConfiguration;
 import android.hardware.camera2.utils.ConcurrentCameraIdCombination;
 import android.hardware.devicestate.DeviceStateManager;
 import android.hardware.display.DisplayManager;
-import android.p009os.Binder;
-import android.p009os.DeadObjectException;
-import android.p009os.Handler;
-import android.p009os.HandlerExecutor;
-import android.p009os.HandlerThread;
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
-import android.p009os.ServiceSpecificException;
-import android.p009os.SystemProperties;
+import android.os.Binder;
+import android.os.DeadObjectException;
+import android.os.Handler;
+import android.os.HandlerExecutor;
+import android.os.HandlerThread;
+import android.os.IBinder;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.ServiceSpecificException;
+import android.os.SystemProperties;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
@@ -939,7 +939,7 @@ public final class CameraManager {
       }
     }
 
-    @Override // android.hardware.ICameraServiceListener.Stub, android.p009os.IInterface
+    @Override // android.hardware.ICameraServiceListener.Stub, android.os.IInterface
     public IBinder asBinder() {
       return this;
     }

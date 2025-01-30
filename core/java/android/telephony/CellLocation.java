@@ -2,8 +2,8 @@ package android.telephony;
 
 import android.app.ActivityThread;
 import android.content.Context;
-import android.p009os.Bundle;
-import android.p009os.RemoteException;
+import android.os.Bundle;
+import android.os.RemoteException;
 import android.telephony.cdma.CdmaCellLocation;
 import android.telephony.gsm.GsmCellLocation;
 import com.android.internal.telephony.ITelephony;

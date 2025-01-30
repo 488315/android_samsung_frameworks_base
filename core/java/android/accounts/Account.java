@@ -1,10 +1,10 @@
 package android.accounts;
 
-import android.p009os.BadParcelableException;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.BadParcelableException;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
@@ -103,12 +103,12 @@ public class Account implements Parcelable {
     return this.accessId;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.name);
     dest.writeString(this.type);

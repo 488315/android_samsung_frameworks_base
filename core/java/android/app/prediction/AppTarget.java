@@ -1,10 +1,10 @@
 package android.app.prediction;
 
 import android.annotation.SystemApi;
-import android.content.p002pm.ShortcutInfo;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.UserHandle;
+import android.content.pm.ShortcutInfo;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.UserHandle;
 import java.util.Objects;
 
 @SystemApi
@@ -128,12 +128,12 @@ public final class AppTarget implements Parcelable {
         && this.mRank == other.mRank;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeTypedObject(this.mId, flags);
     dest.writeTypedObject(this.mShortcutInfo, flags);

@@ -1,7 +1,7 @@
 package android.view.inputmethod;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 
 /* loaded from: classes4.dex */
@@ -59,14 +59,14 @@ public final class CorrectionInfo implements Parcelable {
         + "\"}";
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mOffset);
     TextUtils.writeToParcel(this.mOldText, dest, flags);
     TextUtils.writeToParcel(this.mNewText, dest, flags);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

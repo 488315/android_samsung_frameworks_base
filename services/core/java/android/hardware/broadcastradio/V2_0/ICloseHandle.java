@@ -10,7 +10,7 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
-import com.att.iqi.lib.metrics.p019hw.HwConstants;
+import com.att.iqi.lib.metrics.hw.HwConstants;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;

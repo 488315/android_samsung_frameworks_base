@@ -4,7 +4,7 @@ import android.util.Log;
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.buffer.MutableMediaBuffer;
-import com.samsung.android.sume.core.descriptor.p044nn.NNFWDescriptor;
+import com.samsung.android.sume.core.descriptor.nn.NNFWDescriptor;
 import com.samsung.android.sume.core.functional.ModelSelector;
 import com.samsung.android.sume.core.types.Status;
 import java.util.Arrays;

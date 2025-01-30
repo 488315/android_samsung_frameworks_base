@@ -5,16 +5,16 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p002pm.IPackageManager;
-import android.content.p002pm.PackageManager;
-import android.p009os.Binder;
-import android.p009os.Debug;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
-import android.p009os.UserHandle;
+import android.content.pm.IPackageManager;
+import android.content.pm.PackageManager;
+import android.os.Binder;
+import android.os.Debug;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.UserHandle;
 import android.system.OsConstants;
 import android.util.Log;
 import com.android.internal.net.NetworkUtilsInternal;
@@ -203,7 +203,7 @@ public class VpnService extends Service {
   private class Callback extends Binder {
     private Callback() {}
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     protected boolean onTransact(int code, Parcel data, Parcel reply, int flags) {
       if (code == 16777215) {
         VpnService.this.onRevoke();

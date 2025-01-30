@@ -18,8 +18,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.UndoManager;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ResolveInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.AssetManager;
 import android.content.res.ColorStateList;
 import android.content.res.CompatibilityInfo;
@@ -49,19 +49,19 @@ import android.hardware.scontext.SContextConstants;
 import android.icu.text.DecimalFormatSymbols;
 import android.inputmethodservice.ExtractEditText;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.AsyncTask;
-import android.p009os.Build;
-import android.p009os.Bundle;
-import android.p009os.CancellationSignal;
-import android.p009os.Handler;
-import android.p009os.LocaleList;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.ParcelableParcel;
-import android.p009os.Process;
-import android.p009os.ServiceManager;
-import android.p009os.SystemClock;
-import android.p009os.UserHandle;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.CancellationSignal;
+import android.os.Handler;
+import android.os.LocaleList;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.ParcelableParcel;
+import android.os.Process;
+import android.os.ServiceManager;
+import android.os.SystemClock;
+import android.os.UserHandle;
 import android.provider.Browser;
 import android.provider.Settings;
 import android.sec.enterprise.EnterpriseDeviceManager;
@@ -12836,7 +12836,7 @@ public class TextView extends View implements ViewTreeObserver.OnPreDrawListener
     }
 
     @Override // android.view.View.BaseSavedState, android.view.AbsSavedState,
-              // android.p009os.Parcelable
+              // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       super.writeToParcel(parcel, i);
       parcel.writeInt(this.selStart);

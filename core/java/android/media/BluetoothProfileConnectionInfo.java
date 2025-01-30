@@ -1,8 +1,8 @@
 package android.media;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
 /* loaded from: classes2.dex */
@@ -41,7 +41,7 @@ public final class BluetoothProfileConnectionInfo implements Parcelable {
     this(profile, false, -1, false);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mProfile);
     dest.writeBoolean(this.mSupprNoisy);
@@ -49,7 +49,7 @@ public final class BluetoothProfileConnectionInfo implements Parcelable {
     dest.writeBoolean(this.mIsLeOutput);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

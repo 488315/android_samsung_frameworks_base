@@ -3,7 +3,7 @@ package com.samsung.android.allshare.extension;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.drm.DrmManagerClient;
-import android.p009os.Environment;
+import android.os.Environment;
 import com.google.android.mms.ContentType;
 import com.samsung.android.allshare.DLog;
 import com.samsung.android.share.SemShareConstants;

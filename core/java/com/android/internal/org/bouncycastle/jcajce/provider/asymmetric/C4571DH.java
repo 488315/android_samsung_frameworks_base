@@ -1,8 +1,8 @@
 package com.android.internal.org.bouncycastle.jcajce.provider.asymmetric;
 
-import com.android.internal.org.bouncycastle.asn1.p019x9.X9ObjectIdentifiers;
+import com.android.internal.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
-import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.p023dh.KeyFactorySpi;
+import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.dh.KeyFactorySpi;
 import com.android.internal.org.bouncycastle.jcajce.provider.config.ConfigurableProvider;
 import com.android.internal.org.bouncycastle.jcajce.provider.util.AsymmetricAlgorithmProvider;
 import java.util.HashMap;

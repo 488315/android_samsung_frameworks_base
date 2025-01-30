@@ -1,8 +1,8 @@
 package android.location;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
@@ -53,12 +53,12 @@ public final class LastLocationRequest implements Parcelable {
     return this.mAdasGnssBypass || this.mLocationSettingsIgnored;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeBoolean(this.mHiddenFromAppOps);
     parcel.writeBoolean(this.mAdasGnssBypass);

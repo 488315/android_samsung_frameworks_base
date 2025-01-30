@@ -1,11 +1,11 @@
 package android.window;
 
 import android.app.ActivityManager;
-import android.content.p002pm.ActivityInfo;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
+import android.content.pm.ActivityInfo;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
 import android.view.InsetsState;
 import android.view.SurfaceControl;
 import android.view.WindowInsets;
@@ -88,12 +88,12 @@ public final class StartingWindowInfo implements Parcelable {
     return (this.startingWindowTypeParameter & 128) != 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeTypedObject(this.taskInfo, flags);
     dest.writeTypedObject(this.targetActivityInfo, flags);

@@ -3,8 +3,8 @@ package android.view.displayhash;
 import android.annotation.NonNull;
 import android.annotation.SystemApi;
 import android.graphics.Rect;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.AnnotationValidations;
 import com.samsung.android.ims.options.SemCapabilities;
 
@@ -108,7 +108,7 @@ public final class DisplayHash implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   @SystemApi
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeLong(this.mTimeMillis);
@@ -118,7 +118,7 @@ public final class DisplayHash implements Parcelable {
     dest.writeByteArray(this.mHmac);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   @SystemApi
   public int describeContents() {
     return 0;

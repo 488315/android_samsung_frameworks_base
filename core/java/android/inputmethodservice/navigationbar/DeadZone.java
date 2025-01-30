@@ -3,7 +3,7 @@ package android.inputmethodservice.navigationbar;
 import android.animation.ObjectAnimator;
 import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.p009os.SystemClock;
+import android.os.SystemClock;
 import android.util.FloatProperty;
 import android.util.Log;
 import android.view.MotionEvent;

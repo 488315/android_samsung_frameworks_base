@@ -25,13 +25,13 @@ import android.hardware.camera2.params.SessionConfiguration;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.hardware.camera2.utils.SubmitInfo;
 import android.hardware.camera2.utils.SurfaceUtils;
-import android.p009os.Binder;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.RemoteException;
-import android.p009os.ServiceSpecificException;
-import android.p009os.SystemClock;
+import android.os.Binder;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.RemoteException;
+import android.os.ServiceSpecificException;
+import android.os.SystemClock;
 import android.util.Log;
 import android.util.Range;
 import android.util.Size;
@@ -1487,7 +1487,7 @@ public class CameraDeviceImpl extends CameraDevice implements IBinder.DeathRecip
         public CameraDeviceCallbacks() {
         }
 
-        @Override // android.hardware.camera2.ICameraDeviceCallbacks.Stub, android.p009os.IInterface
+        @Override // android.hardware.camera2.ICameraDeviceCallbacks.Stub, android.os.IInterface
         public IBinder asBinder() {
             return this;
         }

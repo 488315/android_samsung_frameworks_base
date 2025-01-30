@@ -1,6 +1,6 @@
 package com.android.server.enterprise.storage;
 
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;

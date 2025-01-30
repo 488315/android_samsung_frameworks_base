@@ -1,8 +1,8 @@
 package com.samsung.android.hardware.context;
 
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 /* loaded from: classes5.dex */
@@ -460,12 +460,12 @@ public class SemContextEvent implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeLong(this.timestamp);
     dest.writeParcelable(this.semContext, flags);

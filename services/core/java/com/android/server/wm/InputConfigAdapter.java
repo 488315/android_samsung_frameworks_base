@@ -1,6 +1,6 @@
 package com.android.server.wm;
 
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import java.util.Iterator;
 import java.util.List;
 

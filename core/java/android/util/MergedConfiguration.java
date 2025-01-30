@@ -1,8 +1,8 @@
 package android.util;
 
 import android.content.res.Configuration;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.io.PrintWriter;
 
 /* loaded from: classes4.dex */
@@ -62,7 +62,7 @@ public class MergedConfiguration implements Parcelable {
     readFromParcel(in);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     this.mGlobalConfig.writeToParcel(dest, flags);
     this.mOverrideConfig.writeToParcel(dest, flags);
@@ -75,7 +75,7 @@ public class MergedConfiguration implements Parcelable {
     this.mMergedConfig.readFromParcel(source);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

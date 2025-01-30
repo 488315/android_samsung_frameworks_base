@@ -4,11 +4,11 @@ import android.annotation.SystemApi;
 import android.hardware.soundtrigger.IRecognitionStatusCallback;
 import android.hardware.soundtrigger.SoundTrigger;
 import android.media.AudioFormat;
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.ParcelUuid;
-import android.p009os.RemoteException;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.os.ParcelUuid;
+import android.os.RemoteException;
 import android.util.Slog;
 import com.android.internal.app.ISoundTriggerSession;
 import java.io.PrintWriter;
@@ -229,7 +229,7 @@ public final class SoundTriggerDetector {
       super(looper);
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       if (SoundTriggerDetector.this.mCallback == null) {
         Slog.m121w(

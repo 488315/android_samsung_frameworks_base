@@ -3,7 +3,7 @@ package com.android.server.notification;
 import android.app.NotificationChannel;
 import android.app.Person;
 import android.os.Bundle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Log;
 import com.android.internal.logging.InstanceId;
 import com.android.internal.logging.UiEventLogger;

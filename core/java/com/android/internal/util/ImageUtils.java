@@ -13,7 +13,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import android.util.Size;
 import com.google.android.mms.ContentType;
 import java.io.IOException;

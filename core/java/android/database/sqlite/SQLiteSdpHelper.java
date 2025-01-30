@@ -1,8 +1,8 @@
 package android.database.sqlite;
 
 import android.database.DatabaseUtils;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.util.Log;
 import com.samsung.android.knox.dar.IDarManagerService;
 

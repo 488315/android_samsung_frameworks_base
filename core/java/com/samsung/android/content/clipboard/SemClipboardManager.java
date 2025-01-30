@@ -3,12 +3,12 @@ package com.samsung.android.content.clipboard;
 import android.content.ClipData;
 import android.content.Context;
 import android.hardware.graphics.common.Dataspace;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.Message;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.ParcelFileDescriptor;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.sec.clipboard.IClipboardDataPasteEvent;
 import android.sec.clipboard.IClipboardService;
 import android.sec.clipboard.data.ClipboardConstants;
@@ -171,7 +171,7 @@ public class SemClipboardManager {
             this.mContext
                 .getMainLooper()) { // from class:
                                     // com.samsung.android.content.clipboard.SemClipboardManager.2
-          @Override // android.p009os.Handler
+          @Override // android.os.Handler
           public void handleMessage(Message msg) {
             SemClipboardManager.this.notifyEvent(msg);
           }

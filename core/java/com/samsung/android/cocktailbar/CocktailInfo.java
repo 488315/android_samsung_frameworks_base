@@ -2,9 +2,9 @@ package com.samsung.android.cocktailbar;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.RemoteViews;
 
 /* loaded from: classes5.dex */
@@ -198,7 +198,7 @@ public class CocktailInfo implements Parcelable {
     return dumpResult;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeParcelable(this.mContentView, flags);
     out.writeParcelable(this.mHelpView, flags);
@@ -226,7 +226,7 @@ public class CocktailInfo implements Parcelable {
     this.mClassInfo = in.readInt() != 0 ? new ComponentName(in) : null;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

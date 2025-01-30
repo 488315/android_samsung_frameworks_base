@@ -1,8 +1,8 @@
 package android.telephony;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 @SystemApi
 /* loaded from: classes3.dex */
@@ -108,14 +108,14 @@ public final class SmsCbLocation implements Parcelable {
     return i2 == -1 || i2 == cid;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.mPlmn);
     dest.writeInt(this.mLac);
     dest.writeInt(this.mCid);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

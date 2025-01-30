@@ -9,7 +9,7 @@ import android.content.IntentSender;
 import android.content.integrity.AppInstallMetadata;
 import android.content.integrity.IAppIntegrityManager;
 import android.content.integrity.IntegrityUtils;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ParceledListSlice;

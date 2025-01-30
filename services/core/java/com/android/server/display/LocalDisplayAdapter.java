@@ -13,7 +13,7 @@ import android.os.Looper;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.os.Trace;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.DisplayUtils;
 import android.util.EventLog;
 import android.util.LongSparseArray;

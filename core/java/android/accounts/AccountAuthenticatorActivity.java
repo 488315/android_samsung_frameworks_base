@@ -2,7 +2,7 @@ package android.accounts;
 
 import android.app.Activity;
 import android.companion.CompanionDeviceManager;
-import android.p009os.Bundle;
+import android.os.Bundle;
 
 @Deprecated
 /* loaded from: classes.dex */

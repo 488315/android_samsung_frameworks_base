@@ -1,6 +1,6 @@
 package android.filterpacks.videoproc;
 
-import android.content.p001om.WallpaperThemeConstants;
+import android.content.om.WallpaperThemeConstants;
 import android.filterfw.core.Filter;
 import android.filterfw.core.FilterContext;
 import android.filterfw.core.Frame;
@@ -13,8 +13,8 @@ import android.filterfw.core.ShaderProgram;
 import android.filterfw.format.ImageFormat;
 import android.hardware.scontext.SContextConstants;
 import android.opengl.GLES20;
-import android.p009os.SystemClock;
-import android.p009os.SystemProperties;
+import android.os.SystemClock;
+import android.os.SystemProperties;
 import android.util.Log;
 import java.util.Arrays;
 

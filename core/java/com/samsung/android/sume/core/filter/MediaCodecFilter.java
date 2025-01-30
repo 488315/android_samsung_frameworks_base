@@ -2,7 +2,7 @@ package com.samsung.android.sume.core.filter;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.MediaCodec;
-import android.p009os.ConditionVariable;
+import android.os.ConditionVariable;
 import android.util.Log;
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.channel.BufferChannel;

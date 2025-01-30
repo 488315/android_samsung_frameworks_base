@@ -1,7 +1,7 @@
 package android.text.style;
 
-import android.p009os.Parcel;
-import android.p009os.PersistableBundle;
+import android.os.Parcel;
+import android.os.PersistableBundle;
 import android.text.ParcelableSpan;
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -109,12 +109,12 @@ public class TtsSpan implements ParcelableSpan {
     return this.mArgs;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     writeToParcelInternal(dest, flags);
   }

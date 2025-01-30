@@ -3,7 +3,7 @@ package android.database;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
-import android.p009os.CancellationSignal;
+import android.os.CancellationSignal;
 import android.util.ArraySet;
 import com.android.internal.util.ArrayUtils;
 import java.util.Arrays;

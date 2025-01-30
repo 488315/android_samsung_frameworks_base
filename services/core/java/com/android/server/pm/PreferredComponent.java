@@ -1,7 +1,7 @@
 package com.android.server.pm;
 
 import android.content.ComponentName;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ResolveInfo;
 import android.util.Slog;

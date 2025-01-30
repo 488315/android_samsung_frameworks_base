@@ -12,9 +12,9 @@ import android.graphics.Rect;
 import android.graphics.RenderNode;
 import android.graphics.drawable.Drawable;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Debug;
-import android.p009os.Handler;
-import android.p009os.Looper;
+import android.os.Debug;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.ArraySet;
 import android.util.Log;
 import android.util.LongSparseArray;
@@ -51,7 +51,7 @@ public final class BackgroundBlurDrawable extends Drawable {
 
   /* JADX WARN: Code restructure failed: missing block: B:4:0x0017, code lost:
 
-     if (android.p009os.SystemProperties.getInt("viewroot.debug.blur", 0) != 0) goto L6;
+     if (android.os.SystemProperties.getInt("viewroot.debug.blur", 0) != 0) goto L6;
   */
   static {
     String simpleName = BackgroundBlurDrawable.class.getSimpleName();

@@ -1,7 +1,7 @@
 package android.view;
 
 import android.content.Context;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.content.res.CompatibilityInfo;
 import android.graphics.BLASTBufferQueue;
 import android.graphics.BlendMode;
@@ -14,11 +14,11 @@ import android.graphics.Rect;
 import android.graphics.Region;
 import android.graphics.RenderNode;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Debug;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.SystemClock;
+import android.os.Debug;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.SystemClock;
 import android.util.ArraySet;
 import android.util.AttributeSet;
 import android.util.Log;

@@ -1,7 +1,7 @@
 package com.android.internal.util;
 
 import android.hardware.scontext.SContextConstants;
-import android.p009os.SystemClock;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;

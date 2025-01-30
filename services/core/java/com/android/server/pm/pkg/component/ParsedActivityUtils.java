@@ -9,7 +9,7 @@ import android.content.pm.parsing.result.ParseResult;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.ArraySet;
 import android.util.AttributeSet;
 import android.util.Log;

@@ -1,9 +1,9 @@
 package android.telephony.ims.stub;
 
 import android.annotation.SystemApi;
-import android.p009os.Binder;
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.telephony.ims.DelegateMessageCallback;
 import android.telephony.ims.DelegateRequest;
 import android.telephony.ims.DelegateStateCallback;

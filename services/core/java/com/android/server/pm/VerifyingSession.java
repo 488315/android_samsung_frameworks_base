@@ -26,7 +26,7 @@ import android.os.SystemProperties;
 import android.os.Trace;
 import android.os.UserHandle;
 import android.os.incremental.IncrementalManager;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.text.TextUtils;

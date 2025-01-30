@@ -1,7 +1,7 @@
 package android.media.effect.effects;
 
 import android.app.slice.Slice;
-import android.content.p001om.WallpaperThemeConstants;
+import android.content.om.WallpaperThemeConstants;
 import android.filterfw.core.Filter;
 import android.filterfw.core.OneShotScheduler;
 import android.filterpacks.videoproc.BackDropperFilter;

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Path;
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.provider.Settings;
 import android.util.Log;
 import android.util.TypedValue;

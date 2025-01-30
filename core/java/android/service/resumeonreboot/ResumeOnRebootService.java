@@ -3,13 +3,13 @@ package android.service.resumeonreboot;
 import android.annotation.SystemApi;
 import android.app.Service;
 import android.content.Intent;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.ParcelableException;
-import android.p009os.RemoteCallback;
-import android.p009os.RemoteException;
-import com.android.internal.p029os.BackgroundThread;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.ParcelableException;
+import android.os.RemoteCallback;
+import android.os.RemoteException;
+import com.android.internal.os.BackgroundThread;
 import java.io.IOException;
 
 @SystemApi

@@ -1,7 +1,7 @@
 package android.window;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.SurfaceControl;
 
 /* loaded from: classes4.dex */
@@ -32,13 +32,13 @@ public final class DisplayAreaAppearedInfo implements Parcelable {
     this.mLeash = leash;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeTypedObject(this.mDisplayAreaInfo, flags);
     dest.writeTypedObject(this.mLeash, flags);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

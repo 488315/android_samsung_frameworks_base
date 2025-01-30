@@ -1,9 +1,9 @@
 package android.telecom;
 
-import android.p009os.Handler;
-import android.p009os.Message;
-import android.p009os.RemoteException;
-import com.android.internal.p029os.SomeArgs;
+import android.os.Handler;
+import android.os.Message;
+import android.os.RemoteException;
+import com.android.internal.os.SomeArgs;
 import com.android.internal.telecom.IVideoCallback;
 
 /* loaded from: classes3.dex */
@@ -18,7 +18,7 @@ final class VideoCallbackServant {
   private final IVideoCallback mDelegate;
   private final Handler mHandler =
       new Handler() { // from class: android.telecom.VideoCallbackServant.1
-        @Override // android.p009os.Handler
+        @Override // android.os.Handler
         public void handleMessage(Message msg) {
           try {
             internalHandleMessage(msg);

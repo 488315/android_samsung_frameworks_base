@@ -1,7 +1,7 @@
 package android.util;
 
 import android.content.res.FontScaleConverter;
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 
 /* loaded from: classes4.dex */
 public class DisplayMetrics {

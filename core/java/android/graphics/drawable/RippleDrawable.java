@@ -18,7 +18,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.RecordingCanvas;
 import android.graphics.Rect;
 import android.graphics.Shader;
-import android.p009os.Looper;
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.animation.AnimationUtils;

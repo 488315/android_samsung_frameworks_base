@@ -3,9 +3,9 @@ package com.samsung.android.sume.core.buffer;
 import android.graphics.Bitmap;
 import android.hardware.HardwareBuffer;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
+import android.os.Parcelable;
 import android.util.Log;
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.format.MediaFormat;
@@ -88,7 +88,7 @@ public class GenericMediaBuffer<T> extends MediaBufferBase {
     return super.deepCopy2();
   }
 
-  @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, android.p009os.Parcelable
+  @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, android.os.Parcelable
   public /* bridge */ /* synthetic */ int describeContents() {
     return super.describeContents();
   }
@@ -237,7 +237,7 @@ public class GenericMediaBuffer<T> extends MediaBufferBase {
     this.planes = (List) parcel.readSerializable();
   }
 
-  @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, android.p009os.Parcelable
+  @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     HardwareBuffer hardwareBuffer;
     super.writeToParcel(parcel, i);

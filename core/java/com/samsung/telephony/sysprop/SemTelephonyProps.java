@@ -1,6 +1,6 @@
 package com.samsung.telephony.sysprop;
 
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import com.android.internal.telephony.TelephonyProperties;
 import java.util.ArrayList;
 import java.util.Iterator;

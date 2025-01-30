@@ -1,6 +1,6 @@
 package android.media.audiofx;
 
-import android.content.p001om.WallpaperThemeConstants;
+import android.content.om.WallpaperThemeConstants;
 import java.util.StringTokenizer;
 
 /* loaded from: classes2.dex */

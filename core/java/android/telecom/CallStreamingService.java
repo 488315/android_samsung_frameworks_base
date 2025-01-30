@@ -3,11 +3,11 @@ package android.telecom;
 import android.annotation.SystemApi;
 import android.app.Service;
 import android.content.Intent;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.RemoteException;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
+import android.os.RemoteException;
 import com.android.internal.telecom.ICallStreamingService;
 import com.android.internal.telecom.IStreamingCallAdapter;
 import java.lang.annotation.Retention;
@@ -28,7 +28,7 @@ public abstract class CallStreamingService extends Service {
   private StreamingCall mCall;
   private final Handler mHandler =
       new Handler(Looper.getMainLooper()) { // from class: android.telecom.CallStreamingService.1
-        @Override // android.p009os.Handler
+        @Override // android.os.Handler
         public void handleMessage(Message msg) {
           if (CallStreamingService.this.mStreamingCallAdapter == null && msg.what != 1) {
             Log.m71i(this, "handleMessage: null adapter!", new Object[0]);

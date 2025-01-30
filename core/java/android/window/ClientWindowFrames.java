@@ -1,8 +1,8 @@
 package android.window;
 
 import android.graphics.Rect;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public class ClientWindowFrames implements Parcelable {
@@ -70,7 +70,7 @@ public class ClientWindowFrames implements Parcelable {
     this.compatScale = in.readFloat();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     this.frame.writeToParcel(dest, flags);
     this.displayFrame.writeToParcel(dest, flags);
@@ -94,7 +94,7 @@ public class ClientWindowFrames implements Parcelable {
         + "}";
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

@@ -1,8 +1,8 @@
 package android.telephony.ims.stub;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.telephony.ims.feature.ImsFeature;
 import android.util.ArraySet;
 import java.util.Set;
@@ -106,12 +106,12 @@ public final class ImsFeatureConfiguration implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     FeatureSlotPair[] featureSlotPairs = new FeatureSlotPair[this.mFeatures.size()];
     this.mFeatures.toArray(featureSlotPairs);

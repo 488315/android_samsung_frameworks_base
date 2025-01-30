@@ -1,6 +1,6 @@
 package com.samsung.android.knox.analytics.util;
 
-import android.p009os.SemSystemProperties;
+import android.os.SemSystemProperties;
 
 /* loaded from: classes5.dex */
 public final class Log {

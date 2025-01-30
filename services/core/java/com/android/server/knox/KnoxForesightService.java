@@ -9,7 +9,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.Bundle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Log;
 import com.samsung.android.knox.IBasicCommand;
 import dalvik.system.DexClassLoader;

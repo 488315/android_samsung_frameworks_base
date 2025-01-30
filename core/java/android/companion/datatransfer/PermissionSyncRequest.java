@@ -1,8 +1,8 @@
 package android.companion.datatransfer;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class PermissionSyncRequest extends SystemDataTransferRequest implements Parcelable {

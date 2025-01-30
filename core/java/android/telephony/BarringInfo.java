@@ -1,8 +1,8 @@
 package android.telephony;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.SparseArray;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -136,7 +136,7 @@ public final class BarringInfo implements Parcelable {
       this.mConditionalBarringTimeSeconds = p.readInt();
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeInt(this.mBarringType);
       dest.writeBoolean(this.mIsConditionallyBarred);
@@ -144,7 +144,7 @@ public final class BarringInfo implements Parcelable {
       dest.writeInt(this.mConditionalBarringTimeSeconds);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -199,13 +199,13 @@ public final class BarringInfo implements Parcelable {
         p.readSparseArray(BarringServiceInfo.class.getClassLoader(), BarringServiceInfo.class);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeParcelable(this.mCellIdentity, flags);
     dest.writeSparseArray(this.mBarringServiceInfos);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

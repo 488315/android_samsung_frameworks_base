@@ -2,8 +2,8 @@ package com.android.internal.telephony;
 
 import android.app.blob.XmlTags;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Build;
-import android.p009os.SystemProperties;
+import android.os.Build;
+import android.os.SystemProperties;
 import android.security.keystore.KeyProperties;
 import android.telephony.Rlog;
 import android.telephony.TelephonyManager;

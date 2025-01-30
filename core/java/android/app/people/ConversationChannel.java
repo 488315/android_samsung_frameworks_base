@@ -2,9 +2,9 @@ package android.app.people;
 
 import android.app.NotificationChannel;
 import android.app.NotificationChannelGroup;
-import android.content.p002pm.ShortcutInfo;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.content.pm.ShortcutInfo;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,12 +89,12 @@ public final class ConversationChannel implements Parcelable {
         arrayList, ConversationStatus.class.getClassLoader(), ConversationStatus.class);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeParcelable(this.mShortcutInfo, flags);
     dest.writeInt(this.mUid);

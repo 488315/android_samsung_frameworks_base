@@ -2,14 +2,14 @@ package com.samsung.android.app;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.net.Uri;
-import android.p009os.Bundle;
-import android.p009os.Debug;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.SystemProperties;
+import android.os.Bundle;
+import android.os.Debug;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.AttributeSet;
@@ -587,12 +587,12 @@ public final class SemExecutableInfo implements Parcelable {
     return str6 == null ? that.mActivityLaunchMode == null : str6.equals(that.mActivityLaunchMode);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeString(this.mUid);
     parcel.writeInt(this.mEnabled ? 1 : 0);

@@ -1,8 +1,8 @@
 package com.samsung.android.app;
 
 import android.app.ActivityManager;
-import android.p009os.Process;
-import android.p009os.RemoteException;
+import android.os.Process;
+import android.os.RemoteException;
 import android.util.Slog;
 import android.view.View;
 import dalvik.system.VMDebug;

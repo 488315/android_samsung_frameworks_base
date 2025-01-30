@@ -1,7 +1,7 @@
 package android.service.translation;
 
-import android.p009os.DeadObjectException;
-import android.p009os.RemoteException;
+import android.os.DeadObjectException;
+import android.os.RemoteException;
 import android.util.Log;
 import android.view.translation.TranslationResponse;
 import java.util.Objects;

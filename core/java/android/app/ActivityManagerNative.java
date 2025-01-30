@@ -1,7 +1,7 @@
 package android.app;
 
 import android.content.Intent;
-import android.p009os.IBinder;
+import android.os.IBinder;
 
 @Deprecated
 /* loaded from: classes.dex */

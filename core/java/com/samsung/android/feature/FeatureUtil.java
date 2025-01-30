@@ -1,6 +1,6 @@
 package com.samsung.android.feature;
 
-import android.p009os.SemSystemProperties;
+import android.os.SemSystemProperties;
 import android.telecom.Logging.Session;
 import android.text.TextUtils;
 import android.util.Log;

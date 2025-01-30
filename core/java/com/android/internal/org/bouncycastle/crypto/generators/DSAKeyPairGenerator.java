@@ -8,7 +8,7 @@ import com.android.internal.org.bouncycastle.crypto.params.DSAKeyGenerationParam
 import com.android.internal.org.bouncycastle.crypto.params.DSAParameters;
 import com.android.internal.org.bouncycastle.crypto.params.DSAPrivateKeyParameters;
 import com.android.internal.org.bouncycastle.crypto.params.DSAPublicKeyParameters;
-import com.android.internal.org.bouncycastle.math.p026ec.WNafUtil;
+import com.android.internal.org.bouncycastle.math.ec.WNafUtil;
 import com.android.internal.org.bouncycastle.util.BigIntegers;
 import java.math.BigInteger;
 import java.security.SecureRandom;

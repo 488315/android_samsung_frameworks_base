@@ -8,20 +8,20 @@ import android.app.ITransientNotificationCallback;
 import android.compat.Compatibility;
 import android.content.Context;
 import android.content.ContextWrapper;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.hardware.display.DisplayManager;
-import android.p009os.Binder;
-import android.p009os.Debug;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
-import android.p009os.SystemProperties;
+import android.os.Binder;
+import android.os.Debug;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.SystemProperties;
 import android.provider.Settings;
 import android.text.Html;
 import android.text.SpannableString;
@@ -594,7 +594,7 @@ public class Toast {
       this.mCallbacks = new WeakReference<>(callbacks);
       this.mHandler =
           new Handler(looper, null) { // from class: android.widget.Toast.TN.1
-            @Override // android.p009os.Handler
+            @Override // android.os.Handler
             public void handleMessage(Message msg) {
               switch (msg.what) {
                 case 0:

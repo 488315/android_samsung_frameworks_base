@@ -27,7 +27,7 @@ import com.android.internal.infra.AbstractRemoteService;
 import com.android.internal.infra.AndroidFuture;
 import com.android.internal.infra.ServiceConnector;
 import com.android.internal.os.IResultReceiver;
-import com.android.server.autofill.p008ui.InlineFillUi;
+import com.android.server.autofill.ui.InlineFillUi;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CancellationException;

@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Rect;
-import android.p009os.Handler;
-import android.p009os.Message;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -59,7 +59,7 @@ public class ZoomButtonsController implements View.OnTouchListener {
       };
   private final Handler mHandler =
       new Handler() { // from class: android.widget.ZoomButtonsController.2
-        @Override // android.p009os.Handler
+        @Override // android.os.Handler
         public void handleMessage(Message msg) {
           switch (msg.what) {
             case 2:

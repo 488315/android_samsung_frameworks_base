@@ -1,6 +1,6 @@
 package android.telephony.ims.aidl;
 
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.telephony.ims.ImsException;
 import android.telephony.ims.stub.RcsCapabilityExchangeImplBase;
 import java.util.List;

@@ -4,24 +4,24 @@ import android.annotation.SystemApi;
 import android.app.ActivityThread;
 import android.app.AppGlobals;
 import android.bluetooth.BluetoothDevice;
-import android.content.p002pm.ActivityInfo;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ResolveInfo;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
-import android.p009os.Bundle;
-import android.p009os.BundleMerger;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.Process;
-import android.p009os.ShellCommand;
-import android.p009os.StrictMode;
-import android.p009os.UserHandle;
-import android.p009os.storage.StorageManager;
+import android.os.Bundle;
+import android.os.BundleMerger;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.Process;
+import android.os.ShellCommand;
+import android.os.StrictMode;
+import android.os.UserHandle;
+import android.os.storage.StorageManager;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -1163,12 +1163,12 @@ public class Intent implements Parcelable, Cloneable {
       return icon;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeString8(this.packageName);
       dest.writeString8(this.resourceName);
@@ -1811,7 +1811,7 @@ public class Intent implements Parcelable, Cloneable {
   	at jadx.core.dex.visitors.typeinference.TypeInferenceVisitor.visit(TypeInferenceVisitor.java:77)
   */
   public static android.content.Intent parseCommandArgs(
-      android.p009os.ShellCommand r16, android.content.Intent.CommandOptionHandler r17)
+      android.os.ShellCommand r16, android.content.Intent.CommandOptionHandler r17)
       throws java.net.URISyntaxException {
     /*
         Method dump skipped, instructions count: 2408
@@ -3321,7 +3321,7 @@ public class Intent implements Parcelable, Cloneable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     Bundle bundle = this.mExtras;
     if (bundle != null) {
@@ -3330,7 +3330,7 @@ public class Intent implements Parcelable, Cloneable {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeString8(this.mAction);
     Uri.writeToParcel(parcel, this.mData);

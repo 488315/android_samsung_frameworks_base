@@ -1,7 +1,7 @@
 package android.text.style;
 
 import android.graphics.Paint;
-import android.p009os.Parcel;
+import android.os.Parcel;
 import android.text.ParcelableSpan;
 import android.text.TextPaint;
 import com.android.internal.util.Preconditions;
@@ -55,12 +55,12 @@ public interface LineHeightSpan extends ParagraphStyle, WrapTogetherSpan {
       return 28;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       writeToParcelInternal(dest, flags);
     }

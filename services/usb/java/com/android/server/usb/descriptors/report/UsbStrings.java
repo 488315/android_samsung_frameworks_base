@@ -1,11 +1,11 @@
 package com.android.server.usb.descriptors.report;
 
 import android.net.resolv.aidl.IDnsResolverUnsolicitedEventListener;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import com.android.internal.util.FrameworkStatsLog;
 import com.android.internal.util.jobs.XmlUtils;
-import com.att.iqi.lib.metrics.p019hw.HwConstants;
-import com.att.iqi.lib.metrics.p020mm.MM05;
+import com.att.iqi.lib.metrics.hw.HwConstants;
+import com.att.iqi.lib.metrics.mm.MM05;
 import java.util.HashMap;
 
 /* loaded from: classes3.dex */

@@ -8,7 +8,7 @@ import android.annotation.NonNull;
 import android.annotation.Size;
 import android.annotation.UserIdInt;
 import android.content.Intent;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import java.lang.annotation.Annotation;
 

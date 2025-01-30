@@ -2,7 +2,7 @@ package android.inputmethodservice;
 
 import android.content.Context;
 import android.net.Uri;
-import android.p009os.UserManager;
+import android.os.UserManager;
 import android.util.Log;
 import android.util.Printer;
 import android.view.inputmethod.EditorInfo;

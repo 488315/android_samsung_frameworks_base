@@ -2,8 +2,8 @@ package android.telephony.ims;
 
 import android.annotation.SystemApi;
 import android.content.Context;
-import android.p009os.RemoteException;
-import android.p009os.ServiceSpecificException;
+import android.os.RemoteException;
+import android.os.ServiceSpecificException;
 import android.telephony.BinderCacheManager;
 import android.telephony.ims.aidl.IImsRcsController;
 import android.telephony.ims.aidl.SipDelegateConnectionAidlWrapper;

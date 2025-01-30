@@ -1,7 +1,7 @@
 package android.app.wallpapereffectsgeneration;
 
 import android.annotation.SystemApi;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import java.util.concurrent.Executor;
 
 @SystemApi

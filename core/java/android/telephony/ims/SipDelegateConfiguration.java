@@ -2,8 +2,8 @@ package android.telephony.ims;
 
 import android.annotation.SystemApi;
 import android.net.Uri;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -391,7 +391,7 @@ public final class SipDelegateConfiguration implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeLong(this.mVersion);
     dest.writeInt(this.mTransportType);
@@ -566,7 +566,7 @@ public final class SipDelegateConfiguration implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

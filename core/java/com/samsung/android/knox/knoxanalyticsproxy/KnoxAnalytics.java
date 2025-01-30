@@ -1,9 +1,9 @@
 package com.samsung.android.knox.knoxanalyticsproxy;
 
-import android.p009os.Binder;
-import android.p009os.RemoteException;
-import android.p009os.SemSystemProperties;
-import android.p009os.ServiceManager;
+import android.os.Binder;
+import android.os.RemoteException;
+import android.os.SemSystemProperties;
+import android.os.ServiceManager;
 import android.util.Log;
 
 /* loaded from: classes5.dex */

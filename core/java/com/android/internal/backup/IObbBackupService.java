@@ -1,12 +1,12 @@
 package com.android.internal.backup;
 
 import android.app.backup.IBackupManager;
-import android.p009os.Binder;
-import android.p009os.IBinder;
-import android.p009os.IInterface;
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.IBinder;
+import android.os.IInterface;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
+import android.os.RemoteException;
 
 /* loaded from: classes4.dex */
 public interface IObbBackupService extends IInterface {
@@ -45,7 +45,7 @@ public interface IObbBackupService extends IInterface {
         IBackupManager callbackBinder)
         throws RemoteException {}
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return null;
     }
@@ -71,7 +71,7 @@ public interface IObbBackupService extends IInterface {
       return new Proxy(obj);
     }
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return this;
     }
@@ -87,12 +87,12 @@ public interface IObbBackupService extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public String getTransactionName(int transactionCode) {
       return getDefaultTransactionName(transactionCode);
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
         throws RemoteException {
       if (code >= 1 && code <= 16777215) {
@@ -140,7 +140,7 @@ public interface IObbBackupService extends IInterface {
         this.mRemote = remote;
       }
 
-      @Override // android.p009os.IInterface
+      @Override // android.os.IInterface
       public IBinder asBinder() {
         return this.mRemote;
       }
@@ -244,7 +244,7 @@ public interface IObbBackupService extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public int getMaxTransactionId() {
       return 1;
     }

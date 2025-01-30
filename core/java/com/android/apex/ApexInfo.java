@@ -1,6 +1,6 @@
 package com.android.apex;
 
-import com.samsung.android.p043sm.iafdlib.IafdConstant;
+import com.samsung.android.sm.iafdlib.IafdConstant;
 import java.io.IOException;
 import javax.xml.datatype.DatatypeConfigurationException;
 import org.xmlpull.v1.XmlPullParser;

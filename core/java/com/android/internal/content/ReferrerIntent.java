@@ -1,8 +1,8 @@
 package com.android.internal.content;
 
 import android.content.Intent;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
@@ -29,7 +29,7 @@ public class ReferrerIntent extends Intent {
     this.mReferrer = referrer;
   }
 
-  @Override // android.content.Intent, android.p009os.Parcelable
+  @Override // android.content.Intent, android.os.Parcelable
   public void writeToParcel(Parcel dest, int parcelableFlags) {
     super.writeToParcel(dest, parcelableFlags);
     dest.writeString(this.mReferrer);

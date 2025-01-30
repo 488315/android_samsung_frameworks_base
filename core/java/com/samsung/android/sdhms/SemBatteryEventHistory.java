@@ -1,7 +1,7 @@
 package com.samsung.android.sdhms;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class SemBatteryEventHistory implements Cloneable, Parcelable {
@@ -110,12 +110,12 @@ public class SemBatteryEventHistory implements Cloneable, Parcelable {
     this.eventValue = in.readInt();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeLong(this.updateTime);
     parcel.writeInt(this.eventType);

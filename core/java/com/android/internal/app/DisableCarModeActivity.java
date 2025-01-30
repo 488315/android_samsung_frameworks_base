@@ -3,9 +3,9 @@ package com.android.internal.app;
 import android.app.Activity;
 import android.app.IUiModeManager;
 import android.content.Context;
-import android.p009os.Bundle;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.Bundle;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.util.Log;
 
 /* loaded from: classes4.dex */

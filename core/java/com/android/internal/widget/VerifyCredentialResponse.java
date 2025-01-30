@@ -1,7 +1,7 @@
 package com.android.internal.widget;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.service.gatekeeper.GateKeeperResponse;
 import android.util.Slog;
 import java.lang.annotation.Retention;
@@ -103,7 +103,7 @@ public final class VerifyCredentialResponse implements Parcelable {
     return new VerifyCredentialResponse(this.mResponseCode, this.mTimeout, null, 0L);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mResponseCode);
     dest.writeInt(this.mTimeout);
@@ -111,7 +111,7 @@ public final class VerifyCredentialResponse implements Parcelable {
     dest.writeLong(this.mGatekeeperPasswordHandle);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

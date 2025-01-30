@@ -1,8 +1,8 @@
 package android.hardware.hdmi;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 @SystemApi
 /* loaded from: classes2.dex */
@@ -40,12 +40,12 @@ public final class HdmiHotplugEvent implements Parcelable {
     return this.mConnected;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeInt(this.mPort);
     parcel.writeByte(this.mConnected ? (byte) 1 : (byte) 0);

@@ -1,7 +1,7 @@
 package com.samsung.android.edge;
 
 import android.content.ComponentName;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import android.service.notification.StatusBarNotification;
 
 /* loaded from: classes5.dex */

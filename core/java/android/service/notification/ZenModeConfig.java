@@ -6,14 +6,14 @@ import android.app.NotificationManager;
 import android.app.job.JobInfo;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.MediaMetrics;
 import android.net.Uri;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.provider.Contacts;
 import android.provider.Settings;
 import android.text.TextUtils;
@@ -28,7 +28,7 @@ import com.android.internal.util.XmlUtils;
 import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.samsung.android.knox.analytics.database.Contract;
-import com.samsung.android.p043sm.iafdlib.IafdConstant;
+import com.samsung.android.sm.iafdlib.IafdConstant;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -288,7 +288,7 @@ public class ZenModeConfig implements Parcelable {
     this.allowAppBypassDndList = source.createStringArrayList();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeInt(this.allowCalls ? 1 : 0);
     parcel.writeInt(this.allowRepeatCallers ? 1 : 0);
@@ -1000,7 +1000,7 @@ public class ZenModeConfig implements Parcelable {
     return tryParseLong(val, defValue);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -1856,12 +1856,12 @@ public class ZenModeConfig implements Parcelable {
       this.pkg = source.readString();
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       parcel.writeInt(this.enabled ? 1 : 0);
       parcel.writeInt(this.snoozing ? 1 : 0);

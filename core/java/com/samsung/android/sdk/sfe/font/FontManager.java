@@ -2,14 +2,14 @@ package com.samsung.android.sdk.sfe.font;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.FontListParser;
 import android.media.MediaMetrics;
 import android.net.Uri;
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.sec.enterprise.content.SecContentProviderURI;
 import android.text.FontConfig;
 import android.text.TextUtils;

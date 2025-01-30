@@ -2,8 +2,8 @@ package android.app;
 
 import android.graphics.drawable.Icon;
 import android.net.Uri;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -133,12 +133,12 @@ public final class Person implements Parcelable {
         Boolean.valueOf(this.mIsImportant));
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeCharSequence(this.mName);
     if (this.mIcon != null) {

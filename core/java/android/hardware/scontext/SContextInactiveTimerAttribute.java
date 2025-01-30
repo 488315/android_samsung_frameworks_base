@@ -1,7 +1,7 @@
 package android.hardware.scontext;
 
-import android.media.p008tv.TvContract;
-import android.p009os.Bundle;
+import android.media.tv.TvContract;
+import android.os.Bundle;
 import android.util.Log;
 
 @Deprecated

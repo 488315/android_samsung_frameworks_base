@@ -1,7 +1,7 @@
 package android.telephony.data;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -56,7 +56,7 @@ public final class QosBearerSession implements Parcelable {
     return this.qosBearerFilterList;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.qosBearerSessionId);
     if (this.qos.getType() == 1) {
@@ -67,7 +67,7 @@ public final class QosBearerSession implements Parcelable {
     dest.writeList(this.qosBearerFilterList);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

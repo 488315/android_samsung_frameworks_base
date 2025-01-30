@@ -1,12 +1,12 @@
 package com.android.internal.power;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
+import android.os.Parcel;
 import android.text.TextUtils;
 import android.util.DebugUtils;
 import android.util.Slog;
 import android.view.Display;
-import com.android.internal.p029os.LongMultiStateCounter;
+import com.android.internal.os.LongMultiStateCounter;
 import java.io.PrintWriter;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

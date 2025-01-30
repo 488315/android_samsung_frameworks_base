@@ -1,7 +1,7 @@
 package android.app.time;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.service.timezone.TimeZoneProviderStatus;
 import android.text.TextUtils;
 import com.samsung.android.ims.options.SemCapabilities;
@@ -178,12 +178,12 @@ public final class LocationTimeZoneAlgorithmStatus implements Parcelable {
     return providerReportedStatus;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeInt(this.mStatus);
     parcel.writeInt(this.mPrimaryProviderStatus);

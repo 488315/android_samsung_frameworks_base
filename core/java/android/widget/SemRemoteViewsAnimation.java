@@ -1,9 +1,9 @@
 package android.widget;
 
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.View;
 
 /* loaded from: classes4.dex */
@@ -27,13 +27,13 @@ public abstract class SemRemoteViewsAnimation implements Parcelable {
     this.mIsExpired = parcel.readBoolean();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mViewId);
     dest.writeBoolean(this.mIsExpired);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

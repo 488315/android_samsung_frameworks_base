@@ -1,7 +1,7 @@
 package com.samsung.android.audio;
 
 import android.content.Context;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.text.TextUtils;
 import com.android.internal.C4337R;

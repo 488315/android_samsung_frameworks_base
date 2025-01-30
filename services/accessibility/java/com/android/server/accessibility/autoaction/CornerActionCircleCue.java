@@ -3,7 +3,7 @@ package com.android.server.accessibility.autoaction;
 import android.R;
 import android.content.Context;
 import android.os.Handler;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;

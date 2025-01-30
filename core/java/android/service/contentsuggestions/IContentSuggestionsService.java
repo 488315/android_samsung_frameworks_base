@@ -5,12 +5,12 @@ import android.app.contentsuggestions.IClassificationsCallback;
 import android.app.contentsuggestions.ISelectionsCallback;
 import android.app.contentsuggestions.SelectionsRequest;
 import android.hardware.HardwareBuffer;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
-import android.p009os.IInterface;
-import android.p009os.Parcel;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.IInterface;
+import android.os.Parcel;
+import android.os.RemoteException;
 
 /* loaded from: classes3.dex */
 public interface IContentSuggestionsService extends IInterface {
@@ -48,7 +48,7 @@ public interface IContentSuggestionsService extends IInterface {
     @Override // android.service.contentsuggestions.IContentSuggestionsService
     public void notifyInteraction(String requestId, Bundle interaction) throws RemoteException {}
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return null;
     }
@@ -75,7 +75,7 @@ public interface IContentSuggestionsService extends IInterface {
       return new Proxy(obj);
     }
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return this;
     }
@@ -95,12 +95,12 @@ public interface IContentSuggestionsService extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public String getTransactionName(int transactionCode) {
       return getDefaultTransactionName(transactionCode);
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
         throws RemoteException {
       if (code >= 1 && code <= 16777215) {
@@ -155,7 +155,7 @@ public interface IContentSuggestionsService extends IInterface {
         this.mRemote = remote;
       }
 
-      @Override // android.p009os.IInterface
+      @Override // android.os.IInterface
       public IBinder asBinder() {
         return this.mRemote;
       }
@@ -227,7 +227,7 @@ public interface IContentSuggestionsService extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public int getMaxTransactionId() {
       return 3;
     }

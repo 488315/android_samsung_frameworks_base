@@ -1,9 +1,9 @@
 package android.view.textclassifier;
 
 import android.icu.util.ULocale;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Arrays;
@@ -125,12 +125,12 @@ public abstract class TextClassifierEvent implements Parcelable {
     this.mExtras = in.readBundle();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(getParcelToken());
     dest.writeInt(this.mEventCategory);
@@ -439,7 +439,7 @@ public abstract class TextClassifierEvent implements Parcelable {
       this.mRelativeSuggestedWordEndIndex = in.readInt();
     }
 
-    @Override // android.view.textclassifier.TextClassifierEvent, android.p009os.Parcelable
+    @Override // android.view.textclassifier.TextClassifierEvent, android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       super.writeToParcel(dest, flags);
       dest.writeInt(this.mRelativeWordStartIndex);

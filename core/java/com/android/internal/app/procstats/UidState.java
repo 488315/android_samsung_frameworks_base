@@ -1,7 +1,7 @@
 package com.android.internal.app.procstats;
 
-import android.p009os.Parcel;
-import android.p009os.UserHandle;
+import android.os.Parcel;
+import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.TimeUtils;

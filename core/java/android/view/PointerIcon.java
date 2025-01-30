@@ -18,11 +18,11 @@ import android.graphics.drawable.VectorDrawable;
 import android.hardware.display.DisplayManager;
 import android.hardware.input.IInputManager;
 import android.hardware.input.InputManager;
-import android.p009os.Binder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.Binder;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.util.Log;
 import android.util.SparseArray;
 import com.android.internal.C4337R;
@@ -394,12 +394,12 @@ public final class PointerIcon implements Parcelable {
     return this.mType;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     try {
       out.writeInt(this.mType);

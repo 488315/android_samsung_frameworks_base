@@ -1,7 +1,7 @@
 package android.app.admin;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 
 /* loaded from: classes.dex */
@@ -45,7 +45,7 @@ public final class StringPolicyValue extends PolicyValue<String> {
     return Objects.hash(getValue());
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -54,7 +54,7 @@ public final class StringPolicyValue extends PolicyValue<String> {
     return "StringPolicyValue { " + getValue() + " }";
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(getValue());
   }

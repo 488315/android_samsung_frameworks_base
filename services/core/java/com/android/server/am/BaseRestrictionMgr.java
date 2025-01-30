@@ -14,7 +14,7 @@ import android.content.pm.ServiceInfo;
 import android.net.INetd;
 import android.os.RemoteException;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Slog;
 import android.util.SparseArray;
 import com.android.internal.util.jobs.XmlUtils;

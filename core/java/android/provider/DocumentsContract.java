@@ -7,21 +7,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.MimeTypeFilter;
-import android.content.p002pm.ResolveInfo;
+import android.content.pm.ResolveInfo;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.media.ExifInterface;
 import android.net.Uri;
-import android.p009os.Bundle;
-import android.p009os.CancellationSignal;
-import android.p009os.OperationCanceledException;
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.Parcelable;
-import android.p009os.ParcelableException;
-import android.p009os.RemoteException;
-import android.p009os.UserHandle;
+import android.os.Bundle;
+import android.os.CancellationSignal;
+import android.os.OperationCanceledException;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
+import android.os.Parcelable;
+import android.os.ParcelableException;
+import android.os.RemoteException;
+import android.os.UserHandle;
 import android.util.Log;
 import android.util.Size;
 import com.android.internal.util.Preconditions;
@@ -732,13 +732,13 @@ public final class DocumentsContract {
       return "DocumentsContract.Path{rootId=" + this.mRootId + ", path=" + this.mPath + "}";
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeString(this.mRootId);
       dest.writeStringList(this.mPath);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }

@@ -1,7 +1,7 @@
 package com.android.server.wm;
 
 import android.content.ComponentName;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.ActivityInfo;
 import android.graphics.Rect;
 import android.os.Environment;

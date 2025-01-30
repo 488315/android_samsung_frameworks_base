@@ -1,9 +1,9 @@
 package android.window;
 
 import android.graphics.Rect;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public final class TaskFragmentCreationParams implements Parcelable {
@@ -93,7 +93,7 @@ public final class TaskFragmentCreationParams implements Parcelable {
     this.mPairedActivityToken = in.readStrongBinder();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     this.mOrganizer.writeToParcel(dest, flags);
     dest.writeStrongBinder(this.mFragmentToken);
@@ -122,7 +122,7 @@ public final class TaskFragmentCreationParams implements Parcelable {
         + "}";
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

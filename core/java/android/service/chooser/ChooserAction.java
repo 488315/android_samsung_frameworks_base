@@ -2,8 +2,8 @@ package android.service.chooser;
 
 import android.app.PendingIntent;
 import android.graphics.drawable.Icon;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import java.util.Objects;
 
@@ -49,12 +49,12 @@ public final class ChooserAction implements Parcelable {
     return this.mAction;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     this.mIcon.writeToParcel(dest, flags);
     TextUtils.writeToParcel(this.mLabel, dest, flags);

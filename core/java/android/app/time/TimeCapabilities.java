@@ -1,9 +1,9 @@
 package android.app.time;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.UserHandle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.UserHandle;
 import java.util.Objects;
 
 @SystemApi
@@ -44,7 +44,7 @@ public final class TimeCapabilities implements Parcelable {
         .build();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     UserHandle.writeToParcel(this.mUserHandle, dest);
     dest.writeInt(this.mConfigureAutoDetectionEnabledCapability);
@@ -71,7 +71,7 @@ public final class TimeCapabilities implements Parcelable {
     return newConfigBuilder.build();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

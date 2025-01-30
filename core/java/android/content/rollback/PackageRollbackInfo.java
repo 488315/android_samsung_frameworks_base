@@ -1,9 +1,9 @@
 package android.content.rollback;
 
 import android.annotation.SystemApi;
-import android.content.p002pm.VersionedPackage;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.content.pm.VersionedPackage;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -159,12 +159,12 @@ public final class PackageRollbackInfo implements Parcelable {
     this.mRollbackDataPolicy = 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     this.mVersionRolledBackFrom.writeToParcel(out, flags);
     this.mVersionRolledBackTo.writeToParcel(out, flags);

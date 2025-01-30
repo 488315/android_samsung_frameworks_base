@@ -2,8 +2,8 @@ package android.database.sqlite;
 
 import android.database.CursorWindow;
 import android.database.DatabaseUtils;
-import android.p009os.CancellationSignal;
-import android.p009os.ParcelFileDescriptor;
+import android.os.CancellationSignal;
+import android.os.ParcelFileDescriptor;
 
 /* loaded from: classes.dex */
 public final class SQLiteSession {

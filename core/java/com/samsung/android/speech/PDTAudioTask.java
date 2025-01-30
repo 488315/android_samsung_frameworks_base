@@ -1,9 +1,9 @@
 package com.samsung.android.speech;
 
 import android.media.AudioRecord;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.Message;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import com.samsung.voicebargein.BargeInEngine;
 import com.samsung.voicebargein.BargeInEngineWrapper;
@@ -93,7 +93,7 @@ class PDTAudioTask extends AudioTask implements Runnable {
     this.dualThresholdFlag = 0;
     this.handler =
         new Handler() { // from class: com.samsung.android.speech.PDTAudioTask.1
-          @Override // android.p009os.Handler
+          @Override // android.os.Handler
           public void handleMessage(Message msg) {
             String[] result = msg.getData().getStringArray("recognition_result");
             if (PDTAudioTask.this.m_listener != null) {

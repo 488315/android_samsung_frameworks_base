@@ -11,7 +11,7 @@ import com.samsung.android.sume.core.channel.SendChannelRouter$$ExternalSyntheti
 import com.samsung.android.sume.core.channel.SendChannelRouter$$ExternalSyntheticLambda2;
 import com.samsung.android.sume.core.channel.VoidBufferChannel;
 import com.samsung.android.sume.core.descriptor.MFDescriptor;
-import com.samsung.android.sume.core.descriptor.p044nn.NNFWDescriptor;
+import com.samsung.android.sume.core.descriptor.nn.NNFWDescriptor;
 import com.samsung.android.sume.core.evaluate.Evaluator;
 import com.samsung.android.sume.core.filter.DecorateFilter;
 import com.samsung.android.sume.core.filter.ImgpDecorateFilter;
@@ -26,7 +26,7 @@ import com.samsung.android.sume.core.filter.NNFWFilter;
 import com.samsung.android.sume.core.message.MessageChannel;
 import com.samsung.android.sume.core.message.MessagePublisher;
 import com.samsung.android.sume.core.message.MessageSubscriberBase;
-import com.samsung.android.sume.core.types.p045nn.NNFW;
+import com.samsung.android.sume.core.types.nn.NNFW;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

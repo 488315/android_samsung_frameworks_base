@@ -2,8 +2,8 @@ package com.android.internal.net;
 
 import android.app.PendingIntent;
 import android.net.NetworkInfo;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 /* loaded from: classes4.dex */
@@ -38,12 +38,12 @@ public class LegacyVpnInfo implements Parcelable {
   public String key;
   public int state = -1;
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeString(this.key);
     out.writeInt(this.state);

@@ -1,8 +1,8 @@
 package android.telephony.data;
 
 import android.net.LinkAddress;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -147,13 +147,13 @@ public final class QosBearerFilter implements Parcelable {
       return i2 >= 20 && i2 <= 65535 && (i = this.end) >= 20 && i <= 65535 && i2 <= i;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeInt(this.start);
       dest.writeInt(this.end);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -263,7 +263,7 @@ public final class QosBearerFilter implements Parcelable {
     this.precedence = source.readInt();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeList(this.localAddresses);
     dest.writeList(this.remoteAddresses);
@@ -277,7 +277,7 @@ public final class QosBearerFilter implements Parcelable {
     dest.writeInt(this.precedence);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

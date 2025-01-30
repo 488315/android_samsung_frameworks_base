@@ -1,7 +1,7 @@
 package com.samsung.android.sume.core.controller;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.ConditionVariable;
+import android.os.ConditionVariable;
 import android.util.Log;
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBuffer;

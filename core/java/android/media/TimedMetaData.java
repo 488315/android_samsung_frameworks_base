@@ -1,6 +1,6 @@
 package android.media;
 
-import android.p009os.Parcel;
+import android.os.Parcel;
 
 /* loaded from: classes2.dex */
 public final class TimedMetaData {

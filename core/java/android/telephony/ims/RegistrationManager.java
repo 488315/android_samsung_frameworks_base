@@ -2,8 +2,8 @@ package android.telephony.ims;
 
 import android.annotation.SystemApi;
 import android.net.Uri;
-import android.p009os.Binder;
-import android.p009os.Bundle;
+import android.os.Binder;
+import android.os.Bundle;
 import android.telephony.ims.aidl.IImsRegistrationCallback;
 import android.util.Log;
 import java.lang.annotation.Retention;

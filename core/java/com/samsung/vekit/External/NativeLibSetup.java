@@ -1,6 +1,6 @@
 package com.samsung.vekit.External;
 
-import android.p009os.Build;
+import android.os.Build;
 import android.util.Log;
 
 /* loaded from: classes6.dex */

@@ -1,7 +1,7 @@
 package android.view;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public abstract class DisplayAddress implements Parcelable {
@@ -70,7 +70,7 @@ public abstract class DisplayAddress implements Parcelable {
       return Long.hashCode(this.mPhysicalDisplayId);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel out, int flags) {
       out.writeLong(this.mPhysicalDisplayId);
     }
@@ -117,7 +117,7 @@ public abstract class DisplayAddress implements Parcelable {
       return this.mMacAddress.hashCode();
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel out, int flags) {
       out.writeString(this.mMacAddress);
     }
@@ -127,7 +127,7 @@ public abstract class DisplayAddress implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

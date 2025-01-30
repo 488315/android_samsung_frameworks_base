@@ -5,8 +5,8 @@ import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.drm.DrmInfoRequest;
 import android.icu.util.Calendar;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.format.DateUtils;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -513,7 +513,7 @@ public class DatePicker extends FrameLayout {
       }
 
       @Override // android.view.View.BaseSavedState, android.view.AbsSavedState,
-                // android.p009os.Parcelable
+                // android.os.Parcelable
       public void writeToParcel(Parcel dest, int flags) {
         super.writeToParcel(dest, flags);
         dest.writeInt(this.mSelectedYear);

@@ -2,7 +2,7 @@ package android.telephony.ims.compat.stub;
 
 import android.content.Context;
 import android.content.Intent;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.util.Log;
 import com.android.ims.ImsConfig;
 import com.android.ims.ImsConfigListener;

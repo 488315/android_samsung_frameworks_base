@@ -3,14 +3,14 @@ package com.samsung.android.smartface;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.p009os.DeadObjectException;
-import android.p009os.Handler;
-import android.p009os.HandlerThread;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
-import android.p009os.UserHandle;
+import android.os.DeadObjectException;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.Message;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.UserHandle;
 import android.util.Log;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -343,7 +343,7 @@ public class SmartFaceManager {
       this.mManager = manager;
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       synchronized (SmartFaceManager.this.mListenerLock) {
         if (SmartFaceManager.this.mListener != null) {

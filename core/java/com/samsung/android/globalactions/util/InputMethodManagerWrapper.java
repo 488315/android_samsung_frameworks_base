@@ -1,7 +1,7 @@
 package com.samsung.android.globalactions.util;
 
 import android.content.Context;
-import android.p009os.IBinder;
+import android.os.IBinder;
 import android.view.inputmethod.InputMethodManager;
 
 /* loaded from: classes5.dex */

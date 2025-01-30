@@ -1,7 +1,7 @@
 package android.app.admin;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.ArraySet;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -69,7 +69,7 @@ public final class PackagePolicy implements Parcelable {
     return this.mPolicyType == 2 && systemPackages.contains(packageName);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mPolicyType);
     dest.writeArraySet(this.mPackageNames);
@@ -90,7 +90,7 @@ public final class PackagePolicy implements Parcelable {
     return Objects.hash(Integer.valueOf(this.mPolicyType), this.mPackageNames);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

@@ -5,9 +5,9 @@ import com.android.internal.org.bouncycastle.crypto.CipherParameters;
 import com.android.internal.org.bouncycastle.crypto.params.ECDomainParameters;
 import com.android.internal.org.bouncycastle.crypto.params.ECPrivateKeyParameters;
 import com.android.internal.org.bouncycastle.crypto.params.ECPublicKeyParameters;
-import com.android.internal.org.bouncycastle.math.p026ec.ECAlgorithms;
-import com.android.internal.org.bouncycastle.math.p026ec.ECConstants;
-import com.android.internal.org.bouncycastle.math.p026ec.ECPoint;
+import com.android.internal.org.bouncycastle.math.ec.ECAlgorithms;
+import com.android.internal.org.bouncycastle.math.ec.ECConstants;
+import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 import java.math.BigInteger;
 
 /* loaded from: classes5.dex */

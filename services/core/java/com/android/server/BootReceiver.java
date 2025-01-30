@@ -14,7 +14,7 @@ import android.os.ParcelFileDescriptor;
 import android.os.RecoverySystem;
 import android.os.SemHqmManager;
 import android.os.SystemProperties;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.provider.Downloads;
 import android.provider.Settings;
 import android.system.ErrnoException;

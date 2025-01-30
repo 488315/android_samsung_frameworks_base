@@ -16,7 +16,7 @@ import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;

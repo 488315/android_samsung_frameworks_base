@@ -1,13 +1,13 @@
 package android.view.inputmethod;
 
 import android.content.Context;
-import android.content.p002pm.ApplicationInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.res.Configuration;
 import android.icu.text.DisplayContext;
 import android.icu.text.LocaleDisplayNames;
 import android.icu.util.ULocale;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Slog;
 import com.android.internal.inputmethod.SubtypeLocaleUtils;
@@ -487,12 +487,12 @@ public final class InputMethodSubtype implements Parcelable {
         : subtype.hashCode() == hashCode();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeInt(this.mSubtypeNameResId);
     TextUtils.writeToParcel(this.mSubtypeNameOverride, parcel, i);

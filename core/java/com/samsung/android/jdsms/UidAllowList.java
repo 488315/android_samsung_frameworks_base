@@ -1,6 +1,6 @@
 package com.samsung.android.jdsms;
 
-import android.p009os.Process;
+import android.os.Process;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;

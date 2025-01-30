@@ -1,7 +1,7 @@
 package com.samsung.android.bio.face;
 
 import android.content.Context;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.hardware.biometrics.BiometricAuthenticator;
 import android.hardware.biometrics.BiometricFaceConstants;
 import android.hardware.biometrics.BiometricPrompt;
@@ -12,17 +12,17 @@ import android.hardware.face.FaceEnrollFrame;
 import android.hardware.face.FaceManager;
 import android.hardware.face.IFaceService;
 import android.hardware.face.IFaceServiceReceiver;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.CancellationSignal;
-import android.p009os.Debug;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
-import android.p009os.Trace;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.CancellationSignal;
+import android.os.Debug;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.Trace;
 import android.util.Log;
 import android.view.Surface;
 import android.view.View;
@@ -595,7 +595,7 @@ public class SemBioFaceManager {
       super(looper);
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       Log.m98i(
           SemBioFaceManager.TAG, "handleMessage = " + msg.what + ", " + msg.arg1 + ", " + msg.arg2);

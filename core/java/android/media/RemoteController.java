@@ -8,10 +8,10 @@ import android.media.session.MediaController;
 import android.media.session.MediaSessionLegacyHelper;
 import android.media.session.MediaSessionManager;
 import android.media.session.PlaybackState;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -284,7 +284,7 @@ public final class RemoteController {
       super(looper);
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       switch (msg.what) {
         case 0:

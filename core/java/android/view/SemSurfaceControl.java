@@ -2,7 +2,7 @@ package android.view;
 
 import android.graphics.Bitmap;
 import android.graphics.Rect;
-import android.p009os.IBinder;
+import android.os.IBinder;
 import android.util.Log;
 import android.window.ScreenCapture;
 

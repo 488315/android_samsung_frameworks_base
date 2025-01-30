@@ -2,7 +2,7 @@ package com.samsung.android.allshare.extension;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import com.samsung.android.allshare.DLog;
 import com.samsung.android.allshare.Device;
 import com.samsung.android.allshare.media.AVPlayer;

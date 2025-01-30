@@ -4,11 +4,11 @@ import android.Manifest;
 import android.app.ActivityManager;
 import android.app.IActivityManager;
 import android.content.Context;
-import android.p009os.Binder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
-import android.p009os.UserHandle;
+import android.os.Binder;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
+import android.os.UserHandle;
 import java.util.List;
 
 /* loaded from: classes5.dex */
@@ -197,12 +197,12 @@ public class SemAppRestrictionManager implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {}
 
   public static class RestrictionInfo implements Parcelable {
@@ -275,12 +275,12 @@ public class SemAppRestrictionManager implements Parcelable {
       this.byUser = in.readBoolean();
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       parcel.writeInt(this.type);
       parcel.writeInt(this.state);
@@ -349,12 +349,12 @@ public class SemAppRestrictionManager implements Parcelable {
           (RestrictionInfo) in.readParcelable(RestrictionInfo.class.getClassLoader());
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       parcel.writeString(this.packageName);
       parcel.writeInt(this.uid);

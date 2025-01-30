@@ -1,8 +1,8 @@
 package android.sec.clipboard.data;
 
 import android.net.Uri;
-import android.p009os.Build;
-import android.p009os.SystemProperties;
+import android.os.Build;
+import android.os.SystemProperties;
 
 /* loaded from: classes3.dex */
 public class ClipboardConstants {

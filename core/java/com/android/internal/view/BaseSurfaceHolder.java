@@ -2,7 +2,7 @@ package com.android.internal.view;
 
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.p009os.SystemClock;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.Surface;
 import android.view.SurfaceHolder;

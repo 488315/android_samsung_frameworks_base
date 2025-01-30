@@ -2,7 +2,7 @@ package com.samsung.android.service.reactive;
 
 import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.ServiceManager;
+import android.os.ServiceManager;
 import android.util.Log;
 
 /* loaded from: classes5.dex */

@@ -2,10 +2,10 @@ package com.android.internal.app;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.p009os.Bundle;
-import android.p009os.IPowerManager;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.Bundle;
+import android.os.IPowerManager;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.util.Slog;
 
 /* loaded from: classes4.dex */

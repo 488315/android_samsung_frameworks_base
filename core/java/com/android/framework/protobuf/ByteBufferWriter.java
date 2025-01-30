@@ -1,6 +1,6 @@
 package com.android.framework.protobuf;
 
-import android.media.p008tv.TvContract;
+import android.media.tv.TvContract;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.ref.SoftReference;

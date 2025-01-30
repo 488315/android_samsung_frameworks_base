@@ -2,7 +2,7 @@ package android.content;
 
 import android.database.ContentObserver;
 import android.database.Cursor;
-import android.p009os.Handler;
+import android.os.Handler;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;

@@ -2,8 +2,8 @@ package android.service.autofill;
 
 import android.annotation.NonNull;
 import android.app.slice.Slice;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.inline.InlinePresentationSpec;
 import com.android.internal.util.AnnotationValidations;
 import java.util.List;
@@ -94,7 +94,7 @@ public final class InlinePresentation implements Parcelable {
         + Boolean.hashCode(this.mPinned);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     byte flg = this.mPinned ? (byte) (0 | 4) : (byte) 0;
     dest.writeByte(flg);
@@ -102,7 +102,7 @@ public final class InlinePresentation implements Parcelable {
     dest.writeTypedObject(this.mInlinePresentationSpec, flags);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

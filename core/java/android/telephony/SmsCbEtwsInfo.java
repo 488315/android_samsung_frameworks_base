@@ -1,8 +1,8 @@
 package android.telephony;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.telephony.uicc.IccUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -64,7 +64,7 @@ public final class SmsCbEtwsInfo implements Parcelable {
     this.mWarningSecurityInformation = in.createByteArray();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeInt(this.mWarningType);
     parcel.writeInt(this.mIsEmergencyUserAlert ? 1 : 0);
@@ -130,7 +130,7 @@ public final class SmsCbEtwsInfo implements Parcelable {
         + '}';
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

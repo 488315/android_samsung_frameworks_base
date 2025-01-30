@@ -2,9 +2,9 @@ package android.view;
 
 import android.annotation.NonNull;
 import android.graphics.Rect;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
 import com.android.internal.util.AnnotationValidations;
 import java.util.ArrayList;
 
@@ -123,7 +123,7 @@ public class ScrollCaptureResponse implements Parcelable {
         + " }";
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     byte flg = this.mConnection != null ? (byte) (0 | 2) : (byte) 0;
     if (this.mWindowBounds != null) {
@@ -163,7 +163,7 @@ public class ScrollCaptureResponse implements Parcelable {
     dest.writeStringList(this.mMessages);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

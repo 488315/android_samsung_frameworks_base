@@ -1,7 +1,7 @@
 package com.samsung.android.sume.core.functional;
 
 import com.samsung.android.sume.core.buffer.MediaBuffer;
-import com.samsung.android.sume.core.descriptor.p044nn.NNDescriptor;
+import com.samsung.android.sume.core.descriptor.nn.NNDescriptor;
 import java.util.function.Consumer;
 
 @FunctionalInterface

@@ -1,6 +1,6 @@
 package com.android.net.module.util;
 
-import android.p009os.Parcel;
+import android.os.Parcel;
 import android.util.Log;
 import java.net.Inet6Address;
 import java.net.InetAddress;

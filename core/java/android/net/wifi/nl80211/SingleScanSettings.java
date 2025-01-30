@@ -1,7 +1,7 @@
 package android.net.wifi.nl80211;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -72,7 +72,7 @@ public class SingleScanSettings implements Parcelable {
         Integer.valueOf(Arrays.hashCode(this.vendorIes)));
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -82,7 +82,7 @@ public class SingleScanSettings implements Parcelable {
     return scanType == 0 || scanType == 1 || scanType == 2;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     if (!isValidScanType(this.scanType)) {
       Log.wtf(TAG, "Invalid scan type " + this.scanType);

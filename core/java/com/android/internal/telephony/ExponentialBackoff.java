@@ -1,7 +1,7 @@
 package com.android.internal.telephony;
 
-import android.p009os.Handler;
-import android.p009os.Looper;
+import android.os.Handler;
+import android.os.Looper;
 
 /* loaded from: classes5.dex */
 public class ExponentialBackoff {

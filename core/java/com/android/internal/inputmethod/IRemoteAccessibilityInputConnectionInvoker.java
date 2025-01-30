@@ -1,6 +1,6 @@
 package com.android.internal.inputmethod;
 
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.view.KeyEvent;
 import android.view.inputmethod.SurroundingText;
 import android.view.inputmethod.TextAttribute;

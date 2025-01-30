@@ -1,10 +1,10 @@
 package android.app;
 
 import android.content.res.Configuration;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
-import android.p009os.IRemoteCallback;
-import android.p009os.OutcomeReceiver;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.IRemoteCallback;
+import android.os.OutcomeReceiver;
 
 /* loaded from: classes.dex */
 public class FullscreenRequestHandler {
@@ -39,7 +39,7 @@ public class FullscreenRequestHandler {
                 token,
                 request,
                 new IRemoteCallback.Stub() { // from class: android.app.FullscreenRequestHandler.1
-                  @Override // android.p009os.IRemoteCallback
+                  @Override // android.os.IRemoteCallback
                   public void sendResult(Bundle res) {
                     FullscreenRequestHandler.notifyFullscreenRequestResult(
                         OutcomeReceiver.this, res.getInt("result"));

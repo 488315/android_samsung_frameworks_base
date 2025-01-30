@@ -1,9 +1,9 @@
 package com.samsung.android.allshare;
 
-import android.p009os.Build;
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
+import android.os.Build;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Base64;
 import com.android.internal.accessibility.common.ShortcutConstants;
 import java.io.DataOutputStream;
@@ -424,7 +424,7 @@ class TVMessageSender extends Thread {
   private void createHandler() {
     this.mHandler =
         new Handler() { // from class: com.samsung.android.allshare.TVMessageSender.1
-          @Override // android.p009os.Handler
+          @Override // android.os.Handler
           public void handleMessage(Message msg) {
             switch (msg.what) {
               case 0:

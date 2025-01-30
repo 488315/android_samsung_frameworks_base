@@ -1,8 +1,8 @@
 package com.samsung.android.sepunion;
 
 import android.content.ComponentName;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
+import android.os.Bundle;
+import android.os.IBinder;
 import com.samsung.android.cover.CoverState;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;

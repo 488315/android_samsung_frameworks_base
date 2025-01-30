@@ -1,8 +1,8 @@
 package android.window;
 
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
-import android.p009os.SystemClock;
+import android.os.IBinder;
+import android.os.RemoteException;
+import android.os.SystemClock;
 import android.util.Singleton;
 
 /* loaded from: classes4.dex */

@@ -5,7 +5,7 @@ import android.app.StatusBarManager;
 import android.app.WindowConfiguration;
 import android.content.res.CompatibilityInfo;
 import android.graphics.Rect;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.view.Choreographer;

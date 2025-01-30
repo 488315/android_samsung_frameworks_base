@@ -1,8 +1,8 @@
 package android.hardware.contexthub;
 
-import android.p009os.BadParcelableException;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.BadParcelableException;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class NanoappBinary implements Parcelable {
@@ -33,12 +33,12 @@ public class NanoappBinary implements Parcelable {
   public byte targetChreApiMajorVersion = 0;
   public byte targetChreApiMinorVersion = 0;
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final int getStability() {
     return 1;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
     int _aidl_start_pos = _aidl_parcel.dataPosition();
     _aidl_parcel.writeInt(0);
@@ -122,7 +122,7 @@ public class NanoappBinary implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

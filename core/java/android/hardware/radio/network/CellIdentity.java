@@ -1,8 +1,8 @@
 package android.hardware.radio.network;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
@@ -156,12 +156,12 @@ public final class CellIdentity implements Parcelable {
     _set(6, _value);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final int getStability() {
     return 1;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
     _aidl_parcel.writeInt(this._tag);
     switch (this._tag) {
@@ -231,7 +231,7 @@ public final class CellIdentity implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     switch (getTag()) {
       case 1:

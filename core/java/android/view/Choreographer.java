@@ -4,13 +4,13 @@ import android.animation.AnimationHandler;
 import android.app.ActivityThread;
 import android.graphics.FrameInfo;
 import android.hardware.display.DisplayManagerGlobal;
-import android.p009os.Debug;
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.SystemClock;
-import android.p009os.SystemProperties;
-import android.p009os.Trace;
+import android.os.Debug;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.os.SystemClock;
+import android.os.SystemProperties;
+import android.os.Trace;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TimeUtils;
@@ -1107,7 +1107,7 @@ public final class Choreographer {
       super(looper);
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       switch (msg.what) {
         case 0:

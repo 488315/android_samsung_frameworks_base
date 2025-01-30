@@ -1,8 +1,8 @@
 package com.samsung.android.media;
 
 import android.content.res.AssetFileDescriptor;
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import java.io.FileDescriptor;
 import java.io.IOException;

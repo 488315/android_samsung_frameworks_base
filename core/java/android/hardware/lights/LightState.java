@@ -1,8 +1,8 @@
 package android.hardware.lights;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class LightState implements Parcelable {
@@ -71,13 +71,13 @@ public final class LightState implements Parcelable {
     return this.mPlayerId;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mColor);
     dest.writeInt(this.mPlayerId);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

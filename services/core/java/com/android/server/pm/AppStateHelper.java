@@ -6,7 +6,7 @@ import android.app.ActivityThread;
 import android.app.usage.NetworkStats;
 import android.app.usage.NetworkStatsManager;
 import android.content.Context;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.IPackageManager;
 import android.media.AudioFocusInfo;
 import android.media.AudioManager;

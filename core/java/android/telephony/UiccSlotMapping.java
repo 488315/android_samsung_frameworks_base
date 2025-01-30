@@ -2,8 +2,8 @@ package android.telephony;
 
 import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
@@ -33,14 +33,14 @@ public final class UiccSlotMapping implements Parcelable {
     this.mLogicalSlotIndex = in.readInt();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mPortIndex);
     dest.writeInt(this.mPhysicalSlotIndex);
     dest.writeInt(this.mLogicalSlotIndex);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

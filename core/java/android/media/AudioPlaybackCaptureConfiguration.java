@@ -3,7 +3,7 @@ package android.media;
 import android.media.audiopolicy.AudioMix;
 import android.media.audiopolicy.AudioMixingRule;
 import android.media.projection.MediaProjection;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import com.android.internal.util.Preconditions;
 import java.util.function.Predicate;
 import java.util.function.ToIntFunction;

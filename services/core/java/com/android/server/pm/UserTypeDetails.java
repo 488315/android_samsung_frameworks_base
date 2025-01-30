@@ -6,7 +6,7 @@ import android.content.pm.UserProperties;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.UserManager;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import com.android.internal.util.Preconditions;
 import com.android.server.BundleUtils;
 import java.io.PrintWriter;

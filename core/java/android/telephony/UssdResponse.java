@@ -1,7 +1,7 @@
 package android.telephony;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 
 /* loaded from: classes3.dex */
@@ -25,7 +25,7 @@ public final class UssdResponse implements Parcelable {
   private CharSequence mReturnMessage;
   private String mUssdRequest;
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.mUssdRequest);
     TextUtils.writeToParcel(this.mReturnMessage, dest, 0);
@@ -39,7 +39,7 @@ public final class UssdResponse implements Parcelable {
     return this.mReturnMessage;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

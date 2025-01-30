@@ -1,8 +1,8 @@
 package android.telephony.gba;
 
 import android.net.Uri;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.telephony.IBootstrapAuthenticationCallback;
 import com.android.internal.telephony.uicc.IccUtils;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -114,7 +114,7 @@ public final class GbaAuthRequest implements Parcelable {
     return this.mCallback;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeInt(this.mToken);
     out.writeInt(this.mSubId);
@@ -126,7 +126,7 @@ public final class GbaAuthRequest implements Parcelable {
     out.writeStrongInterface(this.mCallback);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

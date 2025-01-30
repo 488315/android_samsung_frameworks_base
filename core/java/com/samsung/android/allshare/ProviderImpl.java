@@ -1,7 +1,7 @@
 package com.samsung.android.allshare;
 
 import android.net.Uri;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import com.samsung.android.allshare.media.Provider;
 import com.samsung.android.allshare.media.Receiver;
 import com.samsung.android.allshare.media.SearchCriteria;

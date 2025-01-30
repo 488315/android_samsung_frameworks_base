@@ -3,9 +3,9 @@ package android.app.servertransaction;
 import android.app.ClientTransactionHandler;
 import android.content.res.CompatibilityInfo;
 import android.content.res.Configuration;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 
 /* loaded from: classes.dex */
@@ -61,7 +61,7 @@ public class ConfigurationChangeItem extends ClientTransactionItem {
     ObjectPool.recycle(this);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeTypedObject(this.mConfiguration, flags);
     dest.writeInt(this.mDeviceId);

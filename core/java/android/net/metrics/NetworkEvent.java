@@ -1,8 +1,8 @@
 package android.net.metrics;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.SparseArray;
 import com.android.internal.util.MessageUtils;
 import java.lang.annotation.Retention;
@@ -59,13 +59,13 @@ public final class NetworkEvent implements IpConnectivityLog.Event {
     this.durationMs = in.readLong();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeInt(this.eventType);
     out.writeLong(this.durationMs);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

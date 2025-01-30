@@ -2,8 +2,8 @@ package com.android.internal.view;
 
 import android.annotation.NonNull;
 import android.graphics.Rect;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.InsetsFlags;
 import android.view.ViewDebug;
 import com.android.internal.util.AnnotationValidations;
@@ -62,13 +62,13 @@ public class AppearanceRegion implements Parcelable {
     return this.mBounds;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mAppearance);
     dest.writeTypedObject(this.mBounds, flags);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

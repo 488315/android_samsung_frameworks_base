@@ -1,8 +1,8 @@
 package com.samsung.android.view;
 
 import android.graphics.Bitmap;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class ScreenshotResult implements Parcelable {
@@ -104,7 +104,7 @@ public class ScreenshotResult implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     if (this.mCapturedBitmap != null) {
       dest.writeInt(1);
@@ -117,7 +117,7 @@ public class ScreenshotResult implements Parcelable {
     dest.writeString(this.mSecuredWindowName);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

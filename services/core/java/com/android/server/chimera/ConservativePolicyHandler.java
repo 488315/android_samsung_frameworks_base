@@ -1,7 +1,7 @@
 package com.android.server.chimera;
 
 import android.os.Looper;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import com.android.server.am.FreecessController;
 import java.io.PrintWriter;
 import java.util.ArrayList;

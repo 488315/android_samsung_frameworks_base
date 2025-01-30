@@ -2,8 +2,8 @@ package android.database;
 
 import android.content.res.Resources;
 import android.database.sqlite.SQLiteClosable;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.C4337R;
 import dalvik.annotation.optimization.FastNative;
 import dalvik.system.CloseGuard;
@@ -355,12 +355,12 @@ public class CursorWindow extends SQLiteClosable implements Parcelable {
     return CREATOR.createFromParcel(p);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     acquireReference();
     try {

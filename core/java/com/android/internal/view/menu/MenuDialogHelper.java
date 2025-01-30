@@ -2,7 +2,7 @@ package com.android.internal.view.menu;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.p009os.IBinder;
+import android.os.IBinder;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;

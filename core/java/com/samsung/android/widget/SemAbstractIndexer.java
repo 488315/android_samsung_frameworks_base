@@ -2,7 +2,7 @@ package com.samsung.android.widget;
 
 import android.database.DataSetObservable;
 import android.database.DataSetObserver;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import android.util.Log;
 import android.util.SparseIntArray;
 import java.text.Collator;

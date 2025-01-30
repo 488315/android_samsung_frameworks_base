@@ -2,9 +2,9 @@ package android.view.translation;
 
 import android.annotation.NonNull;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.AnnotationValidations;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -145,7 +145,7 @@ public final class TranslationResponseValue implements Parcelable {
         + Objects.hashCode(this.mTransliteration);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     byte flg = this.mText != null ? (byte) (0 | 2) : (byte) 0;
     if (this.mTransliteration != null) {
@@ -164,7 +164,7 @@ public final class TranslationResponseValue implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

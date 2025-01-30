@@ -1,8 +1,8 @@
 package com.samsung.android.globalactions.util;
 
 import android.content.Context;
-import android.content.p002pm.UserInfo;
-import android.p009os.UserManager;
+import android.content.pm.UserInfo;
+import android.os.UserManager;
 import java.util.List;
 
 /* loaded from: classes5.dex */

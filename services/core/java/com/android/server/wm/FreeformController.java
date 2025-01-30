@@ -16,7 +16,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.RemoteCallbackList;
 import android.os.RemoteException;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.view.ContextThemeWrapper;

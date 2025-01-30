@@ -7,9 +7,9 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.hardware.scontext.SContextConstants;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.SystemProperties;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.SystemProperties;
 import android.util.MathUtils;
 import android.util.Size;
 import com.android.internal.graphics.ColorUtils;
@@ -319,12 +319,12 @@ public final class WallpaperColors implements Parcelable {
     return proportions;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     List<Color> mainColors = getMainColors();
     int count = mainColors.size();

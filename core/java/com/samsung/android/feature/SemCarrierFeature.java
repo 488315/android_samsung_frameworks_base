@@ -1,7 +1,7 @@
 package com.samsung.android.feature;
 
-import android.p009os.Debug;
-import android.p009os.SystemProperties;
+import android.os.Debug;
+import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
 import java.util.LinkedHashMap;

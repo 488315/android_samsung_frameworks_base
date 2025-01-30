@@ -1,8 +1,8 @@
 package com.samsung.android.displayquality;
 
 import android.content.Context;
-import android.p009os.IBinder;
-import android.p009os.ServiceManager;
+import android.os.IBinder;
+import android.os.ServiceManager;
 import android.util.Slog;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

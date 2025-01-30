@@ -2,8 +2,8 @@ package android.service.autofill;
 
 import android.icu.text.DateFormat;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.autofill.AutofillId;
 import android.view.autofill.AutofillValue;
@@ -76,12 +76,12 @@ public final class DateTransformation extends InternalTransformation
             + NavigationBarInflaterView.SIZE_MOD_END;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeParcelable(this.mFieldId, flags);
     parcel.writeSerializable(this.mDateFormat);

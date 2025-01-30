@@ -1,10 +1,10 @@
 package android.telephony;
 
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.PersistableBundle;
-import android.p009os.SystemClock;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.PersistableBundle;
+import android.os.SystemClock;
 import com.android.internal.telephony.SemTelephonyUtils;
 import com.android.internal.telephony.TelephonyFeatures;
 import java.util.ArrayList;
@@ -194,7 +194,7 @@ public class SignalStrength implements Parcelable {
     this.mPrimaryRadioTechnology = in.readInt();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeParcelable(this.mCdma, flags);
     out.writeParcelable(this.mGsm, flags);
@@ -211,7 +211,7 @@ public class SignalStrength implements Parcelable {
     return this.mTimestampMillis;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

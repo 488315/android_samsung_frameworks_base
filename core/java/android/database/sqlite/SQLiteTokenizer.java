@@ -7,7 +7,7 @@ import com.android.internal.accessibility.common.ShortcutConstants;
 import com.android.internal.transition.EpicenterTranslateClipReveal;
 import com.samsung.android.hardware.secinputdev.SemInputDeviceManager;
 import com.samsung.android.knox.analytics.database.Contract;
-import com.samsung.android.p042os.SemDvfsManager;
+import com.samsung.android.os.SemDvfsManager;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;

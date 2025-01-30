@@ -4,9 +4,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.Message;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.util.TypedValue;
@@ -120,7 +120,7 @@ public class ProgressDialog extends AlertDialog {
     if (i2 == 1) {
       this.mViewUpdateHandler =
           new Handler() { // from class: android.app.ProgressDialog.1
-            @Override // android.p009os.Handler
+            @Override // android.os.Handler
             public void handleMessage(Message message) {
               super.handleMessage(message);
               int progress = ProgressDialog.this.mProgress.getProgress();

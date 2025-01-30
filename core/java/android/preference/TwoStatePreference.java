@@ -2,8 +2,8 @@ package android.preference;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -191,7 +191,7 @@ public abstract class TwoStatePreference extends Preference {
       this.checked = source.readInt() == 1;
     }
 
-    @Override // android.view.AbsSavedState, android.p009os.Parcelable
+    @Override // android.view.AbsSavedState, android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       super.writeToParcel(parcel, i);
       parcel.writeInt(this.checked ? 1 : 0);

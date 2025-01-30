@@ -2,8 +2,8 @@ package android.app.compat;
 
 import android.annotation.SystemApi;
 import android.compat.Compatibility;
-import android.p009os.RemoteException;
-import android.p009os.UserHandle;
+import android.os.RemoteException;
+import android.os.UserHandle;
 import android.util.ArrayMap;
 import com.android.internal.compat.CompatibilityOverrideConfig;
 import com.android.internal.compat.CompatibilityOverridesByPackageConfig;

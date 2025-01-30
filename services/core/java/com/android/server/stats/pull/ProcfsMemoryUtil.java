@@ -1,7 +1,7 @@
 package com.android.server.stats.pull;
 
 import android.os.Process;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.SparseArray;
 
 /* loaded from: classes3.dex */

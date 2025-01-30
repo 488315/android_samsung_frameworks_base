@@ -4,7 +4,7 @@ import android.annotation.SystemApi;
 import android.app.PendingIntent$$ExternalSyntheticLambda1;
 import android.content.Context;
 import android.net.Uri;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.telephony.ims.aidl.CapabilityExchangeAidlWrapper;
 import android.telephony.ims.aidl.ICapabilityExchangeEventListener;
 import android.telephony.ims.aidl.IImsCapabilityCallback;

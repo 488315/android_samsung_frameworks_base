@@ -1,8 +1,8 @@
 package android.hardware.camera2.extension;
 
-import android.p009os.BadParcelableException;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.BadParcelableException;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class OutputConfigId implements Parcelable {
@@ -27,7 +27,7 @@ public class OutputConfigId implements Parcelable {
   /* renamed from: id */
   public int f124id = 0;
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
     int _aidl_start_pos = _aidl_parcel.dataPosition();
     _aidl_parcel.writeInt(0);
@@ -66,7 +66,7 @@ public class OutputConfigId implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

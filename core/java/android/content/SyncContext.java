@@ -1,8 +1,8 @@
 package android.content;
 
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
-import android.p009os.SystemClock;
+import android.os.IBinder;
+import android.os.RemoteException;
+import android.os.SystemClock;
 
 /* loaded from: classes.dex */
 public class SyncContext {

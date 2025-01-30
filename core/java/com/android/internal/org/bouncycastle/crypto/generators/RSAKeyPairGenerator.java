@@ -1,6 +1,6 @@
 package com.android.internal.org.bouncycastle.crypto.generators;
 
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import com.android.internal.org.bouncycastle.crypto.AsymmetricCipherKeyPair;
 import com.android.internal.org.bouncycastle.crypto.AsymmetricCipherKeyPairGenerator;
 import com.android.internal.org.bouncycastle.crypto.KeyGenerationParameters;
@@ -9,7 +9,7 @@ import com.android.internal.org.bouncycastle.crypto.params.RSAKeyGenerationParam
 import com.android.internal.org.bouncycastle.crypto.params.RSAKeyParameters;
 import com.android.internal.org.bouncycastle.crypto.params.RSAPrivateCrtKeyParameters;
 import com.android.internal.org.bouncycastle.math.Primes;
-import com.android.internal.org.bouncycastle.math.p026ec.WNafUtil;
+import com.android.internal.org.bouncycastle.math.ec.WNafUtil;
 import com.android.internal.org.bouncycastle.util.BigIntegers;
 import java.math.BigInteger;
 

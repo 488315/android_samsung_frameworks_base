@@ -5,9 +5,9 @@ import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.hardware.display.DeviceProductInfo;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.Process;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.Process;
 import android.provider.Settings;
 import android.util.ArraySet;
 import android.util.DisplayMetrics;
@@ -311,7 +311,7 @@ public final class DisplayInfo implements Parcelable {
     this.thermalBrightnessThrottlingDataId = source.readString8();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.layerStack);
     dest.writeInt(this.flags);
@@ -397,7 +397,7 @@ public final class DisplayInfo implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

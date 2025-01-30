@@ -3,8 +3,8 @@ package android.app;
 import android.annotation.IntRange;
 import android.annotation.NonNull;
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.AnnotationValidations;
 import java.lang.annotation.Annotation;
 
@@ -84,7 +84,7 @@ public final class RuntimeAppOpAccessMessage implements Parcelable {
     return this.mSamplingStrategy;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     byte flg = this.mAttributionTag != null ? (byte) (0 | 8) : (byte) 0;
     dest.writeByte(flg);
@@ -99,7 +99,7 @@ public final class RuntimeAppOpAccessMessage implements Parcelable {
     dest.writeInt(this.mSamplingStrategy);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

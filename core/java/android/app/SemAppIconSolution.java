@@ -2,10 +2,10 @@ package android.app;
 
 import android.content.APKContents;
 import android.content.Context;
-import android.content.p001om.SamsungThemeConstants;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageItemInfo;
-import android.content.p002pm.PackageManager;
+import android.content.om.SamsungThemeConstants;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageItemInfo;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.XmlResourceParser;

@@ -4,15 +4,15 @@ import android.app.INotificationManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Message;
-import android.p009os.PowerManager;
-import android.p009os.Process;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.PowerManager;
+import android.os.Process;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.provider.DocumentsContract;
 import android.provider.Settings;
 import android.util.Log;
@@ -386,7 +386,7 @@ public class SemEdgeManager {
               SemEdgeManager.this.mContext
                   .getMainLooper()) { // from class:
                                       // com.samsung.android.edge.SemEdgeManager.EdgeLightingCallbackDelegate.1
-            @Override // android.p009os.Handler
+            @Override // android.os.Handler
             public void handleMessage(Message msg) {
               if (EdgeLightingCallbackDelegate.this.mCallback != null) {
                 switch (msg.what) {
@@ -419,7 +419,7 @@ public class SemEdgeManager {
               SemEdgeManager.this.mContext
                   .getMainLooper()) { // from class:
                                       // com.samsung.android.edge.SemEdgeManager.EdgeLightingCallbackDelegate.2
-            @Override // android.p009os.Handler
+            @Override // android.os.Handler
             public void handleMessage(Message msg) {
               if (EdgeLightingCallbackDelegate.this.mListener != null) {
                 switch (msg.what) {

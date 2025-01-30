@@ -5,7 +5,7 @@ import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.ResourcesImpl;
-import android.p009os.Trace;
+import android.os.Trace;
 import android.util.DisplayMetrics;
 import android.view.DisplayAdjustments;
 import java.io.IOException;

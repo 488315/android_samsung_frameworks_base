@@ -2,8 +2,8 @@ package android.nfc;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.proto.ProtoOutputStream;
 import android.webkit.WebView;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;
@@ -575,12 +575,12 @@ public final class NdefRecord implements Parcelable {
     return il ? length3 + 1 : length3;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mTnf);
     dest.writeInt(this.mType.length);

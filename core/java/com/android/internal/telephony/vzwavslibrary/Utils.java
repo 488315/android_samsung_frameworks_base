@@ -1,10 +1,10 @@
 package com.android.internal.telephony.vzwavslibrary;
 
 import android.content.Context;
-import android.content.p002pm.PackageInfo;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.Signature;
-import android.content.p002pm.SigningInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
+import android.content.pm.SigningInfo;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.security.MessageDigest;

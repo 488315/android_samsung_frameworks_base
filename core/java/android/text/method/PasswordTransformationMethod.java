@@ -1,8 +1,8 @@
 package android.text.method;
 
 import android.graphics.Rect;
-import android.p009os.Handler;
-import android.p009os.SystemClock;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.text.Editable;
 import android.text.GetChars;
 import android.text.NoCopySpan;

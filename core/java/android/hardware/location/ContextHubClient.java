@@ -1,7 +1,7 @@
 package android.hardware.location;
 
 import android.annotation.SystemApi;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.util.Log;
 import dalvik.system.CloseGuard;
 import java.io.Closeable;

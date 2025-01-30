@@ -1,8 +1,8 @@
 package android.media.midi;
 
-import android.p009os.IBinder;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.RemoteException;
+import android.os.IBinder;
+import android.os.ParcelFileDescriptor;
+import android.os.RemoteException;
 import android.util.Log;
 import com.android.internal.midi.MidiDispatcher;
 import dalvik.system.CloseGuard;

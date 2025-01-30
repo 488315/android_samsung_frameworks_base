@@ -1,8 +1,8 @@
 package android.nfc.tech;
 
 import android.nfc.Tag;
-import android.p009os.Bundle;
-import android.p009os.RemoteException;
+import android.os.Bundle;
+import android.os.RemoteException;
 import java.io.IOException;
 
 /* loaded from: classes3.dex */

@@ -1,9 +1,9 @@
 package android.view;
 
 import android.annotation.NonNull;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
 import com.android.internal.util.AnnotationValidations;
 
 /* loaded from: classes4.dex */
@@ -79,14 +79,14 @@ public final class InputMonitor implements Parcelable {
         + " }";
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeTypedObject(this.mInputChannel, flags);
     dest.writeStrongInterface(this.mHost);
     dest.writeTypedObject(this.mSurface, flags);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

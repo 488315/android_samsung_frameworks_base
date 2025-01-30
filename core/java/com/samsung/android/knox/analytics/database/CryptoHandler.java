@@ -1,7 +1,7 @@
 package com.samsung.android.knox.analytics.database;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.DeadObjectException;
+import android.os.DeadObjectException;
 import android.security.keystore.BackendBusyException;
 import android.security.keystore.KeyProperties;
 import android.security.keystore.KeyProtection;

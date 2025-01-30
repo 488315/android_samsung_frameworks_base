@@ -3,7 +3,7 @@ package com.android.server.pm;
 import android.app.usage.UsageEvents;
 import android.app.usage.UsageStatsManagerInternal;
 import android.content.Context;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.IBackgroundInstallControlService;
 import android.content.pm.InstallSourceInfo;

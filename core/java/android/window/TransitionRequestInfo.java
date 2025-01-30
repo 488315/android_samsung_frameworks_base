@@ -2,8 +2,8 @@ package android.window;
 
 import android.app.ActivityManager;
 import android.graphics.Rect;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.WindowManager;
 import com.android.internal.util.AnnotationValidations;
 import java.lang.annotation.Annotation;
@@ -157,7 +157,7 @@ public final class TransitionRequestInfo implements Parcelable {
           + " }";
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       byte flg = this.mPhysicalDisplayChanged ? (byte) (0 | 32) : (byte) 0;
       if (this.mUiModeChanged) {
@@ -183,7 +183,7 @@ public final class TransitionRequestInfo implements Parcelable {
       dest.writeInt(this.mEndRotation);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -272,7 +272,7 @@ public final class TransitionRequestInfo implements Parcelable {
         + " }";
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     byte flg = this.mTriggerTask != null ? (byte) (0 | 2) : (byte) 0;
     if (this.mRemoteTransition != null) {
@@ -297,7 +297,7 @@ public final class TransitionRequestInfo implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

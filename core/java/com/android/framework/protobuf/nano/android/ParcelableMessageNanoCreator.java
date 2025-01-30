@@ -1,7 +1,7 @@
 package com.android.framework.protobuf.nano.android;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import com.android.framework.protobuf.nano.InvalidProtocolBufferNanoException;
 import com.android.framework.protobuf.nano.MessageNano;

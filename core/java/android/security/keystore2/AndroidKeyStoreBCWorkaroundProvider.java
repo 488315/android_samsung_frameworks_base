@@ -1,6 +1,6 @@
 package android.security.keystore2;
 
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.security.keystore.KeyProperties;
 import com.samsung.android.security.mdf.MdfUtils;
 import java.security.Provider;

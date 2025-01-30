@@ -2,15 +2,15 @@ package android.telephony.ims;
 
 import android.annotation.SystemApi;
 import android.net.Uri;
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.RemoteException;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.os.RemoteException;
 import android.telecom.VideoProfile;
 import android.view.Surface;
 import com.android.ims.internal.IImsVideoCallCallback;
 import com.android.ims.internal.IImsVideoCallProvider;
-import com.android.internal.p029os.SomeArgs;
+import com.android.internal.os.SomeArgs;
 
 @SystemApi
 /* loaded from: classes3.dex */
@@ -30,7 +30,7 @@ public abstract class ImsVideoCallProvider {
   private final Handler mProviderHandler =
       new Handler(
           Looper.getMainLooper()) { // from class: android.telephony.ims.ImsVideoCallProvider.1
-        @Override // android.p009os.Handler
+        @Override // android.os.Handler
         public void handleMessage(Message msg) {
           SomeArgs args;
           switch (msg.what) {

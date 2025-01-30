@@ -3,9 +3,9 @@ package com.sec.android.iaft;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
-import android.p009os.Message;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.Message;
 
 /* loaded from: classes6.dex */
 public class IAFDService extends Service {

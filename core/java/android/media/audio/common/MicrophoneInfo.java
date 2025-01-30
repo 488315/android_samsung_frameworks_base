@@ -1,8 +1,8 @@
 package android.media.audio.common;
 
-import android.p009os.BadParcelableException;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.BadParcelableException;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.StringJoiner;
@@ -57,12 +57,12 @@ public class MicrophoneInfo implements Parcelable {
     public static final int UNKNOWN = 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final int getStability() {
     return 1;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
     int _aidl_start_pos = _aidl_parcel.dataPosition();
     _aidl_parcel.writeInt(0);
@@ -239,7 +239,7 @@ public class MicrophoneInfo implements Parcelable {
             .toArray());
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     int _mask = 0 | describeContents(this.device);
     return _mask
@@ -288,12 +288,12 @@ public class MicrophoneInfo implements Parcelable {
     public float maxSpldB = 0.0f;
     public float minSpldB = 0.0f;
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public final int getStability() {
       return 1;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
       int _aidl_start_pos = _aidl_parcel.dataPosition();
       _aidl_parcel.writeInt(0);
@@ -350,7 +350,7 @@ public class MicrophoneInfo implements Parcelable {
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -378,12 +378,12 @@ public class MicrophoneInfo implements Parcelable {
     public float frequencyHz = 0.0f;
     public float leveldB = 0.0f;
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public final int getStability() {
       return 1;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
       int _aidl_start_pos = _aidl_parcel.dataPosition();
       _aidl_parcel.writeInt(0);
@@ -431,7 +431,7 @@ public class MicrophoneInfo implements Parcelable {
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -465,12 +465,12 @@ public class MicrophoneInfo implements Parcelable {
     /* renamed from: z */
     public float f308z = 0.0f;
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public final int getStability() {
       return 1;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
       int _aidl_start_pos = _aidl_parcel.dataPosition();
       _aidl_parcel.writeInt(0);
@@ -527,7 +527,7 @@ public class MicrophoneInfo implements Parcelable {
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }

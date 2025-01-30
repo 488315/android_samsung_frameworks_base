@@ -2,7 +2,7 @@ package com.android.internal.app;
 
 import android.app.ActivityManager;
 import android.content.Context;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BlurMaskFilter;
@@ -19,7 +19,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.DrawableWrapper;
-import android.p009os.UserHandle;
+import android.os.UserHandle;
 import android.util.AttributeSet;
 import android.util.Pools;
 import android.util.TypedValue;

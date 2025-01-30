@@ -1,7 +1,7 @@
 package com.android.server.appprelauncher;
 
 import android.app.ActivityManager;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.os.ShellCommand;
 import com.android.internal.util.jobs.XmlUtils;
 import com.android.server.LocalServices;

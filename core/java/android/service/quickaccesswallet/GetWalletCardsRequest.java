@@ -1,7 +1,7 @@
 package android.service.quickaccesswallet;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public final class GetWalletCardsRequest implements Parcelable {
@@ -37,12 +37,12 @@ public final class GetWalletCardsRequest implements Parcelable {
     this.mMaxCards = maxCards;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mCardWidthPx);
     dest.writeInt(this.mCardHeightPx);

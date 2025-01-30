@@ -1,11 +1,11 @@
 package android.telephony;
 
 import android.annotation.SystemApi;
-import android.content.p002pm.PackageInfo;
-import android.content.p002pm.Signature;
-import android.content.p002pm.SigningInfo;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.content.pm.PackageInfo;
+import android.content.pm.Signature;
+import android.content.pm.SigningInfo;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import com.android.internal.telephony.uicc.IccUtils;
 import java.io.ByteArrayInputStream;
@@ -138,7 +138,7 @@ public final class UiccAccessRule implements Parcelable {
     this.mAccessType = in.readLong();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeByteArray(this.mCertificateHash);
     dest.writeString(this.mPackageName);
@@ -221,7 +221,7 @@ public final class UiccAccessRule implements Parcelable {
         + this.mAccessType;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

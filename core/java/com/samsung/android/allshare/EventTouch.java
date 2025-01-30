@@ -1,7 +1,7 @@
 package com.samsung.android.allshare;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* compiled from: IAppControlAPI.java */
 /* loaded from: classes5.dex */
@@ -49,12 +49,12 @@ class EventTouch implements Parcelable {
 
   EventTouch() {}
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.f2948mX);
     dest.writeInt(this.f2949mY);

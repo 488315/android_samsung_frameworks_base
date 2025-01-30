@@ -75,7 +75,7 @@ import com.samsung.android.knox.dar.ddar.DualDarManager;
 import com.samsung.android.knox.dar.ddar.fsm.Event;
 import com.samsung.android.knox.dar.ddar.fsm.State;
 import com.samsung.android.knox.dar.ddar.fsm.StateMachine;
-import com.samsung.android.server.p025pm.p026mm.MaintenanceModeManager;
+import com.samsung.android.server.pm.mm.MaintenanceModeManager;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

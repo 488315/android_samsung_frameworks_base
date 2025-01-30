@@ -1,6 +1,6 @@
 package com.android.server.wm;
 
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Slog;
 import com.android.server.enterprise.vpn.knoxvpn.KnoxVpnFirewallHelper;
 import java.io.BufferedReader;

@@ -2,11 +2,11 @@ package android.inputmethodservice;
 
 import android.Manifest;
 import android.content.Context;
-import android.p009os.Binder;
-import android.p009os.IBinder;
-import android.p009os.Message;
-import android.p009os.RemoteException;
-import android.p009os.ResultReceiver;
+import android.os.Binder;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.RemoteException;
+import android.os.ResultReceiver;
 import android.util.Log;
 import android.view.InputChannel;
 import android.view.MotionEvent;
@@ -23,8 +23,8 @@ import com.android.internal.inputmethod.IInputMethodSession;
 import com.android.internal.inputmethod.IInputMethodSessionCallback;
 import com.android.internal.inputmethod.IRemoteInputConnection;
 import com.android.internal.inputmethod.InlineSuggestionsRequestInfo;
-import com.android.internal.p029os.HandlerCaller;
-import com.android.internal.p029os.SomeArgs;
+import com.android.internal.os.HandlerCaller;
+import com.android.internal.os.SomeArgs;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.lang.ref.WeakReference;
@@ -272,7 +272,7 @@ class IInputMethodWrapper extends IInputMethod.Stub implements HandlerCaller.Cal
     }
   }
 
-  @Override // android.p009os.Binder
+  @Override // android.os.Binder
   protected void dump(FileDescriptor fd, PrintWriter fout, String[] args) {
     InputMethodServiceInternal target = this.mTarget.get();
     if (target == null) {

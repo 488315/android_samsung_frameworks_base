@@ -1,8 +1,8 @@
 package com.samsung.android.sume.core.message;
 
-import android.p009os.Bundle;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
+import android.os.Bundle;
+import android.os.Parcelable;
+import android.os.RemoteException;
 import android.util.Log;
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
@@ -28,7 +28,7 @@ public final class Response extends Message {
     super(992, code);
   }
 
-  private Response(android.p009os.Message msg) {
+  private Response(android.os.Message msg) {
     super(msg);
     Bundle bundle = msg.getData();
     Parcelable[] buffers = bundle.getParcelableArray("buffer-list");
@@ -64,9 +64,9 @@ public final class Response extends Message {
   }
 
   @Override // com.samsung.android.sume.core.message.Message
-  public android.p009os.Message toAndroidMessage() {
+  public android.os.Message toAndroidMessage() {
     Log.m94d(TAG, "toAndroidMessage");
-    android.p009os.Message msg = super.toAndroidMessage();
+    android.os.Message msg = super.toAndroidMessage();
     if (this.bufferList != null) {
       Bundle bundle = msg.getData();
       bundle.putParcelableArray(
@@ -154,7 +154,7 @@ public final class Response extends Message {
     try {
       try {
         Log.m94d(TAG, "send response: " + this);
-        android.p009os.Message msg = toAndroidMessage();
+        android.os.Message msg = toAndroidMessage();
         this.replyTo.send(msg);
         list = this.bufferList;
       } catch (RemoteException e) {
@@ -244,7 +244,7 @@ public final class Response extends Message {
   }
 
   /* renamed from: of */
-  public static Response m439of(android.p009os.Message msg) {
+  public static Response m439of(android.os.Message msg) {
     return new Response(msg);
   }
 

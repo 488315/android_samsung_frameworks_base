@@ -2,10 +2,10 @@ package android.app;
 
 import android.annotation.SystemApi;
 import android.content.ComponentName;
-import android.p009os.RemoteException;
-import android.service.p012vr.IPersistentVrStateCallbacks;
-import android.service.p012vr.IVrManager;
-import android.service.p012vr.IVrStateCallbacks;
+import android.os.RemoteException;
+import android.service.vr.IPersistentVrStateCallbacks;
+import android.service.vr.IVrManager;
+import android.service.vr.IVrStateCallbacks;
 import android.util.ArrayMap;
 import java.util.Map;
 import java.util.concurrent.Executor;
@@ -32,7 +32,7 @@ public class VrManager {
         CallbackEntry.this.mCallback.onVrStateChanged(enabled);
       }
 
-      @Override // android.service.p012vr.IVrStateCallbacks
+      @Override // android.service.vr.IVrStateCallbacks
       public void onVrStateChanged(final boolean enabled) {
         CallbackEntry.this.mExecutor.execute(
             new Runnable() { // from class:
@@ -54,7 +54,7 @@ public class VrManager {
         CallbackEntry.this.mCallback.onPersistentVrStateChanged(enabled);
       }
 
-      @Override // android.service.p012vr.IPersistentVrStateCallbacks
+      @Override // android.service.vr.IPersistentVrStateCallbacks
       public void onPersistentVrStateChanged(final boolean enabled) {
         CallbackEntry.this.mExecutor.execute(
             new Runnable() { // from class:

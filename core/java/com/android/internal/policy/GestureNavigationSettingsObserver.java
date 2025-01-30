@@ -4,7 +4,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.ContentObserver;
-import android.p009os.Handler;
+import android.os.Handler;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.util.DisplayMetrics;

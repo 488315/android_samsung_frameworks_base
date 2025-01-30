@@ -1,9 +1,9 @@
 package android.util;
 
 import android.annotation.SystemApi;
-import android.p009os.DeadSystemException;
+import android.os.DeadSystemException;
 import android.util.secutil.LogSwitcher;
-import com.android.internal.p029os.RuntimeInit;
+import com.android.internal.os.RuntimeInit;
 import com.android.internal.util.FastPrintWriter;
 import com.android.internal.util.LineBreakBufferedWriter;
 import dalvik.annotation.optimization.FastNative;

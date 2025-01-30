@@ -1,7 +1,7 @@
 package com.samsung.android.knox;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public enum SemPersonaState implements Parcelable {
@@ -44,12 +44,12 @@ public enum SemPersonaState implements Parcelable {
     return this.knox2_0_state_id;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(name());
   }

@@ -1,7 +1,7 @@
 package com.samsung.android.wallpaper;
 
-import android.p009os.Build;
-import android.p009os.SystemProperties;
+import android.os.Build;
+import android.os.SystemProperties;
 import android.text.TextUtils;
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.feature.SemFloatingFeature;

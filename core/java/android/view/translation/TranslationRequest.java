@@ -1,8 +1,8 @@
 package android.view.translation;
 
 import android.annotation.NonNull;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.BitUtils;
 import com.android.internal.util.Preconditions;
@@ -131,14 +131,14 @@ public final class TranslationRequest implements Parcelable {
         + " }";
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mFlags);
     dest.writeParcelableList(this.mTranslationRequestValues, flags);
     dest.writeParcelableList(this.mViewTranslationRequests, flags);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

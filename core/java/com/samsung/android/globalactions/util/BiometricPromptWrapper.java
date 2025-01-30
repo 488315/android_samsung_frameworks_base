@@ -3,9 +3,9 @@ package com.samsung.android.globalactions.util;
 import android.content.Context;
 import android.hardware.biometrics.BiometricManager;
 import android.hardware.biometrics.BiometricPrompt;
-import android.p009os.CancellationSignal;
-import android.p009os.Handler;
-import android.p009os.Looper;
+import android.os.CancellationSignal;
+import android.os.Handler;
+import android.os.Looper;
 import java.util.concurrent.Executor;
 
 /* loaded from: classes5.dex */

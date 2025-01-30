@@ -1,6 +1,6 @@
 package android.accessibilityservice;
 
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.util.ArrayMap;
 import android.view.MotionEvent;
 import android.view.accessibility.AccessibilityInteractionClient;

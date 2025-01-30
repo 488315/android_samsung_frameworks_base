@@ -2,9 +2,9 @@ package android.app.prediction;
 
 import android.annotation.SystemApi;
 import android.content.Context;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 @SystemApi
 /* loaded from: classes.dex */
@@ -73,12 +73,12 @@ public final class AppPredictionContext implements Parcelable {
         && this.mPackageName.equals(other.mPackageName);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.mUiSurface);
     dest.writeInt(this.mPredictedTargetCount);

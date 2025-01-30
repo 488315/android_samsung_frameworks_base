@@ -2,7 +2,7 @@ package com.samsung.android.jdsms;
 
 import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Binder;
+import android.os.Binder;
 import com.samsung.android.dsms.aidl.IDsmsService;
 import java.util.Timer;
 import java.util.TimerTask;

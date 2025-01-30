@@ -5,11 +5,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.UserHandle;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.UserHandle;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
@@ -87,7 +87,7 @@ public final class StatusHints implements Parcelable {
     return this.mExtras;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -105,7 +105,7 @@ public final class StatusHints implements Parcelable {
     return icon;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeCharSequence(this.mLabel);
     out.writeParcelable(this.mIcon, 0);

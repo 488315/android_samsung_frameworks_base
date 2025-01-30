@@ -1,8 +1,8 @@
 package android.telephony.ims.aidl;
 
 import android.net.Uri;
-import android.p009os.Binder;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.RemoteException;
 import android.telephony.ims.ImsException;
 import android.telephony.ims.RcsContactUceCapability;
 import android.telephony.ims.SipDetails;

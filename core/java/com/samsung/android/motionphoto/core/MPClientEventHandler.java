@@ -1,8 +1,8 @@
 package com.samsung.android.motionphoto.core;
 
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 
 /* loaded from: classes5.dex */
@@ -32,7 +32,7 @@ public class MPClientEventHandler extends Handler {
     this.mOnErrorListener = mOnErrorListener;
   }
 
-  @Override // android.p009os.Handler
+  @Override // android.os.Handler
   public void handleMessage(Message msg) {
     String str = TAG;
     Log.m94d(

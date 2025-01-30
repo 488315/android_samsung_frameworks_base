@@ -2,8 +2,8 @@ package com.android.internal.inputmethod;
 
 import android.graphics.Matrix;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.SparseArray;
 import android.view.InputChannel;
 import java.lang.annotation.Retention;
@@ -146,7 +146,7 @@ public final class InputBindResult implements Parcelable {
         + "}";
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.result);
     dest.writeStrongInterface(this.method);
@@ -173,7 +173,7 @@ public final class InputBindResult implements Parcelable {
     dest.writeBoolean(this.isInputMethodSuppressingSpellChecker);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     InputChannel inputChannel = this.channel;
     if (inputChannel != null) {

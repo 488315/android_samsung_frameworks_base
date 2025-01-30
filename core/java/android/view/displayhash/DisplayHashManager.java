@@ -1,6 +1,6 @@
 package android.view.displayhash;
 
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.util.ArraySet;
 import android.util.Log;
 import android.view.WindowManagerGlobal;

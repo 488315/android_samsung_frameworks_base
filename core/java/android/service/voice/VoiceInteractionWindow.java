@@ -3,7 +3,7 @@ package android.service.voice;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Rect;
-import android.p009os.IBinder;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;

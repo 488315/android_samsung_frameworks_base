@@ -1,10 +1,10 @@
 package com.samsung.android.content.smartclip;
 
-import android.p009os.Binder;
-import android.p009os.IBinder;
-import android.p009os.IInterface;
-import android.p009os.Parcel;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.IBinder;
+import android.os.IInterface;
+import android.os.Parcel;
+import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface IBleSpenChargeLockStateChangedListener extends IInterface {
@@ -17,7 +17,7 @@ public interface IBleSpenChargeLockStateChangedListener extends IInterface {
     @Override // com.samsung.android.content.smartclip.IBleSpenChargeLockStateChangedListener
     public void onChanged(boolean isLocked) throws RemoteException {}
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return null;
     }
@@ -42,7 +42,7 @@ public interface IBleSpenChargeLockStateChangedListener extends IInterface {
       return new Proxy(obj);
     }
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return this;
     }
@@ -56,12 +56,12 @@ public interface IBleSpenChargeLockStateChangedListener extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public String getTransactionName(int transactionCode) {
       return getDefaultTransactionName(transactionCode);
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
         throws RemoteException {
       if (code >= 1 && code <= 16777215) {
@@ -91,7 +91,7 @@ public interface IBleSpenChargeLockStateChangedListener extends IInterface {
         this.mRemote = remote;
       }
 
-      @Override // android.p009os.IInterface
+      @Override // android.os.IInterface
       public IBinder asBinder() {
         return this.mRemote;
       }
@@ -113,7 +113,7 @@ public interface IBleSpenChargeLockStateChangedListener extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public int getMaxTransactionId() {
       return 0;
     }

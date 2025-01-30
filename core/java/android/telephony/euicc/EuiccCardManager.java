@@ -2,8 +2,8 @@ package android.telephony.euicc;
 
 import android.annotation.SystemApi;
 import android.content.Context;
-import android.p009os.Binder;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.RemoteException;
 import android.service.euicc.EuiccProfileInfo;
 import android.telephony.TelephonyFrameworkInitializer;
 import android.util.Log;

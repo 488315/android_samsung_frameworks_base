@@ -1,7 +1,7 @@
 package com.samsung.android.sepunion;
 
 import android.content.Context;
-import android.p009os.IBinder;
+import android.os.IBinder;
 
 /* loaded from: classes5.dex */
 public class GalaxyRegistryServiceManager {

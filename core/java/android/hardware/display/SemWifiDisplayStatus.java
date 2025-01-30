@@ -1,6 +1,6 @@
 package android.hardware.display;
 
-import android.p009os.Parcelable;
+import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class SemWifiDisplayStatus {

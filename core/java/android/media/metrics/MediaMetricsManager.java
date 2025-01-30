@@ -1,7 +1,7 @@
 package android.media.metrics;
 
-import android.p009os.PersistableBundle;
-import android.p009os.RemoteException;
+import android.os.PersistableBundle;
+import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public final class MediaMetricsManager {

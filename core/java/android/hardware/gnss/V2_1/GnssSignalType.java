@@ -2,9 +2,9 @@ package android.hardware.gnss.V2_1;
 
 import android.hardware.gnss.V2_0.GnssConstellationType;
 import android.hardware.scontext.SContextConstants;
-import android.p009os.HidlSupport;
-import android.p009os.HwBlob;
-import android.p009os.HwParcel;
+import android.os.HidlSupport;
+import android.os.HwBlob;
+import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 

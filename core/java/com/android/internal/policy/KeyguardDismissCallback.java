@@ -1,6 +1,6 @@
 package com.android.internal.policy;
 
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public class KeyguardDismissCallback extends IKeyguardDismissCallback.Stub {

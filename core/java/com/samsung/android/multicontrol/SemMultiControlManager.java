@@ -1,7 +1,7 @@
 package com.samsung.android.multicontrol;
 
 import android.content.Context;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.view.IInputFilter;
 
 /* loaded from: classes5.dex */

@@ -19,7 +19,7 @@ import android.os.Process;
 import android.os.RemoteException;
 import android.os.Trace;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.provider.Settings;
 import android.telecom.DefaultDialerManager;
 import android.telecom.TelecomManager;

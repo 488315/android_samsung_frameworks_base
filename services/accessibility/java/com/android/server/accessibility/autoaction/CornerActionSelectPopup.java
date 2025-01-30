@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.Looper;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.WindowManager;

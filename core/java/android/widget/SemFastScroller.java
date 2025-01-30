@@ -12,7 +12,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.p009os.SystemClock;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.IntProperty;
 import android.util.Log;

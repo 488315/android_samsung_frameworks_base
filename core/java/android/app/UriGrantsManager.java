@@ -1,11 +1,11 @@
 package android.app;
 
 import android.content.Context;
-import android.content.p002pm.ParceledListSlice;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.content.pm.ParceledListSlice;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.util.Singleton;
 
 /* loaded from: classes.dex */

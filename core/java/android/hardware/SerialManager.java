@@ -1,8 +1,8 @@
 package android.hardware;
 
 import android.content.Context;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.RemoteException;
+import android.os.ParcelFileDescriptor;
+import android.os.RemoteException;
 import java.io.IOException;
 
 /* loaded from: classes.dex */

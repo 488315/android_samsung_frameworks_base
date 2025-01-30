@@ -2,15 +2,15 @@ package android.app.admin;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.p002pm.ActivityInfo;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ResolveInfo;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.graphics.drawable.Drawable;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Printer;
@@ -475,7 +475,7 @@ public final class DeviceAdminInfo implements Parcelable {
     return "DeviceAdminInfo{" + this.mActivityInfo.name + "}";
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     this.mActivityInfo.writeToParcel(dest, flags);
     dest.writeInt(this.mUsesPolicies);
@@ -483,7 +483,7 @@ public final class DeviceAdminInfo implements Parcelable {
     dest.writeInt(this.mHeadlessDeviceOwnerMode);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

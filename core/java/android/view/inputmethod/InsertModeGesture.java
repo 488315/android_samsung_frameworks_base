@@ -1,10 +1,10 @@
 package android.view.inputmethod;
 
 import android.graphics.PointF;
-import android.p009os.CancellationSignal;
-import android.p009os.CancellationSignalBeamer;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.CancellationSignal;
+import android.os.CancellationSignalBeamer;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
@@ -99,12 +99,12 @@ public final class InsertModeGesture extends CancellableHandwritingGesture imple
     return false;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString8(this.mFallbackText);
     dest.writeTypedObject(this.mPoint, flags);

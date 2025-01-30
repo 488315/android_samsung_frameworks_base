@@ -7,7 +7,7 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.util.Pair;
 
 /* loaded from: classes3.dex */

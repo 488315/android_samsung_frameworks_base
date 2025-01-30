@@ -1,7 +1,7 @@
 package android.view.textclassifier;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.Preconditions;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -113,7 +113,7 @@ public final class SelectionEvent implements Parcelable {
         (SystemTextClassifierMetadata) in.readParcelable(null, SystemTextClassifierMetadata.class);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mAbsoluteStart);
     dest.writeInt(this.mAbsoluteEnd);
@@ -144,7 +144,7 @@ public final class SelectionEvent implements Parcelable {
     dest.writeParcelable(this.mSystemTcMetadata, flags);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

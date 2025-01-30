@@ -3,7 +3,7 @@ package com.android.server.people.data;
 import android.app.people.ConversationStatus;
 import android.content.LocusId;
 import android.net.Uri;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.text.TextUtils;
 import android.util.Slog;
 import android.util.proto.ProtoInputStream;

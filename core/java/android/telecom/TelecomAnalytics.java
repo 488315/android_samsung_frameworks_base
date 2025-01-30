@@ -1,8 +1,8 @@
 package android.telecom;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,12 +83,12 @@ public final class TelecomAnalytics implements Parcelable {
       return this.mTime;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel out, int flags) {
       out.writeInt(this.mId);
       out.writeLong(this.mTime);
@@ -118,12 +118,12 @@ public final class TelecomAnalytics implements Parcelable {
     return this.mCallAnalytics;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeTypedList(this.mSessionTimings);
     out.writeTypedList(this.mCallAnalytics);

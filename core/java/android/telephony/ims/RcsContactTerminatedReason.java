@@ -1,8 +1,8 @@
 package android.telephony.ims;
 
 import android.net.Uri;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public final class RcsContactTerminatedReason implements Parcelable {
@@ -35,13 +35,13 @@ public final class RcsContactTerminatedReason implements Parcelable {
     this.mReason = in.readString();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeParcelable(this.mContactUri, flags);
     out.writeString(this.mReason);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

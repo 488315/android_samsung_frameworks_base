@@ -3,12 +3,12 @@ package android.telecom;
 import android.app.Service;
 import android.content.Intent;
 import android.net.Uri;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.RemoteException;
-import com.android.internal.p029os.SomeArgs;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
+import android.os.RemoteException;
+import com.android.internal.os.SomeArgs;
 import com.android.internal.telecom.ICallRedirectionAdapter;
 import com.android.internal.telecom.ICallRedirectionService;
 
@@ -20,7 +20,7 @@ public abstract class CallRedirectionService extends Service {
   private ICallRedirectionAdapter mCallRedirectionAdapter;
   private final Handler mHandler =
       new Handler(Looper.getMainLooper()) { // from class: android.telecom.CallRedirectionService.1
-        @Override // android.p009os.Handler
+        @Override // android.os.Handler
         public void handleMessage(Message msg) {
           switch (msg.what) {
             case 1:

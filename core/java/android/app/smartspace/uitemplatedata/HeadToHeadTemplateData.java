@@ -2,8 +2,8 @@ package android.app.smartspace.uitemplatedata;
 
 import android.annotation.SystemApi;
 import android.app.smartspace.SmartspaceUtils;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
@@ -96,12 +96,12 @@ public final class HeadToHeadTemplateData extends BaseTemplateData {
     return this.mHeadToHeadAction;
   }
 
-  @Override // android.app.smartspace.uitemplatedata.BaseTemplateData, android.p009os.Parcelable
+  @Override // android.app.smartspace.uitemplatedata.BaseTemplateData, android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.app.smartspace.uitemplatedata.BaseTemplateData, android.p009os.Parcelable
+  @Override // android.app.smartspace.uitemplatedata.BaseTemplateData, android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     super.writeToParcel(out, flags);
     out.writeTypedObject(this.mHeadToHeadTitle, flags);

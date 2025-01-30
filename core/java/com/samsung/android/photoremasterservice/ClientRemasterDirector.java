@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import com.samsung.android.photoremaster.IDirector;
 import com.samsung.android.photoremaster.util.LogUtil;
 import java.util.ArrayList;

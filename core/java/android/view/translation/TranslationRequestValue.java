@@ -1,7 +1,7 @@
 package android.view.translation;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 
 /* loaded from: classes4.dex */
@@ -57,7 +57,7 @@ public final class TranslationRequestValue implements Parcelable {
     return _hash;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     byte flg = this.mText != null ? (byte) (0 | 1) : (byte) 0;
     dest.writeByte(flg);
@@ -67,7 +67,7 @@ public final class TranslationRequestValue implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

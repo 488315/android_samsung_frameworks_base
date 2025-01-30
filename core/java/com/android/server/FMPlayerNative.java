@@ -1,6 +1,6 @@
 package com.android.server;
 
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.util.Log;
 
 /* loaded from: classes5.dex */

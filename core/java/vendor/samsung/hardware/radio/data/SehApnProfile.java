@@ -1,8 +1,8 @@
 package vendor.samsung.hardware.radio.data;
 
-import android.p009os.BadParcelableException;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.BadParcelableException;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes6.dex */
 public class SehApnProfile implements Parcelable {
@@ -30,12 +30,12 @@ public class SehApnProfile implements Parcelable {
   public String roamingProto;
   public String user;
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final int getStability() {
     return 1;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
     int _aidl_start_pos = _aidl_parcel.dataPosition();
     _aidl_parcel.writeInt(0);
@@ -119,7 +119,7 @@ public class SehApnProfile implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

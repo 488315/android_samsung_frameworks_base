@@ -1,7 +1,7 @@
 package android.view;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public final class WindowContentFrameStats extends FrameStats implements Parcelable {
@@ -59,12 +59,12 @@ public final class WindowContentFrameStats extends FrameStats implements Parcela
     return jArr[index];
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeLong(this.mRefreshPeriodNano);
     parcel.writeLongArray(this.mFramesPostedTimeNano);

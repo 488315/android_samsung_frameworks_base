@@ -2,7 +2,7 @@ package com.android.internal.logging;
 
 import android.content.Context;
 import android.metrics.LogMaker;
-import android.p009os.Build;
+import android.os.Build;
 
 /* loaded from: classes4.dex */
 public class MetricsLogger {

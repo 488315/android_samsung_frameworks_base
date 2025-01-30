@@ -1,7 +1,7 @@
 package com.android.internal.org.bouncycastle.crypto;
 
 import android.provider.Downloads;
-import com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParameters;
+import com.android.internal.org.bouncycastle.asn1.x9.X9ECParameters;
 import com.android.internal.org.bouncycastle.crypto.params.DHParameters;
 import com.android.internal.org.bouncycastle.crypto.params.DHValidationParameters;
 import com.android.internal.org.bouncycastle.crypto.params.DSAParameters;

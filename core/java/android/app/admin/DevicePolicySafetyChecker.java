@@ -1,6 +1,6 @@
 package android.app.admin;
 
-import com.android.internal.p029os.IResultReceiver;
+import com.android.internal.os.IResultReceiver;
 
 /* loaded from: classes.dex */
 public interface DevicePolicySafetyChecker {

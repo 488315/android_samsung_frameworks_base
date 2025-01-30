@@ -2,8 +2,8 @@ package android.view.inputmethod;
 
 import android.annotation.NonNull;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.inline.InlinePresentationSpec;
 import com.android.internal.util.AnnotationValidations;
 import java.lang.annotation.Retention;
@@ -175,7 +175,7 @@ public final class InlineSuggestionInfo implements Parcelable {
         + Objects.hashCode(this.mTooltip);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     byte flg = this.mPinned ? (byte) (0 | 16) : (byte) 0;
     if (this.mAutofillHints != null) {
@@ -198,7 +198,7 @@ public final class InlineSuggestionInfo implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

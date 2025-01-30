@@ -1,8 +1,8 @@
 package android.hardware;
 
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
+import android.os.Parcelable;
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.time.Duration;
@@ -176,7 +176,7 @@ public final class SyncFence implements AutoCloseable, Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 1;
   }
@@ -189,7 +189,7 @@ public final class SyncFence implements AutoCloseable, Parcelable {
     return this.mNativePtr;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     synchronized (this.mCloser) {
       long j = this.mNativePtr;

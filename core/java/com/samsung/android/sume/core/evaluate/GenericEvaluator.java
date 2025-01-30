@@ -1,7 +1,7 @@
 package com.samsung.android.sume.core.evaluate;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.samsung.android.sume.core.Def;
 import java.util.stream.Stream;
 

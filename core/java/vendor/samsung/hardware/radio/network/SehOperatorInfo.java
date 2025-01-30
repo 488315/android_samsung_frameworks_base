@@ -1,8 +1,8 @@
 package vendor.samsung.hardware.radio.network;
 
-import android.p009os.BadParcelableException;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.BadParcelableException;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
@@ -35,12 +35,12 @@ public class SehOperatorInfo implements Parcelable {
   public String rat;
   public int status = 0;
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final int getStability() {
     return 1;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
     int _aidl_start_pos = _aidl_parcel.dataPosition();
     _aidl_parcel.writeInt(0);
@@ -135,7 +135,7 @@ public class SehOperatorInfo implements Parcelable {
     return "vendor.samsung.hardware.radio.network.SehOperatorInfo" + _aidl_sj.toString();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

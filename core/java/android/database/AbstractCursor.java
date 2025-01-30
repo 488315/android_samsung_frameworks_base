@@ -2,7 +2,7 @@ package android.database;
 
 import android.content.ContentResolver;
 import android.net.Uri;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import android.util.Log;
 import dalvik.system.CloseGuard;
 import java.lang.ref.WeakReference;

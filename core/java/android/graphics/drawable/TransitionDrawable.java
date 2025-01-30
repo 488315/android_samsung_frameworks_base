@@ -2,7 +2,7 @@ package android.graphics.drawable;
 
 import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.p009os.SystemClock;
+import android.os.SystemClock;
 
 /* loaded from: classes.dex */
 public class TransitionDrawable extends LayerDrawable implements Drawable.Callback {

@@ -1,9 +1,9 @@
 package android.ddm;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Debug;
-import android.p009os.Process;
-import android.p009os.UserHandle;
+import android.os.Debug;
+import android.os.Process;
+import android.os.UserHandle;
 import dalvik.system.VMRuntime;
 import java.nio.ByteBuffer;
 import org.apache.harmony.dalvik.ddmc.Chunk;

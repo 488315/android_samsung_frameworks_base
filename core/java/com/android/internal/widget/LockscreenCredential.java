@@ -1,7 +1,7 @@
 package com.android.internal.widget;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.security.keystore.KeyProperties;
 import android.text.TextUtils;
 import com.android.internal.util.ArrayUtils;
@@ -191,13 +191,13 @@ public class LockscreenCredential implements Parcelable, AutoCloseable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mType);
     dest.writeByteArray(this.mCredential);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

@@ -1,7 +1,7 @@
 package com.android.server.display;
 
 import android.hardware.display.DeviceProductInfo;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.view.Display;
 import android.view.DisplayAddress;
 import android.view.DisplayCutout;

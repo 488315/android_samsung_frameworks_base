@@ -2,7 +2,7 @@ package android.telephony.data;
 
 import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import com.android.telephony.Rlog;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

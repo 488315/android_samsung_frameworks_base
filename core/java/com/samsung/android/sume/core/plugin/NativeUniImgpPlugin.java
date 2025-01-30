@@ -5,7 +5,7 @@ import android.graphics.Gainmap;
 import android.graphics.Rect;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.ExifInterface;
-import android.p009os.BatteryManager;
+import android.os.BatteryManager;
 import android.util.Log;
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.sume.core.Def;

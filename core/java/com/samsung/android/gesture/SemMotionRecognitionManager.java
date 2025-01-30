@@ -2,11 +2,11 @@ package com.samsung.android.gesture;
 
 import android.app.ActivityThread;
 import android.content.Context;
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.telecom.Logging.Session;
 import android.util.Log;
 import com.samsung.android.hardware.context.SemContext;
@@ -450,7 +450,7 @@ public class SemMotionRecognitionManager {
           new Handler(
               looper) { // from class:
                         // com.samsung.android.gesture.SemMotionRecognitionManager.MRListenerDelegate.1
-            @Override // android.p009os.Handler
+            @Override // android.os.Handler
             public void handleMessage(Message msg) {
               synchronized (SemMotionRecognitionManager.this.sListenerDelegates) {
                 try {

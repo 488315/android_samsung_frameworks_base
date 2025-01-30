@@ -2,13 +2,13 @@ package com.android.internal.org.bouncycastle.jcajce.util;
 
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.asn1.ASN1OctetString;
-import com.android.internal.org.bouncycastle.asn1.p019x9.ECNamedCurveTable;
-import com.android.internal.org.bouncycastle.asn1.p019x9.X962Parameters;
-import com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParameters;
-import com.android.internal.org.bouncycastle.asn1.p019x9.X9ECPoint;
+import com.android.internal.org.bouncycastle.asn1.x9.ECNamedCurveTable;
+import com.android.internal.org.bouncycastle.asn1.x9.X962Parameters;
+import com.android.internal.org.bouncycastle.asn1.x9.X9ECParameters;
+import com.android.internal.org.bouncycastle.asn1.x9.X9ECPoint;
 import com.android.internal.org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
-import com.android.internal.org.bouncycastle.crypto.p020ec.CustomNamedCurves;
-import com.android.internal.org.bouncycastle.math.p026ec.ECCurve;
+import com.android.internal.org.bouncycastle.crypto.ec.CustomNamedCurves;
+import com.android.internal.org.bouncycastle.math.ec.ECCurve;
 import java.io.IOException;
 import java.security.interfaces.ECPublicKey;
 import java.security.spec.ECParameterSpec;
@@ -62,7 +62,7 @@ public class ECKeyUtil {
         }
         curve = X9ECParameters.getInstance(params.getParameters()).getCurve();
       }
-      com.android.internal.org.bouncycastle.math.p026ec.ECPoint p =
+      com.android.internal.org.bouncycastle.math.ec.ECPoint p =
           curve.decodePoint(publicKeyInfo.getPublicKeyData().getOctets());
       ASN1OctetString pEnc = ASN1OctetString.getInstance(new X9ECPoint(p, true).toASN1Primitive());
       try {

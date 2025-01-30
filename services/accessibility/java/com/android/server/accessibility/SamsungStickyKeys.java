@@ -9,7 +9,7 @@ import android.content.res.Configuration;
 import android.hardware.display.DisplayManager;
 import android.os.Handler;
 import android.os.Message;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;

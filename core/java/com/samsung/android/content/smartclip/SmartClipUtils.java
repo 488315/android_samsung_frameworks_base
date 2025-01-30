@@ -1,11 +1,11 @@
 package com.samsung.android.content.smartclip;
 
 import android.content.Context;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 

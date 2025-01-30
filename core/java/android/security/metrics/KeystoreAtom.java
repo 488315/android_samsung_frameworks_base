@@ -1,8 +1,8 @@
 package android.security.metrics;
 
-import android.p009os.BadParcelableException;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.BadParcelableException;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class KeystoreAtom implements Parcelable {
@@ -26,7 +26,7 @@ public class KeystoreAtom implements Parcelable {
   public int count = 0;
   public KeystoreAtomPayload payload;
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
     int _aidl_start_pos = _aidl_parcel.dataPosition();
     _aidl_parcel.writeInt(0);
@@ -75,7 +75,7 @@ public class KeystoreAtom implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     int _mask = 0 | describeContents(this.payload);
     return _mask;

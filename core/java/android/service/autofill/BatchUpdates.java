@@ -1,8 +1,8 @@
 package android.service.autofill;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Pair;
 import android.view.autofill.Helper;
 import android.widget.RemoteViews;
@@ -113,12 +113,12 @@ public final class BatchUpdates implements Parcelable {
         .toString();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     ArrayList<Pair<Integer, InternalTransformation>> arrayList = this.mTransformations;
     if (arrayList == null) {

@@ -1,6 +1,6 @@
 package com.samsung.android.privacydashboard;
 
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.text.format.DateFormat;
 import java.util.Objects;
 

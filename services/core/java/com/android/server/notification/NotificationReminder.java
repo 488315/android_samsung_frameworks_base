@@ -27,7 +27,7 @@ import android.os.RemoteException;
 import android.os.SystemClock;
 import android.os.UserHandle;
 import android.os.VibrationEffect;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.provider.Settings;
 import android.provider.Telephony;
 import android.telecom.TelecomManager;

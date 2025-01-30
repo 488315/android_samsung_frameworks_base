@@ -1,6 +1,6 @@
 package com.android.internal.util.function.pooled;
 
-import android.p009os.TraceNameSupplier;
+import android.os.TraceNameSupplier;
 import com.android.internal.util.FunctionalUtils;
 
 /* loaded from: classes5.dex */

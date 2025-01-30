@@ -18,7 +18,7 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.Region;
 import android.graphics.Xfermode;
-import android.p009os.Trace;
+import android.os.Trace;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.StateSet;

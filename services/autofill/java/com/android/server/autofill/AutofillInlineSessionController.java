@@ -4,7 +4,7 @@ import android.content.ComponentName;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.autofill.AutofillId;
-import com.android.server.autofill.p008ui.InlineFillUi;
+import com.android.server.autofill.ui.InlineFillUi;
 import com.android.server.inputmethod.InputMethodManagerInternal;
 import java.util.Optional;
 import java.util.function.Consumer;

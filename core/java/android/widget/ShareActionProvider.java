@@ -2,8 +2,8 @@ package android.widget;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ResolveInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.ActionProvider;

@@ -1,6 +1,6 @@
 package com.android.server.pm.dex;
 
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Log;
 import com.android.server.art.model.DexoptParams;
 import com.android.server.pm.PackageManagerServiceCompilerMapping;

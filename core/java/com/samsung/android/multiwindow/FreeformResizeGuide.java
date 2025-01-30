@@ -8,8 +8,8 @@ import android.app.ActivityThread;
 import android.content.Context;
 import android.graphics.Rect;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Handler;
-import android.p009os.Message;
+import android.os.Handler;
+import android.os.Message;
 import android.util.DisplayMetrics;
 import android.util.Slog;
 import android.view.HapticFeedbackConstants;
@@ -460,7 +460,7 @@ public class FreeformResizeGuide {
 
     HandlerC5200H() {}
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       switch (msg.what) {
         case 0:

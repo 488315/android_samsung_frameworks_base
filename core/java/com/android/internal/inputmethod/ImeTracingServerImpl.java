@@ -1,7 +1,7 @@
 package com.android.internal.inputmethod;
 
-import android.p009os.Build;
-import android.p009os.SystemClock;
+import android.os.Build;
+import android.os.SystemClock;
 import android.util.Log;
 import android.util.proto.ProtoOutputStream;
 import android.view.inputmethod.InputMethodManager;

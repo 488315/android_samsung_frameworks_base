@@ -2,9 +2,9 @@ package android.util.sysfwutil;
 
 import android.hardware.usb.UsbManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.FileUtils;
-import android.p009os.Process;
-import android.p009os.SystemProperties;
+import android.os.FileUtils;
+import android.os.Process;
+import android.os.SystemProperties;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

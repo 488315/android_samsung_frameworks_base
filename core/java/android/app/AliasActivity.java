@@ -1,10 +1,10 @@
 package android.app;
 
 import android.content.Intent;
-import android.content.p002pm.ActivityInfo;
-import android.content.p002pm.PackageManager;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.res.XmlResourceParser;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Xml;
 import com.android.internal.util.XmlUtils;

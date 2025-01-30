@@ -1,7 +1,7 @@
 package com.samsung.android.media.fmradio;
 
-import android.p009os.Handler;
-import android.p009os.Message;
+import android.os.Handler;
+import android.os.Message;
 import com.samsung.android.media.fmradio.internal.IFMEventListener;
 
 /* loaded from: classes5.dex */
@@ -156,7 +156,7 @@ public class SemFmEventListener {
       };
   Handler mHandler =
       new Handler() { // from class: com.samsung.android.media.fmradio.SemFmEventListener.2
-        @Override // android.p009os.Handler
+        @Override // android.os.Handler
         public void handleMessage(Message msg) {
           switch (msg.what) {
             case 1:

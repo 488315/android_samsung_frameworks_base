@@ -1,6 +1,6 @@
 package com.samsung.android.knox.analytics.util;
 
-import android.p009os.Bundle;
+import android.os.Bundle;
 import com.samsung.android.knox.analytics.database.Contract;
 
 /* loaded from: classes5.dex */

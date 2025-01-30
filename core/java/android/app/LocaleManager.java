@@ -3,8 +3,8 @@ package android.app;
 import android.annotation.SystemApi;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.p009os.LocaleList;
-import android.p009os.RemoteException;
+import android.os.LocaleList;
+import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public class LocaleManager {

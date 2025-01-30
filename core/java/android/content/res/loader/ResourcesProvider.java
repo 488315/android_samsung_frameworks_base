@@ -1,12 +1,12 @@
 package android.content.res.loader;
 
 import android.content.Context;
-import android.content.p001om.OverlayInfo;
-import android.content.p002pm.ApplicationInfo;
+import android.content.om.OverlayInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.res.ApkAssets;
-import android.p009os.ParcelFileDescriptor;
+import android.os.ParcelFileDescriptor;
 import android.util.Log;
-import com.android.internal.content.p015om.OverlayManagerImpl;
+import com.android.internal.content.om.OverlayManagerImpl;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.Preconditions;
 import java.io.Closeable;

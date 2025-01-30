@@ -5,7 +5,7 @@ import android.annotation.SystemApi;
 import android.app.ActivityManager;
 import android.app.ActivityThread;
 import android.app.UriGrantsManager;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.Resources;
 import android.database.ContentObserver;
@@ -20,19 +20,19 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
-import android.p009os.Build;
-import android.p009os.Bundle;
-import android.p009os.CancellationSignal;
-import android.p009os.DeadObjectException;
-import android.p009os.IBinder;
-import android.p009os.ICancellationSignal;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.ParcelableException;
-import android.p009os.RemoteCallback;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
-import android.p009os.SystemClock;
-import android.p009os.UserHandle;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.CancellationSignal;
+import android.os.DeadObjectException;
+import android.os.IBinder;
+import android.os.ICancellationSignal;
+import android.os.ParcelFileDescriptor;
+import android.os.ParcelableException;
+import android.os.RemoteCallback;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.SystemClock;
+import android.os.UserHandle;
 import android.provider.CalendarContract;
 import android.provider.ContactsContract;
 import android.provider.DocumentsContract;
@@ -2075,7 +2075,7 @@ public abstract class ContentResolver implements ContentInterface {
       this.mContentProvider = icp;
     }
 
-    @Override // android.p009os.ParcelFileDescriptor
+    @Override // android.os.ParcelFileDescriptor
     public void releaseResources() {
       if (this.mProviderReleased.compareAndSet(false, true)) {
         ContentResolver.this.releaseProvider(this.mContentProvider);

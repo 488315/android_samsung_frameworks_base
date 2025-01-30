@@ -2,7 +2,7 @@ package android.hardware.usb;
 
 import android.annotation.SystemApi;
 import android.content.Context;
-import android.p009os.ParcelFileDescriptor;
+import android.os.ParcelFileDescriptor;
 import com.android.internal.location.GpsNetInitiatedHandler;
 import com.android.internal.util.Preconditions;
 import dalvik.system.CloseGuard;

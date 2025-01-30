@@ -2,8 +2,8 @@ package android.text.style;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.ParcelableSpan;
 
 /* loaded from: classes3.dex */
@@ -44,12 +44,12 @@ public class AccessibilityReplacementSpan extends ReplacementSpan implements Par
     return 29;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     writeToParcelInternal(dest, flags);
   }

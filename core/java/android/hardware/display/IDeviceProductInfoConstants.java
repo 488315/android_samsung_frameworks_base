@@ -1,10 +1,10 @@
 package android.hardware.display;
 
-import android.p009os.Binder;
-import android.p009os.IBinder;
-import android.p009os.IInterface;
-import android.p009os.Parcel;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.IBinder;
+import android.os.IInterface;
+import android.os.Parcel;
+import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IDeviceProductInfoConstants extends IInterface {
@@ -15,7 +15,7 @@ public interface IDeviceProductInfoConstants extends IInterface {
   public static final String DESCRIPTOR = "android.hardware.display.IDeviceProductInfoConstants";
 
   public static class Default implements IDeviceProductInfoConstants {
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return null;
     }
@@ -37,7 +37,7 @@ public interface IDeviceProductInfoConstants extends IInterface {
       return new Proxy(obj);
     }
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return this;
     }
@@ -46,12 +46,12 @@ public interface IDeviceProductInfoConstants extends IInterface {
       return null;
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public String getTransactionName(int transactionCode) {
       return getDefaultTransactionName(transactionCode);
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
         throws RemoteException {
       switch (code) {
@@ -70,7 +70,7 @@ public interface IDeviceProductInfoConstants extends IInterface {
         this.mRemote = remote;
       }
 
-      @Override // android.p009os.IInterface
+      @Override // android.os.IInterface
       public IBinder asBinder() {
         return this.mRemote;
       }
@@ -80,7 +80,7 @@ public interface IDeviceProductInfoConstants extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public int getMaxTransactionId() {
       return 0;
     }

@@ -5,8 +5,8 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.ContextMenu;
 import android.view.View;
@@ -731,7 +731,7 @@ public class ExpandableListView extends ListView {
     }
 
     @Override // android.view.View.BaseSavedState, android.view.AbsSavedState,
-              // android.p009os.Parcelable
+              // android.os.Parcelable
     public void writeToParcel(Parcel out, int flags) {
       super.writeToParcel(out, flags);
       out.writeList(this.expandedGroupMetadataList);

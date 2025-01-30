@@ -1,8 +1,8 @@
 package com.android.internal.app;
 
 import android.content.Intent;
-import android.content.p002pm.ActivityInfo;
-import android.p009os.Bundle;
+import android.content.pm.ActivityInfo;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Slog;
 import com.android.internal.C4337R;

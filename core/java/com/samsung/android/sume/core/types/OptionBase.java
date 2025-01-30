@@ -1,7 +1,7 @@
 package com.samsung.android.sume.core.types;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import com.samsung.android.sume.core.Def;
 import java.io.Serializable;
@@ -24,12 +24,12 @@ public abstract class OptionBase implements Parcelable, Serializable {
     in.readMap(hashMap, null);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeMap(this.data);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

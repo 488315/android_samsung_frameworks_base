@@ -1,8 +1,8 @@
 package android.view.inputmethod;
 
-import android.p009os.CancellationSignal;
-import android.p009os.CancellationSignalBeamer;
-import android.p009os.IBinder;
+import android.os.CancellationSignal;
+import android.os.CancellationSignalBeamer;
+import android.os.IBinder;
 
 /* loaded from: classes4.dex */
 public abstract class CancellableHandwritingGesture extends HandwritingGesture {

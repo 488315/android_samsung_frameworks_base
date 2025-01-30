@@ -13,7 +13,7 @@ import com.android.internal.org.bouncycastle.asn1.DERBitString;
 import com.android.internal.org.bouncycastle.asn1.DERNull;
 import com.android.internal.org.bouncycastle.asn1.nist.NISTObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.oiw.OIWObjectIdentifiers;
-import com.android.internal.org.bouncycastle.asn1.p019x9.X9ObjectIdentifiers;
+import com.android.internal.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.pkcs.CertificationRequest;
 import com.android.internal.org.bouncycastle.asn1.pkcs.CertificationRequestInfo;
 import com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;

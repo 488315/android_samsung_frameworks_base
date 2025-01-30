@@ -2,7 +2,7 @@ package android.telephony.ims.compat;
 
 import android.app.Service;
 import android.content.Intent;
-import android.p009os.IBinder;
+import android.os.IBinder;
 import android.telephony.ims.compat.feature.ImsFeature;
 import android.telephony.ims.compat.feature.MMTelFeature;
 import android.telephony.ims.compat.feature.RcsFeature;

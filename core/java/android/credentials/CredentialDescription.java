@@ -1,8 +1,8 @@
 package android.credentials;
 
 import android.annotation.NonNull;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.service.credentials.CredentialEntry;
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Preconditions;
@@ -83,12 +83,12 @@ public final class CredentialDescription implements Parcelable {
     return !credentialEntry.getType().equals(type);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString8(this.mType);
     dest.writeStringList(this.mSupportedElementKeys.stream().toList());

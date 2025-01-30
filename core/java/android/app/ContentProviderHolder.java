@@ -2,10 +2,10 @@ package android.app;
 
 import android.content.ContentProviderNative;
 import android.content.IContentProvider;
-import android.content.p002pm.ProviderInfo;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.content.pm.ProviderInfo;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class ContentProviderHolder implements Parcelable {
@@ -34,12 +34,12 @@ public class ContentProviderHolder implements Parcelable {
     this.info = _info;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     this.info.writeToParcel(parcel, 0);
     IContentProvider iContentProvider = this.provider;

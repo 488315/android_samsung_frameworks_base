@@ -3,7 +3,7 @@ package android.media;
 import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 
 @Deprecated
 /* loaded from: classes2.dex */

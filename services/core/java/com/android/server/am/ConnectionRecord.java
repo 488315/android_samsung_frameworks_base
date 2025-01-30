@@ -4,7 +4,7 @@ import android.app.IServiceConnection;
 import android.app.PendingIntent;
 import android.content.ComponentName;
 import android.os.SystemClock;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
 import android.util.proto.ProtoUtils;

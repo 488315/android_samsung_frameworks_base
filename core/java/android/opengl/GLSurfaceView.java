@@ -1,7 +1,7 @@
 package android.opengl;
 
 import android.content.Context;
-import android.p009os.Trace;
+import android.os.Trace;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;

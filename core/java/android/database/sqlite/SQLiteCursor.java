@@ -4,7 +4,7 @@ import android.database.AbstractWindowedCursor;
 import android.database.CursorWindow;
 import android.database.DatabaseUtils;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.StrictMode;
+import android.os.StrictMode;
 import android.util.Log;
 import com.android.internal.util.Preconditions;
 import java.util.HashMap;

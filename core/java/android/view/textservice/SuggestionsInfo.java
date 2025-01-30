@@ -1,7 +1,7 @@
 package android.view.textservice;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.ArrayUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -64,7 +64,7 @@ public final class SuggestionsInfo implements Parcelable {
     this.mSuggestionsAvailable = source.readInt() == 1;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeInt(this.mSuggestionsAttributes);
     parcel.writeStringArray(this.mSuggestions);
@@ -101,7 +101,7 @@ public final class SuggestionsInfo implements Parcelable {
     return this.mSuggestions[i];
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

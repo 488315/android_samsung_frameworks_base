@@ -1,8 +1,8 @@
 package com.samsung.android.knox.knoxanalyticsproxy;
 
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.format.Time;
 import com.samsung.android.ims.options.SemCapabilities;
 import java.io.Serializable;
@@ -124,7 +124,7 @@ public class KnoxAnalyticsData implements Parcelable {
     this.eventId = in.readLong();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.feature);
     dest.writeInt(this.schemaVersion);
@@ -134,7 +134,7 @@ public class KnoxAnalyticsData implements Parcelable {
     dest.writeLong(this.eventId);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

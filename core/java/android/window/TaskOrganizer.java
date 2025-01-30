@@ -2,11 +2,11 @@ package android.window;
 
 import android.app.ActivityManager;
 import android.app.PendingIntent$$ExternalSyntheticLambda1;
-import android.content.p002pm.ActivityInfo;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.view.SurfaceControl;
 import java.util.List;
 import java.util.concurrent.Executor;

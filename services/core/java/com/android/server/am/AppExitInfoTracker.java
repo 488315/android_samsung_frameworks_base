@@ -18,7 +18,7 @@ import android.os.ParcelFileDescriptor;
 import android.os.Process;
 import android.os.SystemProperties;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.system.OsConstants;
 import android.text.TextUtils;
 import android.util.ArrayMap;

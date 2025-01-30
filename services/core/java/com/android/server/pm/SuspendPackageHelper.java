@@ -26,7 +26,7 @@ import com.android.server.pm.pkg.SuspendParams;
 import com.android.server.pm.pkg.mutate.PackageStateMutator;
 import com.android.server.pm.pkg.mutate.PackageUserStateWrite;
 import com.android.server.utils.WatchedArrayMap;
-import com.samsung.android.server.p025pm.PmLog;
+import com.samsung.android.server.pm.PmLog;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;

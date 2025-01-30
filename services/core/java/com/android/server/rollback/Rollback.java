@@ -3,7 +3,7 @@ package com.android.server.rollback;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.PackageInstaller;
 import android.content.pm.PackageManager;
 import android.content.pm.VersionedPackage;

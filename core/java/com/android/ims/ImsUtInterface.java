@@ -1,7 +1,7 @@
 package com.android.ims;
 
-import android.p009os.Handler;
-import android.p009os.Message;
+import android.os.Handler;
+import android.os.Message;
 
 /* loaded from: classes4.dex */
 public interface ImsUtInterface {

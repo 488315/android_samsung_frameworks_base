@@ -3,14 +3,14 @@ package android.view.inputmethod;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ResolveInfo;
-import android.content.p002pm.ServiceInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Printer;
 import java.io.IOException;
@@ -103,7 +103,7 @@ public final class InputMethodInfo implements Parcelable {
   /* JADX WARN: Not initialized variable reg: 20, insn: 0x0391: MOVE (r5 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY]) = (r20 I:??[int, float, boolean, short, byte, char, OBJECT, ARRAY] A[D('isAuxIme' boolean)]), block:B:167:0x038f */
   public InputMethodInfo(
       android.content.Context r32,
-      android.content.p002pm.ResolveInfo r33,
+      android.content.pm.ResolveInfo r33,
       java.util.List<android.view.inputmethod.InputMethodSubtype> r34)
       throws org.xmlpull.v1.XmlPullParserException, java.io.IOException {
     /*
@@ -474,7 +474,7 @@ public final class InputMethodInfo implements Parcelable {
     return this.mShowInInputMethodPicker;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeString(this.mId);
     parcel.writeString(this.mSettingsActivityName);
@@ -493,7 +493,7 @@ public final class InputMethodInfo implements Parcelable {
     parcel.writeString8(this.mStylusHandwritingSettingsActivityAttr);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

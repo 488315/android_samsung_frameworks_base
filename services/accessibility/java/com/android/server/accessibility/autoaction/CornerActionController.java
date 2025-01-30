@@ -7,7 +7,7 @@ import android.database.ContentObserver;
 import android.hardware.display.DisplayManager;
 import android.os.Handler;
 import android.os.Looper;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.provider.Settings;
 import android.view.ContextThemeWrapper;
 import android.view.Display;

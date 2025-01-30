@@ -1,7 +1,7 @@
 package android.app;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* compiled from: FragmentManager.java */
 /* loaded from: classes.dex */
@@ -40,12 +40,12 @@ final class FragmentManagerState implements Parcelable {
     this.mNextFragmentIndex = in.readInt();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeTypedArray(this.mActive, flags);
     dest.writeIntArray(this.mAdded);

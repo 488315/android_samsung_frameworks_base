@@ -1,8 +1,8 @@
 package android.security;
 
 import android.net.Uri;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
@@ -81,12 +81,12 @@ public final class UrisToAliases implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeMap(this.mUrisToAliases);
   }

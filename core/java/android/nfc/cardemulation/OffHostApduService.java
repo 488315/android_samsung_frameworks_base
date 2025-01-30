@@ -2,7 +2,7 @@ package android.nfc.cardemulation;
 
 import android.app.Service;
 import android.content.Intent;
-import android.p009os.IBinder;
+import android.os.IBinder;
 
 /* loaded from: classes3.dex */
 public abstract class OffHostApduService extends Service {

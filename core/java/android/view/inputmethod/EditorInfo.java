@@ -1,10 +1,10 @@
 package android.view.inputmethod;
 
-import android.p009os.Bundle;
-import android.p009os.LocaleList;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.UserHandle;
+import android.os.Bundle;
+import android.os.LocaleList;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.UserHandle;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.util.Printer;
@@ -524,7 +524,7 @@ public class EditorInfo implements InputType, Parcelable {
     return newEditorInfo;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.inputType);
     dest.writeInt(this.imeOptions);
@@ -560,7 +560,7 @@ public class EditorInfo implements InputType, Parcelable {
     UserHandle.writeToParcel(this.targetInputMethodUser, dest);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

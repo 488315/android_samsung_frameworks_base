@@ -6,11 +6,11 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Message;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.util.Log;
 
 @Deprecated
@@ -142,7 +142,7 @@ public abstract class ConditionProviderService extends Service {
 
     private HandlerC2737H() {}
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       String name = null;
       if (!ConditionProviderService.this.mIsConnected) {

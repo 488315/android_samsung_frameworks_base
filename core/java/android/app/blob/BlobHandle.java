@@ -1,7 +1,7 @@
 package android.app.blob;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Base64;
 import android.util.IndentingPrintWriter;
 import com.android.internal.org.bouncycastle.cms.CMSAttributeTableGenerator;
@@ -84,12 +84,12 @@ public final class BlobHandle implements Parcelable {
     return this.tag;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.algorithm);
     dest.writeByteArray(this.digest);

@@ -1,8 +1,8 @@
 package com.samsung.android.service.HermesService;
 
 import android.content.Context;
-import android.p009os.IBinder;
-import android.p009os.PowerManager;
+import android.os.IBinder;
+import android.os.PowerManager;
 import android.util.Log;
 import com.samsung.android.sepunion.SemUnionManager;
 import com.samsung.android.sepunion.UnionConstants;

@@ -1,8 +1,8 @@
 package android.window;
 
 import android.graphics.Rect;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.SurfaceControl;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -46,7 +46,7 @@ public final class StartingWindowRemovalInfo implements Parcelable {
     readFromParcel(source);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -63,7 +63,7 @@ public final class StartingWindowRemovalInfo implements Parcelable {
     this.duration = source.readLong();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.taskId);
     dest.writeTypedObject(this.windowAnimationLeash, flags);

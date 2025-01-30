@@ -8,7 +8,7 @@ import android.media.musicrecognition.IMusicRecognitionService;
 import android.os.IBinder;
 import android.os.IInterface;
 import android.os.ParcelFileDescriptor;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import com.android.internal.infra.AbstractMultiplePendingRequestsRemoteService;
 import com.android.internal.infra.AbstractRemoteService;
 import java.util.concurrent.CompletableFuture;

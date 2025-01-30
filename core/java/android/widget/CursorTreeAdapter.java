@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.DataSetObserver;
-import android.p009os.Handler;
+import android.os.Handler;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;

@@ -1,7 +1,7 @@
 package com.android.server.pm;
 
 import android.R;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.res.Resources;
 import android.os.SystemProperties;
 import android.util.ArrayMap;

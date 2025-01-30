@@ -2,8 +2,8 @@ package android.net.vcn;
 
 import android.net.TransportInfo;
 import android.net.wifi.WifiInfo;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
@@ -83,7 +83,7 @@ public class VcnTransportInfo implements TransportInfo, Parcelable {
         && this.mMinUdpPort4500NatTimeoutSeconds == that.mMinUdpPort4500NatTimeoutSeconds;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -108,7 +108,7 @@ public class VcnTransportInfo implements TransportInfo, Parcelable {
     return 4L;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mSubId);
     dest.writeParcelable(this.mWifiInfo, flags);

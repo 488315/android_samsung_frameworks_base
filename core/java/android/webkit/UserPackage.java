@@ -1,10 +1,10 @@
 package android.webkit;
 
 import android.content.Context;
-import android.content.p002pm.PackageInfo;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.UserInfo;
-import android.p009os.UserManager;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
+import android.os.UserManager;
 import java.util.ArrayList;
 import java.util.List;
 

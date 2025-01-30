@@ -2,7 +2,7 @@ package android.database;
 
 import android.content.ContentResolver;
 import android.net.Uri;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import java.io.Closeable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

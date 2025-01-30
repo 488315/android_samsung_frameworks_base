@@ -2,10 +2,10 @@ package com.samsung.android.speech;
 
 import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import java.io.File;
 import java.io.FileInputStream;
@@ -117,7 +117,7 @@ public class SemSpeechRecognizer {
                 Looper
                     .getMainLooper()) { // from class:
                                         // com.samsung.android.speech.SemSpeechRecognizer.1
-              @Override // android.p009os.Handler
+              @Override // android.os.Handler
               public void handleMessage(Message msg) {
                 Log.m96e(SemSpeechRecognizer.TAG, "audio is halt without stopRecognition()");
                 SemSpeechRecognizer.this.stopRecognition();
@@ -131,7 +131,7 @@ public class SemSpeechRecognizer {
                 Looper
                     .getMainLooper()) { // from class:
                                         // com.samsung.android.speech.SemSpeechRecognizer.2
-              @Override // android.p009os.Handler
+              @Override // android.os.Handler
               public void handleMessage(Message msg) {
                 int result = msg.getData().getInt("commandType");
                 SemSpeechRecognizer semSpeechRecognizer = SemSpeechRecognizer.this;

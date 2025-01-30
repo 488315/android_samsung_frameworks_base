@@ -1,12 +1,12 @@
 package android.app;
 
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.p009os.Handler;
-import android.p009os.ParcelFileDescriptor;
+import android.os.Handler;
+import android.os.ParcelFileDescriptor;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;

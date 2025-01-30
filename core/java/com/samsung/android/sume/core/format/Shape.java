@@ -1,7 +1,7 @@
 package com.samsung.android.sume.core.format;
 
 import android.graphics.Rect;
-import android.p009os.Parcelable;
+import android.os.Parcelable;
 import java.io.Serializable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

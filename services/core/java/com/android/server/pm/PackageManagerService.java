@@ -20,8 +20,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentSender;
 import android.content.om.SamsungThemeConstants;
-import android.content.p000pm.PackageManagerInternal;
-import android.content.p000pm.TestUtilityService;
+import android.content.pm.PackageManagerInternal;
+import android.content.pm.TestUtilityService;
 import android.content.pm.ASKSManager;
 import android.content.pm.ActivityInfo;
 import android.content.pm.ApplicationInfo;
@@ -94,8 +94,8 @@ import android.os.incremental.PerUidReadTimeouts;
 import android.os.storage.IStorageManager;
 import android.os.storage.StorageManager;
 import android.os.storage.StorageManagerInternal;
-import android.p005os.IInstalld;
-import android.p005os.ReconcileSdkDataArgs;
+import android.os.IInstalld;
+import android.os.ReconcileSdkDataArgs;
 import android.permission.PermissionManager;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
@@ -198,15 +198,15 @@ import com.samsung.android.knox.application.IApplicationPolicy;
 import com.samsung.android.localeoverlaymanager.LocaleOverlayManagerWrapper;
 import com.samsung.android.rune.CoreRune;
 import com.samsung.android.rune.PMRune;
-import com.samsung.android.server.p025pm.MetaDataHelper;
-import com.samsung.android.server.p025pm.PmLog;
-import com.samsung.android.server.p025pm.PmServerUtils;
-import com.samsung.android.server.p025pm.install.MultiUserInstallPolicy;
-import com.samsung.android.server.p025pm.install.UnknownSourceAppManager;
-import com.samsung.android.server.p025pm.lifecycle.PmCustomInjector;
-import com.samsung.android.server.p025pm.lifecycle.PmLifecycleImpl;
-import com.samsung.android.server.p025pm.monetization.MonetizationUtils;
-import com.samsung.android.server.p025pm.p026mm.MaintenanceModeManager;
+import com.samsung.android.server.pm.MetaDataHelper;
+import com.samsung.android.server.pm.PmLog;
+import com.samsung.android.server.pm.PmServerUtils;
+import com.samsung.android.server.pm.install.MultiUserInstallPolicy;
+import com.samsung.android.server.pm.install.UnknownSourceAppManager;
+import com.samsung.android.server.pm.lifecycle.PmCustomInjector;
+import com.samsung.android.server.pm.lifecycle.PmLifecycleImpl;
+import com.samsung.android.server.pm.monetization.MonetizationUtils;
+import com.samsung.android.server.pm.mm.MaintenanceModeManager;
 import dalvik.system.VMRuntime;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -7976,17 +7976,17 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
       return PackageManagerService.this.mApexManager;
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public DynamicCodeLogger getDynamicCodeLogger() {
       return PackageManagerService.this.mDynamicCodeLogger;
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public void updateExternalMediaStatus(boolean z, boolean z2) {
       PackageManagerService.this.mAsecInstallHelper.updateExternalMediaStatus(z, z2);
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public boolean isPlatformSigned(String str) {
       PackageStateInternal packageStateInternal = snapshot().getPackageStateInternal(str);
       if (packageStateInternal == null) {
@@ -8001,7 +8001,7 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
               .checkCapability(signingDetails, 4);
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public boolean isDataRestoreSafe(byte[] bArr, String str) {
       SigningDetails signingDetails = snapshot().getSigningDetails(str);
       if (signingDetails == null) {
@@ -8010,7 +8010,7 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
       return signingDetails.hasSha256Certificate(bArr, 1);
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public boolean isDataRestoreSafe(Signature signature, String str) {
       SigningDetails signingDetails = snapshot().getSigningDetails(str);
       if (signingDetails == null) {
@@ -8019,7 +8019,7 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
       return signingDetails.hasCertificate(signature, 1);
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public boolean hasSignatureCapability(int i, int i2, int i3) {
       Computer snapshot = snapshot();
       SigningDetails signingDetails = snapshot.getSigningDetails(i);
@@ -8028,7 +8028,7 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
           || signingDetails2.hasAncestorOrSelf(signingDetails);
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public PackageList getPackageList(
         PackageManagerInternal.PackageListObserver packageListObserver) {
       final ArrayList arrayList = new ArrayList();
@@ -8057,7 +8057,7 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
       }
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public String getDisabledSystemPackageName(String str) {
       PackageStateInternal disabledSystemPackage = snapshot().getDisabledSystemPackage(str);
       AndroidPackageInternal pkg =
@@ -8068,14 +8068,14 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
       return pkg.getPackageName();
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public boolean isResolveActivityComponent(ComponentInfo componentInfo) {
       return PackageManagerService.this.mResolveActivity.packageName.equals(
               componentInfo.packageName)
           && PackageManagerService.this.mResolveActivity.name.equals(componentInfo.name);
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public void removeAllNonSystemPackageSuspensions(int i) {
       Computer snapshotComputer = PackageManagerService.this.snapshotComputer();
       PackageManagerService.this.mSuspendPackageHelper.removeSuspensionsBySuspendingPackage(
@@ -8100,26 +8100,26 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
       return !"android".equals(str);
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public void flushPackageRestrictions(int i) {
       synchronized (PackageManagerService.this.mLock) {
         PackageManagerService.this.flushPackageRestrictionsAsUserInternalLocked(i);
       }
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public String[] setPackagesSuspendedByAdmin(int i, String[] strArr, boolean z) {
       return PackageManagerService.this.mSuspendPackageHelper.setPackagesSuspendedByAdmin(
           PackageManagerService.this.snapshotComputer(), i, strArr, z);
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public void setPackagesSuspendedForQuietMode(int i, boolean z) {
       PackageManagerService.this.mSuspendPackageHelper.setPackagesSuspendedForQuietMode(
           PackageManagerService.this.snapshotComputer(), i, z);
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public void setDeviceAndProfileOwnerPackages(int i, String str, SparseArray sparseArray) {
       PackageManagerService.this.mProtectedPackages.setDeviceAndProfileOwnerPackages(
           i, str, sparseArray);
@@ -8135,7 +8135,7 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
       }
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public boolean wasPackageStopped(String str, int i) {
       PackageStateInternal packageStateInternal =
           PackageManagerService.this.snapshotComputer().getPackageStateInternal(str);
@@ -8145,7 +8145,7 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
       return packageStateInternal.getUserStateOrDefault(i).isStopped();
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public void setExternalSourcesPolicy(
         PackageManagerInternal.ExternalSourcesPolicy externalSourcesPolicy) {
       if (externalSourcesPolicy != null) {
@@ -8153,7 +8153,7 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
       }
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public boolean isPackagePersistent(String str) {
       AndroidPackageInternal pkg;
       PackageStateInternal packageStateInternal = snapshot().getPackageStateInternal(str);
@@ -8163,7 +8163,7 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
           && pkg.isPersistent();
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public List getTargetPackageNames(int i) {
       final ArrayList arrayList = new ArrayList();
       PackageManagerService.this.forEachPackageState(
@@ -8188,33 +8188,33 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
       list.add(pkg.getPackageName());
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public void setEnabledOverlayPackages(int i, ArrayMap arrayMap, Set set, Set set2) {
       PackageManagerService.this.setEnabledOverlayPackages(i, arrayMap, set, set2);
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public void addIsolatedUid(int i, int i2) {
       synchronized (PackageManagerService.this.mLock) {
         PackageManagerService.this.mIsolatedOwners.put(i, i2);
       }
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public void removeIsolatedUid(int i) {
       synchronized (PackageManagerService.this.mLock) {
         PackageManagerService.this.mIsolatedOwners.delete(i);
       }
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public void notifyPackageUse(String str, int i) {
       synchronized (PackageManagerService.this.mLock) {
         PackageManagerService.this.notifyPackageUseInternal(str, i);
       }
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public String removeLegacyDefaultBrowserPackageName(int i) {
       String removeDefaultBrowserPackageNameLPw;
       synchronized (PackageManagerService.this.mLock) {
@@ -8224,7 +8224,7 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
       return removeDefaultBrowserPackageNameLPw;
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public void uninstallApex(String str, long j, int i, IntentSender intentSender, int i2) {
       if (!PackageManagerServiceUtils.isRootOrShell(Binder.getCallingUid())) {
         throw new SecurityException("Not allowed to uninstall apexes");
@@ -8257,7 +8257,7 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
       packageDeleteObserverAdapter.onPackageDeleted(str, 1, null);
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public void legacyDumpProfiles(String str, boolean z) {
       AndroidPackage androidPackage = PackageManagerService.this.snapshotComputer().getPackage(str);
       if (androidPackage == null) {
@@ -8270,13 +8270,13 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
       }
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public void legacyForceDexOpt(String str) {
       PackageManagerService.this.mDexOptHelper.forceDexOpt(
           PackageManagerService.this.snapshotComputer(), str);
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public void legacyReconcileSecondaryDexFiles(String str) {
       Computer snapshotComputer = PackageManagerService.this.snapshotComputer();
       if (snapshotComputer.getInstantAppPackageName(Binder.getCallingUid()) == null
@@ -8285,12 +8285,12 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
       }
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public void updateRuntimePermissionsFingerprint(int i) {
       PackageManagerService.this.mSettings.updateRuntimePermissionsFingerprint(i);
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public void migrateLegacyObbData() {
       try {
         PackageManagerService.this.mInstaller.migrateLegacyObbData();
@@ -8299,7 +8299,7 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
       }
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public void writeSettings(boolean z) {
       synchronized (PackageManagerService.this.mLock) {
         if (z) {
@@ -8310,7 +8310,7 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
       }
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public void writePermissionSettings(int[] iArr, boolean z) {
       synchronized (PackageManagerService.this.mLock) {
         for (int i : iArr) {
@@ -8319,12 +8319,12 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
       }
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public boolean isPermissionUpgradeNeeded(int i) {
       return PackageManagerService.this.mSettings.isPermissionUpgradeNeeded(i);
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public void setIntegrityVerificationResult(int i, int i2) {
       Message obtainMessage = PackageManagerService.this.mHandler.obtainMessage(25);
       obtainMessage.arg1 = i;
@@ -8332,7 +8332,7 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
       PackageManagerService.this.mHandler.sendMessage(obtainMessage);
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public void setVisibilityLogging(String str, boolean z) {
       PackageManagerServiceUtils.enforceSystemOrRootOrShell(
           "Only the system or shell can set visibility logging.");
@@ -8346,7 +8346,7 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
           .enableLogging(packageStateInternal.getAppId(), z);
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public void clearBlockUninstallForUser(int i) {
       synchronized (PackageManagerService.this.mLock) {
         PackageManagerService.this.mSettings.clearBlockUninstallLPw(i);
@@ -8354,7 +8354,7 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
       }
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public boolean registerInstalledLoadingProgressCallback(
         String str,
         PackageManagerInternal.InstalledLoadingProgressCallback installedLoadingProgressCallback,
@@ -8384,7 +8384,7 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
           installedLoadingProgressCallback.getBinder());
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public IncrementalStatesInfo getIncrementalStatesInfo(String str, int i, int i2) {
       PackageStateInternal packageStateForInstalledAndFiltered =
           PackageManagerService.this
@@ -8399,12 +8399,12 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
           packageStateForInstalledAndFiltered.getLoadingCompletedTime());
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public boolean isSameApp(String str, int i, int i2) {
       return isSameApp(str, 0L, i, i2);
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public boolean isSameApp(String str, long j, int i, int i2) {
       if (str == null) {
         return false;
@@ -8420,7 +8420,7 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
       PackageManagerService.this.notifyInstallObserver(str, true);
     }
 
-    @Override // android.content.p000pm.PackageManagerInternal
+    @Override // android.content.pm.PackageManagerInternal
     public void onPackageProcessKilledForUninstall(final String str) {
       PackageManagerService.this.mHandler.post(
           new Runnable() { // from class:
@@ -8839,7 +8839,7 @@ public class PackageManagerService implements PackageSender, TestUtilityService 
     writeSettingsLPrTEMP(false);
   }
 
-  @Override // android.content.p000pm.TestUtilityService
+  @Override // android.content.pm.TestUtilityService
   public void verifyHoldLockToken(IBinder iBinder) {
     if (!Build.IS_DEBUGGABLE) {
       throw new SecurityException("holdLock requires a debuggable build");

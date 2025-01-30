@@ -3,7 +3,7 @@ package com.android.server.accessibility;
 import android.accessibilityservice.AccessibilityTrace;
 import android.os.Binder;
 import android.os.ShellCommand;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import com.android.server.wm.WindowManagerInternal;
 import java.io.PrintWriter;
 import java.util.ArrayList;

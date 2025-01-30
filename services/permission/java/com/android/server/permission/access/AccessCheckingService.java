@@ -1,7 +1,7 @@
 package com.android.server.permission.access;
 
 import android.content.Context;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.os.SystemProperties;
 import android.permission.PermissionManager;
 import android.util.ArrayMap;

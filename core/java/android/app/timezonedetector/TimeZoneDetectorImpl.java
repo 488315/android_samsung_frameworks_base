@@ -1,7 +1,7 @@
 package android.app.timezonedetector;
 
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 
 /* loaded from: classes.dex */
 public final class TimeZoneDetectorImpl implements TimeZoneDetector {

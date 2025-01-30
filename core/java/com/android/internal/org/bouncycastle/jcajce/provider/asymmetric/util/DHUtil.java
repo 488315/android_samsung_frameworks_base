@@ -4,7 +4,7 @@ import com.android.internal.org.bouncycastle.crypto.params.AsymmetricKeyParamete
 import com.android.internal.org.bouncycastle.crypto.params.DHParameters;
 import com.android.internal.org.bouncycastle.crypto.params.DHPrivateKeyParameters;
 import com.android.internal.org.bouncycastle.crypto.params.DHPublicKeyParameters;
-import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.p023dh.BCDHPublicKey;
+import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.dh.BCDHPublicKey;
 import java.security.InvalidKeyException;
 import java.security.PrivateKey;
 import java.security.PublicKey;

@@ -1,9 +1,9 @@
 package android.service.notification;
 
 import android.app.NotificationChannel;
-import android.content.p002pm.ShortcutInfo;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.content.pm.ShortcutInfo;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
@@ -46,7 +46,7 @@ public final class ConversationChannelWrapper implements Parcelable {
     this.mUid = in.readInt();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeParcelable(this.mNotificationChannel, flags);
     dest.writeCharSequence(this.mGroupLabel);
@@ -56,7 +56,7 @@ public final class ConversationChannelWrapper implements Parcelable {
     dest.writeInt(this.mUid);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

@@ -1,7 +1,7 @@
 package android.text.style;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.ParcelableSpan;
 import android.text.TextPaint;
 
@@ -32,12 +32,12 @@ public final class SuggestionRangeSpan extends CharacterStyle implements Parcela
     this.mBackgroundColor = src.readInt();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     writeToParcelInternal(dest, flags);
   }

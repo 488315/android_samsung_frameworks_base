@@ -1,6 +1,6 @@
 package com.samsung.android.authenticator;
 
-import android.p009os.ParcelFileDescriptor;
+import android.os.ParcelFileDescriptor;
 
 /* loaded from: classes5.dex */
 final class HalService {

@@ -6,8 +6,8 @@ import android.content.ContentValues;
 import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.provider.Telephony;
 import android.telephony.CarrierConfigManager;
 import android.telephony.ServiceState;
@@ -1116,12 +1116,12 @@ public class ApnSetting implements Parcelable {
     return ServiceState.bitmaskHasTech((int) j, networkType);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mId);
     dest.writeString(this.mOperatorNumeric);

@@ -1,7 +1,7 @@
 package android.view.autofill;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.View;
 import com.android.internal.accessibility.common.ShortcutConstants;
 import java.util.Objects;
@@ -170,12 +170,12 @@ public final class AutofillId implements Parcelable {
     return builder.toString();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeInt(this.mViewId);
     parcel.writeInt(this.mFlags);

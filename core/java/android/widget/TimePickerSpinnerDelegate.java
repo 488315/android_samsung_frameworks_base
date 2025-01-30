@@ -2,7 +2,7 @@ package android.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.p009os.Parcelable;
+import android.os.Parcelable;
 import android.text.format.DateFormat;
 import android.text.format.DateUtils;
 import android.util.AttributeSet;

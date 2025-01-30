@@ -2,8 +2,8 @@ package android.hardware.location;
 
 import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import java.nio.BufferUnderflowException;
 import java.nio.ByteBuffer;
@@ -155,12 +155,12 @@ public final class NanoAppBinary implements Parcelable {
     parseBinaryHeader();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeInt(this.mNanoAppBinary.length);
     out.writeByteArray(this.mNanoAppBinary);

@@ -16,7 +16,7 @@ import android.os.RemoteException;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
-import com.att.iqi.lib.metrics.p019hw.HwConstants;
+import com.att.iqi.lib.metrics.hw.HwConstants;
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 import com.samsung.android.knox.custom.LauncherConfigurationInternal;
 import com.samsung.android.mcf.McfAdapter;

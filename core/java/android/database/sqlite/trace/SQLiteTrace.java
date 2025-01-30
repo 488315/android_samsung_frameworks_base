@@ -2,8 +2,8 @@ package android.database.sqlite.trace;
 
 import android.database.sqlite.SQLiteConnection;
 import android.database.sqlite.SQLiteDebug;
-import android.p009os.Process;
-import android.p009os.SystemProperties;
+import android.os.Process;
+import android.os.SystemProperties;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;

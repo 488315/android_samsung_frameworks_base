@@ -4,19 +4,19 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.p002pm.BaseParceledListSlice;
-import android.content.p002pm.ParceledListSlice;
+import android.content.pm.BaseParceledListSlice;
+import android.content.pm.ParceledListSlice;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.MediaDescription;
 import android.media.session.MediaSession;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
-import android.p009os.ResultReceiver;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
+import android.os.ResultReceiver;
 import android.service.media.IMediaBrowserService;
 import android.service.media.IMediaBrowserServiceCallbacks;
 import android.service.media.MediaBrowserService;
@@ -250,7 +250,7 @@ public final class MediaBrowser {
     }
     ResultReceiver receiver =
         new ResultReceiver(this.mHandler) { // from class: android.media.browse.MediaBrowser.4
-          @Override // android.p009os.ResultReceiver
+          @Override // android.os.ResultReceiver
           protected void onReceiveResult(int resultCode, Bundle resultData) {
             if (!MediaBrowser.this.isConnected()) {
               return;
@@ -557,12 +557,12 @@ public final class MediaBrowser {
       this.mDescription = MediaDescription.CREATOR.createFromParcel(in);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel out, int flags) {
       out.writeInt(this.mFlags);
       this.mDescription.writeToParcel(out, flags);

@@ -1,8 +1,8 @@
 package com.android.internal.app;
 
 import android.annotation.IntRange;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.AnnotationValidations;
 
 /* loaded from: classes4.dex */
@@ -61,14 +61,14 @@ public final class MessageSamplingConfig implements Parcelable {
     return this.mExpirationTimeSinceBootMillis;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mSampledOpCode);
     dest.writeInt(this.mAcceptableLeftDistance);
     dest.writeLong(this.mExpirationTimeSinceBootMillis);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

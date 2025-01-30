@@ -1,7 +1,7 @@
 package android.util;
 
 import android.content.Context;
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.provider.Settings;
 import android.text.TextUtils;
 import java.util.HashMap;

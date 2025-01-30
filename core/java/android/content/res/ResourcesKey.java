@@ -1,6 +1,6 @@
 package android.content.res;
 
-import android.content.p001om.SamsungThemeUtils;
+import android.content.om.SamsungThemeUtils;
 import android.content.res.loader.ResourcesLoader;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.text.TextUtils;

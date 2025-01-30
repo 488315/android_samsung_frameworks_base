@@ -1,9 +1,9 @@
 package com.samsung.android.cocktailbar;
 
 import android.graphics.Bitmap;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 
 /* loaded from: classes5.dex */
@@ -81,7 +81,7 @@ public class FeedsInfo implements Parcelable {
     this.packageName = packageName;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     TextUtils.writeToParcel(this.feedsText, out, flags);
     out.writeInt(this.icon);
@@ -94,7 +94,7 @@ public class FeedsInfo implements Parcelable {
     out.writeString(this.packageName);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

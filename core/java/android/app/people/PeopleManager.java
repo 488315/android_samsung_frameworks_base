@@ -2,9 +2,9 @@ package android.app.people;
 
 import android.annotation.SystemApi;
 import android.content.Context;
-import android.content.p002pm.ParceledListSlice;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.content.pm.ParceledListSlice;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.util.Pair;
 import android.util.Slog;
 import com.android.internal.util.Preconditions;

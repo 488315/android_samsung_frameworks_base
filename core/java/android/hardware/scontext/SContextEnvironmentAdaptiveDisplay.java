@@ -1,9 +1,9 @@
 package android.hardware.scontext;
 
 import android.hardware.gnss.GnssSignalType;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 @Deprecated
 /* loaded from: classes2.dex */
@@ -61,7 +61,7 @@ public class SContextEnvironmentAdaptiveDisplay extends SContextEventContext {
   }
 
   @Override // com.samsung.android.hardware.context.SemContextEventContext,
-            // android.p009os.Parcelable
+            // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeBundle(this.mContext);
   }

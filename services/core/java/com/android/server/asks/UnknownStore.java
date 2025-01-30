@@ -2,7 +2,7 @@ package com.android.server.asks;
 
 import android.os.SystemProperties;
 import android.util.Slog;
-import com.samsung.android.knox.p024zt.devicetrust.EndpointMonitorConst;
+import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;

@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDebug;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Process;
+import android.os.Process;
 import android.util.Log;
 import com.android.internal.content.NativeLibraryHelper;
 import java.io.File;

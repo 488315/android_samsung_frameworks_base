@@ -27,7 +27,7 @@ import android.os.ShellCommand;
 import android.os.StatFs;
 import android.os.SystemClock;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.provider.Settings;
 import android.system.ErrnoException;
 import android.system.Os;

@@ -1,7 +1,7 @@
 package com.samsung.android.continuity;
 
 import android.content.Context;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.util.Log;
 import com.samsung.android.feature.SemFloatingFeature;
 

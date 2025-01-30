@@ -5,7 +5,7 @@ import android.content.Context;
 import android.media.MediaExtractor;
 import android.media.MediaFormat;
 import android.net.Uri;
-import android.p009os.Build;
+import android.os.Build;
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.media.SemExtendedFormat;
 import java.io.File;

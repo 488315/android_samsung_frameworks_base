@@ -5,15 +5,15 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.HandlerThread;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.Messenger;
-import android.p009os.SystemClock;
-import android.p009os.UserHandle;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.SystemClock;
+import android.os.UserHandle;
 import android.util.Log;
 import com.android.internal.widget.LockPatternUtils;
 import com.samsung.android.feature.SemFloatingFeature;
@@ -316,7 +316,7 @@ public class CameraLightSensorManager {
       this.retry = 5;
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       switch (msg.what) {
         case 1:

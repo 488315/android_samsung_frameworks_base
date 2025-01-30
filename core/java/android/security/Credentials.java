@@ -1,8 +1,8 @@
 package android.security;
 
-import com.android.internal.org.bouncycastle.util.p028io.pem.PemObject;
-import com.android.internal.org.bouncycastle.util.p028io.pem.PemReader;
-import com.android.internal.org.bouncycastle.util.p028io.pem.PemWriter;
+import com.android.internal.org.bouncycastle.util.io.pem.PemObject;
+import com.android.internal.org.bouncycastle.util.io.pem.PemReader;
+import com.android.internal.org.bouncycastle.util.io.pem.PemWriter;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

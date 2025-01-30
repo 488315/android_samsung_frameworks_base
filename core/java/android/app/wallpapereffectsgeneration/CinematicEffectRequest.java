@@ -2,8 +2,8 @@ package android.app.wallpapereffectsgeneration;
 
 import android.annotation.SystemApi;
 import android.graphics.Bitmap;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
@@ -61,12 +61,12 @@ public final class CinematicEffectRequest implements Parcelable {
     return Objects.hash(this.mTaskId);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeString(this.mTaskId);
     this.mBitmap.writeToParcel(out, flags);

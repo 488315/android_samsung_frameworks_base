@@ -4,7 +4,7 @@ import android.annotation.SystemApi;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p002pm.ResolveInfo;
+import android.content.pm.ResolveInfo;
 import android.telephony.mbms.MbmsDownloadReceiver;
 import java.util.List;
 

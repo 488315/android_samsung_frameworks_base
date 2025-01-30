@@ -9,9 +9,9 @@ import android.hardware.camera2.ICameraOfflineSession;
 import android.hardware.camera2.params.OutputConfiguration;
 import android.hardware.camera2.params.SessionConfiguration;
 import android.hardware.camera2.utils.SubmitInfo;
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
-import android.p009os.ServiceSpecificException;
+import android.os.IBinder;
+import android.os.RemoteException;
+import android.os.ServiceSpecificException;
 import android.view.Surface;
 
 /* loaded from: classes.dex */

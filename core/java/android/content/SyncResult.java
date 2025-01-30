@@ -1,8 +1,8 @@
 package android.content;
 
 import android.hardware.gnss.GnssSignalType;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.samsung.android.share.SemShareConstants;
 
 /* loaded from: classes.dex */
@@ -97,12 +97,12 @@ public final class SyncResult implements Parcelable {
     this.stats.clear();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeInt(this.syncAlreadyInProgress ? 1 : 0);
     parcel.writeInt(this.tooManyDeletions ? 1 : 0);

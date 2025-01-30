@@ -5,10 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
-import android.p009os.Handler;
-import android.p009os.HandlerThread;
-import android.p009os.Looper;
-import android.p009os.UserHandle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.UserHandle;
 
 /* loaded from: classes5.dex */
 public abstract class PackageChangeReceiver extends BroadcastReceiver {

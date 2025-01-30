@@ -1,6 +1,6 @@
 package android.view.inputmethod;
 
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;

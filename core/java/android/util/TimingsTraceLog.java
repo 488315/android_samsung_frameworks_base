@@ -1,8 +1,8 @@
 package android.util;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.SystemClock;
-import android.p009os.Trace;
+import android.os.SystemClock;
+import android.os.Trace;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

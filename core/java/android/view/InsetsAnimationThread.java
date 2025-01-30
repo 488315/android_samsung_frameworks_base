@@ -1,7 +1,7 @@
 package android.view;
 
-import android.p009os.Handler;
-import android.p009os.HandlerThread;
+import android.os.Handler;
+import android.os.HandlerThread;
 
 /* loaded from: classes4.dex */
 public class InsetsAnimationThread extends HandlerThread {

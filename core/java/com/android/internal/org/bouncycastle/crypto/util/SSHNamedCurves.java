@@ -2,12 +2,12 @@ package com.android.internal.org.bouncycastle.crypto.util;
 
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import com.android.internal.org.bouncycastle.asn1.nist.NISTNamedCurves;
-import com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParameters;
+import com.android.internal.org.bouncycastle.asn1.x9.X9ECParameters;
 import com.android.internal.org.bouncycastle.asn1.sec.SECObjectIdentifiers;
-import com.android.internal.org.bouncycastle.crypto.p020ec.CustomNamedCurves;
+import com.android.internal.org.bouncycastle.crypto.ec.CustomNamedCurves;
 import com.android.internal.org.bouncycastle.crypto.params.ECDomainParameters;
 import com.android.internal.org.bouncycastle.crypto.params.ECNamedDomainParameters;
-import com.android.internal.org.bouncycastle.math.p026ec.ECCurve;
+import com.android.internal.org.bouncycastle.math.ec.ECCurve;
 import com.android.internal.org.bouncycastle.util.Strings;
 import java.util.Collections;
 import java.util.Enumeration;

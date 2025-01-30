@@ -3,8 +3,8 @@ package android.telephony;
 import android.annotation.SystemApi;
 import android.compat.Compatibility;
 import android.net.LinkProperties;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.telephony.data.ApnSetting;
 import com.android.internal.telephony.util.TelephonyUtils;
 import java.util.Objects;
@@ -148,12 +148,12 @@ public final class PreciseDataConnectionState implements Parcelable {
     return this.mApnSetting;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeInt(this.mTransportType);
     out.writeInt(this.mId);

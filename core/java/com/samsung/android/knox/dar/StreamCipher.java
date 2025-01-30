@@ -1,6 +1,6 @@
 package com.samsung.android.knox.dar;
 
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.util.Log;
 import com.android.internal.widget.LockscreenCredential;
 import java.security.SecureRandom;

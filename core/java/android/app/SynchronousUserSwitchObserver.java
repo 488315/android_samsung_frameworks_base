@@ -1,7 +1,7 @@
 package android.app;
 
-import android.p009os.IRemoteCallback;
-import android.p009os.RemoteException;
+import android.os.IRemoteCallback;
+import android.os.RemoteException;
 
 /* loaded from: classes.dex */
 public abstract class SynchronousUserSwitchObserver extends UserSwitchObserver {

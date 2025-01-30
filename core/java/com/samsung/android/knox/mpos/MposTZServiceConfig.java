@@ -1,8 +1,8 @@
 package com.samsung.android.knox.mpos;
 
-import android.p009os.Build;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class MposTZServiceConfig implements Parcelable {
@@ -51,7 +51,7 @@ public class MposTZServiceConfig implements Parcelable {
     readFromParcel(in);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flag) {
     out.writeInt(this.maxSendCmdSize);
     out.writeInt(this.maxRecvRespSize);
@@ -68,7 +68,7 @@ public class MposTZServiceConfig implements Parcelable {
     this.processName = in.readString();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

@@ -1,6 +1,6 @@
 package android.hardware.fingerprint;
 
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public class FingerprintServiceReceiver extends IFingerprintServiceReceiver.Stub {

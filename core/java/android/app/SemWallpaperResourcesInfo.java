@@ -2,9 +2,9 @@ package android.app;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import com.samsung.android.wallpaper.utils.SemWallpaperProperties;

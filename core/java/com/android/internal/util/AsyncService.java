@@ -2,10 +2,10 @@ package com.android.internal.util;
 
 import android.app.Service;
 import android.content.Intent;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Message;
-import android.p009os.Messenger;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
 import android.util.Log;
 
 /* loaded from: classes5.dex */

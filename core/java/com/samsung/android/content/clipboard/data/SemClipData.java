@@ -6,11 +6,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.net.Uri;
-import android.p009os.Binder;
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.Parcelable;
-import android.p009os.PersistableBundle;
+import android.os.Binder;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
+import android.os.Parcelable;
+import android.os.PersistableBundle;
 import android.sec.clipboard.data.ClipboardConstants;
 import android.sec.clipboard.data.ClipboardDataFactory;
 import android.sec.clipboard.util.Log;
@@ -294,12 +294,12 @@ public abstract class SemClipData implements Parcelable, Serializable {
     return result2;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mType);
     dest.writeLong(this.mTimestamp);
@@ -555,7 +555,7 @@ public abstract class SemClipData implements Parcelable, Serializable {
   */
   /* JADX WARN: Code restructure failed: missing block: B:13:0x0074, code lost:
 
-     r4 = android.p009os.Binder.clearCallingIdentity();
+     r4 = android.os.Binder.clearCallingIdentity();
   */
   /* JADX WARN: Code restructure failed: missing block: B:15:0x0078, code lost:
 
@@ -567,7 +567,7 @@ public abstract class SemClipData implements Parcelable, Serializable {
   */
   /* JADX WARN: Code restructure failed: missing block: B:22:0x00a4, code lost:
 
-     android.p009os.Binder.restoreCallingIdentity(r4);
+     android.os.Binder.restoreCallingIdentity(r4);
   */
   /* JADX WARN: Code restructure failed: missing block: B:23:0x00a7, code lost:
 

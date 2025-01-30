@@ -1,8 +1,8 @@
 package android.telephony.mbms;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -48,13 +48,13 @@ public final class FileServiceInfo extends ServiceInfo implements Parcelable {
     in.readList(arrayList, FileInfo.class.getClassLoader(), FileInfo.class);
   }
 
-  @Override // android.telephony.mbms.ServiceInfo, android.p009os.Parcelable
+  @Override // android.telephony.mbms.ServiceInfo, android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     super.writeToParcel(dest, flags);
     dest.writeList(this.files);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

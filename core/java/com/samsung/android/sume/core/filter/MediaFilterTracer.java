@@ -5,7 +5,7 @@ import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.buffer.MutableMediaBuffer;
 import com.samsung.android.sume.core.descriptor.MFDescriptor;
-import com.samsung.android.sume.core.descriptor.p044nn.NNFWDescriptor;
+import com.samsung.android.sume.core.descriptor.nn.NNFWDescriptor;
 import com.samsung.android.sume.core.message.Message;
 import com.samsung.android.sume.core.message.MessageProducer;
 import java.util.ArrayList;

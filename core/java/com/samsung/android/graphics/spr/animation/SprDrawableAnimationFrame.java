@@ -1,7 +1,7 @@
 package com.samsung.android.graphics.spr.animation;
 
 import android.graphics.drawable.Drawable;
-import android.p009os.SystemClock;
+import android.os.SystemClock;
 import com.samsung.android.graphics.spr.document.SprDocument;
 
 /* loaded from: classes5.dex */

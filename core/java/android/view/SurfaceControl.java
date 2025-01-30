@@ -1,7 +1,7 @@
 package android.view;
 
 import android.content.Context;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.graphics.ColorSpace;
 import android.graphics.GraphicBuffer;
 import android.graphics.Matrix;
@@ -21,14 +21,14 @@ import android.hardware.display.IVirtualDisplayCallback;
 import android.hardware.display.VirtualDisplay;
 import android.hardware.graphics.common.DisplayDecorationSupport;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Build;
-import android.p009os.Debug;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.Build;
+import android.os.Debug;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -897,12 +897,12 @@ public final class SurfaceControl implements Parcelable {
     assignNativeObject(object, "readFromParcel");
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     if (sDebugUsageAfterRelease) {
       checkNotReleased();
@@ -1427,13 +1427,13 @@ public final class SurfaceControl implements Parcelable {
       this.max = other.max;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeFloat(this.min);
       dest.writeFloat(this.max);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -2857,7 +2857,7 @@ public final class SurfaceControl implements Parcelable {
       return this;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       if (this.mNativeObject == 0) {
         dest.writeInt(0);
@@ -2887,7 +2887,7 @@ public final class SurfaceControl implements Parcelable {
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }

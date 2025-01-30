@@ -2,7 +2,7 @@ package com.android.server.security;
 
 import android.app.AppOpsManager;
 import android.content.Context;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.os.Binder;
 import android.os.Build;
 import android.os.Environment;

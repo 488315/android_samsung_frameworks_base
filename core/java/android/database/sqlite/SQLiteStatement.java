@@ -1,6 +1,6 @@
 package android.database.sqlite;
 
-import android.p009os.ParcelFileDescriptor;
+import android.os.ParcelFileDescriptor;
 
 /* loaded from: classes.dex */
 public final class SQLiteStatement extends SQLiteProgram {

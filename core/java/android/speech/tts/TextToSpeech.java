@@ -10,12 +10,12 @@ import android.hardware.usb.UsbManager;
 import android.media.AudioAttributes;
 import android.media.audio.Enums;
 import android.net.Uri;
-import android.p009os.AsyncTask;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.ParcelFileDescriptor;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.text.TextUtils;
 import android.util.Log;
 import com.android.internal.content.NativeLibraryHelper;
@@ -1307,7 +1307,7 @@ public class TextToSpeech {
       private SetupConnectionAsyncTask() {}
 
       /* JADX INFO: Access modifiers changed from: protected */
-      @Override // android.p009os.AsyncTask
+      @Override // android.os.AsyncTask
       public Integer doInBackground(Void... params) {
         synchronized (TextToSpeech.this.mStartLock) {
           if (isCancelled()) {
@@ -1336,7 +1336,7 @@ public class TextToSpeech {
       }
 
       /* JADX INFO: Access modifiers changed from: protected */
-      @Override // android.p009os.AsyncTask
+      @Override // android.os.AsyncTask
       public void onPostExecute(Integer result) {
         synchronized (TextToSpeech.this.mStartLock) {
           if (Connection.this.mOnSetupConnectionAsyncTask == this) {

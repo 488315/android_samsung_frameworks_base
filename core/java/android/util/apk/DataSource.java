@@ -1,6 +1,6 @@
 package android.util.apk;
 
-import android.p009os.incremental.IncrementalManager;
+import android.os.incremental.IncrementalManager;
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.security.DigestException;

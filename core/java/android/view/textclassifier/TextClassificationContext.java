@@ -1,7 +1,7 @@
 package android.view.textclassifier;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -86,12 +86,12 @@ public final class TextClassificationContext implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeString(this.mPackageName);
     parcel.writeString(this.mWidgetType);

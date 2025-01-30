@@ -1,8 +1,8 @@
 package android.system.keystore2;
 
-import android.p009os.BadParcelableException;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.BadParcelableException;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class CreateOperationResponse implements Parcelable {
@@ -29,12 +29,12 @@ public class CreateOperationResponse implements Parcelable {
   public KeyParameters parameters;
   public byte[] upgradedBlob;
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final int getStability() {
     return 1;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
     int _aidl_start_pos = _aidl_parcel.dataPosition();
     _aidl_parcel.writeInt(0);
@@ -101,7 +101,7 @@ public class CreateOperationResponse implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     int _mask = 0 | describeContents(this.operationChallenge);
     return _mask | describeContents(this.parameters);

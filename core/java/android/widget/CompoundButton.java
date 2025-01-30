@@ -8,8 +8,8 @@ import android.graphics.Canvas;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.RemotableViewMethod;
@@ -511,7 +511,7 @@ public abstract class CompoundButton extends Button implements Checkable {
     }
 
     @Override // android.view.View.BaseSavedState, android.view.AbsSavedState,
-              // android.p009os.Parcelable
+              // android.os.Parcelable
     public void writeToParcel(Parcel out, int flags) {
       super.writeToParcel(out, flags);
       out.writeValue(Boolean.valueOf(this.checked));

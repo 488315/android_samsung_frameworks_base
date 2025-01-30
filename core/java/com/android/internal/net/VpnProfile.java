@@ -5,9 +5,9 @@ import android.net.ProxyInfo;
 import android.net.Uri;
 import android.net.ipsec.ike.IkeTunnelConnectionParams;
 import android.net.vcn.persistablebundleutils.TunnelConnectionParamsUtils;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.PersistableBundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.PersistableBundle;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyProperties;
 import android.security.keystore2.AndroidKeyStoreProvider;
@@ -270,7 +270,7 @@ public final class VpnProfile implements Cloneable, Parcelable {
     this.mAllowedAlgorithms = allowedAlgorithms;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeString(this.key);
     parcel.writeString(this.name);
@@ -672,7 +672,7 @@ public final class VpnProfile implements Cloneable, Parcelable {
         && this.automaticIpVersionSelectionEnabled == other.automaticIpVersionSelectionEnabled;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

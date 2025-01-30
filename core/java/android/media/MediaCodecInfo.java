@@ -2,8 +2,8 @@ package android.media;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.audiofx.SemDolbyAudioEffect;
-import android.p009os.Process;
-import android.p009os.SystemProperties;
+import android.os.Process;
+import android.os.SystemProperties;
 import android.sysprop.MediaProperties;
 import android.util.Log;
 import android.util.Pair;

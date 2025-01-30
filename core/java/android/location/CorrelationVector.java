@@ -2,8 +2,8 @@ package android.location;
 
 import android.annotation.SystemApi;
 import android.hardware.scontext.SContextConstants;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.Preconditions;
 import java.util.Arrays;
 import java.util.Objects;
@@ -72,7 +72,7 @@ public final class CorrelationVector implements Parcelable {
     in.readIntArray(iArr);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -89,7 +89,7 @@ public final class CorrelationVector implements Parcelable {
         + '}';
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeDouble(this.mSamplingWidthMeters);
     dest.writeDouble(this.mSamplingStartMeters);

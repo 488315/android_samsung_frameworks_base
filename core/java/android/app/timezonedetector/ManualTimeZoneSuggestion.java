@@ -1,8 +1,8 @@
 package android.app.timezonedetector;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.ShellCommand;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.ShellCommand;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,12 +44,12 @@ public final class ManualTimeZoneSuggestion implements Parcelable {
     return suggestion;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.mZoneId);
     dest.writeList(this.mDebugInfo);

@@ -4,9 +4,9 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.location.Address;
 import android.location.Location;
-import android.p009os.Handler;
-import android.p009os.Message;
-import android.p009os.RemoteException;
+import android.os.Handler;
+import android.os.Message;
+import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
 import java.lang.annotation.Retention;
@@ -69,7 +69,7 @@ public class SemLocationManager {
       this.mListenerHandler =
           new Handler() { // from class:
                           // com.samsung.android.location.SemLocationManager.LocListenerTransport.1
-            @Override // android.p009os.Handler
+            @Override // android.os.Handler
             public void handleMessage(Message msg) {
               LocListenerTransport.this._handleMessage(msg);
             }

@@ -11,7 +11,7 @@ import android.graphics.BlendMode;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
-import android.p009os.Process;
+import android.os.Process;
 import android.text.format.DateUtils;
 import android.util.AttributeSet;
 import android.util.Log;

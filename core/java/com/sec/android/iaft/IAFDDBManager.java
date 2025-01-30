@@ -5,10 +5,10 @@ import android.database.ContentObserver;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.Process;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.os.Process;
 import android.util.Slog;
 import java.io.File;
 import java.util.HashMap;
@@ -447,7 +447,7 @@ public class IAFDDBManager {
   private class IAFDDBManagerHandler extends Handler {
     public IAFDDBManagerHandler() {}
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       if (msg.what == 255) {
         IAFDDBManager.this.initTBs();

@@ -2,8 +2,8 @@ package android.service.notification;
 
 import android.content.Context;
 import android.net.Uri;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.security.keystore.KeyProperties;
 import android.util.proto.ProtoOutputStream;
 import java.lang.annotation.Retention;
@@ -86,7 +86,7 @@ public final class Condition implements Parcelable {
     return state >= 0 && state <= 3;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeParcelable(this.f478id, 0);
     dest.writeString(this.summary);
@@ -180,7 +180,7 @@ public final class Condition implements Parcelable {
         Integer.valueOf(this.flags));
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

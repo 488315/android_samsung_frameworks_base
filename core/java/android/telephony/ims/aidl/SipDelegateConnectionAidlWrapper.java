@@ -1,8 +1,8 @@
 package android.telephony.ims.aidl;
 
-import android.p009os.Binder;
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.telephony.ims.DelegateRegistrationState;
 import android.telephony.ims.FeatureTagState;
 import android.telephony.ims.SipDelegateConfiguration;

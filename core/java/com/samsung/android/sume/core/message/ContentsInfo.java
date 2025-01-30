@@ -1,8 +1,8 @@
 package com.samsung.android.sume.core.message;
 
 import android.content.ContentValues;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda1;
 import com.samsung.android.sume.core.buffer.MediaBufferBase$$ExternalSyntheticLambda2;
@@ -60,13 +60,13 @@ public class ContentsInfo implements Parcelable {
     this.data = message.get();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     Def.require(this.data != null);
     dest.writeMap(this.data);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

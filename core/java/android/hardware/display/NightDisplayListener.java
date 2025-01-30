@@ -5,8 +5,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
-import android.p009os.Handler;
-import android.p009os.Looper;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import java.time.LocalTime;
 

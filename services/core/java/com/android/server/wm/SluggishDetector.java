@@ -6,7 +6,7 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.PowerManager;
 import android.os.SystemClock;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.PerfLog;
 import android.util.Slog;
 import com.android.server.ServiceThread;

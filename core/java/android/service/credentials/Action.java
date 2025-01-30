@@ -1,8 +1,8 @@
 package android.service.credentials;
 
 import android.app.slice.Slice;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
@@ -32,12 +32,12 @@ public final class Action implements Parcelable {
     this.mSlice = (Slice) in.readTypedObject(Slice.CREATOR);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeTypedObject(this.mSlice, flags);
   }

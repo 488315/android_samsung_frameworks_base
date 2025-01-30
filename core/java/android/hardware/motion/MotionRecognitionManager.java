@@ -1,7 +1,7 @@
 package android.hardware.motion;
 
-import android.p009os.Handler;
-import android.p009os.Looper;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import com.samsung.android.gesture.SemMotionEventListener;
 import com.samsung.android.gesture.SemMotionRecognitionEvent;

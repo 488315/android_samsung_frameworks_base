@@ -2,11 +2,11 @@ package com.samsung.android.media.codec;
 
 import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Handler;
-import android.p009os.HandlerThread;
-import android.p009os.IBinder;
-import android.p009os.Message;
-import android.p009os.RemoteException;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.RemoteException;
 import android.util.Log;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -100,7 +100,7 @@ public class VideoTranscodingService extends IVideoTranscodingService.Stub {
             this.mHandlerThread
                 .getLooper()) { // from class:
                                 // com.samsung.android.media.codec.VideoTranscodingService.1
-          @Override // android.p009os.Handler
+          @Override // android.os.Handler
           public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {

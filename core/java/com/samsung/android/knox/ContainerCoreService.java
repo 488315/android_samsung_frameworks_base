@@ -2,8 +2,8 @@ package com.samsung.android.knox;
 
 import android.app.Service;
 import android.content.Intent;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
+import android.os.Bundle;
+import android.os.IBinder;
 
 /* loaded from: classes5.dex */
 public abstract class ContainerCoreService extends Service {

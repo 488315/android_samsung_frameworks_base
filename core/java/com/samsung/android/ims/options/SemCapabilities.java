@@ -1,11 +1,11 @@
 package com.samsung.android.ims.options;
 
 import android.app.backup.FullBackup;
-import android.hardware.p006tv.tuner.FrontendInnerFec;
+import android.hardware.tv.tuner.FrontendInnerFec;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.SemSystemProperties;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.SemSystemProperties;
 import android.util.Log;
 import com.samsung.android.ims.settings.SemImsProfile;
 import com.samsung.android.sepunion.UnionConstants;
@@ -320,12 +320,12 @@ public class SemCapabilities implements Parcelable, Cloneable {
     return this.mExtFeatures;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeInt(this.mIsAvailable ? 1 : 0);
     parcel.writeLong(this.mFeatures);

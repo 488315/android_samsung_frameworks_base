@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.IFusedGeofenceHardware;
 import android.location.IGpsGeofenceHardware;
-import android.p009os.Binder;
-import android.p009os.IBinder;
+import android.os.Binder;
+import android.os.IBinder;
 
 /* loaded from: classes2.dex */
 public class GeofenceHardwareService extends Service {

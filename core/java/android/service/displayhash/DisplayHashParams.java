@@ -1,8 +1,8 @@
 package android.service.displayhash;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Size;
 
 @SystemApi
@@ -66,7 +66,7 @@ public final class DisplayHashParams implements Parcelable {
         + " }";
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     byte flg = this.mGrayscaleBuffer ? (byte) (0 | 2) : (byte) 0;
     if (this.mBufferSize != null) {
@@ -79,7 +79,7 @@ public final class DisplayHashParams implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

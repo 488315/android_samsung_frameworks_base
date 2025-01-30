@@ -2,7 +2,7 @@ package com.android.server.am.mars.database;
 
 import android.util.Slog;
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
-import java.com.android.server.p028am.mars.database.MARsListManager;
+import java.com.android.server.am.mars.database.MARsListManager;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;

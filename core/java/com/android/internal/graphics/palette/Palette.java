@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.hardware.scontext.SContextConstants;
-import android.p009os.AsyncTask;
+import android.os.AsyncTask;
 import android.util.Log;
 import java.util.Collections;
 import java.util.List;
@@ -231,7 +231,7 @@ public final class Palette {
           Void,
           Palette>() { // from class: com.android.internal.graphics.palette.Palette.Builder.1
         /* JADX INFO: Access modifiers changed from: protected */
-        @Override // android.p009os.AsyncTask
+        @Override // android.os.AsyncTask
         public Palette doInBackground(Bitmap... params) {
           try {
             return Builder.this.generate();
@@ -242,7 +242,7 @@ public final class Palette {
         }
 
         /* JADX INFO: Access modifiers changed from: protected */
-        @Override // android.p009os.AsyncTask
+        @Override // android.os.AsyncTask
         public void onPostExecute(Palette colorExtractor) {
           listener.onGenerated(colorExtractor);
         }

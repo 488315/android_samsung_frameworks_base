@@ -1,8 +1,8 @@
 package android.telephony;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Arrays;
 
 @SystemApi
@@ -249,7 +249,7 @@ public final class TelephonyHistogram implements Parcelable {
     in.readIntArray(iArr3);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeInt(this.mCategory);
     out.writeInt(this.mId);
@@ -268,7 +268,7 @@ public final class TelephonyHistogram implements Parcelable {
     out.writeIntArray(this.mBucketCounters);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

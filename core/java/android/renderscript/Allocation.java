@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.media.MediaMetrics;
-import android.p009os.Trace;
+import android.os.Trace;
 import android.util.Log;
 import android.view.Surface;
 import java.lang.reflect.Array;

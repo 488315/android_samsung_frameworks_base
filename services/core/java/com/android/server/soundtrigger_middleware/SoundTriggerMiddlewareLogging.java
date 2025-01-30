@@ -16,7 +16,7 @@ import android.media.soundtrigger_middleware.RecognitionEventSys;
 import android.media.soundtrigger_middleware.SoundTriggerModuleDescriptor;
 import android.os.IBinder;
 import android.os.SystemClock;
-import android.p005os.BatteryStatsInternal;
+import android.os.BatteryStatsInternal;
 import android.util.Slog;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.LatencyTracker;

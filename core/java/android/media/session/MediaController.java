@@ -3,19 +3,19 @@ package android.media.session;
 import android.annotation.SystemApi;
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.p002pm.ParceledListSlice;
+import android.content.pm.ParceledListSlice;
 import android.media.AudioAttributes;
 import android.media.MediaMetadata;
 import android.media.Rating;
 import android.net.Uri;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
-import android.p009os.ResultReceiver;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
+import android.os.ResultReceiver;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -665,12 +665,12 @@ public final class MediaController {
           + this.mVolumeControlId;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeInt(this.mPlaybackType);
       dest.writeInt(this.mVolumeControl);
@@ -763,7 +763,7 @@ public final class MediaController {
       this.mCallback = cb;
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       if (!this.mRegistered) {}
       switch (msg.what) {

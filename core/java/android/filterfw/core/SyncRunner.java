@@ -1,6 +1,6 @@
 package android.filterfw.core;
 
-import android.p009os.ConditionVariable;
+import android.os.ConditionVariable;
 import android.util.Log;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

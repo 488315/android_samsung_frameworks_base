@@ -1,8 +1,8 @@
 package android.telephony.ims;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Objects;
@@ -56,7 +56,7 @@ public final class MediaThreshold implements Parcelable {
     this.mRtpInactivityTimeMillis = in.createLongArray();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeIntArray(this.mRtpPacketLossRate);
     dest.writeIntArray(this.mRtpJitter);
@@ -75,7 +75,7 @@ public final class MediaThreshold implements Parcelable {
     return inactivityTime >= 0 && inactivityTime <= 60000;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

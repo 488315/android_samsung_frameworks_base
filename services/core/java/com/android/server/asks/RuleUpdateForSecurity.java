@@ -2,7 +2,7 @@ package com.android.server.asks;
 
 import android.os.Binder;
 import android.os.SystemProperties;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Slog;
 import android.util.jar.StrictJarFile;
 import java.io.BufferedInputStream;

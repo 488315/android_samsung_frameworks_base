@@ -2,8 +2,8 @@ package android.net.metrics;
 
 import android.annotation.SystemApi;
 import android.app.blob.XmlTags;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.NtpTrustedTime;
 import android.util.SparseArray;
@@ -118,7 +118,7 @@ public final class ApfProgramEvent implements IpConnectivityLog.Event {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeLong(this.lifetime);
     out.writeLong(this.actualLifetime);
@@ -128,7 +128,7 @@ public final class ApfProgramEvent implements IpConnectivityLog.Event {
     out.writeInt(this.flags);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

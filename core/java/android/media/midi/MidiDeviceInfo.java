@@ -1,8 +1,8 @@
 package android.media.midi;
 
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -208,7 +208,7 @@ public final class MidiDeviceInfo implements Parcelable {
         + this.mDefaultProtocol;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -230,7 +230,7 @@ public final class MidiDeviceInfo implements Parcelable {
     return basicProperties;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeInt(this.mType);
     parcel.writeInt(this.mId);

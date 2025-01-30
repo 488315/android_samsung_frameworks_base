@@ -2,8 +2,8 @@ package com.samsung.android.hardware.display;
 
 import android.content.Context;
 import android.hardware.display.IColorDisplayManager;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.util.Log;
 
 /* loaded from: classes5.dex */

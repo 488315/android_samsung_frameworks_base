@@ -1,8 +1,8 @@
 package android.service.timezone;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import com.android.server.SecureKeyConst;
 import java.lang.annotation.ElementType;
@@ -105,12 +105,12 @@ public final class TimeZoneProviderStatus implements Parcelable {
         locationDependencyStatus, connectivityDependencyStatus, timeZoneResolutionOperationStatus);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeInt(this.mLocationDetectionDependencyStatus);
     parcel.writeInt(this.mConnectivityDependencyStatus);

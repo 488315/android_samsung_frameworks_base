@@ -1,7 +1,7 @@
 package android.hardware.display;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -268,7 +268,7 @@ public final class SemDlnaDevice implements Parcelable {
     return this.mUid.hashCode();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeString(this.mName);
     parcel.writeString(this.mIpAddress);
@@ -283,7 +283,7 @@ public final class SemDlnaDevice implements Parcelable {
     parcel.writeInt(this.mConnectionState);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

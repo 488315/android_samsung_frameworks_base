@@ -3,11 +3,11 @@ package android.print;
 import android.app.EventLogTags;
 import android.app.settings.SettingsEnums;
 import android.bluetooth.hci.BluetoothHciProtoEnums;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.Process;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.Process;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.ArraySet;
@@ -164,7 +164,7 @@ public final class PrintAttributes implements Parcelable {
     return attributes;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     if (this.mMediaSize != null) {
       parcel.writeInt(1);
@@ -188,7 +188,7 @@ public final class PrintAttributes implements Parcelable {
     parcel.writeInt(this.mDuplexMode);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

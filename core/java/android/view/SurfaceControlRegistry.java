@@ -3,7 +3,7 @@ package android.view;
 import android.Manifest;
 import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.SystemClock;
+import android.os.SystemClock;
 import android.util.Log;
 import android.util.secutil.Slog;
 import com.android.internal.util.GcUtils;

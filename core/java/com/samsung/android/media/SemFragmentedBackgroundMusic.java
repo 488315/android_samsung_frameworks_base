@@ -1,7 +1,7 @@
 package com.samsung.android.media;
 
 import android.content.res.AssetFileDescriptor;
-import android.p009os.Parcel;
+import android.os.Parcel;
 import java.io.FileDescriptor;
 import java.util.ArrayList;
 

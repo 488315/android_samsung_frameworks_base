@@ -1,7 +1,7 @@
 package android.media;
 
 import android.annotation.SystemApi;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 
 @SystemApi
 /* loaded from: classes2.dex */

@@ -1,8 +1,8 @@
 package android.telephony.ims.compat.stub;
 
-import android.p009os.Bundle;
-import android.p009os.Message;
-import android.p009os.RemoteException;
+import android.os.Bundle;
+import android.os.Message;
+import android.os.RemoteException;
 import android.telephony.CallQuality;
 import android.telephony.ServiceState;
 import android.telephony.ims.ImsCallProfile;

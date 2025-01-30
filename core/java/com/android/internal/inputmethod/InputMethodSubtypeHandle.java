@@ -1,8 +1,8 @@
 package com.android.internal.inputmethod;
 
 import android.content.ComponentName;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.view.inputmethod.InputMethodInfo;
 import android.view.inputmethod.InputMethodSubtype;
@@ -127,12 +127,12 @@ public final class InputMethodSubtypeHandle implements Parcelable {
     return "InputMethodSubtypeHandle{mHandle=" + this.mHandle + "}";
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString8(toStringHandle());
   }

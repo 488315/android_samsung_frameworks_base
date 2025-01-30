@@ -3,7 +3,7 @@ package android.app;
 import android.content.BroadcastReceiver;
 import android.content.ContentProvider;
 import android.content.Intent;
-import android.content.p002pm.ApplicationInfo;
+import android.content.pm.ApplicationInfo;
 
 /* loaded from: classes.dex */
 public class AppComponentFactory {

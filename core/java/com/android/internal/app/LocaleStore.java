@@ -2,8 +2,8 @@ package com.android.internal.app;
 
 import android.app.LocaleManager;
 import android.content.Context;
-import android.p009os.LocaleList;
-import android.p009os.SystemProperties;
+import android.os.LocaleList;
+import android.os.SystemProperties;
 import android.provider.Settings;
 import android.telecom.Logging.Session;
 import android.telephony.TelephonyManager;

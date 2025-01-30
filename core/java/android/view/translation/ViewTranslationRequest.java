@@ -1,8 +1,8 @@
 package android.view.translation;
 
 import android.annotation.NonNull;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.ArrayMap;
 import android.view.autofill.AutofillId;
 import com.android.internal.util.AnnotationValidations;
@@ -153,13 +153,13 @@ public final class ViewTranslationRequest implements Parcelable {
     return (_hash * 31) + Objects.hashCode(this.mTranslationRequestValues);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeTypedObject(this.mAutofillId, flags);
     dest.writeMap(this.mTranslationRequestValues);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

@@ -1,7 +1,7 @@
 package com.android.server.pm;
 
 import android.content.Context;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.PackageInstaller;
 import com.android.internal.app.FrozenAppActivity;
 import com.android.server.LocalServices;

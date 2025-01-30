@@ -2,8 +2,8 @@ package android.content.integrity;
 
 import android.annotation.SystemApi;
 import android.content.IntentSender;
-import android.content.p002pm.ParceledListSlice;
-import android.p009os.RemoteException;
+import android.content.pm.ParceledListSlice;
+import android.os.RemoteException;
 import java.util.List;
 
 @SystemApi

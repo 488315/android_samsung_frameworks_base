@@ -1,8 +1,8 @@
 package android.telephony.satellite;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
@@ -35,12 +35,12 @@ public final class AntennaPosition implements Parcelable {
     readFromParcel(in);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeParcelable(this.mAntennaDirection, flags);
     out.writeInt(this.mSuggestedHoldPosition);

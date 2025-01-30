@@ -1,7 +1,7 @@
 package android.util;
 
 import android.app.ActivityManager;
-import android.content.p002pm.Signature;
+import android.content.pm.Signature;
 import android.text.TextUtils;
 import java.io.ByteArrayOutputStream;
 import java.io.File;

@@ -1,15 +1,15 @@
 package com.android.internal.org.bouncycastle.asn1.sec;
 
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
-import com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParameters;
-import com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder;
-import com.android.internal.org.bouncycastle.asn1.p019x9.X9ECPoint;
-import com.android.internal.org.bouncycastle.math.p026ec.ECConstants;
-import com.android.internal.org.bouncycastle.math.p026ec.ECCurve;
-import com.android.internal.org.bouncycastle.math.p026ec.WNafUtil;
-import com.android.internal.org.bouncycastle.math.p026ec.endo.GLVTypeBEndomorphism;
-import com.android.internal.org.bouncycastle.math.p026ec.endo.GLVTypeBParameters;
-import com.android.internal.org.bouncycastle.math.p026ec.endo.ScalarSplitParameters;
+import com.android.internal.org.bouncycastle.asn1.x9.X9ECParameters;
+import com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder;
+import com.android.internal.org.bouncycastle.asn1.x9.X9ECPoint;
+import com.android.internal.org.bouncycastle.math.ec.ECConstants;
+import com.android.internal.org.bouncycastle.math.ec.ECCurve;
+import com.android.internal.org.bouncycastle.math.ec.WNafUtil;
+import com.android.internal.org.bouncycastle.math.ec.endo.GLVTypeBEndomorphism;
+import com.android.internal.org.bouncycastle.math.ec.endo.GLVTypeBParameters;
+import com.android.internal.org.bouncycastle.math.ec.endo.ScalarSplitParameters;
 import com.android.internal.org.bouncycastle.util.Strings;
 import com.android.internal.org.bouncycastle.util.encoders.Hex;
 import java.math.BigInteger;
@@ -21,7 +21,7 @@ public class SECNamedCurves {
   static X9ECParametersHolder secp112r1 =
       new X9ECParametersHolder() { // from class:
                                    // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.1
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger p = SECNamedCurves.fromHex("DB7C2ABF62E35E668076BEAD208B");
           BigInteger a = SECNamedCurves.fromHex("DB7C2ABF62E35E668076BEAD2088");
@@ -39,7 +39,7 @@ public class SECNamedCurves {
   static X9ECParametersHolder secp112r2 =
       new X9ECParametersHolder() { // from class:
                                    // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.2
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger p = SECNamedCurves.fromHex("DB7C2ABF62E35E668076BEAD208B");
           BigInteger a = SECNamedCurves.fromHex("6127C24C05F38A0AAAF65C0EF02C");
@@ -57,7 +57,7 @@ public class SECNamedCurves {
   static X9ECParametersHolder secp128r1 =
       new X9ECParametersHolder() { // from class:
                                    // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.3
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger p = SECNamedCurves.fromHex("FFFFFFFDFFFFFFFFFFFFFFFFFFFFFFFF");
           BigInteger a = SECNamedCurves.fromHex("FFFFFFFDFFFFFFFFFFFFFFFFFFFFFFFC");
@@ -75,7 +75,7 @@ public class SECNamedCurves {
   static X9ECParametersHolder secp128r2 =
       new X9ECParametersHolder() { // from class:
                                    // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.4
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger p = SECNamedCurves.fromHex("FFFFFFFDFFFFFFFFFFFFFFFFFFFFFFFF");
           BigInteger a = SECNamedCurves.fromHex("D6031998D1B3BBFEBF59CC9BBFF9AEE1");
@@ -92,7 +92,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder secp160k1 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.5
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger p = SECNamedCurves.fromHex("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFAC73");
           BigInteger a = ECConstants.ZERO;
@@ -125,7 +125,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder secp160r1 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.6
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger p = SECNamedCurves.fromHex("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7FFFFFFF");
           BigInteger a = SECNamedCurves.fromHex("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF7FFFFFFC");
@@ -143,7 +143,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder secp160r2 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.7
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger p = SECNamedCurves.fromHex("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFAC73");
           BigInteger a = SECNamedCurves.fromHex("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFAC70");
@@ -161,7 +161,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder secp192k1 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.8
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger p = SECNamedCurves.fromHex("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFEE37");
           BigInteger a = ECConstants.ZERO;
@@ -194,7 +194,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder secp192r1 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.9
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger p = SECNamedCurves.fromHex("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFFFFFFFFFFFF");
           BigInteger a = SECNamedCurves.fromHex("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFFFFFFFFFFFC");
@@ -212,7 +212,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder secp224k1 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.10
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger p =
               SECNamedCurves.fromHex("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFE56D");
@@ -247,7 +247,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder secp224r1 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.11
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger p =
               SECNamedCurves.fromHex("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000000000000001");
@@ -269,7 +269,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder secp256k1 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.12
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger p =
               SECNamedCurves.fromHex(
@@ -308,7 +308,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder secp256r1 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.13
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger p =
               SECNamedCurves.fromHex(
@@ -334,7 +334,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder secp384r1 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.14
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger p =
               SECNamedCurves.fromHex(
@@ -360,7 +360,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder secp521r1 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.15
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger p =
               SECNamedCurves.fromHex(
@@ -387,7 +387,7 @@ public class SECNamedCurves {
   static X9ECParametersHolder sect113r1 =
       new X9ECParametersHolder() { // from class:
                                    // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.16
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger a = SECNamedCurves.fromHex("003088250CA6E7C7FE649CE85820F7");
           BigInteger b = SECNamedCurves.fromHex("00E8BEE4D3E2260744188BE0E9C723");
@@ -404,7 +404,7 @@ public class SECNamedCurves {
   static X9ECParametersHolder sect113r2 =
       new X9ECParametersHolder() { // from class:
                                    // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.17
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger a = SECNamedCurves.fromHex("00689918DBEC7E5A0DD6DFC0AA55C7");
           BigInteger b = SECNamedCurves.fromHex("0095E9A9EC9B297BD4BF36E059184F");
@@ -421,7 +421,7 @@ public class SECNamedCurves {
   static X9ECParametersHolder sect131r1 =
       new X9ECParametersHolder() { // from class:
                                    // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.18
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger a = SECNamedCurves.fromHex("07A11B09A76B562144418FF3FF8C2570B8");
           BigInteger b = SECNamedCurves.fromHex("0217C05610884B63B9C6C7291678F9D341");
@@ -438,7 +438,7 @@ public class SECNamedCurves {
   static X9ECParametersHolder sect131r2 =
       new X9ECParametersHolder() { // from class:
                                    // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.19
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger a = SECNamedCurves.fromHex("03E5A88919D7CAFCBF415F07C2176573B2");
           BigInteger b = SECNamedCurves.fromHex("04B8266A46C55657AC734CE38F018F2192");
@@ -454,7 +454,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder sect163k1 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.20
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger a = BigInteger.valueOf(1L);
           BigInteger b = BigInteger.valueOf(1L);
@@ -470,7 +470,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder sect163r1 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.21
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger a = SECNamedCurves.fromHex("07B6882CAAEFA84F9554FF8428BD88E246D2782AE2");
           BigInteger b = SECNamedCurves.fromHex("0713612DCDDCB40AAB946BDA29CA91F73AF958AFD9");
@@ -487,7 +487,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder sect163r2 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.22
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger a = BigInteger.valueOf(1L);
           BigInteger b = SECNamedCurves.fromHex("020A601907B8C953CA1481EB10512F78744A3205FD");
@@ -504,7 +504,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder sect193r1 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.23
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger a =
               SECNamedCurves.fromHex("0017858FEB7A98975169E171F77B4087DE098AC8A911DF7B01");
@@ -524,7 +524,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder sect193r2 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.24
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger a =
               SECNamedCurves.fromHex("0163F35A5137C2CE3EA6ED8667190B0BC43ECD69977702709B");
@@ -544,7 +544,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder sect233k1 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.25
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger a = ECConstants.ZERO;
           BigInteger b = BigInteger.valueOf(1L);
@@ -561,7 +561,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder sect233r1 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.26
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger a = BigInteger.valueOf(1L);
           BigInteger b =
@@ -582,7 +582,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder sect239k1 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.27
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger a = ECConstants.ZERO;
           BigInteger b = BigInteger.valueOf(1L);
@@ -600,7 +600,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder sect283k1 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.28
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger a = ECConstants.ZERO;
           BigInteger b = BigInteger.valueOf(1L);
@@ -618,7 +618,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder sect283r1 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.29
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger a = BigInteger.valueOf(1L);
           BigInteger b =
@@ -639,7 +639,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder sect409k1 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.30
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger a = ECConstants.ZERO;
           BigInteger b = BigInteger.valueOf(1L);
@@ -657,7 +657,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder sect409r1 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.31
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger a = BigInteger.valueOf(1L);
           BigInteger b =
@@ -678,7 +678,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder sect571k1 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.32
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger a = ECConstants.ZERO;
           BigInteger b = BigInteger.valueOf(1L);
@@ -696,7 +696,7 @@ public class SECNamedCurves {
       };
   static X9ECParametersHolder sect571r1 = new X9ECParametersHolder() { // from class:
         // com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves.33
-        @Override // com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParametersHolder
+        @Override // com.android.internal.org.bouncycastle.asn1.x9.X9ECParametersHolder
         protected X9ECParameters createParameters() {
           BigInteger a = BigInteger.valueOf(1L);
           BigInteger b =

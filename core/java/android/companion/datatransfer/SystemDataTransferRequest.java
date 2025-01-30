@@ -1,6 +1,6 @@
 package android.companion.datatransfer;
 
-import android.p009os.Parcel;
+import android.os.Parcel;
 
 /* loaded from: classes.dex */
 public abstract class SystemDataTransferRequest {

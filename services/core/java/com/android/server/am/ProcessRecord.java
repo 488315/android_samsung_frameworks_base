@@ -2,7 +2,7 @@ package com.android.server.am;
 
 import android.app.BackgroundStartPrivileges;
 import android.app.IApplicationThread;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.ProcessInfo;
 import android.content.res.CompatibilityInfo;

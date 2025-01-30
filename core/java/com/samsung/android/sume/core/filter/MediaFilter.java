@@ -1,11 +1,11 @@
 package com.samsung.android.sume.core.filter;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Pair;
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.descriptor.MFDescriptor;
-import com.samsung.android.sume.core.descriptor.p044nn.NNDescriptor;
+import com.samsung.android.sume.core.descriptor.nn.NNDescriptor;
 import com.samsung.android.sume.core.functional.Operator;
 import com.samsung.android.sume.core.message.MessageConsumer;
 import com.samsung.android.sume.core.message.MessageProducer;

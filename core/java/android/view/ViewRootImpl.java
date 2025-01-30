@@ -14,9 +14,9 @@ import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.p002pm.ActivityInfo;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.res.CompatibilityInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -50,21 +50,21 @@ import android.media.AudioManager;
 import android.media.MediaMetrics;
 import android.media.TtmlUtils;
 import android.media.audio.Enums;
-import android.p009os.Binder;
-import android.p009os.Build;
-import android.p009os.Bundle;
-import android.p009os.Debug;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.Process;
-import android.p009os.RemoteException;
-import android.p009os.SystemClock;
-import android.p009os.SystemProperties;
-import android.p009os.Trace;
-import android.p009os.UserHandle;
+import android.os.Binder;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Debug;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
+import android.os.ParcelFileDescriptor;
+import android.os.Process;
+import android.os.RemoteException;
+import android.os.SystemClock;
+import android.os.SystemProperties;
+import android.os.Trace;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.sysprop.DisplayProperties;
 import android.telecom.Logging.Session;
@@ -114,8 +114,8 @@ import com.android.internal.C4337R;
 import com.android.internal.graphics.drawable.BackgroundBlurDrawable;
 import com.android.internal.inputmethod.ImeTracing;
 import com.android.internal.inputmethod.InputMethodDebug;
-import com.android.internal.p029os.IResultReceiver;
-import com.android.internal.p029os.SomeArgs;
+import com.android.internal.os.IResultReceiver;
+import com.android.internal.os.SomeArgs;
 import com.android.internal.policy.DecorView;
 import com.android.internal.policy.PhoneFallbackEventHandler;
 import com.android.internal.util.Preconditions;
@@ -8213,7 +8213,7 @@ public final class ViewRootImpl
   final class ViewRootHandler extends Handler {
     ViewRootHandler() {}
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public String getMessageName(Message message) {
       switch (message.what) {
         case 1:
@@ -8287,7 +8287,7 @@ public final class ViewRootImpl
       }
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public boolean sendMessageAtTime(Message msg, long uptimeMillis) {
       if (msg.what == 26 && msg.obj == null) {
         throw new NullPointerException(
@@ -8296,7 +8296,7 @@ public final class ViewRootImpl
       return super.sendMessageAtTime(msg, uptimeMillis);
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       if (Trace.isTagEnabled(8L)) {
         Trace.traceBegin(8L, getMessageName(msg));
@@ -9993,7 +9993,7 @@ public final class ViewRootImpl
       this.mDeviceKeyEvents = new SparseArray<>();
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       switch (msg.what) {
         case 1:
@@ -13511,7 +13511,7 @@ public final class ViewRootImpl
 
     public HCTRelayoutHandler() {}
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message message) {
       switch (message.what) {
         case 1:

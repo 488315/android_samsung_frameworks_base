@@ -13,18 +13,18 @@ import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.hardware.display.DisplayManager;
 import android.hardware.scontext.SContextConstants;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.Debug;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.Process;
-import android.p009os.ResultReceiver;
-import android.p009os.SystemProperties;
-import android.p009os.Trace;
-import android.p009os.UserHandle;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.Debug;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
+import android.os.Process;
+import android.os.ResultReceiver;
+import android.os.SystemProperties;
+import android.os.Trace;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.text.style.SuggestionSpan;
@@ -57,7 +57,7 @@ import com.android.internal.inputmethod.ImeTracing;
 import com.android.internal.inputmethod.InputBindResult;
 import com.android.internal.inputmethod.InputMethodDebug;
 import com.android.internal.inputmethod.InputMethodPrivilegedOperationsRegistry;
-import com.android.internal.p029os.SomeArgs;
+import com.android.internal.os.SomeArgs;
 import com.android.internal.view.IInputMethodManager;
 import com.samsung.android.ims.options.SemCapabilities;
 import java.io.FileDescriptor;
@@ -190,7 +190,7 @@ public final class InputMethodManager {
   private final DelegateImpl mDelegate = new DelegateImpl();
   private final IInputMethodClient.Stub mClient =
       new IInputMethodClient.Stub() { // from class: android.view.inputmethod.InputMethodManager.2
-        @Override // android.p009os.Binder
+        @Override // android.os.Binder
         protected void dump(FileDescriptor fd, PrintWriter fout, String[] args) {
           CountDownLatch latch = new CountDownLatch(1);
           SomeArgs sargs = SomeArgs.obtain();
@@ -613,7 +613,7 @@ public final class InputMethodManager {
       super(looper, null, true);
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       IAccessibilityInputMethodSessionInvoker invoker;
       switch (msg.what) {

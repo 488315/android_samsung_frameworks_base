@@ -1,6 +1,6 @@
 package com.samsung.android.wallpaper.colortheme.monet;
 
-import android.content.p001om.WallpaperThemeConstants;
+import android.content.om.WallpaperThemeConstants;
 import android.hardware.scontext.SContextConstants;
 import android.util.Pair;
 import com.android.internal.graphics.cam.Cam;

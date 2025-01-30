@@ -10,11 +10,11 @@ import android.media.soundtrigger_middleware.ISoundTriggerMiddlewareService;
 import android.media.soundtrigger_middleware.ISoundTriggerModule;
 import android.media.soundtrigger_middleware.PhraseRecognitionEventSys;
 import android.media.soundtrigger_middleware.RecognitionEventSys;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.RemoteException;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
+import android.os.RemoteException;
 import android.util.Log;
 import java.io.IOException;
 
@@ -229,7 +229,7 @@ public class SoundTriggerModule {
           new Handler(
               looper) { // from class:
                         // android.hardware.soundtrigger.SoundTriggerModule.EventHandlerDelegate.1
-            @Override // android.p009os.Handler
+            @Override // android.os.Handler
             public void handleMessage(Message msg) {
               switch (msg.what) {
                 case 1:

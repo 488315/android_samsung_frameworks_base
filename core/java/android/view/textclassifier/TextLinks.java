@@ -1,10 +1,10 @@
 package android.view.textclassifier;
 
 import android.content.Context;
-import android.p009os.Bundle;
-import android.p009os.LocaleList;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.LocaleList;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.Spannable;
 import android.text.style.ClickableSpan;
 import android.text.style.URLSpan;
@@ -89,12 +89,12 @@ public final class TextLinks implements Parcelable {
         Locale.US, "TextLinks{fullText=%s, links=%s}", this.mFullText, this.mLinks);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.mFullText);
     dest.writeTypedList(this.mLinks);
@@ -176,12 +176,12 @@ public final class TextLinks implements Parcelable {
           this.mUrlSpan);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       this.mEntityScores.writeToParcel(dest, flags);
       dest.writeInt(this.mStart);
@@ -329,12 +329,12 @@ public final class TextLinks implements Parcelable {
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeString(this.mText.toString());
       dest.writeParcelable(this.mDefaultLocales, flags);

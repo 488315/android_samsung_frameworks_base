@@ -4,7 +4,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
-import android.p009os.SystemClock;
+import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import com.android.internal.C4337R;

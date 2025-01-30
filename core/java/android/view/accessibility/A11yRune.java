@@ -6,7 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.CursorIndexOutOfBoundsException;
 import android.net.Uri;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import com.samsung.android.feature.SemFloatingFeature;
 
 /* loaded from: classes4.dex */

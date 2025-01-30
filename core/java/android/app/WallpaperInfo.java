@@ -3,17 +3,17 @@ package android.app;
 import android.annotation.SystemApi;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ResolveInfo;
-import android.content.p002pm.ServiceInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.service.wallpaper.WallpaperService;
 import android.util.AttributeSet;
 import android.util.Printer;
@@ -253,7 +253,7 @@ public final class WallpaperInfo implements Parcelable {
         + "}";
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeString(this.mSettingsActivityName);
     parcel.writeInt(this.mThumbnailResource);
@@ -269,7 +269,7 @@ public final class WallpaperInfo implements Parcelable {
     this.mService.writeToParcel(parcel, i);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

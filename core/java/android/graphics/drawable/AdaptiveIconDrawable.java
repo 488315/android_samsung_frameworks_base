@@ -2,7 +2,7 @@ package android.graphics.drawable;
 
 import android.app.ActivityThread;
 import android.app.SemAppIconSolution;
-import android.content.p001om.WallpaperThemeConstants;
+import android.content.om.WallpaperThemeConstants;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.content.res.TypedArray;

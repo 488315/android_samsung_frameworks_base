@@ -6,7 +6,7 @@ import android.content.ComponentName;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.IntArray;
 import android.util.Slog;
 import android.view.RemoteAnimationTarget;

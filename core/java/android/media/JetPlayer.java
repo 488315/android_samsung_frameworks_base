@@ -1,9 +1,9 @@
 package android.media;
 
 import android.content.res.AssetFileDescriptor;
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.AndroidRuntimeException;
 import android.util.Log;
 import java.io.FileDescriptor;
@@ -196,7 +196,7 @@ public class JetPlayer {
       this.mJet = jet;
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       OnJetEventListener listener;
       synchronized (JetPlayer.this.mEventListenerLock) {

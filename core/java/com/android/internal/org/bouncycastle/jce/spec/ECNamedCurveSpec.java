@@ -4,9 +4,9 @@ import com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.EC5
 import com.android.internal.org.bouncycastle.math.field.FiniteField;
 import com.android.internal.org.bouncycastle.math.field.Polynomial;
 import com.android.internal.org.bouncycastle.math.field.PolynomialExtensionField;
-import com.android.internal.org.bouncycastle.math.p026ec.ECAlgorithms;
-import com.android.internal.org.bouncycastle.math.p026ec.ECCurve;
-import com.android.internal.org.bouncycastle.math.p026ec.ECPoint;
+import com.android.internal.org.bouncycastle.math.ec.ECAlgorithms;
+import com.android.internal.org.bouncycastle.math.ec.ECCurve;
+import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import java.math.BigInteger;
 import java.security.spec.ECField;

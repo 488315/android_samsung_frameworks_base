@@ -1,17 +1,17 @@
 package com.samsung.android.content.smartclip;
 
 import android.content.Context;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.Message;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.text.method.PasswordTransformationMethod;
 import android.text.method.TransformationMethod;
@@ -478,7 +478,7 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
                 this.mResult = resultElement;
               }
 
-              @Override // android.p009os.Handler
+              @Override // android.os.Handler
               public void handleMessage(Message msg) {
                 Log.m94d(SmartClipDataCropperImpl.TAG, "Meta data arrived from chrome");
                 Bundle bundle = msg.getData();
@@ -611,7 +611,7 @@ public class SmartClipDataCropperImpl extends SemSmartClipDataCropper {
                 this.mResult = resultElement;
               }
 
-              @Override // android.p009os.Handler
+              @Override // android.os.Handler
               public void handleMessage(Message msg) {
                 Log.m94d(
                     SmartClipDataCropperImpl.TAG, "Pending meta data arrived from third party");

@@ -1,8 +1,8 @@
 package com.android.server;
 
 import android.content.Context;
-import android.p009os.Build;
-import android.p009os.SystemProperties;
+import android.os.Build;
+import android.os.SystemProperties;
 import android.util.Slog;
 import com.samsung.android.service.EngineeringMode.EngineeringModeManager;
 

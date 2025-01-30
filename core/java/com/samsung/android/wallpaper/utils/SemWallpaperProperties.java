@@ -2,8 +2,8 @@ package com.samsung.android.wallpaper.utils;
 
 import android.app.WallpaperManager;
 import android.content.Context;
-import android.p009os.Bundle;
-import android.p009os.ParcelFileDescriptor;
+import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
 import android.text.TextUtils;
 import android.util.Log;
 

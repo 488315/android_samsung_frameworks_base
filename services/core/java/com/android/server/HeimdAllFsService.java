@@ -11,7 +11,7 @@ import android.os.ServiceManager;
 import android.os.StatFs;
 import android.os.SystemProperties;
 import android.os.incremental.IncrementalManager;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Slog;
 import com.android.internal.util.IndentingPrintWriter;
 import java.io.BufferedReader;

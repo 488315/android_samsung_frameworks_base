@@ -7,8 +7,8 @@ import android.accounts.NetworkErrorException;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
+import android.os.Bundle;
+import android.os.IBinder;
 
 /* loaded from: classes3.dex */
 public class AuthenticatorService extends Service {

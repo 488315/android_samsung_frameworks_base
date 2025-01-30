@@ -1,7 +1,7 @@
 package android.security.keymaster;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
@@ -241,7 +241,7 @@ public class KeymasterArguments implements Parcelable {
     return this.mArguments.size();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeTypedList(this.mArguments);
   }
@@ -250,7 +250,7 @@ public class KeymasterArguments implements Parcelable {
     in.readTypedList(this.mArguments, KeymasterArgument.CREATOR);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

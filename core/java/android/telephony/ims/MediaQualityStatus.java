@@ -1,8 +1,8 @@
 package android.telephony.ims;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
@@ -82,7 +82,7 @@ public final class MediaQualityStatus implements Parcelable {
     this.mRtpInactivityTimeMillis = in.readLong();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.mImsCallSessionId);
     dest.writeInt(this.mMediaSessionType);
@@ -92,7 +92,7 @@ public final class MediaQualityStatus implements Parcelable {
     dest.writeLong(this.mRtpInactivityTimeMillis);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

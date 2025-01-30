@@ -2,7 +2,7 @@ package com.samsung.android.location;
 
 import android.content.Intent;
 import android.location.Location;
-import android.p009os.Parcelable;
+import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package android.util;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.Preconditions;
 
 /* loaded from: classes4.dex */
@@ -88,12 +88,12 @@ public final class SizeF implements Parcelable {
     return Float.floatToIntBits(this.mWidth) ^ Float.floatToIntBits(this.mHeight);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeFloat(this.mWidth);
     out.writeFloat(this.mHeight);

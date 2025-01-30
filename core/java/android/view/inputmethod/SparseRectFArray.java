@@ -1,8 +1,8 @@
 package android.view.inputmethod;
 
 import android.graphics.RectF;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Arrays;
 
 /* loaded from: classes4.dex */
@@ -32,7 +32,7 @@ public final class SparseRectFArray implements Parcelable {
     this.mFlagsArray = source.createIntArray();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeIntArray(this.mKeys);
     dest.writeFloatArray(this.mCoordinates);
@@ -229,7 +229,7 @@ public final class SparseRectFArray implements Parcelable {
     return this.mFlagsArray[arrayIndex];
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

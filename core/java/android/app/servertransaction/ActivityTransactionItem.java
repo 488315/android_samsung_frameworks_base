@@ -2,7 +2,7 @@ package android.app.servertransaction;
 
 import android.app.ActivityThread;
 import android.app.ClientTransactionHandler;
-import android.p009os.IBinder;
+import android.os.IBinder;
 
 /* loaded from: classes.dex */
 public abstract class ActivityTransactionItem extends ClientTransactionItem {

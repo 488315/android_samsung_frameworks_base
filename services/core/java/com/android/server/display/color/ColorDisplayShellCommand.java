@@ -1,6 +1,6 @@
 package com.android.server.display.color;
 
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.os.ShellCommand;
 import com.android.server.LocalServices;
 

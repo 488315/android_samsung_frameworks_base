@@ -1,8 +1,8 @@
 package com.samsung.android.hardware.context;
 
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class SemContextActiveTimeMonitor extends SemContextEventContext {
@@ -42,7 +42,7 @@ public class SemContextActiveTimeMonitor extends SemContextEventContext {
   }
 
   @Override // com.samsung.android.hardware.context.SemContextEventContext,
-            // android.p009os.Parcelable
+            // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeBundle(this.mContext);
   }

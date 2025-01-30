@@ -1,9 +1,9 @@
 package com.android.internal.app;
 
 import android.content.Intent;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
-import android.p009os.Bundle;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Slog;
 import android.widget.Toast;

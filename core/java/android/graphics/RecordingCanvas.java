@@ -1,6 +1,6 @@
 package android.graphics;
 
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.util.Pools;
 import dalvik.annotation.optimization.CriticalNative;
 

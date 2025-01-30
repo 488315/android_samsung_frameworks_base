@@ -1,7 +1,7 @@
 package android.service.voice;
 
-import android.p009os.Bundle;
-import android.p009os.IBinder;
+import android.os.Bundle;
+import android.os.IBinder;
 
 /* loaded from: classes3.dex */
 public abstract class VoiceInteractionManagerInternal {

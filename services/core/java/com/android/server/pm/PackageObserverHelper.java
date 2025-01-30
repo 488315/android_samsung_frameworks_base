@@ -1,6 +1,6 @@
 package com.android.server.pm;
 
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.util.ArraySet;
 
 /* loaded from: classes3.dex */

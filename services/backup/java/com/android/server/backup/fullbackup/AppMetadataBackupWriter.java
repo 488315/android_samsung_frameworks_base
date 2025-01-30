@@ -8,7 +8,7 @@ import android.content.pm.Signature;
 import android.content.pm.SigningInfo;
 import android.os.Build;
 import android.os.Environment;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.StringBuilderPrinter;
 import com.android.internal.util.Preconditions;
 import com.android.server.backup.UserBackupManagerService;

@@ -2,8 +2,8 @@ package android.service.assist.classification;
 
 import android.annotation.NonNull;
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.ArraySet;
 import com.android.internal.util.AnnotationValidations;
 import java.util.ArrayList;
@@ -55,12 +55,12 @@ public final class FieldClassificationResponse implements Parcelable {
     return "FieldClassificationResponse { classifications = " + this.mClassifications + " }";
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     parcelClassifications(dest, flags);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

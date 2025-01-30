@@ -1,6 +1,6 @@
 package android.hardware.camera2;
 
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.util.Size;
 import android.view.Surface;
 import java.lang.annotation.Retention;

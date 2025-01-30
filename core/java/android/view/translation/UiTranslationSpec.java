@@ -1,8 +1,8 @@
 package android.view.translation;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 @SystemApi
 /* loaded from: classes4.dex */
@@ -58,13 +58,13 @@ public final class UiTranslationSpec implements Parcelable {
     return _hash;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     byte flg = this.mShouldPadContentForCompat ? (byte) (0 | 1) : (byte) 0;
     dest.writeByte(flg);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

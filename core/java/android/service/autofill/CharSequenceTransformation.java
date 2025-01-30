@@ -1,8 +1,8 @@
 package android.service.autofill;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.telecom.Logging.Session;
 import android.util.Log;
 import android.util.Pair;
@@ -113,14 +113,14 @@ public final class CharSequenceTransformation extends InternalTransformation imp
         return !Helper.sDebug ? super.toString() : "MultipleViewsCharSequenceTransformation: [fields=" + this.mFields + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
         return 0;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r2v0, types: [java.io.Serializable, java.util.regex.Pattern[]] */
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int flags) {
         int size = this.mFields.size();
         AutofillId[] ids = new AutofillId[size];

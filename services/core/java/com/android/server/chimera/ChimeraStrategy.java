@@ -2,7 +2,7 @@ package com.android.server.chimera;
 
 import android.net.util.NetworkConstants;
 import android.os.SystemProperties;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.text.TextUtils;
 import android.util.Log;
 import com.android.internal.util.FrameworkStatsLog;

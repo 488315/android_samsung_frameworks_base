@@ -2,7 +2,7 @@ package com.samsung.android.service.ProtectedATCommand;
 
 import android.app.ActivityManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.security.keystore.KeyProperties;
 import android.util.Slog;
 import com.samsung.android.service.ProtectedATCommand.list.ATCommands;

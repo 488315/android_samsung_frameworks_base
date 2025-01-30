@@ -1,7 +1,7 @@
 package com.samsung.android.service.EngineeringMode;
 
 import android.content.Context;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.Log;
 import com.samsung.android.core.SizeCompatInfo;

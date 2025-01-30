@@ -3,8 +3,8 @@ package android.net.vcn;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.NetworkSpecifier;
 import android.net.TelephonyNetworkSpecifier;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.ArrayUtils;
 import java.util.Arrays;
 import java.util.Objects;
@@ -38,12 +38,12 @@ public final class VcnUnderlyingNetworkSpecifier extends NetworkSpecifier implem
     return this.mSubIds;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeIntArray(this.mSubIds);
   }

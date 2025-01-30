@@ -1,6 +1,6 @@
 package android.content.res;
 
-import android.content.p001om.OverlayableInfo;
+import android.content.om.OverlayableInfo;
 import android.content.res.loader.AssetsProvider;
 import android.text.TextUtils;
 import dalvik.annotation.optimization.CriticalNative;

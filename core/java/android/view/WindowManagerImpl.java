@@ -4,16 +4,16 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Region;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
-import android.p009os.StrictMode;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.RemoteException;
+import android.os.StrictMode;
 import android.window.ITaskFpsCallback;
 import android.window.TaskFpsCallback;
 import android.window.WindowMetricsController;
 import android.window.WindowProvider;
 import android.window.WindowProviderService;
-import com.android.internal.p029os.IResultReceiver;
+import com.android.internal.os.IResultReceiver;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -136,7 +136,7 @@ public final class WindowManagerImpl implements WindowManager {
       final WindowManager.KeyboardShortcutsReceiver receiver, int deviceId) {
     IResultReceiver resultReceiver =
         new IResultReceiver.Stub() { // from class: android.view.WindowManagerImpl.1
-          @Override // com.android.internal.p029os.IResultReceiver
+          @Override // com.android.internal.os.IResultReceiver
           public void send(int resultCode, Bundle resultData) throws RemoteException {
             List<KeyboardShortcutGroup> result =
                 resultData.getParcelableArrayList(

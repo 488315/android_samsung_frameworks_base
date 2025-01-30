@@ -1,8 +1,8 @@
 package android.app;
 
 import android.net.Uri;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class GrantedUriPermission implements Parcelable {
@@ -33,12 +33,12 @@ public class GrantedUriPermission implements Parcelable {
     return this.packageName + ":" + this.uri;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeParcelable(this.uri, flags);
     out.writeString(this.packageName);

@@ -2,7 +2,7 @@ package com.android.server.pm;
 
 import android.app.admin.SecurityLog;
 import android.content.Context;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.ApkChecksum;
 import android.content.pm.IOnChecksumsReadyListener;
 import android.os.Bundle;

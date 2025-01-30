@@ -1,7 +1,7 @@
 package android.internal.hidl.safe_union.V1_0;
 
-import android.p009os.HwBlob;
-import android.p009os.HwParcel;
+import android.os.HwBlob;
+import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 

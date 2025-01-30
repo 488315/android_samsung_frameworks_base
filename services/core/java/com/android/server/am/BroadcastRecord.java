@@ -14,7 +14,7 @@ import android.os.Binder;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.ArrayMap;
 import android.util.PrintWriterPrinter;
 import android.util.SparseArray;

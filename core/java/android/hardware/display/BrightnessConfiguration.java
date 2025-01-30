@@ -2,8 +2,8 @@ package android.hardware.display;
 
 import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Pair;
 import com.android.internal.util.Preconditions;
 import com.android.internal.util.XmlUtils;
@@ -141,7 +141,7 @@ public final class BrightnessConfiguration implements Parcelable {
     return this.mShortTermModelLowerLuxMultiplier;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeFloatArray(this.mLux);
     dest.writeFloatArray(this.mNits);
@@ -167,7 +167,7 @@ public final class BrightnessConfiguration implements Parcelable {
     dest.writeFloat(this.mShortTermModelUpperLuxMultiplier);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

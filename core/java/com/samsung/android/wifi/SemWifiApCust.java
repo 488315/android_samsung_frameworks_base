@@ -1,8 +1,8 @@
 package com.samsung.android.wifi;
 
-import android.p009os.Build;
-import android.p009os.Debug;
-import android.p009os.SystemProperties;
+import android.os.Build;
+import android.os.Debug;
+import android.os.SystemProperties;
 import android.util.Log;
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.hardware.secinputdev.SemInputDeviceManager;

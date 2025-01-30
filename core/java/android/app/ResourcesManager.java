@@ -1,6 +1,6 @@
 package android.app;
 
-import android.content.p002pm.ApplicationInfo;
+import android.content.pm.ApplicationInfo;
 import android.content.res.ApkAssets;
 import android.content.res.AssetManager;
 import android.content.res.CompatResources;
@@ -11,9 +11,9 @@ import android.content.res.ResourcesImpl;
 import android.content.res.ResourcesKey;
 import android.content.res.loader.ResourcesLoader;
 import android.hardware.display.DisplayManagerGlobal;
-import android.p009os.IBinder;
-import android.p009os.Process;
-import android.p009os.Trace;
+import android.os.IBinder;
+import android.os.Process;
+import android.os.Trace;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.DisplayMetrics;

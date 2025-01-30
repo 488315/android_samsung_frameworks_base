@@ -1,8 +1,8 @@
 package android.hardware.radio;
 
-import android.p009os.BadParcelableException;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.BadParcelableException;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.StringJoiner;
 
 /* loaded from: classes2.dex */
@@ -28,12 +28,12 @@ public class RadioConst implements Parcelable {
   public static final int MAX_UUID_LENGTH = 64;
   public static final int P2_CONSTANT_NO_P2 = -1;
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final int getStability() {
     return 1;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
     int _aidl_start_pos = _aidl_parcel.dataPosition();
     _aidl_parcel.writeInt(0);
@@ -68,7 +68,7 @@ public class RadioConst implements Parcelable {
     return "android.hardware.radio.RadioConst" + _aidl_sj.toString();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

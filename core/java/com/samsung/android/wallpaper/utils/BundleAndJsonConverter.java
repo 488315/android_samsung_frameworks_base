@@ -1,6 +1,6 @@
 package com.samsung.android.wallpaper.utils;
 
-import android.p009os.Bundle;
+import android.os.Bundle;
 import android.util.JsonReader;
 import android.util.JsonWriter;
 import android.util.Log;

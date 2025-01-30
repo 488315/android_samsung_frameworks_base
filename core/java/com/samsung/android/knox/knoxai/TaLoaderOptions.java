@@ -1,8 +1,8 @@
 package com.samsung.android.knox.knoxai;
 
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
+import android.os.Parcelable;
 import java.io.FileDescriptor;
 
 /* loaded from: classes5.dex */
@@ -82,7 +82,7 @@ public class TaLoaderOptions implements Parcelable {
     readFromParcel(in);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flag) {
     out.writeInt(this.rootLength);
     out.writeString(this.root);
@@ -103,7 +103,7 @@ public class TaLoaderOptions implements Parcelable {
     this.taSize = in.readInt();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

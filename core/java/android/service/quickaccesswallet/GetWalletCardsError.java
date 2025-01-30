@@ -1,8 +1,8 @@
 package android.service.quickaccesswallet;
 
 import android.graphics.drawable.Icon;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 
 /* loaded from: classes3.dex */
@@ -31,12 +31,12 @@ public final class GetWalletCardsError implements Parcelable {
     this.mMessage = message;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     if (this.mIcon == null) {
       dest.writeByte((byte) 0);

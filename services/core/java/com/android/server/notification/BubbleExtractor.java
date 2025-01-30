@@ -9,7 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Slog;
 import com.android.internal.util.FrameworkStatsLog;
 

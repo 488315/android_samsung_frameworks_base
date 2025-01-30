@@ -1,7 +1,7 @@
 package android.opengl;
 
 import android.hardware.SyncFence;
-import android.p009os.ParcelFileDescriptor;
+import android.os.ParcelFileDescriptor;
 import android.util.Log;
 
 /* loaded from: classes3.dex */

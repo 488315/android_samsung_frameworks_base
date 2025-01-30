@@ -1,7 +1,7 @@
 package android.app.servertransaction;
 
 import android.app.ClientTransactionHandler;
-import android.p009os.IBinder;
+import android.os.IBinder;
 
 /* loaded from: classes.dex */
 public interface BaseClientRequest extends ObjectPoolItem {

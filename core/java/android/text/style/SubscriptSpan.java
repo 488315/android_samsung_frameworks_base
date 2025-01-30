@@ -1,6 +1,6 @@
 package android.text.style;
 
-import android.p009os.Parcel;
+import android.os.Parcel;
 import android.text.ParcelableSpan;
 import android.text.TextPaint;
 
@@ -20,12 +20,12 @@ public class SubscriptSpan extends MetricAffectingSpan implements ParcelableSpan
     return 15;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     writeToParcelInternal(dest, flags);
   }

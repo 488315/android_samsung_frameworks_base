@@ -2,11 +2,11 @@ package android.app;
 
 import android.annotation.SystemApi;
 import android.content.Context;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
-import android.p009os.Handler;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.os.Handler;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 

@@ -1,8 +1,8 @@
 package com.samsung.android.globalactions.util;
 
 import android.content.Context;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.provider.Settings;
 
 /* loaded from: classes5.dex */

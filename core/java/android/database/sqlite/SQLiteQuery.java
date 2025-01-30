@@ -1,7 +1,7 @@
 package android.database.sqlite;
 
 import android.database.CursorWindow;
-import android.p009os.CancellationSignal;
+import android.os.CancellationSignal;
 import android.util.Log;
 
 /* loaded from: classes.dex */

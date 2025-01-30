@@ -3,7 +3,7 @@ package com.samsung.android.graphics.spr.animation;
 import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.graphics.drawable.Drawable;
-import android.p009os.SystemClock;
+import android.os.SystemClock;
 import com.samsung.android.graphics.spr.document.SprDocument;
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeAnimatorSet;

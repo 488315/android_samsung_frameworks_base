@@ -1,8 +1,8 @@
 package com.android.internal.org.bouncycastle.jce;
 
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
-import com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParameters;
-import com.android.internal.org.bouncycastle.crypto.p020ec.CustomNamedCurves;
+import com.android.internal.org.bouncycastle.asn1.x9.X9ECParameters;
+import com.android.internal.org.bouncycastle.crypto.ec.CustomNamedCurves;
 import com.android.internal.org.bouncycastle.jce.spec.ECNamedCurveParameterSpec;
 import java.util.Enumeration;
 
@@ -17,12 +17,12 @@ public class ECNamedCurveTable {
       }
       if (ecP == null
           && (ecP =
-                  com.android.internal.org.bouncycastle.asn1.p019x9.ECNamedCurveTable.getByName(
+                  com.android.internal.org.bouncycastle.asn1.x9.ECNamedCurveTable.getByName(
                       name))
               == null) {
         try {
           ecP =
-              com.android.internal.org.bouncycastle.asn1.p019x9.ECNamedCurveTable.getByOID(
+              com.android.internal.org.bouncycastle.asn1.x9.ECNamedCurveTable.getByOID(
                   new ASN1ObjectIdentifier(name));
         } catch (IllegalArgumentException e2) {
         }
@@ -36,6 +36,6 @@ public class ECNamedCurveTable {
   }
 
   public static Enumeration getNames() {
-    return com.android.internal.org.bouncycastle.asn1.p019x9.ECNamedCurveTable.getNames();
+    return com.android.internal.org.bouncycastle.asn1.x9.ECNamedCurveTable.getNames();
   }
 }

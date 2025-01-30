@@ -1,7 +1,7 @@
 package com.samsung.android.service.SemService;
 
 import android.content.Context;
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;

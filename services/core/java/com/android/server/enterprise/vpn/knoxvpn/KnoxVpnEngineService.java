@@ -77,7 +77,7 @@ import com.samsung.android.knox.net.vpn.IVpnInfoPolicy;
 import com.samsung.android.knox.net.vpn.KnoxVpnContext;
 import com.samsung.android.knox.net.vpn.KnoxVpnPolicyConstants;
 import com.samsung.android.knox.net.vpn.serviceprovider.IKnoxVpnService;
-import com.samsung.android.knox.p024zt.devicetrust.EndpointMonitorConst;
+import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.ArrayList;

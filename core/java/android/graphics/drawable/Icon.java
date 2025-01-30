@@ -1,8 +1,8 @@
 package android.graphics.drawable;
 
 import android.content.Context;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -12,13 +12,13 @@ import android.graphics.PorterDuff;
 import android.graphics.RecordingCanvas;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
-import android.p009os.AsyncTask;
-import android.p009os.Handler;
-import android.p009os.Message;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.Process;
-import android.p009os.UserHandle;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.Process;
+import android.os.UserHandle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.NtpTrustedTime;
@@ -613,7 +613,7 @@ public final class Icon implements Parcelable {
     return sb.toString();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     int i = this.mType;
     return (i == 1 || i == 5 || i == 3) ? 1 : 0;
@@ -662,7 +662,7 @@ public final class Icon implements Parcelable {
     this.mBlendMode = BlendMode.fromValue(in.readInt());
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mType);
     switch (this.mType) {

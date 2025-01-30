@@ -16,7 +16,7 @@ import android.os.InputConstants;
 import android.os.Process;
 import android.os.RemoteException;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Slog;
 import android.view.Display;
 import android.view.DragEvent;

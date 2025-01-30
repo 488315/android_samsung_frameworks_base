@@ -4,7 +4,7 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.os.Binder;
 import android.os.IBinder;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 import com.android.server.enterprise.EnterpriseServiceCallback;

@@ -5,8 +5,8 @@ import android.animation.AnimatorInflater;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.content.Context;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.View;
 
 /* loaded from: classes4.dex */
@@ -40,7 +40,7 @@ public class SemRemoteViewsPropertyAnimation extends SemRemoteViewsAnimation {
     this.mAnimResId = parcel.readInt();
   }
 
-  @Override // android.widget.SemRemoteViewsAnimation, android.p009os.Parcelable
+  @Override // android.widget.SemRemoteViewsAnimation, android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     super.writeToParcel(dest, flags);
     dest.writeInt(this.mAnimResId);
@@ -54,7 +54,7 @@ public class SemRemoteViewsPropertyAnimation extends SemRemoteViewsAnimation {
     }
   }
 
-  @Override // android.widget.SemRemoteViewsAnimation, android.p009os.Parcelable
+  @Override // android.widget.SemRemoteViewsAnimation, android.os.Parcelable
   public int describeContents() {
     return 0;
   }

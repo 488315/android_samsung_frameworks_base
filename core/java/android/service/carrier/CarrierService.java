@@ -3,10 +3,10 @@ package android.service.carrier;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
-import android.p009os.PersistableBundle;
-import android.p009os.ResultReceiver;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.PersistableBundle;
+import android.os.ResultReceiver;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyRegistryManager;
 import android.util.Log;
@@ -68,7 +68,7 @@ public abstract class CarrierService extends Service {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     protected void dump(FileDescriptor fd, PrintWriter pw, String[] args) {
       CarrierService.this.dump(fd, pw, args);
     }

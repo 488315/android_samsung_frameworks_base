@@ -63,7 +63,7 @@ import android.os.UEventObserver;
 import android.os.UserHandle;
 import android.os.VibrationAttributes;
 import android.os.Vibrator;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.service.dreams.DreamManagerInternal;

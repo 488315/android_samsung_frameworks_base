@@ -1,14 +1,14 @@
 package android.content.res;
 
-import android.content.p001om.SamsungThemeConstants;
-import android.content.p002pm.ActivityInfo;
+import android.content.om.SamsungThemeConstants;
+import android.content.pm.ActivityInfo;
 import android.content.res.loader.ResourcesLoader;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.SystemProperties;
+import android.os.ParcelFileDescriptor;
+import android.os.SystemProperties;
 import android.util.ArraySet;
 import android.util.SparseArray;
 import android.util.TypedValue;
-import com.android.internal.content.p015om.OverlayConfig;
+import com.android.internal.content.om.OverlayConfig;
 import com.samsung.android.util.CustomizedTextParser;
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;

@@ -4,10 +4,10 @@ import android.annotation.NonNull;
 import android.annotation.SystemApi;
 import android.media.AudioFormat;
 import android.media.AudioTimestamp;
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.Parcelable;
-import android.p009os.PersistableBundle;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
+import android.os.Parcelable;
+import android.os.PersistableBundle;
 import com.android.internal.util.AnnotationValidations;
 import java.util.Arrays;
 import java.util.Objects;
@@ -161,7 +161,7 @@ public final class HotwordAudioStream implements Parcelable {
         + Arrays.hashCode(this.mInitialAudio);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     byte flg = this.mTimestamp != null ? (byte) (0 | 4) : (byte) 0;
     dest.writeByte(flg);
@@ -175,7 +175,7 @@ public final class HotwordAudioStream implements Parcelable {
     dest.writeByteArray(this.mInitialAudio);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

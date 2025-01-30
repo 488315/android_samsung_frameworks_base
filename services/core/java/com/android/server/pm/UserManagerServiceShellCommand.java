@@ -6,7 +6,7 @@ import android.app.ActivityThread;
 import android.app.IActivityManager;
 import android.app.admin.DevicePolicyManagerInternal;
 import android.content.Context;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.UserInfo;
 import android.content.res.Resources;
 import android.os.Binder;

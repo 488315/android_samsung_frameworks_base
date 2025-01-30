@@ -6,10 +6,10 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.ServiceConnection;
 import android.net.Uri;
-import android.p009os.IBinder;
+import android.os.IBinder;
 import android.provider.MediaStore;
 import android.util.Log;
-import com.android.internal.p029os.BackgroundThread;
+import com.android.internal.os.BackgroundThread;
 import java.io.File;
 
 /* loaded from: classes2.dex */

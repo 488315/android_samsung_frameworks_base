@@ -25,7 +25,7 @@ import com.android.internal.org.bouncycastle.operator.DigestCalculator;
 import com.android.internal.org.bouncycastle.operator.OperatorCreationException;
 import com.android.internal.org.bouncycastle.operator.RawContentVerifier;
 import com.android.internal.org.bouncycastle.util.Arrays;
-import com.android.internal.org.bouncycastle.util.p028io.TeeOutputStream;
+import com.android.internal.org.bouncycastle.util.io.TeeOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;

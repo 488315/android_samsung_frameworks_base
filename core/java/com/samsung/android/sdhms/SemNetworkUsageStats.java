@@ -1,7 +1,7 @@
 package com.samsung.android.sdhms;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,12 +89,12 @@ public class SemNetworkUsageStats implements Parcelable {
     this.netUsageList = in.createTypedArrayList(NetworkUsageHistoryItem.CREATOR);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeLong(this.startTime);
     parcel.writeLong(this.endTime);
@@ -177,12 +177,12 @@ public class SemNetworkUsageStats implements Parcelable {
       this.usage = in.readLong();
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       parcel.writeString(this.packageName);
       parcel.writeInt(this.uid);

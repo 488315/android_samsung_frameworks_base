@@ -1,8 +1,8 @@
 package com.android.internal.util;
 
-import android.p009os.Bundle;
-import android.p009os.Parcelable;
-import com.android.internal.p029os.IResultReceiver;
+import android.os.Bundle;
+import android.os.Parcelable;
+import com.android.internal.os.IResultReceiver;
 import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -80,7 +80,7 @@ public final class SyncResultReceiver extends IResultReceiver.Stub {
     return this.mBundle.getInt("EXTRA");
   }
 
-  @Override // com.android.internal.p029os.IResultReceiver
+  @Override // com.android.internal.os.IResultReceiver
   public void send(int resultCode, Bundle resultData) {
     this.mResult = resultCode;
     this.mBundle = resultData;

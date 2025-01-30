@@ -1,8 +1,8 @@
 package com.android.internal.telephony;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Bundle;
-import android.p009os.SystemProperties;
+import android.os.Bundle;
+import android.os.SystemProperties;
 import android.telephony.CallState;
 import android.telephony.PreciseCallState;
 import android.telephony.TelephonyManager;

@@ -8,7 +8,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.ArraySet;
 import android.util.Slog;
 import android.window.DisplayWindowPolicyController;

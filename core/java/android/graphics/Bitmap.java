@@ -1,18 +1,18 @@
 package android.graphics;
 
-import android.content.p002pm.IPackageManager;
+import android.content.pm.IPackageManager;
 import android.graphics.ColorSpace;
 import android.graphics.NinePatch;
 import android.hardware.HardwareBuffer;
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.Parcelable;
-import android.p009os.Process;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
-import android.p009os.SharedMemory;
-import android.p009os.StrictMode;
-import android.p009os.Trace;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
+import android.os.Parcelable;
+import android.os.Process;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.SharedMemory;
+import android.os.StrictMode;
+import android.os.Trace;
 import android.util.DisplayMetrics;
 import android.util.Half;
 import android.util.Log;
@@ -1133,12 +1133,12 @@ public final class Bitmap implements Parcelable {
         nativeSetPixels(this.mNativePtr, pixels, offset, stride, x, y, width, height);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
         return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel p, int flags) {
         checkRecycled("Can't parcel a recycled bitmap");
         noteHardwareBitmapSlowCall();

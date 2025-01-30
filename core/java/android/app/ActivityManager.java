@@ -6,13 +6,13 @@ import android.app.job.JobInfo;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p002pm.ActivityInfo;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.ConfigurationInfo;
-import android.content.p002pm.IPackageDataObserver;
-import android.content.p002pm.PackageInfo;
-import android.content.p002pm.ParceledListSlice;
-import android.content.p002pm.UserInfo;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.ConfigurationInfo;
+import android.content.pm.IPackageDataObserver;
+import android.content.pm.PackageInfo;
+import android.content.pm.ParceledListSlice;
+import android.content.pm.UserInfo;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -23,21 +23,21 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Icon;
 import android.hardware.HardwareBuffer;
-import android.p009os.Binder;
-import android.p009os.Build;
-import android.p009os.Bundle;
-import android.p009os.Debug;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.LocaleList;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
-import android.p009os.SystemProperties;
-import android.p009os.UserHandle;
-import android.p009os.UserManager;
-import android.p009os.WorkSource;
+import android.os.Binder;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Debug;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.LocaleList;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.SystemProperties;
+import android.os.UserHandle;
+import android.os.UserManager;
+import android.os.WorkSource;
 import android.security.keystore.KeyProperties;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
@@ -50,8 +50,8 @@ import android.window.TaskSnapshot;
 import com.android.internal.C4337R;
 import com.android.internal.app.LocalePicker;
 import com.android.internal.app.procstats.ProcessStats;
-import com.android.internal.p029os.RoSystemProperties;
-import com.android.internal.p029os.TransferPipe;
+import com.android.internal.os.RoSystemProperties;
+import com.android.internal.os.TransferPipe;
 import com.android.internal.util.FastPrintWriter;
 import com.android.internal.util.MemInfoReader;
 import com.android.internal.util.Preconditions;
@@ -1209,12 +1209,12 @@ public class ActivityManager {
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       if (this.mLabel == null) {
         dest.writeInt(0);
@@ -1405,7 +1405,7 @@ public class ActivityManager {
       readFromParcel(source);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -1422,7 +1422,7 @@ public class ActivityManager {
       super.readFromParcel(source);
     }
 
-    @Override // android.app.TaskInfo, android.p009os.Parcelable
+    @Override // android.app.TaskInfo, android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeInt(this.f12id);
       dest.writeInt(this.persistentId);
@@ -1556,7 +1556,7 @@ public class ActivityManager {
       return this.configuration.windowConfiguration.getWindowingMode() == 5;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -1567,7 +1567,7 @@ public class ActivityManager {
       super.readFromParcel(source);
     }
 
-    @Override // android.app.TaskInfo, android.p009os.Parcelable
+    @Override // android.app.TaskInfo, android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeInt(this.f13id);
       super.writeToParcel(dest, flags);
@@ -1725,12 +1725,12 @@ public class ActivityManager {
 
     public RunningServiceInfo() {}
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       ComponentName.writeToParcel(this.service, parcel);
       parcel.writeInt(this.pid);
@@ -1816,12 +1816,12 @@ public class ActivityManager {
 
     public MemoryInfo() {}
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       parcel.writeLong(this.advertisedMem);
       parcel.writeLong(this.availMem);
@@ -1918,12 +1918,12 @@ public class ActivityManager {
       this.crashData = null;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeInt(this.condition);
       dest.writeString(this.processName);
@@ -2127,12 +2127,12 @@ public class ActivityManager {
       this.lastSwapPss = 0L;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       parcel.writeString(this.processName);
       parcel.writeInt(this.pid);
@@ -3454,12 +3454,12 @@ public class ActivityManager {
       return this.mIntentSenderType;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int flags) {
       parcel.writeString(this.mCreatorPackage);
       parcel.writeInt(this.mCreatorUid);

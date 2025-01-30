@@ -7,7 +7,7 @@ import android.content.pm.SigningDetails;
 import android.net.Uri;
 import android.os.Build;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.ArrayMap;
 import android.util.ExceptionUtils;
 import android.util.Slog;

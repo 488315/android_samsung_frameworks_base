@@ -7,9 +7,9 @@ import android.database.DataSetObserver;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.MathUtils;
@@ -996,7 +996,7 @@ public class ViewPager extends ViewGroup {
       super(superState);
     }
 
-    @Override // android.view.AbsSavedState, android.p009os.Parcelable
+    @Override // android.view.AbsSavedState, android.os.Parcelable
     public void writeToParcel(Parcel out, int flags) {
       super.writeToParcel(out, flags);
       out.writeInt(this.position);

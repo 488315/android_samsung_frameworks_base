@@ -1,8 +1,8 @@
 package android.hardware.radio.voice;
 
-import android.p009os.BadParcelableException;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.BadParcelableException;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
@@ -47,12 +47,12 @@ public class CdmaInformationRecord implements Parcelable {
   public CdmaRedirectingNumberInfoRecord[] redir;
   public CdmaSignalInfoRecord[] signal;
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final int getStability() {
     return 1;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
     int _aidl_start_pos = _aidl_parcel.dataPosition();
     _aidl_parcel.writeInt(0);
@@ -177,7 +177,7 @@ public class CdmaInformationRecord implements Parcelable {
     return "android.hardware.radio.voice.CdmaInformationRecord" + _aidl_sj.toString();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     int _mask = 0 | describeContents(this.display);
     return _mask

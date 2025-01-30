@@ -5,19 +5,19 @@ import android.app.AppOpsManager;
 import android.app.job.JobInfo;
 import android.app.time.LocationTimeZoneManager;
 import android.content.Context;
-import android.content.p002pm.PackageInfo;
-import android.content.p002pm.PackageManager;
-import android.p009os.Binder;
-import android.p009os.Environment;
-import android.p009os.Handler;
-import android.p009os.HandlerThread;
-import android.p009os.IBinder;
-import android.p009os.Message;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.RemoteException;
-import android.p009os.SharedMemory;
-import android.p009os.Trace;
-import android.p009os.UserHandle;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.os.Binder;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.ParcelFileDescriptor;
+import android.os.RemoteException;
+import android.os.SharedMemory;
+import android.os.Trace;
+import android.os.UserHandle;
 import android.system.ErrnoException;
 import android.text.format.Time;
 import android.util.Log;
@@ -427,7 +427,7 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
   */
   /* JADX WARN: Code restructure failed: missing block: B:18:0x005f, code lost:
 
-     throw new android.p009os.RemoteException("Failed to allocate space");
+     throw new android.os.RemoteException("Failed to allocate space");
   */
   /*
       Code decompiled incorrectly, please refer to instructions dump.
@@ -507,7 +507,7 @@ public class GraphicsStatsService extends IGraphicsStats.Stub {
     }
   }
 
-  @Override // android.p009os.Binder
+  @Override // android.os.Binder
   protected void dump(FileDescriptor fd, PrintWriter fout, String[] args) {
     ArrayList<HistoricalBuffer> buffers;
     if (DumpUtils.checkDumpAndUsageStatsPermission(this.mContext, TAG, fout)) {

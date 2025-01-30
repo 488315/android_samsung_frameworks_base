@@ -2,7 +2,7 @@ package com.samsung.android.hardware.soundtrigger;
 
 import android.hardware.soundtrigger.SoundTrigger;
 import android.hardware.soundtrigger.SoundTriggerModuleWrapper;
-import android.p009os.Handler;
+import android.os.Handler;
 
 /* loaded from: classes5.dex */
 public class SemSoundTriggerModule {

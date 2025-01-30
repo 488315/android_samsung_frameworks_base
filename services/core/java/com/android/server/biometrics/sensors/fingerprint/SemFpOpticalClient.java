@@ -6,7 +6,7 @@ import android.os.IBinder;
 import android.os.RemoteException;
 import android.util.Slog;
 import com.android.server.biometrics.SemBiometricSysUiManager;
-import com.samsung.android.knox.p024zt.devicetrust.EndpointMonitorConst;
+import com.samsung.android.knox.zt.devicetrust.EndpointMonitorConst;
 
 /* loaded from: classes.dex */
 public class SemFpOpticalClient

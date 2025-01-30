@@ -3,7 +3,7 @@ package com.android.server.accessibility;
 import android.content.Context;
 import android.graphics.Region;
 import android.os.PowerManager;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Slog;
 import android.util.SparseArray;
 import android.util.SparseBooleanArray;

@@ -4,7 +4,7 @@ import android.graphics.SurfaceTexture;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
-import android.p009os.SemSystemProperties;
+import android.os.SemSystemProperties;
 import com.samsung.android.transcode.util.LogS;
 import com.samsung.android.transcode.util.OpenGlHelper;
 import java.nio.Buffer;

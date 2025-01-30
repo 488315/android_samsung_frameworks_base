@@ -2,8 +2,8 @@ package android.companion;
 
 import android.annotation.NonNull;
 import android.annotation.UserIdInt;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.provider.OneTimeUseBuilder;
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.ArrayUtils;
@@ -290,7 +290,7 @@ public final class AssociationRequest implements Parcelable {
         + Boolean.hashCode(this.mSkipPrompt);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     int flg = this.mSingleDevice ? 0 | 1 : 0;
     if (this.mSelfManaged) {
@@ -343,7 +343,7 @@ public final class AssociationRequest implements Parcelable {
     dest.writeLong(this.mCreationTime);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

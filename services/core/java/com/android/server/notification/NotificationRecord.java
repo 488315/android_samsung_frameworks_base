@@ -9,7 +9,7 @@ import android.app.PendingIntent;
 import android.app.Person;
 import android.content.ContentProvider;
 import android.content.Context;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.ShortcutInfo;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Icon;

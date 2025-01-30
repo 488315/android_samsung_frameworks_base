@@ -1,7 +1,7 @@
 package android.telephony.ims;
 
 import android.annotation.SystemApi;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.telephony.CallQuality;
 import android.telephony.ServiceState;
 import android.telephony.ims.aidl.IImsCallSessionListener;

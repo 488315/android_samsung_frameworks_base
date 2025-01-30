@@ -1,8 +1,8 @@
 package android.hardware.radio;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Collection;
@@ -58,14 +58,14 @@ public final class Announcement implements Parcelable {
     this.mVendorInfo = Utils.readStringMap(in);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeTypedObject(this.mSelector, 0);
     dest.writeInt(this.mType);
     Utils.writeStringMap(dest, this.mVendorInfo);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

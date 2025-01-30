@@ -4,7 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.os.IBinder;
 import android.os.IInterface;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.service.contentcapture.ActivityEvent;
 import android.service.contentcapture.IContentCaptureService;
 import android.service.contentcapture.IContentCaptureServiceCallback;

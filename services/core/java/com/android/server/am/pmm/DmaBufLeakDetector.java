@@ -6,7 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.StrictMode;
 import android.os.SystemProperties;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.text.TextUtils;
 import android.util.Slog;
 import com.android.internal.os.KernelAllocationStats;

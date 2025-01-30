@@ -1,7 +1,7 @@
 package android.app.timedetector;
 
 import android.app.time.UnixEpochTime;
-import android.p009os.SystemClock;
+import android.os.SystemClock;
 
 /* loaded from: classes.dex */
 public interface TimeDetector {

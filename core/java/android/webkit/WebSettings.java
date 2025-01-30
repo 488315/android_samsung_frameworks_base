@@ -3,7 +3,7 @@ package android.webkit;
 import android.annotation.SystemApi;
 import android.app.ResourcesManager;
 import android.content.Context;
-import android.content.p002pm.ApplicationInfo;
+import android.content.pm.ApplicationInfo;
 import com.android.internal.util.ArrayUtils;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

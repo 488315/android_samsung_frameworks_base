@@ -1,7 +1,7 @@
 package com.samsung.android.security;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public final class SemSdCardEncryptionPolicy
@@ -103,12 +103,12 @@ public final class SemSdCardEncryptionPolicy
     return !equals(semSdCardEncryptionPolicy) ? 1 : 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeInt(this.mIsPolicy);
     out.writeInt(this.mEncryptState);

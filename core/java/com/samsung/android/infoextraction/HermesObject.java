@@ -1,7 +1,7 @@
 package com.samsung.android.infoextraction;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class HermesObject implements Parcelable {
@@ -24,7 +24,7 @@ public class HermesObject implements Parcelable {
       };
   private Object obj = null;
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -37,7 +37,7 @@ public class HermesObject implements Parcelable {
     return this.obj;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeParcelable((HermesObject) this.obj, flags);
   }

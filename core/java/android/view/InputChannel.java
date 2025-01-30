@@ -1,8 +1,8 @@
 package android.view;
 
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
 import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes4.dex */
@@ -97,7 +97,7 @@ public final class InputChannel implements Parcelable {
     return target;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 1;
   }
@@ -112,7 +112,7 @@ public final class InputChannel implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     if (out == null) {
       throw new IllegalArgumentException("out must not be null");

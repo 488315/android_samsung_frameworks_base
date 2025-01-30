@@ -1,6 +1,6 @@
 package android.app.admin;
 
-import android.p009os.Parcelable;
+import android.os.Parcelable;
 import java.util.Objects;
 
 /* loaded from: classes.dex */

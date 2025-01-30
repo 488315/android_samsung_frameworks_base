@@ -2,8 +2,8 @@ package com.samsung.android.wifi;
 
 import android.net.MacAddress;
 import android.net.wifi.MloLink;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -471,12 +471,12 @@ public final class SemMobileWipsScanResultAdapter implements Parcelable {
     return sb.toString();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     if (this.wifiSsid != null) {
       parcel.writeInt(1);
@@ -695,12 +695,12 @@ public final class SemMobileWipsScanResultAdapter implements Parcelable {
       return ByteBuffer.wrap(this.bytes).asReadOnlyBuffer();
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeInt(this.f3091id);
       dest.writeInt(this.idExt);

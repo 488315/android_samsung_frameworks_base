@@ -1,10 +1,10 @@
 package com.samsung.android.sume.core.message;
 
 import android.content.ContentValues;
-import android.p009os.Bundle;
-import android.p009os.Messenger;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
+import android.os.Bundle;
+import android.os.Messenger;
+import android.os.Parcelable;
+import android.os.RemoteException;
 import android.util.Log;
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBuffer;
@@ -24,7 +24,7 @@ public final class Request extends Message {
   private List<MediaBuffer> outputBufferList;
   private Messenger receiver;
 
-  private Request(android.p009os.Message message) {
+  private Request(android.os.Message message) {
     super(message);
     this.isOneWay = false;
     Bundle bundle = message.getData();
@@ -74,8 +74,8 @@ public final class Request extends Message {
   }
 
   @Override // com.samsung.android.sume.core.message.Message
-  public android.p009os.Message toAndroidMessage() {
-    android.p009os.Message msg = super.toAndroidMessage();
+  public android.os.Message toAndroidMessage() {
+    android.os.Message msg = super.toAndroidMessage();
     Bundle bundle = msg.getData();
     List<MediaBuffer> list = this.inputBufferList;
     if (list != null) {
@@ -282,7 +282,7 @@ public final class Request extends Message {
   }
 
   /* renamed from: of */
-  public static Request m435of(android.p009os.Message msg) {
+  public static Request m435of(android.os.Message msg) {
     return new Request(msg);
   }
 }

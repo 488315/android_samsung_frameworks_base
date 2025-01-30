@@ -1,7 +1,7 @@
 package com.android.internal.widget;
 
 import android.content.Context;
-import android.p009os.SystemClock;
+import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.RemotableViewMethod;

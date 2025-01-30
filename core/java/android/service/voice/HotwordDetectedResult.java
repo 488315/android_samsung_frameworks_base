@@ -2,14 +2,14 @@ package android.service.voice;
 
 import android.annotation.NonNull;
 import android.annotation.SystemApi;
-import android.content.p002pm.AppSearchShortcutInfo;
+import android.content.pm.AppSearchShortcutInfo;
 import android.content.res.Resources;
 import android.hardware.scontext.SContextConstants;
 import android.media.AudioRecord;
 import android.media.MediaSyncEvent;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.PersistableBundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.PersistableBundle;
 import com.android.internal.C4337R;
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Preconditions;
@@ -500,7 +500,7 @@ public final class HotwordDetectedResult implements Parcelable {
         + this.mBackgroundAudioPower;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     int flg = this.mHotwordDetectionPersonalized ? 0 | 32 : 0;
     if (this.mMediaSyncEvent != null) {
@@ -523,7 +523,7 @@ public final class HotwordDetectedResult implements Parcelable {
     dest.writeInt(this.mBackgroundAudioPower);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

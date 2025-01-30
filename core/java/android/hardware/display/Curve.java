@@ -1,8 +1,8 @@
 package android.hardware.display;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public final class Curve implements Parcelable {
@@ -42,13 +42,13 @@ public final class Curve implements Parcelable {
     return this.f137mY;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeFloatArray(this.f136mX);
     out.writeFloatArray(this.f137mY);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

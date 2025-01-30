@@ -4,7 +4,7 @@ import android.annotation.SystemApi;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.p009os.Message;
+import android.os.Message;
 import android.view.View;
 
 /* loaded from: classes4.dex */

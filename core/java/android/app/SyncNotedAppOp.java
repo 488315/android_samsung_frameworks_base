@@ -1,8 +1,8 @@
 package android.app;
 
 import android.annotation.IntRange;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.AnnotationValidations;
 import java.util.Objects;
 
@@ -99,7 +99,7 @@ public final class SyncNotedAppOp implements Parcelable {
         + Objects.hashCode(this.mPackageName);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     byte flg = this.mAttributionTag != null ? (byte) (0 | 4) : (byte) 0;
     if (this.mPackageName != null) {
@@ -118,7 +118,7 @@ public final class SyncNotedAppOp implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

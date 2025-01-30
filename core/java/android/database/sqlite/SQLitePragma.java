@@ -1,6 +1,6 @@
 package android.database.sqlite;
 
-import android.p009os.CancellationSignal;
+import android.os.CancellationSignal;
 import android.util.Log;
 import com.android.internal.content.NativeLibraryHelper;
 import java.util.regex.Matcher;

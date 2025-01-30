@@ -20,7 +20,7 @@ import android.os.LocaleList;
 import android.os.ParcelFileDescriptor;
 import android.os.RemoteException;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.Slog;

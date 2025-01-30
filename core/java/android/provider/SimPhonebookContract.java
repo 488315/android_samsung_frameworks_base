@@ -3,7 +3,7 @@ package android.provider;
 import android.annotation.SystemApi;
 import android.content.ContentResolver;
 import android.net.Uri;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import com.android.internal.util.Preconditions;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

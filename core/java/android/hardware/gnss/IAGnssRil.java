@@ -1,12 +1,12 @@
 package android.hardware.gnss;
 
-import android.p009os.BadParcelableException;
-import android.p009os.Binder;
-import android.p009os.IBinder;
-import android.p009os.IInterface;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
+import android.os.BadParcelableException;
+import android.os.Binder;
+import android.os.IBinder;
+import android.os.IInterface;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
 
 /* loaded from: classes2.dex */
 public interface IAGnssRil extends IInterface {
@@ -64,7 +64,7 @@ public interface IAGnssRil extends IInterface {
       return "";
     }
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return null;
     }
@@ -94,7 +94,7 @@ public interface IAGnssRil extends IInterface {
       return new Proxy(obj);
     }
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return this;
     }
@@ -118,12 +118,12 @@ public interface IAGnssRil extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public String getTransactionName(int transactionCode) {
       return getDefaultTransactionName(transactionCode);
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
         throws RemoteException {
       String descriptor = DESCRIPTOR;
@@ -186,7 +186,7 @@ public interface IAGnssRil extends IInterface {
         this.mRemote = remote;
       }
 
-      @Override // android.p009os.IInterface
+      @Override // android.os.IInterface
       public IBinder asBinder() {
         return this.mRemote;
       }
@@ -308,7 +308,7 @@ public interface IAGnssRil extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public int getMaxTransactionId() {
       return 16777214;
     }
@@ -342,12 +342,12 @@ public interface IAGnssRil extends IInterface {
     public int pcid = 0;
     public int arfcn = 0;
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public final int getStability() {
       return 1;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
       int _aidl_start_pos = _aidl_parcel.dataPosition();
       _aidl_parcel.writeInt(0);
@@ -449,7 +449,7 @@ public interface IAGnssRil extends IInterface {
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -476,12 +476,12 @@ public interface IAGnssRil extends IInterface {
     public AGnssRefLocationCellID cellID;
     public int type;
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public final int getStability() {
       return 1;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
       int _aidl_start_pos = _aidl_parcel.dataPosition();
       _aidl_parcel.writeInt(0);
@@ -530,7 +530,7 @@ public interface IAGnssRil extends IInterface {
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       int _mask = 0 | describeContents(this.cellID);
       return _mask;
@@ -568,12 +568,12 @@ public interface IAGnssRil extends IInterface {
     public boolean isConnected = false;
     public int capabilities = 0;
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public final int getStability() {
       return 1;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
       int _aidl_start_pos = _aidl_parcel.dataPosition();
       _aidl_parcel.writeInt(0);
@@ -639,7 +639,7 @@ public interface IAGnssRil extends IInterface {
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }

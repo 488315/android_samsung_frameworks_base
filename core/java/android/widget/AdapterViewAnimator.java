@@ -6,9 +6,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.TypedArray;
-import android.p009os.Handler;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Handler;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.RemotableViewMethod;
@@ -658,7 +658,7 @@ public abstract class AdapterViewAnimator extends AdapterView<Adapter>
     }
 
     @Override // android.view.View.BaseSavedState, android.view.AbsSavedState,
-              // android.p009os.Parcelable
+              // android.os.Parcelable
     public void writeToParcel(Parcel out, int flags) {
       super.writeToParcel(out, flags);
       out.writeInt(this.whichChild);

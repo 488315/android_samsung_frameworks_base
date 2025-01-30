@@ -3,9 +3,9 @@ package android.telephony;
 import android.annotation.SystemApi;
 import android.app.Service;
 import android.content.Intent;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
-import android.p009os.RemoteCallback;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.RemoteCallback;
 import android.telecom.ParcelableCallAnalytics;
 import android.telephony.cdma.CdmaSmsCbProgramData;
 import com.android.internal.telephony.gsm.SmsCbHeader;
@@ -246,12 +246,12 @@ public abstract class CellBroadcastService extends Service {
       return CellBroadcastService.this.getCellBroadcastAreaInfo(slotIndex);
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     protected void dump(FileDescriptor fd, PrintWriter fout, String[] args) {
       CellBroadcastService.this.dump(fd, fout, args);
     }
 
-    @Override // android.p009os.Binder, android.p009os.IBinder
+    @Override // android.os.Binder, android.os.IBinder
     public void dump(FileDescriptor fd, String[] args) {
       PrintWriter pw = new FastPrintWriter(new FileOutputStream(fd));
       CellBroadcastService.this.dump(fd, pw, args);

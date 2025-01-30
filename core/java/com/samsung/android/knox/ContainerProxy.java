@@ -1,8 +1,8 @@
 package com.samsung.android.knox;
 
-import android.p009os.Bundle;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.Bundle;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.util.Log;
 
 /* loaded from: classes5.dex */

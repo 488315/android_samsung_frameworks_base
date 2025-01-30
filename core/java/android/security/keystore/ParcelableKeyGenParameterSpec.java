@@ -1,7 +1,7 @@
 package android.security.keystore;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.math.BigInteger;
 import java.security.spec.AlgorithmParameterSpec;
 import java.security.spec.ECGenParameterSpec;
@@ -36,7 +36,7 @@ public final class ParcelableKeyGenParameterSpec implements Parcelable {
     this.mSpec = spec;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -50,7 +50,7 @@ public final class ParcelableKeyGenParameterSpec implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeString(this.mSpec.getKeystoreAlias());
     out.writeInt(this.mSpec.getPurposes());

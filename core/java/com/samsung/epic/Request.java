@@ -1,10 +1,10 @@
 package com.samsung.epic;
 
 import android.content.Context;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
-import android.p009os.epic.IEpicManager;
-import android.p009os.epic.IEpicObject;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.epic.IEpicManager;
+import android.os.epic.IEpicObject;
 
 /* loaded from: classes6.dex */
 public class Request {

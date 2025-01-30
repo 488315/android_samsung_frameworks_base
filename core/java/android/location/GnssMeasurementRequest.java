@@ -1,8 +1,8 @@
 package android.location;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.TimeUtils;
 import com.android.internal.util.Preconditions;
 import java.util.Objects;
@@ -50,7 +50,7 @@ public final class GnssMeasurementRequest implements Parcelable {
     return this.mIntervalMillis;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeBoolean(this.mFullTracking);
     parcel.writeBoolean(this.mCorrelationVectorOutputsEnabled);
@@ -95,7 +95,7 @@ public final class GnssMeasurementRequest implements Parcelable {
         Integer.valueOf(this.mIntervalMillis));
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

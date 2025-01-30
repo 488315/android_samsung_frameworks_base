@@ -2,8 +2,8 @@ package android.app.smartspace.uitemplatedata;
 
 import android.annotation.SystemApi;
 import android.app.smartspace.SmartspaceUtils;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import java.util.Objects;
 
@@ -89,12 +89,12 @@ public class BaseTemplateData implements Parcelable {
     return this.mLayoutWeight;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeInt(this.mTemplateType);
     out.writeTypedObject(this.mPrimaryItem, flags);
@@ -287,12 +287,12 @@ public class BaseTemplateData implements Parcelable {
       return this.mLoggingInfo;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel out, int flags) {
       out.writeTypedObject(this.mText, flags);
       out.writeTypedObject(this.mIcon, flags);
@@ -414,12 +414,12 @@ public class BaseTemplateData implements Parcelable {
       return this.mPackageName;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel out, int flags) {
       out.writeInt(this.mInstanceId);
       out.writeInt(this.mFeatureType);

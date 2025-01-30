@@ -1,8 +1,8 @@
 package android.hardware.display;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.ArraySet;
 import android.view.Surface;
 import java.util.Collection;
@@ -109,7 +109,7 @@ public final class VirtualDisplayConfig implements Parcelable {
     return this.mRequestedRefreshRate;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString8(this.mName);
     dest.writeInt(this.mWidth);
@@ -124,7 +124,7 @@ public final class VirtualDisplayConfig implements Parcelable {
     dest.writeFloat(this.mRequestedRefreshRate);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

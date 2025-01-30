@@ -4,7 +4,7 @@ import android.content.ContentProviderClient;
 import android.database.Cursor;
 import android.drm.DrmInfoRequest;
 import android.media.MediaMetrics;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.util.Log;
 import java.util.ArrayList;
 

@@ -2,8 +2,8 @@ package android.service.controls;
 
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Icon;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import com.android.internal.util.Preconditions;
 import java.lang.annotation.Retention;
@@ -193,12 +193,12 @@ public class CustomControl implements Parcelable {
     return this.mOverlayCustomIcon;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.mCustomIconAnimationJson);
     dest.writeString(this.mCustomIconAnimationJsonCache);

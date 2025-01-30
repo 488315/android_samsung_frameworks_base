@@ -2,7 +2,7 @@ package com.samsung.android.jdsms;
 
 import android.content.Context;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Binder;
+import android.os.Binder;
 
 /* loaded from: classes5.dex */
 final class PolicyEnforcer {

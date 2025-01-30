@@ -1,7 +1,7 @@
 package android.media.midi;
 
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.util.Log;
 import dalvik.system.CloseGuard;
 import java.io.Closeable;

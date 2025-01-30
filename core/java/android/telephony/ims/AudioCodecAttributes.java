@@ -1,8 +1,8 @@
 package android.telephony.ims;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Range;
 
 @SystemApi
@@ -48,7 +48,7 @@ public final class AudioCodecAttributes implements Parcelable {
         new Range<>(Float.valueOf(in.readFloat()), Float.valueOf(in.readFloat()));
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeFloat(this.mBitrateKbps);
     out.writeFloat(this.mBitrateRangeKbps.getLower().floatValue());
@@ -58,7 +58,7 @@ public final class AudioCodecAttributes implements Parcelable {
     out.writeFloat(this.mBandwidthRangeKhz.getUpper().floatValue());
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

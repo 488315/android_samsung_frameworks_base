@@ -13,9 +13,9 @@ import android.hardware.display.DeviceProductInfo;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.DisplayManagerGlobal;
 import android.hardware.graphics.common.DisplayDecorationSupport;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.SystemClock;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.SystemClock;
 import android.util.ArraySet;
 import android.util.DisplayMetrics;
 import com.samsung.android.hardware.display.RefreshRateConfig;
@@ -1245,7 +1245,7 @@ public final class Display {
           + "}";
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -1260,7 +1260,7 @@ public final class Display {
           in.createIntArray());
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel out, int parcelableFlags) {
       out.writeInt(this.mModeId);
       out.writeInt(this.mWidth);
@@ -1410,7 +1410,7 @@ public final class Display {
       this.mMinLuminance = source.readFloat();
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeInt(this.mSupportedHdrTypes.length);
       int i = 0;
@@ -1428,7 +1428,7 @@ public final class Display {
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }

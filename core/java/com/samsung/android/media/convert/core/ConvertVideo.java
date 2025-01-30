@@ -11,7 +11,7 @@ import android.media.MediaFormat;
 import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.opengl.GLES20;
-import android.p009os.SemSystemProperties;
+import android.os.SemSystemProperties;
 import android.provider.MediaStore;
 import android.sec.enterprise.content.SecContentProviderURI;
 import android.util.Log;

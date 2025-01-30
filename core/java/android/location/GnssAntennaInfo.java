@@ -1,8 +1,8 @@
 package android.location;
 
 import android.hardware.scontext.SContextConstants;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
@@ -113,12 +113,12 @@ public final class GnssAntennaInfo implements Parcelable {
       return this.mOffsetZUncertaintyMm;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeDouble(this.mOffsetXMm);
       dest.writeDouble(this.mOffsetXUncertaintyMm);
@@ -245,12 +245,12 @@ public final class GnssAntennaInfo implements Parcelable {
       return 180.0d / (this.mNumColumns - 1);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeInt(this.mNumRows);
       dest.writeInt(this.mNumColumns);
@@ -382,12 +382,12 @@ public final class GnssAntennaInfo implements Parcelable {
     return this.mSignalGainCorrections;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeDouble(this.mCarrierFrequencyMHz);
     parcel.writeTypedObject(this.mPhaseCenterOffset, flags);

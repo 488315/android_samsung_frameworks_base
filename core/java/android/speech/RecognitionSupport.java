@@ -1,8 +1,8 @@
 package android.speech;
 
 import android.annotation.NonNull;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.AnnotationValidations;
 import java.util.ArrayList;
 import java.util.List;
@@ -106,7 +106,7 @@ public final class RecognitionSupport implements Parcelable {
         + Objects.hashCode(this.mOnlineLanguages);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeStringList(this.mInstalledOnDeviceLanguages);
     dest.writeStringList(this.mPendingOnDeviceLanguages);
@@ -114,7 +114,7 @@ public final class RecognitionSupport implements Parcelable {
     dest.writeStringList(this.mOnlineLanguages);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

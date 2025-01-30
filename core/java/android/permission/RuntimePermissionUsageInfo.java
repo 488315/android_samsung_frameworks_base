@@ -1,8 +1,8 @@
 package android.permission;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.Preconditions;
 
 @SystemApi
@@ -46,12 +46,12 @@ public final class RuntimePermissionUsageInfo implements Parcelable {
     return this.mName;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeString(this.mName);
     parcel.writeInt(this.mNumUsers);

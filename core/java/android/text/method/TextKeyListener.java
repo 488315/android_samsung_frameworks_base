@@ -3,7 +3,7 @@ package android.text.method;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.database.ContentObserver;
-import android.p009os.Handler;
+import android.os.Handler;
 import android.provider.Settings;
 import android.text.Editable;
 import android.text.NoCopySpan;

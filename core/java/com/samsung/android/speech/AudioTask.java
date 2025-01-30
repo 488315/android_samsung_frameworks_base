@@ -3,9 +3,9 @@ package com.samsung.android.speech;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.Message;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -60,7 +60,7 @@ class AudioTask implements Runnable {
   private boolean isOEMResult = false;
   private int dualThresholdFlag = 0;
   private Handler handler = new Handler() { // from class: com.samsung.android.speech.AudioTask.1
-        @Override // android.p009os.Handler
+        @Override // android.os.Handler
         public void handleMessage(Message msg) {
           String[] result = msg.getData().getStringArray("recognition_result");
           if (AudioTask.this.m_listener != null) {

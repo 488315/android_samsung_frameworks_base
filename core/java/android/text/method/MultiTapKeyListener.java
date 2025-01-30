@@ -1,7 +1,7 @@
 package android.text.method;
 
-import android.p009os.Handler;
-import android.p009os.SystemClock;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.text.Editable;
 import android.text.Selection;
 import android.text.SpanWatcher;

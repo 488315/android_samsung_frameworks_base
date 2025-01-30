@@ -1,8 +1,8 @@
 package android.net.wifi.nl80211;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import java.util.Objects;
 
@@ -176,12 +176,12 @@ public final class DeviceWiphyCapabilities implements Parcelable {
         Integer.valueOf(this.mMaxNumberRxSpatialStreams));
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeBoolean(this.m80211nSupported);
     out.writeBoolean(this.m80211acSupported);

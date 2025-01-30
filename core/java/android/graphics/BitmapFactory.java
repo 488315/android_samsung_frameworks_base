@@ -1,13 +1,13 @@
 package android.graphics;
 
-import android.content.p001om.SamsungThemeConstants;
+import android.content.om.SamsungThemeConstants;
 import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.drm.DrmInfo;
 import android.drm.DrmInfoRequest;
 import android.drm.DrmManagerClient;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.Trace;
+import android.os.ParcelFileDescriptor;
+import android.os.Trace;
 import android.util.Log;
 import android.util.TypedValue;
 import com.android.internal.widget.MessagingMessage;

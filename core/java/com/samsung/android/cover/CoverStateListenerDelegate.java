@@ -1,10 +1,10 @@
 package com.samsung.android.cover;
 
 import android.content.Context;
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.RemoteException;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 class CoverStateListenerDelegate extends ICoverStateListenerCallback.Stub {
@@ -48,7 +48,7 @@ class CoverStateListenerDelegate extends ICoverStateListenerCallback.Stub {
       this.mListener = listener;
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       if (this.mListener != null) {
         switch (msg.what) {

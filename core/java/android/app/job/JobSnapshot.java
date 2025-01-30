@@ -1,7 +1,7 @@
 package android.app.job;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class JobSnapshot implements Parcelable {
@@ -63,12 +63,12 @@ public class JobSnapshot implements Parcelable {
     return !this.mJob.isRequireStorageNotLow() || satisfied(8);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     this.mJob.writeToParcel(out, flags);
     out.writeInt(this.mSatisfiedConstraints);

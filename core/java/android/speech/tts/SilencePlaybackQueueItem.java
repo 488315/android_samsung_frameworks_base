@@ -1,6 +1,6 @@
 package android.speech.tts;
 
-import android.p009os.ConditionVariable;
+import android.os.ConditionVariable;
 
 /* loaded from: classes3.dex */
 class SilencePlaybackQueueItem extends PlaybackQueueItem {

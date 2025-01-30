@@ -1,7 +1,7 @@
 package com.android.internal.graphics.palette;
 
 import com.android.internal.graphics.ColorUtils;
-import com.android.internal.p016ml.clustering.KMeans;
+import com.android.internal.ml.clustering.KMeans;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;

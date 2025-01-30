@@ -1,8 +1,8 @@
 package com.samsung.android.globalactions.util;
 
 import android.content.Context;
-import android.p009os.Bundle;
-import android.p009os.UserHandle;
+import android.os.Bundle;
+import android.os.UserHandle;
 import com.samsung.android.knox.SemPersonaManager;
 
 /* loaded from: classes5.dex */

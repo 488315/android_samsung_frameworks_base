@@ -17,7 +17,7 @@ import android.os.SystemClock;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.text.format.DateFormat;
-import com.att.iqi.lib.metrics.p019hw.HwConstants;
+import com.att.iqi.lib.metrics.hw.HwConstants;
 import com.samsung.android.cover.INfcLedCoverTouchListenerCallback;
 import com.samsung.android.sepunion.Log;
 import java.io.FileDescriptor;

@@ -2,12 +2,12 @@ package com.samsung.android.audio;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.AudioSystem;
 import android.media.MediaMetrics;
-import android.p009os.Binder;
-import android.p009os.SystemProperties;
+import android.os.Binder;
+import android.os.SystemProperties;
 import android.telecom.Logging.Session;
 import android.text.TextUtils;
 import android.util.Log;
@@ -32,7 +32,7 @@ public class AudioManagerHelper {
 
   /* JADX WARN: Code restructure failed: missing block: B:4:0x002f, code lost:
 
-     if (android.p009os.SystemProperties.getBoolean("ro.product_ship", true) != false) goto L8;
+     if (android.os.SystemProperties.getBoolean("ro.product_ship", true) != false) goto L8;
   */
   static {
     boolean z = "user".equals(SystemProperties.get("ro.build.type", "user"));

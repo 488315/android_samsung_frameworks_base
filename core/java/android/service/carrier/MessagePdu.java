@@ -1,7 +1,7 @@
 package android.service.carrier;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,12 +45,12 @@ public final class MessagePdu implements Parcelable {
     return this.mPduList;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     List<byte[]> list = this.mPduList;
     if (list == null) {

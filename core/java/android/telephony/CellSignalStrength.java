@@ -1,7 +1,7 @@
 package android.telephony;
 
 import android.annotation.SystemApi;
-import android.p009os.PersistableBundle;
+import android.os.PersistableBundle;
 
 /* loaded from: classes3.dex */
 public abstract class CellSignalStrength {

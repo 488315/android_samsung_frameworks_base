@@ -2,7 +2,7 @@ package android.telephony.ims.stub;
 
 import android.annotation.SystemApi;
 import android.net.Uri;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.telephony.ims.ImsReasonInfo;
 import android.telephony.ims.ImsRegistrationAttributes;
 import android.telephony.ims.SipDetails;

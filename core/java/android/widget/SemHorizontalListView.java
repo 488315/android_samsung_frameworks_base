@@ -9,7 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.p009os.Trace;
+import android.os.Trace;
 import android.util.AttributeSet;
 import android.util.MathUtils;
 import android.view.FocusFinder;

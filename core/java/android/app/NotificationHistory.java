@@ -3,12 +3,12 @@ package android.app;
 import android.graphics.drawable.Icon;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.NtpTrustedTime;
-import com.android.internal.p029os.BackgroundThread;
+import com.android.internal.os.BackgroundThread;
 import com.samsung.android.server.notification.NotificationHistoryImageProvider;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -711,12 +711,12 @@ public final class NotificationHistory implements Parcelable {
     return notificationOut.build();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     Parcel p = Parcel.obtain();
     p.writeInt(this.mHistoryCount);

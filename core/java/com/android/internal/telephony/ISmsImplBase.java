@@ -2,7 +2,7 @@ package com.android.internal.telephony;
 
 import android.app.PendingIntent;
 import android.net.Uri;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import java.util.List;
 
 /* loaded from: classes5.dex */

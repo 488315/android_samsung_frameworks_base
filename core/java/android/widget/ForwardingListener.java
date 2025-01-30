@@ -1,6 +1,6 @@
 package android.widget;
 
-import android.p009os.SystemClock;
+import android.os.SystemClock;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;

@@ -1,7 +1,7 @@
 package android.nfc;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.proto.ProtoOutputStream;
 import java.nio.ByteBuffer;
 import java.util.Arrays;
@@ -97,12 +97,12 @@ public final class NdefMessage implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mRecords.length);
     dest.writeTypedArray(this.mRecords, flags);

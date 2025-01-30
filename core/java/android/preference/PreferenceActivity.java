@@ -10,11 +10,11 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.Message;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -87,7 +87,7 @@ public abstract class PreferenceActivity extends ListActivity
   private boolean mUpdateLayoutBySplitChange = false;
   private View.OnLayoutChangeListener mSplitBarLayoutChangeListner = null;
   private Handler mHandler = new Handler() { // from class: android.preference.PreferenceActivity.1
-        @Override // android.p009os.Handler
+        @Override // android.os.Handler
         public void handleMessage(Message msg) {
           PreferenceActivity preferenceActivity;
           Header mappedHeader;
@@ -254,12 +254,12 @@ public abstract class PreferenceActivity extends ListActivity
       return this.breadCrumbShortTitle;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeLong(this.f351id);
       dest.writeInt(this.titleRes);
@@ -930,7 +930,7 @@ public abstract class PreferenceActivity extends ListActivity
   */
   /* JADX WARN: Code restructure failed: missing block: B:79:0x00ef, code lost:
 
-     r9 = new android.p009os.Bundle();
+     r9 = new android.os.Bundle();
   */
   /* JADX WARN: Code restructure failed: missing block: B:80:0x00f7, code lost:
 

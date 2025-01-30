@@ -6,7 +6,7 @@ import android.filterfw.core.Frame;
 import android.filterfw.core.FrameFormat;
 import android.filterfw.core.GenerateFieldPort;
 import android.filterfw.format.ObjectFormat;
-import android.p009os.SystemClock;
+import android.os.SystemClock;
 
 /* loaded from: classes.dex */
 public class ThroughputFilter extends Filter {

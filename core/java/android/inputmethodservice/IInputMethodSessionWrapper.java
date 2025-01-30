@@ -2,9 +2,9 @@ package android.inputmethodservice;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.p009os.Bundle;
-import android.p009os.Looper;
-import android.p009os.Message;
+import android.os.Bundle;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.InputChannel;
@@ -19,8 +19,8 @@ import android.view.inputmethod.ExtractedText;
 import android.view.inputmethod.InputMethodSession;
 import com.android.internal.inputmethod.IInputMethodSession;
 import com.android.internal.inputmethod.IRemoteInputConnection;
-import com.android.internal.p029os.HandlerCaller;
-import com.android.internal.p029os.SomeArgs;
+import com.android.internal.os.HandlerCaller;
+import com.android.internal.os.SomeArgs;
 
 /* loaded from: classes2.dex */
 class IInputMethodSessionWrapper extends IInputMethodSession.Stub

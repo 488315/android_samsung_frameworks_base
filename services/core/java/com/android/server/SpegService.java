@@ -1,7 +1,7 @@
 package com.android.server;
 
 import android.content.Context;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.os.IBinder;
 import android.os.ISpegHelperService;
 import android.os.RemoteException;

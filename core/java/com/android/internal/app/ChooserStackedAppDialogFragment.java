@@ -1,10 +1,10 @@
 package com.android.internal.app;
 
 import android.content.DialogInterface;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
-import android.p009os.Bundle;
-import android.p009os.UserHandle;
+import android.os.Bundle;
+import android.os.UserHandle;
 import com.android.internal.app.chooser.DisplayResolveInfo;
 import com.android.internal.app.chooser.MultiDisplayResolveInfo;
 

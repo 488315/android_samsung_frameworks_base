@@ -1,6 +1,6 @@
 package com.samsung.android.media;
 
-import android.p009os.ParcelFileDescriptor;
+import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import java.io.FileInputStream;
 import java.io.IOException;

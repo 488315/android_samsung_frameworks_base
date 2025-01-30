@@ -3,21 +3,21 @@ package android.app;
 import android.annotation.SystemApi;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p002pm.InstantAppRequestInfo;
-import android.content.p002pm.InstantAppResolveInfo;
+import android.content.pm.InstantAppRequestInfo;
+import android.content.pm.InstantAppResolveInfo;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Build;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.IRemoteCallback;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.RemoteException;
-import android.p009os.UserHandle;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.IRemoteCallback;
+import android.os.Looper;
+import android.os.Message;
+import android.os.RemoteException;
+import android.os.UserHandle;
 import android.util.Log;
 import android.util.Slog;
-import com.android.internal.p029os.SomeArgs;
+import com.android.internal.os.SomeArgs;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -185,7 +185,7 @@ public abstract class InstantAppResolverService extends Service {
       super(looper, null, true);
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message message) {
       int action = message.what;
       switch (action) {

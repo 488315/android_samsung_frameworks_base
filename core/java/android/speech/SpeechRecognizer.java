@@ -3,15 +3,15 @@ package android.speech;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p002pm.ResolveInfo;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.content.pm.ResolveInfo;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
@@ -93,7 +93,7 @@ public class SpeechRecognizer {
   private SpeechRecognizer(Context context, ComponentName serviceComponent) {
     this.mHandler =
         new Handler(Looper.getMainLooper()) { // from class: android.speech.SpeechRecognizer.1
-          @Override // android.p009os.Handler
+          @Override // android.os.Handler
           public void handleMessage(Message msg) {
             switch (msg.what) {
               case 1:
@@ -138,7 +138,7 @@ public class SpeechRecognizer {
   private SpeechRecognizer(Context context, boolean onDevice) {
     this.mHandler =
         new Handler(Looper.getMainLooper()) { // from class: android.speech.SpeechRecognizer.1
-          @Override // android.p009os.Handler
+          @Override // android.os.Handler
           public void handleMessage(Message msg) {
             switch (msg.what) {
               case 1:
@@ -575,7 +575,7 @@ public class SpeechRecognizer {
               Looper
                   .getMainLooper()) { // from class:
                                       // android.speech.SpeechRecognizer.InternalRecognitionListener.1
-            @Override // android.p009os.Handler
+            @Override // android.os.Handler
             public void handleMessage(Message msg) {
               if (InternalRecognitionListener.this.mInternalListener == null) {}
               switch (msg.what) {

@@ -1,8 +1,8 @@
 package com.samsung.android.infoextraction;
 
 import android.net.Uri;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +35,7 @@ public class KerykeionRequest implements Parcelable {
     this.mPrimitive = new ArrayList();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -79,7 +79,7 @@ public class KerykeionRequest implements Parcelable {
     return this.mHermesObject;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeInt(this.nType);
     out.writeList(this.mPrimitive);

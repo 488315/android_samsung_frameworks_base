@@ -1,6 +1,6 @@
 package android.security.net.config;
 
-import android.content.p002pm.ApplicationInfo;
+import android.content.pm.ApplicationInfo;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import java.security.cert.X509Certificate;

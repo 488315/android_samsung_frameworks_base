@@ -2,8 +2,8 @@ package com.samsung.android.battauthmanager;
 
 import android.app.AppGlobals;
 import android.content.Context;
-import android.content.p002pm.IPackageManager;
-import android.p009os.HandlerThread;
+import android.content.pm.IPackageManager;
+import android.os.HandlerThread;
 import android.util.Log;
 
 /* loaded from: classes5.dex */

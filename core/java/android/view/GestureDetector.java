@@ -1,15 +1,15 @@
 package android.view;
 
 import android.content.Context;
-import android.p009os.Debug;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.ICustomFrequencyManager;
-import android.p009os.Message;
-import android.p009os.Process;
-import android.p009os.ServiceManager;
-import android.p009os.StrictMode;
-import android.p009os.SystemClock;
+import android.os.Debug;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.ICustomFrequencyManager;
+import android.os.Message;
+import android.os.Process;
+import android.os.ServiceManager;
+import android.os.StrictMode;
+import android.os.SystemClock;
 import android.util.Log;
 import android.widget.OverScroller;
 import com.android.internal.util.FrameworkStatsLog;
@@ -144,7 +144,7 @@ public class GestureDetector {
       super(handler.getLooper());
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       switch (msg.what) {
         case 1:

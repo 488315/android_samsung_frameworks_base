@@ -1,7 +1,7 @@
 package android.hardware.display;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -164,12 +164,12 @@ public final class DeviceProductInfo implements Parcelable {
         Integer.valueOf(this.mConnectionToSinkType));
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.mName);
     dest.writeString(this.mManufacturerPnpId);
@@ -209,13 +209,13 @@ public final class DeviceProductInfo implements Parcelable {
       this.mYear = (Integer) in.readValue(null);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeValue(this.mWeek);
       dest.writeValue(this.mYear);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }

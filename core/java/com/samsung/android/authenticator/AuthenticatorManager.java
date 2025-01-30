@@ -1,7 +1,7 @@
 package com.samsung.android.authenticator;
 
 import android.content.res.AssetFileDescriptor;
-import android.p009os.ParcelFileDescriptor;
+import android.os.ParcelFileDescriptor;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;

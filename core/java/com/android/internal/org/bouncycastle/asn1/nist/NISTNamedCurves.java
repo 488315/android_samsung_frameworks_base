@@ -1,7 +1,7 @@
 package com.android.internal.org.bouncycastle.asn1.nist;
 
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
-import com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParameters;
+import com.android.internal.org.bouncycastle.asn1.x9.X9ECParameters;
 import com.android.internal.org.bouncycastle.asn1.sec.SECNamedCurves;
 import com.android.internal.org.bouncycastle.asn1.sec.SECObjectIdentifiers;
 import com.android.internal.org.bouncycastle.util.Strings;

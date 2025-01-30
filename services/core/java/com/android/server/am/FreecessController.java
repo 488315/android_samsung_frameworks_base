@@ -52,7 +52,7 @@ import com.android.server.am.mars.netlink.StructFreeCessMsg;
 import com.android.server.am.mars.util.UidStateMgr;
 import com.android.server.pm.PackageManagerShellCommandDataLoader;
 import com.android.server.wm.WindowManagerService;
-import java.com.android.server.p028am.mars.database.MARsListManager;
+import java.com.android.server.am.mars.database.MARsListManager;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileDescriptor;

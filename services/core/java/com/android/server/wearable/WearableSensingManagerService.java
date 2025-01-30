@@ -4,7 +4,7 @@ import android.R;
 import android.app.wearable.IWearableSensingManager;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.os.ParcelFileDescriptor;
 import android.os.PersistableBundle;
 import android.os.RemoteCallback;

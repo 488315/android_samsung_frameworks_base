@@ -1,6 +1,6 @@
 package com.samsung.android.vibrator;
 
-import android.p009os.Build;
+import android.os.Build;
 import com.samsung.android.feature.SemCscFeature;
 import com.samsung.android.feature.SemFloatingFeature;
 

@@ -2,7 +2,7 @@ package android.hardware;
 
 import android.annotation.SystemApi;
 import android.hardware.input.InputSensorInfo;
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import java.util.UUID;
 
 /* loaded from: classes.dex */

@@ -1,7 +1,7 @@
 package android.telephony.data;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -95,7 +95,7 @@ public final class RouteSelectionDescriptor implements Parcelable {
     return this.mDnn;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mPrecedence);
     dest.writeInt(this.mSessionType);
@@ -104,7 +104,7 @@ public final class RouteSelectionDescriptor implements Parcelable {
     dest.writeStringList(this.mDnn);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

@@ -1,7 +1,7 @@
 package com.samsung.android.sepunion;
 
-import android.p009os.Bundle;
-import android.p009os.IBinder;
+import android.os.Bundle;
+import android.os.IBinder;
 import com.samsung.android.cover.CoverState;
 
 /* loaded from: classes5.dex */

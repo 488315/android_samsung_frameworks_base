@@ -1,8 +1,8 @@
 package android.view.inputmethod;
 
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
-import android.p009os.ResultReceiver;
+import android.os.IBinder;
+import android.os.RemoteException;
+import android.os.ResultReceiver;
 import android.util.Log;
 import android.view.InputChannel;
 import android.view.MotionEvent;

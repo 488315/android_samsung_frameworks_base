@@ -1,8 +1,8 @@
 package com.samsung.android.chimera;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
 /* loaded from: classes5.dex */
@@ -43,12 +43,12 @@ public class PSIAvailableMem implements Parcelable {
     this.checkTime = in.readLong();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeLong(this.availMem);
     dest.writeLong(this.running);

@@ -1,10 +1,10 @@
 package com.samsung.android.media;
 
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.Parcel;
-import android.p009os.Process;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.os.Parcel;
+import android.os.Process;
 import android.util.Log;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -282,7 +282,7 @@ public final class SemMediaResourceHelper {
       this.mMediaResourceHelper = semMediaResourceHelper;
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       switch (msg.what) {
         case 1:

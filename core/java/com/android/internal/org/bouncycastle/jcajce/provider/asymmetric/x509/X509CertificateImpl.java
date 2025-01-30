@@ -29,7 +29,7 @@ import com.android.internal.org.bouncycastle.asn1.x509.KeyUsage;
 import com.android.internal.org.bouncycastle.asn1.x509.TBSCertificate;
 import com.android.internal.org.bouncycastle.jcajce.CompositePublicKey;
 import com.android.internal.org.bouncycastle.jcajce.interfaces.BCX509Certificate;
-import com.android.internal.org.bouncycastle.jcajce.p022io.OutputStreamFactory;
+import com.android.internal.org.bouncycastle.jcajce.io.OutputStreamFactory;
 import com.android.internal.org.bouncycastle.jcajce.util.JcaJceHelper;
 import com.android.internal.org.bouncycastle.jce.X509Principal;
 import com.android.internal.org.bouncycastle.jce.provider.BouncyCastleProvider;

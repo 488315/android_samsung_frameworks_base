@@ -1,7 +1,7 @@
 package android.telephony.mbms;
 
 import android.net.Uri;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.telephony.MbmsStreamingSession;
 import android.telephony.mbms.vendor.IMbmsStreamingService;
 import android.util.Log;

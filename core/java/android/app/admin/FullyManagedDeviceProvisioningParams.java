@@ -2,9 +2,9 @@ package android.app.admin;
 
 import android.annotation.SystemApi;
 import android.content.ComponentName;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.PersistableBundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.PersistableBundle;
 import com.samsung.android.ims.options.SemCapabilities;
 import java.util.Locale;
 import java.util.Objects;
@@ -245,7 +245,7 @@ public final class FullyManagedDeviceProvisioningParams implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -283,7 +283,7 @@ public final class FullyManagedDeviceProvisioningParams implements Parcelable {
         .toString();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeTypedObject(this.mDeviceAdminComponentName, flags);
     dest.writeString(this.mOwnerName);

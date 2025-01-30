@@ -1,8 +1,8 @@
 package android.service.notification;
 
-import android.content.p002pm.VersionedPackage;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.content.pm.VersionedPackage;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.ArraySet;
 
 /* loaded from: classes3.dex */
@@ -42,7 +42,7 @@ public class NotificationListenerFilter implements Parcelable {
     this.mDisallowedPackages = in.readArraySet(VersionedPackage.class.getClassLoader());
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mAllowedNotificationTypes);
     dest.writeArraySet(this.mDisallowedPackages);
@@ -84,7 +84,7 @@ public class NotificationListenerFilter implements Parcelable {
     this.mDisallowedPackages.add(pkg);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

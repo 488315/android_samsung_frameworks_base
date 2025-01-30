@@ -36,7 +36,7 @@ import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.os.UserHandle;
 import android.os.UserManager;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.stats.camera.nano.CameraProtos;
 import android.util.ArrayMap;
 import android.util.ArraySet;

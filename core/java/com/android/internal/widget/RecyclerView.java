@@ -1,7 +1,7 @@
 package com.android.internal.widget;
 
 import android.content.Context;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.content.res.TypedArray;
 import android.database.Observable;
 import android.graphics.Canvas;
@@ -11,11 +11,11 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.MediaMetrics;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.SystemClock;
-import android.p009os.Trace;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.SystemClock;
+import android.os.Trace;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseArray;
@@ -6949,7 +6949,7 @@ public class RecyclerView extends ViewGroup implements ScrollingView, NestedScro
       super(superState);
     }
 
-    @Override // android.view.AbsSavedState, android.p009os.Parcelable
+    @Override // android.view.AbsSavedState, android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       super.writeToParcel(dest, flags);
       dest.writeParcelable(this.mLayoutState, 0);

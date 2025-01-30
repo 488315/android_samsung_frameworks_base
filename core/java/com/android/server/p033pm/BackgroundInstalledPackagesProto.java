@@ -1,6 +1,0 @@
-package com.android.server.p033pm;
-
-/* loaded from: classes5.dex */
-public final class BackgroundInstalledPackagesProto {
-  public static final long BG_INSTALLED_PKG = 2246267895809L;
-}

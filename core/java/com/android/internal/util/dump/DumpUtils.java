@@ -1,7 +1,7 @@
 package com.android.internal.util.dump;
 
 import android.content.ComponentName;
-import android.media.p008tv.interactive.TvInteractiveAppManager;
+import android.media.tv.interactive.TvInteractiveAppManager;
 
 /* loaded from: classes5.dex */
 public class DumpUtils {

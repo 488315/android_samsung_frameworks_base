@@ -2,8 +2,8 @@ package android.telephony;
 
 import android.annotation.SystemApi;
 import android.content.Context;
-import android.content.p002pm.PackageInfo;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -13,9 +13,9 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.ParcelUuid;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.ParcelUuid;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -641,7 +641,7 @@ public class SubscriptionInfo implements Parcelable {
     return this.mUsageSetting;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mId);
     dest.writeString(this.mIccId);
@@ -675,7 +675,7 @@ public class SubscriptionInfo implements Parcelable {
     dest.writeInt(this.mUsageSetting);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

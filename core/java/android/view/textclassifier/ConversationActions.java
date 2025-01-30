@@ -1,9 +1,9 @@
 package android.view.textclassifier;
 
 import android.app.Person;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.SpannedString;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -46,12 +46,12 @@ public final class ConversationActions implements Parcelable {
     this.mId = in.readString();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeTypedList(this.mConversationActions);
     parcel.writeString(this.mId);
@@ -107,7 +107,7 @@ public final class ConversationActions implements Parcelable {
       this.mExtras = in.readBundle();
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int flags) {
       parcel.writeParcelable(this.mAuthor, flags);
       parcel.writeInt(this.mReferenceTime != null ? 1 : 0);
@@ -119,7 +119,7 @@ public final class ConversationActions implements Parcelable {
       parcel.writeBundle(this.mExtras);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -237,7 +237,7 @@ public final class ConversationActions implements Parcelable {
       return request;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int flags) {
       parcel.writeParcelableList(this.mConversation, flags);
       parcel.writeParcelable(this.mTypeConfig, flags);
@@ -247,7 +247,7 @@ public final class ConversationActions implements Parcelable {
       parcel.writeParcelable(this.mSystemTcMetadata, flags);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }

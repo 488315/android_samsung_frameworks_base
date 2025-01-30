@@ -7,14 +7,14 @@ import android.database.CursorToBulkCursorAdaptor;
 import android.database.DatabaseUtils;
 import android.database.IContentObserver;
 import android.net.Uri;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
-import android.p009os.ICancellationSignal;
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.RemoteCallback;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.ICancellationSignal;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
+import android.os.RemoteCallback;
+import android.os.RemoteException;
 import java.util.ArrayList;
 
 /* loaded from: classes.dex */
@@ -36,7 +36,7 @@ public abstract class ContentProviderNative extends Binder implements IContentPr
     return new ContentProviderProxy(obj);
   }
 
-  @Override // android.p009os.Binder
+  @Override // android.os.Binder
   public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
     String[] projection;
     int i = 0;
@@ -309,7 +309,7 @@ public abstract class ContentProviderNative extends Binder implements IContentPr
     return true;
   }
 
-  @Override // android.p009os.IInterface
+  @Override // android.os.IInterface
   public IBinder asBinder() {
     return this;
   }

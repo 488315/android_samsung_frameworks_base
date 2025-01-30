@@ -4,8 +4,8 @@ import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Context;
 import android.content.Intent;
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
 import android.sec.clipboard.util.Log;
 import java.net.URISyntaxException;
 
@@ -115,7 +115,7 @@ public class SemIntentClipData extends SemClipData {
     return null;
   }
 
-  @Override // com.samsung.android.content.clipboard.data.SemClipData, android.p009os.Parcelable
+  @Override // com.samsung.android.content.clipboard.data.SemClipData, android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     Log.secI(TAG, "Intent write to parcel");
     dest.writeInt(8);

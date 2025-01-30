@@ -2,8 +2,8 @@ package android.location;
 
 import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.security.InvalidParameterException;
 import java.util.Arrays;
 import java.util.Collection;
@@ -66,12 +66,12 @@ public class GpsMeasurementsEvent implements Parcelable {
     return this.mReadOnlyMeasurements;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeParcelable(this.mClock, flags);
     int measurementsCount = this.mReadOnlyMeasurements.size();

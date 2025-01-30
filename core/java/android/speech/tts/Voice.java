@@ -1,8 +1,8 @@
 package android.speech.tts;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.logging.nano.MetricsProto;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -69,7 +69,7 @@ public class Voice implements Parcelable {
     Collections.addAll(hashSet, in.readStringArray());
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeString(this.mName);
     parcel.writeSerializable(this.mLocale);
@@ -79,7 +79,7 @@ public class Voice implements Parcelable {
     parcel.writeStringList(new ArrayList(this.mFeatures));
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

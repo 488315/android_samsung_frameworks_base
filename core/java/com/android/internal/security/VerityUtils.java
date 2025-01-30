@@ -1,7 +1,7 @@
 package com.android.internal.security;
 
-import android.p009os.Build;
-import android.p009os.SystemProperties;
+import android.os.Build;
+import android.os.SystemProperties;
 import android.system.Os;
 import android.system.OsConstants;
 import android.util.Slog;

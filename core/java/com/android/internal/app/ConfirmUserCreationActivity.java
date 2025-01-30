@@ -4,12 +4,12 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.UserInfo;
-import android.p009os.Bundle;
-import android.p009os.PersistableBundle;
-import android.p009os.UserManager;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.UserInfo;
+import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.os.UserManager;
 import android.util.Log;
 import com.android.internal.C4337R;
 

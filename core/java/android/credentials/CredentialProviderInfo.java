@@ -2,10 +2,10 @@ package android.credentials;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.p002pm.ServiceInfo;
+import android.content.pm.ServiceInfo;
 import android.graphics.drawable.Drawable;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -99,7 +99,7 @@ public final class CredentialProviderInfo implements Parcelable {
     return this.mServiceInfo.getComponentName();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeTypedObject(this.mServiceInfo, flags);
     dest.writeBoolean(this.mIsSystemProvider);
@@ -111,7 +111,7 @@ public final class CredentialProviderInfo implements Parcelable {
     dest.writeStringList(capabilities);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

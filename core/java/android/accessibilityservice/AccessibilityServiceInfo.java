@@ -4,19 +4,19 @@ import android.accessibilityservice.util.AccessibilityUtils;
 import android.annotation.SystemApi;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ResolveInfo;
-import android.content.p002pm.ServiceInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.pm.ServiceInfo;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.content.res.XmlResourceParser;
 import android.graphics.drawable.Drawable;
 import android.hardware.fingerprint.FingerprintManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
-import android.p009os.SystemClock;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
+import android.os.SystemClock;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.SparseArray;
@@ -467,7 +467,7 @@ public class AccessibilityServiceInfo implements Parcelable {
     return this.mIsAccessibilityTool;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -480,7 +480,7 @@ public class AccessibilityServiceInfo implements Parcelable {
     return result;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeInt(this.eventTypes);
     parcel.writeStringArray(this.packageNames);

@@ -1,7 +1,7 @@
 package android.hardware.input;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
+import android.os.Parcel;
 
 @SystemApi
 /* loaded from: classes2.dex */

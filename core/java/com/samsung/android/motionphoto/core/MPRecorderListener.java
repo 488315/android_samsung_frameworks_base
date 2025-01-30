@@ -1,7 +1,7 @@
 package com.samsung.android.motionphoto.core;
 
-import android.p009os.Looper;
-import android.p009os.Message;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import java.lang.ref.WeakReference;
 

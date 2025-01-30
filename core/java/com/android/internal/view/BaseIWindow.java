@@ -1,9 +1,9 @@
 package com.android.internal.view;
 
 import android.hardware.input.InputManagerGlobal;
-import android.p009os.Bundle;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.RemoteException;
+import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
+import android.os.RemoteException;
 import android.util.MergedConfiguration;
 import android.view.DragEvent;
 import android.view.IScrollCaptureResponseListener;
@@ -15,7 +15,7 @@ import android.view.InsetsState;
 import android.view.ScrollCaptureResponse;
 import android.view.inputmethod.ImeTracker;
 import android.window.ClientWindowFrames;
-import com.android.internal.p029os.IResultReceiver;
+import com.android.internal.os.IResultReceiver;
 import com.samsung.android.content.smartclip.SmartClipRemoteRequestInfo;
 import java.io.IOException;
 

@@ -7,14 +7,14 @@ import android.media.AudioFormat;
 import android.media.permission.Identity;
 import android.media.soundtrigger_middleware.ISoundTriggerMiddlewareService;
 import android.media.soundtrigger_middleware.SoundTriggerModuleDescriptor;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
-import android.p009os.ServiceSpecificException;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.ServiceSpecificException;
 import android.system.OsConstants;
 import android.util.Log;
 import com.android.internal.logging.nano.MetricsProto;
@@ -245,7 +245,7 @@ public class SoundTrigger {
           audioCapabilities);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       parcel.writeInt(getId());
       parcel.writeString(getImplementor());
@@ -265,7 +265,7 @@ public class SoundTrigger {
       parcel.writeInt(getAudioCapabilities());
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -527,7 +527,7 @@ public class SoundTrigger {
       return new Keyphrase(id, recognitionModes, locale, text, users);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeInt(getId());
       dest.writeInt(getRecognitionModes());
@@ -541,7 +541,7 @@ public class SoundTrigger {
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -652,12 +652,12 @@ public class SoundTrigger {
       return new KeyphraseSoundModel(uuid, vendorUuid, data, keyphrases, version);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeString(getUuid().toString());
       if (getVendorUuid() == null) {
@@ -732,7 +732,7 @@ public class SoundTrigger {
       this(uuid, vendorUuid, data, -1);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -750,7 +750,7 @@ public class SoundTrigger {
       return new GenericSoundModel(uuid, vendorUuid, data, version);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeString(getUuid().toString());
       if (getVendorUuid() == null) {
@@ -816,7 +816,7 @@ public class SoundTrigger {
       return this.mEnd;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -840,7 +840,7 @@ public class SoundTrigger {
       return false;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeInt(this.mStart);
       dest.writeInt(this.mEnd);
@@ -1198,7 +1198,7 @@ public class SoundTrigger {
           captureRequested, allowMultipleTriggers, keyphrases, data, audioCapabilities);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       parcel.writeByte(this.captureRequested ? (byte) 1 : (byte) 0);
       parcel.writeByte(this.allowMultipleTriggers ? (byte) 1 : (byte) 0);
@@ -1207,7 +1207,7 @@ public class SoundTrigger {
       parcel.writeInt(this.audioCapabilities);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -1288,13 +1288,13 @@ public class SoundTrigger {
       return new ConfidenceLevel(userId, confidenceLevel);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeInt(this.userId);
       dest.writeInt(this.confidenceLevel);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -1393,7 +1393,7 @@ public class SoundTrigger {
           id, recognitionModes, coarseConfidenceLevel, confidenceLevels);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeInt(this.f227id);
       dest.writeInt(this.recognitionModes);
@@ -1401,7 +1401,7 @@ public class SoundTrigger {
       dest.writeTypedArray(this.confidenceLevels, flags);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -1568,7 +1568,7 @@ public class SoundTrigger {
     }
 
     @Override // android.hardware.soundtrigger.SoundTrigger.RecognitionEvent,
-              // android.p009os.Parcelable
+              // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       parcel.writeInt(this.status);
       parcel.writeInt(this.soundModelHandle);
@@ -1593,7 +1593,7 @@ public class SoundTrigger {
     }
 
     @Override // android.hardware.soundtrigger.SoundTrigger.RecognitionEvent,
-              // android.p009os.Parcelable
+              // android.os.Parcelable
     public int describeContents() {
       return 0;
     }

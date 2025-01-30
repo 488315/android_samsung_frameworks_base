@@ -2,8 +2,8 @@ package com.samsung.android.allshare.extension.impl;
 
 import android.location.Location;
 import android.net.Uri;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
+import android.os.Bundle;
+import android.os.Parcel;
 import com.samsung.android.allshare.Caption;
 import com.samsung.android.allshare.Item;
 import com.samsung.android.allshare.Subtitle;
@@ -49,12 +49,12 @@ public class SimpleImageItem extends Item implements IBundleHolder {
         (bundle == null ? null : bundle.getParcelable(AllShareKey.BUNDLE_PARCELABLE_ITEM_URI));
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeBundle(this.mBundle);
   }

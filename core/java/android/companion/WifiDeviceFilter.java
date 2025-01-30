@@ -3,8 +3,8 @@ package android.companion;
 import android.annotation.NonNull;
 import android.net.MacAddress;
 import android.net.wifi.ScanResult;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Parcelling;
 import java.util.Objects;
@@ -100,7 +100,7 @@ public final class WifiDeviceFilter implements DeviceFilter<ScanResult> {
         };
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     byte flg = this.mNamePattern != null ? (byte) (0 | 1) : (byte) 0;
     if (this.mBssid != null) {
@@ -115,7 +115,7 @@ public final class WifiDeviceFilter implements DeviceFilter<ScanResult> {
     dest.writeTypedObject(this.mBssidMask, flags);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

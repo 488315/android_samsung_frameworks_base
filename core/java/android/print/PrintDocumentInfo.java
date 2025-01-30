@@ -1,7 +1,7 @@
 package android.print;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import com.android.internal.util.Preconditions;
 import java.lang.annotation.Retention;
@@ -73,12 +73,12 @@ public final class PrintDocumentInfo implements Parcelable {
     this.mDataSize = dataSize;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeString(this.mName);
     parcel.writeInt(this.mPageCount);

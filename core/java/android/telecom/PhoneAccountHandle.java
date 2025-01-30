@@ -1,10 +1,10 @@
 package android.telecom;
 
 import android.content.ComponentName;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.Process;
-import android.p009os.UserHandle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.Process;
+import android.os.UserHandle;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
@@ -78,12 +78,12 @@ public final class PhoneAccountHandle implements Parcelable {
         && Objects.equals(((PhoneAccountHandle) other).getUserHandle(), getUserHandle());
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     this.mComponentName.writeToParcel(out, flags);
     out.writeString(this.mId);

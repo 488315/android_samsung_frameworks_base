@@ -1,8 +1,8 @@
 package android.app;
 
 import android.graphics.drawable.Icon;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import java.io.PrintWriter;
 import java.util.Objects;
@@ -121,12 +121,12 @@ public final class RemoteAction implements Parcelable {
         Boolean.valueOf(this.mShouldShowIcon));
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     this.mIcon.writeToParcel(out, 0);
     TextUtils.writeToParcel(this.mTitle, out, flags);

@@ -4,9 +4,9 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.View;
 
 /* loaded from: classes4.dex */
@@ -45,12 +45,12 @@ public class SemRemoteViewsBasicAnimation extends SemRemoteViewsAnimation {
     this.mExtras = in.readBundle(getClass().getClassLoader());
   }
 
-  @Override // android.widget.SemRemoteViewsAnimation, android.p009os.Parcelable
+  @Override // android.widget.SemRemoteViewsAnimation, android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.widget.SemRemoteViewsAnimation, android.p009os.Parcelable
+  @Override // android.widget.SemRemoteViewsAnimation, android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     super.writeToParcel(dest, flags);
     dest.writeString(this.mAnimationType);

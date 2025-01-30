@@ -2,8 +2,8 @@ package android.companion;
 
 import android.app.Service;
 import android.content.Intent;
-import android.p009os.Handler;
-import android.p009os.IBinder;
+import android.os.Handler;
+import android.os.IBinder;
 import android.util.Log;
 import java.io.InputStream;
 import java.io.OutputStream;

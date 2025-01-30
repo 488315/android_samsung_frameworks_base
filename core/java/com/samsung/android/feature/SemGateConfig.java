@@ -1,7 +1,7 @@
 package com.samsung.android.feature;
 
-import android.p009os.Build;
-import android.p009os.SystemProperties;
+import android.os.Build;
+import android.os.SystemProperties;
 import android.util.Log;
 
 @Deprecated

@@ -3,8 +3,8 @@ package android.hardware.location;
 import android.annotation.SystemApi;
 import android.hardware.contexthub.V1_0.ContextHub;
 import android.media.MediaMetrics;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.proto.ProtoOutputStream;
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import java.util.Arrays;
@@ -258,12 +258,12 @@ public class ContextHubInfo implements Parcelable {
     this.mMemoryRegions = (MemoryRegion[]) in.createTypedArray(MemoryRegion.CREATOR);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeInt(this.mId);
     out.writeString(this.mName);

@@ -1,10 +1,10 @@
 package android.print;
 
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.Preconditions;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -276,12 +276,12 @@ public final class PrintJobInfo implements Parcelable {
     this.mAdvancedOptions = options;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeParcelable(this.mId, i);
     parcel.writeString(this.mLabel);

@@ -1,8 +1,8 @@
 package android.telecom.Logging;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.telecom.Log;
 import android.text.TextUtils;
 import android.util.Slog;
@@ -83,12 +83,12 @@ public class Session {
           s.getFullSessionId(), s.getFullMethodPath(!Log.DEBUG && s.isSessionExternal()), newInfo);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel destination, int flags) {
       destination.writeString(this.sessionId);
       destination.writeString(this.methodPath);

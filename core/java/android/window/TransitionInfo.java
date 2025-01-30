@@ -7,9 +7,9 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.hardware.HardwareBuffer;
-import android.p009os.Debug;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Debug;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.security.keystore.KeyProperties;
 import android.telecom.Logging.Session;
 import android.util.Log;
@@ -126,7 +126,7 @@ public final class TransitionInfo implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mType);
     dest.writeInt(this.mFlags);
@@ -144,7 +144,7 @@ public final class TransitionInfo implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -1166,7 +1166,7 @@ public final class TransitionInfo implements Parcelable {
       return this.mSkipDefaultTransition;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeTypedObject(this.mContainer, flags);
       dest.writeTypedObject(this.mParent, flags);
@@ -1216,7 +1216,7 @@ public final class TransitionInfo implements Parcelable {
       this.mInsetsForRecentsTransition.writeToParcel(dest, flags);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -1489,7 +1489,7 @@ public final class TransitionInfo implements Parcelable {
       return open ? this.mCustomActivityOpenTransition : this.mCustomActivityCloseTransition;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeInt(this.mType);
       dest.writeInt(this.mEnterResId);
@@ -1504,7 +1504,7 @@ public final class TransitionInfo implements Parcelable {
       dest.writeTypedObject(this.mCustomActivityCloseTransition, flags);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -1587,12 +1587,12 @@ public final class TransitionInfo implements Parcelable {
         this.mCustomBackgroundColor = backgroundColor;
       }
 
-      @Override // android.p009os.Parcelable
+      @Override // android.os.Parcelable
       public int describeContents() {
         return 0;
       }
 
-      @Override // android.p009os.Parcelable
+      @Override // android.os.Parcelable
       public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(this.mCustomEnterResId);
         dest.writeInt(this.mCustomExitResId);
@@ -1703,7 +1703,7 @@ public final class TransitionInfo implements Parcelable {
       return this.mIsActivityRootLeash;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeInt(this.mDisplayId);
       this.mLeash.writeToParcel(dest, flags);
@@ -1714,7 +1714,7 @@ public final class TransitionInfo implements Parcelable {
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }

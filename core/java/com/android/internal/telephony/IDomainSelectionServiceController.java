@@ -1,10 +1,10 @@
 package com.android.internal.telephony;
 
-import android.p009os.Binder;
-import android.p009os.IBinder;
-import android.p009os.IInterface;
-import android.p009os.Parcel;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.IBinder;
+import android.os.IInterface;
+import android.os.Parcel;
+import android.os.RemoteException;
 import android.telephony.BarringInfo;
 import android.telephony.DomainSelectionService;
 import android.telephony.ServiceState;
@@ -36,7 +36,7 @@ public interface IDomainSelectionServiceController extends IInterface {
     @Override // com.android.internal.telephony.IDomainSelectionServiceController
     public void updateBarringInfo(int slotId, int subId, BarringInfo info) throws RemoteException {}
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return null;
     }
@@ -62,7 +62,7 @@ public interface IDomainSelectionServiceController extends IInterface {
       return new Proxy(obj);
     }
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return this;
     }
@@ -80,12 +80,12 @@ public interface IDomainSelectionServiceController extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public String getTransactionName(int transactionCode) {
       return getDefaultTransactionName(transactionCode);
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
         throws RemoteException {
       if (code >= 1 && code <= 16777215) {
@@ -133,7 +133,7 @@ public interface IDomainSelectionServiceController extends IInterface {
         this.mRemote = remote;
       }
 
-      @Override // android.p009os.IInterface
+      @Override // android.os.IInterface
       public IBinder asBinder() {
         return this.mRemote;
       }
@@ -188,7 +188,7 @@ public interface IDomainSelectionServiceController extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public int getMaxTransactionId() {
       return 2;
     }

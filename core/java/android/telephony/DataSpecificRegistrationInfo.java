@@ -1,8 +1,8 @@
 package android.telephony;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Objects;
@@ -93,7 +93,7 @@ public final class DataSpecificRegistrationInfo implements Parcelable {
     this.mLteAttachExtraInfo = source.readInt();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.maxDataCalls);
     dest.writeBoolean(this.isDcNrRestricted);
@@ -104,7 +104,7 @@ public final class DataSpecificRegistrationInfo implements Parcelable {
     dest.writeInt(this.mLteAttachExtraInfo);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

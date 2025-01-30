@@ -6,9 +6,9 @@ import android.hardware.scontext.SContextConstants;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.Message;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Xml;
 import android.view.Display;
 import android.view.WindowManager;
@@ -109,7 +109,7 @@ final class ViewControllerImpl extends ViewController implements IBundleHolder {
       };
   private Handler mEventHandler =
       new Handler() { // from class: com.samsung.android.allshare.ViewControllerImpl.3
-        @Override // android.p009os.Handler
+        @Override // android.os.Handler
         public void handleMessage(Message msg) {
           super.handleMessage(msg);
           switch (msg.what) {

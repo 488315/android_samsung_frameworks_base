@@ -1,7 +1,7 @@
 package android.util.secutil;
 
-import android.p009os.DeadSystemException;
-import com.android.internal.p029os.RuntimeInit;
+import android.os.DeadSystemException;
+import com.android.internal.os.RuntimeInit;
 import com.android.internal.util.FastPrintWriter;
 import com.android.internal.util.LineBreakBufferedWriter;
 import java.io.PrintWriter;

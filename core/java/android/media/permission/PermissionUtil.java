@@ -2,7 +2,7 @@ package android.media.permission;
 
 import android.content.Context;
 import android.content.PermissionChecker;
-import android.p009os.Binder;
+import android.os.Binder;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */

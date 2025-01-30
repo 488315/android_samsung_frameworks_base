@@ -2,7 +2,7 @@ package com.samsung.android.multiwindow;
 
 import android.app.ActivityTaskManager;
 import android.content.Intent;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import com.samsung.android.rune.CoreRune;
 
 /* loaded from: classes5.dex */

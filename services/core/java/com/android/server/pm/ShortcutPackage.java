@@ -30,7 +30,7 @@ import android.os.Binder;
 import android.os.PersistableBundle;
 import android.os.StrictMode;
 import android.os.SystemClock;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.text.format.Formatter;
 import android.util.ArrayMap;
 import android.util.ArraySet;
@@ -2029,7 +2029,7 @@ public class ShortcutPackage extends ShortcutPackageItem {
   */
   /* JADX WARN: Code restructure failed: missing block: B:18:0x01e7, code lost:
 
-     r0 = r7 | android.p005os.IInstalld.FLAG_USE_QUOTA;
+     r0 = r7 | android.os.IInstalld.FLAG_USE_QUOTA;
   */
   /* JADX WARN: Code restructure failed: missing block: B:19:0x01eb, code lost:
 

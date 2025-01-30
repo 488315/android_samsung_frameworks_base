@@ -1,7 +1,7 @@
 package com.samsung.android.sume.solution.filter;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.samsung.android.sume.core.descriptor.ImgpDescriptor;
 import com.samsung.android.sume.core.filter.ImgpFilter;
 import com.samsung.android.sume.core.filter.factory.MediaFilterFactory;

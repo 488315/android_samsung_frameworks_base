@@ -1,8 +1,8 @@
 package android.view.accessibility;
 
-import android.p009os.LocaleList;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.LocaleList;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.view.WindowManager;
 import java.util.Objects;
@@ -81,12 +81,12 @@ public final class AccessibilityWindowAttributes implements Parcelable {
     return Objects.hash(this.mWindowTitle, this.mLocales);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeCharSequence(this.mWindowTitle);
     parcel.writeParcelable(this.mLocales, flags);

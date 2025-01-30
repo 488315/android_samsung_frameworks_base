@@ -5,21 +5,21 @@ import android.app.Activity;
 import android.app.slice.Slice;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.net.Uri;
-import android.p009os.BadParcelableException;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
-import android.p009os.LocaleList;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.PooledStringReader;
-import android.p009os.PooledStringWriter;
-import android.p009os.RemoteException;
-import android.p009os.SystemClock;
+import android.os.BadParcelableException;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.LocaleList;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.PooledStringReader;
+import android.os.PooledStringWriter;
+import android.os.RemoteException;
+import android.os.SystemClock;
 import android.text.Spanned;
 import android.text.TextUtils;
 import android.util.Log;
@@ -110,7 +110,7 @@ public class AssistStructure implements Parcelable {
       this.mAssistStructure = as;
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     protected boolean onTransact(int code, Parcel data, Parcel reply, int flags)
         throws RemoteException {
       if (code == 2) {
@@ -1357,12 +1357,12 @@ public class AssistStructure implements Parcelable {
       return this.mViewNode;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int flags) {
       this.mViewNode.writeSelfToParcel(parcel, null, false, null, false);
     }
@@ -1862,12 +1862,12 @@ public class AssistStructure implements Parcelable {
       return this.mAttributes;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int flags) {
       parcel.writeString(this.mTag);
       parcel.writeStringArray(this.mNames);
@@ -2221,12 +2221,12 @@ public class AssistStructure implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeInt(this.mTaskId);
     ComponentName.writeToParcel(this.mActivityComponent, parcel);

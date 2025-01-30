@@ -2,7 +2,7 @@ package com.android.server.accessibility;
 
 import android.graphics.Rect;
 import android.os.Build;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.view.accessibility.AccessibilityWindowInfo;
 import java.io.PrintWriter;

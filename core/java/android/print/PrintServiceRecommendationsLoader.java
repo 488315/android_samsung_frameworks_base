@@ -2,8 +2,8 @@ package android.print;
 
 import android.content.Context;
 import android.content.Loader;
-import android.p009os.Handler;
-import android.p009os.Message;
+import android.os.Handler;
+import android.os.Message;
 import android.printservice.recommendation.RecommendationInfo;
 import com.android.internal.util.Preconditions;
 import java.util.List;
@@ -72,7 +72,7 @@ public class PrintServiceRecommendationsLoader extends Loader<List<Recommendatio
       super(PrintServiceRecommendationsLoader.this.getContext().getMainLooper());
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       if (PrintServiceRecommendationsLoader.this.isStarted()) {
         PrintServiceRecommendationsLoader.this.deliverResult((List) msg.obj);

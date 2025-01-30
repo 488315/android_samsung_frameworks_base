@@ -1,7 +1,7 @@
 package com.samsung.android.edge;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public final class EdgeLightingPolicyInfo implements Parcelable {
@@ -55,14 +55,14 @@ public final class EdgeLightingPolicyInfo implements Parcelable {
     return str + ", category= " + this.category + ", range= " + this.range + "}";
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.packageName);
     dest.writeInt(this.category);
     dest.writeInt(this.range);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

@@ -2,8 +2,8 @@ package android.database.sqlite;
 
 import android.content.res.Resources;
 import android.hardware.usb.UsbManager;
-import android.p009os.StatFs;
-import android.p009os.SystemProperties;
+import android.os.StatFs;
+import android.os.SystemProperties;
 import com.android.internal.C4337R;
 
 /* loaded from: classes.dex */

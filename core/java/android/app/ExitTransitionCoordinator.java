@@ -8,10 +8,10 @@ import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.Message;
-import android.p009os.ResultReceiver;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.ResultReceiver;
 import android.transition.Transition;
 import android.transition.TransitionListenerAdapter;
 import android.transition.TransitionManager;
@@ -78,7 +78,7 @@ public class ExitTransitionCoordinator extends ActivityTransitionCoordinator {
     this.mExitCallbacks = exitCallbacks;
   }
 
-  @Override // android.p009os.ResultReceiver
+  @Override // android.os.ResultReceiver
   protected void onReceiveResult(int resultCode, Bundle resultData) {
     switch (resultCode) {
       case 100:
@@ -261,7 +261,7 @@ public class ExitTransitionCoordinator extends ActivityTransitionCoordinator {
       }
       this.mHandler =
           new Handler() { // from class: android.app.ExitTransitionCoordinator.3
-            @Override // android.p009os.Handler
+            @Override // android.os.Handler
             public void handleMessage(Message msg) {
               ExitTransitionCoordinator.this.mIsCanceled = true;
               ExitTransitionCoordinator.this.finish();

@@ -3,7 +3,7 @@ package android.telephony.satellite.stub;
 import android.app.PendingIntent$$ExternalSyntheticLambda1;
 import android.app.Service;
 import android.content.Intent;
-import android.p009os.IBinder;
+import android.os.IBinder;
 import com.android.telephony.Rlog;
 
 /* loaded from: classes3.dex */

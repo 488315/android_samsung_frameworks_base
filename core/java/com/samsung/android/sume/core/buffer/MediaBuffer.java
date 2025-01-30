@@ -2,7 +2,7 @@ package com.samsung.android.sume.core.buffer;
 
 import android.graphics.Bitmap;
 import android.graphics.Rect;
-import android.p009os.Parcelable;
+import android.os.Parcelable;
 import com.samsung.android.sume.core.UniExifInterface;
 import com.samsung.android.sume.core.format.Copyable;
 import com.samsung.android.sume.core.format.MediaFormat;

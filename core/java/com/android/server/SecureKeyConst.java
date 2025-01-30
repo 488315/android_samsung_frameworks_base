@@ -1,6 +1,6 @@
 package com.android.server;
 
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import com.android.internal.midi.MidiConstants;
 import com.samsung.android.graphics.spr.document.animator.SprAnimatorBase;
 import com.samsung.android.graphics.spr.document.attribute.SprAttributeBase;

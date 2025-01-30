@@ -4,8 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.p009os.Bundle;
-import android.p009os.UserManager;
+import android.os.Bundle;
+import android.os.UserManager;
 
 /* loaded from: classes.dex */
 final class UserRestrictionsDetector extends BroadcastReceiver {

@@ -1,7 +1,7 @@
 package android.companion.utils;
 
-import android.p009os.Binder;
-import android.p009os.Build;
+import android.os.Binder;
+import android.os.Build;
 import android.provider.DeviceConfig;
 
 /* loaded from: classes.dex */

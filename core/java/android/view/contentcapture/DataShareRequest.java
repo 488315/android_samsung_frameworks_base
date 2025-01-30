@@ -3,8 +3,8 @@ package android.view.contentcapture;
 import android.annotation.NonNull;
 import android.app.ActivityThread;
 import android.content.LocusId;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.AnnotationValidations;
 import java.util.Objects;
 
@@ -80,7 +80,7 @@ public final class DataShareRequest implements Parcelable {
         + Objects.hashCode(this.mMimeType);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     byte flg = this.mLocusId != null ? (byte) (0 | 2) : (byte) 0;
     dest.writeByte(flg);
@@ -92,7 +92,7 @@ public final class DataShareRequest implements Parcelable {
     dest.writeString(this.mMimeType);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

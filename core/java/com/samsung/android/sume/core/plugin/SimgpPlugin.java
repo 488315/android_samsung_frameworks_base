@@ -1,7 +1,7 @@
 package com.samsung.android.sume.core.plugin;
 
 import android.media.MediaFormat;
-import android.p009os.BatteryManager;
+import android.os.BatteryManager;
 import android.util.Log;
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.MediaBuffer;

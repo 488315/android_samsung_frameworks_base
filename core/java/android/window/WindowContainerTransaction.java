@@ -2,14 +2,14 @@ package android.window;
 
 import android.app.PendingIntent;
 import android.content.Intent;
-import android.content.p002pm.ShortcutInfo;
+import android.content.pm.ShortcutInfo;
 import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.ArrayMap;
 import android.view.InsetsFrameProvider;
 import android.view.SurfaceControl;
@@ -786,7 +786,7 @@ public final class WindowContainerTransaction implements Parcelable {
         + " }";
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeMap(this.mChanges);
     dest.writeTypedList(this.mHierarchyOps);
@@ -809,7 +809,7 @@ public final class WindowContainerTransaction implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -1206,7 +1206,7 @@ public final class WindowContainerTransaction implements Parcelable {
       return sb.toString();
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       this.mConfiguration.writeToParcel(dest, flags);
       dest.writeBoolean(this.mFocusable);
@@ -1246,7 +1246,7 @@ public final class WindowContainerTransaction implements Parcelable {
       dest.writeBoolean(this.mForceTaskInfoChangeRequested);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -1639,7 +1639,7 @@ public final class WindowContainerTransaction implements Parcelable {
       return sb.append("}").toString();
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeInt(this.mType);
       dest.writeStrongBinder(this.mContainer);
@@ -1658,7 +1658,7 @@ public final class WindowContainerTransaction implements Parcelable {
       dest.writeBoolean(this.mReparentLeafTaskIfRelaunch);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -1819,12 +1819,12 @@ public final class WindowContainerTransaction implements Parcelable {
       return this.mToken;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeStrongBinder(this.mToken);
       this.mChange.writeToParcel(dest, flags);

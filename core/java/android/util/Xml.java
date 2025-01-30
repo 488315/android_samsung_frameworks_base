@@ -1,6 +1,6 @@
 package android.util;
 
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.system.ErrnoException;
 import android.system.Os;
 import com.android.internal.util.ArtBinaryXmlPullParser;

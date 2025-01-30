@@ -5,9 +5,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.p009os.Binder;
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
+import android.os.Binder;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
 import android.sec.clipboard.data.ClipboardConstants;
 import android.sec.clipboard.util.ClipboardDataBitmapUtil;
 import android.sec.clipboard.util.ClipboardProcText;
@@ -244,7 +244,7 @@ public class SemHtmlClipData extends SemClipData {
     }
   }
 
-  @Override // com.samsung.android.content.clipboard.data.SemClipData, android.p009os.Parcelable
+  @Override // com.samsung.android.content.clipboard.data.SemClipData, android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     Log.secI(TAG, "html write to parcel");
     dest.writeInt(4);

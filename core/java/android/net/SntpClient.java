@@ -2,8 +2,8 @@ package android.net;
 
 import android.net.sntp.Duration64;
 import android.net.sntp.Timestamp64;
-import android.p009os.RemoteException;
-import android.p009os.SystemClock;
+import android.os.RemoteException;
+import android.os.SystemClock;
 import android.sec.enterprise.EnterpriseDeviceManager;
 import android.sec.enterprise.IEDMProxy;
 import android.text.TextUtils;

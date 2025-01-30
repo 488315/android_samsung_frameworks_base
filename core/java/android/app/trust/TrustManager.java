@@ -1,12 +1,12 @@
 package android.app.trust;
 
 import android.hardware.biometrics.BiometricSourceType;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.RemoteException;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
+import android.os.RemoteException;
 import android.util.ArrayMap;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class TrustManager {
   private final ITrustManager mService;
   private final Handler mHandler =
       new Handler(Looper.getMainLooper()) { // from class: android.app.trust.TrustManager.2
-        @Override // android.p009os.Handler
+        @Override // android.os.Handler
         public void handleMessage(Message msg) {
           switch (msg.what) {
             case 1:

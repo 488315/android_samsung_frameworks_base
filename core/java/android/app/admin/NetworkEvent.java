@@ -1,8 +1,8 @@
 package android.app.admin;
 
-import android.p009os.Parcel;
-import android.p009os.ParcelFormatException;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.ParcelFormatException;
+import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public abstract class NetworkEvent implements Parcelable {
@@ -37,7 +37,7 @@ public abstract class NetworkEvent implements Parcelable {
   String mPackageName;
   long mTimestamp;
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public abstract void writeToParcel(Parcel parcel, int i);
 
   NetworkEvent() {}
@@ -63,7 +63,7 @@ public abstract class NetworkEvent implements Parcelable {
     return this.mId;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

@@ -6,7 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.hardware.gnss.GnssSignalType;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Build;
+import android.os.Build;
 import com.samsung.android.graphics.spr.document.SprDocument;
 import com.samsung.android.graphics.spr.document.shape.SprObjectBase;
 import java.io.File;

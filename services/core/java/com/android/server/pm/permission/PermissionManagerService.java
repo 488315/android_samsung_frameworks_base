@@ -6,7 +6,7 @@ import android.app.IActivityManager;
 import android.content.AttributionSource;
 import android.content.AttributionSourceState;
 import android.content.Context;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.PackageManager;
 import android.content.pm.ParceledListSlice;
 import android.content.pm.PermissionGroupInfo;

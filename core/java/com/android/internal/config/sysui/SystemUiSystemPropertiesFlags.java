@@ -1,7 +1,7 @@
 package com.android.internal.config.sysui;
 
-import android.p009os.Build;
-import android.p009os.SystemProperties;
+import android.os.Build;
+import android.os.SystemProperties;
 import android.util.Log;
 
 /* loaded from: classes4.dex */

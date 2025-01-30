@@ -1,12 +1,12 @@
 package android.database.sqlite;
 
 import android.hardware.scontext.SContextConstants;
-import android.p009os.CancellationSignal;
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.OperationCanceledException;
-import android.p009os.SystemClock;
+import android.os.CancellationSignal;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.os.OperationCanceledException;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.ArraySet;
 import android.util.Log;
@@ -1428,7 +1428,7 @@ public final class SQLiteConnectionPool implements Closeable {
       this.mOnAllConnectionsIdle = onAllConnectionsIdle;
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       synchronized (SQLiteConnectionPool.this.mLock) {
         if (this != SQLiteConnectionPool.this.mIdleConnectionHandler) {
@@ -1471,7 +1471,7 @@ public final class SQLiteConnectionPool implements Closeable {
     }
 
     @Override // android.database.sqlite.SQLiteConnectionPool.IdleConnectionHandler,
-              // android.p009os.Handler
+              // android.os.Handler
     public void handleMessage(Message msg) {
       synchronized (SQLiteConnectionPool.this.mLock) {
         if (this != SQLiteConnectionPool.this.mIdleConnectionHandler) {

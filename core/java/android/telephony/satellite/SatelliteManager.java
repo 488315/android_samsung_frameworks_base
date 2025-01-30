@@ -1,14 +1,14 @@
 package android.telephony.satellite;
 
 import android.content.Context;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.CancellationSignal;
-import android.p009os.Handler;
-import android.p009os.ICancellationSignal;
-import android.p009os.OutcomeReceiver;
-import android.p009os.RemoteException;
-import android.p009os.ResultReceiver;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.CancellationSignal;
+import android.os.Handler;
+import android.os.ICancellationSignal;
+import android.os.OutcomeReceiver;
+import android.os.RemoteException;
+import android.os.ResultReceiver;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyFrameworkInitializer;
 import com.android.internal.telephony.IIntegerConsumer;
@@ -244,7 +244,7 @@ public class SatelliteManager {
       this.val$callback = outcomeReceiver;
     }
 
-    @Override // android.p009os.ResultReceiver
+    @Override // android.os.ResultReceiver
     protected void onReceiveResult(final int resultCode, Bundle resultData) {
       if (resultCode == 0) {
         if (resultData.containsKey("satellite_enabled")) {
@@ -341,7 +341,7 @@ public class SatelliteManager {
       this.val$callback = outcomeReceiver;
     }
 
-    @Override // android.p009os.ResultReceiver
+    @Override // android.os.ResultReceiver
     protected void onReceiveResult(final int resultCode, Bundle resultData) {
       if (resultCode == 0) {
         if (resultData.containsKey(SatelliteManager.KEY_DEMO_MODE_ENABLED)) {
@@ -439,7 +439,7 @@ public class SatelliteManager {
       this.val$callback = outcomeReceiver;
     }
 
-    @Override // android.p009os.ResultReceiver
+    @Override // android.os.ResultReceiver
     protected void onReceiveResult(final int resultCode, Bundle resultData) {
       if (resultCode == 0) {
         if (resultData.containsKey(SatelliteManager.KEY_SATELLITE_SUPPORTED)) {
@@ -537,7 +537,7 @@ public class SatelliteManager {
       this.val$callback = outcomeReceiver;
     }
 
-    @Override // android.p009os.ResultReceiver
+    @Override // android.os.ResultReceiver
     protected void onReceiveResult(final int resultCode, Bundle resultData) {
       if (resultCode == 0) {
         if (resultData.containsKey(SatelliteManager.KEY_SATELLITE_CAPABILITIES)) {
@@ -1046,7 +1046,7 @@ public class SatelliteManager {
       this.val$callback = outcomeReceiver;
     }
 
-    @Override // android.p009os.ResultReceiver
+    @Override // android.os.ResultReceiver
     protected void onReceiveResult(final int resultCode, Bundle resultData) {
       if (resultCode == 0) {
         if (resultData.containsKey(SatelliteManager.KEY_SATELLITE_PROVISIONED)) {
@@ -1409,7 +1409,7 @@ public class SatelliteManager {
       this.val$callback = outcomeReceiver;
     }
 
-    @Override // android.p009os.ResultReceiver
+    @Override // android.os.ResultReceiver
     protected void onReceiveResult(final int resultCode, Bundle resultData) {
       if (resultCode == 0) {
         if (resultData.containsKey(SatelliteManager.KEY_SATELLITE_COMMUNICATION_ALLOWED)) {
@@ -1507,7 +1507,7 @@ public class SatelliteManager {
       this.val$callback = outcomeReceiver;
     }
 
-    @Override // android.p009os.ResultReceiver
+    @Override // android.os.ResultReceiver
     protected void onReceiveResult(final int resultCode, Bundle resultData) {
       if (resultCode == 0) {
         if (resultData.containsKey(SatelliteManager.KEY_SATELLITE_NEXT_VISIBILITY)) {

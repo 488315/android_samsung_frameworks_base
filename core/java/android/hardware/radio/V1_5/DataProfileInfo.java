@@ -5,9 +5,9 @@ import android.hardware.radio.V1_0.DataProfileId;
 import android.hardware.radio.V1_0.DataProfileInfoType;
 import android.hardware.radio.V1_4.PdpProtocolType;
 import android.hardware.radio.V1_4.RadioAccessFamily;
-import android.p009os.HidlSupport;
-import android.p009os.HwBlob;
-import android.p009os.HwParcel;
+import android.os.HidlSupport;
+import android.os.HwBlob;
+import android.os.HwParcel;
 import java.util.ArrayList;
 import java.util.Objects;
 

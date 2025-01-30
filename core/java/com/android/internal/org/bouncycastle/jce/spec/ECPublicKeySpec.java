@@ -1,6 +1,6 @@
 package com.android.internal.org.bouncycastle.jce.spec;
 
-import com.android.internal.org.bouncycastle.math.p026ec.ECPoint;
+import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 
 /* loaded from: classes5.dex */
 public class ECPublicKeySpec extends ECKeySpec {

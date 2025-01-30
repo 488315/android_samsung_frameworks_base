@@ -1,7 +1,7 @@
 package com.android.internal.org.bouncycastle.asn1.sec;
 
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
-import com.android.internal.org.bouncycastle.asn1.p019x9.X9ObjectIdentifiers;
+import com.android.internal.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
 
 /* loaded from: classes5.dex */
 public interface SECObjectIdentifiers {

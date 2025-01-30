@@ -1,8 +1,8 @@
 package android.filterfw.core;
 
 import android.filterfw.format.ObjectFormat;
-import android.filterfw.p004io.GraphIOException;
-import android.filterfw.p004io.TextGraphReader;
+import android.filterfw.io.GraphIOException;
+import android.filterfw.io.TextGraphReader;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.util.Log;
 import java.io.Serializable;

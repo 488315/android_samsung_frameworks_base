@@ -1,6 +1,6 @@
 package android.net.vcn.persistablebundleutils;
 
-import android.p009os.PersistableBundle;
+import android.os.PersistableBundle;
 import com.android.server.vcn.repackaged.util.PersistableBundleUtils;
 
 /* compiled from: D8$$SyntheticClass */

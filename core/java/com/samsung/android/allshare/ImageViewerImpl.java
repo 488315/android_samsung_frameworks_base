@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import com.samsung.android.allshare.media.ContentInfo;
 import com.samsung.android.allshare.media.ImageViewer;
 import com.samsung.android.allshare.media.PlaylistPlayer;

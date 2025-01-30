@@ -1,10 +1,10 @@
 package com.samsung.android.hardware;
 
 import android.content.Context;
-import android.p009os.IBinder;
-import android.p009os.ICustomFrequencyManager;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.IBinder;
+import android.os.ICustomFrequencyManager;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import com.sec.android.sdhms.ISamsungDeviceHealthManager;
 
 /* loaded from: classes5.dex */

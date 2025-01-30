@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Icon;
 import android.os.StrictMode;
 import android.os.SystemClock;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Log;
 import android.util.Slog;
 import java.io.ByteArrayOutputStream;

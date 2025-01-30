@@ -1,8 +1,8 @@
 package com.samsung.android.allshare.extension;
 
 import android.net.Uri;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
+import android.os.Bundle;
+import android.os.Parcel;
 import com.samsung.android.allshare.DLog;
 import com.samsung.android.allshare.Item;
 import com.samsung.android.ims.options.SemCapabilities;

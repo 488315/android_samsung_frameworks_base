@@ -1,7 +1,7 @@
 package android.nfc;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class TechListParcel implements Parcelable {
@@ -34,12 +34,12 @@ public class TechListParcel implements Parcelable {
     return this.mTechLists;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     int count = this.mTechLists.length;
     dest.writeInt(count);

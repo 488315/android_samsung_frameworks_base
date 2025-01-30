@@ -1,6 +1,6 @@
 package com.android.server.pm;
 
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.ApkChecksum;
 import android.content.pm.Checksum;
 import android.content.pm.IOnChecksumsReadyListener;

@@ -13,7 +13,7 @@ import android.os.Process;
 import android.os.ShellCommand;
 import android.os.SystemProperties;
 import android.os.UserHandle;
-import android.p005os.BatteryStatsInternal;
+import android.os.BatteryStatsInternal;
 import android.provider.Settings;
 import android.util.ArrayMap;
 import android.util.ArraySet;

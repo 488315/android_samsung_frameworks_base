@@ -48,7 +48,7 @@ import android.os.connectivity.CellularBatteryStats;
 import android.os.connectivity.GpsBatteryStats;
 import android.os.connectivity.WifiActivityEnergyInfo;
 import android.os.connectivity.WifiBatteryStats;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.provider.Settings;
 import android.telephony.CellSignalStrength;
 import android.telephony.CellSignalStrengthLte;

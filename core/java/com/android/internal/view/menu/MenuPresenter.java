@@ -1,7 +1,7 @@
 package com.android.internal.view.menu;
 
 import android.content.Context;
-import android.p009os.Parcelable;
+import android.os.Parcelable;
 import android.view.ViewGroup;
 
 /* loaded from: classes5.dex */

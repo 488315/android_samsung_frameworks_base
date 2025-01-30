@@ -13,7 +13,7 @@ import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.drawable.ColorDrawable;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.view.HapticFeedbackConstants;
 import android.view.View;

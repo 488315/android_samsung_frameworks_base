@@ -1,9 +1,9 @@
 package android.spay;
 
-import android.p009os.Build;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Build;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -85,7 +85,7 @@ public class PaymentTZServiceConfig implements Parcelable {
     readFromParcel(in);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flag) {
     out.writeStrongBinder(this.mClient);
     out.writeInt(this.mTAConfigs.size());
@@ -110,7 +110,7 @@ public class PaymentTZServiceConfig implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

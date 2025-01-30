@@ -1,6 +1,6 @@
 package android.telephony.mbms;
 
-import android.p009os.Parcel;
+import android.os.Parcel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;

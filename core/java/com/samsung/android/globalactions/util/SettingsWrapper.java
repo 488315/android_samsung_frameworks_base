@@ -5,7 +5,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.provider.Settings;
 import android.sec.enterprise.content.SecContentProviderURI;
 import com.samsung.android.audio.AudioConstants;

@@ -1,9 +1,9 @@
 package android.hardware.gnss;
 
 import android.hardware.scontext.SContextConstants;
-import android.p009os.BadParcelableException;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.BadParcelableException;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes2.dex */
 public class GnssData implements Parcelable {
@@ -28,12 +28,12 @@ public class GnssData implements Parcelable {
   public GnssAgc[] gnssAgcs = new GnssAgc[0];
   public GnssMeasurement[] measurements;
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final int getStability() {
     return 1;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
     int _aidl_start_pos = _aidl_parcel.dataPosition();
     _aidl_parcel.writeInt(0);
@@ -101,7 +101,7 @@ public class GnssData implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     int _mask = 0 | describeContents(this.measurements);
     return _mask
@@ -148,12 +148,12 @@ public class GnssData implements Parcelable {
     public int constellation = 0;
     public long carrierFrequencyHz = 0;
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public final int getStability() {
       return 1;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
       int _aidl_start_pos = _aidl_parcel.dataPosition();
       _aidl_parcel.writeInt(0);
@@ -210,7 +210,7 @@ public class GnssData implements Parcelable {
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }

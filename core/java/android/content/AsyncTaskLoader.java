@@ -1,9 +1,9 @@
 package android.content;
 
-import android.p009os.AsyncTask;
-import android.p009os.Handler;
-import android.p009os.OperationCanceledException;
-import android.p009os.SystemClock;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.OperationCanceledException;
+import android.os.SystemClock;
 import android.util.TimeUtils;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -31,7 +31,7 @@ public abstract class AsyncTaskLoader<D> extends Loader<D> {
     LoadTask() {}
 
     /* JADX INFO: Access modifiers changed from: protected */
-    @Override // android.p009os.AsyncTask
+    @Override // android.os.AsyncTask
     public D doInBackground(Void... voidArr) {
       try {
         return (D) AsyncTaskLoader.this.onLoadInBackground();
@@ -43,7 +43,7 @@ public abstract class AsyncTaskLoader<D> extends Loader<D> {
       }
     }
 
-    @Override // android.p009os.AsyncTask
+    @Override // android.os.AsyncTask
     protected void onPostExecute(D data) {
       try {
         AsyncTaskLoader.this.dispatchOnLoadComplete(this, data);
@@ -52,7 +52,7 @@ public abstract class AsyncTaskLoader<D> extends Loader<D> {
       }
     }
 
-    @Override // android.p009os.AsyncTask
+    @Override // android.os.AsyncTask
     protected void onCancelled(D data) {
       try {
         AsyncTaskLoader.this.dispatchOnCancelled(this, data);

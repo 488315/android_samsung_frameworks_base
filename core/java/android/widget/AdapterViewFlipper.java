@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.TypedArray;
-import android.p009os.Process;
+import android.os.Process;
 import android.util.AttributeSet;
 import android.view.RemotableViewMethod;
 import com.android.internal.C4337R;

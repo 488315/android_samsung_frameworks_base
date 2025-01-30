@@ -1,7 +1,7 @@
 package android.telephony.ims.aidl;
 
-import android.p009os.Binder;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.RemoteException;
 import android.telephony.ims.DelegateMessageCallback;
 import android.telephony.ims.DelegateRegistrationState;
 import android.telephony.ims.DelegateStateCallback;

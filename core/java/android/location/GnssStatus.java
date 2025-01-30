@@ -1,7 +1,7 @@
 package android.location;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.Preconditions;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -225,12 +225,12 @@ public final class GnssStatus implements Parcelable {
         + Arrays.hashCode(this.mCn0DbHzs);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeInt(this.mSvCount);
     for (int i = 0; i < this.mSvCount; i++) {

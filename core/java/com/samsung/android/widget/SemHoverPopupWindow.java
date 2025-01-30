@@ -5,13 +5,13 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.hardware.input.InputManager;
-import android.p009os.Debug;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Message;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
-import android.p009os.SystemClock;
+import android.os.Debug;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -134,7 +134,7 @@ public class SemHoverPopupWindow {
         new Handler(
             this.mContext
                 .getMainLooper()) { // from class: com.samsung.android.widget.SemHoverPopupWindow.1
-          @Override // android.p009os.Handler
+          @Override // android.os.Handler
           public void handleMessage(Message msg) {
             if (SemHoverPopupWindow.this.mPopup != null
                 && SemHoverPopupWindow.this.mPopup.isShowing()
@@ -1349,7 +1349,7 @@ public class SemHoverPopupWindow {
       this.mContainerDismissHandler =
           new Handler(this.mContext.getMainLooper()) { // from class:
             // com.samsung.android.widget.SemHoverPopupWindow.TouchablePopupContainer.1
-            @Override // android.p009os.Handler
+            @Override // android.os.Handler
             public void handleMessage(Message msg) {
               Log.m94d(
                   SemHoverPopupWindow.TAG,

@@ -1,7 +1,7 @@
 package android.telephony.data;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -59,14 +59,14 @@ public final class UrspRule implements Parcelable {
     return this.mRouteSelectionDescriptor;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mPrecedence);
     dest.writeTypedList(this.mTrafficDescriptors, flags);
     dest.writeTypedList(this.mRouteSelectionDescriptor, flags);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

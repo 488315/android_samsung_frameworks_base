@@ -8,8 +8,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.LocusId;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -26,15 +26,15 @@ import android.media.PlayerBase;
 import android.media.audio.Enums;
 import android.media.session.MediaSession;
 import android.net.Uri;
-import android.p009os.BadParcelableException;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.SystemClock;
-import android.p009os.SystemProperties;
-import android.p009os.UserHandle;
-import android.p009os.UserManager;
+import android.os.BadParcelableException;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.SystemClock;
+import android.os.SystemProperties;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.text.BidiFormatter;
 import android.text.SpannableStringBuilder;
@@ -713,12 +713,12 @@ public class Notification implements Parcelable {
           isAuthenticationRequired());
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       Icon icon = getIcon();
       if (icon != null) {
@@ -1356,12 +1356,12 @@ public class Notification implements Parcelable {
     return charSequence;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(final Parcel parcel, int flags) {
     boolean collectPendingIntents = this.allPendingIntents == null;
     if (collectPendingIntents) {
@@ -6552,12 +6552,12 @@ public class Notification implements Parcelable {
       return this.mFlags;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       parcel.writeInt(this.mPendingIntent != null ? 1 : 0);
       PendingIntent pendingIntent = this.mPendingIntent;

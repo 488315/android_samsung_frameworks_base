@@ -1,8 +1,8 @@
 package android.hardware.radio.sim;
 
-import android.p009os.BadParcelableException;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.BadParcelableException;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 import java.util.StringJoiner;
 
@@ -40,12 +40,12 @@ public class IccIo implements Parcelable {
   /* renamed from: p3 */
   public int f216p3 = 0;
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final int getStability() {
     return 1;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
     int _aidl_start_pos = _aidl_parcel.dataPosition();
     _aidl_parcel.writeInt(0);
@@ -170,7 +170,7 @@ public class IccIo implements Parcelable {
     return "android.hardware.radio.sim.IccIo" + _aidl_sj.toString();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

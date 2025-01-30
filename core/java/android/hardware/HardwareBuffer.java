@@ -1,8 +1,8 @@
 package android.hardware;
 
 import android.graphics.GraphicBuffer;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.provider.Telephony;
 import dalvik.annotation.optimization.CriticalNative;
 import dalvik.annotation.optimization.FastNative;
@@ -220,12 +220,12 @@ public final class HardwareBuffer implements Parcelable, AutoCloseable {
     return this.mNativeObject == 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 1;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     if (isClosed()) {
       throw new IllegalStateException(

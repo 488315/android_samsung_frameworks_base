@@ -1,7 +1,7 @@
 package android.telephony.satellite.stub;
 
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.util.Log;
 import com.android.internal.telephony.IBooleanConsumer;
 import com.android.internal.telephony.IIntegerConsumer;

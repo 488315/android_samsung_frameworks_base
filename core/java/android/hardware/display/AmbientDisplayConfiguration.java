@@ -1,8 +1,8 @@
 package android.hardware.display;
 
 import android.content.Context;
-import android.p009os.Build;
-import android.p009os.SystemProperties;
+import android.os.Build;
+import android.os.SystemProperties;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.ArrayMap;

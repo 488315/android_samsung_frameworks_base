@@ -1,8 +1,8 @@
 package android.database.sqlite;
 
-import android.p009os.Build;
-import android.p009os.Process;
-import android.p009os.SystemProperties;
+import android.os.Build;
+import android.os.Process;
+import android.os.SystemProperties;
 import android.util.Log;
 import android.util.Printer;
 import java.util.ArrayList;

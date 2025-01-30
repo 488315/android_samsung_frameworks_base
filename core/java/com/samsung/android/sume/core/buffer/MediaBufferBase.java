@@ -1,9 +1,9 @@
 package com.samsung.android.sume.core.buffer;
 
-import android.content.p001om.OverlayManagerExt$$ExternalSyntheticLambda1;
+import android.content.om.OverlayManagerExt$$ExternalSyntheticLambda1;
 import android.hardware.HardwareBuffer;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
+import android.os.Parcel;
 import android.util.Log;
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.format.MediaFormat;
@@ -76,7 +76,7 @@ abstract class MediaBufferBase implements MediaBuffer {
     in.readMap(this.extra, null);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeSerializable(this.format);
     dest.writeInt(flags);
@@ -418,7 +418,7 @@ abstract class MediaBufferBase implements MediaBuffer {
     throw new UnsupportedOperationException("not implemented yet");
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

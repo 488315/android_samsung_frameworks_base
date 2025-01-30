@@ -13,10 +13,10 @@ import android.hardware.camera2.ICameraOfflineSession;
 import android.hardware.camera2.TotalCaptureResult;
 import android.hardware.camera2.params.InputConfiguration;
 import android.hardware.camera2.params.OutputConfiguration;
-import android.p009os.Binder;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.util.Log;
 import android.util.Range;
 import android.util.Size;
@@ -102,7 +102,7 @@ public class CameraOfflineSessionImpl extends CameraOfflineSession
   public class CameraDeviceCallbacks extends ICameraDeviceCallbacks.Stub {
     public CameraDeviceCallbacks() {}
 
-    @Override // android.hardware.camera2.ICameraDeviceCallbacks.Stub, android.p009os.IInterface
+    @Override // android.hardware.camera2.ICameraDeviceCallbacks.Stub, android.os.IInterface
     public IBinder asBinder() {
       return this;
     }

@@ -1,7 +1,7 @@
 package android.view;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.AnnotationValidations;
 import java.lang.annotation.Annotation;
 import java.lang.annotation.Retention;
@@ -138,7 +138,7 @@ public final class VerifiedMotionEvent extends VerifiedInputEvent implements Par
         + this.mButtonState;
   }
 
-  @Override // android.view.VerifiedInputEvent, android.p009os.Parcelable
+  @Override // android.view.VerifiedInputEvent, android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     super.writeToParcel(dest, flags);
     dest.writeFloat(this.mRawX);
@@ -150,7 +150,7 @@ public final class VerifiedMotionEvent extends VerifiedInputEvent implements Par
     dest.writeInt(this.mButtonState);
   }
 
-  @Override // android.view.VerifiedInputEvent, android.p009os.Parcelable
+  @Override // android.view.VerifiedInputEvent, android.os.Parcelable
   public int describeContents() {
     return 0;
   }

@@ -1,12 +1,12 @@
 package com.samsung.android.sume.core.message;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Bundle;
-import android.p009os.Messenger;
+import android.os.Bundle;
+import android.os.Messenger;
 import android.util.Log;
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.buffer.GenericMediaBuffer;
-import com.samsung.android.sume.core.descriptor.p044nn.NNDescriptor$$ExternalSyntheticLambda0;
+import com.samsung.android.sume.core.descriptor.nn.NNDescriptor$$ExternalSyntheticLambda0;
 import java.io.Serializable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -133,7 +133,7 @@ public class Message {
   @Retention(RetentionPolicy.SOURCE)
   public @interface RequestType {}
 
-  public Message(android.p009os.Message message) {
+  public Message(android.os.Message message) {
     this.data = new HashMap();
     Bundle bundle = message.getData();
     bundle.setClassLoader(GenericMediaBuffer.class.getClassLoader());
@@ -160,14 +160,14 @@ public class Message {
     return this.bundledDataHandler;
   }
 
-  public android.p009os.Message toAndroidMessage() {
+  public android.os.Message toAndroidMessage() {
     Bundle bundle = new Bundle();
     bundle.putSerializable("data", (Serializable) this.data);
     Exception exc = this.exception;
     if (exc != null) {
       bundle.putSerializable("exception", exc);
     }
-    android.p009os.Message message = new android.p009os.Message();
+    android.os.Message message = new android.os.Message();
     message.what = this.code;
     message.arg1 = this.type;
     message.arg2 = this.extra;

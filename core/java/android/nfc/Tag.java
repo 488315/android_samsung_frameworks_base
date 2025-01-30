@@ -11,10 +11,10 @@ import android.nfc.tech.NfcB;
 import android.nfc.tech.NfcBarcode;
 import android.nfc.tech.NfcF;
 import android.nfc.tech.NfcV;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -272,12 +272,12 @@ public final class Tag implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     int isMock = this.mTagService == null ? 1 : 0;
     writeBytesWithNull(dest, this.mId);

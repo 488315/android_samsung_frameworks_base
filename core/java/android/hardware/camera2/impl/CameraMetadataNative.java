@@ -51,9 +51,9 @@ import android.hardware.camera2.utils.ArrayUtils;
 import android.hardware.camera2.utils.TypeReference;
 import android.location.Location;
 import android.location.LocationManager;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.ServiceSpecificException;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.ServiceSpecificException;
 import android.util.Log;
 import android.util.Range;
 import android.util.Size;
@@ -713,12 +713,12 @@ public class CameraMetadataNative implements Parcelable {
     registerAllMarshalers();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     nativeWriteToParcel(dest, this.mMetadataPtr);
   }

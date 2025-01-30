@@ -3,7 +3,7 @@ package com.samsung.android.cocktailbar;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.p009os.Bundle;
+import android.os.Bundle;
 
 /* loaded from: classes5.dex */
 public class SemCocktailProvider extends BroadcastReceiver {

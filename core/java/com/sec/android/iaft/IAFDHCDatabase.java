@@ -1,7 +1,7 @@
 package com.sec.android.iaft;
 
 import android.content.Context;
-import com.samsung.android.p043sm.iafdlib.IafdConstant;
+import com.samsung.android.sm.iafdlib.IafdConstant;
 import java.util.HashMap;
 
 /* loaded from: classes6.dex */

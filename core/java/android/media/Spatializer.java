@@ -3,7 +3,7 @@ package android.media;
 import android.annotation.SystemApi;
 import android.media.permission.ClearCallingIdentityContext;
 import android.media.permission.SafeCloseable;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.util.Log;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

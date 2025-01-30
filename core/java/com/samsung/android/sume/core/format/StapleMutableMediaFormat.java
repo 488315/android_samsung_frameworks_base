@@ -1,6 +1,6 @@
 package com.samsung.android.sume.core.format;
 
-import android.content.p001om.OverlayManagerExt$$ExternalSyntheticLambda1;
+import android.content.om.OverlayManagerExt$$ExternalSyntheticLambda1;
 import android.graphics.Rect;
 import android.util.Log;
 import android.util.Pair;

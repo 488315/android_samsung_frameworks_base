@@ -1,8 +1,8 @@
 package android.telephony.euicc;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.telephony.UiccAccessRule;
 import com.android.internal.util.Preconditions;
 import java.util.ArrayList;
@@ -148,7 +148,7 @@ public final class DownloadableSubscription implements Parcelable {
     this.accessRules = Arrays.asList(accessRules);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.encodedActivationCode);
     dest.writeString(this.confirmationCode);
@@ -156,7 +156,7 @@ public final class DownloadableSubscription implements Parcelable {
     dest.writeTypedList(this.accessRules);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

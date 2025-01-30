@@ -3,7 +3,7 @@ package com.android.server;
 import android.content.Context;
 import android.hardware.usb.UsbDevice;
 import android.hardware.usb.UsbManager;
-import android.media.p008tv.interactive.TvInteractiveAppService;
+import android.media.tv.interactive.TvInteractiveAppService;
 import android.util.Log;
 import com.samsung.android.common.AsPackageName;
 

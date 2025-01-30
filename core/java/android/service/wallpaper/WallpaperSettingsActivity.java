@@ -1,6 +1,6 @@
 package android.service.wallpaper;
 
-import android.p009os.Bundle;
+import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
 /* loaded from: classes3.dex */

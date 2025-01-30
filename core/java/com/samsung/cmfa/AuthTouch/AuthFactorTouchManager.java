@@ -4,9 +4,9 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.p002pm.PackageManager;
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
+import android.content.pm.PackageManager;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.util.Log;
 import android.view.MotionEvent;
 

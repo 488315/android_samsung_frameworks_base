@@ -4,10 +4,10 @@ import android.annotation.SystemApi;
 import android.app.PendingIntent;
 import android.app.smartspace.SmartspaceUtils;
 import android.content.Intent;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.UserHandle;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.UserHandle;
 import android.text.TextUtils;
 import java.util.Objects;
 
@@ -84,7 +84,7 @@ public final class TapAction implements Parcelable {
     return this.mShouldShowOnLockscreen;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     TextUtils.writeToParcel(this.mId, out, flags);
     out.writeTypedObject(this.mIntent, flags);
@@ -94,7 +94,7 @@ public final class TapAction implements Parcelable {
     out.writeBoolean(this.mShouldShowOnLockscreen);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

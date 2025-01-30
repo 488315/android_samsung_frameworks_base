@@ -1,8 +1,8 @@
 package android.window;
 
 import android.content.res.Configuration;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.SparseIntArray;
 import java.util.Arrays;
 
@@ -199,7 +199,7 @@ public final class SizeConfigurationBuckets implements Parcelable {
     return this.mScreenLayoutLongSet;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     byte flg = this.mScreenLayoutLongSet ? (byte) (0 | 16) : (byte) 0;
     if (this.mHorizontal != null) {
@@ -233,7 +233,7 @@ public final class SizeConfigurationBuckets implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

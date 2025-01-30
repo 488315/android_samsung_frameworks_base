@@ -2,8 +2,8 @@ package android.net;
 
 import android.annotation.SystemApi;
 import android.content.Context;
-import android.p009os.IBinder;
-import android.p009os.ServiceManager;
+import android.os.IBinder;
+import android.os.ServiceManager;
 import com.android.net.module.util.PermissionUtils;
 
 @SystemApi

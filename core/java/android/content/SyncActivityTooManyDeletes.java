@@ -2,7 +2,7 @@ package android.content;
 
 import android.accounts.Account;
 import android.app.Activity;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,7 +12,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.android.internal.C4337R;
-import com.samsung.android.core.p036pm.runtimemanifest.RuntimeManifestUtils;
+import com.samsung.android.core.pm.runtimemanifest.RuntimeManifestUtils;
 
 /* loaded from: classes.dex */
 public class SyncActivityTooManyDeletes extends Activity

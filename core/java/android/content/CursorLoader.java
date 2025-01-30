@@ -2,8 +2,8 @@ package android.content;
 
 import android.database.Cursor;
 import android.net.Uri;
-import android.p009os.CancellationSignal;
-import android.p009os.OperationCanceledException;
+import android.os.CancellationSignal;
+import android.os.OperationCanceledException;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.util.Arrays;

@@ -2,13 +2,13 @@ package android.print;
 
 import android.app.PendingIntent;
 import android.content.Context;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageInfo;
-import android.content.p002pm.PackageManager;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.Icon;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import com.android.internal.util.Preconditions;
 import java.lang.annotation.Retention;
@@ -156,12 +156,12 @@ public final class PrinterInfo implements Parcelable {
     this.mInfoIntent = (PendingIntent) parcel.readParcelable(null, PendingIntent.class);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeParcelable(this.mId, i);
     parcel.writeString(this.mName);

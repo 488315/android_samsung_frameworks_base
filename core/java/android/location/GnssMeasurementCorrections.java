@@ -1,8 +1,8 @@
 package android.location;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.Preconditions;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -111,7 +111,7 @@ public final class GnssMeasurementCorrections implements Parcelable {
     return this.mEnvironmentBearingUncertaintyDegrees;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -149,7 +149,7 @@ public final class GnssMeasurementCorrections implements Parcelable {
             Float.valueOf(this.mEnvironmentBearingUncertaintyDegrees));
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeDouble(this.mLatitudeDegrees);
     parcel.writeDouble(this.mLongitudeDegrees);

@@ -5,7 +5,7 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.hardware.display.DisplayManager;
-import android.p009os.UserHandle;
+import android.os.UserHandle;
 import android.telecom.TelecomManager;
 import android.view.Display;
 import com.samsung.android.globalactions.presentation.SamsungGlobalActions;

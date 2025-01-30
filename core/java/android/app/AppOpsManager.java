@@ -10,31 +10,31 @@ import android.content.AttributionSource;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ParceledListSlice;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ParceledListSlice;
 import android.database.DatabaseUtils;
 import android.health.connect.HealthConnectManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.MediaMetrics;
-import android.p009os.Binder;
-import android.p009os.Build;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.HandlerExecutor;
-import android.p009os.HandlerThread;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.PackageTagsList;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.Process;
-import android.p009os.RemoteCallback;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
-import android.p009os.SystemClock;
-import android.p009os.UserHandle;
-import android.p009os.UserManager;
+import android.os.Binder;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerExecutor;
+import android.os.HandlerThread;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.PackageTagsList;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.Process;
+import android.os.RemoteCallback;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.SystemClock;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.DeviceConfig;
 import android.security.keystore.KeyProperties;
 import android.util.ArrayMap;
@@ -52,8 +52,8 @@ import com.android.internal.app.IAppOpsService;
 import com.android.internal.app.IAppOpsStartedCallback;
 import com.android.internal.app.MessageSamplingConfig;
 import com.android.internal.content.NativeLibraryHelper;
-import com.android.internal.p029os.RuntimeInit;
-import com.android.internal.p029os.ZygoteInit;
+import com.android.internal.os.RuntimeInit;
+import com.android.internal.os.ZygoteInit;
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.Parcelling;
@@ -1514,12 +1514,12 @@ public class AppOpsManager {
       return this.mEntries;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeString(this.mPackageName);
       dest.writeInt(this.mUid);
@@ -1593,7 +1593,7 @@ public class AppOpsManager {
       return this.mAttributionTag;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       byte flg = this.mPackageName != null ? (byte) (0 | 2) : (byte) 0;
       if (this.mAttributionTag != null) {
@@ -1611,7 +1611,7 @@ public class AppOpsManager {
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -1693,7 +1693,7 @@ public class AppOpsManager {
       return this.mProxy;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       byte flg = this.mProxy != null ? (byte) (0 | 4) : (byte) 0;
       dest.writeByte(flg);
@@ -1705,7 +1705,7 @@ public class AppOpsManager {
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -1945,7 +1945,7 @@ public class AppOpsManager {
           };
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       byte flg = this.mRunning ? (byte) (0 | 2) : (byte) 0;
       if (this.mAccessEvents != null) {
@@ -1960,7 +1960,7 @@ public class AppOpsManager {
       sParcellingForRejectEvents.parcel(this.mRejectEvents, dest, flags);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -2198,14 +2198,14 @@ public class AppOpsManager {
       return this.mAttributedOpEntries;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeInt(this.mOp);
       dest.writeInt(this.mMode);
       dest.writeMap(this.mAttributedOpEntries);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -2666,12 +2666,12 @@ public class AppOpsManager {
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int flags) {
       parcel.writeLong(this.mBeginTimeMillis);
       parcel.writeLong(this.mEndTimeMillis);
@@ -2970,12 +2970,12 @@ public class AppOpsManager {
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int flags) {
       parcel.writeInt(this.mUid);
       parcel.writeTypedArrayMap(this.mHistoricalPackageOps, flags);
@@ -3275,12 +3275,12 @@ public class AppOpsManager {
       return combinedOp;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int flags) {
       parcel.writeString(this.mPackageName);
       parcel.writeTypedArrayMap(this.mAttributedHistoricalOps, flags);
@@ -3550,7 +3550,7 @@ public class AppOpsManager {
       return (_hash * 31) + Objects.hashCode(this.mHistoricalOps);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       byte flg = this.mTag != null ? (byte) (0 | 1) : (byte) 0;
       if (this.mHistoricalOps != null) {
@@ -3567,7 +3567,7 @@ public class AppOpsManager {
       }
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
@@ -3915,12 +3915,12 @@ public class AppOpsManager {
           this.mAccessDuration, fromUidState, toUidState, flags);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int flags) {
       parcel.writeInt(this.mOp);
       AppOpsManager.writeLongSparseLongArrayToParcel(this.mAccessCount, parcel);

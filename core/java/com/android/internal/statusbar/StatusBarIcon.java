@@ -1,9 +1,9 @@
 package com.android.internal.statusbar;
 
 import android.graphics.drawable.Icon;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.UserHandle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.UserHandle;
 import android.text.TextUtils;
 
 /* loaded from: classes5.dex */
@@ -101,7 +101,7 @@ public class StatusBarIcon implements Parcelable {
     this.contentDescription = in.readCharSequence();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeParcelable(this.icon, 0);
     parcel.writeString(this.pkg);
@@ -112,7 +112,7 @@ public class StatusBarIcon implements Parcelable {
     parcel.writeCharSequence(this.contentDescription);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

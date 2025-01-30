@@ -1,8 +1,8 @@
 package android.telephony.emergency;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.telephony.PhoneNumberUtils;
 import android.text.TextUtils;
 import android.util.SparseArray;
@@ -121,7 +121,7 @@ public final class EmergencyNumber implements Parcelable, Comparable<EmergencyNu
     this.mEmergencyCallRouting = source.readInt();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.mNumber);
     dest.writeString(this.mCountryIso);
@@ -207,7 +207,7 @@ public final class EmergencyNumber implements Parcelable, Comparable<EmergencyNu
     return this.mEmergencyCallRouting;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

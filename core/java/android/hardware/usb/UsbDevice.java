@@ -2,9 +2,9 @@ package android.hardware.usb;
 
 import android.app.ActivityThread;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
 import com.android.internal.util.Preconditions;
 import java.util.Objects;
 
@@ -292,12 +292,12 @@ public class UsbDevice implements Parcelable {
     return builder.toString();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeString(this.mName);
     parcel.writeInt(this.mVendorId);

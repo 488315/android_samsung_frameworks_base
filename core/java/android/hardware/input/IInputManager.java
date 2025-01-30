@@ -5,15 +5,15 @@ import android.app.ActivityThread;
 import android.bluetooth.BluetoothDevice;
 import android.hardware.lights.Light;
 import android.hardware.lights.LightState;
-import android.p009os.Binder;
-import android.p009os.CombinedVibration;
-import android.p009os.IBinder;
-import android.p009os.IInterface;
-import android.p009os.IVibratorStateListener;
-import android.p009os.Parcel;
-import android.p009os.PermissionEnforcer;
-import android.p009os.RemoteException;
-import android.p009os.VibrationEffect;
+import android.os.Binder;
+import android.os.CombinedVibration;
+import android.os.IBinder;
+import android.os.IInterface;
+import android.os.IVibratorStateListener;
+import android.os.Parcel;
+import android.os.PermissionEnforcer;
+import android.os.RemoteException;
+import android.os.VibrationEffect;
 import android.view.InputChannel;
 import android.view.InputDevice;
 import android.view.InputEvent;
@@ -770,7 +770,7 @@ public interface IInputManager extends IInterface {
       return null;
     }
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return null;
     }
@@ -912,7 +912,7 @@ public interface IInputManager extends IInterface {
       return new Proxy(obj);
     }
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return this;
     }
@@ -1136,12 +1136,12 @@ public interface IInputManager extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public String getTransactionName(int transactionCode) {
       return getDefaultTransactionName(transactionCode);
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
         throws RemoteException {
       boolean[] _arg3;
@@ -1925,7 +1925,7 @@ public interface IInputManager extends IInterface {
         this.mRemote = remote;
       }
 
-      @Override // android.p009os.IInterface
+      @Override // android.os.IInterface
       public IBinder asBinder() {
         return this.mRemote;
       }
@@ -3810,7 +3810,7 @@ public interface IInputManager extends IInterface {
           Manifest.permission.MONITOR_KEYBOARD_BACKLIGHT, getCallingPid(), getCallingUid());
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public int getMaxTransactionId() {
       return 105;
     }

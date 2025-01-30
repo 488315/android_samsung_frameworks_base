@@ -1,9 +1,9 @@
 package com.samsung.android.authenticator;
 
-import android.p009os.IBinder;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.IBinder;
+import android.os.ParcelFileDescriptor;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import vendor.samsung.hardware.authfw.ISehAuthenticationFramework;

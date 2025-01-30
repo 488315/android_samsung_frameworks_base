@@ -1,7 +1,7 @@
 package android.printservice;
 
 import android.graphics.drawable.Icon;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.print.PrinterId;
 import android.util.Log;
 

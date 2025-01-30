@@ -11,8 +11,8 @@ import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
-import android.p009os.Handler;
-import android.p009os.Message;
+import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
@@ -260,7 +260,7 @@ public class KeyboardView extends View implements View.OnClickListener {
     if (this.mHandler == null) {
       this.mHandler =
           new Handler() { // from class: android.inputmethodservice.KeyboardView.1
-            @Override // android.p009os.Handler
+            @Override // android.os.Handler
             public void handleMessage(Message msg) {
               switch (msg.what) {
                 case 1:

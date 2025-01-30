@@ -88,7 +88,7 @@ import com.android.server.pm.split.SplitAssetLoader;
 import com.samsung.android.core.pm.runtimemanifest.RuntimeManifestUtils;
 import com.samsung.android.knox.custom.KnoxCustomManagerService;
 import com.samsung.android.rune.PMRune;
-import com.samsung.android.server.p025pm.runtimemanifest.LegacyRuntimeManifestParseUtils;
+import com.samsung.android.server.pm.runtimemanifest.LegacyRuntimeManifestParseUtils;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
@@ -1803,7 +1803,7 @@ public class ParsingPackageUtils {
   */
   /* JADX WARN: Code restructure failed: missing block: B:138:0x0489, code lost:
 
-     com.samsung.android.server.p025pm.runtimemanifest.RuntimeManifestOverlayUtils.applyRuntimeManifestIfNeeded(r25, r26);
+     com.samsung.android.server.pm.runtimemanifest.RuntimeManifestOverlayUtils.applyRuntimeManifestIfNeeded(r25, r26);
   */
   /* JADX WARN: Code restructure failed: missing block: B:140:0x0494, code lost:
 

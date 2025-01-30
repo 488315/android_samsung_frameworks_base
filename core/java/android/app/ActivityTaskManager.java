@@ -1,16 +1,16 @@
 package android.app;
 
 import android.content.Context;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Rect;
-import android.p009os.Build;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.Build;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.util.DisplayMetrics;
 import android.util.Singleton;
 import android.view.RemoteAnimationDefinition;
@@ -373,12 +373,12 @@ public class ActivityTaskManager {
     public int position;
     public boolean visible;
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.app.TaskInfo, android.p009os.Parcelable
+    @Override // android.app.TaskInfo, android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       parcel.writeTypedObject(this.bounds, i);
       parcel.writeIntArray(this.childTaskIds);

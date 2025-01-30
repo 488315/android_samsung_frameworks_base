@@ -1,7 +1,7 @@
 package com.samsung.android.hardware.display;
 
 import android.hardware.display.DisplayManagerGlobal;
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.view.DisplayAddress;
 import com.samsung.android.rune.CoreRune;

@@ -8,16 +8,16 @@ import android.app.IActivityClientController;
 import android.app.ProfilerInfo;
 import android.app.ResultInfo;
 import android.content.Intent;
-import android.content.p002pm.ActivityInfo;
+import android.content.pm.ActivityInfo;
 import android.content.res.CompatibilityInfo;
 import android.content.res.Configuration;
-import android.p009os.BaseBundle;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.PersistableBundle;
-import android.p009os.Trace;
+import android.os.BaseBundle;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.PersistableBundle;
+import android.os.Trace;
 import com.android.internal.app.IVoiceInteractor;
 import com.android.internal.content.ReferrerIntent;
 import java.util.List;
@@ -172,7 +172,7 @@ public class LaunchActivityItem extends ClientTransactionItem {
     ObjectPool.recycle(this);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeTypedObject(this.mIntent, flags);
     dest.writeInt(this.mIdent);

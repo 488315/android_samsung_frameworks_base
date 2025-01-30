@@ -1,7 +1,7 @@
 package com.samsung.android.sume.core.buffer;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
+import android.os.Parcel;
 import android.util.Log;
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.format.MediaFormat;
@@ -58,7 +58,7 @@ public abstract class MediaBufferGroup extends MediaBufferBase {
     return super.containsExtra(str);
   }
 
-  @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, android.p009os.Parcelable
+  @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, android.os.Parcelable
   public /* bridge */ /* synthetic */ int describeContents() {
     return super.describeContents();
   }
@@ -179,7 +179,7 @@ public abstract class MediaBufferGroup extends MediaBufferBase {
     in.readParcelableList(arrayList, GenericMediaBuffer.class.getClassLoader());
   }
 
-  @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, android.p009os.Parcelable
+  @Override // com.samsung.android.sume.core.buffer.MediaBufferBase, android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     super.writeToParcel(dest, flags);
     dest.writeParcelableList(this.buffers, flags);

@@ -1,7 +1,7 @@
 package android.app;
 
 import android.content.Context;
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
 import java.io.File;

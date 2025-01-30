@@ -39,7 +39,7 @@ import com.android.server.enterprise.vpn.knoxvpn.KnoxVpnFirewallHelper;
 import com.android.server.knox.dar.sdp.SDPLog;
 import com.android.server.pm.UserManagerInternal;
 import com.android.server.utils.Slogf;
-import com.att.iqi.lib.metrics.p020mm.MM05;
+import com.att.iqi.lib.metrics.mm.MM05;
 import com.samsung.android.feature.SemFloatingFeature;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;

@@ -7,10 +7,10 @@ import android.database.ContentObserver;
 import android.hardware.display.DisplayManager;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.SystemClock;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.MathUtils;
 import android.util.Slog;
@@ -475,7 +475,7 @@ public class BrightnessSynchronizer {
       super(looper);
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       switch (msg.what) {
         case 1:

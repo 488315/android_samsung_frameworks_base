@@ -3,7 +3,7 @@ package android.speech;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p002pm.ResolveInfo;
+import android.content.pm.ResolveInfo;
 
 /* loaded from: classes3.dex */
 public class RecognizerIntent {

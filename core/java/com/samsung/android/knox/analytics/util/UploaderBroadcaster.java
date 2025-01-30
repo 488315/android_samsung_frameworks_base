@@ -4,7 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.UserHandle;
+import android.os.UserHandle;
 
 /* loaded from: classes5.dex */
 public class UploaderBroadcaster {

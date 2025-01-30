@@ -29,7 +29,7 @@ import android.os.IHwBinder;
 import android.os.RemoteException;
 import android.os.SystemClock;
 import android.os.UserManager;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.text.TextUtils;
 import android.util.Slog;
 import android.util.SparseArray;

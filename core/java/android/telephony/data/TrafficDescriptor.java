@@ -1,8 +1,8 @@
 package android.telephony.data;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.util.Objects;
@@ -178,7 +178,7 @@ public final class TrafficDescriptor implements Parcelable {
     return null;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -187,7 +187,7 @@ public final class TrafficDescriptor implements Parcelable {
     return "TrafficDescriptor={mDnn=" + this.mDnn + ", " + this.mOsAppId + "}";
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.mDnn);
     OsAppId osAppId = this.mOsAppId;

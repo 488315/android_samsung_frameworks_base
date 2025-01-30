@@ -2,8 +2,8 @@ package com.android.internal.widget;
 
 import android.content.Context;
 import android.graphics.PointF;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -1574,12 +1574,12 @@ public class LinearLayoutManager extends RecyclerView.LayoutManager
       this.mAnchorPosition = -1;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       parcel.writeInt(this.mAnchorPosition);
       parcel.writeInt(this.mAnchorOffset);

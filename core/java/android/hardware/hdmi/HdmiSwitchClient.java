@@ -1,8 +1,8 @@
 package android.hardware.hdmi;
 
 import android.annotation.SystemApi;
-import android.p009os.Binder;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.RemoteException;
 import android.util.Log;
 import com.android.internal.util.FunctionalUtils;
 import java.util.Collections;

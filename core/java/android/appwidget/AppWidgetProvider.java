@@ -3,7 +3,7 @@ package android.appwidget;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.p009os.Bundle;
+import android.os.Bundle;
 
 /* loaded from: classes.dex */
 public class AppWidgetProvider extends BroadcastReceiver {

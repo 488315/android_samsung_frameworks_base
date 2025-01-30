@@ -12,7 +12,7 @@ import android.os.IHwBinder;
 import android.os.IHwInterface;
 import android.os.NativeHandle;
 import android.os.RemoteException;
-import com.att.iqi.lib.metrics.p020mm.MM05;
+import com.att.iqi.lib.metrics.mm.MM05;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;

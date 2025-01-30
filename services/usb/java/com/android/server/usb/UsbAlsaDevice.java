@@ -3,7 +3,7 @@ package com.android.server.usb;
 import android.media.AudioDeviceAttributes;
 import android.media.IAudioService;
 import android.os.RemoteException;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.sysfwutil.Slog;
 import com.android.internal.util.dump.DualDumpOutputStream;
 import com.android.server.audio.AudioService;

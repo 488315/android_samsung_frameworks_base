@@ -1,7 +1,7 @@
 package com.android.internal.app.procstats;
 
-import android.p009os.Build;
-import android.p009os.Parcel;
+import android.os.Build;
+import android.os.Parcel;
 import android.util.EventLog;
 import android.util.Slog;
 import com.android.internal.util.GrowingArrayUtils;

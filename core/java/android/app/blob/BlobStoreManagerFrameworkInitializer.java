@@ -2,7 +2,7 @@ package android.app.blob;
 
 import android.app.SystemServiceRegistry;
 import android.content.Context;
-import android.p009os.IBinder;
+import android.os.IBinder;
 
 /* loaded from: classes.dex */
 public class BlobStoreManagerFrameworkInitializer {

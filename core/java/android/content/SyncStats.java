@@ -1,8 +1,8 @@
 package android.content;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class SyncStats implements Parcelable {
@@ -100,12 +100,12 @@ public class SyncStats implements Parcelable {
     this.numSkippedEntries = 0L;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeLong(this.numAuthExceptions);
     dest.writeLong(this.numIoExceptions);

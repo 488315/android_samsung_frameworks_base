@@ -2,9 +2,9 @@ package android.app.compat;
 
 import android.app.PropertyInvalidatedCache;
 import android.content.Context;
-import android.p009os.Binder;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.Binder;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import com.android.internal.compat.IPlatformCompat;
 
 /* loaded from: classes.dex */

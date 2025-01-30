@@ -2,8 +2,8 @@ package android.service.euicc;
 
 import android.annotation.SystemApi;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Arrays;
 import java.util.List;
 
@@ -67,14 +67,14 @@ public final class GetEuiccProfileInfoListResult implements Parcelable {
     this.mIsRemovable = in.readBoolean();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.result);
     dest.writeTypedArray(this.mProfiles, flags);
     dest.writeBoolean(this.mIsRemovable);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

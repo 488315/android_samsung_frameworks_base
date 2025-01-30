@@ -2,9 +2,9 @@ package android.app.job;
 
 import android.compat.Compatibility;
 import android.content.Intent;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.PersistableBundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.PersistableBundle;
 
 /* loaded from: classes.dex */
 public final class JobWorkItem implements Parcelable {
@@ -220,12 +220,12 @@ public final class JobWorkItem implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     if (this.mIntent != null) {
       out.writeInt(1);

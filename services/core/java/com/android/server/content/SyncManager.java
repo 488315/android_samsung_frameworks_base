@@ -31,7 +31,7 @@ import android.content.SyncInfo;
 import android.content.SyncResult;
 import android.content.SyncStats;
 import android.content.SyncStatusInfo;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;

@@ -6,22 +6,22 @@ import android.app.IServiceConnection;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.p002pm.IPackageDataObserver;
-import android.content.p002pm.ParceledListSlice;
-import android.content.p002pm.StringParceledListSlice;
+import android.content.pm.IPackageDataObserver;
+import android.content.pm.ParceledListSlice;
+import android.content.pm.StringParceledListSlice;
 import android.graphics.Bitmap;
 import android.net.ProxyInfo;
 import android.net.Uri;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
-import android.p009os.IInterface;
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.PersistableBundle;
-import android.p009os.RemoteCallback;
-import android.p009os.RemoteException;
-import android.p009os.UserHandle;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.IInterface;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
+import android.os.PersistableBundle;
+import android.os.RemoteCallback;
+import android.os.RemoteException;
+import android.os.UserHandle;
 import android.sec.enterprise.content.SecContentProviderURI;
 import android.security.keymaster.KeymasterCertificateChain;
 import android.security.keystore.ParcelableKeyGenParameterSpec;
@@ -3466,7 +3466,7 @@ public interface IDevicePolicyManager extends IInterface {
     @Override // android.app.admin.IDevicePolicyManager
     public void calculateHasIncompatibleAccounts() throws RemoteException {}
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return null;
     }
@@ -3950,7 +3950,7 @@ public interface IDevicePolicyManager extends IInterface {
       return new Proxy(obj);
     }
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return this;
     }
@@ -4874,12 +4874,12 @@ public interface IDevicePolicyManager extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public String getTransactionName(int transactionCode) {
       return getDefaultTransactionName(transactionCode);
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
         throws RemoteException {
       if (code >= 1 && code <= 16777215) {
@@ -7188,7 +7188,7 @@ public interface IDevicePolicyManager extends IInterface {
         this.mRemote = remote;
       }
 
-      @Override // android.p009os.IInterface
+      @Override // android.os.IInterface
       public IBinder asBinder() {
         return this.mRemote;
       }
@@ -17581,7 +17581,7 @@ public interface IDevicePolicyManager extends IInterface {
       return true;
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public int getMaxTransactionId() {
       return 455;
     }

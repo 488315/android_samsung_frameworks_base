@@ -1,10 +1,10 @@
 package com.samsung.android.rune;
 
-import android.p009os.Build;
-import android.p009os.Debug;
-import android.p009os.FactoryTest;
-import android.p009os.Process;
-import android.p009os.SystemProperties;
+import android.os.Build;
+import android.os.Debug;
+import android.os.FactoryTest;
+import android.os.Process;
+import android.os.SystemProperties;
 import android.view.ViewRootImpl;
 import com.samsung.android.desktopmode.DesktopModeFeature;
 import com.samsung.android.feature.SemCscFeature;

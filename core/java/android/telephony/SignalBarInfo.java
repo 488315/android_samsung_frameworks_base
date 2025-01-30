@@ -1,7 +1,7 @@
 package android.telephony;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 import vendor.samsung.hardware.radio.V2_0.SehSignalBar;
 
@@ -133,7 +133,7 @@ public class SignalBarInfo implements Parcelable {
     this.mNrLevel = level;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -205,7 +205,7 @@ public class SignalBarInfo implements Parcelable {
         && this.mNrLevel == other.mNrLevel;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mCdmaLevel);
     dest.writeInt(this.mEvdoLevel);

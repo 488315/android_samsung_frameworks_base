@@ -2,7 +2,7 @@ package com.samsung.android.sume.core.buffer;
 
 import android.graphics.Bitmap;
 import android.hardware.HardwareBuffer;
-import android.p009os.ParcelFileDescriptor;
+import android.os.ParcelFileDescriptor;
 import android.util.Log;
 import android.util.Pair;
 import com.samsung.android.sume.core.Def;

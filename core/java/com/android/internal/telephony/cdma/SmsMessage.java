@@ -1,7 +1,7 @@
 package com.android.internal.telephony.cdma;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
+import android.os.Parcel;
 import android.sysprop.TelephonyProperties;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.SmsCbLocation;

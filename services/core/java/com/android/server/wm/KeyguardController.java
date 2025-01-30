@@ -4,7 +4,7 @@ import android.os.Debug;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.os.Trace;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Log;
 import android.util.Slog;
 import android.util.SparseArray;

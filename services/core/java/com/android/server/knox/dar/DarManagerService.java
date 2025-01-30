@@ -32,7 +32,7 @@ import com.android.server.knox.dar.ddar.core.DualDarDoManagerImpl;
 import com.android.server.knox.dar.sdp.SDPLog;
 import com.android.server.knox.dar.sdp.SdpManagerImpl;
 import com.android.server.knox.dar.sdp.security.BytesUtil;
-import com.android.server.knox.p010zt.devicetrust.EndpointMonitorImpl;
+import com.android.server.knox.zt.devicetrust.EndpointMonitorImpl;
 import com.android.server.pm.UserManagerInternal;
 import com.samsung.android.knox.EnterpriseKnoxManager;
 import com.samsung.android.knox.SemPersonaManager;

@@ -2,14 +2,14 @@ package android.appwidget;
 
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.p002pm.ActivityInfo;
-import android.content.p002pm.PackageManager;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.res.ResourceId;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.UserHandle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.UserHandle;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import java.lang.annotation.Retention;
@@ -155,7 +155,7 @@ public class AppWidgetProviderInfo implements Parcelable {
     return this.providerInfo;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeTypedObject(this.provider, flags);
     out.writeInt(this.minWidth);
@@ -218,7 +218,7 @@ public class AppWidgetProviderInfo implements Parcelable {
     return that;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

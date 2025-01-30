@@ -2,7 +2,7 @@ package com.samsung.android.sume.core.graph;
 
 import android.media.ExifInterface;
 import android.media.MediaMetadataRetriever;
-import android.media.p008tv.interactive.TvInteractiveAppService;
+import android.media.tv.interactive.TvInteractiveAppService;
 import android.util.Log;
 import android.util.Pair;
 import com.samsung.android.sume.core.Def;

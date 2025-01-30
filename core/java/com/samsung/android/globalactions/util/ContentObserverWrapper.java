@@ -3,7 +3,7 @@ package com.samsung.android.globalactions.util;
 import android.content.Context;
 import android.database.ContentObserver;
 import android.net.Uri;
-import android.p009os.Handler;
+import android.os.Handler;
 import java.util.ArrayList;
 import java.util.Iterator;
 

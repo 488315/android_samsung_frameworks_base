@@ -1,7 +1,7 @@
 package com.android.modules.utils;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class StringParceledListSlice extends BaseParceledListSlice<String> {
     super.setInlineCountLimit(i);
   }
 
-  @Override // com.android.modules.utils.BaseParceledListSlice, android.p009os.Parcelable
+  @Override // com.android.modules.utils.BaseParceledListSlice, android.os.Parcelable
   public /* bridge */ /* synthetic */ void writeToParcel(Parcel parcel, int i) {
     super.writeToParcel(parcel, i);
   }
@@ -56,7 +56,7 @@ public class StringParceledListSlice extends BaseParceledListSlice<String> {
     return new StringParceledListSlice(Collections.emptyList());
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

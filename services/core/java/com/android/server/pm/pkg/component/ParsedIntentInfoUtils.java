@@ -11,8 +11,8 @@ import com.android.internal.R;
 import com.android.server.pm.pkg.parsing.ParsingPackage;
 import com.android.server.pm.pkg.parsing.ParsingPackageUtils;
 import com.android.server.pm.pkg.parsing.ParsingUtils;
-import com.samsung.android.server.p025pm.allowlist.BroadcastReceiverListParser;
-import com.samsung.android.server.p025pm.allowlist.RestrictedReceiverFilter;
+import com.samsung.android.server.pm.allowlist.BroadcastReceiverListParser;
+import com.samsung.android.server.pm.allowlist.RestrictedReceiverFilter;
 import java.util.ArrayList;
 
 /* loaded from: classes3.dex */

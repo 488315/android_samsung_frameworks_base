@@ -1,9 +1,9 @@
 package android.content.res;
 
-import android.content.p002pm.ActivityInfo;
+import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.p009os.StrictMode;
+import android.os.StrictMode;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import com.android.internal.util.XmlUtils;

@@ -4,7 +4,7 @@ import android.R;
 import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.hardware.display.DisplayManager;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.provider.Settings;
 import android.util.Slog;
 import android.view.Display;

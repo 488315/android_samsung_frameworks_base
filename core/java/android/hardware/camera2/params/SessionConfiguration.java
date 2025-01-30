@@ -4,8 +4,8 @@ import android.graphics.ColorSpace;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CaptureRequest;
 import android.hardware.camera2.utils.HashCodeHelpers;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
@@ -79,7 +79,7 @@ public final class SessionConfiguration implements Parcelable {
     this.mOutputConfigurations = outConfigs;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     if (dest == null) {
       throw new IllegalArgumentException("dest must not be null");
@@ -100,7 +100,7 @@ public final class SessionConfiguration implements Parcelable {
     dest.writeTypedList(this.mOutputConfigurations);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

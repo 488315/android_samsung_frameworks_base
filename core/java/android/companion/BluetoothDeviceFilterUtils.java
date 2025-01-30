@@ -2,8 +2,8 @@ package android.companion;
 
 import android.bluetooth.BluetoothDevice;
 import android.net.wifi.ScanResult;
-import android.p009os.ParcelUuid;
-import android.p009os.Parcelable;
+import android.os.ParcelUuid;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 import java.util.Arrays;

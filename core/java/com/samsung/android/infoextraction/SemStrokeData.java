@@ -1,8 +1,8 @@
 package com.samsung.android.infoextraction;
 
 import android.graphics.PointF;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class SemStrokeData implements Parcelable {
     this.mStroke = new ArrayList();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -53,7 +53,7 @@ public class SemStrokeData implements Parcelable {
     return this.mStroke.size();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeTypedList(this.mStroke);
   }

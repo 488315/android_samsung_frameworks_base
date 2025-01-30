@@ -8,7 +8,7 @@ import android.content.pm.Signature;
 import android.os.Binder;
 import android.os.Build;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Base64;
 import android.util.SparseArray;
 import com.samsung.android.sepunion.Log;

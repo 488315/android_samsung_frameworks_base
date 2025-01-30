@@ -1,6 +1,6 @@
 package android.app.servertransaction;
 
-import android.p009os.Parcelable;
+import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public abstract class ClientTransactionItem implements BaseClientRequest, Parcelable {
@@ -12,7 +12,7 @@ public abstract class ClientTransactionItem implements BaseClientRequest, Parcel
     return true;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

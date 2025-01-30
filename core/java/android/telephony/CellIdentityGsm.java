@@ -1,7 +1,7 @@
 package android.telephony;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.telephony.gsm.GsmCellLocation;
 import android.text.TextUtils;
 import android.util.ArraySet;
@@ -249,7 +249,7 @@ public final class CellIdentityGsm extends CellIdentity {
         + "}";
   }
 
-  @Override // android.telephony.CellIdentity, android.p009os.Parcelable
+  @Override // android.telephony.CellIdentity, android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     super.writeToParcel(dest, 1);
     dest.writeInt(this.mLac);

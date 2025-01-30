@@ -1,8 +1,8 @@
 package android.hardware.location;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.content.NativeLibraryHelper;
 
 @SystemApi
@@ -84,12 +84,12 @@ public class MemoryRegion implements Parcelable {
     return isEqual;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeInt(this.mSizeBytes);
     parcel.writeInt(this.mSizeBytesFree);

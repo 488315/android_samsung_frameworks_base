@@ -1,8 +1,8 @@
 package android.security.identity;
 
 import android.content.Context;
-import android.p009os.RemoteException;
-import android.p009os.ServiceSpecificException;
+import android.os.RemoteException;
+import android.os.ServiceSpecificException;
 import android.security.GateKeeper;
 import java.io.ByteArrayInputStream;
 import java.security.cert.Certificate;

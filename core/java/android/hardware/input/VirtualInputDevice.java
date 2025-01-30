@@ -1,8 +1,8 @@
 package android.hardware.input;
 
 import android.companion.virtual.IVirtualDevice;
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
+import android.os.IBinder;
+import android.os.RemoteException;
 import java.io.Closeable;
 
 /* loaded from: classes2.dex */

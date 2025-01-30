@@ -7,7 +7,7 @@ import com.samsung.android.sume.core.buffer.MediaBuffer;
 import com.samsung.android.sume.core.buffer.MediaBufferGroup;
 import com.samsung.android.sume.core.buffer.MutableMediaBuffer;
 import com.samsung.android.sume.core.descriptor.MFDescriptor;
-import com.samsung.android.sume.core.descriptor.p044nn.NNFWDescriptor;
+import com.samsung.android.sume.core.descriptor.nn.NNFWDescriptor;
 import com.samsung.android.sume.core.format.MediaFormat;
 import com.samsung.android.sume.core.format.MutableMediaFormat;
 import com.samsung.android.sume.core.functional.BiBufferProcessor;

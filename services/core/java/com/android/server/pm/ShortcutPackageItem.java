@@ -7,7 +7,7 @@ import android.util.Slog;
 import android.util.Xml;
 import com.android.internal.util.Preconditions;
 import com.android.modules.utils.TypedXmlSerializer;
-import com.samsung.android.server.p025pm.PmLog;
+import com.samsung.android.server.pm.PmLog;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

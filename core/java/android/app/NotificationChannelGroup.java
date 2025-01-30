@@ -1,9 +1,9 @@
 package android.app;
 
 import android.annotation.SystemApi;
-import android.content.p002pm.ParceledListSlice;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.content.pm.ParceledListSlice;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Patterns;
@@ -92,7 +92,7 @@ public final class NotificationChannelGroup implements Parcelable {
     return input;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     if (this.mId != null) {
       dest.writeByte((byte) 1);
@@ -200,7 +200,7 @@ public final class NotificationChannelGroup implements Parcelable {
     return record;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

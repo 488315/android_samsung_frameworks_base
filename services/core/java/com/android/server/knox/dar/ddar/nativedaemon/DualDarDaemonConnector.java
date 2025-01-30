@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.os.SystemClock;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import com.android.server.knox.dar.ddar.DDLog;
 import java.io.IOException;
 import java.io.InputStream;

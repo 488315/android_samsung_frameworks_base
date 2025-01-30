@@ -1,7 +1,7 @@
 package android.util;
 
 import android.annotation.SystemApi;
-import android.p009os.SystemClock;
+import android.os.SystemClock;
 
 @SystemApi(client = SystemApi.Client.MODULE_LIBRARIES)
 /* loaded from: classes4.dex */

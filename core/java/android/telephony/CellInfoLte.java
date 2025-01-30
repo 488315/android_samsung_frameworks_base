@@ -1,7 +1,7 @@
 package android.telephony;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 
 /* loaded from: classes3.dex */
@@ -119,12 +119,12 @@ public final class CellInfoLte extends CellInfo implements Parcelable {
     return sb.toString();
   }
 
-  @Override // android.telephony.CellInfo, android.p009os.Parcelable
+  @Override // android.telephony.CellInfo, android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.telephony.CellInfo, android.p009os.Parcelable
+  @Override // android.telephony.CellInfo, android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     super.writeToParcel(dest, flags, 3);
     this.mCellIdentityLte.writeToParcel(dest, flags);

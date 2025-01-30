@@ -5,8 +5,8 @@ import android.nfc.INfcTag;
 import android.nfc.NdefMessage;
 import android.nfc.Tag;
 import android.nfc.TagLostException;
-import android.p009os.Bundle;
-import android.p009os.RemoteException;
+import android.os.Bundle;
+import android.os.RemoteException;
 import android.util.Log;
 import java.io.IOException;
 

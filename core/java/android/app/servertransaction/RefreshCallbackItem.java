@@ -2,9 +2,9 @@ package android.app.servertransaction;
 
 import android.app.ActivityThread;
 import android.app.ClientTransactionHandler;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class RefreshCallbackItem extends ActivityTransactionItem {
@@ -72,7 +72,7 @@ public class RefreshCallbackItem extends ActivityTransactionItem {
 
   private RefreshCallbackItem() {}
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mPostExecutionState);
   }

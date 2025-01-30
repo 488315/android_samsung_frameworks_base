@@ -1,6 +1,6 @@
 package android.view.contentcapture;
 
-import android.p009os.ParcelFileDescriptor;
+import android.os.ParcelFileDescriptor;
 
 /* loaded from: classes4.dex */
 public interface DataShareWriteAdapter {

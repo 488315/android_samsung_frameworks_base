@@ -1,6 +1,6 @@
 package android.net;
 
-import android.p009os.Parcel;
+import android.os.Parcel;
 
 /* loaded from: classes2.dex */
 public class MobileLinkQualityInfo extends LinkQualityInfo {
@@ -18,7 +18,7 @@ public class MobileLinkQualityInfo extends LinkQualityInfo {
   private int mLteRssnr = Integer.MAX_VALUE;
   private int mLteCqi = Integer.MAX_VALUE;
 
-  @Override // android.net.LinkQualityInfo, android.p009os.Parcelable
+  @Override // android.net.LinkQualityInfo, android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     super.writeToParcel(dest, flags, 3);
     dest.writeInt(this.mMobileNetworkType);

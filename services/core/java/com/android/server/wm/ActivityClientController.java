@@ -16,7 +16,7 @@ import android.app.servertransaction.PipStateTransactionItem;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.res.Configuration;
 import android.graphics.Point;
 import android.graphics.Rect;

@@ -6,30 +6,30 @@ import android.content.IIntentSender;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.LocusId;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.IPackageDataObserver;
-import android.content.p002pm.PackageInfo;
-import android.content.p002pm.ParceledListSlice;
-import android.content.p002pm.UserInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.IPackageDataObserver;
+import android.content.pm.PackageInfo;
+import android.content.pm.ParceledListSlice;
+import android.content.pm.UserInfo;
 import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.hardware.usb.UsbManager;
 import android.net.Uri;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.Debug;
-import android.p009os.IBinder;
-import android.p009os.IInterface;
-import android.p009os.IProgressListener;
-import android.p009os.LocaleList;
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.RemoteCallback;
-import android.p009os.RemoteException;
-import android.p009os.StrictMode;
-import android.p009os.WorkSource;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.Debug;
+import android.os.IBinder;
+import android.os.IInterface;
+import android.os.IProgressListener;
+import android.os.LocaleList;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
+import android.os.RemoteCallback;
+import android.os.RemoteException;
+import android.os.StrictMode;
+import android.os.WorkSource;
 import android.text.TextUtils;
-import com.android.internal.p029os.IResultReceiver;
+import com.android.internal.os.IResultReceiver;
 import com.samsung.android.globalactions.presentation.viewmodel.DefaultActionNames;
 import com.samsung.android.sdhms.SemAppRestrictionManager;
 import java.util.List;
@@ -2463,7 +2463,7 @@ public interface IActivityManager extends IInterface {
     @Override // android.app.IActivityManager
     public void updateDelayServiceEnable(boolean enable) throws RemoteException {}
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return null;
     }
@@ -2789,7 +2789,7 @@ public interface IActivityManager extends IInterface {
       return new Proxy(obj);
     }
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return this;
     }
@@ -3405,12 +3405,12 @@ public interface IActivityManager extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public String getTransactionName(int transactionCode) {
       return getDefaultTransactionName(transactionCode);
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
         throws RemoteException {
       if (code >= 1 && code <= 16777215) {
@@ -5429,7 +5429,7 @@ public interface IActivityManager extends IInterface {
         this.mRemote = remote;
       }
 
-      @Override // android.p009os.IInterface
+      @Override // android.os.IInterface
       public IBinder asBinder() {
         return this.mRemote;
       }
@@ -11922,7 +11922,7 @@ public interface IActivityManager extends IInterface {
       return true;
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public int getMaxTransactionId() {
       return 301;
     }

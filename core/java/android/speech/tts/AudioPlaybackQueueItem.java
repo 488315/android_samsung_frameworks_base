@@ -3,7 +3,7 @@ package android.speech.tts;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.p009os.ConditionVariable;
+import android.os.ConditionVariable;
 import android.util.Log;
 
 /* loaded from: classes3.dex */

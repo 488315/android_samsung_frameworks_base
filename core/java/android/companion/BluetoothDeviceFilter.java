@@ -1,9 +1,9 @@
 package android.companion;
 
 import android.bluetooth.BluetoothDevice;
-import android.p009os.Parcel;
-import android.p009os.ParcelUuid;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.ParcelUuid;
+import android.os.Parcelable;
 import android.provider.OneTimeUseBuilder;
 import android.text.format.DateFormat;
 import com.android.internal.util.ArrayUtils;
@@ -93,7 +93,7 @@ public final class BluetoothDeviceFilter implements DeviceFilter<BluetoothDevice
     return this.mServiceUuidMasks;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(BluetoothDeviceFilterUtils.patternToString(getNamePattern()));
     dest.writeString(this.mAddress);
@@ -136,7 +136,7 @@ public final class BluetoothDeviceFilter implements DeviceFilter<BluetoothDevice
         + '}';
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

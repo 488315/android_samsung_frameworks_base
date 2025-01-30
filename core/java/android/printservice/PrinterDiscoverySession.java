@@ -1,8 +1,8 @@
 package android.printservice;
 
-import android.content.p002pm.ParceledListSlice;
-import android.p009os.CancellationSignal;
-import android.p009os.RemoteException;
+import android.content.pm.ParceledListSlice;
+import android.os.CancellationSignal;
+import android.os.RemoteException;
 import android.print.PrinterId;
 import android.print.PrinterInfo;
 import android.util.ArrayMap;

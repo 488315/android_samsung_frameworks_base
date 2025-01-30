@@ -2,8 +2,8 @@ package android.view;
 
 import android.annotation.NonNull;
 import android.graphics.Rect;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.ArrayUtils;
 import java.util.Arrays;
@@ -146,13 +146,13 @@ public class PrivacyIndicatorBounds implements Parcelable {
     return (_hash * 31) + this.mRotation;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeTypedArray(this.mStaticBounds, flags);
     dest.writeInt(this.mRotation);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

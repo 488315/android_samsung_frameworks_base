@@ -1,8 +1,8 @@
 package com.samsung.android.fontutil;
 
 import android.content.Context;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.net.Uri;
 import android.sec.enterprise.content.SecContentProviderURI;

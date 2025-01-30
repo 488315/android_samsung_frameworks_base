@@ -6,30 +6,30 @@ import android.content.Context;
 import android.content.IIntentReceiver;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageInfo;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.SharedLibraryInfo;
-import android.content.p002pm.dex.ArtManager;
-import android.content.p002pm.split.SplitDependencyLoader;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.SharedLibraryInfo;
+import android.content.pm.dex.ArtManager;
+import android.content.pm.split.SplitDependencyLoader;
 import android.content.res.AssetManager;
 import android.content.res.CompatibilityInfo;
 import android.content.res.Resources;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Bundle;
-import android.p009os.Environment;
-import android.p009os.FileUtils;
-import android.p009os.GraphicsEnvironment;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Process;
-import android.p009os.RemoteException;
-import android.p009os.StrictMode;
-import android.p009os.SystemClock;
-import android.p009os.SystemProperties;
-import android.p009os.Trace;
-import android.p009os.UserHandle;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.FileUtils;
+import android.os.GraphicsEnvironment;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Process;
+import android.os.RemoteException;
+import android.os.StrictMode;
+import android.os.SystemClock;
+import android.os.SystemProperties;
+import android.os.Trace;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.security.net.config.NetworkSecurityConfigProvider;
 import android.sysprop.VndkProperties;
@@ -501,7 +501,7 @@ public final class LoadedApk {
       this.mCachedClassLoaders = new ClassLoader[LoadedApk.this.mSplitNames.length + 1];
     }
 
-    @Override // android.content.p002pm.split.SplitDependencyLoader
+    @Override // android.content.pm.split.SplitDependencyLoader
     protected boolean isSplitCached(int splitIdx) {
       boolean z;
       synchronized (LoadedApk.this.mLock) {
@@ -510,7 +510,7 @@ public final class LoadedApk {
       return z;
     }
 
-    @Override // android.content.p002pm.split.SplitDependencyLoader
+    @Override // android.content.pm.split.SplitDependencyLoader
     protected void constructSplit(int splitIdx, int[] configSplitIndices, int parentSplitIdx)
         throws PackageManager.NameNotFoundException {
       synchronized (LoadedApk.this.mLock) {

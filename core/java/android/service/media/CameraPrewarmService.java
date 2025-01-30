@@ -2,10 +2,10 @@ package android.service.media;
 
 import android.app.Service;
 import android.content.Intent;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Message;
-import android.p009os.Messenger;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
 
 /* loaded from: classes3.dex */
 public abstract class CameraPrewarmService extends Service {
@@ -15,7 +15,7 @@ public abstract class CameraPrewarmService extends Service {
   private boolean mCameraIntentFired;
   private final Handler mHandler =
       new Handler() { // from class: android.service.media.CameraPrewarmService.1
-        @Override // android.p009os.Handler
+        @Override // android.os.Handler
         public void handleMessage(Message msg) {
           switch (msg.what) {
             case 1:

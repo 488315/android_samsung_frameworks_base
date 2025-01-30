@@ -1,6 +1,6 @@
 package com.android.server.permission.access.permission;
 
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import com.android.server.permission.access.util.IntExtensionsKt;
 
 /* compiled from: PermissionFlags.kt */

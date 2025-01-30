@@ -1,7 +1,7 @@
 package android.net;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.telecom.TelecomManager;
 import android.util.BackupUtils;
 import android.util.Log;
@@ -175,7 +175,7 @@ public class NetworkPolicy implements Parcelable, Comparable<NetworkPolicy> {
     this.inferred = source.readInt() != 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeParcelable(this.template, i);
     parcel.writeParcelable(this.cycleRule, i);
@@ -188,7 +188,7 @@ public class NetworkPolicy implements Parcelable, Comparable<NetworkPolicy> {
     parcel.writeInt(this.inferred ? 1 : 0);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

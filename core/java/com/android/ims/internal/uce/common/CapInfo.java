@@ -1,8 +1,8 @@
 package com.android.ims.internal.uce.common;
 
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -415,12 +415,12 @@ public class CapInfo implements Parcelable {
     return this.mCapInfoMap.containsKey(featureTag);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeInt(this.mImSupported ? 1 : 0);
     parcel.writeInt(this.mFtSupported ? 1 : 0);

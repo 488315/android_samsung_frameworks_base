@@ -1,11 +1,11 @@
 package android.print;
 
 import android.content.Context;
-import android.content.p002pm.ParceledListSlice;
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.RemoteException;
+import android.content.pm.ParceledListSlice;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.os.RemoteException;
 import android.print.IPrinterDiscoveryObserver;
 import android.util.ArrayMap;
 import android.util.Log;
@@ -240,7 +240,7 @@ public final class PrinterDiscoverySession {
             super(looper, null, false);
         }
 
-        @Override // android.p009os.Handler
+        @Override // android.os.Handler
         public void handleMessage(Message message) {
             switch (message.what) {
                 case 1:

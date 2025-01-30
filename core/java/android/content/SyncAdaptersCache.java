@@ -1,7 +1,7 @@
 package android.content;
 
-import android.content.p002pm.RegisteredServicesCache;
-import android.content.p002pm.XmlSerializerAndParser;
+import android.content.pm.RegisteredServicesCache;
+import android.content.pm.XmlSerializerAndParser;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.provider.ContactsContract;
@@ -37,7 +37,7 @@ public class SyncAdaptersCache extends RegisteredServicesCache<SyncAdapterType> 
   }
 
   /* JADX WARN: Can't rename method to resolve collision */
-  @Override // android.content.p002pm.RegisteredServicesCache
+  @Override // android.content.pm.RegisteredServicesCache
   public SyncAdapterType parseServiceAttributes(
       Resources res, String packageName, AttributeSet attrs) {
     TypedArray sa = res.obtainAttributes(attrs, C4337R.styleable.SyncAdapter);
@@ -67,7 +67,7 @@ public class SyncAdaptersCache extends RegisteredServicesCache<SyncAdapterType> 
     }
   }
 
-  @Override // android.content.p002pm.RegisteredServicesCache
+  @Override // android.content.pm.RegisteredServicesCache
   protected void onServicesChangedLocked(int userId) {
     synchronized (this.mServicesLock) {
       ArrayMap<String, String[]> adapterMap = this.mAuthorityToSyncAdapters.get(userId);
@@ -103,7 +103,7 @@ public class SyncAdaptersCache extends RegisteredServicesCache<SyncAdapterType> 
     }
   }
 
-  @Override // android.content.p002pm.RegisteredServicesCache
+  @Override // android.content.pm.RegisteredServicesCache
   protected void onUserRemoved(int userId) {
     synchronized (this.mServicesLock) {
       this.mAuthorityToSyncAdapters.remove(userId);
@@ -114,14 +114,14 @@ public class SyncAdaptersCache extends RegisteredServicesCache<SyncAdapterType> 
   static class MySerializer implements XmlSerializerAndParser<SyncAdapterType> {
     MySerializer() {}
 
-    @Override // android.content.p002pm.XmlSerializerAndParser
+    @Override // android.content.pm.XmlSerializerAndParser
     public void writeAsXml(SyncAdapterType item, TypedXmlSerializer out) throws IOException {
       out.attribute(null, ContactsContract.Directory.DIRECTORY_AUTHORITY, item.authority);
       out.attribute(null, "accountType", item.accountType);
     }
 
     /* JADX WARN: Can't rename method to resolve collision */
-    @Override // android.content.p002pm.XmlSerializerAndParser
+    @Override // android.content.pm.XmlSerializerAndParser
     public SyncAdapterType createFromXml(TypedXmlPullParser parser)
         throws IOException, XmlPullParserException {
       String authority =

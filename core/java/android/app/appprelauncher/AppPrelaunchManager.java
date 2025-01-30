@@ -1,6 +1,6 @@
 package android.app.appprelauncher;
 
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.util.Slog;
 
 /* loaded from: classes.dex */

@@ -1,8 +1,8 @@
 package android.net;
 
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.util.Log;
-import com.android.internal.p029os.RoSystemProperties;
+import com.android.internal.os.RoSystemProperties;
 import com.android.org.conscrypt.OpenSSLSocketImpl;
 import com.android.org.conscrypt.SSLClientSessionCache;
 import java.io.IOException;

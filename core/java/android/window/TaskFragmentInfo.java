@@ -2,9 +2,9 @@ package android.window;
 
 import android.content.res.Configuration;
 import android.graphics.Point;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -180,7 +180,7 @@ public final class TaskFragmentInfo implements Parcelable {
     point2.readFromParcel(in);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeStrongBinder(this.mFragmentToken);
     dest.writeTypedObject(this.mToken, flags);
@@ -222,7 +222,7 @@ public final class TaskFragmentInfo implements Parcelable {
         + "}";
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

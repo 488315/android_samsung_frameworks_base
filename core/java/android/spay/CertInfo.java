@@ -1,7 +1,7 @@
 package android.spay;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -35,7 +35,7 @@ public class CertInfo implements Parcelable {
     readFromParcel(in);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flag) {
     Log.m94d(TAG, "Writing Certificates = " + this.mCerts.size());
     out.writeInt(this.mCerts.size());
@@ -72,7 +72,7 @@ public class CertInfo implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

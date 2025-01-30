@@ -8,7 +8,7 @@ import android.filterfw.core.GenerateFieldPort;
 import android.filterfw.core.Program;
 import android.filterfw.core.ShaderProgram;
 import android.filterfw.format.ImageFormat;
-import android.p009os.BatteryManager;
+import android.os.BatteryManager;
 import java.util.Date;
 import java.util.Random;
 

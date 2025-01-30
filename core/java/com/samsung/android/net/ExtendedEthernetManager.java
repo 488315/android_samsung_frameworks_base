@@ -1,7 +1,7 @@
 package com.samsung.android.net;
 
 import android.net.IpConfiguration;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.util.Log;
 
 /* loaded from: classes5.dex */

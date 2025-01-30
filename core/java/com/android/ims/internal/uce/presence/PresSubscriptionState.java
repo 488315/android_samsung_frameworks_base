@@ -1,7 +1,7 @@
 package com.android.ims.internal.uce.presence;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes4.dex */
 public class PresSubscriptionState implements Parcelable {
@@ -27,12 +27,12 @@ public class PresSubscriptionState implements Parcelable {
   public static final int UCE_PRES_SUBSCRIPTION_STATE_UNKNOWN = 3;
   private int mPresSubscriptionState;
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mPresSubscriptionState);
   }

@@ -1,6 +1,6 @@
 package android.sec.enterprise;
 
-import android.p009os.ServiceManager;
+import android.os.ServiceManager;
 import android.sec.enterprise.adapterlayer.ISystemUIAdapterCallback;
 import android.sec.enterprise.auditlog.AuditLog;
 import android.sec.enterprise.certificate.CertificatePolicy;

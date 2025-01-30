@@ -1,10 +1,10 @@
 package com.android.internal.org.bouncycastle.crypto.params;
 
-import com.android.internal.org.bouncycastle.asn1.p019x9.X9ECParameters;
-import com.android.internal.org.bouncycastle.math.p026ec.ECAlgorithms;
-import com.android.internal.org.bouncycastle.math.p026ec.ECConstants;
-import com.android.internal.org.bouncycastle.math.p026ec.ECCurve;
-import com.android.internal.org.bouncycastle.math.p026ec.ECPoint;
+import com.android.internal.org.bouncycastle.asn1.x9.X9ECParameters;
+import com.android.internal.org.bouncycastle.math.ec.ECAlgorithms;
+import com.android.internal.org.bouncycastle.math.ec.ECConstants;
+import com.android.internal.org.bouncycastle.math.ec.ECCurve;
+import com.android.internal.org.bouncycastle.math.ec.ECPoint;
 import com.android.internal.org.bouncycastle.util.Arrays;
 import com.android.internal.org.bouncycastle.util.BigIntegers;
 import java.math.BigInteger;

@@ -1,8 +1,8 @@
 package android.service.autofill;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.autofill.AutofillId;
@@ -139,14 +139,14 @@ public final class ImageTransformation extends InternalTransformation implements
         return !Helper.sDebug ? super.toString() : "ImageTransformation: [id=" + this.mId + ", options=" + this.mOptions + NavigationBarInflaterView.SIZE_MOD_END;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
         return 0;
     }
 
     /* JADX WARN: Multi-variable type inference failed */
     /* JADX WARN: Type inference failed for: r1v0, types: [java.io.Serializable, java.util.regex.Pattern[]] */
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeParcelable(this.mId, flags);
         int size = this.mOptions.size();

@@ -1,6 +1,6 @@
 package com.android.server.display.brightness;
 
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Slog;
 import com.android.internal.display.BrightnessSynchronizer;
 import java.util.ArrayList;

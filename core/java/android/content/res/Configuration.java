@@ -4,10 +4,10 @@ import android.app.WindowConfiguration;
 import android.app.slice.Slice;
 import android.content.ConfigurationProto;
 import android.hardware.Camera;
-import android.p009os.Build;
-import android.p009os.LocaleList;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Build;
+import android.os.LocaleList;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Slog;
@@ -2012,12 +2012,12 @@ public final class Configuration implements Parcelable, Comparable<Configuration
     return Math.abs(diff) > 268435456 ? diff < 0 : diff > 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeFloat(this.fontScale);
     parcel.writeInt(this.mcc);

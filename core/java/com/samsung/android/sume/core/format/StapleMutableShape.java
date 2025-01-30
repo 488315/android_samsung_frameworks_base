@@ -1,7 +1,7 @@
 package com.samsung.android.sume.core.format;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Pair;
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.types.ShapeType;
@@ -63,12 +63,12 @@ class StapleMutableShape implements MutableShape {
     this.channels = in.readInt();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.batch);
     dest.writeInt(this.rows);

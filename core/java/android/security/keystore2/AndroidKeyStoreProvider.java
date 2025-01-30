@@ -1,6 +1,6 @@
 package android.security.keystore2;
 
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.security.KeyStore2;
 import android.security.KeyStoreException;
 import android.security.KeyStoreSecurityLevel;

@@ -2,7 +2,7 @@ package com.android.server.backup.utils;
 
 import android.app.compat.CompatChanges;
 import android.content.Context;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;

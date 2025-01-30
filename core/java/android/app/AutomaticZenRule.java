@@ -2,8 +2,8 @@ package android.app;
 
 import android.content.ComponentName;
 import android.net.Uri;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.service.notification.ZenPolicy;
 import java.util.Objects;
 
@@ -170,12 +170,12 @@ public final class AutomaticZenRule implements Parcelable {
     return this.mPkg;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeInt(this.enabled ? 1 : 0);
     if (this.name != null) {

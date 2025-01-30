@@ -1,7 +1,7 @@
 package com.android.internal.app.procstats;
 
-import android.p009os.Parcel;
-import android.p009os.SystemClock;
+import android.os.Parcel;
+import android.os.SystemClock;
 import android.util.Slog;
 import android.util.TimeUtils;
 import android.util.proto.ProtoOutputStream;

@@ -2,7 +2,7 @@ package com.samsung.android.media.codec;
 
 import android.content.Context;
 import android.net.Uri;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import com.samsung.android.transcode.core.Encode;
 import com.samsung.android.transcode.core.EncodeVideo;
 import java.io.IOException;

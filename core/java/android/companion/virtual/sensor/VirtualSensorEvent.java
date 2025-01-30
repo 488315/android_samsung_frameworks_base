@@ -1,9 +1,9 @@
 package android.companion.virtual.sensor;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.SystemClock;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.SystemClock;
 
 @SystemApi
 /* loaded from: classes.dex */
@@ -40,14 +40,14 @@ public final class VirtualSensorEvent implements Parcelable {
     this.mTimestampNanos = parcel.readLong();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int parcelableFlags) {
     parcel.writeInt(this.mValues.length);
     parcel.writeFloatArray(this.mValues);
     parcel.writeLong(this.mTimestampNanos);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

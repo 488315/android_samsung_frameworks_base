@@ -1,7 +1,7 @@
 package android.security.keymaster;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,7 +45,7 @@ public class KeymasterCertificateChain implements Parcelable {
     return this.mCertificates;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     List<byte[]> list = this.mCertificates;
     if (list == null) {
@@ -66,7 +66,7 @@ public class KeymasterCertificateChain implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

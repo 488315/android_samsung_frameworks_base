@@ -2,12 +2,12 @@ package com.android.internal.telephony;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
-import android.p009os.Build;
-import android.p009os.CarrierAssociatedAppEntry;
-import android.p009os.SystemConfigManager;
-import android.p009os.UserHandle;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.os.Build;
+import android.os.CarrierAssociatedAppEntry;
+import android.os.SystemConfigManager;
+import android.os.UserHandle;
 import android.permission.LegacyPermissionManager;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;

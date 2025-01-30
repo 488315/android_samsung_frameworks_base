@@ -1,7 +1,7 @@
 package android.database.sqlite;
 
 import android.database.Cursor;
-import android.p009os.CancellationSignal;
+import android.os.CancellationSignal;
 
 /* loaded from: classes.dex */
 public final class SQLiteDirectCursorDriver implements SQLiteCursorDriver {

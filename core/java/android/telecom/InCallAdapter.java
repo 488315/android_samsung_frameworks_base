@@ -1,12 +1,12 @@
 package android.telecom;
 
 import android.net.Uri;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.OutcomeReceiver;
-import android.p009os.RemoteException;
-import android.p009os.ResultReceiver;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.OutcomeReceiver;
+import android.os.RemoteException;
+import android.os.ResultReceiver;
 import com.android.internal.telecom.IInCallAdapter;
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -129,7 +129,7 @@ public final class InCallAdapter {
       this.val$callback = outcomeReceiver;
     }
 
-    @Override // android.p009os.ResultReceiver
+    @Override // android.os.ResultReceiver
     protected void onReceiveResult(int resultCode, final Bundle result) {
       super.onReceiveResult(resultCode, result);
       long identity = Binder.clearCallingIdentity();

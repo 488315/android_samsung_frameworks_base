@@ -1,7 +1,7 @@
 package android.app;
 
 import android.content.ComponentName;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.window.TaskSnapshot;
 
 /* loaded from: classes.dex */

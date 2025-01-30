@@ -1,7 +1,7 @@
 package android.util.apk;
 
-import android.p009os.incremental.IncrementalManager;
-import android.p009os.incremental.V4Signature;
+import android.os.incremental.IncrementalManager;
+import android.os.incremental.V4Signature;
 import android.util.ArrayMap;
 import android.util.Pair;
 import java.io.ByteArrayInputStream;

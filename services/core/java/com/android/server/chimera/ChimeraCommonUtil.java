@@ -2,7 +2,7 @@ package com.android.server.chimera;
 
 import android.os.Debug;
 import android.os.SystemProperties;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Log;
 import android.util.Slog;
 import com.android.internal.util.FrameworkStatsLog;

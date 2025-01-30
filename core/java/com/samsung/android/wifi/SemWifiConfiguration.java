@@ -1,7 +1,7 @@
 package com.samsung.android.wifi;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -163,7 +163,7 @@ public class SemWifiConfiguration implements Parcelable {
         && this.isLockDown == other.isLockDown;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -181,7 +181,7 @@ public class SemWifiConfiguration implements Parcelable {
     this.creationTime = source.creationTime;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.configKey);
     dest.writeInt(this.networkScore);

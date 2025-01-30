@@ -14,7 +14,7 @@ import android.os.FileUtils;
 import android.os.Process;
 import android.os.SemHqmManager;
 import android.os.SystemProperties;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.provider.Settings;
 import android.util.Slog;
 import com.android.internal.util.jobs.XmlUtils;

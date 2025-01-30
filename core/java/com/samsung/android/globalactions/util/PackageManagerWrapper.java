@@ -3,9 +3,9 @@ package com.samsung.android.globalactions.util;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ResolveInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 
 /* loaded from: classes5.dex */
 public class PackageManagerWrapper {

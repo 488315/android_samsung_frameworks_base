@@ -1,15 +1,15 @@
 package com.android.server.hdmi;
 
 import android.hardware.hdmi.HdmiPortInfo;
-import android.hardware.p002tv.cec.V1_0.HotplugEvent;
-import android.hardware.p002tv.cec.V1_0.IHdmiCec;
-import android.hardware.p002tv.cec.V1_0.IHdmiCecCallback;
-import android.hardware.p002tv.cec.V1_1.IHdmiCecCallback;
-import android.hardware.p002tv.hdmi.cec.CecMessage;
-import android.hardware.p002tv.hdmi.cec.IHdmiCec;
-import android.hardware.p002tv.hdmi.cec.IHdmiCecCallback;
-import android.hardware.p002tv.hdmi.connection.IHdmiConnection;
-import android.hardware.p002tv.hdmi.connection.IHdmiConnectionCallback;
+import android.hardware.tv.cec.V1_0.HotplugEvent;
+import android.hardware.tv.cec.V1_0.IHdmiCec;
+import android.hardware.tv.cec.V1_0.IHdmiCecCallback;
+import android.hardware.tv.cec.V1_1.IHdmiCecCallback;
+import android.hardware.tv.hdmi.cec.CecMessage;
+import android.hardware.tv.hdmi.cec.IHdmiCec;
+import android.hardware.tv.hdmi.cec.IHdmiCecCallback;
+import android.hardware.tv.hdmi.connection.IHdmiConnection;
+import android.hardware.tv.hdmi.connection.IHdmiConnectionCallback;
 import android.icu.util.IllformedLocaleException;
 import android.icu.util.ULocale;
 import android.os.Binder;
@@ -833,11 +833,11 @@ public final class HdmiCecController {
     @Override // com.android.server.hdmi.HdmiCecController.NativeWrapper
     public HdmiPortInfo[] nativeGetPortInfos() {
       try {
-        android.hardware.p002tv.hdmi.connection.HdmiPortInfo[] portInfo =
+        android.hardware.tv.hdmi.connection.HdmiPortInfo[] portInfo =
             this.mHdmiConnection.getPortInfo();
         HdmiPortInfo[] hdmiPortInfoArr = new HdmiPortInfo[portInfo.length];
         int i = 0;
-        for (android.hardware.p002tv.hdmi.connection.HdmiPortInfo hdmiPortInfo : portInfo) {
+        for (android.hardware.tv.hdmi.connection.HdmiPortInfo hdmiPortInfo : portInfo) {
           hdmiPortInfoArr[i] =
               new HdmiPortInfo.Builder(
                       hdmiPortInfo.portId, hdmiPortInfo.type, hdmiPortInfo.physicalAddress)
@@ -896,7 +896,7 @@ public final class HdmiCecController {
   public final class NativeWrapperImpl11
       implements NativeWrapper, IHwBinder.DeathRecipient, IHdmiCec.getPhysicalAddressCallback {
     public HdmiCecCallback mCallback;
-    public android.hardware.p002tv.cec.V1_1.IHdmiCec mHdmiCec;
+    public android.hardware.tv.cec.V1_1.IHdmiCec mHdmiCec;
     public final Object mLock;
     public int mPhysicalAddress;
 
@@ -915,8 +915,8 @@ public final class HdmiCecController {
 
     public boolean connectToHal() {
       try {
-        android.hardware.p002tv.cec.V1_1.IHdmiCec service =
-            android.hardware.p002tv.cec.V1_1.IHdmiCec.getService(true);
+        android.hardware.tv.cec.V1_1.IHdmiCec service =
+            android.hardware.tv.cec.V1_1.IHdmiCec.getService(true);
         this.mHdmiCec = service;
         try {
           service.linkToDeath(this, 353L);
@@ -962,8 +962,8 @@ public final class HdmiCecController {
 
     @Override // com.android.server.hdmi.HdmiCecController.NativeWrapper
     public int nativeSendCecCommand(int i, int i2, byte[] bArr) {
-      android.hardware.p002tv.cec.V1_1.CecMessage cecMessage =
-          new android.hardware.p002tv.cec.V1_1.CecMessage();
+      android.hardware.tv.cec.V1_1.CecMessage cecMessage =
+          new android.hardware.tv.cec.V1_1.CecMessage();
       cecMessage.initiator = i;
       cecMessage.destination = i2;
       cecMessage.body = new ArrayList(bArr.length);
@@ -1036,8 +1036,8 @@ public final class HdmiCecController {
         Iterator it = portInfo.iterator();
         int i = 0;
         while (it.hasNext()) {
-          android.hardware.p002tv.cec.V1_0.HdmiPortInfo hdmiPortInfo =
-              (android.hardware.p002tv.cec.V1_0.HdmiPortInfo) it.next();
+          android.hardware.tv.cec.V1_0.HdmiPortInfo hdmiPortInfo =
+              (android.hardware.tv.cec.V1_0.HdmiPortInfo) it.next();
           hdmiPortInfoArr[i] =
               new HdmiPortInfo.Builder(
                       hdmiPortInfo.portId, hdmiPortInfo.type, hdmiPortInfo.physicalAddress)
@@ -1121,7 +1121,7 @@ public final class HdmiCecController {
   public final class NativeWrapperImpl
       implements NativeWrapper, IHwBinder.DeathRecipient, IHdmiCec.getPhysicalAddressCallback {
     public HdmiCecCallback mCallback;
-    public android.hardware.p002tv.cec.V1_0.IHdmiCec mHdmiCec;
+    public android.hardware.tv.cec.V1_0.IHdmiCec mHdmiCec;
     public final Object mLock;
     public int mPhysicalAddress;
 
@@ -1140,8 +1140,8 @@ public final class HdmiCecController {
 
     public boolean connectToHal() {
       try {
-        android.hardware.p002tv.cec.V1_0.IHdmiCec service =
-            android.hardware.p002tv.cec.V1_0.IHdmiCec.getService(true);
+        android.hardware.tv.cec.V1_0.IHdmiCec service =
+            android.hardware.tv.cec.V1_0.IHdmiCec.getService(true);
         this.mHdmiCec = service;
         try {
           service.linkToDeath(this, 353L);
@@ -1167,8 +1167,8 @@ public final class HdmiCecController {
 
     @Override // com.android.server.hdmi.HdmiCecController.NativeWrapper
     public int nativeSendCecCommand(int i, int i2, byte[] bArr) {
-      android.hardware.p002tv.cec.V1_0.CecMessage cecMessage =
-          new android.hardware.p002tv.cec.V1_0.CecMessage();
+      android.hardware.tv.cec.V1_0.CecMessage cecMessage =
+          new android.hardware.tv.cec.V1_0.CecMessage();
       cecMessage.initiator = i;
       cecMessage.destination = i2;
       cecMessage.body = new ArrayList(bArr.length);
@@ -1241,8 +1241,8 @@ public final class HdmiCecController {
         Iterator it = portInfo.iterator();
         int i = 0;
         while (it.hasNext()) {
-          android.hardware.p002tv.cec.V1_0.HdmiPortInfo hdmiPortInfo =
-              (android.hardware.p002tv.cec.V1_0.HdmiPortInfo) it.next();
+          android.hardware.tv.cec.V1_0.HdmiPortInfo hdmiPortInfo =
+              (android.hardware.tv.cec.V1_0.HdmiPortInfo) it.next();
           hdmiPortInfoArr[i] =
               new HdmiPortInfo.Builder(
                       hdmiPortInfo.portId, hdmiPortInfo.type, hdmiPortInfo.physicalAddress)
@@ -1386,8 +1386,8 @@ public final class HdmiCecController {
       this.mHdmiCecCallback = hdmiCecCallback;
     }
 
-    @Override // android.hardware.p002tv.cec.V1_0.IHdmiCecCallback
-    public void onCecMessage(android.hardware.p002tv.cec.V1_0.CecMessage cecMessage) {
+    @Override // android.hardware.tv.cec.V1_0.IHdmiCecCallback
+    public void onCecMessage(android.hardware.tv.cec.V1_0.CecMessage cecMessage) {
       byte[] bArr = new byte[cecMessage.body.size()];
       for (int i = 0; i < cecMessage.body.size(); i++) {
         bArr[i] = ((Byte) cecMessage.body.get(i)).byteValue();
@@ -1395,7 +1395,7 @@ public final class HdmiCecController {
       this.mHdmiCecCallback.onCecMessage(cecMessage.initiator, cecMessage.destination, bArr);
     }
 
-    @Override // android.hardware.p002tv.cec.V1_0.IHdmiCecCallback
+    @Override // android.hardware.tv.cec.V1_0.IHdmiCecCallback
     public void onHotplugEvent(HotplugEvent hotplugEvent) {
       this.mHdmiCecCallback.onHotplugEvent(hotplugEvent.portId, hotplugEvent.connected);
     }
@@ -1408,8 +1408,8 @@ public final class HdmiCecController {
       this.mHdmiCecCallback = hdmiCecCallback;
     }
 
-    @Override // android.hardware.p002tv.cec.V1_1.IHdmiCecCallback
-    public void onCecMessage_1_1(android.hardware.p002tv.cec.V1_1.CecMessage cecMessage) {
+    @Override // android.hardware.tv.cec.V1_1.IHdmiCecCallback
+    public void onCecMessage_1_1(android.hardware.tv.cec.V1_1.CecMessage cecMessage) {
       byte[] bArr = new byte[cecMessage.body.size()];
       for (int i = 0; i < cecMessage.body.size(); i++) {
         bArr[i] = ((Byte) cecMessage.body.get(i)).byteValue();
@@ -1417,8 +1417,8 @@ public final class HdmiCecController {
       this.mHdmiCecCallback.onCecMessage(cecMessage.initiator, cecMessage.destination, bArr);
     }
 
-    @Override // android.hardware.p002tv.cec.V1_0.IHdmiCecCallback
-    public void onCecMessage(android.hardware.p002tv.cec.V1_0.CecMessage cecMessage) {
+    @Override // android.hardware.tv.cec.V1_0.IHdmiCecCallback
+    public void onCecMessage(android.hardware.tv.cec.V1_0.CecMessage cecMessage) {
       byte[] bArr = new byte[cecMessage.body.size()];
       for (int i = 0; i < cecMessage.body.size(); i++) {
         bArr[i] = ((Byte) cecMessage.body.get(i)).byteValue();
@@ -1426,7 +1426,7 @@ public final class HdmiCecController {
       this.mHdmiCecCallback.onCecMessage(cecMessage.initiator, cecMessage.destination, bArr);
     }
 
-    @Override // android.hardware.p002tv.cec.V1_0.IHdmiCecCallback
+    @Override // android.hardware.tv.cec.V1_0.IHdmiCecCallback
     public void onHotplugEvent(HotplugEvent hotplugEvent) {
       this.mHdmiCecCallback.onHotplugEvent(hotplugEvent.portId, hotplugEvent.connected);
     }
@@ -1435,7 +1435,7 @@ public final class HdmiCecController {
   public final class HdmiCecCallbackAidl extends IHdmiCecCallback.Stub {
     public final HdmiCecCallback mHdmiCecCallback;
 
-    @Override // android.hardware.p002tv.hdmi.cec.IHdmiCecCallback
+    @Override // android.hardware.tv.hdmi.cec.IHdmiCecCallback
     public int getInterfaceVersion() {
       return 1;
     }
@@ -1444,13 +1444,13 @@ public final class HdmiCecController {
       this.mHdmiCecCallback = hdmiCecCallback;
     }
 
-    @Override // android.hardware.p002tv.hdmi.cec.IHdmiCecCallback
+    @Override // android.hardware.tv.hdmi.cec.IHdmiCecCallback
     public void onCecMessage(CecMessage cecMessage) {
       this.mHdmiCecCallback.onCecMessage(
           cecMessage.initiator, cecMessage.destination, cecMessage.body);
     }
 
-    @Override // android.hardware.p002tv.hdmi.cec.IHdmiCecCallback
+    @Override // android.hardware.tv.hdmi.cec.IHdmiCecCallback
     public synchronized String getInterfaceHash() {
       return "cd956e3a0c2e6ade71693c85e9f0aeffa221ea26";
     }
@@ -1459,7 +1459,7 @@ public final class HdmiCecController {
   public final class HdmiConnectionCallbackAidl extends IHdmiConnectionCallback.Stub {
     public final HdmiCecCallback mHdmiCecCallback;
 
-    @Override // android.hardware.p002tv.hdmi.connection.IHdmiConnectionCallback
+    @Override // android.hardware.tv.hdmi.connection.IHdmiConnectionCallback
     public int getInterfaceVersion() {
       return 1;
     }
@@ -1468,12 +1468,12 @@ public final class HdmiCecController {
       this.mHdmiCecCallback = hdmiCecCallback;
     }
 
-    @Override // android.hardware.p002tv.hdmi.connection.IHdmiConnectionCallback
+    @Override // android.hardware.tv.hdmi.connection.IHdmiConnectionCallback
     public void onHotplugEvent(boolean z, int i) {
       this.mHdmiCecCallback.onHotplugEvent(i, z);
     }
 
-    @Override // android.hardware.p002tv.hdmi.connection.IHdmiConnectionCallback
+    @Override // android.hardware.tv.hdmi.connection.IHdmiConnectionCallback
     public synchronized String getInterfaceHash() {
       return "85c26fa47f3c3062aa93ffc8bb0897a85c8cb118";
     }

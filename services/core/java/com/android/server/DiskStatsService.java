@@ -9,7 +9,7 @@ import android.os.ServiceManager;
 import android.os.StatFs;
 import android.os.SystemClock;
 import android.os.storage.StorageManager;
-import android.p005os.IStoraged;
+import android.os.IStoraged;
 import android.util.Log;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;

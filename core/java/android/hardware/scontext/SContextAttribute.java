@@ -1,6 +1,6 @@
 package android.hardware.scontext;
 
-import android.p009os.Parcel;
+import android.os.Parcel;
 import com.samsung.android.hardware.context.SemContextAttribute;
 
 @Deprecated

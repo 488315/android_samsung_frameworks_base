@@ -4,8 +4,8 @@ import android.app.admin.DevicePolicyResources;
 import android.graphics.Rect;
 import android.hardware.display.SemWifiDisplayParameter;
 import android.hardware.input.KeyboardLayout;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.util.proto.ProtoInputStream;
@@ -276,7 +276,7 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
     readFromParcel(in);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     this.mBounds.writeToParcel(dest, flags);
     dest.writeTypedObject(this.mAppBounds, flags);
@@ -333,7 +333,7 @@ public class WindowConfiguration implements Parcelable, Comparable<WindowConfigu
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

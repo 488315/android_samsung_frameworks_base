@@ -1,14 +1,14 @@
 package com.samsung.android.sume.core.graph;
 
 import android.app.admin.PreferentialNetworkServiceConfig$$ExternalSyntheticLambda2;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import android.util.Pair;
 import com.samsung.android.sume.core.Def;
 import com.samsung.android.sume.core.channel.BufferChannelDescriptor;
 import com.samsung.android.sume.core.descriptor.MFDescriptor;
-import com.samsung.android.sume.core.descriptor.p044nn.NNDescriptor;
+import com.samsung.android.sume.core.descriptor.nn.NNDescriptor;
 import com.samsung.android.sume.core.evaluate.Equal;
 import com.samsung.android.sume.core.evaluate.Evaluator;
 import com.samsung.android.sume.core.filter.MediaFilter;
@@ -95,7 +95,7 @@ public class MFDescriptorGraph implements Parcelable {
     return this.option;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeParcelableArray(this.nodes, flags);
     dest.writeParcelable(this.option, flags);
@@ -193,7 +193,7 @@ public class MFDescriptorGraph implements Parcelable {
     builder.addNode(from, to, evaluator, channelDesc);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -332,7 +332,7 @@ public class MFDescriptorGraph implements Parcelable {
       in.readMap(this.channelMap, null);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeInt(this.f3062id);
       dest.writeSerializable(this.descriptor);
@@ -344,7 +344,7 @@ public class MFDescriptorGraph implements Parcelable {
       dest.writeMap(this.channelMap);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }

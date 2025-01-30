@@ -1,6 +1,6 @@
 package android.speech;
 
-import android.p009os.Bundle;
+import android.os.Bundle;
 
 /* loaded from: classes3.dex */
 public interface RecognitionListener {

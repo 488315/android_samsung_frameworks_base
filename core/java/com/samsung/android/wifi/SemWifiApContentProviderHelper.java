@@ -6,7 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.net.Uri;
-import android.p009os.Binder;
+import android.os.Binder;
 import android.util.Log;
 
 /* loaded from: classes6.dex */

@@ -1,7 +1,7 @@
 package com.android.internal.util.function.pooled;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Message;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Pools;
 import com.android.internal.util.ArrayUtils;
@@ -726,7 +726,7 @@ final class PooledLambdaImpl<R>
     return this;
   }
 
-  @Override // android.p009os.TraceNameSupplier
+  @Override // android.os.TraceNameSupplier
   public String getTraceName() {
     return FunctionalUtils.getLambdaName(this.mFunc);
   }

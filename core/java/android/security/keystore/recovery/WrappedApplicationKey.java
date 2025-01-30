@@ -1,8 +1,8 @@
 package android.security.keystore.recovery;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
@@ -73,7 +73,7 @@ public final class WrappedApplicationKey implements Parcelable {
     return this.mMetadata;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeString(this.mAlias);
     out.writeByteArray(this.mEncryptedKeyMaterial);
@@ -86,7 +86,7 @@ public final class WrappedApplicationKey implements Parcelable {
     this.mMetadata = in.createByteArray();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

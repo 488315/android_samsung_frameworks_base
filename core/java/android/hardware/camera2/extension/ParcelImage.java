@@ -2,10 +2,10 @@ package android.hardware.camera2.extension;
 
 import android.graphics.Rect;
 import android.hardware.HardwareBuffer;
-import android.p009os.BadParcelableException;
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.Parcelable;
+import android.os.BadParcelableException;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
+import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class ParcelImage implements Parcelable {
@@ -37,7 +37,7 @@ public class ParcelImage implements Parcelable {
   public long timestamp = 0;
   public int planeCount = 0;
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public final void writeToParcel(Parcel _aidl_parcel, int _aidl_flag) {
     int _aidl_start_pos = _aidl_parcel.dataPosition();
     _aidl_parcel.writeInt(0);
@@ -158,7 +158,7 @@ public class ParcelImage implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     int _mask = 0 | describeContents(this.crop);
     return _mask | describeContents(this.buffer) | describeContents(this.fence);

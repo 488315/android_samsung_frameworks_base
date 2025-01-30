@@ -1,7 +1,7 @@
 package com.android.server.input;
 
-import com.att.iqi.lib.metrics.p019hw.HwConstants;
-import com.att.iqi.lib.metrics.p020mm.MM05;
+import com.att.iqi.lib.metrics.hw.HwConstants;
+import com.att.iqi.lib.metrics.mm.MM05;
 
 /* loaded from: classes2.dex */
 public abstract class HidKeycodes {

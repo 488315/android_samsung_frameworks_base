@@ -1,8 +1,8 @@
 package android.hardware.soundtrigger;
 
 import android.media.permission.Identity;
-import android.p009os.Binder;
-import android.p009os.Handler;
+import android.os.Binder;
+import android.os.Handler;
 
 /* loaded from: classes2.dex */
 public class SoundTriggerModuleWrapper {

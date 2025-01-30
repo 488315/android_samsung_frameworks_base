@@ -1,7 +1,7 @@
 package android.graphics;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Pools;
 
 /* loaded from: classes.dex */
@@ -221,12 +221,12 @@ public class Region implements Parcelable {
     sPool.release(this);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel p, int flags) {
     if (!nativeWriteToParcel(this.mNativeRegion, p)) {
       throw new RuntimeException();

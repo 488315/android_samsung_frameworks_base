@@ -1,6 +1,6 @@
 package com.android.server.biometrics.sensors.fingerprint.aidl;
 
-import com.att.iqi.lib.metrics.p020mm.MM05;
+import com.att.iqi.lib.metrics.mm.MM05;
 
 /* loaded from: classes.dex */
 public abstract class AidlConversionUtils {

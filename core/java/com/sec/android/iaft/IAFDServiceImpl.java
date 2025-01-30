@@ -7,17 +7,17 @@ import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.HandlerThread;
-import android.p009os.Looper;
-import android.p009os.Message;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import android.view.Window;
 import com.samsung.android.feature.SemFloatingFeature;
-import com.samsung.android.p043sm.iafdlib.CheckUpdateCallback;
-import com.samsung.android.p043sm.iafdlib.IafdConstant;
-import com.samsung.android.p043sm.iafdlib.IafdSmAPIManager;
+import com.samsung.android.sm.iafdlib.CheckUpdateCallback;
+import com.samsung.android.sm.iafdlib.IafdConstant;
+import com.samsung.android.sm.iafdlib.IafdSmAPIManager;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
@@ -88,7 +88,7 @@ class IAFDServiceImpl {
       super(looper);
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       switch (msg.what) {
         case 1:
@@ -248,7 +248,7 @@ class IAFDServiceImpl {
           bundle.getString(IafdConstant.KEY_PACKAGE_NAME),
           bundle.getLong(IafdConstant.KEY_VERSION_CODE),
           new CheckUpdateCallback() { // from class: com.sec.android.iaft.IAFDServiceImpl.3
-            @Override // com.samsung.android.p043sm.iafdlib.CheckUpdateCallback
+            @Override // com.samsung.android.sm.iafdlib.CheckUpdateCallback
             public void onResult(
                 int resultCode, long versionCode, String versionName, String pkgName) {
               Message msg = new Message();

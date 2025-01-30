@@ -6,13 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.ArrayMap;
 import android.util.Log;
-import com.samsung.android.ims.p038ft.SemImsFtListener;
-import com.samsung.android.ims.p038ft.SemImsOngoingFtEventListener;
+import com.samsung.android.ims.ft.SemImsFtListener;
+import com.samsung.android.ims.ft.SemImsOngoingFtEventListener;
 import com.samsung.android.ims.settings.SemImsProfile;
 import java.lang.ref.WeakReference;
 import java.lang.reflect.InvocationTargetException;
@@ -1213,7 +1213,7 @@ public class SemImsManager {
       return null;
     }
 
-    @Override // com.samsung.android.ims.p038ft.SemImsFtListener
+    @Override // com.samsung.android.ims.ft.SemImsFtListener
     public void onFtStateChanged(boolean event) throws RemoteException {
       SemImsOngoingFtEventListener imsOngoingFtEventListener = getListener();
       if (imsOngoingFtEventListener != null) {

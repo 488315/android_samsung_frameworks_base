@@ -2,7 +2,7 @@ package com.android.server.enterprise.nap;
 
 import android.os.Process;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.Log;
 import com.samsung.android.knox.net.nap.serviceprovider.INetworkAnalyticsService;
 import org.json.JSONException;

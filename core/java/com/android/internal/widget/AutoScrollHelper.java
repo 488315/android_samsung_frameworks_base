@@ -1,7 +1,7 @@
 package com.android.internal.widget;
 
 import android.content.res.Resources;
-import android.p009os.SystemClock;
+import android.os.SystemClock;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;

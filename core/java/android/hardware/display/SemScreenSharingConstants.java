@@ -1,6 +1,6 @@
 package android.hardware.display;
 
-import android.p009os.Build;
+import android.os.Build;
 
 /* loaded from: classes2.dex */
 public final class SemScreenSharingConstants {

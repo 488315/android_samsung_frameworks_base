@@ -1,12 +1,12 @@
 package android.app;
 
 import android.media.MediaMetrics;
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.SystemClock;
-import android.p009os.SystemProperties;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.os.ParcelFileDescriptor;
+import android.os.SystemClock;
+import android.os.SystemProperties;
 import android.text.TextUtils;
 import android.util.Log;
 import java.io.ByteArrayOutputStream;
@@ -584,7 +584,7 @@ public class PropertyInvalidatedCache<Query, Result> {
                 Looper
                     .getMainLooper()) { // from class:
                                         // android.app.PropertyInvalidatedCache.AutoCorker.1
-              @Override // android.p009os.Handler
+              @Override // android.os.Handler
               public void handleMessage(Message msg) {
                 AutoCorker.this.handleMessage(msg);
               }

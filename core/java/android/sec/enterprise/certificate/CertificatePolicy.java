@@ -1,6 +1,6 @@
 package android.sec.enterprise.certificate;
 
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import android.sec.enterprise.EnterpriseDeviceManager;
 import android.sec.enterprise.IEDMProxy;
 import android.sec.enterprise.content.SecContentProviderURI;

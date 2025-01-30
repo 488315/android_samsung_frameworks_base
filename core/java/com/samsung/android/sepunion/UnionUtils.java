@@ -1,7 +1,7 @@
 package com.samsung.android.sepunion;
 
 import android.content.Context;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 
 /* loaded from: classes5.dex */
 public class UnionUtils {

@@ -2,7 +2,7 @@ package android.text.method;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.Selection;
 import android.view.LayoutInflater;

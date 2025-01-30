@@ -5,7 +5,7 @@ import android.app.Person;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Icon;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.RemotableViewMethod;
 import android.widget.FrameLayout;

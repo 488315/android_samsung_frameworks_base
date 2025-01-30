@@ -1,14 +1,14 @@
 package android.app;
 
-import android.content.p002pm.SharedLibraryInfo;
+import android.content.pm.SharedLibraryInfo;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Build;
-import android.p009os.GraphicsEnvironment;
-import android.p009os.Trace;
+import android.os.Build;
+import android.os.GraphicsEnvironment;
+import android.os.Trace;
 import android.util.ArrayMap;
 import android.util.Log;
 import android.util.NtpTrustedTime;
-import com.android.internal.p029os.ClassLoaderFactory;
+import com.android.internal.os.ClassLoaderFactory;
 import com.samsung.android.hardware.secinputdev.SemInputDeviceManager;
 import dalvik.system.PathClassLoader;
 import java.util.ArrayList;

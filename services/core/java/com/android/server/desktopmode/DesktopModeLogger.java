@@ -3,7 +3,7 @@ package com.android.server.desktopmode;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.os.Bundle;
 import android.os.UserHandle;
 import com.android.server.LocalServices;

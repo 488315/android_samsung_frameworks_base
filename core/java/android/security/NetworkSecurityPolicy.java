@@ -1,7 +1,7 @@
 package android.security;
 
 import android.content.Context;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.security.net.config.ApplicationConfig;
 import android.security.net.config.ManifestConfigSource;
 

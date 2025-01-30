@@ -2,7 +2,7 @@ package android.util;
 
 import android.content.Context;
 import android.graphics.BLASTBufferQueue;
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import dalvik.system.PathClassLoader;
 import java.io.File;
 import java.lang.reflect.Constructor;

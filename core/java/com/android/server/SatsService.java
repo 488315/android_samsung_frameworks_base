@@ -8,9 +8,9 @@ import android.content.IntentFilter;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.LocalSocket;
 import android.net.LocalSocketAddress;
-import android.p009os.Binder;
-import android.p009os.Build;
-import android.p009os.UEventObserver;
+import android.os.Binder;
+import android.os.Build;
+import android.os.UEventObserver;
 import android.util.Slog;
 import com.samsung.android.service.sats.ISatsService;
 import java.io.BufferedReader;
@@ -65,7 +65,7 @@ public final class SatsService extends ISatsService.Stub {
     this.mEmCmdHelper = null;
     UEventObserver uEventObserver =
         new UEventObserver() { // from class: com.android.server.SatsService.1
-          @Override // android.p009os.UEventObserver
+          @Override // android.os.UEventObserver
           public void onUEvent(UEventObserver.UEvent event) {
             synchronized (SatsService.mLockUEvent) {
               if (event.toString().indexOf(SatsService.JIG_STATE) != -1) {

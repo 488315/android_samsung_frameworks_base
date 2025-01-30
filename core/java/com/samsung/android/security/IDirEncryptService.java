@@ -1,11 +1,11 @@
 package com.samsung.android.security;
 
-import android.p009os.Binder;
-import android.p009os.IBinder;
-import android.p009os.IInterface;
-import android.p009os.IVoldTaskListener;
-import android.p009os.Parcel;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.IBinder;
+import android.os.IInterface;
+import android.os.IVoldTaskListener;
+import android.os.Parcel;
+import android.os.RemoteException;
 
 /* loaded from: classes5.dex */
 public interface IDirEncryptService extends IInterface {
@@ -66,7 +66,7 @@ public interface IDirEncryptService extends IInterface {
         this.mRemote = remote;
       }
 
-      @Override // android.p009os.IInterface
+      @Override // android.os.IInterface
       public IBinder asBinder() {
         return this.mRemote;
       }
@@ -345,12 +345,12 @@ public interface IDirEncryptService extends IInterface {
       attachInterface(this, DESCRIPTOR);
     }
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return this;
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
       switch (i) {
         case 1:

@@ -1,7 +1,7 @@
 package android.security.attestationverification;
 
 import android.app.Service;
-import android.p009os.Bundle;
+import android.os.Bundle;
 
 /* loaded from: classes3.dex */
 public abstract class AttestationVerificationService extends Service {

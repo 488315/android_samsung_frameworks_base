@@ -7,8 +7,8 @@ import android.hardware.camera2.MultiResolutionImageReader;
 import android.hardware.camera2.utils.HashCodeHelpers;
 import android.hardware.camera2.utils.SurfaceUtils;
 import android.media.ImageReader;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import android.util.Size;
 import android.view.Surface;
@@ -524,7 +524,7 @@ public final class OutputConfiguration implements Parcelable {
     return this.mPhysicalCameraId;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -548,7 +548,7 @@ public final class OutputConfiguration implements Parcelable {
     return integerList;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     if (parcel == null) {
       throw new IllegalArgumentException("dest must not be null");

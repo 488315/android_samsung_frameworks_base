@@ -2,8 +2,8 @@ package com.android.internal.app;
 
 import android.app.ListFragment;
 import android.content.Context;
-import android.p009os.Bundle;
-import android.p009os.LocaleList;
+import android.os.Bundle;
+import android.os.LocaleList;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;

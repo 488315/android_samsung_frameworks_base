@@ -8,10 +8,10 @@ import android.hardware.camera2.extension.Size;
 import android.media.Image;
 import android.media.ImageReader;
 import android.media.ImageWriter;
-import android.p009os.Handler;
-import android.p009os.HandlerThread;
-import android.p009os.IBinder;
-import android.p009os.RemoteException;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.util.Log;
 import android.view.Surface;
 import java.nio.ByteBuffer;
@@ -220,7 +220,7 @@ public class CameraExtensionJpegProcessor implements ICaptureProcessorImpl {
     }
   }
 
-  @Override // android.p009os.IInterface
+  @Override // android.os.IInterface
   public IBinder asBinder() {
     throw new UnsupportedOperationException("Binder IPC not supported!");
   }

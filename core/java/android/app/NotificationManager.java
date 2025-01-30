@@ -3,27 +3,27 @@ package android.app;
 import android.annotation.SystemApi;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.p002pm.ParceledListSlice;
+import android.content.pm.ParceledListSlice;
 import android.graphics.drawable.Icon;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.net.Uri;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
-import android.p009os.StrictMode;
-import android.p009os.UserHandle;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.StrictMode;
+import android.os.UserHandle;
 import android.service.notification.Condition;
 import android.service.notification.StatusBarNotification;
 import android.service.notification.ZenModeConfig;
 import android.util.Log;
 import android.util.Slog;
 import android.util.proto.ProtoOutputStream;
-import com.samsung.android.core.p036pm.runtimemanifest.RuntimeManifestUtils;
+import com.samsung.android.core.pm.runtimemanifest.RuntimeManifestUtils;
 import java.io.File;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -1014,7 +1014,7 @@ public class NotificationManager {
           source.createStringArrayList());
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeInt(this.priorityCategories);
       dest.writeInt(this.priorityCallSenders);
@@ -1026,7 +1026,7 @@ public class NotificationManager {
       dest.writeStringList(this.mAppBypassDndList);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }

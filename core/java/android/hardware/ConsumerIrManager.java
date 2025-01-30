@@ -1,8 +1,8 @@
 package android.hardware;
 
 import android.content.Context;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.util.Log;
 
 /* loaded from: classes.dex */

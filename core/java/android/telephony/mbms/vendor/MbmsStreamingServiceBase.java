@@ -2,10 +2,10 @@ package android.telephony.mbms.vendor;
 
 import android.annotation.SystemApi;
 import android.net.Uri;
-import android.p009os.Binder;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.RemoteException;
 import android.telephony.mbms.IMbmsStreamingSessionCallback;
 import android.telephony.mbms.IStreamingServiceCallback;
 import android.telephony.mbms.MbmsStreamingSessionCallback;
@@ -184,13 +184,13 @@ public class MbmsStreamingServiceBase extends IMbmsStreamingService.Stub {
 
   public void onAppCallbackDied(int uid, int subscriptionId) {}
 
-  @Override // android.telephony.mbms.vendor.IMbmsStreamingService.Stub, android.p009os.IInterface
+  @Override // android.telephony.mbms.vendor.IMbmsStreamingService.Stub, android.os.IInterface
   @SystemApi
   public IBinder asBinder() {
     return super.asBinder();
   }
 
-  @Override // android.telephony.mbms.vendor.IMbmsStreamingService.Stub, android.p009os.Binder
+  @Override // android.telephony.mbms.vendor.IMbmsStreamingService.Stub, android.os.Binder
   @SystemApi
   public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
     return super.onTransact(code, data, reply, flags);

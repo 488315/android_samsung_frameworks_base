@@ -2,7 +2,7 @@ package android.widget;
 
 import android.app.Service;
 import android.content.Intent;
-import android.p009os.IBinder;
+import android.os.IBinder;
 import com.android.internal.widget.IRemoteViewsFactory;
 import java.util.HashMap;
 

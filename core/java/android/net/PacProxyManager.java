@@ -2,8 +2,8 @@ package android.net;
 
 import android.annotation.SystemApi;
 import android.content.Context;
-import android.p009os.Binder;
-import android.p009os.RemoteException;
+import android.os.Binder;
+import android.os.RemoteException;
 import com.android.internal.util.FunctionalUtils;
 import java.util.HashMap;
 import java.util.Objects;

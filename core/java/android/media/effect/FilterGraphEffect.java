@@ -4,9 +4,9 @@ import android.filterfw.core.Filter;
 import android.filterfw.core.FilterGraph;
 import android.filterfw.core.GraphRunner;
 import android.filterfw.core.SyncRunner;
-import android.filterfw.p004io.GraphIOException;
-import android.filterfw.p004io.GraphReader;
-import android.filterfw.p004io.TextGraphReader;
+import android.filterfw.io.GraphIOException;
+import android.filterfw.io.GraphReader;
+import android.filterfw.io.TextGraphReader;
 
 /* loaded from: classes2.dex */
 public class FilterGraphEffect extends FilterEffect {

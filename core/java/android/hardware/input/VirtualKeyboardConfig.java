@@ -2,8 +2,8 @@ package android.hardware.input;
 
 import android.annotation.SystemApi;
 import android.icu.util.ULocale;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 
 @SystemApi
@@ -49,12 +49,12 @@ public final class VirtualKeyboardConfig extends VirtualInputDeviceConfig implem
     return this.mLayoutType;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.hardware.input.VirtualInputDeviceConfig, android.p009os.Parcelable
+  @Override // android.hardware.input.VirtualInputDeviceConfig, android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     super.writeToParcel(dest, flags);
     dest.writeString8(this.mLanguageTag);

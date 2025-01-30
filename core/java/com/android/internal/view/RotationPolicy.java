@@ -1,13 +1,13 @@
 package com.android.internal.view;
 
 import android.content.Context;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import android.database.ContentObserver;
 import android.net.Uri;
-import android.p009os.AsyncTask;
-import android.p009os.Handler;
-import android.p009os.RemoteException;
-import android.p009os.UserHandle;
+import android.os.AsyncTask;
+import android.os.Handler;
+import android.os.RemoteException;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
 import android.util.Log;

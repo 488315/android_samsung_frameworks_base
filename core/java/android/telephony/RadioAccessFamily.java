@@ -1,7 +1,7 @@
 package android.telephony;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.telephony.DctConstants;
 import com.android.internal.telephony.RILConstants;
 import com.samsung.android.vibrator.SemHapticFeedbackConstants;
@@ -79,12 +79,12 @@ public class RadioAccessFamily implements Parcelable {
     return ret;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel outParcel, int flags) {
     outParcel.writeInt(this.mPhoneId);
     outParcel.writeInt(this.mRadioAccessFamily);

@@ -1,8 +1,8 @@
 package android.app.usage;
 
 import android.content.res.Configuration;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public final class ConfigurationStats implements Parcelable {
@@ -72,12 +72,12 @@ public final class ConfigurationStats implements Parcelable {
     return this.mActivationCount;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     if (this.mConfiguration != null) {
       dest.writeInt(1);

@@ -3,7 +3,7 @@ package com.android.server.pm;
 import android.os.SystemProperties;
 import android.util.ArrayMap;
 import android.util.Log;
-import com.samsung.android.server.p025pm.install.SkippingApks;
+import com.samsung.android.server.pm.install.SkippingApks;
 import java.util.Arrays;
 
 /* loaded from: classes3.dex */

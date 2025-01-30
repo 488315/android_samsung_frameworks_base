@@ -6,11 +6,11 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.PermissionChecker;
-import android.content.p002pm.ActivityInfo;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.LabeledIntent;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ResolveInfo;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.LabeledIntent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -19,11 +19,11 @@ import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.p009os.AsyncTask;
-import android.p009os.RemoteException;
-import android.p009os.Trace;
-import android.p009os.UserHandle;
-import android.p009os.UserManager;
+import android.os.AsyncTask;
+import android.os.RemoteException;
+import android.os.Trace;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.Settings;
 import android.provider.Telephony;
 import android.text.TextUtils;
@@ -336,7 +336,7 @@ public class ResolverListAdapter extends BaseAdapter {
                 .ResolvedComponentInfo>>() { // from class:
                                              // com.android.internal.app.ResolverListAdapter.1
       /* JADX INFO: Access modifiers changed from: protected */
-      @Override // android.p009os.AsyncTask
+      @Override // android.os.AsyncTask
       public List<ResolverActivity.ResolvedComponentInfo> doInBackground(
           List<ResolverActivity.ResolvedComponentInfo>... params) {
         Log.m94d(ResolverListAdapter.TAG, "list up doInBackground!");
@@ -359,7 +359,7 @@ public class ResolverListAdapter extends BaseAdapter {
       }
 
       /* JADX INFO: Access modifiers changed from: protected */
-      @Override // android.p009os.AsyncTask
+      @Override // android.os.AsyncTask
       public void onPostExecute(List<ResolverActivity.ResolvedComponentInfo> sortedComponents) {
         Log.m94d(ResolverListAdapter.TAG, "list up process done!!");
         ResolverListAdapter.this.processSortedList(sortedComponents, doPostProcessing);
@@ -818,13 +818,13 @@ public class ResolverListAdapter extends BaseAdapter {
       new AsyncTask<
           Void, Void, Drawable>() { // from class: com.android.internal.app.ResolverListAdapter.3
         /* JADX INFO: Access modifiers changed from: protected */
-        @Override // android.p009os.AsyncTask
+        @Override // android.os.AsyncTask
         public Drawable doInBackground(Void... params) {
           return ResolverListAdapter.this.loadIconForResolveInfo(iconInfo.getResolveInfo());
         }
 
         /* JADX INFO: Access modifiers changed from: protected */
-        @Override // android.p009os.AsyncTask
+        @Override // android.os.AsyncTask
         public void onPostExecute(Drawable d) {
           iconView.setImageDrawable(d);
         }
@@ -1014,7 +1014,7 @@ public class ResolverListAdapter extends BaseAdapter {
     }
 
     /* JADX INFO: Access modifiers changed from: protected */
-    @Override // android.p009os.AsyncTask
+    @Override // android.os.AsyncTask
     public CharSequence[] doInBackground(Void... voids) {
       ResolveInfoPresentationGetter pg =
           ResolverListAdapter.this.makePresentationGetter(
@@ -1043,7 +1043,7 @@ public class ResolverListAdapter extends BaseAdapter {
     }
 
     /* JADX INFO: Access modifiers changed from: protected */
-    @Override // android.p009os.AsyncTask
+    @Override // android.os.AsyncTask
     public void onPostExecute(CharSequence[] result) {
       if (this.mDisplayResolveInfo.hasDisplayLabel()) {
         return;
@@ -1096,14 +1096,14 @@ public class ResolverListAdapter extends BaseAdapter {
     }
 
     /* JADX INFO: Access modifiers changed from: protected */
-    @Override // android.p009os.AsyncTask
+    @Override // android.os.AsyncTask
     public Drawable doInBackground(Void... params) {
       return ResolverListAdapter.this.loadIconForResolveInfo(this.mResolveInfo);
     }
 
     /* JADX INFO: Access modifiers changed from: protected */
     /* JADX WARN: Can't rename method to resolve collision */
-    @Override // android.p009os.AsyncTask
+    @Override // android.os.AsyncTask
     public void onPostExecute(Drawable d) {
       DisplayResolveInfo otherProfile = ResolverListAdapter.this.getOtherProfile();
       DisplayResolveInfo displayResolveInfo = this.mDisplayResolveInfo;

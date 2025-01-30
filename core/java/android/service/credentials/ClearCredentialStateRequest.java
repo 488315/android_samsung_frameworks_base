@@ -1,9 +1,9 @@
 package android.service.credentials;
 
 import android.annotation.NonNull;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.AnnotationValidations;
 import java.util.Objects;
 
@@ -36,13 +36,13 @@ public final class ClearCredentialStateRequest implements Parcelable {
     return this.mCallingAppInfo;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeTypedObject(this.mCallingAppInfo, flags);
     dest.writeBundle(this.mData);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

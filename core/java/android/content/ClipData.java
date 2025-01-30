@@ -1,12 +1,12 @@
 package android.content;
 
-import android.content.p002pm.ActivityInfo;
+import android.content.pm.ActivityInfo;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.StrictMode;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.StrictMode;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -786,12 +786,12 @@ public class ClipData implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     this.mClipDescription.writeToParcel(dest, flags);
     if (this.mIcon != null) {

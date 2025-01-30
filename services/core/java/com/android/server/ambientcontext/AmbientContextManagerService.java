@@ -7,7 +7,7 @@ import android.app.ambientcontext.IAmbientContextManager;
 import android.app.ambientcontext.IAmbientContextObserver;
 import android.content.ComponentName;
 import android.content.Context;
-import android.content.p000pm.PackageManagerInternal;
+import android.content.pm.PackageManagerInternal;
 import android.os.RemoteCallback;
 import android.os.ResultReceiver;
 import android.os.ShellCallback;

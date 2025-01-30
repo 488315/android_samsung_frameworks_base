@@ -9,7 +9,7 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Sequence;
 import com.android.internal.org.bouncycastle.asn1.DERNull;
 import com.android.internal.org.bouncycastle.asn1.nist.NISTObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.oiw.OIWObjectIdentifiers;
-import com.android.internal.org.bouncycastle.asn1.p019x9.X9ObjectIdentifiers;
+import com.android.internal.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.pkcs.PKCSObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import java.io.IOException;

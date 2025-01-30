@@ -4,8 +4,8 @@ import android.app.ActivityManager;
 import android.app.WindowConfiguration;
 import android.content.ComponentName;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.WindowManager;
 
 /* loaded from: classes4.dex */
@@ -94,7 +94,7 @@ public final class TransitionFilter implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeIntArray(this.mTypeSet);
     dest.writeInt(this.mFlags);
@@ -102,7 +102,7 @@ public final class TransitionFilter implements Parcelable {
     dest.writeTypedArray(this.mRequirements, flags);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -241,7 +241,7 @@ public final class TransitionFilter implements Parcelable {
           && matchesTopActivity(request.getTriggerTask());
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeInt(this.mActivityType);
       dest.writeBoolean(this.mMustBeIndependent);
@@ -253,7 +253,7 @@ public final class TransitionFilter implements Parcelable {
       dest.writeTypedObject(this.mTopActivity, flags);
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }

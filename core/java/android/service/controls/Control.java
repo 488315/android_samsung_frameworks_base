@@ -3,8 +3,8 @@ package android.service.controls;
 import android.app.PendingIntent;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Icon;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.service.controls.templates.ControlTemplate;
 import android.service.controls.templates.ControlTemplateWrapper;
 import android.util.Log;
@@ -189,12 +189,12 @@ public final class Control implements Parcelable {
     return this.mCustomControl;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.mControlId);
     dest.writeInt(this.mDeviceType);

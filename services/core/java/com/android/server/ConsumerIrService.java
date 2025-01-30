@@ -2,8 +2,8 @@ package com.android.server;
 
 import android.content.Context;
 import android.hardware.IConsumerIrService;
-import android.hardware.p001ir.ConsumerIrFreqRange;
-import android.hardware.p001ir.IConsumerIr;
+import android.hardware.ir.ConsumerIrFreqRange;
+import android.hardware.ir.IConsumerIr;
 import android.os.PowerManager;
 import android.os.RemoteException;
 import android.os.ServiceManager;

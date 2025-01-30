@@ -1,6 +1,6 @@
 package android.view.inputmethod;
 
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import java.util.function.Consumer;
 
 /* loaded from: classes4.dex */

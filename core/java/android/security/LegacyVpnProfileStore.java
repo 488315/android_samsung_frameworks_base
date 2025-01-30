@@ -1,7 +1,7 @@
 package android.security;
 
-import android.p009os.ServiceManager;
-import android.p009os.ServiceSpecificException;
+import android.os.ServiceManager;
+import android.os.ServiceSpecificException;
 import android.security.legacykeystore.ILegacyKeystore;
 import android.util.Log;
 

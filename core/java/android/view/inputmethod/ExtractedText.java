@@ -1,7 +1,7 @@
 package android.view.inputmethod;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 
 /* loaded from: classes4.dex */
@@ -41,7 +41,7 @@ public class ExtractedText implements Parcelable {
   public int startOffset;
   public CharSequence text;
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     TextUtils.writeToParcel(this.text, dest, flags);
     dest.writeInt(this.startOffset);
@@ -53,7 +53,7 @@ public class ExtractedText implements Parcelable {
     TextUtils.writeToParcel(this.hint, dest, flags);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

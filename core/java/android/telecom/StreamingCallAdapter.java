@@ -1,6 +1,6 @@
 package android.telecom;
 
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import com.android.internal.telecom.IStreamingCallAdapter;
 
 /* loaded from: classes3.dex */

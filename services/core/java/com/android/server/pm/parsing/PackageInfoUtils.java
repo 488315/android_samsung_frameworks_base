@@ -26,7 +26,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.PatternMatcher;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Pair;

@@ -12,8 +12,8 @@ import android.os.ServiceManager;
 import android.os.SystemClock;
 import android.os.SystemProperties;
 import android.os.UserHandle;
-import android.p005os.IDumpstate;
-import android.p005os.IDumpstateListener;
+import android.os.IDumpstate;
+import android.os.IDumpstateListener;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.ArrayMap;
@@ -112,7 +112,7 @@ public class BugreportManagerServiceImpl extends IDumpstate.Stub {
     this.mBugreportAllowlistedPackages = injector.getAllowlistedPackages();
   }
 
-  @Override // android.p005os.IDumpstate
+  @Override // android.os.IDumpstate
   public void preDumpUiData(String str) {
     enforcePermission(str, Binder.getCallingUid(), true);
     synchronized (this.mLock) {
@@ -120,7 +120,7 @@ public class BugreportManagerServiceImpl extends IDumpstate.Stub {
     }
   }
 
-  @Override // android.p005os.IDumpstate
+  @Override // android.os.IDumpstate
   public void startBugreport(
       int i,
       String str,
@@ -156,7 +156,7 @@ public class BugreportManagerServiceImpl extends IDumpstate.Stub {
     }
   }
 
-  @Override // android.p005os.IDumpstate
+  @Override // android.os.IDumpstate
   public void cancelBugreport(int i, String str) {
     int callingUid = Binder.getCallingUid();
     enforcePermission(str, callingUid, true);
@@ -181,7 +181,7 @@ public class BugreportManagerServiceImpl extends IDumpstate.Stub {
     }
   }
 
-  @Override // android.p005os.IDumpstate
+  @Override // android.os.IDumpstate
   public void retrieveBugreport(
       int i,
       String str,
@@ -577,13 +577,13 @@ public class BugreportManagerServiceImpl extends IDumpstate.Stub {
       }
     }
 
-    @Override // android.p005os.IDumpstateListener
+    @Override // android.os.IDumpstateListener
     public void onProgress(int i) {
       this.mProgress = i;
       this.mListener.onProgress(i);
     }
 
-    @Override // android.p005os.IDumpstateListener
+    @Override // android.os.IDumpstateListener
     public void onError(int i) {
       Slogf.m92e("BugreportManagerService", "onError(): %d", Integer.valueOf(i));
       synchronized (BugreportManagerServiceImpl.this.mLock) {
@@ -593,7 +593,7 @@ public class BugreportManagerServiceImpl extends IDumpstate.Stub {
       this.mListener.onError(i);
     }
 
-    @Override // android.p005os.IDumpstateListener
+    @Override // android.os.IDumpstateListener
     public void onFinished(String str) {
       Slogf.m96i("BugreportManagerService", "onFinished(): %s", str);
       synchronized (BugreportManagerServiceImpl.this.mLock) {
@@ -607,12 +607,12 @@ public class BugreportManagerServiceImpl extends IDumpstate.Stub {
       this.mListener.onFinished(str);
     }
 
-    @Override // android.p005os.IDumpstateListener
+    @Override // android.os.IDumpstateListener
     public void onScreenshotTaken(boolean z) {
       this.mListener.onScreenshotTaken(z);
     }
 
-    @Override // android.p005os.IDumpstateListener
+    @Override // android.os.IDumpstateListener
     public void onUiIntensiveBugreportDumpsFinished() {
       this.mListener.onUiIntensiveBugreportDumpsFinished();
     }

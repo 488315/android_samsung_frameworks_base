@@ -1,7 +1,7 @@
 package android.printservice;
 
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.RemoteException;
+import android.os.ParcelFileDescriptor;
+import android.os.RemoteException;
 import android.print.PrintDocumentInfo;
 import android.print.PrintJobId;
 import android.util.Log;

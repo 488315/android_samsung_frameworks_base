@@ -1,9 +1,9 @@
 package android.app.contentsuggestions;
 
 import android.annotation.SystemApi;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 @SystemApi
 /* loaded from: classes.dex */
@@ -40,12 +40,12 @@ public final class ContentClassification implements Parcelable {
     return this.mExtras;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.mClassificationId);
     dest.writeBundle(this.mExtras);

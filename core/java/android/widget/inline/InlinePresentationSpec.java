@@ -1,9 +1,9 @@
 package android.widget.inline;
 
 import android.annotation.NonNull;
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Size;
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.widget.InlinePresentationStyleUtils;
@@ -101,14 +101,14 @@ public final class InlinePresentationSpec implements Parcelable {
     return (((_hash * 31) + Objects.hashCode(this.mMaxSize)) * 31) + Objects.hashCode(this.mStyle);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeSize(this.mMinSize);
     dest.writeSize(this.mMaxSize);
     dest.writeBundle(this.mStyle);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

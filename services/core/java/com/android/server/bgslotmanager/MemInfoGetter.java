@@ -1,7 +1,7 @@
 package com.android.server.bgslotmanager;
 
 import android.os.Process;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import com.android.internal.util.MemInfoReader;
 
 /* loaded from: classes.dex */

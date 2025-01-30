@@ -1,8 +1,8 @@
 package android.location;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.Preconditions;
 import java.util.Objects;
 
@@ -111,12 +111,12 @@ public final class GnssExcessPathInfo implements Parcelable {
     return this.mAttenuationDb;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int parcelFlags) {
     parcel.writeInt(this.mFlags);
     if (hasExcessPathLength()) {

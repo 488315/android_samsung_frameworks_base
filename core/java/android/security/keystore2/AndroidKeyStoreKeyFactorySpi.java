@@ -1,6 +1,6 @@
 package android.security.keystore2;
 
-import android.p009os.storage.VolumeInfo;
+import android.os.storage.VolumeInfo;
 import android.security.KeyStore;
 import android.security.keystore.KeyGenParameterSpec;
 import android.security.keystore.KeyInfo;

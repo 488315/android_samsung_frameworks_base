@@ -1,6 +1,6 @@
 package android.text;
 
-import android.p009os.Parcel;
+import android.os.Parcel;
 
 /* loaded from: classes3.dex */
 public class Annotation implements ParcelableSpan {
@@ -27,12 +27,12 @@ public class Annotation implements ParcelableSpan {
     return 18;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     writeToParcelInternal(dest, flags);
   }

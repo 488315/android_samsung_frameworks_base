@@ -19,7 +19,7 @@ import android.os.PersistableBundle;
 import android.os.RemoteException;
 import android.os.ServiceManager;
 import android.os.SharedMemory;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.provider.DeviceConfig;
 import android.service.voice.HotwordDetectedResult;
 import android.service.voice.HotwordDetectionServiceFailure;

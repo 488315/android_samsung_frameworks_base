@@ -1,6 +1,6 @@
 package com.android.internal.org.bouncycastle.asn1;
 
-import com.android.internal.org.bouncycastle.util.p028io.Streams;
+import com.android.internal.org.bouncycastle.util.io.Streams;
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;

@@ -3,7 +3,7 @@ package com.android.internal.app;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.util.TypedValue;
 import android.view.KeyEvent;

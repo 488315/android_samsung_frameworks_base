@@ -3,9 +3,9 @@ package android.database;
 import android.annotation.SystemApi;
 import android.app.compat.CompatChanges;
 import android.net.Uri;
-import android.p009os.Handler;
-import android.p009os.Process;
-import android.p009os.UserHandle;
+import android.os.Handler;
+import android.os.Process;
+import android.os.UserHandle;
 import java.util.Arrays;
 import java.util.Collection;
 

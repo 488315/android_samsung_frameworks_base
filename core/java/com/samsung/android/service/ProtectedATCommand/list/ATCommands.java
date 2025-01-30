@@ -1,6 +1,6 @@
 package com.samsung.android.service.ProtectedATCommand.list;
 
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.util.NtpTrustedTime;
 import android.util.Slog;
 import java.nio.charset.Charset;

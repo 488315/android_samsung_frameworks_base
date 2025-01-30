@@ -1,7 +1,7 @@
 package android.accounts;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class AuthenticatorDescription implements Parcelable {
@@ -83,7 +83,7 @@ public class AuthenticatorDescription implements Parcelable {
     this.customTokens = source.readByte() == 1;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -107,7 +107,7 @@ public class AuthenticatorDescription implements Parcelable {
     return "AuthenticatorDescription {type=" + this.type + "}";
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeString(this.type);
     parcel.writeString(this.packageName);

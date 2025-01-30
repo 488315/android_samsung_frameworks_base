@@ -1,8 +1,8 @@
 package android.app;
 
 import android.content.ComponentName;
-import android.p009os.Debug;
-import android.p009os.RemoteException;
+import android.os.Debug;
+import android.os.RemoteException;
 import android.util.Log;
 import com.samsung.android.rune.CoreRune;
 import java.util.Iterator;

@@ -1,14 +1,14 @@
 package android.app;
 
 import android.content.Context;
-import android.content.p002pm.ActivityInfo;
-import android.content.p002pm.PackageManager;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
-import android.p009os.Build;
-import android.p009os.Bundle;
-import android.p009os.Looper;
-import android.p009os.MessageQueue;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Looper;
+import android.os.MessageQueue;
 import android.util.AttributeSet;
 import android.view.InputQueue;
 import android.view.Surface;

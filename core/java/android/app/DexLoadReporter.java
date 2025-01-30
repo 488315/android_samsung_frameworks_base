@@ -1,8 +1,8 @@
 package android.app;
 
-import android.p009os.FileUtils;
-import android.p009os.RemoteException;
-import android.p009os.SystemProperties;
+import android.os.FileUtils;
+import android.os.RemoteException;
+import android.os.SystemProperties;
 import android.util.Slog;
 import dalvik.system.BaseDexClassLoader;
 import dalvik.system.VMRuntime;

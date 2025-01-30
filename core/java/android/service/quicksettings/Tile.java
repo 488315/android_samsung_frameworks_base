@@ -2,10 +2,10 @@ package android.service.quicksettings;
 
 import android.app.PendingIntent;
 import android.graphics.drawable.Icon;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -98,7 +98,7 @@ public final class Tile implements Parcelable {
     this.mStateDescription = stateDescription;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -122,7 +122,7 @@ public final class Tile implements Parcelable {
     this.mPendingIntent = pendingIntent;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     if (this.mIcon != null) {
       dest.writeByte((byte) 1);

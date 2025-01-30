@@ -8,17 +8,17 @@ import android.hardware.soundtrigger.KeyphraseMetadata;
 import android.hardware.soundtrigger.SoundTrigger;
 import android.media.AudioFormat;
 import android.media.permission.Identity;
-import android.p009os.Binder;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
-import android.p009os.IInterface;
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.PermissionEnforcer;
-import android.p009os.PersistableBundle;
-import android.p009os.RemoteCallback;
-import android.p009os.RemoteException;
-import android.p009os.SharedMemory;
+import android.os.Binder;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.IInterface;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
+import android.os.PermissionEnforcer;
+import android.os.PersistableBundle;
+import android.os.RemoteCallback;
+import android.os.RemoteException;
+import android.os.SharedMemory;
 import android.service.voice.IMicrophoneHotwordDetectionVoiceInteractionCallback;
 import android.service.voice.IVisualQueryDetectionVoiceInteractionCallback;
 import android.service.voice.IVoiceInteractionSession;
@@ -436,7 +436,7 @@ public interface IVoiceInteractionManagerService extends IInterface {
     public void notifyActivityEventChanged(IBinder activityToken, int type)
         throws RemoteException {}
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return null;
     }
@@ -523,7 +523,7 @@ public interface IVoiceInteractionManagerService extends IInterface {
       return new Proxy(obj);
     }
 
-    @Override // android.p009os.IInterface
+    @Override // android.os.IInterface
     public IBinder asBinder() {
       return this;
     }
@@ -635,12 +635,12 @@ public interface IVoiceInteractionManagerService extends IInterface {
       }
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public String getTransactionName(int transactionCode) {
       return getDefaultTransactionName(transactionCode);
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
         throws RemoteException {
       if (code >= 1 && code <= 16777215) {
@@ -1034,7 +1034,7 @@ public interface IVoiceInteractionManagerService extends IInterface {
         this.mRemote = remote;
       }
 
-      @Override // android.p009os.IInterface
+      @Override // android.os.IInterface
       public IBinder asBinder() {
         return this.mRemote;
       }
@@ -2013,7 +2013,7 @@ public interface IVoiceInteractionManagerService extends IInterface {
           Manifest.permission.ACCESS_VOICE_INTERACTION_SERVICE, getCallingPid(), getCallingUid());
     }
 
-    @Override // android.p009os.Binder
+    @Override // android.os.Binder
     public int getMaxTransactionId() {
       return 49;
     }

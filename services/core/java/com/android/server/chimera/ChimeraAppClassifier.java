@@ -1,7 +1,7 @@
 package com.android.server.chimera;
 
 import android.bluetooth.BluetoothAdapter;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.ArrayMap;
 import android.util.Log;
 import com.android.server.am.MARsPolicyManager;

@@ -1,9 +1,9 @@
 package android.media;
 
 import android.hardware.scontext.SContextConstants;
-import android.p009os.BadParcelableException;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.BadParcelableException;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.ref.WeakReference;
@@ -223,12 +223,12 @@ public final class VolumeShaper implements AutoCloseable {
       return false;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       VolumeShaperConfiguration parcelable = toParcelable();
       parcelable.writeToParcel(dest, flags);
@@ -785,12 +785,12 @@ public final class VolumeShaper implements AutoCloseable {
           && Float.compare(this.mXOffset, other.mXOffset) == 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       toParcelable().writeToParcel(dest, flags);
     }
@@ -963,12 +963,12 @@ public final class VolumeShaper implements AutoCloseable {
       return this.mVolume == other.mVolume && this.mXOffset == other.mXOffset;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       toParcelable().writeToParcel(dest, flags);
     }

@@ -7,22 +7,22 @@ import android.content.IIntentReceiver;
 import android.content.IIntentSender;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.content.p002pm.ParceledListSlice;
-import android.content.p002pm.ResolveInfo;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteException;
-import android.p009os.UserHandle;
+import android.content.pm.ParceledListSlice;
+import android.content.pm.ResolveInfo;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteException;
+import android.os.UserHandle;
 import android.util.AndroidException;
 import android.util.ArraySet;
 import android.util.Log;
 import android.util.Pair;
 import android.util.proto.ProtoOutputStream;
-import com.android.internal.p029os.IResultReceiver;
+import com.android.internal.os.IResultReceiver;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.Collections;
@@ -93,7 +93,7 @@ public final class PendingIntent implements Parcelable {
       this.mCancelListeners = new ArraySet<>();
     }
 
-    @Override // com.android.internal.p029os.IResultReceiver
+    @Override // com.android.internal.os.IResultReceiver
     public void send(int resultCode, Bundle resultData) throws RemoteException {
       PendingIntent.this.notifyCancelListeners();
     }
@@ -775,12 +775,12 @@ public final class PendingIntent implements Parcelable {
     proto.end(token);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeStrongBinder(this.mTarget.asBinder());
     OnMarshaledListener listener = sOnMarshaledListener.get();

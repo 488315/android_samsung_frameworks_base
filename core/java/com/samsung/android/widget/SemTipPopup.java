@@ -7,9 +7,9 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.provider.Settings;
 import android.telecom.TelecomManager;
 import android.text.TextUtils;
@@ -566,7 +566,7 @@ public class SemTipPopup {
       mHandler =
           new Handler(
               Looper.getMainLooper()) { // from class: com.samsung.android.widget.SemTipPopup.5
-            @Override // android.p009os.Handler
+            @Override // android.os.Handler
             public void handleMessage(Message message) {
               switch (message.what) {
                 case 0:

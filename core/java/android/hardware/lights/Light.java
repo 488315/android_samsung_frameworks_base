@@ -1,8 +1,8 @@
 package android.hardware.lights;
 
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
@@ -63,7 +63,7 @@ public final class Light implements Parcelable {
     this.mCapabilities = in.readInt();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mId);
     dest.writeString(this.mName);
@@ -72,7 +72,7 @@ public final class Light implements Parcelable {
     dest.writeInt(this.mCapabilities);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

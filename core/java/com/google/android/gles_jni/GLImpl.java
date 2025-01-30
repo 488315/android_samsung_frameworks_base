@@ -1,10 +1,10 @@
 package com.google.android.gles_jni;
 
 import android.app.AppGlobals;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.IPackageManager;
-import android.p009os.RemoteException;
-import android.p009os.UserHandle;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.IPackageManager;
+import android.os.RemoteException;
+import android.os.UserHandle;
 import android.util.Log;
 import java.nio.Buffer;
 import java.nio.FloatBuffer;

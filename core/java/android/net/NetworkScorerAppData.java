@@ -1,8 +1,8 @@
 package android.net;
 
 import android.content.ComponentName;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */
@@ -49,7 +49,7 @@ public final class NetworkScorerAppData implements Parcelable {
     this.mNetworkAvailableNotificationChannelId = in.readString();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.packageUid);
     ComponentName.writeToParcel(this.mRecommendationService, dest);
@@ -58,7 +58,7 @@ public final class NetworkScorerAppData implements Parcelable {
     dest.writeString(this.mNetworkAvailableNotificationChannelId);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

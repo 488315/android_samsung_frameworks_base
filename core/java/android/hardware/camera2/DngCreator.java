@@ -7,7 +7,7 @@ import android.hardware.scontext.SContextConstants;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.location.Location;
 import android.media.Image;
-import android.p009os.SystemClock;
+import android.os.SystemClock;
 import android.text.format.Time;
 import android.util.Log;
 import android.util.Size;

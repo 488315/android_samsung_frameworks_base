@@ -2,7 +2,7 @@ package com.android.server.backup;
 
 import android.app.AppGlobals;
 import android.app.backup.BlobBackupHelper;
-import android.content.p002pm.IPackageManager;
+import android.content.pm.IPackageManager;
 import android.util.Slog;
 
 /* loaded from: classes5.dex */

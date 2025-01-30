@@ -1,9 +1,9 @@
 package android.service.credentials;
 
 import android.annotation.NonNull;
-import android.content.p002pm.ParceledListSlice;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.content.pm.ParceledListSlice;
+import android.os.Parcel;
+import android.os.Parcelable;
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Preconditions;
 import java.util.ArrayList;
@@ -42,13 +42,13 @@ public final class BeginCreateCredentialResponse implements Parcelable {
     this.mRemoteCreateEntry = (RemoteEntry) in.readTypedObject(RemoteEntry.CREATOR);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeParcelable(this.mCreateEntries, flags);
     dest.writeTypedObject(this.mRemoteCreateEntry, flags);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

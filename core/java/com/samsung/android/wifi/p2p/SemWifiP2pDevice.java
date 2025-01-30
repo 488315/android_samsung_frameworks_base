@@ -1,8 +1,8 @@
 package com.samsung.android.wifi.p2p;
 
 import android.net.wifi.ScanResult;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 import java.lang.annotation.Retention;
@@ -228,7 +228,7 @@ public class SemWifiP2pDevice implements Parcelable {
     return builder.toString();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeString(this.mDeviceName);
     parcel.writeString(this.mDeviceAddress);
@@ -240,7 +240,7 @@ public class SemWifiP2pDevice implements Parcelable {
     parcel.writeInt(this.mStatus);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

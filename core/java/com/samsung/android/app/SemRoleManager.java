@@ -2,7 +2,7 @@ package com.samsung.android.app;
 
 import android.app.role.RoleManager;
 import android.content.Context;
-import android.p009os.UserHandle;
+import android.os.UserHandle;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.function.Consumer;

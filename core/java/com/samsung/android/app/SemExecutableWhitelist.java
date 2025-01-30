@@ -1,10 +1,10 @@
 package com.samsung.android.app;
 
 import android.content.Context;
-import android.content.p002pm.PackageInfo;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.Signature;
-import android.p009os.Debug;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
+import android.os.Debug;
 import android.util.SparseArray;
 import com.samsung.android.util.SemLog;
 import java.util.ArrayList;

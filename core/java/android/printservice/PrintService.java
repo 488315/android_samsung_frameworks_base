@@ -4,11 +4,11 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.RemoteException;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
+import android.os.RemoteException;
 import android.print.PrintJobInfo;
 import android.print.PrinterId;
 import android.util.Log;
@@ -166,7 +166,7 @@ public abstract class PrintService extends Service {
       super(looper, null, true);
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message message) {
       int action = message.what;
       switch (action) {

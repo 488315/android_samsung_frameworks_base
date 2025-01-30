@@ -1,10 +1,10 @@
 package android.telephony;
 
 import android.annotation.SystemApi;
-import android.p009os.Binder;
-import android.p009os.IBinder;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Binder;
+import android.os.IBinder;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -132,12 +132,12 @@ public final class SignalStrengthUpdateRequest implements Parcelable {
     return this.mLiveToken;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeTypedList(this.mSignalThresholdInfos);
     dest.writeBoolean(this.mIsReportingRequestedWhileIdle);

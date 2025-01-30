@@ -4,7 +4,7 @@ import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import com.android.internal.org.bouncycastle.asn1.ASN1Encodable;
 import com.android.internal.org.bouncycastle.asn1.ASN1Integer;
 import com.android.internal.org.bouncycastle.asn1.ASN1ObjectIdentifier;
-import com.android.internal.org.bouncycastle.asn1.p019x9.X9ObjectIdentifiers;
+import com.android.internal.org.bouncycastle.asn1.x9.X9ObjectIdentifiers;
 import com.android.internal.org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import com.android.internal.org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import com.android.internal.org.bouncycastle.asn1.x509.DSAParameter;

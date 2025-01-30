@@ -2,7 +2,7 @@ package android.net;
 
 import android.content.IntentFilter;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.ServiceManager;
+import android.os.ServiceManager;
 import android.util.Log;
 import com.android.net.IProxyService;
 import com.google.android.collect.Lists;

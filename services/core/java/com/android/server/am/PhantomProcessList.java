@@ -4,7 +4,7 @@ import android.os.Handler;
 import android.os.MessageQueue;
 import android.os.Process;
 import android.os.StrictMode;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.util.FeatureFlagUtils;
 import android.util.Slog;
 import android.util.SparseArray;

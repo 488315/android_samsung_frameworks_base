@@ -5,12 +5,12 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
-import android.content.p002pm.ActivityInfo;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.Message;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -44,7 +44,7 @@ public abstract class PreferenceFragment extends Fragment
   private boolean mIsMetaDataInActivity = View.sIsSamsungBasicInteraction;
   private int mLayoutResId = C4337R.layout.preference_list_fragment;
   private Handler mHandler = new Handler() { // from class: android.preference.PreferenceFragment.1
-        @Override // android.p009os.Handler
+        @Override // android.os.Handler
         public void handleMessage(Message msg) {
           switch (msg.what) {
             case 1:

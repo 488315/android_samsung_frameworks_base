@@ -15,16 +15,16 @@ import android.graphics.Bitmap;
 import android.media.ApplicationMediaCapabilities;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
-import android.p009os.BatteryManager;
-import android.p009os.Bundle;
-import android.p009os.CancellationSignal;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Message;
-import android.p009os.Messenger;
-import android.p009os.RemoteException;
-import android.p009os.SystemProperties;
-import android.p009os.storage.StorageVolume;
+import android.os.BatteryManager;
+import android.os.Bundle;
+import android.os.CancellationSignal;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
+import android.os.SystemProperties;
+import android.os.storage.StorageVolume;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.system.ErrnoException;
@@ -1370,7 +1370,7 @@ public class MtpDatabase implements AutoCloseable {
   static class IncomingHandler extends Handler {
     IncomingHandler() {}
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       Log.m94d(MtpDatabase.TAG, "handleMessage: " + msg.what);
       switch (msg.what) {

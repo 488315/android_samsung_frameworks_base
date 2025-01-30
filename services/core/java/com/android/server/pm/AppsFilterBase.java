@@ -23,7 +23,7 @@ import com.android.server.utils.WatchedArrayMap;
 import com.android.server.utils.WatchedArraySet;
 import com.android.server.utils.WatchedSparseBooleanMatrix;
 import com.android.server.utils.WatchedSparseSetArray;
-import com.samsung.android.server.p025pm.PmServerUtils;
+import com.samsung.android.server.pm.PmServerUtils;
 import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Iterator;

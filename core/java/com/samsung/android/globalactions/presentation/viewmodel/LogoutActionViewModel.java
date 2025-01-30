@@ -1,7 +1,7 @@
 package com.samsung.android.globalactions.presentation.viewmodel;
 
 import android.app.ActivityManager;
-import android.p009os.RemoteException;
+import android.os.RemoteException;
 import com.samsung.android.globalactions.presentation.SamsungGlobalActions;
 import com.samsung.android.globalactions.util.HandlerUtil;
 import com.samsung.android.globalactions.util.LogWrapper;

@@ -1,9 +1,9 @@
 package android.window;
 
-import android.p009os.Bundle;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.RemoteCallback;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.RemoteCallback;
 
 /* loaded from: classes4.dex */
 public final class BackNavigationInfo implements Parcelable {
@@ -63,7 +63,7 @@ public final class BackNavigationInfo implements Parcelable {
         (CustomAnimationInfo) in.readTypedObject(CustomAnimationInfo.CREATOR);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mType);
     dest.writeTypedObject(this.mOnBackNavigationDone, flags);
@@ -101,7 +101,7 @@ public final class BackNavigationInfo implements Parcelable {
     return this.mCustomAnimationInfo;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -190,12 +190,12 @@ public final class BackNavigationInfo implements Parcelable {
       this.mPackageName = packageName;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel dest, int flags) {
       dest.writeString8(this.mPackageName);
       dest.writeInt(this.mWindowAnimations);

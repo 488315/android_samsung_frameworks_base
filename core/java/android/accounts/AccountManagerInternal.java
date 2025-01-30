@@ -1,6 +1,6 @@
 package android.accounts;
 
-import android.p009os.RemoteCallback;
+import android.os.RemoteCallback;
 
 /* loaded from: classes.dex */
 public abstract class AccountManagerInternal {

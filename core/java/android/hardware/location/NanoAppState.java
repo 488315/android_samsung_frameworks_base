@@ -1,8 +1,8 @@
 package android.hardware.location;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -102,12 +102,12 @@ public final class NanoAppState implements Parcelable {
                         NanoAppRpcService.class.getClassLoader(), NanoAppRpcService.class)));
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeLong(this.mNanoAppId);
     parcel.writeInt(this.mNanoAppVersion);

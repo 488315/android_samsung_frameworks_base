@@ -14,9 +14,9 @@ import android.graphics.Rect;
 import android.graphics.RenderNode;
 import android.hardware.scontext.SContextConstants;
 import android.media.audio.Enums;
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.view.HapticFeedbackConstants;
 import android.view.View;
@@ -134,7 +134,7 @@ public class EdgeEffect {
     this.mPath = new Path();
     this.mHandler =
         new Handler(Looper.getMainLooper()) { // from class: android.widget.EdgeEffect.1
-          @Override // android.p009os.Handler
+          @Override // android.os.Handler
           public void handleMessage(Message msg) {
             switch (msg.what) {
               case 1:

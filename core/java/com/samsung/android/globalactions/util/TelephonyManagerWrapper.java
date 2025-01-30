@@ -1,7 +1,7 @@
 package com.samsung.android.globalactions.util;
 
 import android.content.Context;
-import android.p009os.SystemProperties;
+import android.os.SystemProperties;
 import android.telephony.TelephonyManager;
 import com.android.internal.telephony.TelephonyProperties;
 

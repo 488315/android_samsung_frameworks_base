@@ -3,9 +3,9 @@ package com.sec.android.iaft;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.p009os.Bundle;
+import android.os.Bundle;
 import android.provider.Settings;
-import com.samsung.android.p043sm.iafdlib.IafdConstant;
+import com.samsung.android.sm.iafdlib.IafdConstant;
 
 /* loaded from: classes6.dex */
 class IAFDRepair {

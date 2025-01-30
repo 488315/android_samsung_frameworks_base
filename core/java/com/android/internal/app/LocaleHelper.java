@@ -4,7 +4,7 @@ import android.icu.text.CaseMap;
 import android.icu.text.ListFormatter;
 import android.icu.text.NumberingSystem;
 import android.icu.util.ULocale;
-import android.p009os.LocaleList;
+import android.os.LocaleList;
 import java.text.Collator;
 import java.util.Comparator;
 import java.util.Locale;

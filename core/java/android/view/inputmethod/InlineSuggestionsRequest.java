@@ -3,11 +3,11 @@ package android.view.inputmethod;
 import android.annotation.NonNull;
 import android.app.ActivityThread;
 import android.app.compat.CompatChanges;
-import android.p009os.Bundle;
-import android.p009os.IBinder;
-import android.p009os.LocaleList;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.LocaleList;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.inline.InlinePresentationSpec;
 import com.android.internal.util.AnnotationValidations;
 import com.android.internal.util.Preconditions;
@@ -248,7 +248,7 @@ public final class InlineSuggestionsRequest implements Parcelable {
         + Objects.hashCode(this.mInlineTooltipPresentationSpec);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     int flg = this.mHostInputToken != null ? 0 | 32 : 0;
     if (this.mInlineTooltipPresentationSpec != null) {
@@ -268,7 +268,7 @@ public final class InlineSuggestionsRequest implements Parcelable {
     }
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

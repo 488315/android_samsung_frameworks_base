@@ -3,7 +3,7 @@ package com.samsung.android.content.smartclip;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Parcelable;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import com.samsung.android.ims.options.SemCapabilities;

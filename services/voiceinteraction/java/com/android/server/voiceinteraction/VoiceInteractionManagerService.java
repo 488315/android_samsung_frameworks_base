@@ -43,7 +43,7 @@ import android.os.ResultReceiver;
 import android.os.SharedMemory;
 import android.os.ShellCallback;
 import android.os.UserHandle;
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import android.provider.Settings;
 import android.service.voice.IMicrophoneHotwordDetectionVoiceInteractionCallback;
 import android.service.voice.IVisualQueryDetectionVoiceInteractionCallback;

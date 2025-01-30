@@ -1,9 +1,9 @@
 package android.view;
 
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.RemoteException;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.os.RemoteException;
 
 /* loaded from: classes4.dex */
 public abstract class InputFilter extends IInputFilter.Stub {
@@ -83,7 +83,7 @@ public abstract class InputFilter extends IInputFilter.Stub {
       super(looper);
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       switch (msg.what) {
         case 1:

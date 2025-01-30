@@ -1,8 +1,8 @@
 package android.telephony;
 
 import android.annotation.SystemApi;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.format.DateFormat;
 import android.util.Log;
 import java.util.Objects;
@@ -52,7 +52,7 @@ public final class PhoneNumberRange implements Parcelable {
     this.mUpperBound = in.readString();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeString(this.mCountryCode);
     dest.writeString(this.mPrefix);
@@ -60,7 +60,7 @@ public final class PhoneNumberRange implements Parcelable {
     dest.writeString(this.mUpperBound);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

@@ -5,16 +5,16 @@ import android.app.prediction.AppPredictor;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.p002pm.ActivityInfo;
-import android.content.p002pm.LabeledIntent;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ResolveInfo;
-import android.content.p002pm.ShortcutInfo;
+import android.content.pm.ActivityInfo;
+import android.content.pm.LabeledIntent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.pm.ShortcutInfo;
 import android.graphics.drawable.Drawable;
-import android.p009os.AsyncTask;
-import android.p009os.Trace;
-import android.p009os.UserHandle;
-import android.p009os.UserManager;
+import android.os.AsyncTask;
+import android.os.Trace;
+import android.os.UserHandle;
+import android.os.UserManager;
 import android.provider.DeviceConfig;
 import android.service.chooser.ChooserTarget;
 import android.text.Layout;
@@ -337,7 +337,7 @@ public class ChooserListAdapter extends ResolverListAdapter {
         Void,
         List<DisplayResolveInfo>>() { // from class: com.android.internal.app.ChooserListAdapter.2
       /* JADX INFO: Access modifiers changed from: protected */
-      @Override // android.p009os.AsyncTask
+      @Override // android.os.AsyncTask
       public List<DisplayResolveInfo> doInBackground(Void... voids) {
         List<DisplayResolveInfo> allTargets = new ArrayList<>();
         allTargets.addAll(ChooserListAdapter.this.mDisplayList);
@@ -380,7 +380,7 @@ public class ChooserListAdapter extends ResolverListAdapter {
       }
 
       /* JADX INFO: Access modifiers changed from: protected */
-      @Override // android.p009os.AsyncTask
+      @Override // android.os.AsyncTask
       public void onPostExecute(List<DisplayResolveInfo> newList) {
         ChooserListAdapter.this.mSortedList = newList;
         ChooserListAdapter.this.notifyDataSetChanged();
@@ -669,7 +669,7 @@ public class ChooserListAdapter extends ResolverListAdapter {
                 .ResolvedComponentInfo>>() { // from class:
                                              // com.android.internal.app.ChooserListAdapter.3
       /* JADX INFO: Access modifiers changed from: protected */
-      @Override // android.p009os.AsyncTask
+      @Override // android.os.AsyncTask
       public List<ResolverActivity.ResolvedComponentInfo> doInBackground(
           List<ResolverActivity.ResolvedComponentInfo>... params) {
         Trace.beginSection("ChooserListAdapter#SortingTask");
@@ -680,7 +680,7 @@ public class ChooserListAdapter extends ResolverListAdapter {
       }
 
       /* JADX INFO: Access modifiers changed from: protected */
-      @Override // android.p009os.AsyncTask
+      @Override // android.os.AsyncTask
       public void onPostExecute(List<ResolverActivity.ResolvedComponentInfo> sortedComponents) {
         ChooserListAdapter.this.processSortedList(sortedComponents, doPostProcessing);
         if (doPostProcessing) {
@@ -715,13 +715,13 @@ public class ChooserListAdapter extends ResolverListAdapter {
     }
 
     /* JADX INFO: Access modifiers changed from: protected */
-    @Override // android.p009os.AsyncTask
+    @Override // android.os.AsyncTask
     public Boolean doInBackground(Void... voids) {
       return Boolean.valueOf(this.mTargetInfo.loadIcon());
     }
 
     /* JADX INFO: Access modifiers changed from: protected */
-    @Override // android.p009os.AsyncTask
+    @Override // android.os.AsyncTask
     public void onPostExecute(Boolean isLoaded) {
       if (isLoaded.booleanValue()) {
         ChooserListAdapter.this.notifyDataSetChanged();

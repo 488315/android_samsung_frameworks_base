@@ -1,7 +1,7 @@
 package com.samsung.android.sdhms;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,12 +81,12 @@ public class SemThermalStats implements Parcelable {
     this.cpuFreqHistoryList = in.createTypedArrayList(CpuMaxFrequencyThrottledHistoryItem.CREATOR);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeTypedList(this.tempHistoryList);
     parcel.writeTypedList(this.cpuFreqHistoryList);
@@ -154,12 +154,12 @@ public class SemThermalStats implements Parcelable {
       this.skinTemp = in.readInt();
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       parcel.writeLong(this.updatedTime);
       parcel.writeInt(this.skinTemp);
@@ -228,12 +228,12 @@ public class SemThermalStats implements Parcelable {
       this.cpuMaxFreq = in.readInt();
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public int describeContents() {
       return 0;
     }
 
-    @Override // android.p009os.Parcelable
+    @Override // android.os.Parcelable
     public void writeToParcel(Parcel parcel, int i) {
       parcel.writeLong(this.updatedTime);
       parcel.writeInt(this.cpuMaxFreq);

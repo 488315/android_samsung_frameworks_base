@@ -2,12 +2,12 @@ package android.hardware.input;
 
 import android.app.ActivityThread;
 import android.content.Context;
-import android.p009os.Binder;
-import android.p009os.IVibratorStateListener;
-import android.p009os.VibrationAttributes;
-import android.p009os.VibrationEffect;
-import android.p009os.Vibrator;
-import android.p009os.VibratorInfo;
+import android.os.Binder;
+import android.os.IVibratorStateListener;
+import android.os.VibrationAttributes;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
+import android.os.VibratorInfo;
 import android.util.ArrayMap;
 import android.util.Log;
 import com.android.internal.util.Preconditions;
@@ -50,7 +50,7 @@ final class InputDeviceVibrator extends Vibrator {
       this.mListener.onVibratorStateChanged(isVibrating);
     }
 
-    @Override // android.p009os.IVibratorStateListener
+    @Override // android.os.IVibratorStateListener
     public void onVibrating(final boolean isVibrating) {
       this.mExecutor.execute(
           new Runnable() { // from class:
@@ -64,29 +64,29 @@ final class InputDeviceVibrator extends Vibrator {
     }
   }
 
-  @Override // android.p009os.Vibrator
+  @Override // android.os.Vibrator
   protected VibratorInfo getInfo() {
     return this.mVibratorInfo;
   }
 
-  @Override // android.p009os.Vibrator
+  @Override // android.os.Vibrator
   public boolean hasVibrator() {
     return true;
   }
 
-  @Override // android.p009os.Vibrator
+  @Override // android.os.Vibrator
   public boolean isVibrating() {
     return this.mGlobal.isVibrating(this.mDeviceId);
   }
 
-  @Override // android.p009os.Vibrator
+  @Override // android.os.Vibrator
   public void addVibratorStateListener(Vibrator.OnVibratorStateChangedListener listener) {
     Preconditions.checkNotNull(listener);
     Context context = ActivityThread.currentApplication();
     addVibratorStateListener(context.getMainExecutor(), listener);
   }
 
-  @Override // android.p009os.Vibrator
+  @Override // android.os.Vibrator
   public void addVibratorStateListener(
       Executor executor, Vibrator.OnVibratorStateChangedListener listener) {
     Preconditions.checkNotNull(listener);
@@ -106,7 +106,7 @@ final class InputDeviceVibrator extends Vibrator {
     }
   }
 
-  @Override // android.p009os.Vibrator
+  @Override // android.os.Vibrator
   public void removeVibratorStateListener(Vibrator.OnVibratorStateChangedListener listener) {
     Preconditions.checkNotNull(listener);
     synchronized (this.mDelegates) {
@@ -121,12 +121,12 @@ final class InputDeviceVibrator extends Vibrator {
     }
   }
 
-  @Override // android.p009os.Vibrator
+  @Override // android.os.Vibrator
   public boolean hasAmplitudeControl() {
     return this.mVibratorInfo.hasCapability(4L);
   }
 
-  @Override // android.p009os.Vibrator
+  @Override // android.os.Vibrator
   public void vibrate(
       int uid,
       String opPkg,
@@ -136,12 +136,12 @@ final class InputDeviceVibrator extends Vibrator {
     this.mGlobal.vibrate(this.mDeviceId, effect, this.mToken);
   }
 
-  @Override // android.p009os.Vibrator
+  @Override // android.os.Vibrator
   public void cancel() {
     this.mGlobal.cancelVibrate(this.mDeviceId, this.mToken);
   }
 
-  @Override // android.p009os.Vibrator
+  @Override // android.os.Vibrator
   public void cancel(int usageFilter) {
     cancel();
   }

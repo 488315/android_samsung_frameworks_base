@@ -1,8 +1,8 @@
 package android.hardware.lights;
 
 import android.content.Context;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
+import android.os.RemoteException;
+import android.os.ServiceManager;
 import android.util.CloseGuard;
 import com.android.internal.util.Preconditions;
 import java.lang.ref.Reference;

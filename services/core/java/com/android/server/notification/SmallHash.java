@@ -1,6 +1,6 @@
 package com.android.server.notification;
 
-import android.p005os.IInstalld;
+import android.os.IInstalld;
 import java.util.Objects;
 
 /* loaded from: classes2.dex */

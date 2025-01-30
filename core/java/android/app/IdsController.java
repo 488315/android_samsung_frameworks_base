@@ -2,8 +2,8 @@ package android.app;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.p009os.Process;
-import android.p009os.SystemProperties;
+import android.os.Process;
+import android.os.SystemProperties;
 import android.util.Log;
 import android.view.Choreographer;
 import android.view.View;

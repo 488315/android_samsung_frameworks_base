@@ -37,19 +37,19 @@ import android.content.Context;
 import android.content.IContentProvider;
 import android.content.IIntentReceiver;
 import android.content.Intent;
-import android.content.p001om.SamsungThemeConstants;
-import android.content.p002pm.ActivityInfo;
-import android.content.p002pm.ApplicationInfo;
-import android.content.p002pm.ComponentInfo;
-import android.content.p002pm.IPackageManager;
-import android.content.p002pm.InstrumentationInfo;
-import android.content.p002pm.PackageInfo;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ParceledListSlice;
-import android.content.p002pm.PermissionInfo;
-import android.content.p002pm.ProviderInfo;
-import android.content.p002pm.ProviderInfoList;
-import android.content.p002pm.ServiceInfo;
+import android.content.om.SamsungThemeConstants;
+import android.content.pm.ActivityInfo;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.ComponentInfo;
+import android.content.pm.IPackageManager;
+import android.content.pm.InstrumentationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ParceledListSlice;
+import android.content.pm.PermissionInfo;
+import android.content.pm.ProviderInfo;
+import android.content.pm.ProviderInfoList;
+import android.content.pm.ServiceInfo;
 import android.content.res.AssetManager;
 import android.content.res.CompatibilityInfo;
 import android.content.res.Configuration;
@@ -78,40 +78,40 @@ import android.net.Uri;
 import android.nfc.NfcFrameworkInitializer;
 import android.nfc.NfcServiceManager;
 import android.os.StatsFrameworkInitializer;
-import android.p009os.AsyncTask;
-import android.p009os.Binder;
-import android.p009os.BluetoothServiceManager;
-import android.p009os.Build;
-import android.p009os.Bundle;
-import android.p009os.CancellationSignal;
-import android.p009os.Debug;
-import android.p009os.Environment;
-import android.p009os.FileUtils;
-import android.p009os.GraphicsEnvironment;
-import android.p009os.Handler;
-import android.p009os.HandlerExecutor;
-import android.p009os.HandlerThread;
-import android.p009os.IBinder;
-import android.p009os.ICancellationSignal;
-import android.p009os.LocaleList;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.MessageQueue;
-import android.p009os.Parcel;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.PersistableBundle;
-import android.p009os.Process;
-import android.p009os.RemoteCallback;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
-import android.p009os.SharedMemory;
-import android.p009os.StatsServiceManager;
-import android.p009os.StrictMode;
-import android.p009os.SystemClock;
-import android.p009os.SystemProperties;
-import android.p009os.TelephonyServiceManager;
-import android.p009os.Trace;
-import android.p009os.UserHandle;
+import android.os.AsyncTask;
+import android.os.Binder;
+import android.os.BluetoothServiceManager;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.CancellationSignal;
+import android.os.Debug;
+import android.os.Environment;
+import android.os.FileUtils;
+import android.os.GraphicsEnvironment;
+import android.os.Handler;
+import android.os.HandlerExecutor;
+import android.os.HandlerThread;
+import android.os.IBinder;
+import android.os.ICancellationSignal;
+import android.os.LocaleList;
+import android.os.Looper;
+import android.os.Message;
+import android.os.MessageQueue;
+import android.os.Parcel;
+import android.os.ParcelFileDescriptor;
+import android.os.PersistableBundle;
+import android.os.Process;
+import android.os.RemoteCallback;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.SharedMemory;
+import android.os.StatsServiceManager;
+import android.os.StrictMode;
+import android.os.SystemClock;
+import android.os.SystemProperties;
+import android.os.TelephonyServiceManager;
+import android.os.Trace;
+import android.os.UserHandle;
 import android.permission.IPermissionManager;
 import android.provider.BlockedNumberContract;
 import android.provider.CallLog;
@@ -165,11 +165,11 @@ import android.window.WindowProviderService;
 import com.android.internal.app.IVoiceInteractor;
 import com.android.internal.content.NativeLibraryHelper;
 import com.android.internal.content.ReferrerIntent;
-import com.android.internal.p029os.BinderCallsStats;
-import com.android.internal.p029os.BinderInternal;
-import com.android.internal.p029os.RuntimeInit;
-import com.android.internal.p029os.SafeZipPathValidatorCallback;
-import com.android.internal.p029os.SomeArgs;
+import com.android.internal.os.BinderCallsStats;
+import com.android.internal.os.BinderInternal;
+import com.android.internal.os.RuntimeInit;
+import com.android.internal.os.SafeZipPathValidatorCallback;
+import com.android.internal.os.SomeArgs;
 import com.android.internal.policy.DecorView;
 import com.android.internal.policy.PhoneWindow;
 import com.android.internal.util.ArrayUtils;
@@ -1824,7 +1824,7 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
             this.mWeakActivityThread = new WeakReference<>(activityThread);
         }
 
-        @Override // android.p009os.ICancellationSignal
+        @Override // android.os.ICancellationSignal
         public void cancel() {
             CancellationSignal cancellation;
             ActivityThread activityThread = this.mWeakActivityThread.get();
@@ -1942,7 +1942,7 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
             return Integer.toString(code);
         }
 
-        @Override // android.p009os.Handler
+        @Override // android.os.Handler
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 110:
@@ -2546,7 +2546,7 @@ public final class ActivityThread extends ClientTransactionHandler implements Ac
         if (Binder.isSystemServerBinderTrackerEnabled) {
             handlerThread.start();
             this.trackingHandler = new Handler(handlerThread.getLooper()) { // from class: android.app.ActivityThread.1
-                @Override // android.p009os.Handler
+                @Override // android.os.Handler
                 public void handleMessage(Message msg) {
                     switch (msg.what) {
                         case 4:

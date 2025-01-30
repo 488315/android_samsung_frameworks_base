@@ -2,10 +2,10 @@ package android.sec.clipboard.util;
 
 import android.Manifest;
 import android.content.Context;
-import android.content.p002pm.PackageInfo;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.Signature;
-import android.p009os.Binder;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
+import android.os.Binder;
 import android.util.SparseArray;
 import java.util.ArrayList;
 import java.util.Arrays;

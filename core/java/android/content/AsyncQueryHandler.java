@@ -2,10 +2,10 @@ package android.content;
 
 import android.database.Cursor;
 import android.net.Uri;
-import android.p009os.Handler;
-import android.p009os.HandlerThread;
-import android.p009os.Looper;
-import android.p009os.Message;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 import java.lang.ref.WeakReference;
 
@@ -42,7 +42,7 @@ public abstract class AsyncQueryHandler extends Handler {
       super(looper);
     }
 
-    @Override // android.p009os.Handler
+    @Override // android.os.Handler
     public void handleMessage(Message msg) {
       Cursor cursor;
       ContentResolver resolver = AsyncQueryHandler.this.mResolver.get();
@@ -183,7 +183,7 @@ public abstract class AsyncQueryHandler extends Handler {
 
   protected void onDeleteComplete(int token, Object cookie, int result) {}
 
-  @Override // android.p009os.Handler
+  @Override // android.os.Handler
   public void handleMessage(Message msg) {
     WorkerArgs args = (WorkerArgs) msg.obj;
     int token = msg.what;

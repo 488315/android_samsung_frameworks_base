@@ -1,11 +1,11 @@
 package android.content.res;
 
-import android.p009os.Handler;
-import android.p009os.Looper;
-import android.p009os.Message;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.Process;
-import android.p009os.SystemClock;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
+import android.os.ParcelFileDescriptor;
+import android.os.Process;
+import android.os.SystemClock;
 import android.text.TextUtils;
 import android.util.Log;
 import com.android.internal.util.FastPrintWriter;
@@ -80,7 +80,7 @@ public final class ResourceTimer {
         }
         mHandler =
             new Handler(Looper.getMainLooper()) { // from class: android.content.res.ResourceTimer.1
-              @Override // android.p009os.Handler
+              @Override // android.os.Handler
               public void handleMessage(Message msg) {
                 ResourceTimer.handleMessage(msg);
               }

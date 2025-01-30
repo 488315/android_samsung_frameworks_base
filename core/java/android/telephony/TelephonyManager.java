@@ -15,31 +15,31 @@ import android.content.Context;
 import android.content.ContextParams;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.p002pm.PackageInfo;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
 import android.media.MediaMetrics;
 import android.net.Uri;
-import android.p009os.AsyncTask;
-import android.p009os.Binder;
-import android.p009os.Build;
-import android.p009os.Bundle;
-import android.p009os.Handler;
-import android.p009os.IBinder;
-import android.p009os.Looper;
-import android.p009os.OutcomeReceiver;
-import android.p009os.ParcelFileDescriptor;
-import android.p009os.ParcelUuid;
-import android.p009os.Parcelable;
-import android.p009os.PersistableBundle;
-import android.p009os.Process;
-import android.p009os.RemoteException;
-import android.p009os.ResultReceiver;
-import android.p009os.SemSystemProperties;
-import android.p009os.ServiceManager;
-import android.p009os.SystemProperties;
-import android.p009os.WorkSource;
+import android.os.AsyncTask;
+import android.os.Binder;
+import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.OutcomeReceiver;
+import android.os.ParcelFileDescriptor;
+import android.os.ParcelUuid;
+import android.os.Parcelable;
+import android.os.PersistableBundle;
+import android.os.Process;
+import android.os.RemoteException;
+import android.os.ResultReceiver;
+import android.os.SemSystemProperties;
+import android.os.ServiceManager;
+import android.os.SystemProperties;
+import android.os.WorkSource;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
 import android.provider.Telephony;
@@ -63,7 +63,7 @@ import android.util.NtpTrustedTime;
 import android.util.Pair;
 import com.android.internal.C4337R;
 import com.android.internal.content.NativeLibraryHelper;
-import com.android.internal.p029os.BackgroundThread;
+import com.android.internal.os.BackgroundThread;
 import com.android.internal.telephony.CellNetworkScanResult;
 import com.android.internal.telephony.DctConstants;
 import com.android.internal.telephony.GsmAlphabet;
@@ -2509,7 +2509,7 @@ public class TelephonyManager {
             new OutcomeReceiver<
                 ParcelUuid,
                 CallComposerException>() { // from class: android.telephony.TelephonyManager.2
-              @Override // android.p009os.OutcomeReceiver
+              @Override // android.os.OutcomeReceiver
               public void onResult(ParcelUuid result) {
                 try {
                   fileStream.close();
@@ -2521,7 +2521,7 @@ public class TelephonyManager {
                 callback.onResult(result);
               }
 
-              @Override // android.p009os.OutcomeReceiver
+              @Override // android.os.OutcomeReceiver
               public void onError(CallComposerException error) {
                 try {
                   fileStream.close();
@@ -2609,7 +2609,7 @@ public class TelephonyManager {
       this.val$callback = outcomeReceiver;
     }
 
-    @Override // android.p009os.ResultReceiver
+    @Override // android.os.ResultReceiver
     protected void onReceiveResult(final int resultCode, Bundle result) {
       if (resultCode != -1) {
         Executor executor = this.val$executor;
@@ -5641,7 +5641,7 @@ public class TelephonyManager {
     Preconditions.checkNotNull(callback, "UssdResponseCallback cannot be null.");
     ResultReceiver wrappedCallback =
         new ResultReceiver(handler) { // from class: android.telephony.TelephonyManager.7
-          @Override // android.p009os.ResultReceiver
+          @Override // android.os.ResultReceiver
           protected void onReceiveResult(int resultCode, Bundle ussdResponse) {
             com.android.telephony.Rlog.m238d(TelephonyManager.TAG, "USSD:" + resultCode);
             Preconditions.checkNotNull(ussdResponse, "ussdResponse cannot be null.");
@@ -6796,7 +6796,7 @@ public class TelephonyManager {
       this.val$callback = outcomeReceiver;
     }
 
-    @Override // android.p009os.ResultReceiver
+    @Override // android.os.ResultReceiver
     protected void onReceiveResult(int resultCode, Bundle data) {
       if (data == null) {
         Log.m102w(TelephonyManager.TAG, "requestModemActivityInfo: received null bundle");
@@ -9129,7 +9129,7 @@ public class TelephonyManager {
       this.val$callback = outcomeReceiver;
     }
 
-    @Override // android.p009os.ResultReceiver
+    @Override // android.os.ResultReceiver
     protected void onReceiveResult(final int resultCode, Bundle result) {
       if (resultCode == 1) {
         Executor executor = this.val$executor;

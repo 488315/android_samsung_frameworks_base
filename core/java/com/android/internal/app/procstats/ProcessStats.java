@@ -3,15 +3,15 @@ package com.android.internal.app.procstats;
 import android.content.ComponentName;
 import android.hardware.scontext.SContextConstants;
 import android.inputmethodservice.navigationbar.NavigationBarInflaterView;
-import android.p009os.Debug;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.Process;
-import android.p009os.RemoteException;
-import android.p009os.ServiceManager;
-import android.p009os.SystemClock;
-import android.p009os.SystemProperties;
-import android.p009os.UserHandle;
+import android.os.Debug;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.Process;
+import android.os.RemoteException;
+import android.os.ServiceManager;
+import android.os.SystemClock;
+import android.os.SystemProperties;
+import android.os.UserHandle;
 import android.text.format.DateFormat;
 import android.util.ArrayMap;
 import android.util.ArraySet;
@@ -842,12 +842,12 @@ public final class ProcessStats implements Parcelable {
     return name;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     writeToParcel(out, SystemClock.uptimeMillis(), flags);
   }

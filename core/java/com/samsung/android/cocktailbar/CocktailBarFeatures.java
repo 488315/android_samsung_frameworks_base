@@ -1,7 +1,7 @@
 package com.samsung.android.cocktailbar;
 
 import android.content.Context;
-import android.content.p002pm.PackageManager;
+import android.content.pm.PackageManager;
 import java.io.File;
 
 /* loaded from: classes5.dex */

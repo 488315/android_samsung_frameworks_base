@@ -3,7 +3,7 @@ package com.samsung.android.multicontrol;
 import android.content.Context;
 import android.hardware.display.DisplayManager;
 import android.hardware.input.InputManager;
-import android.p009os.Looper;
+import android.os.Looper;
 import android.util.Log;
 import android.view.InputChannel;
 import android.view.InputMonitor;

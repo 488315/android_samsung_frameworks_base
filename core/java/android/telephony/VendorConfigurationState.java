@@ -1,7 +1,7 @@
 package android.telephony;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class VendorConfigurationState implements Parcelable {
@@ -104,7 +104,7 @@ public class VendorConfigurationState implements Parcelable {
     this.mSupportUacType = in.readString();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel out, int flags) {
     out.writeString(this.mFrameWorkReady);
     out.writeString(this.mSupportEgprs);
@@ -121,7 +121,7 @@ public class VendorConfigurationState implements Parcelable {
     out.writeString(this.mSupportUacType);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

@@ -1,6 +1,6 @@
 package android.app;
 
-import android.content.p002pm.IPackageManager;
+import android.content.pm.IPackageManager;
 import android.permission.IPermissionManager;
 
 /* loaded from: classes.dex */

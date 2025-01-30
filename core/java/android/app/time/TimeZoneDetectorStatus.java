@@ -1,7 +1,7 @@
 package android.app.time;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import java.util.Objects;
 
 /* loaded from: classes.dex */
@@ -68,12 +68,12 @@ public final class TimeZoneDetectorStatus implements Parcelable {
         + '}';
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int flags) {
     parcel.writeInt(this.mDetectorStatus);
     parcel.writeParcelable(this.mTelephonyTimeZoneAlgorithmStatus, flags);

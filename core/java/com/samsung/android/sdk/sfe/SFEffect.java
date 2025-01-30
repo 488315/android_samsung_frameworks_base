@@ -1,7 +1,7 @@
 package com.samsung.android.sdk.sfe;
 
 import android.content.ContentResolver;
-import android.p009os.Build;
+import android.os.Build;
 import android.util.Log;
 import com.samsung.android.sdk.sfe.font.FontManager;
 

@@ -1,10 +1,10 @@
 package android.transparency;
 
 import android.content.Context;
-import android.p009os.Bundle;
-import android.p009os.RemoteException;
+import android.os.Bundle;
+import android.os.RemoteException;
 import android.util.Slog;
-import com.android.internal.p029os.IBinaryTransparencyService;
+import com.android.internal.os.IBinaryTransparencyService;
 import java.util.List;
 
 /* loaded from: classes4.dex */

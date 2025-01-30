@@ -1,7 +1,7 @@
 package com.samsung.android.cocktailbar;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /* loaded from: classes5.dex */
 public class CocktailBarStateInfo implements Parcelable, Cloneable {
@@ -112,12 +112,12 @@ public class CocktailBarStateInfo implements Parcelable, Cloneable {
     return stateInfo;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel parcel, int i) {
     parcel.writeInt(this.visibility);
     parcel.writeInt(this.position);

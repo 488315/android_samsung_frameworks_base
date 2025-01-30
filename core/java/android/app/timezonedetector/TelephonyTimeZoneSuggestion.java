@@ -1,9 +1,9 @@
 package android.app.timezonedetector;
 
 import android.content.Context;
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
-import android.p009os.ShellCommand;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.os.ShellCommand;
 import android.speech.tts.TextToSpeech;
 import android.telecom.Logging.Session;
 import android.text.TextUtils;
@@ -88,7 +88,7 @@ public final class TelephonyTimeZoneSuggestion implements Parcelable {
     return suggestion;
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     dest.writeInt(this.mSlotIndex);
     dest.writeString(this.mZoneId);
@@ -98,7 +98,7 @@ public final class TelephonyTimeZoneSuggestion implements Parcelable {
     dest.writeString(this.mCountryIso);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }

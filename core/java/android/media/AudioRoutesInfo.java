@@ -1,7 +1,7 @@
 package android.media;
 
-import android.p009os.Parcel;
-import android.p009os.Parcelable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 
 /* loaded from: classes2.dex */
@@ -49,7 +49,7 @@ public class AudioRoutesInfo implements Parcelable {
     this.mainType = src.readInt();
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public int describeContents() {
     return 0;
   }
@@ -78,7 +78,7 @@ public class AudioRoutesInfo implements Parcelable {
                         : (type & 16) != 0 ? "USB" : Integer.toHexString(type);
   }
 
-  @Override // android.p009os.Parcelable
+  @Override // android.os.Parcelable
   public void writeToParcel(Parcel dest, int flags) {
     TextUtils.writeToParcel(this.bluetoothName, dest, flags);
     dest.writeInt(this.mainType);

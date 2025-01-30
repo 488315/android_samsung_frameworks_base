@@ -1,11 +1,11 @@
 package android.security.keystore2;
 
 import android.app.ActivityThread;
-import android.content.p002pm.FeatureInfo;
-import android.content.p002pm.PackageManager;
-import android.content.p002pm.ParceledListSlice;
-import android.p009os.Build;
-import android.p009os.RemoteException;
+import android.content.pm.FeatureInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ParceledListSlice;
+import android.os.Build;
+import android.os.RemoteException;
 import android.security.keymaster.KeymasterArguments;
 import android.security.keystore.KeyProperties;
 import com.android.internal.util.ArrayUtils;
