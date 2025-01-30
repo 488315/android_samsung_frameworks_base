@@ -5,15 +5,15 @@ import java.util.Set;
 
 /* loaded from: classes3.dex */
 public interface ParsedProcess {
-    ArrayMap getAppClassNamesByPackage();
+  ArrayMap getAppClassNamesByPackage();
 
-    Set getDeniedPermissions();
+  Set getDeniedPermissions();
 
-    int getGwpAsanMode();
+  int getGwpAsanMode();
 
-    int getMemtagMode();
+  int getMemtagMode();
 
-    String getName();
+  String getName();
 
-    int getNativeHeapZeroInitialized();
+  int getNativeHeapZeroInitialized();
 }

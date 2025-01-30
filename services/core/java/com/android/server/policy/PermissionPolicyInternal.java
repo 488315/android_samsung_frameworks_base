@@ -6,19 +6,20 @@ import android.content.Intent;
 /* loaded from: classes3.dex */
 public abstract class PermissionPolicyInternal {
 
-    public interface OnInitializedCallback {
-        void onInitialized(int i);
-    }
+  public interface OnInitializedCallback {
+    void onInitialized(int i);
+  }
 
-    public abstract boolean checkStartActivity(Intent intent, int i, String str);
+  public abstract boolean checkStartActivity(Intent intent, int i, String str);
 
-    public abstract boolean isInitialized(int i);
+  public abstract boolean isInitialized(int i);
 
-    public abstract boolean isIntentToPermissionDialog(Intent intent);
+  public abstract boolean isIntentToPermissionDialog(Intent intent);
 
-    public abstract void setOnInitializedCallback(OnInitializedCallback onInitializedCallback);
+  public abstract void setOnInitializedCallback(OnInitializedCallback onInitializedCallback);
 
-    public abstract boolean shouldShowNotificationDialogForTask(TaskInfo taskInfo, String str, String str2, Intent intent, String str3);
+  public abstract boolean shouldShowNotificationDialogForTask(
+      TaskInfo taskInfo, String str, String str2, Intent intent, String str3);
 
-    public abstract void showNotificationPromptIfNeeded(String str, int i, int i2);
+  public abstract void showNotificationPromptIfNeeded(String str, int i, int i2);
 }

@@ -4,5 +4,5 @@ import android.util.SparseArray;
 
 /* loaded from: classes4.dex */
 public abstract class ProcessStatsInternal {
-    public abstract SparseArray<long[]> getUidProcStateStatsOverTime(long j);
+  public abstract SparseArray<long[]> getUidProcStateStatsOverTime(long j);
 }

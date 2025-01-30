@@ -5,40 +5,35 @@ import com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel;
 
 /* loaded from: classes5.dex */
 public interface ContentView {
-    void dismiss();
+  void dismiss();
 
-    void forceRequestLayout();
+  void forceRequestLayout();
 
-    ViewAnimationState getAnimationState();
+  ViewAnimationState getAnimationState();
 
-    void hideConfirm();
+  void hideConfirm();
 
-    void initAnimations();
+  void initAnimations();
 
-    void initDimens();
+  void initDimens();
 
-    void initLayouts();
+  void initLayouts();
 
-    void setAnimationState(ViewAnimationState viewAnimationState);
+  void setAnimationState(ViewAnimationState viewAnimationState);
 
-    void show();
+  void show();
 
-    void showConfirm(ActionViewModel actionViewModel);
+  void showConfirm(ActionViewModel actionViewModel);
 
-    void updateItemLists(SamsungGlobalActionsPresenter samsungGlobalActionsPresenter);
+  void updateItemLists(SamsungGlobalActionsPresenter samsungGlobalActionsPresenter);
 
-    default void registerRotationWatcher() {
-    }
+  default void registerRotationWatcher() {}
 
-    default void onDismiss() {
-    }
+  default void onDismiss() {}
 
-    default void notifyDataSetChanged() {
-    }
+  default void notifyDataSetChanged() {}
 
-    default void hideDialogOnSecureConfirm() {
-    }
+  default void hideDialogOnSecureConfirm() {}
 
-    default void setInterceptor() {
-    }
+  default void setInterceptor() {}
 }

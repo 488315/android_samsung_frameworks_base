@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.CLASS)
 /* loaded from: classes4.dex */
 public @interface GuardedBy {
-    String[] anyOf() default {};
+  String[] anyOf() default {};
 
-    String[] value() default {};
+  String[] value() default {};
 }

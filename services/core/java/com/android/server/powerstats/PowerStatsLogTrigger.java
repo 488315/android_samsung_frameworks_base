@@ -5,15 +5,15 @@ import android.os.Message;
 
 /* loaded from: classes3.dex */
 public abstract class PowerStatsLogTrigger {
-    public Context mContext;
-    public PowerStatsLogger mPowerStatsLogger;
+  public Context mContext;
+  public PowerStatsLogger mPowerStatsLogger;
 
-    public void logPowerStatsData(int i) {
-        Message.obtain(this.mPowerStatsLogger, i).sendToTarget();
-    }
+  public void logPowerStatsData(int i) {
+    Message.obtain(this.mPowerStatsLogger, i).sendToTarget();
+  }
 
-    public PowerStatsLogTrigger(Context context, PowerStatsLogger powerStatsLogger) {
-        this.mContext = context;
-        this.mPowerStatsLogger = powerStatsLogger;
-    }
+  public PowerStatsLogTrigger(Context context, PowerStatsLogger powerStatsLogger) {
+    this.mContext = context;
+    this.mPowerStatsLogger = powerStatsLogger;
+  }
 }

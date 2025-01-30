@@ -10,19 +10,22 @@ import com.samsung.android.globalactions.util.SystemConditions;
 
 /* loaded from: classes5.dex */
 public class ForceRestartMessageStrategy implements ActionsCreationStrategy {
-    private final ConditionChecker mConditionChecker;
-    private final ActionViewModelFactory mViewModelFactory;
+  private final ConditionChecker mConditionChecker;
+  private final ActionViewModelFactory mViewModelFactory;
 
-    public ForceRestartMessageStrategy(ActionViewModelFactory viewModelFactory, ConditionChecker conditionChecker) {
-        this.mViewModelFactory = viewModelFactory;
-        this.mConditionChecker = conditionChecker;
-    }
+  public ForceRestartMessageStrategy(
+      ActionViewModelFactory viewModelFactory, ConditionChecker conditionChecker) {
+    this.mViewModelFactory = viewModelFactory;
+    this.mConditionChecker = conditionChecker;
+  }
 
-    @Override // com.samsung.android.globalactions.presentation.strategies.ActionsCreationStrategy
-    public void onCreateActions(SamsungGlobalActions globalActions) {
-        if (!this.mConditionChecker.isEnabled(SystemConditions.IS_CLEAR_COVER_CLOSED)) {
-            ActionViewModel viewModel = this.mViewModelFactory.createActionViewModel(globalActions, DefaultActionNames.ACTION_FORCE_RESTART_MESSAGE);
-            globalActions.addAction(viewModel);
-        }
+  @Override // com.samsung.android.globalactions.presentation.strategies.ActionsCreationStrategy
+  public void onCreateActions(SamsungGlobalActions globalActions) {
+    if (!this.mConditionChecker.isEnabled(SystemConditions.IS_CLEAR_COVER_CLOSED)) {
+      ActionViewModel viewModel =
+          this.mViewModelFactory.createActionViewModel(
+              globalActions, DefaultActionNames.ACTION_FORCE_RESTART_MESSAGE);
+      globalActions.addAction(viewModel);
     }
+  }
 }

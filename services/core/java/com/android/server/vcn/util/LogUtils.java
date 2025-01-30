@@ -5,10 +5,10 @@ import com.android.internal.util.HexDump;
 
 /* loaded from: classes3.dex */
 public abstract class LogUtils {
-    public static String getHashedSubscriptionGroup(ParcelUuid parcelUuid) {
-        if (parcelUuid == null) {
-            return null;
-        }
-        return HexDump.toHexString(parcelUuid.hashCode());
+  public static String getHashedSubscriptionGroup(ParcelUuid parcelUuid) {
+    if (parcelUuid == null) {
+      return null;
     }
+    return HexDump.toHexString(parcelUuid.hashCode());
+  }
 }

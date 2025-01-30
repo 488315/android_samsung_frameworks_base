@@ -7,29 +7,29 @@ import java.io.InputStream;
 
 /* loaded from: classes5.dex */
 public class RecipientOperator {
-    private final Object operator;
+  private final Object operator;
 
-    public RecipientOperator(InputDecryptor decryptor) {
-        this.operator = decryptor;
-    }
+  public RecipientOperator(InputDecryptor decryptor) {
+    this.operator = decryptor;
+  }
 
-    public RecipientOperator(MacCalculator macCalculator) {
-        this.operator = macCalculator;
-    }
+  public RecipientOperator(MacCalculator macCalculator) {
+    this.operator = macCalculator;
+  }
 
-    public InputStream getInputStream(InputStream dataIn) {
-        Object obj = this.operator;
-        if (obj instanceof InputDecryptor) {
-            return ((InputDecryptor) obj).getInputStream(dataIn);
-        }
-        return new TeeInputStream(dataIn, ((MacCalculator) this.operator).getOutputStream());
+  public InputStream getInputStream(InputStream dataIn) {
+    Object obj = this.operator;
+    if (obj instanceof InputDecryptor) {
+      return ((InputDecryptor) obj).getInputStream(dataIn);
     }
+    return new TeeInputStream(dataIn, ((MacCalculator) this.operator).getOutputStream());
+  }
 
-    public boolean isMacBased() {
-        return this.operator instanceof MacCalculator;
-    }
+  public boolean isMacBased() {
+    return this.operator instanceof MacCalculator;
+  }
 
-    public byte[] getMac() {
-        return ((MacCalculator) this.operator).getMac();
-    }
+  public byte[] getMac() {
+    return ((MacCalculator) this.operator).getMac();
+  }
 }

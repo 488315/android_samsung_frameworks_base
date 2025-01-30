@@ -20,158 +20,176 @@ import java.util.Enumeration;
 
 /* loaded from: classes5.dex */
 public class BCRSAPrivateKey implements RSAPrivateKey, PKCS12BagAttributeCarrier {
-    private static BigInteger ZERO = BigInteger.valueOf(0);
-    static final long serialVersionUID = 5110188922551353628L;
-    protected transient AlgorithmIdentifier algorithmIdentifier;
-    private byte[] algorithmIdentifierEnc;
-    protected transient PKCS12BagAttributeCarrierImpl attrCarrier;
-    protected BigInteger modulus;
-    protected BigInteger privateExponent;
-    protected transient RSAKeyParameters rsaPrivateKey;
+  private static BigInteger ZERO = BigInteger.valueOf(0);
+  static final long serialVersionUID = 5110188922551353628L;
+  protected transient AlgorithmIdentifier algorithmIdentifier;
+  private byte[] algorithmIdentifierEnc;
+  protected transient PKCS12BagAttributeCarrierImpl attrCarrier;
+  protected BigInteger modulus;
+  protected BigInteger privateExponent;
+  protected transient RSAKeyParameters rsaPrivateKey;
 
-    BCRSAPrivateKey(RSAKeyParameters key) {
-        this.algorithmIdentifierEnc = getEncoding(BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER);
-        this.algorithmIdentifier = BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER;
-        this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
-        this.modulus = key.getModulus();
-        this.privateExponent = key.getExponent();
-        this.rsaPrivateKey = key;
-    }
+  BCRSAPrivateKey(RSAKeyParameters key) {
+    this.algorithmIdentifierEnc = getEncoding(BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER);
+    this.algorithmIdentifier = BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER;
+    this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
+    this.modulus = key.getModulus();
+    this.privateExponent = key.getExponent();
+    this.rsaPrivateKey = key;
+  }
 
-    BCRSAPrivateKey(AlgorithmIdentifier algID, RSAKeyParameters key) {
-        this.algorithmIdentifierEnc = getEncoding(BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER);
-        this.algorithmIdentifier = BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER;
-        this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
-        this.algorithmIdentifier = algID;
-        this.algorithmIdentifierEnc = getEncoding(algID);
-        this.modulus = key.getModulus();
-        this.privateExponent = key.getExponent();
-        this.rsaPrivateKey = key;
-    }
+  BCRSAPrivateKey(AlgorithmIdentifier algID, RSAKeyParameters key) {
+    this.algorithmIdentifierEnc = getEncoding(BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER);
+    this.algorithmIdentifier = BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER;
+    this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
+    this.algorithmIdentifier = algID;
+    this.algorithmIdentifierEnc = getEncoding(algID);
+    this.modulus = key.getModulus();
+    this.privateExponent = key.getExponent();
+    this.rsaPrivateKey = key;
+  }
 
-    BCRSAPrivateKey(RSAPrivateKeySpec spec) {
-        this.algorithmIdentifierEnc = getEncoding(BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER);
-        this.algorithmIdentifier = BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER;
-        this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
-        this.modulus = spec.getModulus();
-        this.privateExponent = spec.getPrivateExponent();
-        this.rsaPrivateKey = new RSAKeyParameters(true, this.modulus, this.privateExponent);
-    }
+  BCRSAPrivateKey(RSAPrivateKeySpec spec) {
+    this.algorithmIdentifierEnc = getEncoding(BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER);
+    this.algorithmIdentifier = BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER;
+    this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
+    this.modulus = spec.getModulus();
+    this.privateExponent = spec.getPrivateExponent();
+    this.rsaPrivateKey = new RSAKeyParameters(true, this.modulus, this.privateExponent);
+  }
 
-    BCRSAPrivateKey(RSAPrivateKey key) {
-        this.algorithmIdentifierEnc = getEncoding(BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER);
-        this.algorithmIdentifier = BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER;
-        this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
-        this.modulus = key.getModulus();
-        this.privateExponent = key.getPrivateExponent();
-        this.rsaPrivateKey = new RSAKeyParameters(true, this.modulus, this.privateExponent);
-    }
+  BCRSAPrivateKey(RSAPrivateKey key) {
+    this.algorithmIdentifierEnc = getEncoding(BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER);
+    this.algorithmIdentifier = BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER;
+    this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
+    this.modulus = key.getModulus();
+    this.privateExponent = key.getPrivateExponent();
+    this.rsaPrivateKey = new RSAKeyParameters(true, this.modulus, this.privateExponent);
+  }
 
-    BCRSAPrivateKey(AlgorithmIdentifier algID, com.android.internal.org.bouncycastle.asn1.pkcs.RSAPrivateKey key) {
-        this.algorithmIdentifierEnc = getEncoding(BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER);
-        this.algorithmIdentifier = BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER;
-        this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
-        this.algorithmIdentifier = algID;
-        this.algorithmIdentifierEnc = getEncoding(algID);
-        this.modulus = key.getModulus();
-        this.privateExponent = key.getPrivateExponent();
-        this.rsaPrivateKey = new RSAKeyParameters(true, this.modulus, this.privateExponent);
-    }
+  BCRSAPrivateKey(
+      AlgorithmIdentifier algID,
+      com.android.internal.org.bouncycastle.asn1.pkcs.RSAPrivateKey key) {
+    this.algorithmIdentifierEnc = getEncoding(BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER);
+    this.algorithmIdentifier = BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER;
+    this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
+    this.algorithmIdentifier = algID;
+    this.algorithmIdentifierEnc = getEncoding(algID);
+    this.modulus = key.getModulus();
+    this.privateExponent = key.getPrivateExponent();
+    this.rsaPrivateKey = new RSAKeyParameters(true, this.modulus, this.privateExponent);
+  }
 
-    @Override // java.security.interfaces.RSAKey
-    public BigInteger getModulus() {
-        return this.modulus;
-    }
+  @Override // java.security.interfaces.RSAKey
+  public BigInteger getModulus() {
+    return this.modulus;
+  }
 
-    @Override // java.security.interfaces.RSAPrivateKey
-    public BigInteger getPrivateExponent() {
-        return this.privateExponent;
-    }
+  @Override // java.security.interfaces.RSAPrivateKey
+  public BigInteger getPrivateExponent() {
+    return this.privateExponent;
+  }
 
-    @Override // java.security.Key
-    public String getAlgorithm() {
-        if (this.algorithmIdentifier.getAlgorithm().equals((ASN1Primitive) PKCSObjectIdentifiers.id_RSASSA_PSS)) {
-            return "RSASSA-PSS";
-        }
-        return "RSA";
+  @Override // java.security.Key
+  public String getAlgorithm() {
+    if (this.algorithmIdentifier
+        .getAlgorithm()
+        .equals((ASN1Primitive) PKCSObjectIdentifiers.id_RSASSA_PSS)) {
+      return "RSASSA-PSS";
     }
+    return "RSA";
+  }
 
-    @Override // java.security.Key
-    public String getFormat() {
-        return "PKCS#8";
-    }
+  @Override // java.security.Key
+  public String getFormat() {
+    return "PKCS#8";
+  }
 
-    RSAKeyParameters engineGetKeyParameters() {
-        return this.rsaPrivateKey;
-    }
+  RSAKeyParameters engineGetKeyParameters() {
+    return this.rsaPrivateKey;
+  }
 
-    @Override // java.security.Key
-    public byte[] getEncoded() {
-        AlgorithmIdentifier algorithmIdentifier = this.algorithmIdentifier;
-        BigInteger modulus = getModulus();
-        BigInteger bigInteger = ZERO;
-        BigInteger privateExponent = getPrivateExponent();
-        BigInteger bigInteger2 = ZERO;
-        return KeyUtil.getEncodedPrivateKeyInfo(algorithmIdentifier, new com.android.internal.org.bouncycastle.asn1.pkcs.RSAPrivateKey(modulus, bigInteger, privateExponent, bigInteger2, bigInteger2, bigInteger2, bigInteger2, bigInteger2));
-    }
+  @Override // java.security.Key
+  public byte[] getEncoded() {
+    AlgorithmIdentifier algorithmIdentifier = this.algorithmIdentifier;
+    BigInteger modulus = getModulus();
+    BigInteger bigInteger = ZERO;
+    BigInteger privateExponent = getPrivateExponent();
+    BigInteger bigInteger2 = ZERO;
+    return KeyUtil.getEncodedPrivateKeyInfo(
+        algorithmIdentifier,
+        new com.android.internal.org.bouncycastle.asn1.pkcs.RSAPrivateKey(
+            modulus,
+            bigInteger,
+            privateExponent,
+            bigInteger2,
+            bigInteger2,
+            bigInteger2,
+            bigInteger2,
+            bigInteger2));
+  }
 
-    public boolean equals(Object o) {
-        if (!(o instanceof RSAPrivateKey)) {
-            return false;
-        }
-        if (o == this) {
-            return true;
-        }
-        RSAPrivateKey key = (RSAPrivateKey) o;
-        return getModulus().equals(key.getModulus()) && getPrivateExponent().equals(key.getPrivateExponent());
+  public boolean equals(Object o) {
+    if (!(o instanceof RSAPrivateKey)) {
+      return false;
     }
+    if (o == this) {
+      return true;
+    }
+    RSAPrivateKey key = (RSAPrivateKey) o;
+    return getModulus().equals(key.getModulus())
+        && getPrivateExponent().equals(key.getPrivateExponent());
+  }
 
-    public int hashCode() {
-        return getModulus().hashCode() ^ getPrivateExponent().hashCode();
-    }
+  public int hashCode() {
+    return getModulus().hashCode() ^ getPrivateExponent().hashCode();
+  }
 
-    @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
-    public void setBagAttribute(ASN1ObjectIdentifier oid, ASN1Encodable attribute) {
-        this.attrCarrier.setBagAttribute(oid, attribute);
-    }
+  @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
+  public void setBagAttribute(ASN1ObjectIdentifier oid, ASN1Encodable attribute) {
+    this.attrCarrier.setBagAttribute(oid, attribute);
+  }
 
-    @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
-    public ASN1Encodable getBagAttribute(ASN1ObjectIdentifier oid) {
-        return this.attrCarrier.getBagAttribute(oid);
-    }
+  @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
+  public ASN1Encodable getBagAttribute(ASN1ObjectIdentifier oid) {
+    return this.attrCarrier.getBagAttribute(oid);
+  }
 
-    @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
-    public Enumeration getBagAttributeKeys() {
-        return this.attrCarrier.getBagAttributeKeys();
-    }
+  @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
+  public Enumeration getBagAttributeKeys() {
+    return this.attrCarrier.getBagAttributeKeys();
+  }
 
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-        in.defaultReadObject();
-        if (this.algorithmIdentifierEnc == null) {
-            this.algorithmIdentifierEnc = getEncoding(BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER);
-        }
-        this.algorithmIdentifier = AlgorithmIdentifier.getInstance(this.algorithmIdentifierEnc);
-        this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
-        this.rsaPrivateKey = new RSAKeyParameters(true, this.modulus, this.privateExponent);
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    if (this.algorithmIdentifierEnc == null) {
+      this.algorithmIdentifierEnc = getEncoding(BCRSAPublicKey.DEFAULT_ALGORITHM_IDENTIFIER);
     }
+    this.algorithmIdentifier = AlgorithmIdentifier.getInstance(this.algorithmIdentifierEnc);
+    this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
+    this.rsaPrivateKey = new RSAKeyParameters(true, this.modulus, this.privateExponent);
+  }
 
-    private void writeObject(ObjectOutputStream out) throws IOException {
-        out.defaultWriteObject();
-    }
+  private void writeObject(ObjectOutputStream out) throws IOException {
+    out.defaultWriteObject();
+  }
 
-    public String toString() {
-        StringBuffer buf = new StringBuffer();
-        String nl = Strings.lineSeparator();
-        buf.append("RSA Private Key [").append(RSAUtil.generateKeyFingerprint(getModulus())).append("],[]").append(nl);
-        buf.append("            modulus: ").append(getModulus().toString(16)).append(nl);
-        return buf.toString();
-    }
+  public String toString() {
+    StringBuffer buf = new StringBuffer();
+    String nl = Strings.lineSeparator();
+    buf.append("RSA Private Key [")
+        .append(RSAUtil.generateKeyFingerprint(getModulus()))
+        .append("],[]")
+        .append(nl);
+    buf.append("            modulus: ").append(getModulus().toString(16)).append(nl);
+    return buf.toString();
+  }
 
-    private static byte[] getEncoding(AlgorithmIdentifier algorithmIdentifier) {
-        try {
-            return algorithmIdentifier.getEncoded();
-        } catch (IOException e) {
-            return null;
-        }
+  private static byte[] getEncoding(AlgorithmIdentifier algorithmIdentifier) {
+    try {
+      return algorithmIdentifier.getEncoded();
+    } catch (IOException e) {
+      return null;
     }
+  }
 }

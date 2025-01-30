@@ -5,21 +5,21 @@ import java.util.List;
 /* loaded from: classes.dex */
 public interface Keyframes extends Cloneable {
 
-    public interface FloatKeyframes extends Keyframes {
-        float getFloatValue(float f);
-    }
+  public interface FloatKeyframes extends Keyframes {
+    float getFloatValue(float f);
+  }
 
-    public interface IntKeyframes extends Keyframes {
-        int getIntValue(float f);
-    }
+  public interface IntKeyframes extends Keyframes {
+    int getIntValue(float f);
+  }
 
-    Keyframes clone();
+  Keyframes clone();
 
-    List<Keyframe> getKeyframes();
+  List<Keyframe> getKeyframes();
 
-    Class getType();
+  Class getType();
 
-    Object getValue(float f);
+  Object getValue(float f);
 
-    void setEvaluator(TypeEvaluator typeEvaluator);
+  void setEvaluator(TypeEvaluator typeEvaluator);
 }

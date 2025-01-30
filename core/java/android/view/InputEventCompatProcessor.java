@@ -6,31 +6,31 @@ import java.util.List;
 
 /* loaded from: classes4.dex */
 public class InputEventCompatProcessor {
-    protected Context mContext;
-    private List<InputEvent> mProcessedEvents = new ArrayList();
-    protected int mTargetSdkVersion;
+  protected Context mContext;
+  private List<InputEvent> mProcessedEvents = new ArrayList();
+  protected int mTargetSdkVersion;
 
-    public InputEventCompatProcessor(Context context) {
-        this.mContext = context;
-        this.mTargetSdkVersion = context.getApplicationInfo().targetSdkVersion;
-    }
+  public InputEventCompatProcessor(Context context) {
+    this.mContext = context;
+    this.mTargetSdkVersion = context.getApplicationInfo().targetSdkVersion;
+  }
 
-    public List<InputEvent> processInputEventForCompatibility(InputEvent e) {
-        if (this.mTargetSdkVersion < 23 && (e instanceof MotionEvent)) {
-            this.mProcessedEvents.clear();
-            MotionEvent motion = (MotionEvent) e;
-            int buttonState = motion.getButtonState();
-            int compatButtonState = (buttonState & 96) >> 4;
-            if (compatButtonState != 0) {
-                motion.setButtonState(buttonState | compatButtonState);
-            }
-            this.mProcessedEvents.add(motion);
-            return this.mProcessedEvents;
-        }
-        return null;
+  public List<InputEvent> processInputEventForCompatibility(InputEvent e) {
+    if (this.mTargetSdkVersion < 23 && (e instanceof MotionEvent)) {
+      this.mProcessedEvents.clear();
+      MotionEvent motion = (MotionEvent) e;
+      int buttonState = motion.getButtonState();
+      int compatButtonState = (buttonState & 96) >> 4;
+      if (compatButtonState != 0) {
+        motion.setButtonState(buttonState | compatButtonState);
+      }
+      this.mProcessedEvents.add(motion);
+      return this.mProcessedEvents;
     }
+    return null;
+  }
 
-    public InputEvent processInputEventBeforeFinish(InputEvent e) {
-        return e;
-    }
+  public InputEvent processInputEventBeforeFinish(InputEvent e) {
+    return e;
+  }
 }

@@ -12,27 +12,35 @@ import java.util.function.Supplier;
 
 /* loaded from: classes.dex */
 public class FingerprintStopUserClient extends StopUserClient {
-    @Override // com.android.server.biometrics.sensors.HalClientMonitor
-    public void unableToStart() {
-    }
+  @Override // com.android.server.biometrics.sensors.HalClientMonitor
+  public void unableToStart() {}
 
-    public FingerprintStopUserClient(Context context, Supplier supplier, IBinder iBinder, int i, int i2, BiometricLogger biometricLogger, BiometricContext biometricContext, StopUserClient.UserStoppedCallback userStoppedCallback) {
-        super(context, supplier, iBinder, i, i2, biometricLogger, biometricContext, userStoppedCallback);
-    }
+  public FingerprintStopUserClient(
+      Context context,
+      Supplier supplier,
+      IBinder iBinder,
+      int i,
+      int i2,
+      BiometricLogger biometricLogger,
+      BiometricContext biometricContext,
+      StopUserClient.UserStoppedCallback userStoppedCallback) {
+    super(
+        context, supplier, iBinder, i, i2, biometricLogger, biometricContext, userStoppedCallback);
+  }
 
-    @Override // com.android.server.biometrics.sensors.BaseClientMonitor
-    public void start(ClientMonitorCallback clientMonitorCallback) {
-        super.start(clientMonitorCallback);
-        startHalOperation();
-    }
+  @Override // com.android.server.biometrics.sensors.BaseClientMonitor
+  public void start(ClientMonitorCallback clientMonitorCallback) {
+    super.start(clientMonitorCallback);
+    startHalOperation();
+  }
 
-    @Override // com.android.server.biometrics.sensors.HalClientMonitor
-    public void startHalOperation() {
-        try {
-            ((AidlSession) getFreshDaemon()).getSession().close();
-        } catch (RemoteException e) {
-            Slog.e("FingerprintStopUserClient", "Remote exception", e);
-            getCallback().onClientFinished(this, false);
-        }
+  @Override // com.android.server.biometrics.sensors.HalClientMonitor
+  public void startHalOperation() {
+    try {
+      ((AidlSession) getFreshDaemon()).getSession().close();
+    } catch (RemoteException e) {
+      Slog.e("FingerprintStopUserClient", "Remote exception", e);
+      getCallback().onClientFinished(this, false);
     }
+  }
 }

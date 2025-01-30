@@ -14,43 +14,51 @@ import java.util.function.Consumer;
 
 /* loaded from: classes2.dex */
 public class SessionInfo {
-    public final AppTargetPredictor mAppTargetPredictor;
-    public final RemoteCallbackList mCallbacks = new RemoteCallbackList();
+  public final AppTargetPredictor mAppTargetPredictor;
+  public final RemoteCallbackList mCallbacks = new RemoteCallbackList();
 
-    public SessionInfo(AppPredictionContext appPredictionContext, DataManager dataManager, int i, Context context) {
-        this.mAppTargetPredictor = AppTargetPredictor.create(appPredictionContext, new Consumer() { // from class: com.android.server.people.SessionInfo$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
+  public SessionInfo(
+      AppPredictionContext appPredictionContext, DataManager dataManager, int i, Context context) {
+    this.mAppTargetPredictor =
+        AppTargetPredictor.create(
+            appPredictionContext,
+            new Consumer() { // from class:
+              // com.android.server.people.SessionInfo$$ExternalSyntheticLambda0
+              @Override // java.util.function.Consumer
+              public final void accept(Object obj) {
                 SessionInfo.this.updatePredictions((List) obj);
-            }
-        }, dataManager, i, context);
-    }
+              }
+            },
+            dataManager,
+            i,
+            context);
+  }
 
-    public void addCallback(IPredictionCallback iPredictionCallback) {
-        this.mCallbacks.register(iPredictionCallback);
-    }
+  public void addCallback(IPredictionCallback iPredictionCallback) {
+    this.mCallbacks.register(iPredictionCallback);
+  }
 
-    public void removeCallback(IPredictionCallback iPredictionCallback) {
-        this.mCallbacks.unregister(iPredictionCallback);
-    }
+  public void removeCallback(IPredictionCallback iPredictionCallback) {
+    this.mCallbacks.unregister(iPredictionCallback);
+  }
 
-    public AppTargetPredictor getPredictor() {
-        return this.mAppTargetPredictor;
-    }
+  public AppTargetPredictor getPredictor() {
+    return this.mAppTargetPredictor;
+  }
 
-    public void onDestroy() {
-        this.mCallbacks.kill();
-    }
+  public void onDestroy() {
+    this.mCallbacks.kill();
+  }
 
-    public final void updatePredictions(List list) {
-        int beginBroadcast = this.mCallbacks.beginBroadcast();
-        for (int i = 0; i < beginBroadcast; i++) {
-            try {
-                this.mCallbacks.getBroadcastItem(i).onResult(new ParceledListSlice(list));
-            } catch (RemoteException e) {
-                Slog.e("SessionInfo", "Failed to calling callback" + e);
-            }
-        }
-        this.mCallbacks.finishBroadcast();
+  public final void updatePredictions(List list) {
+    int beginBroadcast = this.mCallbacks.beginBroadcast();
+    for (int i = 0; i < beginBroadcast; i++) {
+      try {
+        this.mCallbacks.getBroadcastItem(i).onResult(new ParceledListSlice(list));
+      } catch (RemoteException e) {
+        Slog.e("SessionInfo", "Failed to calling callback" + e);
+      }
     }
+    this.mCallbacks.finishBroadcast();
+  }
 }

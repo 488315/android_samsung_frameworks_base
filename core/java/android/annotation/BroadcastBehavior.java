@@ -9,11 +9,11 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 /* loaded from: classes.dex */
 public @interface BroadcastBehavior {
-    boolean explicitOnly() default false;
+  boolean explicitOnly() default false;
 
-    boolean includeBackground() default false;
+  boolean includeBackground() default false;
 
-    boolean protectedBroadcast() default false;
+  boolean protectedBroadcast() default false;
 
-    boolean registeredOnly() default false;
+  boolean registeredOnly() default false;
 }

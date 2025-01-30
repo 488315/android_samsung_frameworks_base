@@ -8,59 +8,61 @@ import android.util.Log;
 
 /* loaded from: classes.dex */
 public class ModuleNetworkStackClient extends NetworkStackClientBase {
-    private static final String TAG = "ModuleNetworkStackClient";
-    private static ModuleNetworkStackClient sInstance;
+  private static final String TAG = "ModuleNetworkStackClient";
+  private static ModuleNetworkStackClient sInstance;
 
-    private ModuleNetworkStackClient() {
+  private ModuleNetworkStackClient() {}
+
+  public static synchronized ModuleNetworkStackClient getInstance(Context context) {
+    ModuleNetworkStackClient moduleNetworkStackClient;
+    synchronized (ModuleNetworkStackClient.class) {
+      if (sInstance == null) {
+        ModuleNetworkStackClient moduleNetworkStackClient2 = new ModuleNetworkStackClient();
+        sInstance = moduleNetworkStackClient2;
+        moduleNetworkStackClient2.startPolling();
+      }
+      moduleNetworkStackClient = sInstance;
     }
+    return moduleNetworkStackClient;
+  }
 
-    public static synchronized ModuleNetworkStackClient getInstance(Context context) {
-        ModuleNetworkStackClient moduleNetworkStackClient;
-        synchronized (ModuleNetworkStackClient.class) {
-            if (sInstance == null) {
-                ModuleNetworkStackClient moduleNetworkStackClient2 = new ModuleNetworkStackClient();
-                sInstance = moduleNetworkStackClient2;
-                moduleNetworkStackClient2.startPolling();
-            }
-            moduleNetworkStackClient = sInstance;
-        }
-        return moduleNetworkStackClient;
+  public static synchronized void resetInstanceForTest() {
+    synchronized (ModuleNetworkStackClient.class) {
+      sInstance = null;
     }
+  }
 
-    public static synchronized void resetInstanceForTest() {
-        synchronized (ModuleNetworkStackClient.class) {
-            sInstance = null;
-        }
+  private void startPolling() {
+    IBinder service = NetworkStack.getService();
+    if (service != null) {
+      onNetworkStackConnected(INetworkStackConnector.Stub.asInterface(service));
+    } else {
+      new Thread(new PollingRunner()).start();
     }
+  }
 
-    private void startPolling() {
+  public class PollingRunner implements Runnable {
+    public PollingRunner() {}
+
+    @Override // java.lang.Runnable
+    public void run() {
+      while (true) {
         IBinder service = NetworkStack.getService();
-        if (service != null) {
-            onNetworkStackConnected(INetworkStackConnector.Stub.asInterface(service));
+        if (service == null) {
+          try {
+            Thread.sleep(200L);
+          } catch (InterruptedException e) {
+            Log.e(
+                ModuleNetworkStackClient.TAG,
+                "Interrupted while waiting for NetworkStack connector",
+                e);
+          }
         } else {
-            new Thread(new PollingRunner()).start();
+          ModuleNetworkStackClient.this.onNetworkStackConnected(
+              INetworkStackConnector.Stub.asInterface(service));
+          return;
         }
+      }
     }
-
-    public class PollingRunner implements Runnable {
-        public PollingRunner() {
-        }
-
-        @Override // java.lang.Runnable
-        public void run() {
-            while (true) {
-                IBinder service = NetworkStack.getService();
-                if (service == null) {
-                    try {
-                        Thread.sleep(200L);
-                    } catch (InterruptedException e) {
-                        Log.e(ModuleNetworkStackClient.TAG, "Interrupted while waiting for NetworkStack connector", e);
-                    }
-                } else {
-                    ModuleNetworkStackClient.this.onNetworkStackConnected(INetworkStackConnector.Stub.asInterface(service));
-                    return;
-                }
-            }
-        }
-    }
+  }
 }

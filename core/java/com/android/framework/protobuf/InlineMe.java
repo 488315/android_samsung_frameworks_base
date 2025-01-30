@@ -8,9 +8,9 @@ import java.lang.annotation.Target;
 @Documented
 /* loaded from: classes4.dex */
 @interface InlineMe {
-    String[] imports() default {};
+  String[] imports() default {};
 
-    String replacement();
+  String replacement();
 
-    String[] staticImports() default {};
+  String[] staticImports() default {};
 }

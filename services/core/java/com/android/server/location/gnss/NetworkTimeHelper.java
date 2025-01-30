@@ -7,19 +7,20 @@ import java.io.PrintWriter;
 /* loaded from: classes2.dex */
 public abstract class NetworkTimeHelper {
 
-    public interface InjectTimeCallback {
-        void injectTime(long j, long j2, int i);
-    }
+  public interface InjectTimeCallback {
+    void injectTime(long j, long j2, int i);
+  }
 
-    public abstract void demandUtcTimeInjection();
+  public abstract void demandUtcTimeInjection();
 
-    public abstract void dump(PrintWriter printWriter);
+  public abstract void dump(PrintWriter printWriter);
 
-    public abstract void onNetworkAvailable();
+  public abstract void onNetworkAvailable();
 
-    public abstract void setPeriodicTimeInjectionMode(boolean z);
+  public abstract void setPeriodicTimeInjectionMode(boolean z);
 
-    public static NetworkTimeHelper create(Context context, Looper looper, InjectTimeCallback injectTimeCallback) {
-        return new NtpNetworkTimeHelper(context, looper, injectTimeCallback);
-    }
+  public static NetworkTimeHelper create(
+      Context context, Looper looper, InjectTimeCallback injectTimeCallback) {
+    return new NtpNetworkTimeHelper(context, looper, injectTimeCallback);
+  }
 }

@@ -9,74 +9,78 @@ import com.samsung.android.media.convert.core.ConvertVideo;
 
 /* loaded from: classes5.dex */
 public class SemSdrVideoConverter {
-    private static ConvertVideo mConvertVideo;
-    private ProgressEventListener mProgressEventListener;
+  private static ConvertVideo mConvertVideo;
+  private ProgressEventListener mProgressEventListener;
 
-    public interface ProgressEventListener {
-        void onCancelled();
+  public interface ProgressEventListener {
+    void onCancelled();
 
-        void onCompleted();
+    void onCompleted();
 
-        void onFailed();
+    void onFailed();
 
-        void onStarted();
+    void onStarted();
+  }
+
+  private SemSdrVideoConverter() {
+    mConvertVideo = new ConvertVideo();
+  }
+
+  public static SemSdrVideoConverter create() {
+    boolean result =
+        SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_MMFW_SUPPORT_HDR2SDR");
+    Log.m94d("SemSdrVideoConverter", "support HDR soltuion :" + result);
+    if (result) {
+      return new SemSdrVideoConverter();
     }
+    return null;
+  }
 
-    private SemSdrVideoConverter() {
-        mConvertVideo = new ConvertVideo();
-    }
+  public boolean initialize(String outputFilePath, String inputFilePath) {
+    return mConvertVideo.initialize(outputFilePath, inputFilePath);
+  }
 
-    public static SemSdrVideoConverter create() {
-        boolean result = SemFloatingFeature.getInstance().getBoolean("SEC_FLOATING_FEATURE_MMFW_SUPPORT_HDR2SDR");
-        Log.m94d("SemSdrVideoConverter", "support HDR soltuion :" + result);
-        if (result) {
-            return new SemSdrVideoConverter();
-        }
-        return null;
-    }
+  public boolean initialize(String outputFilePath, Context context, Uri inputUri) {
+    return mConvertVideo.initialize(outputFilePath, context, inputUri);
+  }
 
-    public boolean initialize(String outputFilePath, String inputFilePath) {
-        return mConvertVideo.initialize(outputFilePath, inputFilePath);
-    }
+  public int getEstimatedOutputFileSize() {
+    return mConvertVideo.getOutputFileSize();
+  }
 
-    public boolean initialize(String outputFilePath, Context context, Uri inputUri) {
-        return mConvertVideo.initialize(outputFilePath, context, inputUri);
-    }
+  public boolean convert() {
+    return mConvertVideo.convert();
+  }
 
-    public int getEstimatedOutputFileSize() {
-        return mConvertVideo.getOutputFileSize();
-    }
+  public boolean cancel() {
+    return mConvertVideo.stop();
+  }
 
-    public boolean convert() {
-        return mConvertVideo.convert();
-    }
+  public void setProgressEventListener(ProgressEventListener listner) {
+    this.mProgressEventListener = listner;
+    mConvertVideo.setProgressUpdateListener(
+        new Convert
+            .ConvertEventListener() { // from class:
+                                      // com.samsung.android.media.codec.SemSdrVideoConverter.1
+          @Override // com.samsung.android.media.convert.core.Convert.ConvertEventListener
+          public void onStarted() {
+            SemSdrVideoConverter.this.mProgressEventListener.onStarted();
+          }
 
-    public boolean cancel() {
-        return mConvertVideo.stop();
-    }
+          @Override // com.samsung.android.media.convert.core.Convert.ConvertEventListener
+          public void onCompleted() {
+            SemSdrVideoConverter.this.mProgressEventListener.onCompleted();
+          }
 
-    public void setProgressEventListener(ProgressEventListener listner) {
-        this.mProgressEventListener = listner;
-        mConvertVideo.setProgressUpdateListener(new Convert.ConvertEventListener() { // from class: com.samsung.android.media.codec.SemSdrVideoConverter.1
-            @Override // com.samsung.android.media.convert.core.Convert.ConvertEventListener
-            public void onStarted() {
-                SemSdrVideoConverter.this.mProgressEventListener.onStarted();
-            }
+          @Override // com.samsung.android.media.convert.core.Convert.ConvertEventListener
+          public void onFailed() {
+            SemSdrVideoConverter.this.mProgressEventListener.onFailed();
+          }
 
-            @Override // com.samsung.android.media.convert.core.Convert.ConvertEventListener
-            public void onCompleted() {
-                SemSdrVideoConverter.this.mProgressEventListener.onCompleted();
-            }
-
-            @Override // com.samsung.android.media.convert.core.Convert.ConvertEventListener
-            public void onFailed() {
-                SemSdrVideoConverter.this.mProgressEventListener.onFailed();
-            }
-
-            @Override // com.samsung.android.media.convert.core.Convert.ConvertEventListener
-            public void onCancelled() {
-                SemSdrVideoConverter.this.mProgressEventListener.onCancelled();
-            }
+          @Override // com.samsung.android.media.convert.core.Convert.ConvertEventListener
+          public void onCancelled() {
+            SemSdrVideoConverter.this.mProgressEventListener.onCancelled();
+          }
         });
-    }
+  }
 }

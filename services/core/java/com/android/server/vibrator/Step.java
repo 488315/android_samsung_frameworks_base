@@ -5,46 +5,46 @@ import java.util.List;
 
 /* loaded from: classes3.dex */
 public abstract class Step implements Comparable {
-    public final VibrationStepConductor conductor;
-    public final long startTime;
+  public final VibrationStepConductor conductor;
+  public final long startTime;
 
-    public boolean acceptVibratorCompleteCallback(int i) {
-        return false;
+  public boolean acceptVibratorCompleteCallback(int i) {
+    return false;
+  }
+
+  public abstract List cancel();
+
+  public abstract void cancelImmediately();
+
+  public long getVibratorOnDuration() {
+    return 0L;
+  }
+
+  public boolean isCleanUp() {
+    return false;
+  }
+
+  public abstract List play();
+
+  public Step(VibrationStepConductor vibrationStepConductor, long j) {
+    this.conductor = vibrationStepConductor;
+    this.startTime = j;
+  }
+
+  public HalVibration getVibration() {
+    return this.conductor.getVibration();
+  }
+
+  public long calculateWaitTime() {
+    long j = this.startTime;
+    if (j == Long.MAX_VALUE) {
+      return 0L;
     }
+    return Math.max(0L, j - SystemClock.uptimeMillis());
+  }
 
-    public abstract List cancel();
-
-    public abstract void cancelImmediately();
-
-    public long getVibratorOnDuration() {
-        return 0L;
-    }
-
-    public boolean isCleanUp() {
-        return false;
-    }
-
-    public abstract List play();
-
-    public Step(VibrationStepConductor vibrationStepConductor, long j) {
-        this.conductor = vibrationStepConductor;
-        this.startTime = j;
-    }
-
-    public HalVibration getVibration() {
-        return this.conductor.getVibration();
-    }
-
-    public long calculateWaitTime() {
-        long j = this.startTime;
-        if (j == Long.MAX_VALUE) {
-            return 0L;
-        }
-        return Math.max(0L, j - SystemClock.uptimeMillis());
-    }
-
-    @Override // java.lang.Comparable
-    public int compareTo(Step step) {
-        return Long.compare(this.startTime, step.startTime);
-    }
+  @Override // java.lang.Comparable
+  public int compareTo(Step step) {
+    return Long.compare(this.startTime, step.startTime);
+  }
 }

@@ -8,10 +8,10 @@ import java.util.function.Consumer;
 /* loaded from: classes4.dex */
 public interface ModelSelector {
 
-    public static class Item {
-        public Consumer<NNDescriptor> descriptorUpdater;
-        public String name;
-    }
+  public static class Item {
+    public Consumer<NNDescriptor> descriptorUpdater;
+    public String name;
+  }
 
-    Item select(MediaBuffer mediaBuffer);
+  Item select(MediaBuffer mediaBuffer);
 }

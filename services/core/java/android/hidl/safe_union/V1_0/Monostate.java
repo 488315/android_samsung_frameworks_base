@@ -6,27 +6,25 @@ import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class Monostate {
-    public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {
-    }
+  public final void readEmbeddedFromParcel(HwParcel hwParcel, HwBlob hwBlob, long j) {}
 
-    public final void writeEmbeddedToBlob(HwBlob hwBlob, long j) {
-    }
+  public final void writeEmbeddedToBlob(HwBlob hwBlob, long j) {}
 
-    public final boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || obj.getClass() != Monostate.class) {
-            return false;
-        }
-        return true;
+  public final boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
     }
+    if (obj == null || obj.getClass() != Monostate.class) {
+      return false;
+    }
+    return true;
+  }
 
-    public final int hashCode() {
-        return Objects.hash(new Object[0]);
-    }
+  public final int hashCode() {
+    return Objects.hash(new Object[0]);
+  }
 
-    public final String toString() {
-        return "{}";
-    }
+  public final String toString() {
+    return "{}";
+  }
 }

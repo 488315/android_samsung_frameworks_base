@@ -26,181 +26,191 @@ import javax.crypto.spec.SecretKeySpec;
 
 /* loaded from: classes5.dex */
 public class KeyAgreementSpi extends BaseAgreementSpi {
-    private static final BigInteger ONE = BigInteger.valueOf(1);
-    private static final BigInteger TWO = BigInteger.valueOf(2);
+  private static final BigInteger ONE = BigInteger.valueOf(1);
+  private static final BigInteger TWO = BigInteger.valueOf(2);
 
-    /* renamed from: g */
-    private BigInteger f895g;
-    private final BasicAgreement mqvAgreement;
+  /* renamed from: g */
+  private BigInteger f895g;
+  private final BasicAgreement mqvAgreement;
 
-    /* renamed from: p */
-    private BigInteger f896p;
-    private byte[] result;
+  /* renamed from: p */
+  private BigInteger f896p;
+  private byte[] result;
 
-    /* renamed from: x */
-    private BigInteger f897x;
+  /* renamed from: x */
+  private BigInteger f897x;
 
-    public KeyAgreementSpi() {
-        this("Diffie-Hellman", null);
+  public KeyAgreementSpi() {
+    this("Diffie-Hellman", null);
+  }
+
+  public KeyAgreementSpi(String kaAlgorithm, DerivationFunction kdf) {
+    super(kaAlgorithm, kdf);
+    this.mqvAgreement = null;
+  }
+
+  public KeyAgreementSpi(String kaAlgorithm, BasicAgreement mqvAgreement, DerivationFunction kdf) {
+    super(kaAlgorithm, kdf);
+    this.mqvAgreement = mqvAgreement;
+  }
+
+  protected byte[] bigIntToBytes(BigInteger r) {
+    int expectedLength = (this.f896p.bitLength() + 7) / 8;
+    byte[] tmp = r.toByteArray();
+    if (tmp.length == expectedLength) {
+      return tmp;
     }
-
-    public KeyAgreementSpi(String kaAlgorithm, DerivationFunction kdf) {
-        super(kaAlgorithm, kdf);
-        this.mqvAgreement = null;
+    if (tmp[0] == 0 && tmp.length == expectedLength + 1) {
+      byte[] rv = new byte[tmp.length - 1];
+      System.arraycopy(tmp, 1, rv, 0, rv.length);
+      return rv;
     }
+    byte[] rv2 = new byte[expectedLength];
+    System.arraycopy(tmp, 0, rv2, rv2.length - tmp.length, tmp.length);
+    return rv2;
+  }
 
-    public KeyAgreementSpi(String kaAlgorithm, BasicAgreement mqvAgreement, DerivationFunction kdf) {
-        super(kaAlgorithm, kdf);
-        this.mqvAgreement = mqvAgreement;
+  @Override // javax.crypto.KeyAgreementSpi
+  protected Key engineDoPhase(Key key, boolean lastPhase)
+      throws InvalidKeyException, IllegalStateException {
+    if (this.f897x == null) {
+      throw new IllegalStateException("Diffie-Hellman not initialised.");
     }
-
-    protected byte[] bigIntToBytes(BigInteger r) {
-        int expectedLength = (this.f896p.bitLength() + 7) / 8;
-        byte[] tmp = r.toByteArray();
-        if (tmp.length == expectedLength) {
-            return tmp;
-        }
-        if (tmp[0] == 0 && tmp.length == expectedLength + 1) {
-            byte[] rv = new byte[tmp.length - 1];
-            System.arraycopy(tmp, 1, rv, 0, rv.length);
-            return rv;
-        }
-        byte[] rv2 = new byte[expectedLength];
-        System.arraycopy(tmp, 0, rv2, rv2.length - tmp.length, tmp.length);
-        return rv2;
+    if (!(key instanceof DHPublicKey)) {
+      throw new InvalidKeyException("DHKeyAgreement doPhase requires DHPublicKey");
     }
-
-    @Override // javax.crypto.KeyAgreementSpi
-    protected Key engineDoPhase(Key key, boolean lastPhase) throws InvalidKeyException, IllegalStateException {
-        if (this.f897x == null) {
-            throw new IllegalStateException("Diffie-Hellman not initialised.");
-        }
-        if (!(key instanceof DHPublicKey)) {
-            throw new InvalidKeyException("DHKeyAgreement doPhase requires DHPublicKey");
-        }
-        DHPublicKey pubKey = (DHPublicKey) key;
-        if (!pubKey.getParams().getG().equals(this.f895g) || !pubKey.getParams().getP().equals(this.f896p)) {
-            throw new InvalidKeyException("DHPublicKey not for this KeyAgreement!");
-        }
-        BigInteger peerY = ((DHPublicKey) key).getY();
-        if (peerY != null && peerY.compareTo(TWO) >= 0) {
-            BigInteger bigInteger = this.f896p;
-            BigInteger bigInteger2 = ONE;
-            if (peerY.compareTo(bigInteger.subtract(bigInteger2)) < 0) {
-                BigInteger res = peerY.modPow(this.f897x, this.f896p);
-                if (res.compareTo(bigInteger2) == 0) {
-                    throw new InvalidKeyException("Shared key can't be 1");
-                }
-                this.result = bigIntToBytes(res);
-                if (lastPhase) {
-                    return null;
-                }
-                return new BCDHPublicKey(res, pubKey.getParams());
-            }
-        }
-        throw new InvalidKeyException("Invalid DH PublicKey");
+    DHPublicKey pubKey = (DHPublicKey) key;
+    if (!pubKey.getParams().getG().equals(this.f895g)
+        || !pubKey.getParams().getP().equals(this.f896p)) {
+      throw new InvalidKeyException("DHPublicKey not for this KeyAgreement!");
     }
-
-    @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseAgreementSpi, javax.crypto.KeyAgreementSpi
-    protected byte[] engineGenerateSecret() throws IllegalStateException {
-        if (this.f897x == null) {
-            throw new IllegalStateException("Diffie-Hellman not initialised.");
+    BigInteger peerY = ((DHPublicKey) key).getY();
+    if (peerY != null && peerY.compareTo(TWO) >= 0) {
+      BigInteger bigInteger = this.f896p;
+      BigInteger bigInteger2 = ONE;
+      if (peerY.compareTo(bigInteger.subtract(bigInteger2)) < 0) {
+        BigInteger res = peerY.modPow(this.f897x, this.f896p);
+        if (res.compareTo(bigInteger2) == 0) {
+          throw new InvalidKeyException("Shared key can't be 1");
         }
-        return super.engineGenerateSecret();
+        this.result = bigIntToBytes(res);
+        if (lastPhase) {
+          return null;
+        }
+        return new BCDHPublicKey(res, pubKey.getParams());
+      }
     }
+    throw new InvalidKeyException("Invalid DH PublicKey");
+  }
 
-    @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseAgreementSpi, javax.crypto.KeyAgreementSpi
-    protected int engineGenerateSecret(byte[] sharedSecret, int offset) throws IllegalStateException, ShortBufferException {
-        if (this.f897x == null) {
-            throw new IllegalStateException("Diffie-Hellman not initialised.");
-        }
-        return super.engineGenerateSecret(sharedSecret, offset);
+  @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseAgreementSpi, javax.crypto.KeyAgreementSpi
+  protected byte[] engineGenerateSecret() throws IllegalStateException {
+    if (this.f897x == null) {
+      throw new IllegalStateException("Diffie-Hellman not initialised.");
     }
+    return super.engineGenerateSecret();
+  }
 
-    @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseAgreementSpi, javax.crypto.KeyAgreementSpi
-    protected SecretKey engineGenerateSecret(String algorithm) throws NoSuchAlgorithmException {
-        if (this.f897x == null) {
-            throw new IllegalStateException("Diffie-Hellman not initialised.");
-        }
-        if (algorithm.equals("TlsPremasterSecret")) {
-            return new SecretKeySpec(trimZeroes(this.result), algorithm);
-        }
-        return super.engineGenerateSecret(algorithm);
+  @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseAgreementSpi, javax.crypto.KeyAgreementSpi
+  protected int engineGenerateSecret(byte[] sharedSecret, int offset)
+      throws IllegalStateException, ShortBufferException {
+    if (this.f897x == null) {
+      throw new IllegalStateException("Diffie-Hellman not initialised.");
     }
+    return super.engineGenerateSecret(sharedSecret, offset);
+  }
 
-    @Override // javax.crypto.KeyAgreementSpi
-    protected void engineInit(Key key, AlgorithmParameterSpec params, SecureRandom random) throws InvalidKeyException, InvalidAlgorithmParameterException {
-        if (!(key instanceof DHPrivateKey)) {
-            throw new InvalidKeyException("DHKeyAgreement requires DHPrivateKey for initialisation");
-        }
-        DHPrivateKey privKey = (DHPrivateKey) key;
-        if (params != null) {
-            if (params instanceof DHParameterSpec) {
-                DHParameterSpec p = (DHParameterSpec) params;
-                this.f896p = p.getP();
-                this.f895g = p.getG();
-                this.ukmParameters = null;
-            } else if (params instanceof UserKeyingMaterialSpec) {
-                if (this.kdf == null) {
-                    throw new InvalidAlgorithmParameterException("no KDF specified for UserKeyingMaterialSpec");
-                }
-                this.f896p = privKey.getParams().getP();
-                this.f895g = privKey.getParams().getG();
-                this.ukmParameters = ((UserKeyingMaterialSpec) params).getUserKeyingMaterial();
-            } else {
-                throw new InvalidAlgorithmParameterException("DHKeyAgreement only accepts DHParameterSpec");
-            }
-        } else {
-            this.f896p = privKey.getParams().getP();
-            this.f895g = privKey.getParams().getG();
-        }
-        BigInteger x = privKey.getX();
-        this.f897x = x;
-        this.result = bigIntToBytes(x);
+  @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseAgreementSpi, javax.crypto.KeyAgreementSpi
+  protected SecretKey engineGenerateSecret(String algorithm) throws NoSuchAlgorithmException {
+    if (this.f897x == null) {
+      throw new IllegalStateException("Diffie-Hellman not initialised.");
     }
+    if (algorithm.equals("TlsPremasterSecret")) {
+      return new SecretKeySpec(trimZeroes(this.result), algorithm);
+    }
+    return super.engineGenerateSecret(algorithm);
+  }
 
-    @Override // javax.crypto.KeyAgreementSpi
-    protected void engineInit(Key key, SecureRandom random) throws InvalidKeyException {
-        if (!(key instanceof DHPrivateKey)) {
-            throw new InvalidKeyException("DHKeyAgreement requires DHPrivateKey");
+  @Override // javax.crypto.KeyAgreementSpi
+  protected void engineInit(Key key, AlgorithmParameterSpec params, SecureRandom random)
+      throws InvalidKeyException, InvalidAlgorithmParameterException {
+    if (!(key instanceof DHPrivateKey)) {
+      throw new InvalidKeyException("DHKeyAgreement requires DHPrivateKey for initialisation");
+    }
+    DHPrivateKey privKey = (DHPrivateKey) key;
+    if (params != null) {
+      if (params instanceof DHParameterSpec) {
+        DHParameterSpec p = (DHParameterSpec) params;
+        this.f896p = p.getP();
+        this.f895g = p.getG();
+        this.ukmParameters = null;
+      } else if (params instanceof UserKeyingMaterialSpec) {
+        if (this.kdf == null) {
+          throw new InvalidAlgorithmParameterException(
+              "no KDF specified for UserKeyingMaterialSpec");
         }
-        DHPrivateKey privKey = (DHPrivateKey) key;
         this.f896p = privKey.getParams().getP();
         this.f895g = privKey.getParams().getG();
-        BigInteger x = privKey.getX();
-        this.f897x = x;
-        this.result = bigIntToBytes(x);
+        this.ukmParameters = ((UserKeyingMaterialSpec) params).getUserKeyingMaterial();
+      } else {
+        throw new InvalidAlgorithmParameterException("DHKeyAgreement only accepts DHParameterSpec");
+      }
+    } else {
+      this.f896p = privKey.getParams().getP();
+      this.f895g = privKey.getParams().getG();
     }
+    BigInteger x = privKey.getX();
+    this.f897x = x;
+    this.result = bigIntToBytes(x);
+  }
 
-    @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseAgreementSpi
-    protected byte[] calcSecret() {
-        return this.result;
+  @Override // javax.crypto.KeyAgreementSpi
+  protected void engineInit(Key key, SecureRandom random) throws InvalidKeyException {
+    if (!(key instanceof DHPrivateKey)) {
+      throw new InvalidKeyException("DHKeyAgreement requires DHPrivateKey");
     }
+    DHPrivateKey privKey = (DHPrivateKey) key;
+    this.f896p = privKey.getParams().getP();
+    this.f895g = privKey.getParams().getG();
+    BigInteger x = privKey.getX();
+    this.f897x = x;
+    this.result = bigIntToBytes(x);
+  }
 
-    private DHPrivateKeyParameters generatePrivateKeyParameter(PrivateKey privKey) throws InvalidKeyException {
-        if (privKey instanceof DHPrivateKey) {
-            if (privKey instanceof BCDHPrivateKey) {
-                return ((BCDHPrivateKey) privKey).engineGetKeyParameters();
-            }
-            DHPrivateKey pub = (DHPrivateKey) privKey;
-            DHParameterSpec params = pub.getParams();
-            return new DHPrivateKeyParameters(pub.getX(), new DHParameters(params.getP(), params.getG(), null, params.getL()));
-        }
-        throw new InvalidKeyException("private key not a DHPrivateKey");
-    }
+  @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseAgreementSpi
+  protected byte[] calcSecret() {
+    return this.result;
+  }
 
-    private DHPublicKeyParameters generatePublicKeyParameter(PublicKey pubKey) throws InvalidKeyException {
-        if (pubKey instanceof DHPublicKey) {
-            if (pubKey instanceof BCDHPublicKey) {
-                return ((BCDHPublicKey) pubKey).engineGetKeyParameters();
-            }
-            DHPublicKey pub = (DHPublicKey) pubKey;
-            DHParameterSpec params = pub.getParams();
-            if (params instanceof DHDomainParameterSpec) {
-                return new DHPublicKeyParameters(pub.getY(), ((DHDomainParameterSpec) params).getDomainParameters());
-            }
-            return new DHPublicKeyParameters(pub.getY(), new DHParameters(params.getP(), params.getG(), null, params.getL()));
-        }
-        throw new InvalidKeyException("public key not a DHPublicKey");
+  private DHPrivateKeyParameters generatePrivateKeyParameter(PrivateKey privKey)
+      throws InvalidKeyException {
+    if (privKey instanceof DHPrivateKey) {
+      if (privKey instanceof BCDHPrivateKey) {
+        return ((BCDHPrivateKey) privKey).engineGetKeyParameters();
+      }
+      DHPrivateKey pub = (DHPrivateKey) privKey;
+      DHParameterSpec params = pub.getParams();
+      return new DHPrivateKeyParameters(
+          pub.getX(), new DHParameters(params.getP(), params.getG(), null, params.getL()));
     }
+    throw new InvalidKeyException("private key not a DHPrivateKey");
+  }
+
+  private DHPublicKeyParameters generatePublicKeyParameter(PublicKey pubKey)
+      throws InvalidKeyException {
+    if (pubKey instanceof DHPublicKey) {
+      if (pubKey instanceof BCDHPublicKey) {
+        return ((BCDHPublicKey) pubKey).engineGetKeyParameters();
+      }
+      DHPublicKey pub = (DHPublicKey) pubKey;
+      DHParameterSpec params = pub.getParams();
+      if (params instanceof DHDomainParameterSpec) {
+        return new DHPublicKeyParameters(
+            pub.getY(), ((DHDomainParameterSpec) params).getDomainParameters());
+      }
+      return new DHPublicKeyParameters(
+          pub.getY(), new DHParameters(params.getP(), params.getG(), null, params.getL()));
+    }
+    throw new InvalidKeyException("public key not a DHPublicKey");
+  }
 }

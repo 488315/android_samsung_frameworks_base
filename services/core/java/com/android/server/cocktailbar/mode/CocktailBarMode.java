@@ -5,18 +5,17 @@ import android.content.Intent;
 /* loaded from: classes.dex */
 public interface CocktailBarMode {
 
-    public interface OnCocktailBarModeListener {
-    }
+  public interface OnCocktailBarModeListener {}
 
-    int getCocktailType();
+  int getCocktailType();
 
-    int getModeId();
+  int getModeId();
 
-    String getModeName();
+  String getModeName();
 
-    int getRegistrationType();
+  int getRegistrationType();
 
-    int onBroadcastReceived(Intent intent);
+  int onBroadcastReceived(Intent intent);
 
-    int renewMode(int i);
+  int renewMode(int i);
 }

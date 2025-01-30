@@ -5,7 +5,24 @@ import android.graphics.drawable.Drawable;
 
 /* loaded from: classes4.dex */
 class InvisibleToggleAllowListingFeatureTarget extends AccessibilityTarget {
-    InvisibleToggleAllowListingFeatureTarget(Context context, int shortcutType, boolean isShortcutSwitched, String id, int uid, CharSequence label, Drawable icon, String key) {
-        super(context, shortcutType, 1, isShortcutSwitched, id, uid, label, context.getPackageManager().semGetDrawableForIconTray(icon, 1), key);
-    }
+  InvisibleToggleAllowListingFeatureTarget(
+      Context context,
+      int shortcutType,
+      boolean isShortcutSwitched,
+      String id,
+      int uid,
+      CharSequence label,
+      Drawable icon,
+      String key) {
+    super(
+        context,
+        shortcutType,
+        1,
+        isShortcutSwitched,
+        id,
+        uid,
+        label,
+        context.getPackageManager().semGetDrawableForIconTray(icon, 1),
+        key);
+  }
 }

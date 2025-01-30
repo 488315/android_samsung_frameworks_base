@@ -10,68 +10,69 @@ import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class AlternativeSpans implements Parcelable {
-    public static final Parcelable.Creator<AlternativeSpans> CREATOR = new Parcelable.Creator<AlternativeSpans>() { // from class: android.speech.AlternativeSpans.1
+  public static final Parcelable.Creator<AlternativeSpans> CREATOR =
+      new Parcelable.Creator<AlternativeSpans>() { // from class: android.speech.AlternativeSpans.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public AlternativeSpans[] newArray(int size) {
-            return new AlternativeSpans[size];
+          return new AlternativeSpans[size];
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public AlternativeSpans createFromParcel(Parcel in) {
-            return new AlternativeSpans(in);
+          return new AlternativeSpans(in);
         }
-    };
-    private final List<AlternativeSpan> mSpans;
+      };
+  private final List<AlternativeSpan> mSpans;
 
-    public AlternativeSpans(List<AlternativeSpan> spans) {
-        this.mSpans = spans;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) spans);
-    }
+  public AlternativeSpans(List<AlternativeSpan> spans) {
+    this.mSpans = spans;
+    AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) spans);
+  }
 
-    public List<AlternativeSpan> getSpans() {
-        return this.mSpans;
-    }
+  public List<AlternativeSpan> getSpans() {
+    return this.mSpans;
+  }
 
-    public String toString() {
-        return "AlternativeSpans { spans = " + this.mSpans + " }";
-    }
+  public String toString() {
+    return "AlternativeSpans { spans = " + this.mSpans + " }";
+  }
 
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        AlternativeSpans that = (AlternativeSpans) o;
-        return Objects.equals(this.mSpans, that.mSpans);
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    AlternativeSpans that = (AlternativeSpans) o;
+    return Objects.equals(this.mSpans, that.mSpans);
+  }
 
-    public int hashCode() {
-        int _hash = (1 * 31) + Objects.hashCode(this.mSpans);
-        return _hash;
-    }
+  public int hashCode() {
+    int _hash = (1 * 31) + Objects.hashCode(this.mSpans);
+    return _hash;
+  }
 
-    @Override // android.p009os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelableList(this.mSpans, flags);
-    }
+  @Override // android.p009os.Parcelable
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeParcelableList(this.mSpans, flags);
+  }
 
-    @Override // android.p009os.Parcelable
-    public int describeContents() {
-        return 0;
-    }
+  @Override // android.p009os.Parcelable
+  public int describeContents() {
+    return 0;
+  }
 
-    AlternativeSpans(Parcel in) {
-        ArrayList arrayList = new ArrayList();
-        in.readParcelableList(arrayList, AlternativeSpan.class.getClassLoader(), AlternativeSpan.class);
-        this.mSpans = arrayList;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) arrayList);
-    }
+  AlternativeSpans(Parcel in) {
+    ArrayList arrayList = new ArrayList();
+    in.readParcelableList(arrayList, AlternativeSpan.class.getClassLoader(), AlternativeSpan.class);
+    this.mSpans = arrayList;
+    AnnotationValidations.validate(
+        (Class<NonNull>) NonNull.class, (NonNull) null, (Object) arrayList);
+  }
 
-    @Deprecated
-    private void __metadata() {
-    }
+  @Deprecated
+  private void __metadata() {}
 }

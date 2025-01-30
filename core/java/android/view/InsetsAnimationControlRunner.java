@@ -6,27 +6,27 @@ import android.view.inputmethod.ImeTracker;
 
 /* loaded from: classes4.dex */
 public interface InsetsAnimationControlRunner {
-    void cancel();
+  void cancel();
 
-    void dumpDebug(ProtoOutputStream protoOutputStream, long j);
+  void dumpDebug(ProtoOutputStream protoOutputStream, long j);
 
-    WindowInsetsAnimation getAnimation();
+  WindowInsetsAnimation getAnimation();
 
-    int getAnimationType();
+  int getAnimationType();
 
-    int getControllingTypes();
+  int getControllingTypes();
 
-    ImeTracker.Token getStatsToken();
+  ImeTracker.Token getStatsToken();
 
-    int getTypes();
+  int getTypes();
 
-    boolean isCancelRequested();
+  boolean isCancelRequested();
 
-    void notifyControlRevoked(int i);
+  void notifyControlRevoked(int i);
 
-    void updateSurfacePosition(SparseArray<InsetsSourceControl> sparseArray);
+  void updateSurfacePosition(SparseArray<InsetsSourceControl> sparseArray);
 
-    default boolean controlsType(int type) {
-        return (getTypes() & type) != 0;
-    }
+  default boolean controlsType(int type) {
+    return (getTypes() & type) != 0;
+  }
 }

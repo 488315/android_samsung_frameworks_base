@@ -9,37 +9,37 @@ import com.android.internal.inputmethod.IRemoteInputConnection;
 /* loaded from: classes4.dex */
 public interface InputMethodSession {
 
-    public interface EventCallback {
-        void finishedEvent(int i, boolean z);
-    }
+  public interface EventCallback {
+    void finishedEvent(int i, boolean z);
+  }
 
-    void appPrivateCommand(String str, Bundle bundle);
+  void appPrivateCommand(String str, Bundle bundle);
 
-    void dispatchGenericMotionEvent(int i, MotionEvent motionEvent, EventCallback eventCallback);
+  void dispatchGenericMotionEvent(int i, MotionEvent motionEvent, EventCallback eventCallback);
 
-    void dispatchKeyEvent(int i, KeyEvent keyEvent, EventCallback eventCallback);
+  void dispatchKeyEvent(int i, KeyEvent keyEvent, EventCallback eventCallback);
 
-    void dispatchTrackballEvent(int i, MotionEvent motionEvent, EventCallback eventCallback);
+  void dispatchTrackballEvent(int i, MotionEvent motionEvent, EventCallback eventCallback);
 
-    void displayCompletions(CompletionInfo[] completionInfoArr);
+  void displayCompletions(CompletionInfo[] completionInfoArr);
 
-    void finishInput();
+  void finishInput();
 
-    void removeImeSurface();
+  void removeImeSurface();
 
-    @Deprecated
-    void toggleSoftInput(int i, int i2);
+  @Deprecated
+  void toggleSoftInput(int i, int i2);
 
-    void updateCursor(Rect rect);
+  void updateCursor(Rect rect);
 
-    void updateCursorAnchorInfo(CursorAnchorInfo cursorAnchorInfo);
+  void updateCursorAnchorInfo(CursorAnchorInfo cursorAnchorInfo);
 
-    void updateExtractedText(int i, ExtractedText extractedText);
+  void updateExtractedText(int i, ExtractedText extractedText);
 
-    void updateSelection(int i, int i2, int i3, int i4, int i5, int i6);
+  void updateSelection(int i, int i2, int i3, int i4, int i5, int i6);
 
-    void viewClicked(boolean z);
+  void viewClicked(boolean z);
 
-    default void invalidateInputInternal(EditorInfo editorInfo, IRemoteInputConnection inputConnection, int sessionId) {
-    }
+  default void invalidateInputInternal(
+      EditorInfo editorInfo, IRemoteInputConnection inputConnection, int sessionId) {}
 }

@@ -6,9 +6,9 @@ import android.telephony.ims.SipMessage;
 @SystemApi
 /* loaded from: classes3.dex */
 public interface DelegateConnectionMessageCallback {
-    void onMessageReceived(SipMessage sipMessage);
+  void onMessageReceived(SipMessage sipMessage);
 
-    void onMessageSendFailure(String str, int i);
+  void onMessageSendFailure(String str, int i);
 
-    void onMessageSent(String str);
+  void onMessageSent(String str);
 }

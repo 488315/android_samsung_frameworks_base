@@ -7,24 +7,34 @@ import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes2.dex */
 public class SenderPermissionFilter implements Filter {
-    public static final FilterFactory FACTORY = new FilterFactory("sender-permission") { // from class: com.android.server.firewall.SenderPermissionFilter.1
+  public static final FilterFactory FACTORY =
+      new FilterFactory(
+          "sender-permission") { // from class: com.android.server.firewall.SenderPermissionFilter.1
         @Override // com.android.server.firewall.FilterFactory
         public Filter newFilter(XmlPullParser xmlPullParser) {
-            String attributeValue = xmlPullParser.getAttributeValue(null, "name");
-            if (attributeValue == null) {
-                throw new XmlPullParserException("Permission name must be specified.", xmlPullParser, null);
-            }
-            return new SenderPermissionFilter(attributeValue);
+          String attributeValue = xmlPullParser.getAttributeValue(null, "name");
+          if (attributeValue == null) {
+            throw new XmlPullParserException(
+                "Permission name must be specified.", xmlPullParser, null);
+          }
+          return new SenderPermissionFilter(attributeValue);
         }
-    };
-    public final String mPermission;
+      };
+  public final String mPermission;
 
-    public SenderPermissionFilter(String str) {
-        this.mPermission = str;
-    }
+  public SenderPermissionFilter(String str) {
+    this.mPermission = str;
+  }
 
-    @Override // com.android.server.firewall.Filter
-    public boolean matches(IntentFirewall intentFirewall, ComponentName componentName, Intent intent, int i, int i2, String str, int i3) {
-        return intentFirewall.checkComponentPermission(this.mPermission, i2, i, i3, true);
-    }
+  @Override // com.android.server.firewall.Filter
+  public boolean matches(
+      IntentFirewall intentFirewall,
+      ComponentName componentName,
+      Intent intent,
+      int i,
+      int i2,
+      String str,
+      int i3) {
+    return intentFirewall.checkComponentPermission(this.mPermission, i2, i, i3, true);
+  }
 }

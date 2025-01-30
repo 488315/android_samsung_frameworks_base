@@ -5,14 +5,14 @@ import android.annotation.SystemApi;
 @SystemApi
 /* loaded from: classes2.dex */
 public final class RestartEvent extends FilterEvent {
-    public static final int NEW_FILTER_FIRST_START_ID = 0;
-    private final int mStartId;
+  public static final int NEW_FILTER_FIRST_START_ID = 0;
+  private final int mStartId;
 
-    private RestartEvent(int startId) {
-        this.mStartId = startId;
-    }
+  private RestartEvent(int startId) {
+    this.mStartId = startId;
+  }
 
-    public int getStartId() {
-        return this.mStartId;
-    }
+  public int getStartId() {
+    return this.mStartId;
+  }
 }

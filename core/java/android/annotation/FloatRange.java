@@ -9,12 +9,12 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 /* loaded from: classes.dex */
 public @interface FloatRange {
-    double from() default Double.NEGATIVE_INFINITY;
+  double from() default Double.NEGATIVE_INFINITY;
 
-    boolean fromInclusive() default true;
+  boolean fromInclusive() default true;
 
-    /* renamed from: to */
-    double m0to() default Double.POSITIVE_INFINITY;
+  /* renamed from: to */
+  double m0to() default Double.POSITIVE_INFINITY;
 
-    boolean toInclusive() default true;
+  boolean toInclusive() default true;
 }

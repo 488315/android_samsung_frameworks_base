@@ -2,5 +2,5 @@ package android.util;
 
 /* loaded from: classes4.dex */
 public interface Printer {
-    void println(String str);
+  void println(String str);
 }

@@ -4,5 +4,5 @@ import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface RuleParser {
-    List parse(RandomAccessObject randomAccessObject, List list);
+  List parse(RandomAccessObject randomAccessObject, List list);
 }

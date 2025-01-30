@@ -6,77 +6,88 @@ import java.util.List;
 
 /* loaded from: classes5.dex */
 public interface JobSchedulerInternal {
-    void addBackingUpUid(int i);
+  void addBackingUpUid(int i);
 
-    void cancelJobsForUid(int i, boolean z, int i2, int i3, String str);
+  void cancelJobsForUid(int i, boolean z, int i2, int i3, String str);
 
-    void clearAllBackingUpUids();
+  void clearAllBackingUpUids();
 
-    String getCloudMediaProviderPackage(int i);
+  String getCloudMediaProviderPackage(int i);
 
-    JobStorePersistStats getPersistStats();
+  JobStorePersistStats getPersistStats();
 
-    List<JobInfo> getSystemScheduledOwnJobs(String str);
+  List<JobInfo> getSystemScheduledOwnJobs(String str);
 
-    boolean isAppConsideredBuggy(int i, String str, int i2, String str2);
+  boolean isAppConsideredBuggy(int i, String str, int i2, String str2);
 
-    boolean isNotificationAssociatedWithAnyUserInitiatedJobs(int i, int i2, String str);
+  boolean isNotificationAssociatedWithAnyUserInitiatedJobs(int i, int i2, String str);
 
-    boolean isNotificationChannelAssociatedWithAnyUserInitiatedJobs(String str, int i, String str2);
+  boolean isNotificationChannelAssociatedWithAnyUserInitiatedJobs(String str, int i, String str2);
 
-    void removeBackingUpUid(int i);
+  void removeBackingUpUid(int i);
 
-    void reportAppUsage(String str, int i);
+  void reportAppUsage(String str, int i);
 
-    public static class JobStorePersistStats {
-        public int countAllJobsLoaded;
-        public int countAllJobsSaved;
-        public int countSystemServerJobsLoaded;
-        public int countSystemServerJobsSaved;
-        public int countSystemSyncManagerJobsLoaded;
-        public int countSystemSyncManagerJobsSaved;
+  public static class JobStorePersistStats {
+    public int countAllJobsLoaded;
+    public int countAllJobsSaved;
+    public int countSystemServerJobsLoaded;
+    public int countSystemServerJobsSaved;
+    public int countSystemSyncManagerJobsLoaded;
+    public int countSystemSyncManagerJobsSaved;
 
-        public JobStorePersistStats() {
-            this.countAllJobsLoaded = -1;
-            this.countSystemServerJobsLoaded = -1;
-            this.countSystemSyncManagerJobsLoaded = -1;
-            this.countAllJobsSaved = -1;
-            this.countSystemServerJobsSaved = -1;
-            this.countSystemSyncManagerJobsSaved = -1;
-        }
-
-        public JobStorePersistStats(JobStorePersistStats source) {
-            this.countAllJobsLoaded = -1;
-            this.countSystemServerJobsLoaded = -1;
-            this.countSystemSyncManagerJobsLoaded = -1;
-            this.countAllJobsSaved = -1;
-            this.countSystemServerJobsSaved = -1;
-            this.countSystemSyncManagerJobsSaved = -1;
-            this.countAllJobsLoaded = source.countAllJobsLoaded;
-            this.countSystemServerJobsLoaded = source.countSystemServerJobsLoaded;
-            this.countSystemSyncManagerJobsLoaded = source.countSystemSyncManagerJobsLoaded;
-            this.countAllJobsSaved = source.countAllJobsSaved;
-            this.countSystemServerJobsSaved = source.countSystemServerJobsSaved;
-            this.countSystemSyncManagerJobsSaved = source.countSystemSyncManagerJobsSaved;
-        }
-
-        public String toString() {
-            return "FirstLoad: " + this.countAllJobsLoaded + "/" + this.countSystemServerJobsLoaded + "/" + this.countSystemSyncManagerJobsLoaded + " LastSave: " + this.countAllJobsSaved + "/" + this.countSystemServerJobsSaved + "/" + this.countSystemSyncManagerJobsSaved;
-        }
-
-        public void dumpDebug(ProtoOutputStream proto, long fieldId) {
-            long token = proto.start(fieldId);
-            long flToken = proto.start(1146756268033L);
-            proto.write(1120986464257L, this.countAllJobsLoaded);
-            proto.write(1120986464258L, this.countSystemServerJobsLoaded);
-            proto.write(1120986464259L, this.countSystemSyncManagerJobsLoaded);
-            proto.end(flToken);
-            long lsToken = proto.start(1146756268034L);
-            proto.write(1120986464257L, this.countAllJobsSaved);
-            proto.write(1120986464258L, this.countSystemServerJobsSaved);
-            proto.write(1120986464259L, this.countSystemSyncManagerJobsSaved);
-            proto.end(lsToken);
-            proto.end(token);
-        }
+    public JobStorePersistStats() {
+      this.countAllJobsLoaded = -1;
+      this.countSystemServerJobsLoaded = -1;
+      this.countSystemSyncManagerJobsLoaded = -1;
+      this.countAllJobsSaved = -1;
+      this.countSystemServerJobsSaved = -1;
+      this.countSystemSyncManagerJobsSaved = -1;
     }
+
+    public JobStorePersistStats(JobStorePersistStats source) {
+      this.countAllJobsLoaded = -1;
+      this.countSystemServerJobsLoaded = -1;
+      this.countSystemSyncManagerJobsLoaded = -1;
+      this.countAllJobsSaved = -1;
+      this.countSystemServerJobsSaved = -1;
+      this.countSystemSyncManagerJobsSaved = -1;
+      this.countAllJobsLoaded = source.countAllJobsLoaded;
+      this.countSystemServerJobsLoaded = source.countSystemServerJobsLoaded;
+      this.countSystemSyncManagerJobsLoaded = source.countSystemSyncManagerJobsLoaded;
+      this.countAllJobsSaved = source.countAllJobsSaved;
+      this.countSystemServerJobsSaved = source.countSystemServerJobsSaved;
+      this.countSystemSyncManagerJobsSaved = source.countSystemSyncManagerJobsSaved;
+    }
+
+    public String toString() {
+      return "FirstLoad: "
+          + this.countAllJobsLoaded
+          + "/"
+          + this.countSystemServerJobsLoaded
+          + "/"
+          + this.countSystemSyncManagerJobsLoaded
+          + " LastSave: "
+          + this.countAllJobsSaved
+          + "/"
+          + this.countSystemServerJobsSaved
+          + "/"
+          + this.countSystemSyncManagerJobsSaved;
+    }
+
+    public void dumpDebug(ProtoOutputStream proto, long fieldId) {
+      long token = proto.start(fieldId);
+      long flToken = proto.start(1146756268033L);
+      proto.write(1120986464257L, this.countAllJobsLoaded);
+      proto.write(1120986464258L, this.countSystemServerJobsLoaded);
+      proto.write(1120986464259L, this.countSystemSyncManagerJobsLoaded);
+      proto.end(flToken);
+      long lsToken = proto.start(1146756268034L);
+      proto.write(1120986464257L, this.countAllJobsSaved);
+      proto.write(1120986464258L, this.countSystemServerJobsSaved);
+      proto.write(1120986464259L, this.countSystemSyncManagerJobsSaved);
+      proto.end(lsToken);
+      proto.end(token);
+    }
+  }
 }

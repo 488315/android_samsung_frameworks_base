@@ -2,7 +2,7 @@ package com.android.server;
 
 /* loaded from: classes5.dex */
 public interface IWorkOnAt {
-    String getCmd();
+  String getCmd();
 
-    String processCmd(String str);
+  String processCmd(String str);
 }

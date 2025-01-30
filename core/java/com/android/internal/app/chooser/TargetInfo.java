@@ -13,39 +13,38 @@ import java.util.List;
 
 /* loaded from: classes4.dex */
 public interface TargetInfo {
-    TargetInfo cloneFilledIn(Intent intent, int i);
+  TargetInfo cloneFilledIn(Intent intent, int i);
 
-    List<Intent> getAllSourceIntents();
+  List<Intent> getAllSourceIntents();
 
-    Drawable getDisplayIcon(Context context);
+  Drawable getDisplayIcon(Context context);
 
-    CharSequence getDisplayLabel();
+  CharSequence getDisplayLabel();
 
-    CharSequence getExtendedInfo();
+  CharSequence getExtendedInfo();
 
-    ResolveInfo getResolveInfo();
+  ResolveInfo getResolveInfo();
 
-    ComponentName getResolvedComponentName();
+  ComponentName getResolvedComponentName();
 
-    Intent getResolvedIntent();
+  Intent getResolvedIntent();
 
-    boolean isPinned();
+  boolean isPinned();
 
-    boolean isSuspended();
+  boolean isSuspended();
 
-    boolean start(Activity activity, Bundle bundle);
+  boolean start(Activity activity, Bundle bundle);
 
-    boolean startAsCaller(ResolverActivity resolverActivity, Bundle bundle, int i);
+  boolean startAsCaller(ResolverActivity resolverActivity, Bundle bundle, int i);
 
-    boolean startAsUser(Activity activity, Bundle bundle, UserHandle userHandle);
+  boolean startAsUser(Activity activity, Bundle bundle, UserHandle userHandle);
 
-    static void prepareIntentForCrossProfileLaunch(Intent intent, int targetUserId) {
-        int currentUserId = UserHandle.myUserId();
-        if (targetUserId != currentUserId) {
-            intent.fixUris(currentUserId);
-        }
+  static void prepareIntentForCrossProfileLaunch(Intent intent, int targetUserId) {
+    int currentUserId = UserHandle.myUserId();
+    if (targetUserId != currentUserId) {
+      intent.fixUris(currentUserId);
     }
+  }
 
-    default void setSkipFixUris(boolean skipFixUris) {
-    }
+  default void setSkipFixUris(boolean skipFixUris) {}
 }

@@ -8,90 +8,93 @@ import java.lang.ref.WeakReference;
 
 /* loaded from: classes4.dex */
 public abstract class InputEventSender {
-    private static final String TAG = "InputEventSender";
-    private final CloseGuard mCloseGuard;
-    private InputChannel mInputChannel;
-    private MessageQueue mMessageQueue;
-    private long mSenderPtr;
+  private static final String TAG = "InputEventSender";
+  private final CloseGuard mCloseGuard;
+  private InputChannel mInputChannel;
+  private MessageQueue mMessageQueue;
+  private long mSenderPtr;
 
-    private static native void nativeDispose(long j);
+  private static native void nativeDispose(long j);
 
-    private static native long nativeInit(WeakReference<InputEventSender> weakReference, InputChannel inputChannel, MessageQueue messageQueue);
+  private static native long nativeInit(
+      WeakReference<InputEventSender> weakReference,
+      InputChannel inputChannel,
+      MessageQueue messageQueue);
 
-    private static native boolean nativeSendKeyEvent(long j, int i, KeyEvent keyEvent);
+  private static native boolean nativeSendKeyEvent(long j, int i, KeyEvent keyEvent);
 
-    private static native boolean nativeSendMotionEvent(long j, int i, MotionEvent motionEvent);
+  private static native boolean nativeSendMotionEvent(long j, int i, MotionEvent motionEvent);
 
-    public InputEventSender(InputChannel inputChannel, Looper looper) {
-        CloseGuard closeGuard = CloseGuard.get();
-        this.mCloseGuard = closeGuard;
-        if (inputChannel == null) {
-            throw new IllegalArgumentException("inputChannel must not be null");
-        }
-        if (looper == null) {
-            throw new IllegalArgumentException("looper must not be null");
-        }
-        this.mInputChannel = inputChannel;
-        this.mMessageQueue = looper.getQueue();
-        this.mSenderPtr = nativeInit(new WeakReference(this), this.mInputChannel, this.mMessageQueue);
-        closeGuard.open("InputEventSender.dispose");
+  public InputEventSender(InputChannel inputChannel, Looper looper) {
+    CloseGuard closeGuard = CloseGuard.get();
+    this.mCloseGuard = closeGuard;
+    if (inputChannel == null) {
+      throw new IllegalArgumentException("inputChannel must not be null");
     }
-
-    protected void finalize() throws Throwable {
-        try {
-            dispose(true);
-        } finally {
-            super.finalize();
-        }
+    if (looper == null) {
+      throw new IllegalArgumentException("looper must not be null");
     }
+    this.mInputChannel = inputChannel;
+    this.mMessageQueue = looper.getQueue();
+    this.mSenderPtr = nativeInit(new WeakReference(this), this.mInputChannel, this.mMessageQueue);
+    closeGuard.open("InputEventSender.dispose");
+  }
 
-    public void dispose() {
-        dispose(false);
+  protected void finalize() throws Throwable {
+    try {
+      dispose(true);
+    } finally {
+      super.finalize();
     }
+  }
 
-    private void dispose(boolean finalized) {
-        CloseGuard closeGuard = this.mCloseGuard;
-        if (closeGuard != null) {
-            if (finalized) {
-                closeGuard.warnIfOpen();
-            }
-            this.mCloseGuard.close();
-        }
-        long j = this.mSenderPtr;
-        if (j != 0) {
-            nativeDispose(j);
-            this.mSenderPtr = 0L;
-        }
-        this.mInputChannel = null;
-        this.mMessageQueue = null;
-    }
+  public void dispose() {
+    dispose(false);
+  }
 
-    public void onInputEventFinished(int seq, boolean handled) {
+  private void dispose(boolean finalized) {
+    CloseGuard closeGuard = this.mCloseGuard;
+    if (closeGuard != null) {
+      if (finalized) {
+        closeGuard.warnIfOpen();
+      }
+      this.mCloseGuard.close();
     }
+    long j = this.mSenderPtr;
+    if (j != 0) {
+      nativeDispose(j);
+      this.mSenderPtr = 0L;
+    }
+    this.mInputChannel = null;
+    this.mMessageQueue = null;
+  }
 
-    public void onTimelineReported(int inputEventId, long gpuCompletedTime, long presentTime) {
-    }
+  public void onInputEventFinished(int seq, boolean handled) {}
 
-    public final boolean sendInputEvent(int seq, InputEvent event) {
-        if (event == null) {
-            throw new IllegalArgumentException("event must not be null");
-        }
-        long j = this.mSenderPtr;
-        if (j == 0) {
-            Log.m102w(TAG, "Attempted to send an input event but the input event sender has already been disposed.");
-            return false;
-        }
-        if (event instanceof KeyEvent) {
-            return nativeSendKeyEvent(j, seq, (KeyEvent) event);
-        }
-        return nativeSendMotionEvent(j, seq, (MotionEvent) event);
-    }
+  public void onTimelineReported(int inputEventId, long gpuCompletedTime, long presentTime) {}
 
-    private void dispatchInputEventFinished(int seq, boolean handled) {
-        onInputEventFinished(seq, handled);
+  public final boolean sendInputEvent(int seq, InputEvent event) {
+    if (event == null) {
+      throw new IllegalArgumentException("event must not be null");
     }
+    long j = this.mSenderPtr;
+    if (j == 0) {
+      Log.m102w(
+          TAG,
+          "Attempted to send an input event but the input event sender has already been disposed.");
+      return false;
+    }
+    if (event instanceof KeyEvent) {
+      return nativeSendKeyEvent(j, seq, (KeyEvent) event);
+    }
+    return nativeSendMotionEvent(j, seq, (MotionEvent) event);
+  }
 
-    private void dispatchTimelineReported(int inputEventId, long gpuCompletedTime, long presentTime) {
-        onTimelineReported(inputEventId, gpuCompletedTime, presentTime);
-    }
+  private void dispatchInputEventFinished(int seq, boolean handled) {
+    onInputEventFinished(seq, handled);
+  }
+
+  private void dispatchTimelineReported(int inputEventId, long gpuCompletedTime, long presentTime) {
+    onTimelineReported(inputEventId, gpuCompletedTime, presentTime);
+  }
 }

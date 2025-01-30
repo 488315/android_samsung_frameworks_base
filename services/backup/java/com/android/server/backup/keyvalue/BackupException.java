@@ -4,10 +4,9 @@ import android.util.AndroidException;
 
 /* loaded from: classes.dex */
 abstract class BackupException extends AndroidException {
-    public BackupException() {
-    }
+  public BackupException() {}
 
-    public BackupException(Exception exc) {
-        super(exc);
-    }
+  public BackupException(Exception exc) {
+    super(exc);
+  }
 }

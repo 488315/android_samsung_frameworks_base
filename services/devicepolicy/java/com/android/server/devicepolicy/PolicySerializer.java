@@ -7,8 +7,9 @@ import com.android.modules.utils.TypedXmlSerializer;
 
 /* loaded from: classes2.dex */
 public abstract class PolicySerializer {
-    /* renamed from: readFromXml */
-    public abstract PolicyValue mo5067readFromXml(TypedXmlPullParser typedXmlPullParser);
+  /* renamed from: readFromXml */
+  public abstract PolicyValue mo5067readFromXml(TypedXmlPullParser typedXmlPullParser);
 
-    public abstract void saveToXml(PolicyKey policyKey, TypedXmlSerializer typedXmlSerializer, Object obj);
+  public abstract void saveToXml(
+      PolicyKey policyKey, TypedXmlSerializer typedXmlSerializer, Object obj);
 }

@@ -2,26 +2,25 @@ package android.p009os;
 
 /* loaded from: classes3.dex */
 public class VintfRuntimeInfo {
-    public static native String getBootAvbVersion();
+  public static native String getBootAvbVersion();
 
-    public static native String getBootVbmetaAvbVersion();
+  public static native String getBootVbmetaAvbVersion();
 
-    public static native String getCpuInfo();
+  public static native String getCpuInfo();
 
-    public static native String getHardwareId();
+  public static native String getHardwareId();
 
-    public static native long getKernelSepolicyVersion();
+  public static native long getKernelSepolicyVersion();
 
-    public static native String getKernelVersion();
+  public static native String getKernelVersion();
 
-    public static native String getNodeName();
+  public static native String getNodeName();
 
-    public static native String getOsName();
+  public static native String getOsName();
 
-    public static native String getOsRelease();
+  public static native String getOsRelease();
 
-    public static native String getOsVersion();
+  public static native String getOsVersion();
 
-    private VintfRuntimeInfo() {
-    }
+  private VintfRuntimeInfo() {}
 }

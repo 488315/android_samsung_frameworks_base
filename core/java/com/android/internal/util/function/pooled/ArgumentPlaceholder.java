@@ -4,12 +4,11 @@ import android.telecom.Logging.Session;
 
 /* loaded from: classes5.dex */
 public final class ArgumentPlaceholder<R> {
-    static final ArgumentPlaceholder<?> INSTANCE = new ArgumentPlaceholder<>();
+  static final ArgumentPlaceholder<?> INSTANCE = new ArgumentPlaceholder<>();
 
-    private ArgumentPlaceholder() {
-    }
+  private ArgumentPlaceholder() {}
 
-    public String toString() {
-        return Session.SESSION_SEPARATION_CHAR_CHILD;
-    }
+  public String toString() {
+    return Session.SESSION_SEPARATION_CHAR_CHILD;
+  }
 }

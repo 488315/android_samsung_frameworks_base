@@ -5,10 +5,9 @@ import java.util.Collection;
 
 /* loaded from: classes3.dex */
 public abstract class WritableIdentityCredential {
-    public abstract Collection<X509Certificate> getCredentialKeyCertificateChain(byte[] bArr);
+  public abstract Collection<X509Certificate> getCredentialKeyCertificateChain(byte[] bArr);
 
-    public abstract byte[] personalize(PersonalizationData personalizationData);
+  public abstract byte[] personalize(PersonalizationData personalizationData);
 
-    protected WritableIdentityCredential() {
-    }
+  protected WritableIdentityCredential() {}
 }

@@ -5,9 +5,9 @@ import com.samsung.android.sume.core.message.ResponseHolder;
 
 /* loaded from: classes4.dex */
 public interface ServiceController {
-    int createMediaFilterController();
+  int createMediaFilterController();
 
-    void releaseMediaFilterController(int i);
+  void releaseMediaFilterController(int i);
 
-    ResponseHolder request(int i, Request request);
+  ResponseHolder request(int i, Request request);
 }

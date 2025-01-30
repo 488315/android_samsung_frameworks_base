@@ -11,118 +11,135 @@ import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes.dex */
 public abstract class JobService extends Service {
-    public static final int JOB_END_NOTIFICATION_POLICY_DETACH = 0;
-    public static final int JOB_END_NOTIFICATION_POLICY_REMOVE = 1;
-    public static final String PERMISSION_BIND = "android.permission.BIND_JOB_SERVICE";
-    private static final String TAG = "JobService";
-    private JobServiceEngine mEngine;
+  public static final int JOB_END_NOTIFICATION_POLICY_DETACH = 0;
+  public static final int JOB_END_NOTIFICATION_POLICY_REMOVE = 1;
+  public static final String PERMISSION_BIND = "android.permission.BIND_JOB_SERVICE";
+  private static final String TAG = "JobService";
+  private JobServiceEngine mEngine;
 
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface JobEndNotificationPolicy {
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface JobEndNotificationPolicy {}
+
+  public abstract boolean onStartJob(JobParameters jobParameters);
+
+  public abstract boolean onStopJob(JobParameters jobParameters);
+
+  @Override // android.app.Service
+  public final IBinder onBind(Intent intent) {
+    if (this.mEngine == null) {
+      this.mEngine =
+          new JobServiceEngine(this) { // from class: android.app.job.JobService.1
+            @Override // android.app.job.JobServiceEngine
+            public boolean onStartJob(JobParameters params) {
+              return JobService.this.onStartJob(params);
+            }
+
+            @Override // android.app.job.JobServiceEngine
+            public boolean onStopJob(JobParameters params) {
+              return JobService.this.onStopJob(params);
+            }
+
+            @Override // android.app.job.JobServiceEngine
+            public long getTransferredDownloadBytes(JobParameters params, JobWorkItem item) {
+              if (item == null) {
+                return JobService.this.getTransferredDownloadBytes(params);
+              }
+              return JobService.this.getTransferredDownloadBytes(params, item);
+            }
+
+            @Override // android.app.job.JobServiceEngine
+            public long getTransferredUploadBytes(JobParameters params, JobWorkItem item) {
+              if (item == null) {
+                return JobService.this.getTransferredUploadBytes(params);
+              }
+              return JobService.this.getTransferredUploadBytes(params, item);
+            }
+
+            @Override // android.app.job.JobServiceEngine
+            public void onNetworkChanged(JobParameters params) {
+              JobService.this.onNetworkChanged(params);
+            }
+          };
     }
+    return this.mEngine.getBinder();
+  }
 
-    public abstract boolean onStartJob(JobParameters jobParameters);
+  public final void jobFinished(JobParameters params, boolean wantsReschedule) {
+    this.mEngine.jobFinished(params, wantsReschedule);
+  }
 
-    public abstract boolean onStopJob(JobParameters jobParameters);
+  public void onNetworkChanged(JobParameters params) {
+    Log.m102w(
+        TAG,
+        "onNetworkChanged() not implemented in "
+            + getClass().getName()
+            + ". Must override in a subclass.");
+  }
 
-    @Override // android.app.Service
-    public final IBinder onBind(Intent intent) {
-        if (this.mEngine == null) {
-            this.mEngine = new JobServiceEngine(this) { // from class: android.app.job.JobService.1
-                @Override // android.app.job.JobServiceEngine
-                public boolean onStartJob(JobParameters params) {
-                    return JobService.this.onStartJob(params);
-                }
+  public final void updateEstimatedNetworkBytes(
+      JobParameters params, long downloadBytes, long uploadBytes) {
+    this.mEngine.updateEstimatedNetworkBytes(params, null, downloadBytes, uploadBytes);
+  }
 
-                @Override // android.app.job.JobServiceEngine
-                public boolean onStopJob(JobParameters params) {
-                    return JobService.this.onStopJob(params);
-                }
+  public final void updateEstimatedNetworkBytes(
+      JobParameters params, JobWorkItem jobWorkItem, long downloadBytes, long uploadBytes) {
+    this.mEngine.updateEstimatedNetworkBytes(params, jobWorkItem, downloadBytes, uploadBytes);
+  }
 
-                @Override // android.app.job.JobServiceEngine
-                public long getTransferredDownloadBytes(JobParameters params, JobWorkItem item) {
-                    if (item == null) {
-                        return JobService.this.getTransferredDownloadBytes(params);
-                    }
-                    return JobService.this.getTransferredDownloadBytes(params, item);
-                }
+  public final void updateTransferredNetworkBytes(
+      JobParameters params, long transferredDownloadBytes, long transferredUploadBytes) {
+    this.mEngine.updateTransferredNetworkBytes(
+        params, null, transferredDownloadBytes, transferredUploadBytes);
+  }
 
-                @Override // android.app.job.JobServiceEngine
-                public long getTransferredUploadBytes(JobParameters params, JobWorkItem item) {
-                    if (item == null) {
-                        return JobService.this.getTransferredUploadBytes(params);
-                    }
-                    return JobService.this.getTransferredUploadBytes(params, item);
-                }
+  public final void updateTransferredNetworkBytes(
+      JobParameters params,
+      JobWorkItem item,
+      long transferredDownloadBytes,
+      long transferredUploadBytes) {
+    this.mEngine.updateTransferredNetworkBytes(
+        params, item, transferredDownloadBytes, transferredUploadBytes);
+  }
 
-                @Override // android.app.job.JobServiceEngine
-                public void onNetworkChanged(JobParameters params) {
-                    JobService.this.onNetworkChanged(params);
-                }
-            };
-        }
-        return this.mEngine.getBinder();
+  public long getTransferredDownloadBytes(JobParameters params) {
+    if (Compatibility.isChangeEnabled(JobScheduler.THROW_ON_INVALID_DATA_TRANSFER_IMPLEMENTATION)) {
+      throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
+    return 0L;
+  }
 
-    public final void jobFinished(JobParameters params, boolean wantsReschedule) {
-        this.mEngine.jobFinished(params, wantsReschedule);
+  public long getTransferredUploadBytes(JobParameters params) {
+    if (Compatibility.isChangeEnabled(JobScheduler.THROW_ON_INVALID_DATA_TRANSFER_IMPLEMENTATION)) {
+      throw new RuntimeException("Not implemented. Must override in a subclass.");
     }
+    return 0L;
+  }
 
-    public void onNetworkChanged(JobParameters params) {
-        Log.m102w(TAG, "onNetworkChanged() not implemented in " + getClass().getName() + ". Must override in a subclass.");
+  public long getTransferredDownloadBytes(JobParameters params, JobWorkItem item) {
+    if (item == null) {
+      return getTransferredDownloadBytes(params);
     }
+    if (Compatibility.isChangeEnabled(JobScheduler.THROW_ON_INVALID_DATA_TRANSFER_IMPLEMENTATION)) {
+      throw new RuntimeException("Not implemented. Must override in a subclass.");
+    }
+    return 0L;
+  }
 
-    public final void updateEstimatedNetworkBytes(JobParameters params, long downloadBytes, long uploadBytes) {
-        this.mEngine.updateEstimatedNetworkBytes(params, null, downloadBytes, uploadBytes);
+  public long getTransferredUploadBytes(JobParameters params, JobWorkItem item) {
+    if (item == null) {
+      return getTransferredUploadBytes(params);
     }
+    if (Compatibility.isChangeEnabled(JobScheduler.THROW_ON_INVALID_DATA_TRANSFER_IMPLEMENTATION)) {
+      throw new RuntimeException("Not implemented. Must override in a subclass.");
+    }
+    return 0L;
+  }
 
-    public final void updateEstimatedNetworkBytes(JobParameters params, JobWorkItem jobWorkItem, long downloadBytes, long uploadBytes) {
-        this.mEngine.updateEstimatedNetworkBytes(params, jobWorkItem, downloadBytes, uploadBytes);
-    }
-
-    public final void updateTransferredNetworkBytes(JobParameters params, long transferredDownloadBytes, long transferredUploadBytes) {
-        this.mEngine.updateTransferredNetworkBytes(params, null, transferredDownloadBytes, transferredUploadBytes);
-    }
-
-    public final void updateTransferredNetworkBytes(JobParameters params, JobWorkItem item, long transferredDownloadBytes, long transferredUploadBytes) {
-        this.mEngine.updateTransferredNetworkBytes(params, item, transferredDownloadBytes, transferredUploadBytes);
-    }
-
-    public long getTransferredDownloadBytes(JobParameters params) {
-        if (Compatibility.isChangeEnabled(JobScheduler.THROW_ON_INVALID_DATA_TRANSFER_IMPLEMENTATION)) {
-            throw new RuntimeException("Not implemented. Must override in a subclass.");
-        }
-        return 0L;
-    }
-
-    public long getTransferredUploadBytes(JobParameters params) {
-        if (Compatibility.isChangeEnabled(JobScheduler.THROW_ON_INVALID_DATA_TRANSFER_IMPLEMENTATION)) {
-            throw new RuntimeException("Not implemented. Must override in a subclass.");
-        }
-        return 0L;
-    }
-
-    public long getTransferredDownloadBytes(JobParameters params, JobWorkItem item) {
-        if (item == null) {
-            return getTransferredDownloadBytes(params);
-        }
-        if (Compatibility.isChangeEnabled(JobScheduler.THROW_ON_INVALID_DATA_TRANSFER_IMPLEMENTATION)) {
-            throw new RuntimeException("Not implemented. Must override in a subclass.");
-        }
-        return 0L;
-    }
-
-    public long getTransferredUploadBytes(JobParameters params, JobWorkItem item) {
-        if (item == null) {
-            return getTransferredUploadBytes(params);
-        }
-        if (Compatibility.isChangeEnabled(JobScheduler.THROW_ON_INVALID_DATA_TRANSFER_IMPLEMENTATION)) {
-            throw new RuntimeException("Not implemented. Must override in a subclass.");
-        }
-        return 0L;
-    }
-
-    public final void setNotification(JobParameters params, int notificationId, Notification notification, int jobEndNotificationPolicy) {
-        this.mEngine.setNotification(params, notificationId, notification, jobEndNotificationPolicy);
-    }
+  public final void setNotification(
+      JobParameters params,
+      int notificationId,
+      Notification notification,
+      int jobEndNotificationPolicy) {
+    this.mEngine.setNotification(params, notificationId, notification, jobEndNotificationPolicy);
+  }
 }

@@ -6,57 +6,56 @@ import android.media.p008tv.tuner.TunerUtils;
 @SystemApi
 /* loaded from: classes2.dex */
 public class TimeFilter implements AutoCloseable {
-    private boolean mEnable = false;
-    private long mNativeContext;
+  private boolean mEnable = false;
+  private long mNativeContext;
 
-    private native int nativeClearTimestamp();
+  private native int nativeClearTimestamp();
 
-    private native int nativeClose();
+  private native int nativeClose();
 
-    private native Long nativeGetSourceTime();
+  private native Long nativeGetSourceTime();
 
-    private native Long nativeGetTimestamp();
+  private native Long nativeGetTimestamp();
 
-    private native int nativeSetTimestamp(long j);
+  private native int nativeSetTimestamp(long j);
 
-    private TimeFilter() {
+  private TimeFilter() {}
+
+  public int setCurrentTimestamp(long timestamp) {
+    int res = nativeSetTimestamp(timestamp);
+    if (res == 0) {
+      this.mEnable = true;
     }
+    return res;
+  }
 
-    public int setCurrentTimestamp(long timestamp) {
-        int res = nativeSetTimestamp(timestamp);
-        if (res == 0) {
-            this.mEnable = true;
-        }
-        return res;
+  public int clearTimestamp() {
+    int res = nativeClearTimestamp();
+    if (res == 0) {
+      this.mEnable = false;
     }
+    return res;
+  }
 
-    public int clearTimestamp() {
-        int res = nativeClearTimestamp();
-        if (res == 0) {
-            this.mEnable = false;
-        }
-        return res;
+  public long getTimeStamp() {
+    if (!this.mEnable) {
+      return -1L;
     }
+    return nativeGetTimestamp().longValue();
+  }
 
-    public long getTimeStamp() {
-        if (!this.mEnable) {
-            return -1L;
-        }
-        return nativeGetTimestamp().longValue();
+  public long getSourceTime() {
+    if (!this.mEnable) {
+      return -1L;
     }
+    return nativeGetSourceTime().longValue();
+  }
 
-    public long getSourceTime() {
-        if (!this.mEnable) {
-            return -1L;
-        }
-        return nativeGetSourceTime().longValue();
+  @Override // java.lang.AutoCloseable
+  public void close() {
+    int res = nativeClose();
+    if (res != 0) {
+      TunerUtils.throwExceptionForResult(res, "Failed to close time filter.");
     }
-
-    @Override // java.lang.AutoCloseable
-    public void close() {
-        int res = nativeClose();
-        if (res != 0) {
-            TunerUtils.throwExceptionForResult(res, "Failed to close time filter.");
-        }
-    }
+  }
 }

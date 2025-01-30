@@ -10,98 +10,105 @@ import java.lang.annotation.Target;
 /* loaded from: classes5.dex */
 public @interface DataClass {
 
-    @Target({ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.LOCAL_VARIABLE})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface Each {
-    }
+  @Target({
+    ElementType.FIELD,
+    ElementType.METHOD,
+    ElementType.PARAMETER,
+    ElementType.LOCAL_VARIABLE
+  })
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface Each {}
 
-    @Target({ElementType.METHOD})
+  @Target({ElementType.METHOD})
+  @Deprecated
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface Generated {
+
+    @Target({
+      ElementType.FIELD,
+      ElementType.METHOD,
+      ElementType.ANNOTATION_TYPE,
+      ElementType.CONSTRUCTOR,
+      ElementType.TYPE
+    })
     @Deprecated
     @Retention(RetentionPolicy.SOURCE)
-    public @interface Generated {
+    public @interface Member {}
 
-        @Target({ElementType.FIELD, ElementType.METHOD, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR, ElementType.TYPE})
-        @Deprecated
-        @Retention(RetentionPolicy.SOURCE)
-        public @interface Member {
-        }
+    String codegenVersion();
 
-        String codegenVersion();
+    String inputSignatures() default "";
 
-        String inputSignatures() default "";
+    String sourceFile();
 
-        String sourceFile();
+    long time();
+  }
 
-        long time();
-    }
+  @Target({ElementType.FIELD})
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface MaySetToNull {}
 
-    @Target({ElementType.FIELD})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface MaySetToNull {
-    }
+  @Target({ElementType.FIELD})
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface ParcelWith {
+    Class<? extends Parcelling> value();
+  }
 
-    @Target({ElementType.FIELD})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface ParcelWith {
-        Class<? extends Parcelling> value();
-    }
+  public interface PerIntFieldAction<THIS> {
+    void acceptInt(THIS r1, String str, int i);
+  }
 
-    public interface PerIntFieldAction<THIS> {
-        void acceptInt(THIS r1, String str, int i);
-    }
+  public interface PerObjectFieldAction<THIS> {
+    void acceptObject(THIS r1, String str, Object obj);
+  }
 
-    public interface PerObjectFieldAction<THIS> {
-        void acceptObject(THIS r1, String str, Object obj);
-    }
+  @Target({ElementType.FIELD})
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface PluralOf {
+    String value();
+  }
 
-    @Target({ElementType.FIELD})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface PluralOf {
-        String value();
-    }
+  @Target({ElementType.TYPE})
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface Suppress {
+    String[] value();
+  }
 
-    @Target({ElementType.TYPE})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface Suppress {
-        String[] value();
-    }
+  @Target({ElementType.FIELD})
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface SuppressConstDefsGeneration {}
 
-    @Target({ElementType.FIELD})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface SuppressConstDefsGeneration {
-    }
+  boolean genAidl() default false;
 
-    boolean genAidl() default false;
+  boolean genBuilder() default false;
 
-    boolean genBuilder() default false;
+  boolean genConstDefs() default true;
 
-    boolean genConstDefs() default true;
+  boolean genConstructor() default true;
 
-    boolean genConstructor() default true;
+  boolean genCopyConstructor() default false;
 
-    boolean genCopyConstructor() default false;
+  boolean genEqualsHashCode() default false;
 
-    boolean genEqualsHashCode() default false;
+  boolean genForEachField() default false;
 
-    boolean genForEachField() default false;
+  boolean genGetters() default true;
 
-    boolean genGetters() default true;
+  boolean genHiddenBuilder() default false;
 
-    boolean genHiddenBuilder() default false;
+  boolean genHiddenConstDefs() default false;
 
-    boolean genHiddenConstDefs() default false;
+  boolean genHiddenConstructor() default false;
 
-    boolean genHiddenConstructor() default false;
+  boolean genHiddenCopyConstructor() default false;
 
-    boolean genHiddenCopyConstructor() default false;
+  boolean genHiddenGetters() default false;
 
-    boolean genHiddenGetters() default false;
+  boolean genHiddenSetters() default false;
 
-    boolean genHiddenSetters() default false;
+  boolean genParcelable() default false;
 
-    boolean genParcelable() default false;
+  boolean genSetters() default false;
 
-    boolean genSetters() default false;
-
-    boolean genToString() default false;
+  boolean genToString() default false;
 }

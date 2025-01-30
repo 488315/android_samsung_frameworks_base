@@ -8,23 +8,23 @@ import java.util.List;
 
 /* loaded from: classes.dex */
 public interface BiometricServiceProvider {
-    boolean containsSensor(int i);
+  boolean containsSensor(int i);
 
-    void dumpInternal(int i, PrintWriter printWriter);
+  void dumpInternal(int i, PrintWriter printWriter);
 
-    void dumpProtoMetrics(int i, FileDescriptor fileDescriptor);
+  void dumpProtoMetrics(int i, FileDescriptor fileDescriptor);
 
-    void dumpProtoState(int i, ProtoOutputStream protoOutputStream, boolean z);
+  void dumpProtoState(int i, ProtoOutputStream protoOutputStream, boolean z);
 
-    long getAuthenticatorId(int i, int i2);
+  long getAuthenticatorId(int i, int i2);
 
-    int getLockoutModeForUser(int i, int i2);
+  int getLockoutModeForUser(int i, int i2);
 
-    SensorPropertiesInternal getSensorProperties(int i);
+  SensorPropertiesInternal getSensorProperties(int i);
 
-    List getSensorProperties();
+  List getSensorProperties();
 
-    boolean hasEnrollments(int i, int i2);
+  boolean hasEnrollments(int i, int i2);
 
-    boolean isHardwareDetected(int i);
+  boolean isHardwareDetected(int i);
 }

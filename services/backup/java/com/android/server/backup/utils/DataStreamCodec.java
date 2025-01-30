@@ -5,7 +5,7 @@ import java.io.DataOutputStream;
 
 /* loaded from: classes.dex */
 public interface DataStreamCodec {
-    Object deserialize(DataInputStream dataInputStream);
+  Object deserialize(DataInputStream dataInputStream);
 
-    void serialize(Object obj, DataOutputStream dataOutputStream);
+  void serialize(Object obj, DataOutputStream dataOutputStream);
 }

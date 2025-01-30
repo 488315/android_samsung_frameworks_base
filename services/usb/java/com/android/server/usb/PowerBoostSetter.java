@@ -7,23 +7,26 @@ import java.time.Instant;
 
 /* loaded from: classes3.dex */
 public class PowerBoostSetter {
-    public PowerManagerInternal mPowerManagerInternal;
-    public Instant mPreviousTimeout = null;
+  public PowerManagerInternal mPowerManagerInternal;
+  public Instant mPreviousTimeout = null;
 
-    public PowerBoostSetter() {
-        this.mPowerManagerInternal = null;
-        this.mPowerManagerInternal = (PowerManagerInternal) LocalServices.getService(PowerManagerInternal.class);
-    }
+  public PowerBoostSetter() {
+    this.mPowerManagerInternal = null;
+    this.mPowerManagerInternal =
+        (PowerManagerInternal) LocalServices.getService(PowerManagerInternal.class);
+  }
 
-    public void boostPower() {
-        if (this.mPowerManagerInternal == null) {
-            this.mPowerManagerInternal = (PowerManagerInternal) LocalServices.getService(PowerManagerInternal.class);
-        }
-        if (this.mPowerManagerInternal == null) {
-            Log.w("PowerBoostSetter", "PowerManagerInternal null");
-        } else if (this.mPreviousTimeout == null || Instant.now().isAfter(this.mPreviousTimeout.plusMillis(7500L))) {
-            this.mPreviousTimeout = Instant.now();
-            this.mPowerManagerInternal.setPowerBoost(0, 15000);
-        }
+  public void boostPower() {
+    if (this.mPowerManagerInternal == null) {
+      this.mPowerManagerInternal =
+          (PowerManagerInternal) LocalServices.getService(PowerManagerInternal.class);
     }
+    if (this.mPowerManagerInternal == null) {
+      Log.w("PowerBoostSetter", "PowerManagerInternal null");
+    } else if (this.mPreviousTimeout == null
+        || Instant.now().isAfter(this.mPreviousTimeout.plusMillis(7500L))) {
+      this.mPreviousTimeout = Instant.now();
+      this.mPowerManagerInternal.setPowerBoost(0, 15000);
+    }
+  }
 }

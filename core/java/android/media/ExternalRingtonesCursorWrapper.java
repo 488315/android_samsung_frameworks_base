@@ -6,18 +6,18 @@ import android.net.Uri;
 
 /* loaded from: classes2.dex */
 public class ExternalRingtonesCursorWrapper extends CursorWrapper {
-    private Uri mUri;
+  private Uri mUri;
 
-    public ExternalRingtonesCursorWrapper(Cursor cursor, Uri uri) {
-        super(cursor);
-        this.mUri = uri;
-    }
+  public ExternalRingtonesCursorWrapper(Cursor cursor, Uri uri) {
+    super(cursor);
+    this.mUri = uri;
+  }
 
-    @Override // android.database.CursorWrapper, android.database.Cursor
-    public String getString(int index) {
-        if (index == 2) {
-            return this.mUri.toString();
-        }
-        return super.getString(index);
+  @Override // android.database.CursorWrapper, android.database.Cursor
+  public String getString(int index) {
+    if (index == 2) {
+      return this.mUri.toString();
     }
+    return super.getString(index);
+  }
 }

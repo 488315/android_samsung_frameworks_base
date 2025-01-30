@@ -8,28 +8,42 @@ import com.android.server.backup.UserBackupManagerService;
 
 /* loaded from: classes.dex */
 public class RestoreFileRunnable implements Runnable {
-    public final IBackupAgent mAgent;
-    public final UserBackupManagerService mBackupManagerService;
-    public final FileMetadata mInfo;
-    public final ParcelFileDescriptor mSocket;
-    public final int mToken;
+  public final IBackupAgent mAgent;
+  public final UserBackupManagerService mBackupManagerService;
+  public final FileMetadata mInfo;
+  public final ParcelFileDescriptor mSocket;
+  public final int mToken;
 
-    public RestoreFileRunnable(UserBackupManagerService userBackupManagerService, IBackupAgent iBackupAgent, FileMetadata fileMetadata, ParcelFileDescriptor parcelFileDescriptor, int i) {
-        this.mAgent = iBackupAgent;
-        this.mInfo = fileMetadata;
-        this.mToken = i;
-        this.mSocket = ParcelFileDescriptor.dup(parcelFileDescriptor.getFileDescriptor());
-        this.mBackupManagerService = userBackupManagerService;
-    }
+  public RestoreFileRunnable(
+      UserBackupManagerService userBackupManagerService,
+      IBackupAgent iBackupAgent,
+      FileMetadata fileMetadata,
+      ParcelFileDescriptor parcelFileDescriptor,
+      int i) {
+    this.mAgent = iBackupAgent;
+    this.mInfo = fileMetadata;
+    this.mToken = i;
+    this.mSocket = ParcelFileDescriptor.dup(parcelFileDescriptor.getFileDescriptor());
+    this.mBackupManagerService = userBackupManagerService;
+  }
 
-    @Override // java.lang.Runnable
-    public void run() {
-        try {
-            IBackupAgent iBackupAgent = this.mAgent;
-            ParcelFileDescriptor parcelFileDescriptor = this.mSocket;
-            FileMetadata fileMetadata = this.mInfo;
-            iBackupAgent.doRestoreFile(parcelFileDescriptor, fileMetadata.size, fileMetadata.type, fileMetadata.domain, fileMetadata.path, fileMetadata.mode, fileMetadata.mtime, this.mToken, this.mBackupManagerService.getBackupManagerBinder());
-        } catch (RemoteException unused) {
-        }
+  @Override // java.lang.Runnable
+  public void run() {
+    try {
+      IBackupAgent iBackupAgent = this.mAgent;
+      ParcelFileDescriptor parcelFileDescriptor = this.mSocket;
+      FileMetadata fileMetadata = this.mInfo;
+      iBackupAgent.doRestoreFile(
+          parcelFileDescriptor,
+          fileMetadata.size,
+          fileMetadata.type,
+          fileMetadata.domain,
+          fileMetadata.path,
+          fileMetadata.mode,
+          fileMetadata.mtime,
+          this.mToken,
+          this.mBackupManagerService.getBackupManagerBinder());
+    } catch (RemoteException unused) {
     }
+  }
 }

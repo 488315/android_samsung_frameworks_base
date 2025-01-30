@@ -7,44 +7,48 @@ import android.p009os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextFlatMotion extends SContextEventContext {
-    public static final Parcelable.Creator<SContextFlatMotion> CREATOR = new Parcelable.Creator<SContextFlatMotion>() { // from class: android.hardware.scontext.SContextFlatMotion.1
+  public static final Parcelable.Creator<SContextFlatMotion> CREATOR =
+      new Parcelable.Creator<
+          SContextFlatMotion>() { // from class: android.hardware.scontext.SContextFlatMotion.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public SContextFlatMotion createFromParcel(Parcel in) {
-            return new SContextFlatMotion(in);
+          return new SContextFlatMotion(in);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public SContextFlatMotion[] newArray(int size) {
-            return new SContextFlatMotion[size];
+          return new SContextFlatMotion[size];
         }
-    };
-    private Bundle mContext;
+      };
+  private Bundle mContext;
 
-    SContextFlatMotion() {
-        this.mContext = new Bundle();
-    }
+  SContextFlatMotion() {
+    this.mContext = new Bundle();
+  }
 
-    SContextFlatMotion(Parcel src) {
-        readFromParcel(src);
-    }
+  SContextFlatMotion(Parcel src) {
+    readFromParcel(src);
+  }
 
-    public int getAction() {
-        return this.mContext.getInt("Action");
-    }
+  public int getAction() {
+    return this.mContext.getInt("Action");
+  }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
-    public void setValues(Bundle context) {
-        this.mContext = context;
-    }
+  @Override // android.hardware.scontext.SContextEventContext,
+            // com.samsung.android.hardware.context.SemContextEventContext
+  public void setValues(Bundle context) {
+    this.mContext = context;
+  }
 
-    @Override // com.samsung.android.hardware.context.SemContextEventContext, android.p009os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeBundle(this.mContext);
-    }
+  @Override // com.samsung.android.hardware.context.SemContextEventContext,
+            // android.p009os.Parcelable
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeBundle(this.mContext);
+  }
 
-    private void readFromParcel(Parcel src) {
-        this.mContext = src.readBundle();
-    }
+  private void readFromParcel(Parcel src) {
+    this.mContext = src.readBundle();
+  }
 }

@@ -1,94 +1,92 @@
 package android.p009os;
 
-import android.p009os.Parcelable;
 import android.util.Log;
 import com.android.internal.p029os.IShellCallback;
 
 /* loaded from: classes3.dex */
 public class ShellCallback implements Parcelable {
-    public static final Parcelable.Creator<ShellCallback> CREATOR = new Parcelable.Creator<ShellCallback>() { // from class: android.os.ShellCallback.1
+  public static final Parcelable.Creator<ShellCallback> CREATOR =
+      new Parcelable.Creator<ShellCallback>() { // from class: android.os.ShellCallback.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public ShellCallback createFromParcel(Parcel in) {
-            return new ShellCallback(in);
+          return new ShellCallback(in);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public ShellCallback[] newArray(int size) {
-            return new ShellCallback[size];
+          return new ShellCallback[size];
         }
-    };
-    static final boolean DEBUG = false;
-    static final String TAG = "ShellCallback";
-    final boolean mLocal = true;
-    IShellCallback mShellCallback;
+      };
+  static final boolean DEBUG = false;
+  static final String TAG = "ShellCallback";
+  final boolean mLocal = true;
+  IShellCallback mShellCallback;
 
-    class MyShellCallback extends IShellCallback.Stub {
-        MyShellCallback() {
-        }
+  class MyShellCallback extends IShellCallback.Stub {
+    MyShellCallback() {}
 
-        @Override // com.android.internal.p029os.IShellCallback
-        public ParcelFileDescriptor openFile(String path, String seLinuxContext, String mode) {
-            return ShellCallback.this.onOpenFile(path, seLinuxContext, mode);
-        }
-    }
-
-    public ShellCallback() {
-    }
-
+    @Override // com.android.internal.p029os.IShellCallback
     public ParcelFileDescriptor openFile(String path, String seLinuxContext, String mode) {
-        if (this.mLocal) {
-            return onOpenFile(path, seLinuxContext, mode);
-        }
-        IShellCallback iShellCallback = this.mShellCallback;
-        if (iShellCallback != null) {
-            try {
-                return iShellCallback.openFile(path, seLinuxContext, mode);
-            } catch (RemoteException e) {
-                Log.m103w(TAG, "Failure opening " + path, e);
-                return null;
-            }
-        }
+      return ShellCallback.this.onOpenFile(path, seLinuxContext, mode);
+    }
+  }
+
+  public ShellCallback() {}
+
+  public ParcelFileDescriptor openFile(String path, String seLinuxContext, String mode) {
+    if (this.mLocal) {
+      return onOpenFile(path, seLinuxContext, mode);
+    }
+    IShellCallback iShellCallback = this.mShellCallback;
+    if (iShellCallback != null) {
+      try {
+        return iShellCallback.openFile(path, seLinuxContext, mode);
+      } catch (RemoteException e) {
+        Log.m103w(TAG, "Failure opening " + path, e);
         return null;
+      }
     }
+    return null;
+  }
 
-    public ParcelFileDescriptor onOpenFile(String path, String seLinuxContext, String mode) {
-        return null;
-    }
+  public ParcelFileDescriptor onOpenFile(String path, String seLinuxContext, String mode) {
+    return null;
+  }
 
-    public static void writeToParcel(ShellCallback callback, Parcel out) {
-        if (callback == null) {
-            out.writeStrongBinder(null);
-        } else {
-            callback.writeToParcel(out, 0);
-        }
+  public static void writeToParcel(ShellCallback callback, Parcel out) {
+    if (callback == null) {
+      out.writeStrongBinder(null);
+    } else {
+      callback.writeToParcel(out, 0);
     }
+  }
 
-    @Override // android.p009os.Parcelable
-    public int describeContents() {
-        return 0;
-    }
+  @Override // android.p009os.Parcelable
+  public int describeContents() {
+    return 0;
+  }
 
-    @Override // android.p009os.Parcelable
-    public void writeToParcel(Parcel out, int flags) {
-        synchronized (this) {
-            if (this.mShellCallback == null) {
-                this.mShellCallback = new MyShellCallback();
-            }
-            out.writeStrongBinder(this.mShellCallback.asBinder());
-        }
+  @Override // android.p009os.Parcelable
+  public void writeToParcel(Parcel out, int flags) {
+    synchronized (this) {
+      if (this.mShellCallback == null) {
+        this.mShellCallback = new MyShellCallback();
+      }
+      out.writeStrongBinder(this.mShellCallback.asBinder());
     }
+  }
 
-    public IBinder getShellCallbackBinder() {
-        return this.mShellCallback.asBinder();
-    }
+  public IBinder getShellCallbackBinder() {
+    return this.mShellCallback.asBinder();
+  }
 
-    ShellCallback(Parcel in) {
-        IShellCallback asInterface = IShellCallback.Stub.asInterface(in.readStrongBinder());
-        this.mShellCallback = asInterface;
-        if (asInterface != null) {
-            Binder.allowBlocking(asInterface.asBinder());
-        }
+  ShellCallback(Parcel in) {
+    IShellCallback asInterface = IShellCallback.Stub.asInterface(in.readStrongBinder());
+    this.mShellCallback = asInterface;
+    if (asInterface != null) {
+      Binder.allowBlocking(asInterface.asBinder());
     }
+  }
 }

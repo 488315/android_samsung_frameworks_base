@@ -5,14 +5,13 @@ import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes5.dex */
 public interface IDeviceIdleConstraint {
-    public static final int ACTIVE = 0;
-    public static final int SENSING_OR_ABOVE = 1;
+  public static final int ACTIVE = 0;
+  public static final int SENSING_OR_ABOVE = 1;
 
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface MinimumState {
-    }
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface MinimumState {}
 
-    void startMonitoring();
+  void startMonitoring();
 
-    void stopMonitoring();
+  void stopMonitoring();
 }

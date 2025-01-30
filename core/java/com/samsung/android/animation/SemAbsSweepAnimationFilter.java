@@ -4,34 +4,37 @@ import android.animation.ValueAnimator;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.view.View;
-import com.samsung.android.animation.SemSweepListAnimator;
 
 /* loaded from: classes5.dex */
 abstract class SemAbsSweepAnimationFilter {
-    protected boolean mIsAnimationBack = false;
+  protected boolean mIsAnimationBack = false;
 
-    abstract ValueAnimator createActionUpAnimator(View view, float f, int i, float f2, boolean z);
+  abstract ValueAnimator createActionUpAnimator(View view, float f, int i, float f2, boolean z);
 
-    abstract void doMoveAction(View view, float f, int i);
+  abstract void doMoveAction(View view, float f, int i);
 
-    abstract void doRefresh();
+  abstract void doRefresh();
 
-    abstract void doUpActionWhenAnimationUpdate(int i, float f);
+  abstract void doUpActionWhenAnimationUpdate(int i, float f);
 
-    abstract void draw(Canvas canvas);
+  abstract void draw(Canvas canvas);
 
-    abstract Rect getBitmapDrawableBound();
+  abstract Rect getBitmapDrawableBound();
 
-    abstract float getEndXOfActionUpAnimator();
+  abstract float getEndXOfActionUpAnimator();
 
-    abstract void initAnimationFilter(View view, float f, int i, SemSweepListAnimator.OnSweepListener onSweepListener, SemSweepListAnimator.SweepConfiguration sweepConfiguration);
+  abstract void initAnimationFilter(
+      View view,
+      float f,
+      int i,
+      SemSweepListAnimator.OnSweepListener onSweepListener,
+      SemSweepListAnimator.SweepConfiguration sweepConfiguration);
 
-    abstract void setForegroundView(View view);
+  abstract void setForegroundView(View view);
 
-    SemAbsSweepAnimationFilter() {
-    }
+  SemAbsSweepAnimationFilter() {}
 
-    public boolean isAnimationBack() {
-        return this.mIsAnimationBack;
-    }
+  public boolean isAnimationBack() {
+    return this.mIsAnimationBack;
+  }
 }

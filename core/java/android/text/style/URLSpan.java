@@ -14,59 +14,59 @@ import android.view.View;
 
 /* loaded from: classes3.dex */
 public class URLSpan extends ClickableSpan implements ParcelableSpan {
-    private final String mURL;
+  private final String mURL;
 
-    public URLSpan(String url) {
-        this.mURL = url;
-    }
+  public URLSpan(String url) {
+    this.mURL = url;
+  }
 
-    public URLSpan(Parcel src) {
-        this.mURL = src.readString();
-    }
+  public URLSpan(Parcel src) {
+    this.mURL = src.readString();
+  }
 
-    public int getSpanTypeId() {
-        return getSpanTypeIdInternal();
-    }
+  public int getSpanTypeId() {
+    return getSpanTypeIdInternal();
+  }
 
-    public int getSpanTypeIdInternal() {
-        return 11;
-    }
+  public int getSpanTypeIdInternal() {
+    return 11;
+  }
 
-    @Override // android.p009os.Parcelable
-    public int describeContents() {
-        return 0;
-    }
+  @Override // android.p009os.Parcelable
+  public int describeContents() {
+    return 0;
+  }
 
-    public void writeToParcel(Parcel dest, int flags) {
-        writeToParcelInternal(dest, flags);
-    }
+  public void writeToParcel(Parcel dest, int flags) {
+    writeToParcelInternal(dest, flags);
+  }
 
-    public void writeToParcelInternal(Parcel dest, int flags) {
-        dest.writeString(this.mURL);
-    }
+  public void writeToParcelInternal(Parcel dest, int flags) {
+    dest.writeString(this.mURL);
+  }
 
-    public String getURL() {
-        return this.mURL;
-    }
+  public String getURL() {
+    return this.mURL;
+  }
 
-    @Override // android.text.style.ClickableSpan
-    public void onClick(View widget) {
-        Uri uri = Uri.parse(getURL());
-        Context context = widget.getContext();
-        Intent intent = new Intent("android.intent.action.VIEW", uri);
-        if (!(context instanceof Activity)) {
-            intent.setFlags(268435456);
-        }
-        intent.putExtra(Browser.EXTRA_APPLICATION_ID, context.getPackageName());
-        try {
-            context.startActivity(intent);
-        } catch (ActivityNotFoundException e) {
-            Log.m102w("URLSpan", "Actvity was not found for intent, " + intent.toString());
-        }
+  @Override // android.text.style.ClickableSpan
+  public void onClick(View widget) {
+    Uri uri = Uri.parse(getURL());
+    Context context = widget.getContext();
+    Intent intent = new Intent("android.intent.action.VIEW", uri);
+    if (!(context instanceof Activity)) {
+      intent.setFlags(268435456);
     }
+    intent.putExtra(Browser.EXTRA_APPLICATION_ID, context.getPackageName());
+    try {
+      context.startActivity(intent);
+    } catch (ActivityNotFoundException e) {
+      Log.m102w("URLSpan", "Actvity was not found for intent, " + intent.toString());
+    }
+  }
 
-    @Override // android.text.style.ClickableSpan
-    public String toString() {
-        return "URLSpan{URL='" + getURL() + DateFormat.QUOTE + '}';
-    }
+  @Override // android.text.style.ClickableSpan
+  public String toString() {
+    return "URLSpan{URL='" + getURL() + DateFormat.QUOTE + '}';
+  }
 }

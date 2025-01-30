@@ -6,44 +6,42 @@ import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes3.dex */
 public interface Parcelable {
-    public static final int CONTENTS_FILE_DESCRIPTOR = 1;
-    public static final int PARCELABLE_ELIDE_DUPLICATES = 2;
+  public static final int CONTENTS_FILE_DESCRIPTOR = 1;
+  public static final int PARCELABLE_ELIDE_DUPLICATES = 2;
 
-    @SystemApi(client = SystemApi.Client.PRIVILEGED_APPS)
-    public static final int PARCELABLE_STABILITY_LOCAL = 0;
+  @SystemApi(client = SystemApi.Client.PRIVILEGED_APPS)
+  public static final int PARCELABLE_STABILITY_LOCAL = 0;
 
-    @SystemApi(client = SystemApi.Client.PRIVILEGED_APPS)
-    public static final int PARCELABLE_STABILITY_VINTF = 1;
-    public static final int PARCELABLE_WRITE_RETURN_VALUE = 1;
+  @SystemApi(client = SystemApi.Client.PRIVILEGED_APPS)
+  public static final int PARCELABLE_STABILITY_VINTF = 1;
 
-    public interface ClassLoaderCreator<T> extends Creator<T> {
-        T createFromParcel(Parcel parcel, ClassLoader classLoader);
-    }
+  public static final int PARCELABLE_WRITE_RETURN_VALUE = 1;
 
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface ContentsFlags {
-    }
+  public interface ClassLoaderCreator<T> extends Creator<T> {
+    T createFromParcel(Parcel parcel, ClassLoader classLoader);
+  }
 
-    public interface Creator<T> {
-        T createFromParcel(Parcel parcel);
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface ContentsFlags {}
 
-        T[] newArray(int i);
-    }
+  public interface Creator<T> {
+    T createFromParcel(Parcel parcel);
 
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface Stability {
-    }
+    T[] newArray(int i);
+  }
 
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface WriteFlags {
-    }
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface Stability {}
 
-    int describeContents();
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface WriteFlags {}
 
-    void writeToParcel(Parcel parcel, int i);
+  int describeContents();
 
-    @SystemApi(client = SystemApi.Client.PRIVILEGED_APPS)
-    default int getStability() {
-        return 0;
-    }
+  void writeToParcel(Parcel parcel, int i);
+
+  @SystemApi(client = SystemApi.Client.PRIVILEGED_APPS)
+  default int getStability() {
+    return 0;
+  }
 }

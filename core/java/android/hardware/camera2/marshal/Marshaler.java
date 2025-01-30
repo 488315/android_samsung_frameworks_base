@@ -6,37 +6,42 @@ import java.nio.ByteBuffer;
 
 /* loaded from: classes.dex */
 public abstract class Marshaler<T> {
-    public static int NATIVE_SIZE_DYNAMIC = -1;
-    protected final int mNativeType;
-    protected final TypeReference<T> mTypeReference;
+  public static int NATIVE_SIZE_DYNAMIC = -1;
+  protected final int mNativeType;
+  protected final TypeReference<T> mTypeReference;
 
-    public abstract int getNativeSize();
+  public abstract int getNativeSize();
 
-    public abstract void marshal(T t, ByteBuffer byteBuffer);
+  public abstract void marshal(T t, ByteBuffer byteBuffer);
 
-    public abstract T unmarshal(ByteBuffer byteBuffer);
+  public abstract T unmarshal(ByteBuffer byteBuffer);
 
-    protected Marshaler(MarshalQueryable<T> query, TypeReference<T> typeReference, int nativeType) {
-        this.mTypeReference = (TypeReference) Preconditions.checkNotNull(typeReference, "typeReference must not be null");
-        this.mNativeType = MarshalHelpers.checkNativeType(nativeType);
-        if (!query.isTypeMappingSupported(typeReference, nativeType)) {
-            throw new UnsupportedOperationException("Unsupported type marshaling for managed type " + typeReference + " and native type " + MarshalHelpers.toStringNativeType(nativeType));
-        }
+  protected Marshaler(MarshalQueryable<T> query, TypeReference<T> typeReference, int nativeType) {
+    this.mTypeReference =
+        (TypeReference) Preconditions.checkNotNull(typeReference, "typeReference must not be null");
+    this.mNativeType = MarshalHelpers.checkNativeType(nativeType);
+    if (!query.isTypeMappingSupported(typeReference, nativeType)) {
+      throw new UnsupportedOperationException(
+          "Unsupported type marshaling for managed type "
+              + typeReference
+              + " and native type "
+              + MarshalHelpers.toStringNativeType(nativeType));
     }
+  }
 
-    public int calculateMarshalSize(T value) {
-        int nativeSize = getNativeSize();
-        if (nativeSize == NATIVE_SIZE_DYNAMIC) {
-            throw new AssertionError("Override this function for dynamically-sized objects");
-        }
-        return nativeSize;
+  public int calculateMarshalSize(T value) {
+    int nativeSize = getNativeSize();
+    if (nativeSize == NATIVE_SIZE_DYNAMIC) {
+      throw new AssertionError("Override this function for dynamically-sized objects");
     }
+    return nativeSize;
+  }
 
-    public TypeReference<T> getTypeReference() {
-        return this.mTypeReference;
-    }
+  public TypeReference<T> getTypeReference() {
+    return this.mTypeReference;
+  }
 
-    public int getNativeType() {
-        return this.mNativeType;
-    }
+  public int getNativeType() {
+    return this.mNativeType;
+  }
 }

@@ -2,23 +2,23 @@ package com.android.server.wm;
 
 /* loaded from: classes3.dex */
 public interface SizeCompatPolicySupports {
-    boolean supportsFreeform();
+  boolean supportsFreeform();
 
-    default boolean supportsFullScreen() {
-        return true;
-    }
+  default boolean supportsFullScreen() {
+    return true;
+  }
 
-    boolean supportsIgnoreOrientationRequest();
+  boolean supportsIgnoreOrientationRequest();
 
-    boolean supportsMockFullScreen();
+  boolean supportsMockFullScreen();
 
-    boolean supportsSandboxDisplay(ActivityRecord activityRecord);
+  boolean supportsSandboxDisplay(ActivityRecord activityRecord);
 
-    default boolean supportsSandboxInsetsHint(ActivityRecord activityRecord) {
-        return false;
-    }
+  default boolean supportsSandboxInsetsHint(ActivityRecord activityRecord) {
+    return false;
+  }
 
-    boolean supportsSandboxMotionEvent(ActivityRecord activityRecord);
+  boolean supportsSandboxMotionEvent(ActivityRecord activityRecord);
 
-    boolean supportsSandboxViewBounds(ActivityRecord activityRecord);
+  boolean supportsSandboxViewBounds(ActivityRecord activityRecord);
 }

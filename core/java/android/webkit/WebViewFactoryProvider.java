@@ -4,62 +4,61 @@ import android.annotation.SystemApi;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.webkit.WebView;
 import java.util.List;
 
 @SystemApi
 /* loaded from: classes4.dex */
 public interface WebViewFactoryProvider {
 
-    public interface Statics {
-        void clearClientCertPreferences(Runnable runnable);
+  public interface Statics {
+    void clearClientCertPreferences(Runnable runnable);
 
-        void enableSlowWholeDocumentDraw();
+    void enableSlowWholeDocumentDraw();
 
-        String findAddress(String str);
+    String findAddress(String str);
 
-        void freeMemoryForTests();
+    void freeMemoryForTests();
 
-        String getDefaultUserAgent(Context context);
+    String getDefaultUserAgent(Context context);
 
-        Uri getSafeBrowsingPrivacyPolicyUrl();
+    Uri getSafeBrowsingPrivacyPolicyUrl();
 
-        void initSafeBrowsing(Context context, ValueCallback<Boolean> valueCallback);
+    void initSafeBrowsing(Context context, ValueCallback<Boolean> valueCallback);
 
-        Uri[] parseFileChooserResult(int i, Intent intent);
+    Uri[] parseFileChooserResult(int i, Intent intent);
 
-        void setSafeBrowsingWhitelist(List<String> list, ValueCallback<Boolean> valueCallback);
+    void setSafeBrowsingWhitelist(List<String> list, ValueCallback<Boolean> valueCallback);
 
-        void setWebContentsDebuggingEnabled(boolean z);
-    }
+    void setWebContentsDebuggingEnabled(boolean z);
+  }
 
-    WebViewProvider createWebView(WebView webView, WebView.PrivateAccess privateAccess);
+  WebViewProvider createWebView(WebView webView, WebView.PrivateAccess privateAccess);
 
-    CookieManager getCookieManager();
+  CookieManager getCookieManager();
 
-    GeolocationPermissions getGeolocationPermissions();
+  GeolocationPermissions getGeolocationPermissions();
 
-    ServiceWorkerController getServiceWorkerController();
+  ServiceWorkerController getServiceWorkerController();
 
-    Statics getStatics();
+  Statics getStatics();
 
-    TokenBindingService getTokenBindingService();
+  TokenBindingService getTokenBindingService();
 
-    TracingController getTracingController();
+  TracingController getTracingController();
 
-    WebIconDatabase getWebIconDatabase();
+  WebIconDatabase getWebIconDatabase();
 
-    WebStorage getWebStorage();
+  WebStorage getWebStorage();
 
-    ClassLoader getWebViewClassLoader();
+  ClassLoader getWebViewClassLoader();
 
-    WebViewDatabase getWebViewDatabase(Context context);
+  WebViewDatabase getWebViewDatabase(Context context);
 
-    default PacProcessor getPacProcessor() {
-        throw new UnsupportedOperationException("Not implemented");
-    }
+  default PacProcessor getPacProcessor() {
+    throw new UnsupportedOperationException("Not implemented");
+  }
 
-    default PacProcessor createPacProcessor() {
-        throw new UnsupportedOperationException("Not implemented");
-    }
+  default PacProcessor createPacProcessor() {
+    throw new UnsupportedOperationException("Not implemented");
+  }
 }

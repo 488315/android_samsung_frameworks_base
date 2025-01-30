@@ -4,33 +4,33 @@ import android.content.Context;
 
 /* loaded from: classes4.dex */
 public abstract class WebViewDatabase {
-    protected static final String LOGTAG = "webviewdatabase";
+  protected static final String LOGTAG = "webviewdatabase";
 
-    @Deprecated
-    public abstract void clearFormData();
+  @Deprecated
+  public abstract void clearFormData();
 
-    public abstract void clearHttpAuthUsernamePassword();
+  public abstract void clearHttpAuthUsernamePassword();
 
-    @Deprecated
-    public abstract void clearUsernamePassword();
+  @Deprecated
+  public abstract void clearUsernamePassword();
 
-    public abstract String[] getHttpAuthUsernamePassword(String str, String str2);
+  public abstract String[] getHttpAuthUsernamePassword(String str, String str2);
 
-    @Deprecated
-    public abstract boolean hasFormData();
+  @Deprecated
+  public abstract boolean hasFormData();
 
-    public abstract boolean hasHttpAuthUsernamePassword();
+  public abstract boolean hasHttpAuthUsernamePassword();
 
-    @Deprecated
-    public abstract boolean hasUsernamePassword();
+  @Deprecated
+  public abstract boolean hasUsernamePassword();
 
-    public abstract void setHttpAuthUsernamePassword(String str, String str2, String str3, String str4);
+  public abstract void setHttpAuthUsernamePassword(
+      String str, String str2, String str3, String str4);
 
-    @Deprecated
-    public WebViewDatabase() {
-    }
+  @Deprecated
+  public WebViewDatabase() {}
 
-    public static WebViewDatabase getInstance(Context context) {
-        return WebViewFactory.getProvider().getWebViewDatabase(context);
-    }
+  public static WebViewDatabase getInstance(Context context) {
+    return WebViewFactory.getProvider().getWebViewDatabase(context);
+  }
 }

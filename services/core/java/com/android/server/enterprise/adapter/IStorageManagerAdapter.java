@@ -5,13 +5,13 @@ import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface IStorageManagerAdapter extends IAdapterHandle {
-    String getExternalSdCardPath();
+  String getExternalSdCardPath();
 
-    String getExternalSdCardState();
+  String getExternalSdCardState();
 
-    String getInternalSdCardPath();
+  String getInternalSdCardPath();
 
-    StorageVolume[] getVolumeList();
+  StorageVolume[] getVolumeList();
 
-    List getVolumes();
+  List getVolumes();
 }

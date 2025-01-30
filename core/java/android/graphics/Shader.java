@@ -4,139 +4,142 @@ import libcore.util.NativeAllocationRegistry;
 
 /* loaded from: classes.dex */
 public class Shader {
-    private Runnable mCleaner;
-    private final ColorSpace mColorSpace;
-    private Matrix mLocalMatrix;
-    private long mNativeInstance;
+  private Runnable mCleaner;
+  private final ColorSpace mColorSpace;
+  private Matrix mLocalMatrix;
+  private long mNativeInstance;
 
-    /* JADX INFO: Access modifiers changed from: private */
-    public static native long nativeGetFinalizer();
+  /* JADX INFO: Access modifiers changed from: private */
+  public static native long nativeGetFinalizer();
 
-    private static class NoImagePreloadHolder {
-        public static final NativeAllocationRegistry sRegistry = NativeAllocationRegistry.createMalloced(Shader.class.getClassLoader(), Shader.nativeGetFinalizer());
+  private static class NoImagePreloadHolder {
+    public static final NativeAllocationRegistry sRegistry =
+        NativeAllocationRegistry.createMalloced(
+            Shader.class.getClassLoader(), Shader.nativeGetFinalizer());
 
-        private NoImagePreloadHolder() {
-        }
+    private NoImagePreloadHolder() {}
+  }
+
+  @Deprecated
+  public Shader() {
+    this.mColorSpace = null;
+  }
+
+  protected Shader(ColorSpace colorSpace) {
+    this.mColorSpace = colorSpace;
+    if (colorSpace == null) {
+      throw new IllegalArgumentException("Use Shader() to create a Shader with no ColorSpace");
     }
+    colorSpace.getNativeInstance();
+  }
 
-    @Deprecated
-    public Shader() {
-        this.mColorSpace = null;
+  protected ColorSpace colorSpace() {
+    return this.mColorSpace;
+  }
+
+  public enum TileMode {
+    CLAMP(0),
+    REPEAT(1),
+    MIRROR(2),
+    DECAL(3);
+
+    final int nativeInt;
+
+    TileMode(int nativeInt) {
+      this.nativeInt = nativeInt;
     }
+  }
 
-    protected Shader(ColorSpace colorSpace) {
-        this.mColorSpace = colorSpace;
-        if (colorSpace == null) {
-            throw new IllegalArgumentException("Use Shader() to create a Shader with no ColorSpace");
-        }
-        colorSpace.getNativeInstance();
+  public boolean getLocalMatrix(Matrix localM) {
+    Matrix matrix = this.mLocalMatrix;
+    if (matrix != null) {
+      localM.set(matrix);
+      return true;
     }
+    return false;
+  }
 
-    protected ColorSpace colorSpace() {
-        return this.mColorSpace;
+  public void setLocalMatrix(Matrix localM) {
+    if (localM == null || localM.isIdentity()) {
+      if (this.mLocalMatrix != null) {
+        this.mLocalMatrix = null;
+        discardNativeInstance();
+        return;
+      }
+      return;
     }
-
-    public enum TileMode {
-        CLAMP(0),
-        REPEAT(1),
-        MIRROR(2),
-        DECAL(3);
-
-        final int nativeInt;
-
-        TileMode(int nativeInt) {
-            this.nativeInt = nativeInt;
-        }
+    Matrix matrix = this.mLocalMatrix;
+    if (matrix == null) {
+      this.mLocalMatrix = new Matrix(localM);
+      discardNativeInstance();
+    } else if (!matrix.equals(localM)) {
+      this.mLocalMatrix.set(localM);
+      discardNativeInstance();
     }
+  }
 
-    public boolean getLocalMatrix(Matrix localM) {
-        Matrix matrix = this.mLocalMatrix;
-        if (matrix != null) {
-            localM.set(matrix);
-            return true;
-        }
-        return false;
-    }
+  protected long createNativeInstance(long nativeMatrix, boolean filterFromPaint) {
+    return 0L;
+  }
 
-    public void setLocalMatrix(Matrix localM) {
-        if (localM == null || localM.isIdentity()) {
-            if (this.mLocalMatrix != null) {
-                this.mLocalMatrix = null;
-                discardNativeInstance();
-                return;
-            }
-            return;
-        }
-        Matrix matrix = this.mLocalMatrix;
-        if (matrix == null) {
-            this.mLocalMatrix = new Matrix(localM);
-            discardNativeInstance();
-        } else if (!matrix.equals(localM)) {
-            this.mLocalMatrix.set(localM);
-            discardNativeInstance();
-        }
-    }
+  protected final synchronized void discardNativeInstance() {
+    discardNativeInstanceLocked();
+  }
 
-    protected long createNativeInstance(long nativeMatrix, boolean filterFromPaint) {
-        return 0L;
+  private void discardNativeInstanceLocked() {
+    if (this.mNativeInstance != 0) {
+      this.mCleaner.run();
+      this.mCleaner = null;
+      this.mNativeInstance = 0L;
     }
+  }
 
-    protected final synchronized void discardNativeInstance() {
-        discardNativeInstanceLocked();
-    }
+  protected boolean shouldDiscardNativeInstance(boolean filterBitmap) {
+    return false;
+  }
 
-    private void discardNativeInstanceLocked() {
-        if (this.mNativeInstance != 0) {
-            this.mCleaner.run();
-            this.mCleaner = null;
-            this.mNativeInstance = 0L;
-        }
+  public final synchronized long getNativeInstance(boolean filterFromPaint) {
+    if (shouldDiscardNativeInstance(filterFromPaint)) {
+      discardNativeInstanceLocked();
     }
+    if (this.mNativeInstance == 0) {
+      Matrix matrix = this.mLocalMatrix;
+      long createNativeInstance =
+          createNativeInstance(matrix == null ? 0L : matrix.m16ni(), filterFromPaint);
+      this.mNativeInstance = createNativeInstance;
+      if (createNativeInstance != 0) {
+        this.mCleaner =
+            NoImagePreloadHolder.sRegistry.registerNativeAllocation(this, this.mNativeInstance);
+      }
+    }
+    return this.mNativeInstance;
+  }
 
-    protected boolean shouldDiscardNativeInstance(boolean filterBitmap) {
-        return false;
-    }
+  public final long getNativeInstance() {
+    return getNativeInstance(false);
+  }
 
-    public final synchronized long getNativeInstance(boolean filterFromPaint) {
-        if (shouldDiscardNativeInstance(filterFromPaint)) {
-            discardNativeInstanceLocked();
-        }
-        if (this.mNativeInstance == 0) {
-            Matrix matrix = this.mLocalMatrix;
-            long createNativeInstance = createNativeInstance(matrix == null ? 0L : matrix.m16ni(), filterFromPaint);
-            this.mNativeInstance = createNativeInstance;
-            if (createNativeInstance != 0) {
-                this.mCleaner = NoImagePreloadHolder.sRegistry.registerNativeAllocation(this, this.mNativeInstance);
-            }
-        }
-        return this.mNativeInstance;
+  protected static long[] convertColors(int[] colors) {
+    if (colors.length < 2) {
+      throw new IllegalArgumentException("needs >= 2 number of colors");
     }
+    long[] colorLongs = new long[colors.length];
+    for (int i = 0; i < colors.length; i++) {
+      colorLongs[i] = Color.pack(colors[i]);
+    }
+    return colorLongs;
+  }
 
-    public final long getNativeInstance() {
-        return getNativeInstance(false);
+  protected static ColorSpace detectColorSpace(long[] colors) {
+    if (colors.length < 2) {
+      throw new IllegalArgumentException("needs >= 2 number of colors");
     }
-
-    protected static long[] convertColors(int[] colors) {
-        if (colors.length < 2) {
-            throw new IllegalArgumentException("needs >= 2 number of colors");
-        }
-        long[] colorLongs = new long[colors.length];
-        for (int i = 0; i < colors.length; i++) {
-            colorLongs[i] = Color.pack(colors[i]);
-        }
-        return colorLongs;
+    ColorSpace colorSpace = Color.colorSpace(colors[0]);
+    for (int i = 1; i < colors.length; i++) {
+      if (Color.colorSpace(colors[i]) != colorSpace) {
+        throw new IllegalArgumentException("All colors must be in the same ColorSpace!");
+      }
     }
-
-    protected static ColorSpace detectColorSpace(long[] colors) {
-        if (colors.length < 2) {
-            throw new IllegalArgumentException("needs >= 2 number of colors");
-        }
-        ColorSpace colorSpace = Color.colorSpace(colors[0]);
-        for (int i = 1; i < colors.length; i++) {
-            if (Color.colorSpace(colors[i]) != colorSpace) {
-                throw new IllegalArgumentException("All colors must be in the same ColorSpace!");
-            }
-        }
-        return colorSpace;
-    }
+    return colorSpace;
+  }
 }

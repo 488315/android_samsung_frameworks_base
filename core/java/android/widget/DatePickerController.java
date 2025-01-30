@@ -4,11 +4,11 @@ import java.util.Calendar;
 
 /* loaded from: classes4.dex */
 interface DatePickerController {
-    Calendar getSelectedDay();
+  Calendar getSelectedDay();
 
-    void onYearSelected(int i);
+  void onYearSelected(int i);
 
-    void registerOnDateChangedListener(OnDateChangedListener onDateChangedListener);
+  void registerOnDateChangedListener(OnDateChangedListener onDateChangedListener);
 
-    void tryVibrate();
+  void tryVibrate();
 }

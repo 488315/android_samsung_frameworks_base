@@ -7,18 +7,18 @@ import java.util.Queue;
 
 /* loaded from: classes4.dex */
 public class FakeMetricsLogger extends MetricsLogger {
-    private Queue<LogMaker> logs = new LinkedList();
+  private Queue<LogMaker> logs = new LinkedList();
 
-    @Override // com.android.internal.logging.MetricsLogger
-    protected void saveLog(LogMaker log) {
-        this.logs.offer(log);
-    }
+  @Override // com.android.internal.logging.MetricsLogger
+  protected void saveLog(LogMaker log) {
+    this.logs.offer(log);
+  }
 
-    public Queue<LogMaker> getLogs() {
-        return this.logs;
-    }
+  public Queue<LogMaker> getLogs() {
+    return this.logs;
+  }
 
-    public void reset() {
-        this.logs.clear();
-    }
+  public void reset() {
+    this.logs.clear();
+  }
 }

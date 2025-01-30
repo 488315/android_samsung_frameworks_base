@@ -7,10 +7,15 @@ import com.android.internal.C4337R;
 
 /* loaded from: classes4.dex */
 public final class NotificationAccessConfirmationActivityContract {
-    public static final String EXTRA_COMPONENT_NAME = "component_name";
-    public static final String EXTRA_USER_ID = "user_id";
+  public static final String EXTRA_COMPONENT_NAME = "component_name";
+  public static final String EXTRA_USER_ID = "user_id";
 
-    public static Intent launcherIntent(Context context, int userId, ComponentName component) {
-        return new Intent().setComponent(ComponentName.unflattenFromString(context.getString(C4337R.string.config_notificationAccessConfirmationActivity))).putExtra("user_id", userId).putExtra(EXTRA_COMPONENT_NAME, component);
-    }
+  public static Intent launcherIntent(Context context, int userId, ComponentName component) {
+    return new Intent()
+        .setComponent(
+            ComponentName.unflattenFromString(
+                context.getString(C4337R.string.config_notificationAccessConfirmationActivity)))
+        .putExtra("user_id", userId)
+        .putExtra(EXTRA_COMPONENT_NAME, component);
+  }
 }

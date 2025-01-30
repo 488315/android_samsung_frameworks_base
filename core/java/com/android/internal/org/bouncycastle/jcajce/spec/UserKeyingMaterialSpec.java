@@ -5,13 +5,13 @@ import java.security.spec.AlgorithmParameterSpec;
 
 /* loaded from: classes5.dex */
 public class UserKeyingMaterialSpec implements AlgorithmParameterSpec {
-    private final byte[] userKeyingMaterial;
+  private final byte[] userKeyingMaterial;
 
-    public UserKeyingMaterialSpec(byte[] userKeyingMaterial) {
-        this.userKeyingMaterial = Arrays.clone(userKeyingMaterial);
-    }
+  public UserKeyingMaterialSpec(byte[] userKeyingMaterial) {
+    this.userKeyingMaterial = Arrays.clone(userKeyingMaterial);
+  }
 
-    public byte[] getUserKeyingMaterial() {
-        return Arrays.clone(this.userKeyingMaterial);
-    }
+  public byte[] getUserKeyingMaterial() {
+    return Arrays.clone(this.userKeyingMaterial);
+  }
 }

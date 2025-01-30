@@ -2,18 +2,18 @@ package android.opengl;
 
 /* loaded from: classes3.dex */
 public class EGLSync extends EGLObjectHandle {
-    private EGLSync(long handle) {
-        super(handle);
-    }
+  private EGLSync(long handle) {
+    super(handle);
+  }
 
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof EGLSync)) {
-            return false;
-        }
-        EGLSync that = (EGLSync) o;
-        return getNativeHandle() == that.getNativeHandle();
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
+    if (!(o instanceof EGLSync)) {
+      return false;
+    }
+    EGLSync that = (EGLSync) o;
+    return getNativeHandle() == that.getNativeHandle();
+  }
 }

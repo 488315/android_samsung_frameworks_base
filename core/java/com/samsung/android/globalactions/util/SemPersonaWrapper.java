@@ -7,20 +7,20 @@ import com.samsung.android.knox.SemPersonaManager;
 
 /* loaded from: classes5.dex */
 public class SemPersonaWrapper {
-    Context mContext;
-    SemPersonaManager mSemPersonaManager;
+  Context mContext;
+  SemPersonaManager mSemPersonaManager;
 
-    public SemPersonaWrapper(Context context) {
-        this.mContext = context;
-        this.mSemPersonaManager = (SemPersonaManager) context.getSystemService("persona");
-    }
+  public SemPersonaWrapper(Context context) {
+    this.mContext = context;
+    this.mSemPersonaManager = (SemPersonaManager) context.getSystemService("persona");
+  }
 
-    public boolean isValidVersion() {
-        Bundle versionInfo = SemPersonaManager.getKnoxInfo();
-        return versionInfo != null && "2.0".equals(versionInfo.getString("version"));
-    }
+  public boolean isValidVersion() {
+    Bundle versionInfo = SemPersonaManager.getKnoxInfo();
+    return versionInfo != null && "2.0".equals(versionInfo.getString("version"));
+  }
 
-    public boolean isDOProvisioningMode() {
-        return SemPersonaManager.isDoEnabled(UserHandle.myUserId());
-    }
+  public boolean isDOProvisioningMode() {
+    return SemPersonaManager.isDoEnabled(UserHandle.myUserId());
+  }
 }

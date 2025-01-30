@@ -4,9 +4,9 @@ import java.util.Set;
 
 /* loaded from: classes2.dex */
 public interface KeyCodeRestrictionCallback extends KeyCodeCallback {
-    Set getRestrictedKeyCodes();
+  Set getRestrictedKeyCodes();
 
-    String getServiceName();
+  String getServiceName();
 
-    boolean isKeyCodeInputAllowed(int i);
+  boolean isKeyCodeInputAllowed(int i);
 }

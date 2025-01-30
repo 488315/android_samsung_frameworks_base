@@ -9,15 +9,20 @@ import java.security.spec.ECParameterSpec;
 
 /* loaded from: classes3.dex */
 public class AndroidKeyStoreECPrivateKey extends AndroidKeyStorePrivateKey implements ECKey {
-    private final ECParameterSpec mParams;
+  private final ECParameterSpec mParams;
 
-    public AndroidKeyStoreECPrivateKey(KeyDescriptor descriptor, long keyId, Authorization[] authorizations, KeyStoreSecurityLevel securityLevel, ECParameterSpec params) {
-        super(descriptor, keyId, authorizations, KeyProperties.KEY_ALGORITHM_EC, securityLevel);
-        this.mParams = params;
-    }
+  public AndroidKeyStoreECPrivateKey(
+      KeyDescriptor descriptor,
+      long keyId,
+      Authorization[] authorizations,
+      KeyStoreSecurityLevel securityLevel,
+      ECParameterSpec params) {
+    super(descriptor, keyId, authorizations, KeyProperties.KEY_ALGORITHM_EC, securityLevel);
+    this.mParams = params;
+  }
 
-    @Override // java.security.interfaces.ECKey
-    public ECParameterSpec getParams() {
-        return this.mParams;
-    }
+  @Override // java.security.interfaces.ECKey
+  public ECParameterSpec getParams() {
+    return this.mParams;
+  }
 }

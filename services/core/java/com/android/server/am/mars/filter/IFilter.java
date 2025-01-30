@@ -4,9 +4,9 @@ import android.content.Context;
 
 /* loaded from: classes.dex */
 public interface IFilter {
-    void deInit();
+  void deInit();
 
-    int filter(String str, int i, int i2, int i3);
+  int filter(String str, int i, int i2, int i3);
 
-    void init(Context context);
+  void init(Context context);
 }

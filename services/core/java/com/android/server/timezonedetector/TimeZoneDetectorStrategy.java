@@ -8,29 +8,30 @@ import android.app.timezonedetector.TelephonyTimeZoneSuggestion;
 
 /* loaded from: classes3.dex */
 public interface TimeZoneDetectorStrategy extends Dumpable {
-    void addChangeListener(StateChangeListener stateChangeListener);
+  void addChangeListener(StateChangeListener stateChangeListener);
 
-    boolean confirmTimeZone(String str);
+  boolean confirmTimeZone(String str);
 
-    void enableTelephonyTimeZoneFallback(String str);
+  void enableTelephonyTimeZoneFallback(String str);
 
-    MetricsTimeZoneDetectorState generateMetricsState();
+  MetricsTimeZoneDetectorState generateMetricsState();
 
-    TimeZoneCapabilitiesAndConfig getCapabilitiesAndConfig(int i, boolean z);
+  TimeZoneCapabilitiesAndConfig getCapabilitiesAndConfig(int i, boolean z);
 
-    TimeZoneState getTimeZoneState();
+  TimeZoneState getTimeZoneState();
 
-    void handleLocationAlgorithmEvent(LocationAlgorithmEvent locationAlgorithmEvent);
+  void handleLocationAlgorithmEvent(LocationAlgorithmEvent locationAlgorithmEvent);
 
-    boolean isGeoTimeZoneDetectionSupported();
+  boolean isGeoTimeZoneDetectionSupported();
 
-    boolean isTelephonyTimeZoneDetectionSupported();
+  boolean isTelephonyTimeZoneDetectionSupported();
 
-    void setTimeZoneState(TimeZoneState timeZoneState);
+  void setTimeZoneState(TimeZoneState timeZoneState);
 
-    boolean suggestManualTimeZone(int i, ManualTimeZoneSuggestion manualTimeZoneSuggestion, boolean z);
+  boolean suggestManualTimeZone(
+      int i, ManualTimeZoneSuggestion manualTimeZoneSuggestion, boolean z);
 
-    void suggestTelephonyTimeZone(TelephonyTimeZoneSuggestion telephonyTimeZoneSuggestion);
+  void suggestTelephonyTimeZone(TelephonyTimeZoneSuggestion telephonyTimeZoneSuggestion);
 
-    boolean updateConfiguration(int i, TimeZoneConfiguration timeZoneConfiguration, boolean z);
+  boolean updateConfiguration(int i, TimeZoneConfiguration timeZoneConfiguration, boolean z);
 }

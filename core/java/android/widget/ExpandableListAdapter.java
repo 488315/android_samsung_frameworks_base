@@ -6,39 +6,39 @@ import android.view.ViewGroup;
 
 /* loaded from: classes4.dex */
 public interface ExpandableListAdapter {
-    boolean areAllItemsEnabled();
+  boolean areAllItemsEnabled();
 
-    Object getChild(int i, int i2);
+  Object getChild(int i, int i2);
 
-    long getChildId(int i, int i2);
+  long getChildId(int i, int i2);
 
-    View getChildView(int i, int i2, boolean z, View view, ViewGroup viewGroup);
+  View getChildView(int i, int i2, boolean z, View view, ViewGroup viewGroup);
 
-    int getChildrenCount(int i);
+  int getChildrenCount(int i);
 
-    long getCombinedChildId(long j, long j2);
+  long getCombinedChildId(long j, long j2);
 
-    long getCombinedGroupId(long j);
+  long getCombinedGroupId(long j);
 
-    Object getGroup(int i);
+  Object getGroup(int i);
 
-    int getGroupCount();
+  int getGroupCount();
 
-    long getGroupId(int i);
+  long getGroupId(int i);
 
-    View getGroupView(int i, boolean z, View view, ViewGroup viewGroup);
+  View getGroupView(int i, boolean z, View view, ViewGroup viewGroup);
 
-    boolean hasStableIds();
+  boolean hasStableIds();
 
-    boolean isChildSelectable(int i, int i2);
+  boolean isChildSelectable(int i, int i2);
 
-    boolean isEmpty();
+  boolean isEmpty();
 
-    void onGroupCollapsed(int i);
+  void onGroupCollapsed(int i);
 
-    void onGroupExpanded(int i);
+  void onGroupExpanded(int i);
 
-    void registerDataSetObserver(DataSetObserver dataSetObserver);
+  void registerDataSetObserver(DataSetObserver dataSetObserver);
 
-    void unregisterDataSetObserver(DataSetObserver dataSetObserver);
+  void unregisterDataSetObserver(DataSetObserver dataSetObserver);
 }

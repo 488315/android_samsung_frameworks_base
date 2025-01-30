@@ -2,40 +2,46 @@ package com.android.internal.p029os;
 
 /* loaded from: classes5.dex */
 public final class KernelAllocationStats {
-    public static native ProcessDmabuf[] getDmabufAllocations();
+  public static native ProcessDmabuf[] getDmabufAllocations();
 
-    public static native ProcessGpuMem[] getGpuAllocations();
+  public static native ProcessGpuMem[] getGpuAllocations();
 
-    private KernelAllocationStats() {
+  private KernelAllocationStats() {}
+
+  public static final class ProcessDmabuf {
+    public final int oomScore;
+    public final String processName;
+    public final int retainedBuffersCount;
+    public final int retainedSizeKb;
+    public final int surfaceFlingerCount;
+    public final int surfaceFlingerSizeKb;
+    public final int uid;
+
+    ProcessDmabuf(
+        int uid,
+        String processName,
+        int oomScore,
+        int retainedSizeKb,
+        int retainedBuffersCount,
+        int surfaceFlingerSizeKb,
+        int surfaceFlingerCount) {
+      this.uid = uid;
+      this.processName = processName;
+      this.oomScore = oomScore;
+      this.retainedSizeKb = retainedSizeKb;
+      this.retainedBuffersCount = retainedBuffersCount;
+      this.surfaceFlingerSizeKb = surfaceFlingerSizeKb;
+      this.surfaceFlingerCount = surfaceFlingerCount;
     }
+  }
 
-    public static final class ProcessDmabuf {
-        public final int oomScore;
-        public final String processName;
-        public final int retainedBuffersCount;
-        public final int retainedSizeKb;
-        public final int surfaceFlingerCount;
-        public final int surfaceFlingerSizeKb;
-        public final int uid;
+  public static final class ProcessGpuMem {
+    public final int gpuMemoryKb;
+    public final int pid;
 
-        ProcessDmabuf(int uid, String processName, int oomScore, int retainedSizeKb, int retainedBuffersCount, int surfaceFlingerSizeKb, int surfaceFlingerCount) {
-            this.uid = uid;
-            this.processName = processName;
-            this.oomScore = oomScore;
-            this.retainedSizeKb = retainedSizeKb;
-            this.retainedBuffersCount = retainedBuffersCount;
-            this.surfaceFlingerSizeKb = surfaceFlingerSizeKb;
-            this.surfaceFlingerCount = surfaceFlingerCount;
-        }
+    ProcessGpuMem(int pid, int gpuMemoryKb) {
+      this.pid = pid;
+      this.gpuMemoryKb = gpuMemoryKb;
     }
-
-    public static final class ProcessGpuMem {
-        public final int gpuMemoryKb;
-        public final int pid;
-
-        ProcessGpuMem(int pid, int gpuMemoryKb) {
-            this.pid = pid;
-            this.gpuMemoryKb = gpuMemoryKb;
-        }
-    }
+  }
 }

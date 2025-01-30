@@ -13,72 +13,77 @@ import java.util.function.BiConsumer;
 
 /* loaded from: classes2.dex */
 public class SmsQueryHelper {
-    public static final SparseIntArray SMS_TYPE_TO_EVENT_TYPE;
-    public final Context mContext;
-    public final String mCurrentCountryIso;
-    public final BiConsumer mEventConsumer;
-    public long mLastMessageTimestamp;
+  public static final SparseIntArray SMS_TYPE_TO_EVENT_TYPE;
+  public final Context mContext;
+  public final String mCurrentCountryIso;
+  public final BiConsumer mEventConsumer;
+  public long mLastMessageTimestamp;
 
-    static {
-        SparseIntArray sparseIntArray = new SparseIntArray();
-        SMS_TYPE_TO_EVENT_TYPE = sparseIntArray;
-        sparseIntArray.put(1, 9);
-        sparseIntArray.put(2, 8);
-    }
+  static {
+    SparseIntArray sparseIntArray = new SparseIntArray();
+    SMS_TYPE_TO_EVENT_TYPE = sparseIntArray;
+    sparseIntArray.put(1, 9);
+    sparseIntArray.put(2, 8);
+  }
 
-    public SmsQueryHelper(Context context, BiConsumer biConsumer) {
-        this.mContext = context;
-        this.mEventConsumer = biConsumer;
-        this.mCurrentCountryIso = Utils.getCurrentCountryIso(context);
-    }
+  public SmsQueryHelper(Context context, BiConsumer biConsumer) {
+    this.mContext = context;
+    this.mEventConsumer = biConsumer;
+    this.mCurrentCountryIso = Utils.getCurrentCountryIso(context);
+  }
 
-    public boolean querySince(long j) {
-        String[] strArr = {KnoxCustomManagerService.f1773ID, "date", "type", "address"};
-        String[] strArr2 = {Long.toString(j)};
-        Binder.allowBlockingForCurrentThread();
-        try {
-            Cursor query = this.mContext.getContentResolver().query(Telephony.Sms.CONTENT_URI, strArr, "date > ?", strArr2, null);
-            boolean z = false;
-            try {
-                if (query == null) {
-                    Slog.w("SmsQueryHelper", "Cursor is null when querying SMS table.");
-                    if (query != null) {
-                        query.close();
-                    }
-                    return false;
-                }
-                while (query.moveToNext()) {
-                    query.getString(query.getColumnIndex(KnoxCustomManagerService.f1773ID));
-                    long j2 = query.getLong(query.getColumnIndex("date"));
-                    int i = query.getInt(query.getColumnIndex("type"));
-                    String formatNumberToE164 = PhoneNumberUtils.formatNumberToE164(query.getString(query.getColumnIndex("address")), this.mCurrentCountryIso);
-                    this.mLastMessageTimestamp = Math.max(this.mLastMessageTimestamp, j2);
-                    if (formatNumberToE164 != null && addEvent(formatNumberToE164, j2, i)) {
-                        z = true;
-                    }
-                }
-                query.close();
-                return z;
-            } finally {
-            }
-        } finally {
-            Binder.defaultBlockingForCurrentThread();
+  public boolean querySince(long j) {
+    String[] strArr = {KnoxCustomManagerService.f1773ID, "date", "type", "address"};
+    String[] strArr2 = {Long.toString(j)};
+    Binder.allowBlockingForCurrentThread();
+    try {
+      Cursor query =
+          this.mContext
+              .getContentResolver()
+              .query(Telephony.Sms.CONTENT_URI, strArr, "date > ?", strArr2, null);
+      boolean z = false;
+      try {
+        if (query == null) {
+          Slog.w("SmsQueryHelper", "Cursor is null when querying SMS table.");
+          if (query != null) {
+            query.close();
+          }
+          return false;
         }
-    }
-
-    public long getLastMessageTimestamp() {
-        return this.mLastMessageTimestamp;
-    }
-
-    public final boolean addEvent(String str, long j, int i) {
-        if (!validateEvent(str, j, i)) {
-            return false;
+        while (query.moveToNext()) {
+          query.getString(query.getColumnIndex(KnoxCustomManagerService.f1773ID));
+          long j2 = query.getLong(query.getColumnIndex("date"));
+          int i = query.getInt(query.getColumnIndex("type"));
+          String formatNumberToE164 =
+              PhoneNumberUtils.formatNumberToE164(
+                  query.getString(query.getColumnIndex("address")), this.mCurrentCountryIso);
+          this.mLastMessageTimestamp = Math.max(this.mLastMessageTimestamp, j2);
+          if (formatNumberToE164 != null && addEvent(formatNumberToE164, j2, i)) {
+            z = true;
+          }
         }
-        this.mEventConsumer.accept(str, new Event(j, SMS_TYPE_TO_EVENT_TYPE.get(i)));
-        return true;
+        query.close();
+        return z;
+      } finally {
+      }
+    } finally {
+      Binder.defaultBlockingForCurrentThread();
     }
+  }
 
-    public final boolean validateEvent(String str, long j, int i) {
-        return !TextUtils.isEmpty(str) && j > 0 && SMS_TYPE_TO_EVENT_TYPE.indexOfKey(i) >= 0;
+  public long getLastMessageTimestamp() {
+    return this.mLastMessageTimestamp;
+  }
+
+  public final boolean addEvent(String str, long j, int i) {
+    if (!validateEvent(str, j, i)) {
+      return false;
     }
+    this.mEventConsumer.accept(str, new Event(j, SMS_TYPE_TO_EVENT_TYPE.get(i)));
+    return true;
+  }
+
+  public final boolean validateEvent(String str, long j, int i) {
+    return !TextUtils.isEmpty(str) && j > 0 && SMS_TYPE_TO_EVENT_TYPE.indexOfKey(i) >= 0;
+  }
 }

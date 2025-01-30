@@ -5,11 +5,11 @@ import org.xmlpull.v1.XmlSerializer;
 /* loaded from: classes3.dex */
 public interface DirtyTracker {
 
-    public interface Persistable {
-        String getFileName();
+  public interface Persistable {
+    String getFileName();
 
-        void writeTo(XmlSerializer xmlSerializer);
-    }
+    void writeTo(XmlSerializer xmlSerializer);
+  }
 
-    void onPersistableDirty(Persistable persistable);
+  void onPersistableDirty(Persistable persistable);
 }

@@ -2,11 +2,11 @@ package com.samsung.android.authenticator;
 
 /* loaded from: classes5.dex */
 interface TrustedApplication {
-    byte[] execute(byte[] bArr);
+  byte[] execute(byte[] bArr);
 
-    int getHandle();
+  int getHandle();
 
-    int load();
+  int load();
 
-    int unload();
+  int unload();
 }

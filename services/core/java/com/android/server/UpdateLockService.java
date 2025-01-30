@@ -14,56 +14,69 @@ import java.io.PrintWriter;
 
 /* loaded from: classes.dex */
 public class UpdateLockService extends IUpdateLock.Stub {
-    public Context mContext;
-    public LockWatcher mLocks = new LockWatcher(new Handler(), "UpdateLocks");
+  public Context mContext;
+  public LockWatcher mLocks = new LockWatcher(new Handler(), "UpdateLocks");
 
-    public class LockWatcher extends TokenWatcher {
-        public LockWatcher(Handler handler, String str) {
-            super(handler, str);
-        }
-
-        @Override // android.os.TokenWatcher
-        public void acquired() {
-            UpdateLockService.this.sendLockChangedBroadcast(false);
-        }
-
-        @Override // android.os.TokenWatcher
-        public void released() {
-            UpdateLockService.this.sendLockChangedBroadcast(true);
-        }
+  public class LockWatcher extends TokenWatcher {
+    public LockWatcher(Handler handler, String str) {
+      super(handler, str);
     }
 
-    public UpdateLockService(Context context) {
-        this.mContext = context;
-        sendLockChangedBroadcast(true);
+    @Override // android.os.TokenWatcher
+    public void acquired() {
+      UpdateLockService.this.sendLockChangedBroadcast(false);
     }
 
-    public void sendLockChangedBroadcast(boolean z) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
-        try {
-            this.mContext.sendStickyBroadcastAsUser(new Intent("android.os.UpdateLock.UPDATE_LOCK_CHANGED").putExtra("nowisconvenient", z).putExtra("timestamp", System.currentTimeMillis()).addFlags(67108864), UserHandle.ALL);
-        } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
-        }
+    @Override // android.os.TokenWatcher
+    public void released() {
+      UpdateLockService.this.sendLockChangedBroadcast(true);
     }
+  }
 
-    public void acquireUpdateLock(IBinder iBinder, String str) {
-        this.mContext.enforceCallingOrSelfPermission("android.permission.UPDATE_LOCK", "acquireUpdateLock");
-        this.mLocks.acquire(iBinder, makeTag(str));
-    }
+  public UpdateLockService(Context context) {
+    this.mContext = context;
+    sendLockChangedBroadcast(true);
+  }
 
-    public void releaseUpdateLock(IBinder iBinder) {
-        this.mContext.enforceCallingOrSelfPermission("android.permission.UPDATE_LOCK", "releaseUpdateLock");
-        this.mLocks.release(iBinder);
+  public void sendLockChangedBroadcast(boolean z) {
+    long clearCallingIdentity = Binder.clearCallingIdentity();
+    try {
+      this.mContext.sendStickyBroadcastAsUser(
+          new Intent("android.os.UpdateLock.UPDATE_LOCK_CHANGED")
+              .putExtra("nowisconvenient", z)
+              .putExtra("timestamp", System.currentTimeMillis())
+              .addFlags(67108864),
+          UserHandle.ALL);
+    } finally {
+      Binder.restoreCallingIdentity(clearCallingIdentity);
     }
+  }
 
-    public final String makeTag(String str) {
-        return "{tag=" + str + " uid=" + Binder.getCallingUid() + " pid=" + Binder.getCallingPid() + '}';
-    }
+  public void acquireUpdateLock(IBinder iBinder, String str) {
+    this.mContext.enforceCallingOrSelfPermission(
+        "android.permission.UPDATE_LOCK", "acquireUpdateLock");
+    this.mLocks.acquire(iBinder, makeTag(str));
+  }
 
-    public void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
-        if (DumpUtils.checkDumpPermission(this.mContext, "UpdateLockService", printWriter)) {
-            this.mLocks.dump(printWriter);
-        }
+  public void releaseUpdateLock(IBinder iBinder) {
+    this.mContext.enforceCallingOrSelfPermission(
+        "android.permission.UPDATE_LOCK", "releaseUpdateLock");
+    this.mLocks.release(iBinder);
+  }
+
+  public final String makeTag(String str) {
+    return "{tag="
+        + str
+        + " uid="
+        + Binder.getCallingUid()
+        + " pid="
+        + Binder.getCallingPid()
+        + '}';
+  }
+
+  public void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    if (DumpUtils.checkDumpPermission(this.mContext, "UpdateLockService", printWriter)) {
+      this.mLocks.dump(printWriter);
     }
+  }
 }

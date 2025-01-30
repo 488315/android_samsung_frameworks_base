@@ -6,27 +6,24 @@ import com.android.server.am.mars.filter.IFilter;
 /* loaded from: classes.dex */
 public class DisableForceStopFilter implements IFilter {
 
-    public abstract class DisableForceStopFilterHolder {
-        public static final DisableForceStopFilter INSTANCE = new DisableForceStopFilter();
-    }
+  public abstract class DisableForceStopFilterHolder {
+    public static final DisableForceStopFilter INSTANCE = new DisableForceStopFilter();
+  }
 
-    public DisableForceStopFilter() {
-    }
+  public DisableForceStopFilter() {}
 
-    @Override // com.android.server.am.mars.filter.IFilter
-    public void deInit() {
-    }
+  @Override // com.android.server.am.mars.filter.IFilter
+  public void deInit() {}
 
-    @Override // com.android.server.am.mars.filter.IFilter
-    public int filter(String str, int i, int i2, int i3) {
-        return 0;
-    }
+  @Override // com.android.server.am.mars.filter.IFilter
+  public int filter(String str, int i, int i2, int i3) {
+    return 0;
+  }
 
-    @Override // com.android.server.am.mars.filter.IFilter
-    public void init(Context context) {
-    }
+  @Override // com.android.server.am.mars.filter.IFilter
+  public void init(Context context) {}
 
-    public static DisableForceStopFilter getInstance() {
-        return DisableForceStopFilterHolder.INSTANCE;
-    }
+  public static DisableForceStopFilter getInstance() {
+    return DisableForceStopFilterHolder.INSTANCE;
+  }
 }

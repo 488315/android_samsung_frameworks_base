@@ -5,9 +5,9 @@ import android.annotation.SystemApi;
 @SystemApi
 /* loaded from: classes3.dex */
 public interface SatelliteTransmissionUpdateCallback {
-    void onReceiveDatagramStateChanged(int i, int i2, int i3);
+  void onReceiveDatagramStateChanged(int i, int i2, int i3);
 
-    void onSatellitePositionChanged(PointingInfo pointingInfo);
+  void onSatellitePositionChanged(PointingInfo pointingInfo);
 
-    void onSendDatagramStateChanged(int i, int i2, int i3);
+  void onSendDatagramStateChanged(int i, int i2, int i3);
 }

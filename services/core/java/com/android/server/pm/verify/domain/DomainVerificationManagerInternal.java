@@ -9,7 +9,6 @@ import com.android.modules.utils.TypedXmlPullParser;
 import com.android.modules.utils.TypedXmlSerializer;
 import com.android.server.pm.Computer;
 import com.android.server.pm.pkg.PackageStateInternal;
-import com.android.server.pm.verify.domain.DomainVerificationEnforcer;
 import com.android.server.pm.verify.domain.proxy.DomainVerificationProxy;
 import java.util.List;
 import java.util.Set;
@@ -18,94 +17,97 @@ import java.util.function.Function;
 
 /* loaded from: classes3.dex */
 public interface DomainVerificationManagerInternal {
-    public static final UUID DISABLED_ID = new UUID(0, 0);
+  public static final UUID DISABLED_ID = new UUID(0, 0);
 
-    public interface Connection extends DomainVerificationEnforcer.Callback {
-        int[] getAllUserIds();
+  public interface Connection extends DomainVerificationEnforcer.Callback {
+    int[] getAllUserIds();
 
-        int getCallingUid();
+    int getCallingUid();
 
-        int getCallingUserId();
+    int getCallingUserId();
 
-        void scheduleWriteSettings();
+    void scheduleWriteSettings();
 
-        Computer snapshot();
+    Computer snapshot();
+  }
+
+  static String approvalLevelToDebugString(int i) {
+    switch (i) {
+      case -4:
+        return "NOT_INSTALLED";
+      case -3:
+        return "DISABLED";
+      case -2:
+        return "UNDECLARED";
+      case -1:
+        return "UNVERIFIED";
+      case 0:
+        return "NONE";
+      case 1:
+        return "LEGACY_ASK";
+      case 2:
+        return "LEGACY_ALWAYS";
+      case 3:
+        return "USER_SELECTION";
+      case 4:
+        return "VERIFIED";
+      case 5:
+        return "INSTANT_APP";
+      default:
+        return "UNKNOWN";
     }
+  }
 
-    static String approvalLevelToDebugString(int i) {
-        switch (i) {
-            case -4:
-                return "NOT_INSTALLED";
-            case -3:
-                return "DISABLED";
-            case -2:
-                return "UNDECLARED";
-            case -1:
-                return "UNVERIFIED";
-            case 0:
-                return "NONE";
-            case 1:
-                return "LEGACY_ASK";
-            case 2:
-                return "LEGACY_ALWAYS";
-            case 3:
-                return "USER_SELECTION";
-            case 4:
-                return "VERIFIED";
-            case 5:
-                return "INSTANT_APP";
-            default:
-                return "UNKNOWN";
-        }
-    }
+  void addLegacySetting(String str, IntentFilterVerificationInfo intentFilterVerificationInfo);
 
-    void addLegacySetting(String str, IntentFilterVerificationInfo intentFilterVerificationInfo);
+  void addPackage(PackageStateInternal packageStateInternal);
 
-    void addPackage(PackageStateInternal packageStateInternal);
+  int approvalLevelForDomain(
+      PackageStateInternal packageStateInternal, Intent intent, long j, int i);
 
-    int approvalLevelForDomain(PackageStateInternal packageStateInternal, Intent intent, long j, int i);
+  void clearPackage(String str);
 
-    void clearPackage(String str);
+  void clearPackageForUser(String str, int i);
 
-    void clearPackageForUser(String str, int i);
+  void clearUser(int i);
 
-    void clearUser(int i);
+  Pair filterToApprovedApp(Intent intent, List list, int i, Function function);
 
-    Pair filterToApprovedApp(Intent intent, List list, int i, Function function);
+  UUID generateNewId();
 
-    UUID generateNewId();
+  DomainVerificationCollector getCollector();
 
-    DomainVerificationCollector getCollector();
+  DomainVerificationInfo getDomainVerificationInfo(String str);
 
-    DomainVerificationInfo getDomainVerificationInfo(String str);
+  UUID getDomainVerificationInfoId(String str);
 
-    UUID getDomainVerificationInfoId(String str);
+  int getLegacyState(String str, int i);
 
-    int getLegacyState(String str, int i);
+  DomainVerificationProxy getProxy();
 
-    DomainVerificationProxy getProxy();
+  DomainVerificationShell getShell();
 
-    DomainVerificationShell getShell();
+  void migrateState(
+      PackageStateInternal packageStateInternal, PackageStateInternal packageStateInternal2);
 
-    void migrateState(PackageStateInternal packageStateInternal, PackageStateInternal packageStateInternal2);
+  void printState(
+      Computer computer, IndentingPrintWriter indentingPrintWriter, String str, Integer num);
 
-    void printState(Computer computer, IndentingPrintWriter indentingPrintWriter, String str, Integer num);
+  void readLegacySettings(TypedXmlPullParser typedXmlPullParser);
 
-    void readLegacySettings(TypedXmlPullParser typedXmlPullParser);
+  void readSettings(Computer computer, TypedXmlPullParser typedXmlPullParser);
 
-    void readSettings(Computer computer, TypedXmlPullParser typedXmlPullParser);
+  void restoreSettings(Computer computer, TypedXmlPullParser typedXmlPullParser);
 
-    void restoreSettings(Computer computer, TypedXmlPullParser typedXmlPullParser);
+  boolean runMessage(int i, Object obj);
 
-    boolean runMessage(int i, Object obj);
+  void setConnection(Connection connection);
 
-    void setConnection(Connection connection);
+  int setDomainVerificationStatusInternal(int i, UUID uuid, Set set, int i2);
 
-    int setDomainVerificationStatusInternal(int i, UUID uuid, Set set, int i2);
+  boolean setLegacyUserState(String str, int i, int i2);
 
-    boolean setLegacyUserState(String str, int i, int i2);
+  void setProxy(DomainVerificationProxy domainVerificationProxy);
 
-    void setProxy(DomainVerificationProxy domainVerificationProxy);
-
-    void writeSettings(Computer computer, TypedXmlSerializer typedXmlSerializer, boolean z, int i);
+  void writeSettings(Computer computer, TypedXmlSerializer typedXmlSerializer, boolean z, int i);
 }

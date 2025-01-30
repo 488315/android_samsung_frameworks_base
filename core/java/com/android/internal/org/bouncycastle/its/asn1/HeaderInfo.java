@@ -8,22 +8,22 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 
 /* loaded from: classes5.dex */
 public class HeaderInfo extends ASN1Object {
-    private HeaderInfo(ASN1Sequence seq) {
-    }
+  private HeaderInfo(ASN1Sequence seq) {}
 
-    public static HeaderInfo getInstance(Object o) {
-        if (o instanceof HeaderInfo) {
-            return (HeaderInfo) o;
-        }
-        if (o != null) {
-            return new HeaderInfo(ASN1Sequence.getInstance(o));
-        }
-        return null;
+  public static HeaderInfo getInstance(Object o) {
+    if (o instanceof HeaderInfo) {
+      return (HeaderInfo) o;
     }
+    if (o != null) {
+      return new HeaderInfo(ASN1Sequence.getInstance(o));
+    }
+    return null;
+  }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
-    public ASN1Primitive toASN1Primitive() {
-        ASN1EncodableVector v = new ASN1EncodableVector();
-        return new DERSequence(v);
-    }
+  @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+            // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+  public ASN1Primitive toASN1Primitive() {
+    ASN1EncodableVector v = new ASN1EncodableVector();
+    return new DERSequence(v);
+  }
 }

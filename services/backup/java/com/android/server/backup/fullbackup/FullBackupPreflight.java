@@ -5,5 +5,5 @@ import android.content.pm.PackageInfo;
 
 /* loaded from: classes.dex */
 public interface FullBackupPreflight {
-    int preflightFullBackup(PackageInfo packageInfo, IBackupAgent iBackupAgent);
+  int preflightFullBackup(PackageInfo packageInfo, IBackupAgent iBackupAgent);
 }

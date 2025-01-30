@@ -9,212 +9,231 @@ import java.util.UUID;
 
 /* loaded from: classes3.dex */
 public abstract class CellIdentity implements Parcelable {
-    public static final Parcelable.Creator<CellIdentity> CREATOR = new Parcelable.Creator<CellIdentity>() { // from class: android.telephony.CellIdentity.1
+  public static final Parcelable.Creator<CellIdentity> CREATOR =
+      new Parcelable.Creator<CellIdentity>() { // from class: android.telephony.CellIdentity.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public CellIdentity createFromParcel(Parcel in) {
-            int type = in.readInt();
-            switch (type) {
-                case 1:
-                    return CellIdentityGsm.createFromParcelBody(in);
-                case 2:
-                    return CellIdentityCdma.createFromParcelBody(in);
-                case 3:
-                    return CellIdentityLte.createFromParcelBody(in);
-                case 4:
-                    return CellIdentityWcdma.createFromParcelBody(in);
-                case 5:
-                    return CellIdentityTdscdma.createFromParcelBody(in);
-                case 6:
-                    return CellIdentityNr.createFromParcelBody(in);
-                default:
-                    throw new IllegalArgumentException("Bad Cell identity Parcel");
-            }
+          int type = in.readInt();
+          switch (type) {
+            case 1:
+              return CellIdentityGsm.createFromParcelBody(in);
+            case 2:
+              return CellIdentityCdma.createFromParcelBody(in);
+            case 3:
+              return CellIdentityLte.createFromParcelBody(in);
+            case 4:
+              return CellIdentityWcdma.createFromParcelBody(in);
+            case 5:
+              return CellIdentityTdscdma.createFromParcelBody(in);
+            case 6:
+              return CellIdentityNr.createFromParcelBody(in);
+            default:
+              throw new IllegalArgumentException("Bad Cell identity Parcel");
+          }
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public CellIdentity[] newArray(int size) {
-            return new CellIdentity[size];
+          return new CellIdentity[size];
         }
-    };
-    public static final int INVALID_CHANNEL_NUMBER = Integer.MAX_VALUE;
-    public static final int MCC_LENGTH = 3;
-    public static final int MNC_MAX_LENGTH = 3;
-    public static final int MNC_MIN_LENGTH = 2;
-    protected String mAlphaLong;
-    protected String mAlphaShort;
-    protected String mGlobalCellId;
-    protected final String mMccStr;
-    protected final String mMncStr;
-    protected final String mTag;
-    protected final int mType;
+      };
+  public static final int INVALID_CHANNEL_NUMBER = Integer.MAX_VALUE;
+  public static final int MCC_LENGTH = 3;
+  public static final int MNC_MAX_LENGTH = 3;
+  public static final int MNC_MIN_LENGTH = 2;
+  protected String mAlphaLong;
+  protected String mAlphaShort;
+  protected String mGlobalCellId;
+  protected final String mMccStr;
+  protected final String mMncStr;
+  protected final String mTag;
+  protected final int mType;
 
-    @SystemApi
-    public abstract CellLocation asCellLocation();
+  @SystemApi
+  public abstract CellLocation asCellLocation();
 
-    @SystemApi
-    public abstract CellIdentity sanitizeLocationInfo();
+  @SystemApi
+  public abstract CellIdentity sanitizeLocationInfo();
 
-    protected abstract void updateGlobalCellId();
+  protected abstract void updateGlobalCellId();
 
-    protected CellIdentity(String tag, int type, String mcc, String mnc, String alphal, String alphas) {
-        this.mTag = tag;
-        this.mType = type;
-        if (mcc == null || isMcc(mcc)) {
-            this.mMccStr = mcc;
-        } else if (mcc.isEmpty() || mcc.equals(String.valueOf(Integer.MAX_VALUE))) {
-            this.mMccStr = null;
-        } else {
-            this.mMccStr = null;
-            log("invalid MCC format: " + mcc);
-        }
-        if (mnc == null || isMnc(mnc)) {
-            this.mMncStr = mnc;
-        } else if (mnc.isEmpty() || mnc.equals(String.valueOf(Integer.MAX_VALUE))) {
-            this.mMncStr = null;
-        } else {
-            this.mMncStr = null;
-            log("invalid MNC format: " + mnc);
-        }
-        String str = this.mMccStr;
-        if ((str != null && this.mMncStr == null) || (str == null && this.mMncStr != null)) {
-            AnomalyReporter.reportAnomaly(UUID.fromString("e257ae06-ac0a-44c0-ba63-823b9f07b3e4"), "CellIdentity Missing Half of PLMN ID");
-        }
-        this.mAlphaLong = alphal;
-        this.mAlphaShort = alphas;
+  protected CellIdentity(
+      String tag, int type, String mcc, String mnc, String alphal, String alphas) {
+    this.mTag = tag;
+    this.mType = type;
+    if (mcc == null || isMcc(mcc)) {
+      this.mMccStr = mcc;
+    } else if (mcc.isEmpty() || mcc.equals(String.valueOf(Integer.MAX_VALUE))) {
+      this.mMccStr = null;
+    } else {
+      this.mMccStr = null;
+      log("invalid MCC format: " + mcc);
     }
-
-    @Override // android.p009os.Parcelable
-    public int describeContents() {
-        return 0;
+    if (mnc == null || isMnc(mnc)) {
+      this.mMncStr = mnc;
+    } else if (mnc.isEmpty() || mnc.equals(String.valueOf(Integer.MAX_VALUE))) {
+      this.mMncStr = null;
+    } else {
+      this.mMncStr = null;
+      log("invalid MNC format: " + mnc);
     }
-
-    public int getType() {
-        return this.mType;
+    String str = this.mMccStr;
+    if ((str != null && this.mMncStr == null) || (str == null && this.mMncStr != null)) {
+      AnomalyReporter.reportAnomaly(
+          UUID.fromString("e257ae06-ac0a-44c0-ba63-823b9f07b3e4"),
+          "CellIdentity Missing Half of PLMN ID");
     }
+    this.mAlphaLong = alphal;
+    this.mAlphaShort = alphas;
+  }
 
-    public String getMccString() {
-        return this.mMccStr;
-    }
+  @Override // android.p009os.Parcelable
+  public int describeContents() {
+    return 0;
+  }
 
-    public String getMncString() {
-        return this.mMncStr;
-    }
+  public int getType() {
+    return this.mType;
+  }
 
-    public int getChannelNumber() {
-        return Integer.MAX_VALUE;
-    }
+  public String getMccString() {
+    return this.mMccStr;
+  }
 
-    public CharSequence getOperatorAlphaLong() {
-        return this.mAlphaLong;
-    }
+  public String getMncString() {
+    return this.mMncStr;
+  }
 
-    public void setOperatorAlphaLong(String alphaLong) {
-        this.mAlphaLong = alphaLong;
-    }
+  public int getChannelNumber() {
+    return Integer.MAX_VALUE;
+  }
 
-    public CharSequence getOperatorAlphaShort() {
-        return this.mAlphaShort;
-    }
+  public CharSequence getOperatorAlphaLong() {
+    return this.mAlphaLong;
+  }
 
-    public void setOperatorAlphaShort(String alphaShort) {
-        this.mAlphaShort = alphaShort;
-    }
+  public void setOperatorAlphaLong(String alphaLong) {
+    this.mAlphaLong = alphaLong;
+  }
 
-    public String getGlobalCellId() {
-        return this.mGlobalCellId;
-    }
+  public CharSequence getOperatorAlphaShort() {
+    return this.mAlphaShort;
+  }
 
-    public boolean isSameCell(CellIdentity ci) {
-        if (ci == null || getClass() != ci.getClass()) {
-            return false;
-        }
-        return TextUtils.equals(getGlobalCellId(), ci.getGlobalCellId());
-    }
+  public void setOperatorAlphaShort(String alphaShort) {
+    this.mAlphaShort = alphaShort;
+  }
 
-    public String getPlmn() {
-        if (this.mMccStr == null || this.mMncStr == null) {
-            return null;
-        }
-        return this.mMccStr + this.mMncStr;
-    }
+  public String getGlobalCellId() {
+    return this.mGlobalCellId;
+  }
 
-    public boolean equals(Object other) {
-        if (!(other instanceof CellIdentity)) {
-            return false;
-        }
-        CellIdentity o = (CellIdentity) other;
-        return this.mType == o.mType && TextUtils.equals(this.mMccStr, o.mMccStr) && TextUtils.equals(this.mMncStr, o.mMncStr) && TextUtils.equals(this.mAlphaLong, o.mAlphaLong) && TextUtils.equals(this.mAlphaShort, o.mAlphaShort);
+  public boolean isSameCell(CellIdentity ci) {
+    if (ci == null || getClass() != ci.getClass()) {
+      return false;
     }
+    return TextUtils.equals(getGlobalCellId(), ci.getGlobalCellId());
+  }
 
-    public int hashCode() {
-        return Objects.hash(this.mAlphaLong, this.mAlphaShort, this.mMccStr, this.mMncStr, Integer.valueOf(this.mType));
+  public String getPlmn() {
+    if (this.mMccStr == null || this.mMncStr == null) {
+      return null;
     }
+    return this.mMccStr + this.mMncStr;
+  }
 
-    @Override // android.p009os.Parcelable
-    public void writeToParcel(Parcel dest, int type) {
-        dest.writeInt(type);
-        dest.writeString(this.mMccStr);
-        dest.writeString(this.mMncStr);
-        dest.writeString(this.mAlphaLong);
-        dest.writeString(this.mAlphaShort);
+  public boolean equals(Object other) {
+    if (!(other instanceof CellIdentity)) {
+      return false;
     }
+    CellIdentity o = (CellIdentity) other;
+    return this.mType == o.mType
+        && TextUtils.equals(this.mMccStr, o.mMccStr)
+        && TextUtils.equals(this.mMncStr, o.mMncStr)
+        && TextUtils.equals(this.mAlphaLong, o.mAlphaLong)
+        && TextUtils.equals(this.mAlphaShort, o.mAlphaShort);
+  }
 
-    public static boolean isValidPlmn(String plmn) {
-        return plmn.length() >= 5 && plmn.length() <= 6 && isMcc(plmn.substring(0, 3)) && isMnc(plmn.substring(3));
-    }
+  public int hashCode() {
+    return Objects.hash(
+        this.mAlphaLong, this.mAlphaShort, this.mMccStr, this.mMncStr, Integer.valueOf(this.mType));
+  }
 
-    protected CellIdentity(String tag, int type, Parcel source) {
-        this(tag, type, source.readString(), source.readString(), source.readString(), source.readString());
-    }
+  @Override // android.p009os.Parcelable
+  public void writeToParcel(Parcel dest, int type) {
+    dest.writeInt(type);
+    dest.writeString(this.mMccStr);
+    dest.writeString(this.mMncStr);
+    dest.writeString(this.mAlphaLong);
+    dest.writeString(this.mAlphaShort);
+  }
 
-    protected void log(String s) {
-        com.android.telephony.Rlog.m246w(this.mTag, s);
-    }
+  public static boolean isValidPlmn(String plmn) {
+    return plmn.length() >= 5
+        && plmn.length() <= 6
+        && isMcc(plmn.substring(0, 3))
+        && isMnc(plmn.substring(3));
+  }
 
-    protected static final int inRangeOrUnavailable(int value, int rangeMin, int rangeMax) {
-        if (value < rangeMin || value > rangeMax) {
-            return Integer.MAX_VALUE;
-        }
-        return value;
-    }
+  protected CellIdentity(String tag, int type, Parcel source) {
+    this(
+        tag,
+        type,
+        source.readString(),
+        source.readString(),
+        source.readString(),
+        source.readString());
+  }
 
-    protected static final long inRangeOrUnavailable(long value, long rangeMin, long rangeMax) {
-        if (value < rangeMin || value > rangeMax) {
-            return Long.MAX_VALUE;
-        }
-        return value;
-    }
+  protected void log(String s) {
+    com.android.telephony.Rlog.m246w(this.mTag, s);
+  }
 
-    protected static final int inRangeOrUnavailable(int value, int rangeMin, int rangeMax, int special) {
-        if ((value < rangeMin || value > rangeMax) && value != special) {
-            return Integer.MAX_VALUE;
-        }
-        return value;
+  protected static final int inRangeOrUnavailable(int value, int rangeMin, int rangeMax) {
+    if (value < rangeMin || value > rangeMax) {
+      return Integer.MAX_VALUE;
     }
+    return value;
+  }
 
-    private static boolean isMcc(String mcc) {
-        if (mcc.length() != 3) {
-            return false;
-        }
-        for (int i = 0; i < 3; i++) {
-            if (mcc.charAt(i) < '0' || mcc.charAt(i) > '9') {
-                return false;
-            }
-        }
-        return true;
+  protected static final long inRangeOrUnavailable(long value, long rangeMin, long rangeMax) {
+    if (value < rangeMin || value > rangeMax) {
+      return Long.MAX_VALUE;
     }
+    return value;
+  }
 
-    private static boolean isMnc(String mnc) {
-        if (mnc.length() < 2 || mnc.length() > 3) {
-            return false;
-        }
-        for (int i = 0; i < mnc.length(); i++) {
-            if (mnc.charAt(i) < '0' || mnc.charAt(i) > '9') {
-                return false;
-            }
-        }
-        return true;
+  protected static final int inRangeOrUnavailable(
+      int value, int rangeMin, int rangeMax, int special) {
+    if ((value < rangeMin || value > rangeMax) && value != special) {
+      return Integer.MAX_VALUE;
     }
+    return value;
+  }
+
+  private static boolean isMcc(String mcc) {
+    if (mcc.length() != 3) {
+      return false;
+    }
+    for (int i = 0; i < 3; i++) {
+      if (mcc.charAt(i) < '0' || mcc.charAt(i) > '9') {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  private static boolean isMnc(String mnc) {
+    if (mnc.length() < 2 || mnc.length() > 3) {
+      return false;
+    }
+    for (int i = 0; i < mnc.length(); i++) {
+      if (mnc.charAt(i) < '0' || mnc.charAt(i) > '9') {
+        return false;
+      }
+    }
+    return true;
+  }
 }

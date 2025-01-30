@@ -4,13 +4,13 @@ import java.security.spec.AlgorithmParameterSpec;
 
 /* loaded from: classes5.dex */
 public class ECNamedCurveGenParameterSpec implements AlgorithmParameterSpec {
-    private String name;
+  private String name;
 
-    public ECNamedCurveGenParameterSpec(String name) {
-        this.name = name;
-    }
+  public ECNamedCurveGenParameterSpec(String name) {
+    this.name = name;
+  }
 
-    public String getName() {
-        return this.name;
-    }
+  public String getName() {
+    return this.name;
+  }
 }

@@ -20,438 +20,439 @@ import java.util.Locale;
 
 /* loaded from: classes4.dex */
 public class CalendarView extends FrameLayout {
-    private static final String DATE_FORMAT = "MM/dd/yyyy";
-    private static final DateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT);
-    private static final String LOG_TAG = "CalendarView";
-    private static final int MODE_HOLO = 0;
-    private static final int MODE_MATERIAL = 1;
-    private final CalendarViewDelegate mDelegate;
+  private static final String DATE_FORMAT = "MM/dd/yyyy";
+  private static final DateFormat DATE_FORMATTER = new SimpleDateFormat(DATE_FORMAT);
+  private static final String LOG_TAG = "CalendarView";
+  private static final int MODE_HOLO = 0;
+  private static final int MODE_MATERIAL = 1;
+  private final CalendarViewDelegate mDelegate;
 
-    private interface CalendarViewDelegate {
-        boolean getBoundsForDate(long j, Rect rect);
+  private interface CalendarViewDelegate {
+    boolean getBoundsForDate(long j, Rect rect);
 
-        long getDate();
+    long getDate();
 
-        int getDateTextAppearance();
+    int getDateTextAppearance();
 
-        int getFirstDayOfWeek();
+    int getFirstDayOfWeek();
 
-        int getFocusedMonthDateColor();
+    int getFocusedMonthDateColor();
 
-        long getMaxDate();
+    long getMaxDate();
 
-        long getMinDate();
+    long getMinDate();
 
-        Drawable getSelectedDateVerticalBar();
+    Drawable getSelectedDateVerticalBar();
 
-        int getSelectedWeekBackgroundColor();
+    int getSelectedWeekBackgroundColor();
 
-        boolean getShowWeekNumber();
+    boolean getShowWeekNumber();
 
-        int getShownWeekCount();
+    int getShownWeekCount();
 
-        int getUnfocusedMonthDateColor();
+    int getUnfocusedMonthDateColor();
 
-        int getWeekDayTextAppearance();
+    int getWeekDayTextAppearance();
 
-        int getWeekNumberColor();
+    int getWeekNumberColor();
 
-        int getWeekSeparatorLineColor();
+    int getWeekSeparatorLineColor();
 
-        void onConfigurationChanged(Configuration configuration);
+    void onConfigurationChanged(Configuration configuration);
 
-        void setDate(long j);
+    void setDate(long j);
 
-        void setDate(long j, boolean z, boolean z2);
+    void setDate(long j, boolean z, boolean z2);
 
-        void setDateTextAppearance(int i);
+    void setDateTextAppearance(int i);
 
-        void setFirstDayOfWeek(int i);
+    void setFirstDayOfWeek(int i);
 
-        void setFocusedMonthDateColor(int i);
+    void setFocusedMonthDateColor(int i);
 
-        void setMaxDate(long j);
+    void setMaxDate(long j);
 
-        void setMinDate(long j);
+    void setMinDate(long j);
 
-        void setOnDateChangeListener(OnDateChangeListener onDateChangeListener);
+    void setOnDateChangeListener(OnDateChangeListener onDateChangeListener);
 
-        void setSelectedDateVerticalBar(int i);
+    void setSelectedDateVerticalBar(int i);
 
-        void setSelectedDateVerticalBar(Drawable drawable);
+    void setSelectedDateVerticalBar(Drawable drawable);
 
-        void setSelectedWeekBackgroundColor(int i);
+    void setSelectedWeekBackgroundColor(int i);
 
-        void setShowWeekNumber(boolean z);
+    void setShowWeekNumber(boolean z);
 
-        void setShownWeekCount(int i);
+    void setShownWeekCount(int i);
 
-        void setUnfocusedMonthDateColor(int i);
+    void setUnfocusedMonthDateColor(int i);
 
-        void setWeekDayTextAppearance(int i);
+    void setWeekDayTextAppearance(int i);
 
-        void setWeekNumberColor(int i);
+    void setWeekNumberColor(int i);
 
-        void setWeekSeparatorLineColor(int i);
+    void setWeekSeparatorLineColor(int i);
+  }
+
+  public interface OnDateChangeListener {
+    void onSelectedDayChange(CalendarView calendarView, int i, int i2, int i3);
+  }
+
+  public final class InspectionCompanion
+      implements android.view.inspector.InspectionCompanion<CalendarView> {
+    private int mDateTextAppearanceId;
+    private int mFirstDayOfWeekId;
+    private int mFocusedMonthDateColorId;
+    private int mMaxDateId;
+    private int mMinDateId;
+    private boolean mPropertiesMapped = false;
+    private int mSelectedDateVerticalBarId;
+    private int mSelectedWeekBackgroundColorId;
+    private int mShowWeekNumberId;
+    private int mShownWeekCountId;
+    private int mUnfocusedMonthDateColorId;
+    private int mWeekDayTextAppearanceId;
+    private int mWeekNumberColorId;
+    private int mWeekSeparatorLineColorId;
+
+    @Override // android.view.inspector.InspectionCompanion
+    public void mapProperties(PropertyMapper propertyMapper) {
+      this.mDateTextAppearanceId = propertyMapper.mapResourceId("dateTextAppearance", 16843593);
+      this.mFirstDayOfWeekId = propertyMapper.mapInt("firstDayOfWeek", 16843581);
+      this.mFocusedMonthDateColorId = propertyMapper.mapColor("focusedMonthDateColor", 16843587);
+      this.mMaxDateId = propertyMapper.mapLong("maxDate", 16843584);
+      this.mMinDateId = propertyMapper.mapLong("minDate", 16843583);
+      this.mSelectedDateVerticalBarId =
+          propertyMapper.mapObject("selectedDateVerticalBar", 16843591);
+      this.mSelectedWeekBackgroundColorId =
+          propertyMapper.mapColor("selectedWeekBackgroundColor", 16843586);
+      this.mShowWeekNumberId = propertyMapper.mapBoolean("showWeekNumber", 16843582);
+      this.mShownWeekCountId = propertyMapper.mapInt("shownWeekCount", 16843585);
+      this.mUnfocusedMonthDateColorId =
+          propertyMapper.mapColor("unfocusedMonthDateColor", 16843588);
+      this.mWeekDayTextAppearanceId =
+          propertyMapper.mapResourceId("weekDayTextAppearance", 16843592);
+      this.mWeekNumberColorId = propertyMapper.mapColor("weekNumberColor", 16843589);
+      this.mWeekSeparatorLineColorId = propertyMapper.mapColor("weekSeparatorLineColor", 16843590);
+      this.mPropertiesMapped = true;
     }
 
-    public interface OnDateChangeListener {
-        void onSelectedDayChange(CalendarView calendarView, int i, int i2, int i3);
+    @Override // android.view.inspector.InspectionCompanion
+    public void readProperties(CalendarView node, PropertyReader propertyReader) {
+      if (!this.mPropertiesMapped) {
+        throw new InspectionCompanion.UninitializedPropertyMapException();
+      }
+      propertyReader.readResourceId(this.mDateTextAppearanceId, node.getDateTextAppearance());
+      propertyReader.readInt(this.mFirstDayOfWeekId, node.getFirstDayOfWeek());
+      propertyReader.readColor(this.mFocusedMonthDateColorId, node.getFocusedMonthDateColor());
+      propertyReader.readLong(this.mMaxDateId, node.getMaxDate());
+      propertyReader.readLong(this.mMinDateId, node.getMinDate());
+      propertyReader.readObject(this.mSelectedDateVerticalBarId, node.getSelectedDateVerticalBar());
+      propertyReader.readColor(
+          this.mSelectedWeekBackgroundColorId, node.getSelectedWeekBackgroundColor());
+      propertyReader.readBoolean(this.mShowWeekNumberId, node.getShowWeekNumber());
+      propertyReader.readInt(this.mShownWeekCountId, node.getShownWeekCount());
+      propertyReader.readColor(this.mUnfocusedMonthDateColorId, node.getUnfocusedMonthDateColor());
+      propertyReader.readResourceId(this.mWeekDayTextAppearanceId, node.getWeekDayTextAppearance());
+      propertyReader.readColor(this.mWeekNumberColorId, node.getWeekNumberColor());
+      propertyReader.readColor(this.mWeekSeparatorLineColorId, node.getWeekSeparatorLineColor());
+    }
+  }
+
+  public CalendarView(Context context) {
+    this(context, null);
+  }
+
+  public CalendarView(Context context, AttributeSet attrs) {
+    this(context, attrs, 16843613);
+  }
+
+  public CalendarView(Context context, AttributeSet attrs, int defStyleAttr) {
+    this(context, attrs, defStyleAttr, 0);
+  }
+
+  public CalendarView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    super(context, attrs, defStyleAttr, defStyleRes);
+    TypedArray a =
+        context.obtainStyledAttributes(
+            attrs, C4337R.styleable.CalendarView, defStyleAttr, defStyleRes);
+    saveAttributeDataForStyleable(
+        context, C4337R.styleable.CalendarView, attrs, a, defStyleAttr, defStyleRes);
+    int mode = a.getInt(13, 0);
+    a.recycle();
+    switch (mode) {
+      case 0:
+        this.mDelegate =
+            new CalendarViewLegacyDelegate(this, context, attrs, defStyleAttr, defStyleRes);
+        return;
+      case 1:
+        this.mDelegate =
+            new CalendarViewMaterialDelegate(this, context, attrs, defStyleAttr, defStyleRes);
+        return;
+      default:
+        throw new IllegalArgumentException("invalid calendarViewMode attribute");
+    }
+  }
+
+  @Deprecated
+  public void setShownWeekCount(int count) {
+    this.mDelegate.setShownWeekCount(count);
+  }
+
+  @Deprecated
+  public int getShownWeekCount() {
+    return this.mDelegate.getShownWeekCount();
+  }
+
+  @Deprecated
+  public void setSelectedWeekBackgroundColor(int color) {
+    this.mDelegate.setSelectedWeekBackgroundColor(color);
+  }
+
+  @Deprecated
+  public int getSelectedWeekBackgroundColor() {
+    return this.mDelegate.getSelectedWeekBackgroundColor();
+  }
+
+  @Deprecated
+  public void setFocusedMonthDateColor(int color) {
+    this.mDelegate.setFocusedMonthDateColor(color);
+  }
+
+  @Deprecated
+  public int getFocusedMonthDateColor() {
+    return this.mDelegate.getFocusedMonthDateColor();
+  }
+
+  @Deprecated
+  public void setUnfocusedMonthDateColor(int color) {
+    this.mDelegate.setUnfocusedMonthDateColor(color);
+  }
+
+  @Deprecated
+  public int getUnfocusedMonthDateColor() {
+    return this.mDelegate.getUnfocusedMonthDateColor();
+  }
+
+  @Deprecated
+  public void setWeekNumberColor(int color) {
+    this.mDelegate.setWeekNumberColor(color);
+  }
+
+  @Deprecated
+  public int getWeekNumberColor() {
+    return this.mDelegate.getWeekNumberColor();
+  }
+
+  @Deprecated
+  public void setWeekSeparatorLineColor(int color) {
+    this.mDelegate.setWeekSeparatorLineColor(color);
+  }
+
+  @Deprecated
+  public int getWeekSeparatorLineColor() {
+    return this.mDelegate.getWeekSeparatorLineColor();
+  }
+
+  @Deprecated
+  public void setSelectedDateVerticalBar(int resourceId) {
+    this.mDelegate.setSelectedDateVerticalBar(resourceId);
+  }
+
+  @Deprecated
+  public void setSelectedDateVerticalBar(Drawable drawable) {
+    this.mDelegate.setSelectedDateVerticalBar(drawable);
+  }
+
+  @Deprecated
+  public Drawable getSelectedDateVerticalBar() {
+    return this.mDelegate.getSelectedDateVerticalBar();
+  }
+
+  public void setWeekDayTextAppearance(int resourceId) {
+    this.mDelegate.setWeekDayTextAppearance(resourceId);
+  }
+
+  public int getWeekDayTextAppearance() {
+    return this.mDelegate.getWeekDayTextAppearance();
+  }
+
+  public void setDateTextAppearance(int resourceId) {
+    this.mDelegate.setDateTextAppearance(resourceId);
+  }
+
+  public int getDateTextAppearance() {
+    return this.mDelegate.getDateTextAppearance();
+  }
+
+  public long getMinDate() {
+    return this.mDelegate.getMinDate();
+  }
+
+  public void setMinDate(long minDate) {
+    this.mDelegate.setMinDate(minDate);
+  }
+
+  public long getMaxDate() {
+    return this.mDelegate.getMaxDate();
+  }
+
+  public void setMaxDate(long maxDate) {
+    this.mDelegate.setMaxDate(maxDate);
+  }
+
+  @Deprecated
+  public void setShowWeekNumber(boolean showWeekNumber) {
+    this.mDelegate.setShowWeekNumber(showWeekNumber);
+  }
+
+  @Deprecated
+  public boolean getShowWeekNumber() {
+    return this.mDelegate.getShowWeekNumber();
+  }
+
+  public int getFirstDayOfWeek() {
+    return this.mDelegate.getFirstDayOfWeek();
+  }
+
+  public void setFirstDayOfWeek(int firstDayOfWeek) {
+    this.mDelegate.setFirstDayOfWeek(firstDayOfWeek);
+  }
+
+  public void setOnDateChangeListener(OnDateChangeListener listener) {
+    this.mDelegate.setOnDateChangeListener(listener);
+  }
+
+  public long getDate() {
+    return this.mDelegate.getDate();
+  }
+
+  public void setDate(long date) {
+    this.mDelegate.setDate(date);
+  }
+
+  public void setDate(long date, boolean animate, boolean center) {
+    this.mDelegate.setDate(date, animate, center);
+  }
+
+  public boolean getBoundsForDate(long date, Rect outBounds) {
+    return this.mDelegate.getBoundsForDate(date, outBounds);
+  }
+
+  @Override // android.view.View
+  protected void onConfigurationChanged(Configuration newConfig) {
+    super.onConfigurationChanged(newConfig);
+    this.mDelegate.onConfigurationChanged(newConfig);
+  }
+
+  @Override // android.widget.FrameLayout, android.view.ViewGroup, android.view.View
+  public CharSequence getAccessibilityClassName() {
+    return CalendarView.class.getName();
+  }
+
+  abstract static class AbstractCalendarViewDelegate implements CalendarViewDelegate {
+    protected static final String DEFAULT_MAX_DATE = "01/01/2100";
+    protected static final String DEFAULT_MIN_DATE = "01/01/1900";
+    protected Context mContext;
+    protected Locale mCurrentLocale;
+    protected CalendarView mDelegator;
+
+    AbstractCalendarViewDelegate(CalendarView delegator, Context context) {
+      this.mDelegator = delegator;
+      this.mContext = context;
+      setCurrentLocale(Locale.getDefault());
     }
 
-    public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<CalendarView> {
-        private int mDateTextAppearanceId;
-        private int mFirstDayOfWeekId;
-        private int mFocusedMonthDateColorId;
-        private int mMaxDateId;
-        private int mMinDateId;
-        private boolean mPropertiesMapped = false;
-        private int mSelectedDateVerticalBarId;
-        private int mSelectedWeekBackgroundColorId;
-        private int mShowWeekNumberId;
-        private int mShownWeekCountId;
-        private int mUnfocusedMonthDateColorId;
-        private int mWeekDayTextAppearanceId;
-        private int mWeekNumberColorId;
-        private int mWeekSeparatorLineColorId;
-
-        @Override // android.view.inspector.InspectionCompanion
-        public void mapProperties(PropertyMapper propertyMapper) {
-            this.mDateTextAppearanceId = propertyMapper.mapResourceId("dateTextAppearance", 16843593);
-            this.mFirstDayOfWeekId = propertyMapper.mapInt("firstDayOfWeek", 16843581);
-            this.mFocusedMonthDateColorId = propertyMapper.mapColor("focusedMonthDateColor", 16843587);
-            this.mMaxDateId = propertyMapper.mapLong("maxDate", 16843584);
-            this.mMinDateId = propertyMapper.mapLong("minDate", 16843583);
-            this.mSelectedDateVerticalBarId = propertyMapper.mapObject("selectedDateVerticalBar", 16843591);
-            this.mSelectedWeekBackgroundColorId = propertyMapper.mapColor("selectedWeekBackgroundColor", 16843586);
-            this.mShowWeekNumberId = propertyMapper.mapBoolean("showWeekNumber", 16843582);
-            this.mShownWeekCountId = propertyMapper.mapInt("shownWeekCount", 16843585);
-            this.mUnfocusedMonthDateColorId = propertyMapper.mapColor("unfocusedMonthDateColor", 16843588);
-            this.mWeekDayTextAppearanceId = propertyMapper.mapResourceId("weekDayTextAppearance", 16843592);
-            this.mWeekNumberColorId = propertyMapper.mapColor("weekNumberColor", 16843589);
-            this.mWeekSeparatorLineColorId = propertyMapper.mapColor("weekSeparatorLineColor", 16843590);
-            this.mPropertiesMapped = true;
-        }
-
-        @Override // android.view.inspector.InspectionCompanion
-        public void readProperties(CalendarView node, PropertyReader propertyReader) {
-            if (!this.mPropertiesMapped) {
-                throw new InspectionCompanion.UninitializedPropertyMapException();
-            }
-            propertyReader.readResourceId(this.mDateTextAppearanceId, node.getDateTextAppearance());
-            propertyReader.readInt(this.mFirstDayOfWeekId, node.getFirstDayOfWeek());
-            propertyReader.readColor(this.mFocusedMonthDateColorId, node.getFocusedMonthDateColor());
-            propertyReader.readLong(this.mMaxDateId, node.getMaxDate());
-            propertyReader.readLong(this.mMinDateId, node.getMinDate());
-            propertyReader.readObject(this.mSelectedDateVerticalBarId, node.getSelectedDateVerticalBar());
-            propertyReader.readColor(this.mSelectedWeekBackgroundColorId, node.getSelectedWeekBackgroundColor());
-            propertyReader.readBoolean(this.mShowWeekNumberId, node.getShowWeekNumber());
-            propertyReader.readInt(this.mShownWeekCountId, node.getShownWeekCount());
-            propertyReader.readColor(this.mUnfocusedMonthDateColorId, node.getUnfocusedMonthDateColor());
-            propertyReader.readResourceId(this.mWeekDayTextAppearanceId, node.getWeekDayTextAppearance());
-            propertyReader.readColor(this.mWeekNumberColorId, node.getWeekNumberColor());
-            propertyReader.readColor(this.mWeekSeparatorLineColorId, node.getWeekSeparatorLineColor());
-        }
+    protected void setCurrentLocale(Locale locale) {
+      if (locale.equals(this.mCurrentLocale)) {
+        return;
+      }
+      this.mCurrentLocale = locale;
     }
 
-    public CalendarView(Context context) {
-        this(context, null);
-    }
+    @Override // android.widget.CalendarView.CalendarViewDelegate
+    public void setShownWeekCount(int count) {}
 
-    public CalendarView(Context context, AttributeSet attrs) {
-        this(context, attrs, 16843613);
-    }
-
-    public CalendarView(Context context, AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
-    }
-
-    public CalendarView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        TypedArray a = context.obtainStyledAttributes(attrs, C4337R.styleable.CalendarView, defStyleAttr, defStyleRes);
-        saveAttributeDataForStyleable(context, C4337R.styleable.CalendarView, attrs, a, defStyleAttr, defStyleRes);
-        int mode = a.getInt(13, 0);
-        a.recycle();
-        switch (mode) {
-            case 0:
-                this.mDelegate = new CalendarViewLegacyDelegate(this, context, attrs, defStyleAttr, defStyleRes);
-                return;
-            case 1:
-                this.mDelegate = new CalendarViewMaterialDelegate(this, context, attrs, defStyleAttr, defStyleRes);
-                return;
-            default:
-                throw new IllegalArgumentException("invalid calendarViewMode attribute");
-        }
-    }
-
-    @Deprecated
-    public void setShownWeekCount(int count) {
-        this.mDelegate.setShownWeekCount(count);
-    }
-
-    @Deprecated
+    @Override // android.widget.CalendarView.CalendarViewDelegate
     public int getShownWeekCount() {
-        return this.mDelegate.getShownWeekCount();
+      return 0;
     }
 
-    @Deprecated
-    public void setSelectedWeekBackgroundColor(int color) {
-        this.mDelegate.setSelectedWeekBackgroundColor(color);
-    }
+    @Override // android.widget.CalendarView.CalendarViewDelegate
+    public void setSelectedWeekBackgroundColor(int color) {}
 
-    @Deprecated
+    @Override // android.widget.CalendarView.CalendarViewDelegate
     public int getSelectedWeekBackgroundColor() {
-        return this.mDelegate.getSelectedWeekBackgroundColor();
+      return 0;
     }
 
-    @Deprecated
-    public void setFocusedMonthDateColor(int color) {
-        this.mDelegate.setFocusedMonthDateColor(color);
-    }
+    @Override // android.widget.CalendarView.CalendarViewDelegate
+    public void setFocusedMonthDateColor(int color) {}
 
-    @Deprecated
+    @Override // android.widget.CalendarView.CalendarViewDelegate
     public int getFocusedMonthDateColor() {
-        return this.mDelegate.getFocusedMonthDateColor();
+      return 0;
     }
 
-    @Deprecated
-    public void setUnfocusedMonthDateColor(int color) {
-        this.mDelegate.setUnfocusedMonthDateColor(color);
-    }
+    @Override // android.widget.CalendarView.CalendarViewDelegate
+    public void setUnfocusedMonthDateColor(int color) {}
 
-    @Deprecated
+    @Override // android.widget.CalendarView.CalendarViewDelegate
     public int getUnfocusedMonthDateColor() {
-        return this.mDelegate.getUnfocusedMonthDateColor();
+      return 0;
     }
 
-    @Deprecated
-    public void setWeekNumberColor(int color) {
-        this.mDelegate.setWeekNumberColor(color);
-    }
+    @Override // android.widget.CalendarView.CalendarViewDelegate
+    public void setWeekNumberColor(int color) {}
 
-    @Deprecated
+    @Override // android.widget.CalendarView.CalendarViewDelegate
     public int getWeekNumberColor() {
-        return this.mDelegate.getWeekNumberColor();
+      return 0;
     }
 
-    @Deprecated
-    public void setWeekSeparatorLineColor(int color) {
-        this.mDelegate.setWeekSeparatorLineColor(color);
-    }
+    @Override // android.widget.CalendarView.CalendarViewDelegate
+    public void setWeekSeparatorLineColor(int color) {}
 
-    @Deprecated
+    @Override // android.widget.CalendarView.CalendarViewDelegate
     public int getWeekSeparatorLineColor() {
-        return this.mDelegate.getWeekSeparatorLineColor();
+      return 0;
     }
 
-    @Deprecated
-    public void setSelectedDateVerticalBar(int resourceId) {
-        this.mDelegate.setSelectedDateVerticalBar(resourceId);
-    }
+    @Override // android.widget.CalendarView.CalendarViewDelegate
+    public void setSelectedDateVerticalBar(int resId) {}
 
-    @Deprecated
-    public void setSelectedDateVerticalBar(Drawable drawable) {
-        this.mDelegate.setSelectedDateVerticalBar(drawable);
-    }
+    @Override // android.widget.CalendarView.CalendarViewDelegate
+    public void setSelectedDateVerticalBar(Drawable drawable) {}
 
-    @Deprecated
+    @Override // android.widget.CalendarView.CalendarViewDelegate
     public Drawable getSelectedDateVerticalBar() {
-        return this.mDelegate.getSelectedDateVerticalBar();
+      return null;
     }
 
-    public void setWeekDayTextAppearance(int resourceId) {
-        this.mDelegate.setWeekDayTextAppearance(resourceId);
-    }
+    @Override // android.widget.CalendarView.CalendarViewDelegate
+    public void setShowWeekNumber(boolean showWeekNumber) {}
 
-    public int getWeekDayTextAppearance() {
-        return this.mDelegate.getWeekDayTextAppearance();
-    }
-
-    public void setDateTextAppearance(int resourceId) {
-        this.mDelegate.setDateTextAppearance(resourceId);
-    }
-
-    public int getDateTextAppearance() {
-        return this.mDelegate.getDateTextAppearance();
-    }
-
-    public long getMinDate() {
-        return this.mDelegate.getMinDate();
-    }
-
-    public void setMinDate(long minDate) {
-        this.mDelegate.setMinDate(minDate);
-    }
-
-    public long getMaxDate() {
-        return this.mDelegate.getMaxDate();
-    }
-
-    public void setMaxDate(long maxDate) {
-        this.mDelegate.setMaxDate(maxDate);
-    }
-
-    @Deprecated
-    public void setShowWeekNumber(boolean showWeekNumber) {
-        this.mDelegate.setShowWeekNumber(showWeekNumber);
-    }
-
-    @Deprecated
+    @Override // android.widget.CalendarView.CalendarViewDelegate
     public boolean getShowWeekNumber() {
-        return this.mDelegate.getShowWeekNumber();
+      return false;
     }
 
-    public int getFirstDayOfWeek() {
-        return this.mDelegate.getFirstDayOfWeek();
+    @Override // android.widget.CalendarView.CalendarViewDelegate
+    public void onConfigurationChanged(Configuration newConfig) {}
+  }
+
+  public static boolean parseDate(String date, Calendar outDate) {
+    if (date == null || date.isEmpty()) {
+      return false;
     }
-
-    public void setFirstDayOfWeek(int firstDayOfWeek) {
-        this.mDelegate.setFirstDayOfWeek(firstDayOfWeek);
+    try {
+      Date parsedDate = DATE_FORMATTER.parse(date);
+      outDate.setTime(parsedDate);
+      return true;
+    } catch (ParseException e) {
+      Log.m102w(LOG_TAG, "Date: " + date + " not in format: " + DATE_FORMAT);
+      return false;
     }
-
-    public void setOnDateChangeListener(OnDateChangeListener listener) {
-        this.mDelegate.setOnDateChangeListener(listener);
-    }
-
-    public long getDate() {
-        return this.mDelegate.getDate();
-    }
-
-    public void setDate(long date) {
-        this.mDelegate.setDate(date);
-    }
-
-    public void setDate(long date, boolean animate, boolean center) {
-        this.mDelegate.setDate(date, animate, center);
-    }
-
-    public boolean getBoundsForDate(long date, Rect outBounds) {
-        return this.mDelegate.getBoundsForDate(date, outBounds);
-    }
-
-    @Override // android.view.View
-    protected void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        this.mDelegate.onConfigurationChanged(newConfig);
-    }
-
-    @Override // android.widget.FrameLayout, android.view.ViewGroup, android.view.View
-    public CharSequence getAccessibilityClassName() {
-        return CalendarView.class.getName();
-    }
-
-    static abstract class AbstractCalendarViewDelegate implements CalendarViewDelegate {
-        protected static final String DEFAULT_MAX_DATE = "01/01/2100";
-        protected static final String DEFAULT_MIN_DATE = "01/01/1900";
-        protected Context mContext;
-        protected Locale mCurrentLocale;
-        protected CalendarView mDelegator;
-
-        AbstractCalendarViewDelegate(CalendarView delegator, Context context) {
-            this.mDelegator = delegator;
-            this.mContext = context;
-            setCurrentLocale(Locale.getDefault());
-        }
-
-        protected void setCurrentLocale(Locale locale) {
-            if (locale.equals(this.mCurrentLocale)) {
-                return;
-            }
-            this.mCurrentLocale = locale;
-        }
-
-        @Override // android.widget.CalendarView.CalendarViewDelegate
-        public void setShownWeekCount(int count) {
-        }
-
-        @Override // android.widget.CalendarView.CalendarViewDelegate
-        public int getShownWeekCount() {
-            return 0;
-        }
-
-        @Override // android.widget.CalendarView.CalendarViewDelegate
-        public void setSelectedWeekBackgroundColor(int color) {
-        }
-
-        @Override // android.widget.CalendarView.CalendarViewDelegate
-        public int getSelectedWeekBackgroundColor() {
-            return 0;
-        }
-
-        @Override // android.widget.CalendarView.CalendarViewDelegate
-        public void setFocusedMonthDateColor(int color) {
-        }
-
-        @Override // android.widget.CalendarView.CalendarViewDelegate
-        public int getFocusedMonthDateColor() {
-            return 0;
-        }
-
-        @Override // android.widget.CalendarView.CalendarViewDelegate
-        public void setUnfocusedMonthDateColor(int color) {
-        }
-
-        @Override // android.widget.CalendarView.CalendarViewDelegate
-        public int getUnfocusedMonthDateColor() {
-            return 0;
-        }
-
-        @Override // android.widget.CalendarView.CalendarViewDelegate
-        public void setWeekNumberColor(int color) {
-        }
-
-        @Override // android.widget.CalendarView.CalendarViewDelegate
-        public int getWeekNumberColor() {
-            return 0;
-        }
-
-        @Override // android.widget.CalendarView.CalendarViewDelegate
-        public void setWeekSeparatorLineColor(int color) {
-        }
-
-        @Override // android.widget.CalendarView.CalendarViewDelegate
-        public int getWeekSeparatorLineColor() {
-            return 0;
-        }
-
-        @Override // android.widget.CalendarView.CalendarViewDelegate
-        public void setSelectedDateVerticalBar(int resId) {
-        }
-
-        @Override // android.widget.CalendarView.CalendarViewDelegate
-        public void setSelectedDateVerticalBar(Drawable drawable) {
-        }
-
-        @Override // android.widget.CalendarView.CalendarViewDelegate
-        public Drawable getSelectedDateVerticalBar() {
-            return null;
-        }
-
-        @Override // android.widget.CalendarView.CalendarViewDelegate
-        public void setShowWeekNumber(boolean showWeekNumber) {
-        }
-
-        @Override // android.widget.CalendarView.CalendarViewDelegate
-        public boolean getShowWeekNumber() {
-            return false;
-        }
-
-        @Override // android.widget.CalendarView.CalendarViewDelegate
-        public void onConfigurationChanged(Configuration newConfig) {
-        }
-    }
-
-    public static boolean parseDate(String date, Calendar outDate) {
-        if (date == null || date.isEmpty()) {
-            return false;
-        }
-        try {
-            Date parsedDate = DATE_FORMATTER.parse(date);
-            outDate.setTime(parsedDate);
-            return true;
-        } catch (ParseException e) {
-            Log.m102w(LOG_TAG, "Date: " + date + " not in format: " + DATE_FORMAT);
-            return false;
-        }
-    }
+  }
 }

@@ -7,13 +7,18 @@ import com.android.server.display.brightness.BrightnessUtils;
 
 /* loaded from: classes2.dex */
 public class ScreenOffBrightnessStrategy implements DisplayBrightnessStrategy {
-    @Override // com.android.server.display.brightness.strategy.DisplayBrightnessStrategy
-    public String getName() {
-        return "ScreenOffBrightnessStrategy";
-    }
+  @Override // com.android.server.display.brightness.strategy.DisplayBrightnessStrategy
+  public String getName() {
+    return "ScreenOffBrightnessStrategy";
+  }
 
-    @Override // com.android.server.display.brightness.strategy.DisplayBrightnessStrategy
-    public DisplayBrightnessState updateBrightness(DisplayManagerInternal.DisplayPowerRequest displayPowerRequest) {
-        return BrightnessUtils.constructDisplayBrightnessState(5, DisplayPowerController2.RATE_FROM_DOZE_TO_ON, DisplayPowerController2.RATE_FROM_DOZE_TO_ON, getName());
-    }
+  @Override // com.android.server.display.brightness.strategy.DisplayBrightnessStrategy
+  public DisplayBrightnessState updateBrightness(
+      DisplayManagerInternal.DisplayPowerRequest displayPowerRequest) {
+    return BrightnessUtils.constructDisplayBrightnessState(
+        5,
+        DisplayPowerController2.RATE_FROM_DOZE_TO_ON,
+        DisplayPowerController2.RATE_FROM_DOZE_TO_ON,
+        getName());
+  }
 }

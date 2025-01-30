@@ -11,64 +11,76 @@ import com.android.server.uri.UriGrantsManagerInternal;
 
 /* loaded from: classes2.dex */
 public final class InputContentUriTokenHandler extends IInputContentUriToken.Stub {
-    public final Object mLock = new Object();
-    public IBinder mPermissionOwnerToken = null;
-    public final int mSourceUid;
-    public final int mSourceUserId;
-    public final String mTargetPackage;
-    public final int mTargetUserId;
-    public final Uri mUri;
+  public final Object mLock = new Object();
+  public IBinder mPermissionOwnerToken = null;
+  public final int mSourceUid;
+  public final int mSourceUserId;
+  public final String mTargetPackage;
+  public final int mTargetUserId;
+  public final Uri mUri;
 
-    public InputContentUriTokenHandler(Uri uri, int i, String str, int i2, int i3) {
-        this.mUri = uri;
-        this.mSourceUid = i;
-        this.mTargetPackage = str;
-        this.mSourceUserId = i2;
-        this.mTargetUserId = i3;
-    }
+  public InputContentUriTokenHandler(Uri uri, int i, String str, int i2, int i3) {
+    this.mUri = uri;
+    this.mSourceUid = i;
+    this.mTargetPackage = str;
+    this.mSourceUserId = i2;
+    this.mTargetUserId = i3;
+  }
 
-    public void take() {
-        synchronized (this.mLock) {
-            if (this.mPermissionOwnerToken != null) {
-                return;
-            }
-            IBinder newUriPermissionOwner = ((UriGrantsManagerInternal) LocalServices.getService(UriGrantsManagerInternal.class)).newUriPermissionOwner("InputContentUriTokenHandler");
-            this.mPermissionOwnerToken = newUriPermissionOwner;
-            doTakeLocked(newUriPermissionOwner);
-        }
+  public void take() {
+    synchronized (this.mLock) {
+      if (this.mPermissionOwnerToken != null) {
+        return;
+      }
+      IBinder newUriPermissionOwner =
+          ((UriGrantsManagerInternal) LocalServices.getService(UriGrantsManagerInternal.class))
+              .newUriPermissionOwner("InputContentUriTokenHandler");
+      this.mPermissionOwnerToken = newUriPermissionOwner;
+      doTakeLocked(newUriPermissionOwner);
     }
+  }
 
-    public final void doTakeLocked(IBinder iBinder) {
-        long clearCallingIdentity = Binder.clearCallingIdentity();
-        try {
-            try {
-                UriGrantsManager.getService().grantUriPermissionFromOwner(iBinder, this.mSourceUid, this.mTargetPackage, this.mUri, 1, this.mSourceUserId, this.mTargetUserId);
-            } catch (RemoteException e) {
-                e.rethrowFromSystemServer();
-            }
-        } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
-        }
+  public final void doTakeLocked(IBinder iBinder) {
+    long clearCallingIdentity = Binder.clearCallingIdentity();
+    try {
+      try {
+        UriGrantsManager.getService()
+            .grantUriPermissionFromOwner(
+                iBinder,
+                this.mSourceUid,
+                this.mTargetPackage,
+                this.mUri,
+                1,
+                this.mSourceUserId,
+                this.mTargetUserId);
+      } catch (RemoteException e) {
+        e.rethrowFromSystemServer();
+      }
+    } finally {
+      Binder.restoreCallingIdentity(clearCallingIdentity);
     }
+  }
 
-    public void release() {
-        synchronized (this.mLock) {
-            if (this.mPermissionOwnerToken == null) {
-                return;
-            }
-            try {
-                ((UriGrantsManagerInternal) LocalServices.getService(UriGrantsManagerInternal.class)).revokeUriPermissionFromOwner(this.mPermissionOwnerToken, this.mUri, 1, this.mSourceUserId);
-            } finally {
-                this.mPermissionOwnerToken = null;
-            }
-        }
+  public void release() {
+    synchronized (this.mLock) {
+      if (this.mPermissionOwnerToken == null) {
+        return;
+      }
+      try {
+        ((UriGrantsManagerInternal) LocalServices.getService(UriGrantsManagerInternal.class))
+            .revokeUriPermissionFromOwner(
+                this.mPermissionOwnerToken, this.mUri, 1, this.mSourceUserId);
+      } finally {
+        this.mPermissionOwnerToken = null;
+      }
     }
+  }
 
-    public void finalize() {
-        try {
-            release();
-        } finally {
-            super/*java.lang.Object*/.finalize();
-        }
+  public void finalize() {
+    try {
+      release();
+    } finally {
+      super /*java.lang.Object*/.finalize();
     }
+  }
 }

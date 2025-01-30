@@ -5,40 +5,39 @@ import java.util.StringTokenizer;
 /* loaded from: classes5.dex */
 public class DeviceExtractor {
 
-    public static class Seed {
-        private static final String DELIMITER = "+";
-        private String mInterface = "";
-        private String mUUID = "";
+  public static class Seed {
+    private static final String DELIMITER = "+";
+    private String mInterface = "";
+    private String mUUID = "";
 
-        private Seed() {
-        }
+    private Seed() {}
 
-        public String getInterface() {
-            return this.mInterface;
-        }
-
-        public String getUUID() {
-            return this.mUUID;
-        }
-
-        public static Seed parseSeedString(String seedString) {
-            StringTokenizer st = new StringTokenizer(seedString, DELIMITER);
-            int count = st.countTokens();
-            if (count != 2) {
-                return null;
-            }
-            String uuid = "";
-            if (st.hasMoreElements()) {
-                uuid = st.nextToken();
-            }
-            String netInterface = "";
-            if (st.hasMoreElements()) {
-                netInterface = st.nextToken();
-            }
-            Seed seed = new Seed();
-            seed.mUUID = uuid;
-            seed.mInterface = netInterface;
-            return seed;
-        }
+    public String getInterface() {
+      return this.mInterface;
     }
+
+    public String getUUID() {
+      return this.mUUID;
+    }
+
+    public static Seed parseSeedString(String seedString) {
+      StringTokenizer st = new StringTokenizer(seedString, DELIMITER);
+      int count = st.countTokens();
+      if (count != 2) {
+        return null;
+      }
+      String uuid = "";
+      if (st.hasMoreElements()) {
+        uuid = st.nextToken();
+      }
+      String netInterface = "";
+      if (st.hasMoreElements()) {
+        netInterface = st.nextToken();
+      }
+      Seed seed = new Seed();
+      seed.mUUID = uuid;
+      seed.mInterface = netInterface;
+      return seed;
+    }
+  }
 }

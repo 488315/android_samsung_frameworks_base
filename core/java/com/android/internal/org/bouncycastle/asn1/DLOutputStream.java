@@ -5,17 +5,17 @@ import java.io.OutputStream;
 
 /* loaded from: classes5.dex */
 class DLOutputStream extends ASN1OutputStream {
-    DLOutputStream(OutputStream os) {
-        super(os);
-    }
+  DLOutputStream(OutputStream os) {
+    super(os);
+  }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1OutputStream
-    void writePrimitive(ASN1Primitive primitive, boolean withTag) throws IOException {
-        primitive.toDLObject().encode(this, withTag);
-    }
+  @Override // com.android.internal.org.bouncycastle.asn1.ASN1OutputStream
+  void writePrimitive(ASN1Primitive primitive, boolean withTag) throws IOException {
+    primitive.toDLObject().encode(this, withTag);
+  }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1OutputStream
-    ASN1OutputStream getDLSubStream() {
-        return this;
-    }
+  @Override // com.android.internal.org.bouncycastle.asn1.ASN1OutputStream
+  ASN1OutputStream getDLSubStream() {
+    return this;
+  }
 }

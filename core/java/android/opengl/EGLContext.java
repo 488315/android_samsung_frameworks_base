@@ -2,18 +2,18 @@ package android.opengl;
 
 /* loaded from: classes3.dex */
 public class EGLContext extends EGLObjectHandle {
-    private EGLContext(long handle) {
-        super(handle);
-    }
+  private EGLContext(long handle) {
+    super(handle);
+  }
 
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof EGLContext)) {
-            return false;
-        }
-        EGLContext that = (EGLContext) o;
-        return getNativeHandle() == that.getNativeHandle();
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
+    if (!(o instanceof EGLContext)) {
+      return false;
+    }
+    EGLContext that = (EGLContext) o;
+    return getNativeHandle() == that.getNativeHandle();
+  }
 }

@@ -7,61 +7,65 @@ import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public abstract class LocationTimeZoneProviderProxy implements Dumpable {
-    public final Context mContext;
-    public Listener mListener;
-    public final Object mSharedLock;
-    public final ThreadingDomain mThreadingDomain;
+  public final Context mContext;
+  public Listener mListener;
+  public final Object mSharedLock;
+  public final ThreadingDomain mThreadingDomain;
 
-    public interface Listener {
-        void onProviderBound();
+  public interface Listener {
+    void onProviderBound();
 
-        void onProviderUnbound();
+    void onProviderUnbound();
 
-        void onReportTimeZoneProviderEvent(TimeZoneProviderEvent timeZoneProviderEvent);
+    void onReportTimeZoneProviderEvent(TimeZoneProviderEvent timeZoneProviderEvent);
+  }
+
+  public abstract void onDestroy();
+
+  public abstract void onInitialize();
+
+  public abstract void setRequest(TimeZoneProviderRequest timeZoneProviderRequest);
+
+  public LocationTimeZoneProviderProxy(Context context, ThreadingDomain threadingDomain) {
+    Objects.requireNonNull(context);
+    this.mContext = context;
+    Objects.requireNonNull(threadingDomain);
+    this.mThreadingDomain = threadingDomain;
+    this.mSharedLock = threadingDomain.getLockObject();
+  }
+
+  public void initialize(Listener listener) {
+    Objects.requireNonNull(listener);
+    synchronized (this.mSharedLock) {
+      if (this.mListener != null) {
+        throw new IllegalStateException("listener already set");
+      }
+      this.mListener = listener;
+      onInitialize();
     }
+  }
 
-    public abstract void onDestroy();
-
-    public abstract void onInitialize();
-
-    public abstract void setRequest(TimeZoneProviderRequest timeZoneProviderRequest);
-
-    public LocationTimeZoneProviderProxy(Context context, ThreadingDomain threadingDomain) {
-        Objects.requireNonNull(context);
-        this.mContext = context;
-        Objects.requireNonNull(threadingDomain);
-        this.mThreadingDomain = threadingDomain;
-        this.mSharedLock = threadingDomain.getLockObject();
+  public void destroy() {
+    synchronized (this.mSharedLock) {
+      onDestroy();
     }
+  }
 
-    public void initialize(Listener listener) {
-        Objects.requireNonNull(listener);
-        synchronized (this.mSharedLock) {
-            if (this.mListener != null) {
-                throw new IllegalStateException("listener already set");
-            }
-            this.mListener = listener;
-            onInitialize();
-        }
-    }
+  /* JADX INFO: Access modifiers changed from: private */
+  public /* synthetic */ void lambda$handleTimeZoneProviderEvent$0(
+      TimeZoneProviderEvent timeZoneProviderEvent) {
+    this.mListener.onReportTimeZoneProviderEvent(timeZoneProviderEvent);
+  }
 
-    public void destroy() {
-        synchronized (this.mSharedLock) {
-            onDestroy();
-        }
-    }
-
-    /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$handleTimeZoneProviderEvent$0(TimeZoneProviderEvent timeZoneProviderEvent) {
-        this.mListener.onReportTimeZoneProviderEvent(timeZoneProviderEvent);
-    }
-
-    public final void handleTimeZoneProviderEvent(final TimeZoneProviderEvent timeZoneProviderEvent) {
-        this.mThreadingDomain.post(new Runnable() { // from class: com.android.server.timezonedetector.location.LocationTimeZoneProviderProxy$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                LocationTimeZoneProviderProxy.this.lambda$handleTimeZoneProviderEvent$0(timeZoneProviderEvent);
-            }
+  public final void handleTimeZoneProviderEvent(final TimeZoneProviderEvent timeZoneProviderEvent) {
+    this.mThreadingDomain.post(
+        new Runnable() { // from class:
+                         // com.android.server.timezonedetector.location.LocationTimeZoneProviderProxy$$ExternalSyntheticLambda0
+          @Override // java.lang.Runnable
+          public final void run() {
+            LocationTimeZoneProviderProxy.this.lambda$handleTimeZoneProviderEvent$0(
+                timeZoneProviderEvent);
+          }
         });
-    }
+  }
 }

@@ -1,41 +1,40 @@
 package android.p009os;
 
-import android.p009os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class CcuStatsInfo implements Parcelable {
-    public static final Parcelable.Creator<CcuStatsInfo> CREATOR = new Parcelable.Creator<CcuStatsInfo>() { // from class: android.os.CcuStatsInfo.1
+  public static final Parcelable.Creator<CcuStatsInfo> CREATOR =
+      new Parcelable.Creator<CcuStatsInfo>() { // from class: android.os.CcuStatsInfo.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public CcuStatsInfo createFromParcel(Parcel in) {
-            return new CcuStatsInfo(in);
+          return new CcuStatsInfo(in);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public CcuStatsInfo[] newArray(int size) {
-            return new CcuStatsInfo[size];
+          return new CcuStatsInfo[size];
         }
-    };
-    public long[] cpuFreqTimeMs;
-    public int uid;
+      };
+  public long[] cpuFreqTimeMs;
+  public int uid;
 
-    public CcuStatsInfo() {
-    }
+  public CcuStatsInfo() {}
 
-    public CcuStatsInfo(Parcel in) {
-        this.uid = in.readInt();
-        this.cpuFreqTimeMs = in.createLongArray();
-    }
+  public CcuStatsInfo(Parcel in) {
+    this.uid = in.readInt();
+    this.cpuFreqTimeMs = in.createLongArray();
+  }
 
-    @Override // android.p009os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.uid);
-        dest.writeLongArray(this.cpuFreqTimeMs);
-    }
+  @Override // android.p009os.Parcelable
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeInt(this.uid);
+    dest.writeLongArray(this.cpuFreqTimeMs);
+  }
 
-    @Override // android.p009os.Parcelable
-    public int describeContents() {
-        return 0;
-    }
+  @Override // android.p009os.Parcelable
+  public int describeContents() {
+    return 0;
+  }
 }

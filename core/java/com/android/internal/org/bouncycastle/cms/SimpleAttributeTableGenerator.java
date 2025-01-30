@@ -5,14 +5,14 @@ import java.util.Map;
 
 /* loaded from: classes5.dex */
 public class SimpleAttributeTableGenerator implements CMSAttributeTableGenerator {
-    private final AttributeTable attributes;
+  private final AttributeTable attributes;
 
-    public SimpleAttributeTableGenerator(AttributeTable attributes) {
-        this.attributes = attributes;
-    }
+  public SimpleAttributeTableGenerator(AttributeTable attributes) {
+    this.attributes = attributes;
+  }
 
-    @Override // com.android.internal.org.bouncycastle.cms.CMSAttributeTableGenerator
-    public AttributeTable getAttributes(Map parameters) {
-        return this.attributes;
-    }
+  @Override // com.android.internal.org.bouncycastle.cms.CMSAttributeTableGenerator
+  public AttributeTable getAttributes(Map parameters) {
+    return this.attributes;
+  }
 }

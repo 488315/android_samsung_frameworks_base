@@ -8,50 +8,54 @@ import java.util.Objects;
 
 /* loaded from: classes.dex */
 public class RectShape extends Shape {
-    private RectF mRect = new RectF();
+  private RectF mRect = new RectF();
 
-    @Override // android.graphics.drawable.shapes.Shape
-    public void draw(Canvas canvas, Paint paint) {
-        canvas.drawRect(this.mRect, paint);
-    }
+  @Override // android.graphics.drawable.shapes.Shape
+  public void draw(Canvas canvas, Paint paint) {
+    canvas.drawRect(this.mRect, paint);
+  }
 
-    @Override // android.graphics.drawable.shapes.Shape
-    public void getOutline(Outline outline) {
-        RectF rect = rect();
-        outline.setRect((int) Math.ceil(rect.left), (int) Math.ceil(rect.top), (int) Math.floor(rect.right), (int) Math.floor(rect.bottom));
-    }
+  @Override // android.graphics.drawable.shapes.Shape
+  public void getOutline(Outline outline) {
+    RectF rect = rect();
+    outline.setRect(
+        (int) Math.ceil(rect.left),
+        (int) Math.ceil(rect.top),
+        (int) Math.floor(rect.right),
+        (int) Math.floor(rect.bottom));
+  }
 
-    @Override // android.graphics.drawable.shapes.Shape
-    protected void onResize(float width, float height) {
-        this.mRect.set(0.0f, 0.0f, width, height);
-    }
+  @Override // android.graphics.drawable.shapes.Shape
+  protected void onResize(float width, float height) {
+    this.mRect.set(0.0f, 0.0f, width, height);
+  }
 
-    protected final RectF rect() {
-        return this.mRect;
-    }
+  protected final RectF rect() {
+    return this.mRect;
+  }
 
-    @Override // android.graphics.drawable.shapes.Shape
-    /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public RectShape mo1783clone() throws CloneNotSupportedException {
-        RectShape shape = (RectShape) super.mo1783clone();
-        shape.mRect = new RectF(this.mRect);
-        return shape;
-    }
+  @Override // android.graphics.drawable.shapes.Shape
+  /* renamed from: clone, reason: merged with bridge method [inline-methods] */
+  public RectShape mo1783clone() throws CloneNotSupportedException {
+    RectShape shape = (RectShape) super.mo1783clone();
+    shape.mRect = new RectF(this.mRect);
+    return shape;
+  }
 
-    @Override // android.graphics.drawable.shapes.Shape
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass() || !super.equals(o)) {
-            return false;
-        }
-        RectShape rectShape = (RectShape) o;
-        return Objects.equals(this.mRect, rectShape.mRect);
+  @Override // android.graphics.drawable.shapes.Shape
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
+    if (o == null || getClass() != o.getClass() || !super.equals(o)) {
+      return false;
+    }
+    RectShape rectShape = (RectShape) o;
+    return Objects.equals(this.mRect, rectShape.mRect);
+  }
 
-    @Override // android.graphics.drawable.shapes.Shape
-    public int hashCode() {
-        return Objects.hash(Integer.valueOf(super.hashCode()), this.mRect);
-    }
+  @Override // android.graphics.drawable.shapes.Shape
+  public int hashCode() {
+    return Objects.hash(Integer.valueOf(super.hashCode()), this.mRect);
+  }
 }

@@ -10,30 +10,33 @@ import com.android.net.module.util.PermissionUtils;
 /* loaded from: classes2.dex */
 public class NetworkStack {
 
-    @SystemApi
-    public static final String PERMISSION_MAINLINE_NETWORK_STACK = "android.permission.MAINLINE_NETWORK_STACK";
-    private static volatile IBinder sMockService;
+  @SystemApi
+  public static final String PERMISSION_MAINLINE_NETWORK_STACK =
+      "android.permission.MAINLINE_NETWORK_STACK";
 
-    @SystemApi
-    public static IBinder getService() {
-        IBinder mockService = sMockService;
-        return mockService != null ? mockService : ServiceManager.getService(Context.NETWORK_STACK_SERVICE);
-    }
+  private static volatile IBinder sMockService;
 
-    public static void setServiceForTest(IBinder mockService) {
-        sMockService = mockService;
-    }
+  @SystemApi
+  public static IBinder getService() {
+    IBinder mockService = sMockService;
+    return mockService != null
+        ? mockService
+        : ServiceManager.getService(Context.NETWORK_STACK_SERVICE);
+  }
 
-    private NetworkStack() {
-    }
+  public static void setServiceForTest(IBinder mockService) {
+    sMockService = mockService;
+  }
 
-    @Deprecated
-    public static void checkNetworkStackPermission(Context context) {
-        PermissionUtils.enforceNetworkStackPermission(context);
-    }
+  private NetworkStack() {}
 
-    @Deprecated
-    public static void checkNetworkStackPermissionOr(Context context, String... otherPermissions) {
-        PermissionUtils.enforceNetworkStackPermissionOr(context, otherPermissions);
-    }
+  @Deprecated
+  public static void checkNetworkStackPermission(Context context) {
+    PermissionUtils.enforceNetworkStackPermission(context);
+  }
+
+  @Deprecated
+  public static void checkNetworkStackPermissionOr(Context context, String... otherPermissions) {
+    PermissionUtils.enforceNetworkStackPermissionOr(context, otherPermissions);
+  }
 }

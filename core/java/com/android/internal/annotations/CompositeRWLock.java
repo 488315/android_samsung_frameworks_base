@@ -9,5 +9,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.CLASS)
 /* loaded from: classes4.dex */
 public @interface CompositeRWLock {
-    String[] value() default {};
+  String[] value() default {};
 }

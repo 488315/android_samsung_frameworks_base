@@ -8,33 +8,34 @@ import java.util.Objects;
 
 /* loaded from: classes2.dex */
 public class SystemDeviceStationaryHelper extends DeviceStationaryHelper {
-    public DeviceIdleInternal mDeviceIdle;
+  public DeviceIdleInternal mDeviceIdle;
 
-    public void onSystemReady() {
-        DeviceIdleInternal deviceIdleInternal = (DeviceIdleInternal) LocalServices.getService(DeviceIdleInternal.class);
-        Objects.requireNonNull(deviceIdleInternal);
-        this.mDeviceIdle = deviceIdleInternal;
-    }
+  public void onSystemReady() {
+    DeviceIdleInternal deviceIdleInternal =
+        (DeviceIdleInternal) LocalServices.getService(DeviceIdleInternal.class);
+    Objects.requireNonNull(deviceIdleInternal);
+    this.mDeviceIdle = deviceIdleInternal;
+  }
 
-    @Override // com.android.server.location.injector.DeviceStationaryHelper
-    public void addListener(DeviceIdleInternal.StationaryListener stationaryListener) {
-        Preconditions.checkState(this.mDeviceIdle != null);
-        long clearCallingIdentity = Binder.clearCallingIdentity();
-        try {
-            this.mDeviceIdle.registerStationaryListener(stationaryListener);
-        } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
-        }
+  @Override // com.android.server.location.injector.DeviceStationaryHelper
+  public void addListener(DeviceIdleInternal.StationaryListener stationaryListener) {
+    Preconditions.checkState(this.mDeviceIdle != null);
+    long clearCallingIdentity = Binder.clearCallingIdentity();
+    try {
+      this.mDeviceIdle.registerStationaryListener(stationaryListener);
+    } finally {
+      Binder.restoreCallingIdentity(clearCallingIdentity);
     }
+  }
 
-    @Override // com.android.server.location.injector.DeviceStationaryHelper
-    public void removeListener(DeviceIdleInternal.StationaryListener stationaryListener) {
-        Preconditions.checkState(this.mDeviceIdle != null);
-        long clearCallingIdentity = Binder.clearCallingIdentity();
-        try {
-            this.mDeviceIdle.unregisterStationaryListener(stationaryListener);
-        } finally {
-            Binder.restoreCallingIdentity(clearCallingIdentity);
-        }
+  @Override // com.android.server.location.injector.DeviceStationaryHelper
+  public void removeListener(DeviceIdleInternal.StationaryListener stationaryListener) {
+    Preconditions.checkState(this.mDeviceIdle != null);
+    long clearCallingIdentity = Binder.clearCallingIdentity();
+    try {
+      this.mDeviceIdle.unregisterStationaryListener(stationaryListener);
+    } finally {
+      Binder.restoreCallingIdentity(clearCallingIdentity);
     }
+  }
 }

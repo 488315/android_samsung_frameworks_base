@@ -8,21 +8,21 @@ import android.filterfw.core.GenerateFieldPort;
 /* loaded from: classes.dex */
 public class FrameStore extends Filter {
 
-    @GenerateFieldPort(name = "key")
-    private String mKey;
+  @GenerateFieldPort(name = "key")
+  private String mKey;
 
-    public FrameStore(String name) {
-        super(name);
-    }
+  public FrameStore(String name) {
+    super(name);
+  }
 
-    @Override // android.filterfw.core.Filter
-    public void setupPorts() {
-        addInputPort("frame");
-    }
+  @Override // android.filterfw.core.Filter
+  public void setupPorts() {
+    addInputPort("frame");
+  }
 
-    @Override // android.filterfw.core.Filter
-    public void process(FilterContext context) {
-        Frame input = pullInput("frame");
-        context.storeFrame(this.mKey, input);
-    }
+  @Override // android.filterfw.core.Filter
+  public void process(FilterContext context) {
+    Frame input = pullInput("frame");
+    context.storeFrame(this.mKey, input);
+  }
 }

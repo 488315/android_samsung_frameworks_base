@@ -8,62 +8,62 @@ import android.view.View;
 
 /* loaded from: classes4.dex */
 public class MediaRouteChooserDialogFragment extends DialogFragment {
-    private final String ARGUMENT_ROUTE_TYPES = "routeTypes";
-    private View.OnClickListener mExtendedSettingsClickListener;
+  private final String ARGUMENT_ROUTE_TYPES = "routeTypes";
+  private View.OnClickListener mExtendedSettingsClickListener;
 
-    public MediaRouteChooserDialogFragment() {
-        int theme;
-        if (MediaRouteChooserDialog.isLightTheme(getContext())) {
-            theme = 16974130;
-        } else {
-            theme = 16974126;
-        }
-        setCancelable(true);
-        setStyle(0, theme);
+  public MediaRouteChooserDialogFragment() {
+    int theme;
+    if (MediaRouteChooserDialog.isLightTheme(getContext())) {
+      theme = 16974130;
+    } else {
+      theme = 16974126;
     }
+    setCancelable(true);
+    setStyle(0, theme);
+  }
 
-    public int getRouteTypes() {
-        Bundle args = getArguments();
-        if (args != null) {
-            return args.getInt("routeTypes");
-        }
-        return 0;
+  public int getRouteTypes() {
+    Bundle args = getArguments();
+    if (args != null) {
+      return args.getInt("routeTypes");
     }
+    return 0;
+  }
 
-    public void setRouteTypes(int types) {
-        if (types != getRouteTypes()) {
-            Bundle args = getArguments();
-            if (args == null) {
-                args = new Bundle();
-            }
-            args.putInt("routeTypes", types);
-            setArguments(args);
-            MediaRouteChooserDialog dialog = (MediaRouteChooserDialog) getDialog();
-            if (dialog != null) {
-                dialog.setRouteTypes(types);
-            }
-        }
+  public void setRouteTypes(int types) {
+    if (types != getRouteTypes()) {
+      Bundle args = getArguments();
+      if (args == null) {
+        args = new Bundle();
+      }
+      args.putInt("routeTypes", types);
+      setArguments(args);
+      MediaRouteChooserDialog dialog = (MediaRouteChooserDialog) getDialog();
+      if (dialog != null) {
+        dialog.setRouteTypes(types);
+      }
     }
+  }
 
-    public void setExtendedSettingsClickListener(View.OnClickListener listener) {
-        if (listener != this.mExtendedSettingsClickListener) {
-            this.mExtendedSettingsClickListener = listener;
-            MediaRouteChooserDialog dialog = (MediaRouteChooserDialog) getDialog();
-            if (dialog != null) {
-                dialog.setExtendedSettingsClickListener(listener);
-            }
-        }
+  public void setExtendedSettingsClickListener(View.OnClickListener listener) {
+    if (listener != this.mExtendedSettingsClickListener) {
+      this.mExtendedSettingsClickListener = listener;
+      MediaRouteChooserDialog dialog = (MediaRouteChooserDialog) getDialog();
+      if (dialog != null) {
+        dialog.setExtendedSettingsClickListener(listener);
+      }
     }
+  }
 
-    public MediaRouteChooserDialog onCreateChooserDialog(Context context, Bundle savedInstanceState) {
-        return new MediaRouteChooserDialog(context, getTheme());
-    }
+  public MediaRouteChooserDialog onCreateChooserDialog(Context context, Bundle savedInstanceState) {
+    return new MediaRouteChooserDialog(context, getTheme());
+  }
 
-    @Override // android.app.DialogFragment
-    public Dialog onCreateDialog(Bundle savedInstanceState) {
-        MediaRouteChooserDialog dialog = onCreateChooserDialog(getActivity(), savedInstanceState);
-        dialog.setRouteTypes(getRouteTypes());
-        dialog.setExtendedSettingsClickListener(this.mExtendedSettingsClickListener);
-        return dialog;
-    }
+  @Override // android.app.DialogFragment
+  public Dialog onCreateDialog(Bundle savedInstanceState) {
+    MediaRouteChooserDialog dialog = onCreateChooserDialog(getActivity(), savedInstanceState);
+    dialog.setRouteTypes(getRouteTypes());
+    dialog.setExtendedSettingsClickListener(this.mExtendedSettingsClickListener);
+    return dialog;
+  }
 }

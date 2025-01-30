@@ -7,20 +7,20 @@ import com.samsung.android.sume.core.filter.MediaFilter;
 
 /* loaded from: classes4.dex */
 public class SimpleConveyorFilter extends SequentialFilter {
-    public SimpleConveyorFilter(SequentialDescriptor sequentialDescriptor) {
-        super(sequentialDescriptor);
-    }
+  public SimpleConveyorFilter(SequentialDescriptor sequentialDescriptor) {
+    super(sequentialDescriptor);
+  }
 
-    @Override // com.samsung.android.sume.core.functional.Operator
-    public MutableMediaBuffer run(MediaBuffer ibuf, MutableMediaBuffer obuf) {
-        MediaBuffer buf = null;
-        for (MediaFilter filter : this.filters) {
-            buf = filter.run(ibuf);
-            ibuf = buf;
-        }
-        if (buf != null) {
-            obuf.put(buf);
-        }
-        return obuf;
+  @Override // com.samsung.android.sume.core.functional.Operator
+  public MutableMediaBuffer run(MediaBuffer ibuf, MutableMediaBuffer obuf) {
+    MediaBuffer buf = null;
+    for (MediaFilter filter : this.filters) {
+      buf = filter.run(ibuf);
+      ibuf = buf;
     }
+    if (buf != null) {
+      obuf.put(buf);
+    }
+    return obuf;
+  }
 }

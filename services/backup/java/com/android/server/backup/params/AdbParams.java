@@ -6,13 +6,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /* loaded from: classes.dex */
 public abstract class AdbParams {
-    public String curPassword;
-    public String encryptPassword;
+  public String curPassword;
+  public String encryptPassword;
 
-    /* renamed from: fd */
-    public ParcelFileDescriptor f1647fd;
-    public IFullBackupRestoreObserver observer;
-    public boolean typeMigration;
-    public final AtomicBoolean latch = new AtomicBoolean(false);
-    public boolean privilegeApp = false;
+  /* renamed from: fd */
+  public ParcelFileDescriptor f1647fd;
+  public IFullBackupRestoreObserver observer;
+  public boolean typeMigration;
+  public final AtomicBoolean latch = new AtomicBoolean(false);
+  public boolean privilegeApp = false;
 }

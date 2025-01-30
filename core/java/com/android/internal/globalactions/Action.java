@@ -7,15 +7,15 @@ import android.view.ViewGroup;
 
 /* loaded from: classes4.dex */
 public interface Action {
-    View create(Context context, View view, ViewGroup viewGroup, LayoutInflater layoutInflater);
+  View create(Context context, View view, ViewGroup viewGroup, LayoutInflater layoutInflater);
 
-    CharSequence getLabelForAccessibility(Context context);
+  CharSequence getLabelForAccessibility(Context context);
 
-    boolean isEnabled();
+  boolean isEnabled();
 
-    void onPress();
+  void onPress();
 
-    boolean showBeforeProvisioning();
+  boolean showBeforeProvisioning();
 
-    boolean showDuringKeyguard();
+  boolean showDuringKeyguard();
 }

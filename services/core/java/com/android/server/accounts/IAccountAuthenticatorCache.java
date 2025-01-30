@@ -10,19 +10,21 @@ import java.util.Collection;
 
 /* loaded from: classes.dex */
 public interface IAccountAuthenticatorCache {
-    void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr, int i);
+  void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr, int i);
 
-    Collection getAllServices(int i);
+  Collection getAllServices(int i);
 
-    boolean getBindInstantServiceAllowed(int i);
+  boolean getBindInstantServiceAllowed(int i);
 
-    RegisteredServicesCache.ServiceInfo getServiceInfo(AuthenticatorDescription authenticatorDescription, int i);
+  RegisteredServicesCache.ServiceInfo getServiceInfo(
+      AuthenticatorDescription authenticatorDescription, int i);
 
-    void invalidateCache(int i);
+  void invalidateCache(int i);
 
-    void setBindInstantServiceAllowed(int i, boolean z);
+  void setBindInstantServiceAllowed(int i, boolean z);
 
-    void setListener(RegisteredServicesCacheListener registeredServicesCacheListener, Handler handler);
+  void setListener(
+      RegisteredServicesCacheListener registeredServicesCacheListener, Handler handler);
 
-    void updateServices(int i);
+  void updateServices(int i);
 }

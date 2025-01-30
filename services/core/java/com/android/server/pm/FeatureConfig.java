@@ -5,17 +5,17 @@ import com.android.server.pm.pkg.PackageStateInternal;
 
 /* loaded from: classes3.dex */
 interface FeatureConfig {
-    void enableLogging(int i, boolean z);
+  void enableLogging(int i, boolean z);
 
-    boolean isGloballyEnabled();
+  boolean isGloballyEnabled();
 
-    boolean isLoggingEnabled(int i);
+  boolean isLoggingEnabled(int i);
 
-    void onSystemReady();
+  void onSystemReady();
 
-    boolean packageIsEnabled(AndroidPackage androidPackage);
+  boolean packageIsEnabled(AndroidPackage androidPackage);
 
-    FeatureConfig snapshot();
+  FeatureConfig snapshot();
 
-    void updatePackageState(PackageStateInternal packageStateInternal, boolean z);
+  void updatePackageState(PackageStateInternal packageStateInternal, boolean z);
 }

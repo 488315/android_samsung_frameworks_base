@@ -4,11 +4,10 @@ import android.annotation.SystemApi;
 
 /* loaded from: classes4.dex */
 public abstract class WebResourceError {
-    public abstract CharSequence getDescription();
+  public abstract CharSequence getDescription();
 
-    public abstract int getErrorCode();
+  public abstract int getErrorCode();
 
-    @SystemApi
-    public WebResourceError() {
-    }
+  @SystemApi
+  public WebResourceError() {}
 }

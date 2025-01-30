@@ -5,22 +5,22 @@ import com.android.internal.org.bouncycastle.math.p026ec.PreCompInfo;
 
 /* loaded from: classes5.dex */
 public class EndoPreCompInfo implements PreCompInfo {
-    protected ECEndomorphism endomorphism;
-    protected ECPoint mappedPoint;
+  protected ECEndomorphism endomorphism;
+  protected ECPoint mappedPoint;
 
-    public ECEndomorphism getEndomorphism() {
-        return this.endomorphism;
-    }
+  public ECEndomorphism getEndomorphism() {
+    return this.endomorphism;
+  }
 
-    public void setEndomorphism(ECEndomorphism endomorphism) {
-        this.endomorphism = endomorphism;
-    }
+  public void setEndomorphism(ECEndomorphism endomorphism) {
+    this.endomorphism = endomorphism;
+  }
 
-    public ECPoint getMappedPoint() {
-        return this.mappedPoint;
-    }
+  public ECPoint getMappedPoint() {
+    return this.mappedPoint;
+  }
 
-    public void setMappedPoint(ECPoint mappedPoint) {
-        this.mappedPoint = mappedPoint;
-    }
+  public void setMappedPoint(ECPoint mappedPoint) {
+    this.mappedPoint = mappedPoint;
+  }
 }

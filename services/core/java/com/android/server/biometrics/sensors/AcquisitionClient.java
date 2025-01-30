@@ -16,134 +16,163 @@ import java.util.function.Supplier;
 
 /* loaded from: classes.dex */
 public abstract class AcquisitionClient extends HalClientMonitor implements ErrorConsumer {
-    public boolean mAlreadyCancelled;
-    public final PowerManager mPowerManager;
-    public boolean mShouldSendErrorToClient;
-    public boolean mShouldVibrate;
-    public static final VibrationAttributes HARDWARE_FEEDBACK_VIBRATION_ATTRIBUTES = VibrationAttributes.createForUsage(50);
-    public static final VibrationEffect SUCCESS_VIBRATION_EFFECT = VibrationEffect.get(0);
-    public static final VibrationEffect ERROR_VIBRATION_EFFECT = VibrationEffect.get(1);
+  public boolean mAlreadyCancelled;
+  public final PowerManager mPowerManager;
+  public boolean mShouldSendErrorToClient;
+  public boolean mShouldVibrate;
+  public static final VibrationAttributes HARDWARE_FEEDBACK_VIBRATION_ATTRIBUTES =
+      VibrationAttributes.createForUsage(50);
+  public static final VibrationEffect SUCCESS_VIBRATION_EFFECT = VibrationEffect.get(0);
+  public static final VibrationEffect ERROR_VIBRATION_EFFECT = VibrationEffect.get(1);
 
-    @Override // com.android.server.biometrics.sensors.BaseClientMonitor
-    public boolean isInterruptable() {
-        return true;
+  @Override // com.android.server.biometrics.sensors.BaseClientMonitor
+  public boolean isInterruptable() {
+    return true;
+  }
+
+  public abstract void stopHalOperation();
+
+  public abstract void vibrateError();
+
+  public AcquisitionClient(
+      Context context,
+      Supplier supplier,
+      IBinder iBinder,
+      ClientMonitorCallbackConverter clientMonitorCallbackConverter,
+      int i,
+      String str,
+      int i2,
+      int i3,
+      boolean z,
+      BiometricLogger biometricLogger,
+      BiometricContext biometricContext) {
+    super(
+        context,
+        supplier,
+        iBinder,
+        clientMonitorCallbackConverter,
+        i,
+        str,
+        i2,
+        i3,
+        biometricLogger,
+        biometricContext);
+    this.mShouldSendErrorToClient = true;
+    this.mPowerManager = (PowerManager) context.getSystemService(PowerManager.class);
+    this.mShouldVibrate = z;
+  }
+
+  @Override // com.android.server.biometrics.sensors.HalClientMonitor
+  public void unableToStart() {
+    try {
+      getListener().onError(getSensorId(), getCookie(), 1, 0);
+    } catch (RemoteException e) {
+      Slog.e("Biometrics/AcquisitionClient", "Unable to send error", e);
     }
+  }
 
-    public abstract void stopHalOperation();
+  @Override // com.android.server.biometrics.sensors.ErrorConsumer
+  public void onError(int i, int i2) {
+    onErrorInternal(i, i2, true);
+  }
 
-    public abstract void vibrateError();
+  public void onUserCanceled() {
+    Slog.d("Biometrics/AcquisitionClient", "onUserCanceled");
+    onErrorInternal(10, 0, false);
+    stopHalOperation();
+  }
 
-    public AcquisitionClient(Context context, Supplier supplier, IBinder iBinder, ClientMonitorCallbackConverter clientMonitorCallbackConverter, int i, String str, int i2, int i3, boolean z, BiometricLogger biometricLogger, BiometricContext biometricContext) {
-        super(context, supplier, iBinder, clientMonitorCallbackConverter, i, str, i2, i3, biometricLogger, biometricContext);
-        this.mShouldSendErrorToClient = true;
-        this.mPowerManager = (PowerManager) context.getSystemService(PowerManager.class);
-        this.mShouldVibrate = z;
-    }
-
-    @Override // com.android.server.biometrics.sensors.HalClientMonitor
-    public void unableToStart() {
-        try {
-            getListener().onError(getSensorId(), getCookie(), 1, 0);
-        } catch (RemoteException e) {
-            Slog.e("Biometrics/AcquisitionClient", "Unable to send error", e);
+  public void onErrorInternal(int i, int i2, boolean z) {
+    Slog.d("Biometrics/AcquisitionClient", "onErrorInternal code: " + i + ", finish: " + z);
+    if (this.mShouldSendErrorToClient) {
+      getLogger().logOnError(getContext(), getOperationContext(), i, i2, getTargetUserId());
+      try {
+        if (getListener() != null) {
+          this.mShouldSendErrorToClient = false;
+          getListener().onError(getSensorId(), getCookie(), i, i2);
         }
+      } catch (RemoteException e) {
+        Slog.w("Biometrics/AcquisitionClient", "Failed to invoke sendError", e);
+      }
     }
+    if (z) {
+      ClientMonitorCallback clientMonitorCallback = this.mCallback;
+      if (clientMonitorCallback == null) {
+        Slog.e(
+            "Biometrics/AcquisitionClient",
+            "Callback is null, perhaps the client hasn't been started yet?");
+      } else {
+        clientMonitorCallback.onClientFinished(this, false);
+      }
+    }
+  }
 
-    @Override // com.android.server.biometrics.sensors.ErrorConsumer
-    public void onError(int i, int i2) {
-        onErrorInternal(i, i2, true);
+  @Override // com.android.server.biometrics.sensors.BaseClientMonitor
+  public void cancel() {
+    if (this.mAlreadyCancelled) {
+      Slog.w("Biometrics/AcquisitionClient", "Cancel was already requested");
+    } else {
+      stopHalOperation();
+      this.mAlreadyCancelled = true;
     }
+  }
 
-    public void onUserCanceled() {
-        Slog.d("Biometrics/AcquisitionClient", "onUserCanceled");
-        onErrorInternal(10, 0, false);
-        stopHalOperation();
+  @Override // com.android.server.biometrics.sensors.BaseClientMonitor
+  public void cancelWithoutStarting(ClientMonitorCallback clientMonitorCallback) {
+    Slog.d("Biometrics/AcquisitionClient", "cancelWithoutStarting: " + this);
+    try {
+      if (getListener() != null) {
+        getListener().onError(getSensorId(), getCookie(), 5, 0);
+      }
+    } catch (RemoteException e) {
+      Slog.w("Biometrics/AcquisitionClient", "Failed to invoke sendError", e);
     }
+    clientMonitorCallback.onClientFinished(this, true);
+  }
 
-    public void onErrorInternal(int i, int i2, boolean z) {
-        Slog.d("Biometrics/AcquisitionClient", "onErrorInternal code: " + i + ", finish: " + z);
-        if (this.mShouldSendErrorToClient) {
-            getLogger().logOnError(getContext(), getOperationContext(), i, i2, getTargetUserId());
-            try {
-                if (getListener() != null) {
-                    this.mShouldSendErrorToClient = false;
-                    getListener().onError(getSensorId(), getCookie(), i, i2);
-                }
-            } catch (RemoteException e) {
-                Slog.w("Biometrics/AcquisitionClient", "Failed to invoke sendError", e);
-            }
-        }
-        if (z) {
-            ClientMonitorCallback clientMonitorCallback = this.mCallback;
-            if (clientMonitorCallback == null) {
-                Slog.e("Biometrics/AcquisitionClient", "Callback is null, perhaps the client hasn't been started yet?");
-            } else {
-                clientMonitorCallback.onClientFinished(this, false);
-            }
-        }
-    }
+  public void onAcquired(int i, int i2) {
+    onAcquiredInternal(i, i2, true);
+  }
 
-    @Override // com.android.server.biometrics.sensors.BaseClientMonitor
-    public void cancel() {
-        if (this.mAlreadyCancelled) {
-            Slog.w("Biometrics/AcquisitionClient", "Cancel was already requested");
-        } else {
-            stopHalOperation();
-            this.mAlreadyCancelled = true;
-        }
+  public final void onAcquiredInternal(int i, int i2, boolean z) {
+    getLogger().logOnAcquired(getContext(), getOperationContext(), i, i2, getTargetUserId());
+    Slog.v("Biometrics/AcquisitionClient", "Acquired: " + i + " " + i2 + ", shouldSend: " + z);
+    if (i == 0) {
+      notifyUserActivity();
     }
+    try {
+      if (getListener() == null || !z) {
+        return;
+      }
+      getListener().onAcquired(getSensorId(), i, i2);
+    } catch (RemoteException e) {
+      Slog.w("Biometrics/AcquisitionClient", "Failed to invoke sendAcquired", e);
+      this.mCallback.onClientFinished(this, false);
+    }
+  }
 
-    @Override // com.android.server.biometrics.sensors.BaseClientMonitor
-    public void cancelWithoutStarting(ClientMonitorCallback clientMonitorCallback) {
-        Slog.d("Biometrics/AcquisitionClient", "cancelWithoutStarting: " + this);
-        try {
-            if (getListener() != null) {
-                getListener().onError(getSensorId(), getCookie(), 5, 0);
-            }
-        } catch (RemoteException e) {
-            Slog.w("Biometrics/AcquisitionClient", "Failed to invoke sendError", e);
-        }
-        clientMonitorCallback.onClientFinished(this, true);
-    }
+  public final void notifyUserActivity() {
+    this.mPowerManager.userActivity(SystemClock.uptimeMillis(), 2, 0);
+  }
 
-    public void onAcquired(int i, int i2) {
-        onAcquiredInternal(i, i2, true);
+  public void vibrateSuccess() {
+    Vibrator vibrator = (Vibrator) getContext().getSystemService(Vibrator.class);
+    if (vibrator == null || !this.mShouldVibrate) {
+      return;
     }
+    vibrator.vibrate(
+        Process.myUid(),
+        getContext().getOpPackageName(),
+        SUCCESS_VIBRATION_EFFECT,
+        getClass().getSimpleName() + "::success",
+        HARDWARE_FEEDBACK_VIBRATION_ATTRIBUTES);
+  }
 
-    public final void onAcquiredInternal(int i, int i2, boolean z) {
-        getLogger().logOnAcquired(getContext(), getOperationContext(), i, i2, getTargetUserId());
-        Slog.v("Biometrics/AcquisitionClient", "Acquired: " + i + " " + i2 + ", shouldSend: " + z);
-        if (i == 0) {
-            notifyUserActivity();
-        }
-        try {
-            if (getListener() == null || !z) {
-                return;
-            }
-            getListener().onAcquired(getSensorId(), i, i2);
-        } catch (RemoteException e) {
-            Slog.w("Biometrics/AcquisitionClient", "Failed to invoke sendAcquired", e);
-            this.mCallback.onClientFinished(this, false);
-        }
-    }
+  public void semSetVibrationEffectUsage(boolean z) {
+    this.mShouldVibrate = z;
+  }
 
-    public final void notifyUserActivity() {
-        this.mPowerManager.userActivity(SystemClock.uptimeMillis(), 2, 0);
-    }
-
-    public void vibrateSuccess() {
-        Vibrator vibrator = (Vibrator) getContext().getSystemService(Vibrator.class);
-        if (vibrator == null || !this.mShouldVibrate) {
-            return;
-        }
-        vibrator.vibrate(Process.myUid(), getContext().getOpPackageName(), SUCCESS_VIBRATION_EFFECT, getClass().getSimpleName() + "::success", HARDWARE_FEEDBACK_VIBRATION_ATTRIBUTES);
-    }
-
-    public void semSetVibrationEffectUsage(boolean z) {
-        this.mShouldVibrate = z;
-    }
-
-    public void doNotSendErrorToClient() {
-        this.mShouldSendErrorToClient = false;
-    }
+  public void doNotSendErrorToClient() {
+    this.mShouldSendErrorToClient = false;
+  }
 }

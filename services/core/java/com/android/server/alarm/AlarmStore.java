@@ -9,33 +9,33 @@ import java.util.function.Predicate;
 /* loaded from: classes.dex */
 public interface AlarmStore {
 
-    public interface AlarmDeliveryCalculator {
-        boolean updateAlarmDelivery(Alarm alarm);
-    }
+  public interface AlarmDeliveryCalculator {
+    boolean updateAlarmDelivery(Alarm alarm);
+  }
 
-    void add(Alarm alarm);
+  void add(Alarm alarm);
 
-    ArrayList asList();
+  ArrayList asList();
 
-    void dump(IndentingPrintWriter indentingPrintWriter, long j, SimpleDateFormat simpleDateFormat);
+  void dump(IndentingPrintWriter indentingPrintWriter, long j, SimpleDateFormat simpleDateFormat);
 
-    void dumpProto(ProtoOutputStream protoOutputStream, long j);
+  void dumpProto(ProtoOutputStream protoOutputStream, long j);
 
-    int getCount(Predicate predicate);
+  int getCount(Predicate predicate);
 
-    long getNextDeliveryTime();
+  long getNextDeliveryTime();
 
-    Alarm getNextWakeFromIdleAlarm();
+  Alarm getNextWakeFromIdleAlarm();
 
-    long getNextWakeupDeliveryTime();
+  long getNextWakeupDeliveryTime();
 
-    ArrayList remove(Predicate predicate);
+  ArrayList remove(Predicate predicate);
 
-    ArrayList removePendingAlarms(long j);
+  ArrayList removePendingAlarms(long j);
 
-    void setAlarmClockRemovalListener(Runnable runnable);
+  void setAlarmClockRemovalListener(Runnable runnable);
 
-    int size();
+  int size();
 
-    boolean updateAlarmDeliveries(AlarmDeliveryCalculator alarmDeliveryCalculator);
+  boolean updateAlarmDeliveries(AlarmDeliveryCalculator alarmDeliveryCalculator);
 }

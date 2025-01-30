@@ -9,5 +9,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.CLASS)
 /* loaded from: classes.dex */
 public @interface TargetApi {
-    int value();
+  int value();
 }

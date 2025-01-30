@@ -8,7 +8,7 @@ import java.security.PublicKey;
 
 /* loaded from: classes5.dex */
 public interface AsymmetricKeyInfoConverter {
-    PrivateKey generatePrivate(PrivateKeyInfo privateKeyInfo) throws IOException;
+  PrivateKey generatePrivate(PrivateKeyInfo privateKeyInfo) throws IOException;
 
-    PublicKey generatePublic(SubjectPublicKeyInfo subjectPublicKeyInfo) throws IOException;
+  PublicKey generatePublic(SubjectPublicKeyInfo subjectPublicKeyInfo) throws IOException;
 }

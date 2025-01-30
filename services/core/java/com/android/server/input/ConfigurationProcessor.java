@@ -13,42 +13,42 @@ import java.util.Map;
 
 /* loaded from: classes2.dex */
 public abstract class ConfigurationProcessor {
-    public static List processExcludedDeviceNames(InputStream inputStream) {
-        ArrayList arrayList = new ArrayList();
-        TypedXmlPullParser resolvePullParser = Xml.resolvePullParser(inputStream);
-        XmlUtils.beginDocument(resolvePullParser, "devices");
-        while (true) {
-            XmlUtils.nextElement(resolvePullParser);
-            if (!"device".equals(resolvePullParser.getName())) {
-                return arrayList;
-            }
-            String attributeValue = resolvePullParser.getAttributeValue((String) null, "name");
-            if (attributeValue != null) {
-                arrayList.add(attributeValue);
-            }
-        }
+  public static List processExcludedDeviceNames(InputStream inputStream) {
+    ArrayList arrayList = new ArrayList();
+    TypedXmlPullParser resolvePullParser = Xml.resolvePullParser(inputStream);
+    XmlUtils.beginDocument(resolvePullParser, "devices");
+    while (true) {
+      XmlUtils.nextElement(resolvePullParser);
+      if (!"device".equals(resolvePullParser.getName())) {
+        return arrayList;
+      }
+      String attributeValue = resolvePullParser.getAttributeValue((String) null, "name");
+      if (attributeValue != null) {
+        arrayList.add(attributeValue);
+      }
     }
+  }
 
-    public static Map processInputPortAssociations(InputStream inputStream) {
-        HashMap hashMap = new HashMap();
-        TypedXmlPullParser resolvePullParser = Xml.resolvePullParser(inputStream);
-        XmlUtils.beginDocument(resolvePullParser, "ports");
-        while (true) {
-            XmlUtils.nextElement(resolvePullParser);
-            if (!"port".equals(resolvePullParser.getName())) {
-                return hashMap;
-            }
-            String attributeValue = resolvePullParser.getAttributeValue((String) null, "input");
-            String attributeValue2 = resolvePullParser.getAttributeValue((String) null, "display");
-            if (TextUtils.isEmpty(attributeValue) || TextUtils.isEmpty(attributeValue2)) {
-                Slog.wtf("ConfigurationProcessor", "Ignoring incomplete entry");
-            } else {
-                try {
-                    hashMap.put(attributeValue, Integer.valueOf(Integer.parseUnsignedInt(attributeValue2)));
-                } catch (NumberFormatException unused) {
-                    Slog.wtf("ConfigurationProcessor", "Display port should be an integer");
-                }
-            }
+  public static Map processInputPortAssociations(InputStream inputStream) {
+    HashMap hashMap = new HashMap();
+    TypedXmlPullParser resolvePullParser = Xml.resolvePullParser(inputStream);
+    XmlUtils.beginDocument(resolvePullParser, "ports");
+    while (true) {
+      XmlUtils.nextElement(resolvePullParser);
+      if (!"port".equals(resolvePullParser.getName())) {
+        return hashMap;
+      }
+      String attributeValue = resolvePullParser.getAttributeValue((String) null, "input");
+      String attributeValue2 = resolvePullParser.getAttributeValue((String) null, "display");
+      if (TextUtils.isEmpty(attributeValue) || TextUtils.isEmpty(attributeValue2)) {
+        Slog.wtf("ConfigurationProcessor", "Ignoring incomplete entry");
+      } else {
+        try {
+          hashMap.put(attributeValue, Integer.valueOf(Integer.parseUnsignedInt(attributeValue2)));
+        } catch (NumberFormatException unused) {
+          Slog.wtf("ConfigurationProcessor", "Display port should be an integer");
         }
+      }
     }
+  }
 }

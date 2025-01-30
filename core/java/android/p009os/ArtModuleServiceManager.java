@@ -6,19 +6,19 @@ import android.annotation.SystemApi;
 /* loaded from: classes3.dex */
 public class ArtModuleServiceManager {
 
-    public static final class ServiceRegisterer {
-        private final String mServiceName;
+  public static final class ServiceRegisterer {
+    private final String mServiceName;
 
-        public ServiceRegisterer(String serviceName) {
-            this.mServiceName = serviceName;
-        }
-
-        public IBinder waitForService() {
-            return ServiceManager.waitForService(this.mServiceName);
-        }
+    public ServiceRegisterer(String serviceName) {
+      this.mServiceName = serviceName;
     }
 
-    public ServiceRegisterer getArtdServiceRegisterer() {
-        return new ServiceRegisterer("artd");
+    public IBinder waitForService() {
+      return ServiceManager.waitForService(this.mServiceName);
     }
+  }
+
+  public ServiceRegisterer getArtdServiceRegisterer() {
+    return new ServiceRegisterer("artd");
+  }
 }

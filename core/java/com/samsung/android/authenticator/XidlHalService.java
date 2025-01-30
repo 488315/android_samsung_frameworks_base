@@ -1,29 +1,37 @@
 package com.samsung.android.authenticator;
 
 import android.p009os.ParcelFileDescriptor;
-import com.samsung.android.authenticator.SemTrustedApplicationExecutor;
 
 /* loaded from: classes5.dex */
 interface XidlHalService {
-    byte[] execute(SemTrustedApplicationExecutor.TrustedAppAssetType trustedAppAssetType, byte[] bArr);
+  byte[] execute(
+      SemTrustedApplicationExecutor.TrustedAppAssetType trustedAppAssetType, byte[] bArr);
 
-    byte[] execute(SemTrustedApplicationExecutor.TrustedAppType trustedAppType, byte[] bArr);
+  byte[] execute(SemTrustedApplicationExecutor.TrustedAppType trustedAppType, byte[] bArr);
 
-    boolean isAvailable();
+  boolean isAvailable();
 
-    boolean load(SemTrustedApplicationExecutor.TrustedAppAssetType trustedAppAssetType, ParcelFileDescriptor parcelFileDescriptor, long j, long j2);
+  boolean load(
+      SemTrustedApplicationExecutor.TrustedAppAssetType trustedAppAssetType,
+      ParcelFileDescriptor parcelFileDescriptor,
+      long j,
+      long j2);
 
-    boolean load(SemTrustedApplicationExecutor.TrustedAppType trustedAppType, ParcelFileDescriptor parcelFileDescriptor, long j, long j2);
+  boolean load(
+      SemTrustedApplicationExecutor.TrustedAppType trustedAppType,
+      ParcelFileDescriptor parcelFileDescriptor,
+      long j,
+      long j2);
 
-    boolean unload(SemTrustedApplicationExecutor.TrustedAppAssetType trustedAppAssetType);
+  boolean unload(SemTrustedApplicationExecutor.TrustedAppAssetType trustedAppAssetType);
 
-    boolean unload(SemTrustedApplicationExecutor.TrustedAppType trustedAppType);
+  boolean unload(SemTrustedApplicationExecutor.TrustedAppType trustedAppType);
 
-    static XidlHalService makeHalService() {
-        AidlHalService aidlHalService = new AidlHalService();
-        if (aidlHalService.isAvailable()) {
-            return aidlHalService;
-        }
-        return new HidlHalService();
+  static XidlHalService makeHalService() {
+    AidlHalService aidlHalService = new AidlHalService();
+    if (aidlHalService.isAvailable()) {
+      return aidlHalService;
     }
+    return new HidlHalService();
+  }
 }

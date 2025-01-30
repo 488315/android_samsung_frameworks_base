@@ -8,13 +8,14 @@ import java.io.IOException;
 
 /* loaded from: classes5.dex */
 public abstract class X509NameEntryConverter {
-    public abstract ASN1Primitive getConvertedValue(ASN1ObjectIdentifier aSN1ObjectIdentifier, String str);
+  public abstract ASN1Primitive getConvertedValue(
+      ASN1ObjectIdentifier aSN1ObjectIdentifier, String str);
 
-    protected ASN1Primitive convertHexEncoded(String str, int off) throws IOException {
-        return ASN1Primitive.fromByteArray(Hex.decodeStrict(str, off, str.length() - off));
-    }
+  protected ASN1Primitive convertHexEncoded(String str, int off) throws IOException {
+    return ASN1Primitive.fromByteArray(Hex.decodeStrict(str, off, str.length() - off));
+  }
 
-    protected boolean canBePrintable(String str) {
-        return DERPrintableString.isPrintableString(str);
-    }
+  protected boolean canBePrintable(String str) {
+    return DERPrintableString.isPrintableString(str);
+  }
 }

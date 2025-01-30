@@ -16,132 +16,139 @@ import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
 public class X9ECParameters extends ASN1Object implements X9ObjectIdentifiers {
-    private static final BigInteger ONE = BigInteger.valueOf(1);
-    private ECCurve curve;
-    private X9FieldID fieldID;
+  private static final BigInteger ONE = BigInteger.valueOf(1);
+  private ECCurve curve;
+  private X9FieldID fieldID;
 
-    /* renamed from: g */
-    private X9ECPoint f738g;
+  /* renamed from: g */
+  private X9ECPoint f738g;
 
-    /* renamed from: h */
-    private BigInteger f739h;
+  /* renamed from: h */
+  private BigInteger f739h;
 
-    /* renamed from: n */
-    private BigInteger f740n;
-    private byte[] seed;
+  /* renamed from: n */
+  private BigInteger f740n;
+  private byte[] seed;
 
-    private X9ECParameters(ASN1Sequence seq) {
-        if (!(seq.getObjectAt(0) instanceof ASN1Integer) || !((ASN1Integer) seq.getObjectAt(0)).hasValue(ONE)) {
-            throw new IllegalArgumentException("bad version in X9ECParameters");
+  private X9ECParameters(ASN1Sequence seq) {
+    if (!(seq.getObjectAt(0) instanceof ASN1Integer)
+        || !((ASN1Integer) seq.getObjectAt(0)).hasValue(ONE)) {
+      throw new IllegalArgumentException("bad version in X9ECParameters");
+    }
+    this.f740n = ((ASN1Integer) seq.getObjectAt(4)).getValue();
+    if (seq.size() == 6) {
+      this.f739h = ((ASN1Integer) seq.getObjectAt(5)).getValue();
+    }
+    X9Curve x9c =
+        new X9Curve(
+            X9FieldID.getInstance(seq.getObjectAt(1)),
+            this.f740n,
+            this.f739h,
+            ASN1Sequence.getInstance(seq.getObjectAt(2)));
+    this.curve = x9c.getCurve();
+    Object p = seq.getObjectAt(3);
+    if (p instanceof X9ECPoint) {
+      this.f738g = (X9ECPoint) p;
+    } else {
+      this.f738g = new X9ECPoint(this.curve, (ASN1OctetString) p);
+    }
+    this.seed = x9c.getSeed();
+  }
+
+  public static X9ECParameters getInstance(Object obj) {
+    if (obj instanceof X9ECParameters) {
+      return (X9ECParameters) obj;
+    }
+    if (obj != null) {
+      return new X9ECParameters(ASN1Sequence.getInstance(obj));
+    }
+    return null;
+  }
+
+  public X9ECParameters(ECCurve curve, X9ECPoint g, BigInteger n) {
+    this(curve, g, n, null, null);
+  }
+
+  public X9ECParameters(ECCurve curve, X9ECPoint g, BigInteger n, BigInteger h) {
+    this(curve, g, n, h, null);
+  }
+
+  public X9ECParameters(ECCurve curve, X9ECPoint g, BigInteger n, BigInteger h, byte[] seed) {
+    this.curve = curve;
+    this.f738g = g;
+    this.f740n = n;
+    this.f739h = h;
+    this.seed = Arrays.clone(seed);
+    if (ECAlgorithms.isFpCurve(curve)) {
+      this.fieldID = new X9FieldID(curve.getField().getCharacteristic());
+      return;
+    }
+    if (ECAlgorithms.isF2mCurve(curve)) {
+      PolynomialExtensionField field = (PolynomialExtensionField) curve.getField();
+      int[] exponents = field.getMinimalPolynomial().getExponentsPresent();
+      if (exponents.length == 3) {
+        this.fieldID = new X9FieldID(exponents[2], exponents[1]);
+        return;
+      } else {
+        if (exponents.length == 5) {
+          this.fieldID = new X9FieldID(exponents[4], exponents[1], exponents[2], exponents[3]);
+          return;
         }
-        this.f740n = ((ASN1Integer) seq.getObjectAt(4)).getValue();
-        if (seq.size() == 6) {
-            this.f739h = ((ASN1Integer) seq.getObjectAt(5)).getValue();
-        }
-        X9Curve x9c = new X9Curve(X9FieldID.getInstance(seq.getObjectAt(1)), this.f740n, this.f739h, ASN1Sequence.getInstance(seq.getObjectAt(2)));
-        this.curve = x9c.getCurve();
-        Object p = seq.getObjectAt(3);
-        if (p instanceof X9ECPoint) {
-            this.f738g = (X9ECPoint) p;
-        } else {
-            this.f738g = new X9ECPoint(this.curve, (ASN1OctetString) p);
-        }
-        this.seed = x9c.getSeed();
+        throw new IllegalArgumentException("Only trinomial and pentomial curves are supported");
+      }
     }
+    throw new IllegalArgumentException("'curve' is of an unsupported type");
+  }
 
-    public static X9ECParameters getInstance(Object obj) {
-        if (obj instanceof X9ECParameters) {
-            return (X9ECParameters) obj;
-        }
-        if (obj != null) {
-            return new X9ECParameters(ASN1Sequence.getInstance(obj));
-        }
-        return null;
-    }
+  public ECCurve getCurve() {
+    return this.curve;
+  }
 
-    public X9ECParameters(ECCurve curve, X9ECPoint g, BigInteger n) {
-        this(curve, g, n, null, null);
-    }
+  public ECPoint getG() {
+    return this.f738g.getPoint();
+  }
 
-    public X9ECParameters(ECCurve curve, X9ECPoint g, BigInteger n, BigInteger h) {
-        this(curve, g, n, h, null);
-    }
+  public BigInteger getN() {
+    return this.f740n;
+  }
 
-    public X9ECParameters(ECCurve curve, X9ECPoint g, BigInteger n, BigInteger h, byte[] seed) {
-        this.curve = curve;
-        this.f738g = g;
-        this.f740n = n;
-        this.f739h = h;
-        this.seed = Arrays.clone(seed);
-        if (ECAlgorithms.isFpCurve(curve)) {
-            this.fieldID = new X9FieldID(curve.getField().getCharacteristic());
-            return;
-        }
-        if (ECAlgorithms.isF2mCurve(curve)) {
-            PolynomialExtensionField field = (PolynomialExtensionField) curve.getField();
-            int[] exponents = field.getMinimalPolynomial().getExponentsPresent();
-            if (exponents.length == 3) {
-                this.fieldID = new X9FieldID(exponents[2], exponents[1]);
-                return;
-            } else {
-                if (exponents.length == 5) {
-                    this.fieldID = new X9FieldID(exponents[4], exponents[1], exponents[2], exponents[3]);
-                    return;
-                }
-                throw new IllegalArgumentException("Only trinomial and pentomial curves are supported");
-            }
-        }
-        throw new IllegalArgumentException("'curve' is of an unsupported type");
-    }
+  public BigInteger getH() {
+    return this.f739h;
+  }
 
-    public ECCurve getCurve() {
-        return this.curve;
-    }
+  public byte[] getSeed() {
+    return Arrays.clone(this.seed);
+  }
 
-    public ECPoint getG() {
-        return this.f738g.getPoint();
-    }
+  public boolean hasSeed() {
+    return this.seed != null;
+  }
 
-    public BigInteger getN() {
-        return this.f740n;
-    }
+  public X9Curve getCurveEntry() {
+    return new X9Curve(this.curve, this.seed);
+  }
 
-    public BigInteger getH() {
-        return this.f739h;
-    }
+  public X9FieldID getFieldIDEntry() {
+    return this.fieldID;
+  }
 
-    public byte[] getSeed() {
-        return Arrays.clone(this.seed);
-    }
+  public X9ECPoint getBaseEntry() {
+    return this.f738g;
+  }
 
-    public boolean hasSeed() {
-        return this.seed != null;
+  @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+            // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+  public ASN1Primitive toASN1Primitive() {
+    ASN1EncodableVector v = new ASN1EncodableVector(6);
+    v.add(new ASN1Integer(ONE));
+    v.add(this.fieldID);
+    v.add(new X9Curve(this.curve, this.seed));
+    v.add(this.f738g);
+    v.add(new ASN1Integer(this.f740n));
+    BigInteger bigInteger = this.f739h;
+    if (bigInteger != null) {
+      v.add(new ASN1Integer(bigInteger));
     }
-
-    public X9Curve getCurveEntry() {
-        return new X9Curve(this.curve, this.seed);
-    }
-
-    public X9FieldID getFieldIDEntry() {
-        return this.fieldID;
-    }
-
-    public X9ECPoint getBaseEntry() {
-        return this.f738g;
-    }
-
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
-    public ASN1Primitive toASN1Primitive() {
-        ASN1EncodableVector v = new ASN1EncodableVector(6);
-        v.add(new ASN1Integer(ONE));
-        v.add(this.fieldID);
-        v.add(new X9Curve(this.curve, this.seed));
-        v.add(this.f738g);
-        v.add(new ASN1Integer(this.f740n));
-        BigInteger bigInteger = this.f739h;
-        if (bigInteger != null) {
-            v.add(new ASN1Integer(bigInteger));
-        }
-        return new DERSequence(v);
-    }
+    return new DERSequence(v);
+  }
 }

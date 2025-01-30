@@ -7,13 +7,13 @@ import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface StateChangedListener {
-    void onControllerStateChanged(ArraySet arraySet);
+  void onControllerStateChanged(ArraySet arraySet);
 
-    void onDeviceIdleStateChanged(boolean z);
+  void onDeviceIdleStateChanged(boolean z);
 
-    void onNetworkChanged(JobStatus jobStatus, Network network);
+  void onNetworkChanged(JobStatus jobStatus, Network network);
 
-    void onRestrictedBucketChanged(List list);
+  void onRestrictedBucketChanged(List list);
 
-    void onRunJobNow(JobStatus jobStatus);
+  void onRunJobNow(JobStatus jobStatus);
 }

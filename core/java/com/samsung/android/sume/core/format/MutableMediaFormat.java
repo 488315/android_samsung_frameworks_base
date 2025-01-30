@@ -12,53 +12,53 @@ import com.samsung.android.sume.core.types.SplitType;
 
 /* loaded from: classes4.dex */
 public interface MutableMediaFormat extends MediaFormat, Copyable<MutableMediaFormat> {
-    MutableMediaFormat set(MediaFilter.Option option);
+  MutableMediaFormat set(MediaFilter.Option option);
 
-    MutableMediaFormat set(String str, Object obj);
+  MutableMediaFormat set(String str, Object obj);
 
-    MutableMediaFormat setChannels(int i);
+  MutableMediaFormat setChannels(int i);
 
-    MutableMediaFormat setCodecType(CodecType codecType);
+  MutableMediaFormat setCodecType(CodecType codecType);
 
-    MutableMediaFormat setCols(int i);
+  MutableMediaFormat setCols(int i);
 
-    MutableMediaFormat setCropRect(Rect rect);
+  MutableMediaFormat setCropRect(Rect rect);
 
-    MutableMediaFormat setDataType(DataType dataType);
+  MutableMediaFormat setDataType(DataType dataType);
 
-    MutableMediaFormat setFlipType(FlipType flipType);
+  MutableMediaFormat setFlipType(FlipType flipType);
 
-    MutableMediaFormat setMediaType(MediaType mediaType);
+  MutableMediaFormat setMediaType(MediaType mediaType);
 
-    MutableMediaFormat setRotation(int i);
+  MutableMediaFormat setRotation(int i);
 
-    MutableMediaFormat setRows(int i);
+  MutableMediaFormat setRows(int i);
 
-    MutableMediaFormat setShape(Shape shape);
+  MutableMediaFormat setShape(Shape shape);
 
-    MutableMediaFormat setSplitType(SplitType splitType);
+  MutableMediaFormat setSplitType(SplitType splitType);
 
-    default MutableMediaFormat setDimension(int width, int height) {
-        setCols(width);
-        setRows(height);
-        return this;
-    }
+  default MutableMediaFormat setDimension(int width, int height) {
+    setCols(width);
+    setRows(height);
+    return this;
+  }
 
-    default MutableMediaFormat setColorFormat(ColorFormat colorFormat) {
-        throw new UnsupportedOperationException("not support for " + getMediaType());
-    }
+  default MutableMediaFormat setColorFormat(ColorFormat colorFormat) {
+    throw new UnsupportedOperationException("not support for " + getMediaType());
+  }
 
-    default MutableMediaFormat setColorSpace(ColorSpace colorSpace) {
-        throw new UnsupportedOperationException("not support for " + getMediaType());
-    }
+  default MutableMediaFormat setColorSpace(ColorSpace colorSpace) {
+    throw new UnsupportedOperationException("not support for " + getMediaType());
+  }
 
-    default MediaFormat toMediaFormat() {
-        throw new UnsupportedOperationException();
-    }
+  default MediaFormat toMediaFormat() {
+    throw new UnsupportedOperationException();
+  }
 
-    @Deprecated
-    /* renamed from: of */
-    static MutableMediaFormat m395of(MediaType mediaType, Object... args) {
-        return MediaFormat.mutableOf(mediaType, args);
-    }
+  @Deprecated
+  /* renamed from: of */
+  static MutableMediaFormat m395of(MediaType mediaType, Object... args) {
+    return MediaFormat.mutableOf(mediaType, args);
+  }
 }

@@ -7,10 +7,10 @@ import com.android.server.servicewatcher.ServiceWatcher;
 /* renamed from: com.android.server.location.geofence.GeofenceProxy$GeofenceProxyServiceConnection$$ExternalSyntheticLambda0 */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class C1788xd661182a implements ServiceWatcher.BinderOperation {
-    public final /* synthetic */ GeofenceProxy f$0;
+  public final /* synthetic */ GeofenceProxy f$0;
 
-    @Override // com.android.server.servicewatcher.ServiceWatcher.BinderOperation
-    public final void run(IBinder iBinder) {
-        this.f$0.updateGeofenceHardware(iBinder);
-    }
+  @Override // com.android.server.servicewatcher.ServiceWatcher.BinderOperation
+  public final void run(IBinder iBinder) {
+    this.f$0.updateGeofenceHardware(iBinder);
+  }
 }

@@ -6,5 +6,6 @@ import java.util.Optional;
 
 /* loaded from: classes2.dex */
 public interface RuleSerializer {
-    void serialize(List list, Optional optional, OutputStream outputStream, OutputStream outputStream2);
+  void serialize(
+      List list, Optional optional, OutputStream outputStream, OutputStream outputStream2);
 }

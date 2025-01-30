@@ -9,11 +9,11 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 /* loaded from: classes.dex */
 public @interface UserHandleAware {
-    int enabledSinceTargetSdkVersion() default 0;
+  int enabledSinceTargetSdkVersion() default 0;
 
-    String[] requiresAnyOfPermissionsIfNotCaller() default {};
+  String[] requiresAnyOfPermissionsIfNotCaller() default {};
 
-    String[] requiresAnyOfPermissionsIfNotCallerProfileGroup() default {};
+  String[] requiresAnyOfPermissionsIfNotCallerProfileGroup() default {};
 
-    String requiresPermissionIfNotCaller() default "";
+  String requiresPermissionIfNotCaller() default "";
 }

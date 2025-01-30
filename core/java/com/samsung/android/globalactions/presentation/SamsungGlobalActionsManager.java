@@ -2,13 +2,13 @@ package com.samsung.android.globalactions.presentation;
 
 /* loaded from: classes5.dex */
 public interface SamsungGlobalActionsManager {
-    boolean isFOTAAvailableForGlobalActions();
+  boolean isFOTAAvailableForGlobalActions();
 
-    void onGlobalActionsHidden();
+  void onGlobalActionsHidden();
 
-    void onGlobalActionsShown();
+  void onGlobalActionsShown();
 
-    void reboot(boolean z);
+  void reboot(boolean z);
 
-    void shutdown();
+  void shutdown();
 }

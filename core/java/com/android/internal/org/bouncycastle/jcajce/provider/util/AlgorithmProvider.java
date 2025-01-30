@@ -4,5 +4,5 @@ import com.android.internal.org.bouncycastle.jcajce.provider.config.Configurable
 
 /* loaded from: classes5.dex */
 public abstract class AlgorithmProvider {
-    public abstract void configure(ConfigurableProvider configurableProvider);
+  public abstract void configure(ConfigurableProvider configurableProvider);
 }

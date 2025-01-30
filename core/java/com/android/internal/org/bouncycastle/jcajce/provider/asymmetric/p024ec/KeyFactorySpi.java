@@ -26,132 +26,154 @@ import java.security.spec.KeySpec;
 
 /* loaded from: classes5.dex */
 public class KeyFactorySpi extends BaseKeyFactorySpi implements AsymmetricKeyInfoConverter {
-    String algorithm;
-    ProviderConfiguration configuration;
+  String algorithm;
+  ProviderConfiguration configuration;
 
-    KeyFactorySpi(String algorithm, ProviderConfiguration configuration) {
-        this.algorithm = algorithm;
-        this.configuration = configuration;
-    }
+  KeyFactorySpi(String algorithm, ProviderConfiguration configuration) {
+    this.algorithm = algorithm;
+    this.configuration = configuration;
+  }
 
-    @Override // java.security.KeyFactorySpi
-    protected Key engineTranslateKey(Key key) throws InvalidKeyException {
-        if (key instanceof ECPublicKey) {
-            return new BCECPublicKey((ECPublicKey) key, this.configuration);
-        }
-        if (key instanceof ECPrivateKey) {
-            return new BCECPrivateKey((ECPrivateKey) key, this.configuration);
-        }
-        throw new InvalidKeyException("key type unknown");
+  @Override // java.security.KeyFactorySpi
+  protected Key engineTranslateKey(Key key) throws InvalidKeyException {
+    if (key instanceof ECPublicKey) {
+      return new BCECPublicKey((ECPublicKey) key, this.configuration);
     }
+    if (key instanceof ECPrivateKey) {
+      return new BCECPrivateKey((ECPrivateKey) key, this.configuration);
+    }
+    throw new InvalidKeyException("key type unknown");
+  }
 
-    @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseKeyFactorySpi, java.security.KeyFactorySpi
-    protected KeySpec engineGetKeySpec(Key key, Class spec) throws InvalidKeySpecException {
-        if ((spec.isAssignableFrom(KeySpec.class) || spec.isAssignableFrom(ECPublicKeySpec.class)) && (key instanceof ECPublicKey)) {
-            ECPublicKey k = (ECPublicKey) key;
-            if (k.getParams() != null) {
-                return new ECPublicKeySpec(k.getW(), k.getParams());
-            }
-            ECParameterSpec implicitSpec = BouncyCastleProvider.CONFIGURATION.getEcImplicitlyCa();
-            return new ECPublicKeySpec(k.getW(), EC5Util.convertSpec(EC5Util.convertCurve(implicitSpec.getCurve(), implicitSpec.getSeed()), implicitSpec));
-        }
-        if ((spec.isAssignableFrom(KeySpec.class) || spec.isAssignableFrom(ECPrivateKeySpec.class)) && (key instanceof ECPrivateKey)) {
-            ECPrivateKey k2 = (ECPrivateKey) key;
-            if (k2.getParams() != null) {
-                return new ECPrivateKeySpec(k2.getS(), k2.getParams());
-            }
-            ECParameterSpec implicitSpec2 = BouncyCastleProvider.CONFIGURATION.getEcImplicitlyCa();
-            return new ECPrivateKeySpec(k2.getS(), EC5Util.convertSpec(EC5Util.convertCurve(implicitSpec2.getCurve(), implicitSpec2.getSeed()), implicitSpec2));
-        }
-        if (spec.isAssignableFrom(com.android.internal.org.bouncycastle.jce.spec.ECPublicKeySpec.class) && (key instanceof ECPublicKey)) {
-            ECPublicKey k3 = (ECPublicKey) key;
-            if (k3.getParams() != null) {
-                return new com.android.internal.org.bouncycastle.jce.spec.ECPublicKeySpec(EC5Util.convertPoint(k3.getParams(), k3.getW()), EC5Util.convertSpec(k3.getParams()));
-            }
-            return new com.android.internal.org.bouncycastle.jce.spec.ECPublicKeySpec(EC5Util.convertPoint(k3.getParams(), k3.getW()), BouncyCastleProvider.CONFIGURATION.getEcImplicitlyCa());
-        }
-        if (spec.isAssignableFrom(com.android.internal.org.bouncycastle.jce.spec.ECPrivateKeySpec.class) && (key instanceof ECPrivateKey)) {
-            ECPrivateKey k4 = (ECPrivateKey) key;
-            if (k4.getParams() != null) {
-                return new com.android.internal.org.bouncycastle.jce.spec.ECPrivateKeySpec(k4.getS(), EC5Util.convertSpec(k4.getParams()));
-            }
-            return new com.android.internal.org.bouncycastle.jce.spec.ECPrivateKeySpec(k4.getS(), BouncyCastleProvider.CONFIGURATION.getEcImplicitlyCa());
-        }
-        return super.engineGetKeySpec(key, spec);
+  @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseKeyFactorySpi, java.security.KeyFactorySpi
+  protected KeySpec engineGetKeySpec(Key key, Class spec) throws InvalidKeySpecException {
+    if ((spec.isAssignableFrom(KeySpec.class) || spec.isAssignableFrom(ECPublicKeySpec.class))
+        && (key instanceof ECPublicKey)) {
+      ECPublicKey k = (ECPublicKey) key;
+      if (k.getParams() != null) {
+        return new ECPublicKeySpec(k.getW(), k.getParams());
+      }
+      ECParameterSpec implicitSpec = BouncyCastleProvider.CONFIGURATION.getEcImplicitlyCa();
+      return new ECPublicKeySpec(
+          k.getW(),
+          EC5Util.convertSpec(
+              EC5Util.convertCurve(implicitSpec.getCurve(), implicitSpec.getSeed()), implicitSpec));
     }
+    if ((spec.isAssignableFrom(KeySpec.class) || spec.isAssignableFrom(ECPrivateKeySpec.class))
+        && (key instanceof ECPrivateKey)) {
+      ECPrivateKey k2 = (ECPrivateKey) key;
+      if (k2.getParams() != null) {
+        return new ECPrivateKeySpec(k2.getS(), k2.getParams());
+      }
+      ECParameterSpec implicitSpec2 = BouncyCastleProvider.CONFIGURATION.getEcImplicitlyCa();
+      return new ECPrivateKeySpec(
+          k2.getS(),
+          EC5Util.convertSpec(
+              EC5Util.convertCurve(implicitSpec2.getCurve(), implicitSpec2.getSeed()),
+              implicitSpec2));
+    }
+    if (spec.isAssignableFrom(com.android.internal.org.bouncycastle.jce.spec.ECPublicKeySpec.class)
+        && (key instanceof ECPublicKey)) {
+      ECPublicKey k3 = (ECPublicKey) key;
+      if (k3.getParams() != null) {
+        return new com.android.internal.org.bouncycastle.jce.spec.ECPublicKeySpec(
+            EC5Util.convertPoint(k3.getParams(), k3.getW()), EC5Util.convertSpec(k3.getParams()));
+      }
+      return new com.android.internal.org.bouncycastle.jce.spec.ECPublicKeySpec(
+          EC5Util.convertPoint(k3.getParams(), k3.getW()),
+          BouncyCastleProvider.CONFIGURATION.getEcImplicitlyCa());
+    }
+    if (spec.isAssignableFrom(com.android.internal.org.bouncycastle.jce.spec.ECPrivateKeySpec.class)
+        && (key instanceof ECPrivateKey)) {
+      ECPrivateKey k4 = (ECPrivateKey) key;
+      if (k4.getParams() != null) {
+        return new com.android.internal.org.bouncycastle.jce.spec.ECPrivateKeySpec(
+            k4.getS(), EC5Util.convertSpec(k4.getParams()));
+      }
+      return new com.android.internal.org.bouncycastle.jce.spec.ECPrivateKeySpec(
+          k4.getS(), BouncyCastleProvider.CONFIGURATION.getEcImplicitlyCa());
+    }
+    return super.engineGetKeySpec(key, spec);
+  }
 
-    @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseKeyFactorySpi, java.security.KeyFactorySpi
-    protected PrivateKey engineGeneratePrivate(KeySpec keySpec) throws InvalidKeySpecException {
-        if (keySpec instanceof com.android.internal.org.bouncycastle.jce.spec.ECPrivateKeySpec) {
-            return new BCECPrivateKey(this.algorithm, (com.android.internal.org.bouncycastle.jce.spec.ECPrivateKeySpec) keySpec, this.configuration);
-        }
-        if (keySpec instanceof ECPrivateKeySpec) {
-            return new BCECPrivateKey(this.algorithm, (ECPrivateKeySpec) keySpec, this.configuration);
-        }
-        return super.engineGeneratePrivate(keySpec);
+  @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseKeyFactorySpi, java.security.KeyFactorySpi
+  protected PrivateKey engineGeneratePrivate(KeySpec keySpec) throws InvalidKeySpecException {
+    if (keySpec instanceof com.android.internal.org.bouncycastle.jce.spec.ECPrivateKeySpec) {
+      return new BCECPrivateKey(
+          this.algorithm,
+          (com.android.internal.org.bouncycastle.jce.spec.ECPrivateKeySpec) keySpec,
+          this.configuration);
     }
+    if (keySpec instanceof ECPrivateKeySpec) {
+      return new BCECPrivateKey(this.algorithm, (ECPrivateKeySpec) keySpec, this.configuration);
+    }
+    return super.engineGeneratePrivate(keySpec);
+  }
 
-    @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseKeyFactorySpi, java.security.KeyFactorySpi
-    protected PublicKey engineGeneratePublic(KeySpec keySpec) throws InvalidKeySpecException {
-        try {
-            if (keySpec instanceof com.android.internal.org.bouncycastle.jce.spec.ECPublicKeySpec) {
-                return new BCECPublicKey(this.algorithm, (com.android.internal.org.bouncycastle.jce.spec.ECPublicKeySpec) keySpec, this.configuration);
-            }
-            if (keySpec instanceof ECPublicKeySpec) {
-                return new BCECPublicKey(this.algorithm, (ECPublicKeySpec) keySpec, this.configuration);
-            }
-            return super.engineGeneratePublic(keySpec);
-        } catch (Exception e) {
-            throw new InvalidKeySpecException("invalid KeySpec: " + e.getMessage(), e);
-        }
+  @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseKeyFactorySpi, java.security.KeyFactorySpi
+  protected PublicKey engineGeneratePublic(KeySpec keySpec) throws InvalidKeySpecException {
+    try {
+      if (keySpec instanceof com.android.internal.org.bouncycastle.jce.spec.ECPublicKeySpec) {
+        return new BCECPublicKey(
+            this.algorithm,
+            (com.android.internal.org.bouncycastle.jce.spec.ECPublicKeySpec) keySpec,
+            this.configuration);
+      }
+      if (keySpec instanceof ECPublicKeySpec) {
+        return new BCECPublicKey(this.algorithm, (ECPublicKeySpec) keySpec, this.configuration);
+      }
+      return super.engineGeneratePublic(keySpec);
+    } catch (Exception e) {
+      throw new InvalidKeySpecException("invalid KeySpec: " + e.getMessage(), e);
     }
+  }
 
-    @Override // com.android.internal.org.bouncycastle.jcajce.provider.util.AsymmetricKeyInfoConverter
-    public PrivateKey generatePrivate(PrivateKeyInfo keyInfo) throws IOException {
-        ASN1ObjectIdentifier algOid = keyInfo.getPrivateKeyAlgorithm().getAlgorithm();
-        if (algOid.equals((ASN1Primitive) X9ObjectIdentifiers.id_ecPublicKey)) {
-            return new BCECPrivateKey(this.algorithm, keyInfo, this.configuration);
-        }
-        throw new IOException("algorithm identifier " + algOid + " in key not recognised");
+  @Override // com.android.internal.org.bouncycastle.jcajce.provider.util.AsymmetricKeyInfoConverter
+  public PrivateKey generatePrivate(PrivateKeyInfo keyInfo) throws IOException {
+    ASN1ObjectIdentifier algOid = keyInfo.getPrivateKeyAlgorithm().getAlgorithm();
+    if (algOid.equals((ASN1Primitive) X9ObjectIdentifiers.id_ecPublicKey)) {
+      return new BCECPrivateKey(this.algorithm, keyInfo, this.configuration);
     }
+    throw new IOException("algorithm identifier " + algOid + " in key not recognised");
+  }
 
-    @Override // com.android.internal.org.bouncycastle.jcajce.provider.util.AsymmetricKeyInfoConverter
-    public PublicKey generatePublic(SubjectPublicKeyInfo keyInfo) throws IOException {
-        ASN1ObjectIdentifier algOid = keyInfo.getAlgorithm().getAlgorithm();
-        if (algOid.equals((ASN1Primitive) X9ObjectIdentifiers.id_ecPublicKey)) {
-            return new BCECPublicKey(this.algorithm, keyInfo, this.configuration);
-        }
-        throw new IOException("algorithm identifier " + algOid + " in key not recognised");
+  @Override // com.android.internal.org.bouncycastle.jcajce.provider.util.AsymmetricKeyInfoConverter
+  public PublicKey generatePublic(SubjectPublicKeyInfo keyInfo) throws IOException {
+    ASN1ObjectIdentifier algOid = keyInfo.getAlgorithm().getAlgorithm();
+    if (algOid.equals((ASN1Primitive) X9ObjectIdentifiers.id_ecPublicKey)) {
+      return new BCECPublicKey(this.algorithm, keyInfo, this.configuration);
     }
+    throw new IOException("algorithm identifier " + algOid + " in key not recognised");
+  }
 
-    /* renamed from: com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.ec.KeyFactorySpi$EC */
-    public static class C4576EC extends KeyFactorySpi {
-        public C4576EC() {
-            super(KeyProperties.KEY_ALGORITHM_EC, BouncyCastleProvider.CONFIGURATION);
-        }
+  /* renamed from: com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.ec.KeyFactorySpi$EC */
+  public static class C4576EC extends KeyFactorySpi {
+    public C4576EC() {
+      super(KeyProperties.KEY_ALGORITHM_EC, BouncyCastleProvider.CONFIGURATION);
     }
+  }
 
-    public static class ECDSA extends KeyFactorySpi {
-        public ECDSA() {
-            super("ECDSA", BouncyCastleProvider.CONFIGURATION);
-        }
+  public static class ECDSA extends KeyFactorySpi {
+    public ECDSA() {
+      super("ECDSA", BouncyCastleProvider.CONFIGURATION);
     }
+  }
 
-    public static class ECDH extends KeyFactorySpi {
-        public ECDH() {
-            super("ECDH", BouncyCastleProvider.CONFIGURATION);
-        }
+  public static class ECDH extends KeyFactorySpi {
+    public ECDH() {
+      super("ECDH", BouncyCastleProvider.CONFIGURATION);
     }
+  }
 
-    public static class ECDHC extends KeyFactorySpi {
-        public ECDHC() {
-            super("ECDHC", BouncyCastleProvider.CONFIGURATION);
-        }
+  public static class ECDHC extends KeyFactorySpi {
+    public ECDHC() {
+      super("ECDHC", BouncyCastleProvider.CONFIGURATION);
     }
+  }
 
-    public static class ECMQV extends KeyFactorySpi {
-        public ECMQV() {
-            super("ECMQV", BouncyCastleProvider.CONFIGURATION);
-        }
+  public static class ECMQV extends KeyFactorySpi {
+    public ECMQV() {
+      super("ECMQV", BouncyCastleProvider.CONFIGURATION);
     }
+  }
 }

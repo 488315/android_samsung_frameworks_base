@@ -13,24 +13,34 @@ import java.util.function.Supplier;
 
 /* loaded from: classes.dex */
 public class FaceServiceRegistry extends BiometricServiceRegistry {
-    public final IFaceService mService;
+  public final IFaceService mService;
 
-    public FaceServiceRegistry(IFaceService iFaceService, Supplier supplier) {
-        super(supplier);
-        this.mService = iFaceService;
-    }
+  public FaceServiceRegistry(IFaceService iFaceService, Supplier supplier) {
+    super(supplier);
+    this.mService = iFaceService;
+  }
 
-    @Override // com.android.server.biometrics.sensors.BiometricServiceRegistry
-    public void registerService(IBiometricService iBiometricService, FaceSensorPropertiesInternal faceSensorPropertiesInternal) {
-        try {
-            iBiometricService.registerAuthenticator(faceSensorPropertiesInternal.sensorId, 8, Utils.propertyStrengthToAuthenticatorStrength(faceSensorPropertiesInternal.sensorStrength), new FaceAuthenticator(this.mService, faceSensorPropertiesInternal.sensorId));
-        } catch (RemoteException unused) {
-            Slog.e("FaceServiceRegistry", "Remote exception when registering sensorId: " + faceSensorPropertiesInternal.sensorId);
-        }
+  @Override // com.android.server.biometrics.sensors.BiometricServiceRegistry
+  public void registerService(
+      IBiometricService iBiometricService,
+      FaceSensorPropertiesInternal faceSensorPropertiesInternal) {
+    try {
+      iBiometricService.registerAuthenticator(
+          faceSensorPropertiesInternal.sensorId,
+          8,
+          Utils.propertyStrengthToAuthenticatorStrength(
+              faceSensorPropertiesInternal.sensorStrength),
+          new FaceAuthenticator(this.mService, faceSensorPropertiesInternal.sensorId));
+    } catch (RemoteException unused) {
+      Slog.e(
+          "FaceServiceRegistry",
+          "Remote exception when registering sensorId: " + faceSensorPropertiesInternal.sensorId);
     }
+  }
 
-    @Override // com.android.server.biometrics.sensors.BiometricServiceRegistry
-    public void invokeRegisteredCallback(IFaceAuthenticatorsRegisteredCallback iFaceAuthenticatorsRegisteredCallback, List list) {
-        iFaceAuthenticatorsRegisteredCallback.onAllAuthenticatorsRegistered(list);
-    }
+  @Override // com.android.server.biometrics.sensors.BiometricServiceRegistry
+  public void invokeRegisteredCallback(
+      IFaceAuthenticatorsRegisteredCallback iFaceAuthenticatorsRegisteredCallback, List list) {
+    iFaceAuthenticatorsRegisteredCallback.onAllAuthenticatorsRegistered(list);
+  }
 }

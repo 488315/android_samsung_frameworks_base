@@ -7,17 +7,17 @@ import java.util.List;
 
 /* loaded from: classes3.dex */
 public interface SharedUserApi {
-    String getName();
+  String getName();
 
-    ArraySet getPackageStates();
+  ArraySet getPackageStates();
 
-    List getPackages();
+  List getPackages();
 
-    int getSeInfoTargetSdkVersion();
+  int getSeInfoTargetSdkVersion();
 
-    LegacyPermissionState getSharedUserLegacyPermissionState();
+  LegacyPermissionState getSharedUserLegacyPermissionState();
 
-    SigningDetails getSigningDetails();
+  SigningDetails getSigningDetails();
 
-    boolean isPrivileged();
+  boolean isPrivileged();
 }

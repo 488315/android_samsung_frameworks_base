@@ -6,10 +6,9 @@ import java.util.List;
 
 /* loaded from: classes4.dex */
 public final class WindowInspector {
-    private WindowInspector() {
-    }
+  private WindowInspector() {}
 
-    public static List<View> getGlobalWindowViews() {
-        return WindowManagerGlobal.getInstance().getWindowViews();
-    }
+  public static List<View> getGlobalWindowViews() {
+    return WindowManagerGlobal.getInstance().getWindowViews();
+  }
 }

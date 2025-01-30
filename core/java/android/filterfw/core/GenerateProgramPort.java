@@ -9,11 +9,11 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 /* loaded from: classes.dex */
 public @interface GenerateProgramPort {
-    boolean hasDefault() default false;
+  boolean hasDefault() default false;
 
-    String name();
+  String name();
 
-    Class type();
+  Class type();
 
-    String variableName() default "";
+  String variableName() default "";
 }

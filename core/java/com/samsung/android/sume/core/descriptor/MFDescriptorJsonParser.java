@@ -4,8 +4,8 @@ import java.io.InputStream;
 
 /* loaded from: classes4.dex */
 public class MFDescriptorJsonParser implements MFDescriptorParser {
-    @Override // com.samsung.android.sume.core.descriptor.MFDescriptorParser
-    public MFDescriptor parse(InputStream stream) {
-        return null;
-    }
+  @Override // com.samsung.android.sume.core.descriptor.MFDescriptorParser
+  public MFDescriptor parse(InputStream stream) {
+    return null;
+  }
 }

@@ -7,13 +7,13 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes.dex */
 public final class SearchUiManager {
-    private final Context mContext;
+  private final Context mContext;
 
-    public SearchUiManager(Context context) {
-        this.mContext = (Context) Objects.requireNonNull(context);
-    }
+  public SearchUiManager(Context context) {
+    this.mContext = (Context) Objects.requireNonNull(context);
+  }
 
-    public SearchSession createSearchSession(SearchContext searchContext) {
-        return new SearchSession(this.mContext, searchContext);
-    }
+  public SearchSession createSearchSession(SearchContext searchContext) {
+    return new SearchSession(this.mContext, searchContext);
+  }
 }

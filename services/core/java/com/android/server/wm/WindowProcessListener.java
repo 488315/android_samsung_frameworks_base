@@ -4,29 +4,29 @@ import android.util.proto.ProtoOutputStream;
 
 /* loaded from: classes3.dex */
 public interface WindowProcessListener {
-    void appDied(String str);
+  void appDied(String str);
 
-    void clearProfilerIfNeeded();
+  void clearProfilerIfNeeded();
 
-    void dumpDebug(ProtoOutputStream protoOutputStream, long j);
+  void dumpDebug(ProtoOutputStream protoOutputStream, long j);
 
-    long getCpuTime();
+  long getCpuTime();
 
-    boolean isRemoved();
+  boolean isRemoved();
 
-    void onStartActivity(int i, boolean z, String str, long j);
+  void onStartActivity(int i, boolean z, String str, long j);
 
-    void setClearWaitingToKill();
+  void setClearWaitingToKill();
 
-    void setPendingUiClean(boolean z);
+  void setPendingUiClean(boolean z);
 
-    void setPendingUiCleanAndForceProcessStateUpTo(int i);
+  void setPendingUiCleanAndForceProcessStateUpTo(int i);
 
-    void setRunningRemoteAnimation(boolean z);
+  void setRunningRemoteAnimation(boolean z);
 
-    boolean skipToFinishActivities();
+  boolean skipToFinishActivities();
 
-    void updateProcessInfo(boolean z, boolean z2, boolean z3);
+  void updateProcessInfo(boolean z, boolean z2, boolean z3);
 
-    void updateServiceConnectionActivities();
+  void updateServiceConnectionActivities();
 }

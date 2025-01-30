@@ -10,43 +10,43 @@ import java.lang.annotation.Target;
 /* loaded from: classes4.dex */
 public @interface InspectableProperty {
 
-    @Target({ElementType.TYPE})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface EnumEntry {
-        String name();
+  @Target({ElementType.TYPE})
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface EnumEntry {
+    String name();
 
-        int value();
-    }
+    int value();
+  }
 
-    @Target({ElementType.TYPE})
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface FlagEntry {
-        int mask() default 0;
+  @Target({ElementType.TYPE})
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface FlagEntry {
+    int mask() default 0;
 
-        String name();
+    String name();
 
-        int target();
-    }
+    int target();
+  }
 
-    public enum ValueType {
-        NONE,
-        INFERRED,
-        INT_ENUM,
-        INT_FLAG,
-        COLOR,
-        GRAVITY,
-        RESOURCE_ID
-    }
+  public enum ValueType {
+    NONE,
+    INFERRED,
+    INT_ENUM,
+    INT_FLAG,
+    COLOR,
+    GRAVITY,
+    RESOURCE_ID
+  }
 
-    int attributeId() default 0;
+  int attributeId() default 0;
 
-    EnumEntry[] enumMapping() default {};
+  EnumEntry[] enumMapping() default {};
 
-    FlagEntry[] flagMapping() default {};
+  FlagEntry[] flagMapping() default {};
 
-    boolean hasAttributeId() default true;
+  boolean hasAttributeId() default true;
 
-    String name() default "";
+  String name() default "";
 
-    ValueType valueType() default ValueType.INFERRED;
+  ValueType valueType() default ValueType.INFERRED;
 }

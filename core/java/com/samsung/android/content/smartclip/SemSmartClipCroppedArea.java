@@ -5,9 +5,9 @@ import android.view.View;
 
 /* loaded from: classes5.dex */
 public interface SemSmartClipCroppedArea {
-    Rect getRect();
+  Rect getRect();
 
-    boolean intersects(Rect rect);
+  boolean intersects(Rect rect);
 
-    boolean intersects(View view);
+  boolean intersects(View view);
 }

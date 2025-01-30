@@ -4,7 +4,7 @@ import com.samsung.android.sume.core.channel.Channel;
 
 /* loaded from: classes4.dex */
 public interface MessageChannel extends Channel<Message> {
-    String getId();
+  String getId();
 
-    void setId(String str);
+  void setId(String str);
 }

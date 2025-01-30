@@ -5,13 +5,13 @@ import android.view.autofill.AutofillValue;
 
 /* loaded from: classes3.dex */
 public interface ValueFinder {
-    AutofillValue findRawValueByAutofillId(AutofillId autofillId);
+  AutofillValue findRawValueByAutofillId(AutofillId autofillId);
 
-    default String findByAutofillId(AutofillId id) {
-        AutofillValue value = findRawValueByAutofillId(id);
-        if (value == null || !value.isText()) {
-            return null;
-        }
-        return value.getTextValue().toString();
+  default String findByAutofillId(AutofillId id) {
+    AutofillValue value = findRawValueByAutofillId(id);
+    if (value == null || !value.isText()) {
+      return null;
     }
+    return value.getTextValue().toString();
+  }
 }

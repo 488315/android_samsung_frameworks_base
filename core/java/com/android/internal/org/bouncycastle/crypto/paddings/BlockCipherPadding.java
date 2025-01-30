@@ -5,11 +5,11 @@ import java.security.SecureRandom;
 
 /* loaded from: classes5.dex */
 public interface BlockCipherPadding {
-    int addPadding(byte[] bArr, int i);
+  int addPadding(byte[] bArr, int i);
 
-    String getPaddingName();
+  String getPaddingName();
 
-    void init(SecureRandom secureRandom) throws IllegalArgumentException;
+  void init(SecureRandom secureRandom) throws IllegalArgumentException;
 
-    int padCount(byte[] bArr) throws InvalidCipherTextException;
+  int padCount(byte[] bArr) throws InvalidCipherTextException;
 }

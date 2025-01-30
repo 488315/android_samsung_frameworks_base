@@ -7,49 +7,49 @@ import java.util.Set;
 @Deprecated
 /* loaded from: classes.dex */
 public interface FrameworkPackageUserState {
-    public static final FrameworkPackageUserState DEFAULT = new FrameworkPackageUserStateDefault();
+  public static final FrameworkPackageUserState DEFAULT = new FrameworkPackageUserStateDefault();
 
-    OverlayPaths getAllOverlayPaths();
+  OverlayPaths getAllOverlayPaths();
 
-    long getCeDataInode();
+  long getCeDataInode();
 
-    Set<String> getDisabledComponents();
+  Set<String> getDisabledComponents();
 
-    int getDistractionFlags();
+  int getDistractionFlags();
 
-    Set<String> getEnabledComponents();
+  Set<String> getEnabledComponents();
 
-    int getEnabledState();
+  int getEnabledState();
 
-    String getHarmfulAppWarning();
+  String getHarmfulAppWarning();
 
-    int getInstallReason();
+  int getInstallReason();
 
-    String getLastDisableAppCaller();
+  String getLastDisableAppCaller();
 
-    OverlayPaths getOverlayPaths();
+  OverlayPaths getOverlayPaths();
 
-    Map<String, OverlayPaths> getSharedLibraryOverlayPaths();
+  Map<String, OverlayPaths> getSharedLibraryOverlayPaths();
 
-    String getSplashScreenTheme();
+  String getSplashScreenTheme();
 
-    int getUninstallReason();
+  int getUninstallReason();
 
-    boolean isComponentDisabled(String str);
+  boolean isComponentDisabled(String str);
 
-    boolean isComponentEnabled(String str);
+  boolean isComponentEnabled(String str);
 
-    boolean isHidden();
+  boolean isHidden();
 
-    boolean isInstalled();
+  boolean isInstalled();
 
-    boolean isInstantApp();
+  boolean isInstantApp();
 
-    boolean isNotLaunched();
+  boolean isNotLaunched();
 
-    boolean isStopped();
+  boolean isStopped();
 
-    boolean isSuspended();
+  boolean isSuspended();
 
-    boolean isVirtualPreload();
+  boolean isVirtualPreload();
 }

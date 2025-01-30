@@ -2,20 +2,20 @@ package com.samsung.android.sume.core.types;
 
 /* loaded from: classes4.dex */
 public enum LoadType {
-    NONE,
-    LAZY,
-    INSTANT,
-    CACHED;
+  NONE,
+  LAZY,
+  INSTANT,
+  CACHED;
 
-    boolean isLazy() {
-        return this == LAZY;
-    }
+  boolean isLazy() {
+    return this == LAZY;
+  }
 
-    boolean isInstant() {
-        return this == INSTANT;
-    }
+  boolean isInstant() {
+    return this == INSTANT;
+  }
 
-    boolean isCached() {
-        return this == CACHED;
-    }
+  boolean isCached() {
+    return this == CACHED;
+  }
 }

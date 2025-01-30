@@ -6,30 +6,30 @@ import android.view.ViewGroup;
 
 /* loaded from: classes4.dex */
 public interface Adapter {
-    public static final int IGNORE_ITEM_VIEW_TYPE = -1;
-    public static final int NO_SELECTION = Integer.MIN_VALUE;
+  public static final int IGNORE_ITEM_VIEW_TYPE = -1;
+  public static final int NO_SELECTION = Integer.MIN_VALUE;
 
-    int getCount();
+  int getCount();
 
-    Object getItem(int i);
+  Object getItem(int i);
 
-    long getItemId(int i);
+  long getItemId(int i);
 
-    int getItemViewType(int i);
+  int getItemViewType(int i);
 
-    View getView(int i, View view, ViewGroup viewGroup);
+  View getView(int i, View view, ViewGroup viewGroup);
 
-    int getViewTypeCount();
+  int getViewTypeCount();
 
-    boolean hasStableIds();
+  boolean hasStableIds();
 
-    boolean isEmpty();
+  boolean isEmpty();
 
-    void registerDataSetObserver(DataSetObserver dataSetObserver);
+  void registerDataSetObserver(DataSetObserver dataSetObserver);
 
-    void unregisterDataSetObserver(DataSetObserver dataSetObserver);
+  void unregisterDataSetObserver(DataSetObserver dataSetObserver);
 
-    default CharSequence[] getAutofillOptions() {
-        return null;
-    }
+  default CharSequence[] getAutofillOptions() {
+    return null;
+  }
 }

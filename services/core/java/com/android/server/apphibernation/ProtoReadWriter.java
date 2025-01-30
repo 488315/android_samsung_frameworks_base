@@ -5,7 +5,7 @@ import android.util.proto.ProtoOutputStream;
 
 /* loaded from: classes.dex */
 public interface ProtoReadWriter {
-    Object readFromProto(ProtoInputStream protoInputStream);
+  Object readFromProto(ProtoInputStream protoInputStream);
 
-    void writeToProto(ProtoOutputStream protoOutputStream, Object obj);
+  void writeToProto(ProtoOutputStream protoOutputStream, Object obj);
 }

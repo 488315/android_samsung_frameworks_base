@@ -2,15 +2,15 @@ package com.samsung.android.sume.core.channel;
 
 /* loaded from: classes4.dex */
 public interface Channel<T> {
-    void cancel();
+  void cancel();
 
-    void close();
+  void close();
 
-    boolean isClosedForReceive();
+  boolean isClosedForReceive();
 
-    boolean isClosedForSend();
+  boolean isClosedForSend();
 
-    T receive();
+  T receive();
 
-    void send(T t);
+  void send(T t);
 }

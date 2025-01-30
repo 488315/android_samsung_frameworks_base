@@ -2,9 +2,7 @@ package android.database;
 
 /* loaded from: classes.dex */
 public abstract class DataSetObserver {
-    public void onChanged() {
-    }
+  public void onChanged() {}
 
-    public void onInvalidated() {
-    }
+  public void onInvalidated() {}
 }

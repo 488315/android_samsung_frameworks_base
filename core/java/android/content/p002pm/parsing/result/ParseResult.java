@@ -2,15 +2,15 @@ package android.content.p002pm.parsing.result;
 
 /* loaded from: classes.dex */
 public interface ParseResult<ResultType> {
-    int getErrorCode();
+  int getErrorCode();
 
-    String getErrorMessage();
+  String getErrorMessage();
 
-    Exception getException();
+  Exception getException();
 
-    ResultType getResult();
+  ResultType getResult();
 
-    boolean isError();
+  boolean isError();
 
-    boolean isSuccess();
+  boolean isSuccess();
 }

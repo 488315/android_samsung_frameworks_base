@@ -2,11 +2,11 @@ package com.android.server;
 
 /* loaded from: classes5.dex */
 public interface RichwaveTuningParameteres extends CommonTuningParamters {
-    int getSeekDC();
+  int getSeekDC();
 
-    int getSeekQA();
+  int getSeekQA();
 
-    boolean setSeekDC(int i);
+  boolean setSeekDC(int i);
 
-    boolean setSeekQA(int i);
+  boolean setSeekQA(int i);
 }

@@ -11,96 +11,108 @@ import java.util.function.Consumer;
 
 /* loaded from: classes4.dex */
 public abstract class ImeTracing {
-    public static final int IME_TRACING_FROM_CLIENT = 0;
-    public static final int IME_TRACING_FROM_IMMS = 2;
-    public static final int IME_TRACING_FROM_IMS = 1;
-    public static final String PROTO_ARG = "--proto-com-android-imetracing";
-    static final String TAG = "imeTracing";
-    static boolean sEnabled = false;
-    private static ImeTracing sInstance;
-    protected boolean mDumpInProgress;
-    private final boolean mIsAvailable = InputMethodManagerGlobal.isImeTraceAvailable();
-    protected final Object mDumpInProgressLock = new Object();
+  public static final int IME_TRACING_FROM_CLIENT = 0;
+  public static final int IME_TRACING_FROM_IMMS = 2;
+  public static final int IME_TRACING_FROM_IMS = 1;
+  public static final String PROTO_ARG = "--proto-com-android-imetracing";
+  static final String TAG = "imeTracing";
+  static boolean sEnabled = false;
+  private static ImeTracing sInstance;
+  protected boolean mDumpInProgress;
+  private final boolean mIsAvailable = InputMethodManagerGlobal.isImeTraceAvailable();
+  protected final Object mDumpInProgressLock = new Object();
 
-    @FunctionalInterface
-    public interface ServiceDumper {
-        void dumpToProto(ProtoOutputStream protoOutputStream, byte[] bArr);
+  @FunctionalInterface
+  public interface ServiceDumper {
+    void dumpToProto(ProtoOutputStream protoOutputStream, byte[] bArr);
+  }
+
+  public abstract void addToBuffer(ProtoOutputStream protoOutputStream, int i);
+
+  public abstract void startTrace(PrintWriter printWriter);
+
+  public abstract void stopTrace(PrintWriter printWriter);
+
+  public abstract void triggerClientDump(
+      String str, InputMethodManager inputMethodManager, byte[] bArr);
+
+  public abstract void triggerManagerServiceDump(String str);
+
+  public abstract void triggerServiceDump(String str, ServiceDumper serviceDumper, byte[] bArr);
+
+  public static ImeTracing getInstance() {
+    if (sInstance == null) {
+      if (isSystemProcess()) {
+        sInstance = new ImeTracingServerImpl();
+      } else {
+        sInstance = new ImeTracingClientImpl();
+      }
     }
+    return sInstance;
+  }
 
-    public abstract void addToBuffer(ProtoOutputStream protoOutputStream, int i);
-
-    public abstract void startTrace(PrintWriter printWriter);
-
-    public abstract void stopTrace(PrintWriter printWriter);
-
-    public abstract void triggerClientDump(String str, InputMethodManager inputMethodManager, byte[] bArr);
-
-    public abstract void triggerManagerServiceDump(String str);
-
-    public abstract void triggerServiceDump(String str, ServiceDumper serviceDumper, byte[] bArr);
-
-    public static ImeTracing getInstance() {
-        if (sInstance == null) {
-            if (isSystemProcess()) {
-                sInstance = new ImeTracingServerImpl();
-            } else {
-                sInstance = new ImeTracingClientImpl();
-            }
-        }
-        return sInstance;
-    }
-
-    public void sendToService(byte[] protoDump, int source, String where) {
-        InputMethodManagerGlobal.startProtoDump(protoDump, source, where, new Consumer() { // from class: com.android.internal.inputmethod.ImeTracing$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                Log.m97e(ImeTracing.TAG, "Exception while sending ime-related dump to server", (RemoteException) obj);
-            }
+  public void sendToService(byte[] protoDump, int source, String where) {
+    InputMethodManagerGlobal.startProtoDump(
+        protoDump,
+        source,
+        where,
+        new Consumer() { // from class:
+                         // com.android.internal.inputmethod.ImeTracing$$ExternalSyntheticLambda0
+          @Override // java.util.function.Consumer
+          public final void accept(Object obj) {
+            Log.m97e(
+                ImeTracing.TAG,
+                "Exception while sending ime-related dump to server",
+                (RemoteException) obj);
+          }
         });
-    }
+  }
 
-    public final void startImeTrace() {
-        InputMethodManagerGlobal.startImeTrace(new Consumer() { // from class: com.android.internal.inputmethod.ImeTracing$$ExternalSyntheticLambda1
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                Log.m97e(ImeTracing.TAG, "Could not start ime trace.", (RemoteException) obj);
-            }
+  public final void startImeTrace() {
+    InputMethodManagerGlobal.startImeTrace(
+        new Consumer() { // from class:
+                         // com.android.internal.inputmethod.ImeTracing$$ExternalSyntheticLambda1
+          @Override // java.util.function.Consumer
+          public final void accept(Object obj) {
+            Log.m97e(ImeTracing.TAG, "Could not start ime trace.", (RemoteException) obj);
+          }
         });
-    }
+  }
 
-    public final void stopImeTrace() {
-        InputMethodManagerGlobal.stopImeTrace(new Consumer() { // from class: com.android.internal.inputmethod.ImeTracing$$ExternalSyntheticLambda2
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                Log.m97e(ImeTracing.TAG, "Could not stop ime trace.", (RemoteException) obj);
-            }
+  public final void stopImeTrace() {
+    InputMethodManagerGlobal.stopImeTrace(
+        new Consumer() { // from class:
+                         // com.android.internal.inputmethod.ImeTracing$$ExternalSyntheticLambda2
+          @Override // java.util.function.Consumer
+          public final void accept(Object obj) {
+            Log.m97e(ImeTracing.TAG, "Could not stop ime trace.", (RemoteException) obj);
+          }
         });
-    }
+  }
 
-    public void saveForBugreport(PrintWriter pw) {
-    }
+  public void saveForBugreport(PrintWriter pw) {}
 
-    public void setEnabled(boolean enabled) {
-        sEnabled = enabled;
-    }
+  public void setEnabled(boolean enabled) {
+    sEnabled = enabled;
+  }
 
-    public boolean isEnabled() {
-        return sEnabled;
-    }
+  public boolean isEnabled() {
+    return sEnabled;
+  }
 
-    public boolean isAvailable() {
-        return this.mIsAvailable;
-    }
+  public boolean isAvailable() {
+    return this.mIsAvailable;
+  }
 
-    private static boolean isSystemProcess() {
-        return ActivityThread.isSystem();
-    }
+  private static boolean isSystemProcess() {
+    return ActivityThread.isSystem();
+  }
 
-    protected void logAndPrintln(PrintWriter pw, String msg) {
-        Log.m98i(TAG, msg);
-        if (pw != null) {
-            pw.println(msg);
-            pw.flush();
-        }
+  protected void logAndPrintln(PrintWriter pw, String msg) {
+    Log.m98i(TAG, msg);
+    if (pw != null) {
+      pw.println(msg);
+      pw.flush();
     }
+  }
 }

@@ -11,33 +11,42 @@ import com.android.internal.org.bouncycastle.operator.SignatureAlgorithmIdentifi
 
 /* loaded from: classes5.dex */
 public class SignerInformationVerifier {
-    private DigestCalculatorProvider digestProvider;
-    private SignatureAlgorithmIdentifierFinder sigAlgorithmFinder;
-    private CMSSignatureAlgorithmNameGenerator sigNameGenerator;
-    private ContentVerifierProvider verifierProvider;
+  private DigestCalculatorProvider digestProvider;
+  private SignatureAlgorithmIdentifierFinder sigAlgorithmFinder;
+  private CMSSignatureAlgorithmNameGenerator sigNameGenerator;
+  private ContentVerifierProvider verifierProvider;
 
-    public SignerInformationVerifier(CMSSignatureAlgorithmNameGenerator sigNameGenerator, SignatureAlgorithmIdentifierFinder sigAlgorithmFinder, ContentVerifierProvider verifierProvider, DigestCalculatorProvider digestProvider) {
-        this.sigNameGenerator = sigNameGenerator;
-        this.sigAlgorithmFinder = sigAlgorithmFinder;
-        this.verifierProvider = verifierProvider;
-        this.digestProvider = digestProvider;
-    }
+  public SignerInformationVerifier(
+      CMSSignatureAlgorithmNameGenerator sigNameGenerator,
+      SignatureAlgorithmIdentifierFinder sigAlgorithmFinder,
+      ContentVerifierProvider verifierProvider,
+      DigestCalculatorProvider digestProvider) {
+    this.sigNameGenerator = sigNameGenerator;
+    this.sigAlgorithmFinder = sigAlgorithmFinder;
+    this.verifierProvider = verifierProvider;
+    this.digestProvider = digestProvider;
+  }
 
-    public boolean hasAssociatedCertificate() {
-        return this.verifierProvider.hasAssociatedCertificate();
-    }
+  public boolean hasAssociatedCertificate() {
+    return this.verifierProvider.hasAssociatedCertificate();
+  }
 
-    public X509CertificateHolder getAssociatedCertificate() {
-        return this.verifierProvider.getAssociatedCertificate();
-    }
+  public X509CertificateHolder getAssociatedCertificate() {
+    return this.verifierProvider.getAssociatedCertificate();
+  }
 
-    public ContentVerifier getContentVerifier(AlgorithmIdentifier signingAlgorithm, AlgorithmIdentifier digestAlgorithm) throws OperatorCreationException {
-        String signatureName = this.sigNameGenerator.getSignatureName(digestAlgorithm, signingAlgorithm);
-        AlgorithmIdentifier baseAlgID = this.sigAlgorithmFinder.find(signatureName);
-        return this.verifierProvider.get(new AlgorithmIdentifier(baseAlgID.getAlgorithm(), signingAlgorithm.getParameters()));
-    }
+  public ContentVerifier getContentVerifier(
+      AlgorithmIdentifier signingAlgorithm, AlgorithmIdentifier digestAlgorithm)
+      throws OperatorCreationException {
+    String signatureName =
+        this.sigNameGenerator.getSignatureName(digestAlgorithm, signingAlgorithm);
+    AlgorithmIdentifier baseAlgID = this.sigAlgorithmFinder.find(signatureName);
+    return this.verifierProvider.get(
+        new AlgorithmIdentifier(baseAlgID.getAlgorithm(), signingAlgorithm.getParameters()));
+  }
 
-    public DigestCalculator getDigestCalculator(AlgorithmIdentifier algorithmIdentifier) throws OperatorCreationException {
-        return this.digestProvider.get(algorithmIdentifier);
-    }
+  public DigestCalculator getDigestCalculator(AlgorithmIdentifier algorithmIdentifier)
+      throws OperatorCreationException {
+    return this.digestProvider.get(algorithmIdentifier);
+  }
 }

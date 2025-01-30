@@ -20,86 +20,113 @@ import java.util.function.Supplier;
 
 /* loaded from: classes4.dex */
 public final class WindowMetricsController {
-    private final Context mContext;
+  private final Context mContext;
 
-    public WindowMetricsController(Context context) {
-        this.mContext = context;
+  public WindowMetricsController(Context context) {
+    this.mContext = context;
+  }
+
+  public WindowMetrics getCurrentWindowMetrics() {
+    return getWindowMetricsInternal(false);
+  }
+
+  public WindowMetrics getMaximumWindowMetrics() {
+    return getWindowMetricsInternal(true);
+  }
+
+  private WindowMetrics getWindowMetricsInternal(boolean isMaximum) {
+    Rect bounds;
+    float density;
+    final boolean isScreenRound;
+    final int activityType;
+    synchronized (ResourcesManager.getInstance()) {
+      Configuration config = this.mContext.getResources().getConfiguration();
+      WindowConfiguration winConfig = config.windowConfiguration;
+      bounds = isMaximum ? winConfig.getMaxBounds() : winConfig.getBounds();
+      density = config.densityDpi * 0.00625f;
+      isScreenRound = config.isScreenRound();
+      activityType = winConfig.getActivityType();
     }
-
-    public WindowMetrics getCurrentWindowMetrics() {
-        return getWindowMetricsInternal(false);
-    }
-
-    public WindowMetrics getMaximumWindowMetrics() {
-        return getWindowMetricsInternal(true);
-    }
-
-    private WindowMetrics getWindowMetricsInternal(boolean isMaximum) {
-        Rect bounds;
-        float density;
-        final boolean isScreenRound;
-        final int activityType;
-        synchronized (ResourcesManager.getInstance()) {
-            Configuration config = this.mContext.getResources().getConfiguration();
-            WindowConfiguration winConfig = config.windowConfiguration;
-            bounds = isMaximum ? winConfig.getMaxBounds() : winConfig.getBounds();
-            density = config.densityDpi * 0.00625f;
-            isScreenRound = config.isScreenRound();
-            activityType = winConfig.getActivityType();
-        }
-        final IBinder token = Context.getToken(this.mContext);
-        final Rect rect = bounds;
-        Supplier<WindowInsets> insetsSupplier = new Supplier() { // from class: android.window.WindowMetricsController$$ExternalSyntheticLambda0
-            @Override // java.util.function.Supplier
-            public final Object get() {
-                WindowInsets lambda$getWindowMetricsInternal$0;
-                lambda$getWindowMetricsInternal$0 = WindowMetricsController.this.lambda$getWindowMetricsInternal$0(token, rect, isScreenRound, activityType);
-                return lambda$getWindowMetricsInternal$0;
-            }
+    final IBinder token = Context.getToken(this.mContext);
+    final Rect rect = bounds;
+    Supplier<WindowInsets> insetsSupplier =
+        new Supplier() { // from class:
+                         // android.window.WindowMetricsController$$ExternalSyntheticLambda0
+          @Override // java.util.function.Supplier
+          public final Object get() {
+            WindowInsets lambda$getWindowMetricsInternal$0;
+            lambda$getWindowMetricsInternal$0 =
+                WindowMetricsController.this.lambda$getWindowMetricsInternal$0(
+                    token, rect, isScreenRound, activityType);
+            return lambda$getWindowMetricsInternal$0;
+          }
         };
-        return new WindowMetrics(new Rect(bounds), insetsSupplier, density);
-    }
+    return new WindowMetrics(new Rect(bounds), insetsSupplier, density);
+  }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ WindowInsets lambda$getWindowMetricsInternal$0(IBinder token, Rect bounds, boolean isScreenRound, int activityType) {
-        return getWindowInsetsFromServerForDisplay(this.mContext.getDisplayId(), token, bounds, isScreenRound, activityType);
-    }
+  /* JADX INFO: Access modifiers changed from: private */
+  public /* synthetic */ WindowInsets lambda$getWindowMetricsInternal$0(
+      IBinder token, Rect bounds, boolean isScreenRound, int activityType) {
+    return getWindowInsetsFromServerForDisplay(
+        this.mContext.getDisplayId(), token, bounds, isScreenRound, activityType);
+  }
 
-    private static WindowInsets getWindowInsetsFromServerForDisplay(int displayId, IBinder token, Rect bounds, boolean isScreenRound, int activityType) {
-        InsetsState insetsState;
-        try {
-            insetsState = new InsetsState();
-        } catch (RemoteException e) {
-            e = e;
-        }
-        try {
-            WindowManagerGlobal.getWindowManagerService().getWindowInsets(displayId, token, insetsState);
-            float overrideInvScale = CompatibilityInfo.getOverrideInvertedScale();
-            if (overrideInvScale != 1.0f) {
-                insetsState.scale(overrideInvScale);
-            }
-            return insetsState.calculateInsets(bounds, null, isScreenRound, 48, 0, 0, -1, activityType, null);
-        } catch (RemoteException e2) {
-            e = e2;
-            throw e.rethrowFromSystemServer();
-        }
+  private static WindowInsets getWindowInsetsFromServerForDisplay(
+      int displayId, IBinder token, Rect bounds, boolean isScreenRound, int activityType) {
+    InsetsState insetsState;
+    try {
+      insetsState = new InsetsState();
+    } catch (RemoteException e) {
+      e = e;
     }
+    try {
+      WindowManagerGlobal.getWindowManagerService().getWindowInsets(displayId, token, insetsState);
+      float overrideInvScale = CompatibilityInfo.getOverrideInvertedScale();
+      if (overrideInvScale != 1.0f) {
+        insetsState.scale(overrideInvScale);
+      }
+      return insetsState.calculateInsets(
+          bounds, null, isScreenRound, 48, 0, 0, -1, activityType, null);
+    } catch (RemoteException e2) {
+      e = e2;
+      throw e.rethrowFromSystemServer();
+    }
+  }
 
-    public Set<WindowMetrics> getPossibleMaximumWindowMetrics(int displayId) {
-        try {
-            List<DisplayInfo> possibleDisplayInfos = WindowManagerGlobal.getWindowManagerService().getPossibleDisplayInfo(displayId);
-            Set<WindowMetrics> maxMetrics = new HashSet<>();
-            for (int i = 0; i < possibleDisplayInfos.size(); i++) {
-                DisplayInfo currentDisplayInfo = possibleDisplayInfos.get(i);
-                Rect maxBounds = new Rect(0, 0, currentDisplayInfo.logicalWidth, currentDisplayInfo.logicalHeight);
-                boolean isScreenRound = (currentDisplayInfo.flags & 16) != 0;
-                WindowInsets windowInsets = getWindowInsetsFromServerForDisplay(currentDisplayInfo.displayId, null, new Rect(0, 0, currentDisplayInfo.getNaturalWidth(), currentDisplayInfo.getNaturalHeight()), isScreenRound, 0);
-                float density = currentDisplayInfo.logicalDensityDpi * 0.00625f;
-                maxMetrics.add(new WindowMetrics(maxBounds, new WindowInsets.Builder(windowInsets).setRoundedCorners(currentDisplayInfo.roundedCorners).setDisplayCutout(currentDisplayInfo.displayCutout).build(), density));
-            }
-            return maxMetrics;
-        } catch (RemoteException e) {
-            throw e.rethrowFromSystemServer();
-        }
+  public Set<WindowMetrics> getPossibleMaximumWindowMetrics(int displayId) {
+    try {
+      List<DisplayInfo> possibleDisplayInfos =
+          WindowManagerGlobal.getWindowManagerService().getPossibleDisplayInfo(displayId);
+      Set<WindowMetrics> maxMetrics = new HashSet<>();
+      for (int i = 0; i < possibleDisplayInfos.size(); i++) {
+        DisplayInfo currentDisplayInfo = possibleDisplayInfos.get(i);
+        Rect maxBounds =
+            new Rect(0, 0, currentDisplayInfo.logicalWidth, currentDisplayInfo.logicalHeight);
+        boolean isScreenRound = (currentDisplayInfo.flags & 16) != 0;
+        WindowInsets windowInsets =
+            getWindowInsetsFromServerForDisplay(
+                currentDisplayInfo.displayId,
+                null,
+                new Rect(
+                    0,
+                    0,
+                    currentDisplayInfo.getNaturalWidth(),
+                    currentDisplayInfo.getNaturalHeight()),
+                isScreenRound,
+                0);
+        float density = currentDisplayInfo.logicalDensityDpi * 0.00625f;
+        maxMetrics.add(
+            new WindowMetrics(
+                maxBounds,
+                new WindowInsets.Builder(windowInsets)
+                    .setRoundedCorners(currentDisplayInfo.roundedCorners)
+                    .setDisplayCutout(currentDisplayInfo.displayCutout)
+                    .build(),
+                density));
+      }
+      return maxMetrics;
+    } catch (RemoteException e) {
+      throw e.rethrowFromSystemServer();
     }
+  }
 }

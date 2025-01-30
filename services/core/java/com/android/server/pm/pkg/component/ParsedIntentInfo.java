@@ -4,13 +4,13 @@ import android.content.IntentFilter;
 
 /* loaded from: classes3.dex */
 public interface ParsedIntentInfo {
-    int getIcon();
+  int getIcon();
 
-    IntentFilter getIntentFilter();
+  IntentFilter getIntentFilter();
 
-    int getLabelRes();
+  int getLabelRes();
 
-    CharSequence getNonLocalizedLabel();
+  CharSequence getNonLocalizedLabel();
 
-    boolean isHasDefault();
+  boolean isHasDefault();
 }

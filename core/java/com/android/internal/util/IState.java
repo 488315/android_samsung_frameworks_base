@@ -4,14 +4,14 @@ import android.p009os.Message;
 
 /* loaded from: classes5.dex */
 public interface IState {
-    public static final boolean HANDLED = true;
-    public static final boolean NOT_HANDLED = false;
+  public static final boolean HANDLED = true;
+  public static final boolean NOT_HANDLED = false;
 
-    void enter();
+  void enter();
 
-    void exit();
+  void exit();
 
-    String getName();
+  String getName();
 
-    boolean processMessage(Message message);
+  boolean processMessage(Message message);
 }

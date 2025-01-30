@@ -6,73 +6,75 @@ import android.os.Parcelable;
 
 /* loaded from: classes.dex */
 public class AuthenticationFrame implements Parcelable {
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() { // from class: android.hardware.biometrics.face.AuthenticationFrame.1
+  public static final Parcelable.Creator CREATOR =
+      new Parcelable
+          .Creator() { // from class: android.hardware.biometrics.face.AuthenticationFrame.1
         @Override // android.os.Parcelable.Creator
         public AuthenticationFrame createFromParcel(Parcel parcel) {
-            AuthenticationFrame authenticationFrame = new AuthenticationFrame();
-            authenticationFrame.readFromParcel(parcel);
-            return authenticationFrame;
+          AuthenticationFrame authenticationFrame = new AuthenticationFrame();
+          authenticationFrame.readFromParcel(parcel);
+          return authenticationFrame;
         }
 
         @Override // android.os.Parcelable.Creator
         public AuthenticationFrame[] newArray(int i) {
-            return new AuthenticationFrame[i];
+          return new AuthenticationFrame[i];
         }
-    };
-    public BaseFrame data;
+      };
+  public BaseFrame data;
 
-    public final int getStability() {
-        return 1;
-    }
+  public final int getStability() {
+    return 1;
+  }
 
-    @Override // android.os.Parcelable
-    public final void writeToParcel(Parcel parcel, int i) {
-        int dataPosition = parcel.dataPosition();
-        parcel.writeInt(0);
-        parcel.writeTypedObject(this.data, i);
-        int dataPosition2 = parcel.dataPosition();
-        parcel.setDataPosition(dataPosition);
-        parcel.writeInt(dataPosition2 - dataPosition);
-        parcel.setDataPosition(dataPosition2);
-    }
+  @Override // android.os.Parcelable
+  public final void writeToParcel(Parcel parcel, int i) {
+    int dataPosition = parcel.dataPosition();
+    parcel.writeInt(0);
+    parcel.writeTypedObject(this.data, i);
+    int dataPosition2 = parcel.dataPosition();
+    parcel.setDataPosition(dataPosition);
+    parcel.writeInt(dataPosition2 - dataPosition);
+    parcel.setDataPosition(dataPosition2);
+  }
 
-    public final void readFromParcel(Parcel parcel) {
-        int dataPosition = parcel.dataPosition();
-        int readInt = parcel.readInt();
-        try {
-            if (readInt < 4) {
-                throw new BadParcelableException("Parcelable too small");
-            }
-            if (parcel.dataPosition() - dataPosition >= readInt) {
-                if (dataPosition > Integer.MAX_VALUE - readInt) {
-                    throw new BadParcelableException("Overflow in the size of parcelable");
-                }
-                parcel.setDataPosition(dataPosition + readInt);
-            } else {
-                this.data = (BaseFrame) parcel.readTypedObject(BaseFrame.CREATOR);
-                if (dataPosition > Integer.MAX_VALUE - readInt) {
-                    throw new BadParcelableException("Overflow in the size of parcelable");
-                }
-                parcel.setDataPosition(dataPosition + readInt);
-            }
-        } catch (Throwable th) {
-            if (dataPosition > Integer.MAX_VALUE - readInt) {
-                throw new BadParcelableException("Overflow in the size of parcelable");
-            }
-            parcel.setDataPosition(dataPosition + readInt);
-            throw th;
+  public final void readFromParcel(Parcel parcel) {
+    int dataPosition = parcel.dataPosition();
+    int readInt = parcel.readInt();
+    try {
+      if (readInt < 4) {
+        throw new BadParcelableException("Parcelable too small");
+      }
+      if (parcel.dataPosition() - dataPosition >= readInt) {
+        if (dataPosition > Integer.MAX_VALUE - readInt) {
+          throw new BadParcelableException("Overflow in the size of parcelable");
         }
-    }
-
-    @Override // android.os.Parcelable
-    public int describeContents() {
-        return describeContents(this.data) | 0;
-    }
-
-    public final int describeContents(Object obj) {
-        if (obj != null && (obj instanceof Parcelable)) {
-            return ((Parcelable) obj).describeContents();
+        parcel.setDataPosition(dataPosition + readInt);
+      } else {
+        this.data = (BaseFrame) parcel.readTypedObject(BaseFrame.CREATOR);
+        if (dataPosition > Integer.MAX_VALUE - readInt) {
+          throw new BadParcelableException("Overflow in the size of parcelable");
         }
-        return 0;
+        parcel.setDataPosition(dataPosition + readInt);
+      }
+    } catch (Throwable th) {
+      if (dataPosition > Integer.MAX_VALUE - readInt) {
+        throw new BadParcelableException("Overflow in the size of parcelable");
+      }
+      parcel.setDataPosition(dataPosition + readInt);
+      throw th;
     }
+  }
+
+  @Override // android.os.Parcelable
+  public int describeContents() {
+    return describeContents(this.data) | 0;
+  }
+
+  public final int describeContents(Object obj) {
+    if (obj != null && (obj instanceof Parcelable)) {
+      return ((Parcelable) obj).describeContents();
+    }
+    return 0;
+  }
 }

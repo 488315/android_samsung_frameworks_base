@@ -5,19 +5,19 @@ import com.android.internal.org.bouncycastle.math.p026ec.ECPoint;
 /* loaded from: classes5.dex */
 public class ECPublicKeySpec extends ECKeySpec {
 
-    /* renamed from: q */
-    private ECPoint f925q;
+  /* renamed from: q */
+  private ECPoint f925q;
 
-    public ECPublicKeySpec(ECPoint q, ECParameterSpec spec) {
-        super(spec);
-        if (q.getCurve() != null) {
-            this.f925q = q.normalize();
-        } else {
-            this.f925q = q;
-        }
+  public ECPublicKeySpec(ECPoint q, ECParameterSpec spec) {
+    super(spec);
+    if (q.getCurve() != null) {
+      this.f925q = q.normalize();
+    } else {
+      this.f925q = q;
     }
+  }
 
-    public ECPoint getQ() {
-        return this.f925q;
-    }
+  public ECPoint getQ() {
+    return this.f925q;
+  }
 }

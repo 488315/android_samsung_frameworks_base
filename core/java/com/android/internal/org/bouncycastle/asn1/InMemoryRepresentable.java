@@ -4,5 +4,5 @@ import java.io.IOException;
 
 /* loaded from: classes5.dex */
 public interface InMemoryRepresentable {
-    ASN1Primitive getLoadedObject() throws IOException;
+  ASN1Primitive getLoadedObject() throws IOException;
 }

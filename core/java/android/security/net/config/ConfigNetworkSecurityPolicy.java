@@ -4,21 +4,21 @@ import libcore.net.NetworkSecurityPolicy;
 
 /* loaded from: classes3.dex */
 public class ConfigNetworkSecurityPolicy extends NetworkSecurityPolicy {
-    private final ApplicationConfig mConfig;
+  private final ApplicationConfig mConfig;
 
-    public ConfigNetworkSecurityPolicy(ApplicationConfig config) {
-        this.mConfig = config;
-    }
+  public ConfigNetworkSecurityPolicy(ApplicationConfig config) {
+    this.mConfig = config;
+  }
 
-    public boolean isCleartextTrafficPermitted() {
-        return this.mConfig.isCleartextTrafficPermitted();
-    }
+  public boolean isCleartextTrafficPermitted() {
+    return this.mConfig.isCleartextTrafficPermitted();
+  }
 
-    public boolean isCleartextTrafficPermitted(String hostname) {
-        return this.mConfig.isCleartextTrafficPermitted(hostname);
-    }
+  public boolean isCleartextTrafficPermitted(String hostname) {
+    return this.mConfig.isCleartextTrafficPermitted(hostname);
+  }
 
-    public boolean isCertificateTransparencyVerificationRequired(String hostname) {
-        return false;
-    }
+  public boolean isCertificateTransparencyVerificationRequired(String hostname) {
+    return false;
+  }
 }

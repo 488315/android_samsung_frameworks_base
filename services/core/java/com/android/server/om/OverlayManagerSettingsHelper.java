@@ -6,17 +6,17 @@ import java.util.Set;
 
 /* loaded from: classes2.dex */
 public class OverlayManagerSettingsHelper {
-    public final OverlayManagerSettings mSettings;
+  public final OverlayManagerSettings mSettings;
 
-    public OverlayManagerSettingsHelper(OverlayManagerSettings overlayManagerSettings) {
-        this.mSettings = overlayManagerSettings;
-    }
+  public OverlayManagerSettingsHelper(OverlayManagerSettings overlayManagerSettings) {
+    this.mSettings = overlayManagerSettings;
+  }
 
-    public OverlayInfo getNullableOverlayInfo(OverlayIdentifier overlayIdentifier, int i) {
-        return this.mSettings.getNullableOverlayInfo(overlayIdentifier, i);
-    }
+  public OverlayInfo getNullableOverlayInfo(OverlayIdentifier overlayIdentifier, int i) {
+    return this.mSettings.getNullableOverlayInfo(overlayIdentifier, i);
+  }
 
-    public Set getAllIdentifiersAndBaseCodePaths() {
-        return this.mSettings.getAllIdentifiersAndBaseCodePaths();
-    }
+  public Set getAllIdentifiersAndBaseCodePaths() {
+    return this.mSettings.getAllIdentifiersAndBaseCodePaths();
+  }
 }

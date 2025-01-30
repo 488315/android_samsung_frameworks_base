@@ -15,40 +15,47 @@ import java.security.cert.X509Certificate;
 
 /* loaded from: classes5.dex */
 public class JcaSignerInfoGeneratorBuilder {
-    private SignerInfoGeneratorBuilder builder;
+  private SignerInfoGeneratorBuilder builder;
 
-    public JcaSignerInfoGeneratorBuilder(DigestCalculatorProvider digestProvider) {
-        this(digestProvider, new DefaultCMSSignatureEncryptionAlgorithmFinder());
-    }
+  public JcaSignerInfoGeneratorBuilder(DigestCalculatorProvider digestProvider) {
+    this(digestProvider, new DefaultCMSSignatureEncryptionAlgorithmFinder());
+  }
 
-    public JcaSignerInfoGeneratorBuilder(DigestCalculatorProvider digestProvider, CMSSignatureEncryptionAlgorithmFinder sigEncAlgFinder) {
-        this.builder = new SignerInfoGeneratorBuilder(digestProvider, sigEncAlgFinder);
-    }
+  public JcaSignerInfoGeneratorBuilder(
+      DigestCalculatorProvider digestProvider,
+      CMSSignatureEncryptionAlgorithmFinder sigEncAlgFinder) {
+    this.builder = new SignerInfoGeneratorBuilder(digestProvider, sigEncAlgFinder);
+  }
 
-    public JcaSignerInfoGeneratorBuilder setDirectSignature(boolean hasNoSignedAttributes) {
-        this.builder.setDirectSignature(hasNoSignedAttributes);
-        return this;
-    }
+  public JcaSignerInfoGeneratorBuilder setDirectSignature(boolean hasNoSignedAttributes) {
+    this.builder.setDirectSignature(hasNoSignedAttributes);
+    return this;
+  }
 
-    public JcaSignerInfoGeneratorBuilder setSignedAttributeGenerator(CMSAttributeTableGenerator signedGen) {
-        this.builder.setSignedAttributeGenerator(signedGen);
-        return this;
-    }
+  public JcaSignerInfoGeneratorBuilder setSignedAttributeGenerator(
+      CMSAttributeTableGenerator signedGen) {
+    this.builder.setSignedAttributeGenerator(signedGen);
+    return this;
+  }
 
-    public JcaSignerInfoGeneratorBuilder setUnsignedAttributeGenerator(CMSAttributeTableGenerator unsignedGen) {
-        this.builder.setUnsignedAttributeGenerator(unsignedGen);
-        return this;
-    }
+  public JcaSignerInfoGeneratorBuilder setUnsignedAttributeGenerator(
+      CMSAttributeTableGenerator unsignedGen) {
+    this.builder.setUnsignedAttributeGenerator(unsignedGen);
+    return this;
+  }
 
-    public SignerInfoGenerator build(ContentSigner contentSigner, X509CertificateHolder certHolder) throws OperatorCreationException {
-        return this.builder.build(contentSigner, certHolder);
-    }
+  public SignerInfoGenerator build(ContentSigner contentSigner, X509CertificateHolder certHolder)
+      throws OperatorCreationException {
+    return this.builder.build(contentSigner, certHolder);
+  }
 
-    public SignerInfoGenerator build(ContentSigner contentSigner, byte[] keyIdentifier) throws OperatorCreationException {
-        return this.builder.build(contentSigner, keyIdentifier);
-    }
+  public SignerInfoGenerator build(ContentSigner contentSigner, byte[] keyIdentifier)
+      throws OperatorCreationException {
+    return this.builder.build(contentSigner, keyIdentifier);
+  }
 
-    public SignerInfoGenerator build(ContentSigner contentSigner, X509Certificate certificate) throws OperatorCreationException, CertificateEncodingException {
-        return build(contentSigner, new JcaX509CertificateHolder(certificate));
-    }
+  public SignerInfoGenerator build(ContentSigner contentSigner, X509Certificate certificate)
+      throws OperatorCreationException, CertificateEncodingException {
+    return build(contentSigner, new JcaX509CertificateHolder(certificate));
+  }
 }

@@ -17,100 +17,110 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /* loaded from: classes3.dex */
 public abstract class PreRebootLogger {
-    public static final String[] BUFFERS_TO_DUMP = {"system"};
-    public static final String[] SERVICES_TO_DUMP = {"rollback", "package"};
-    public static final Object sLock = new Object();
-    public static final long MAX_DUMP_TIME = TimeUnit.SECONDS.toMillis(20);
+  public static final String[] BUFFERS_TO_DUMP = {"system"};
+  public static final String[] SERVICES_TO_DUMP = {"rollback", "package"};
+  public static final Object sLock = new Object();
+  public static final long MAX_DUMP_TIME = TimeUnit.SECONDS.toMillis(20);
 
-    public static void log(Context context) {
-        log(context, getDumpDir());
+  public static void log(Context context) {
+    log(context, getDumpDir());
+  }
+
+  public static void log(Context context, File file) {
+    if (needDump(context)) {
+      dump(file, MAX_DUMP_TIME);
+    } else {
+      wipe(file);
     }
+  }
 
-    public static void log(Context context, File file) {
-        if (needDump(context)) {
-            dump(file, MAX_DUMP_TIME);
-        } else {
-            wipe(file);
-        }
-    }
+  public static boolean needDump(Context context) {
+    return Settings.Global.getInt(context.getContentResolver(), "adb_enabled", 0) == 1
+        && !context.getPackageManager().getPackageInstaller().getActiveStagedSessions().isEmpty();
+  }
 
-    public static boolean needDump(Context context) {
-        return Settings.Global.getInt(context.getContentResolver(), "adb_enabled", 0) == 1 && !context.getPackageManager().getPackageInstaller().getActiveStagedSessions().isEmpty();
-    }
-
-    public static void dump(final File file, long j) {
-        android.util.Slog.d("PreRebootLogger", "Dumping pre-reboot information...");
-        final AtomicBoolean atomicBoolean = new AtomicBoolean(false);
-        Thread thread = new Thread(new Runnable() { // from class: com.android.server.power.PreRebootLogger$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
+  public static void dump(final File file, long j) {
+    android.util.Slog.d("PreRebootLogger", "Dumping pre-reboot information...");
+    final AtomicBoolean atomicBoolean = new AtomicBoolean(false);
+    Thread thread =
+        new Thread(
+            new Runnable() { // from class:
+                             // com.android.server.power.PreRebootLogger$$ExternalSyntheticLambda0
+              @Override // java.lang.Runnable
+              public final void run() {
                 PreRebootLogger.lambda$dump$0(file, atomicBoolean);
-            }
-        });
-        thread.start();
-        try {
-            thread.join(j);
-        } catch (InterruptedException e) {
-            android.util.Slog.e("PreRebootLogger", "Failed to dump pre-reboot information due to interrupted", e);
-        }
-        if (atomicBoolean.get()) {
-            return;
-        }
-        android.util.Slog.w("PreRebootLogger", "Failed to dump pre-reboot information due to timeout");
+              }
+            });
+    thread.start();
+    try {
+      thread.join(j);
+    } catch (InterruptedException e) {
+      android.util.Slog.e(
+          "PreRebootLogger", "Failed to dump pre-reboot information due to interrupted", e);
     }
+    if (atomicBoolean.get()) {
+      return;
+    }
+    android.util.Slog.w("PreRebootLogger", "Failed to dump pre-reboot information due to timeout");
+  }
 
-    public static /* synthetic */ void lambda$dump$0(File file, AtomicBoolean atomicBoolean) {
-        synchronized (sLock) {
-            for (String str : BUFFERS_TO_DUMP) {
-                dumpLogsLocked(file, str);
-            }
-            for (String str2 : SERVICES_TO_DUMP) {
-                dumpServiceLocked(file, str2);
-            }
-        }
-        atomicBoolean.set(true);
+  public static /* synthetic */ void lambda$dump$0(File file, AtomicBoolean atomicBoolean) {
+    synchronized (sLock) {
+      for (String str : BUFFERS_TO_DUMP) {
+        dumpLogsLocked(file, str);
+      }
+      for (String str2 : SERVICES_TO_DUMP) {
+        dumpServiceLocked(file, str2);
+      }
     }
+    atomicBoolean.set(true);
+  }
 
-    public static void wipe(File file) {
-        android.util.Slog.d("PreRebootLogger", "Wiping pre-reboot information...");
-        synchronized (sLock) {
-            for (File file2 : file.listFiles()) {
-                file2.delete();
-            }
-        }
+  public static void wipe(File file) {
+    android.util.Slog.d("PreRebootLogger", "Wiping pre-reboot information...");
+    synchronized (sLock) {
+      for (File file2 : file.listFiles()) {
+        file2.delete();
+      }
     }
+  }
 
-    public static File getDumpDir() {
-        File file = new File(Environment.getDataMiscDirectory(), "prereboot");
-        if (file.exists() && file.isDirectory()) {
-            return file;
-        }
-        throw new UnsupportedOperationException("Pre-reboot dump directory not found");
+  public static File getDumpDir() {
+    File file = new File(Environment.getDataMiscDirectory(), "prereboot");
+    if (file.exists() && file.isDirectory()) {
+      return file;
     }
+    throw new UnsupportedOperationException("Pre-reboot dump directory not found");
+  }
 
-    public static void dumpLogsLocked(File file, String str) {
-        try {
-            File file2 = new File(file, str);
-            if (file2.createNewFile()) {
-                file2.setWritable(true, true);
-            } else {
-                new FileWriter(file2, false).flush();
-            }
-            Runtime.getRuntime().exec(new String[]{"logcat", "-d", "-b", str, "-f", file2.getAbsolutePath()}).waitFor();
-        } catch (IOException | InterruptedException e) {
-            android.util.Slog.e("PreRebootLogger", "Failed to dump system log buffer before reboot", e);
-        }
+  public static void dumpLogsLocked(File file, String str) {
+    try {
+      File file2 = new File(file, str);
+      if (file2.createNewFile()) {
+        file2.setWritable(true, true);
+      } else {
+        new FileWriter(file2, false).flush();
+      }
+      Runtime.getRuntime()
+          .exec(new String[] {"logcat", "-d", "-b", str, "-f", file2.getAbsolutePath()})
+          .waitFor();
+    } catch (IOException | InterruptedException e) {
+      android.util.Slog.e("PreRebootLogger", "Failed to dump system log buffer before reboot", e);
     }
+  }
 
-    public static void dumpServiceLocked(File file, String str) {
-        IBinder checkService = ServiceManager.checkService(str);
-        if (checkService == null) {
-            return;
-        }
-        try {
-            checkService.dump(ParcelFileDescriptor.open(new File(file, str), 738197504).getFileDescriptor(), (String[]) ArrayUtils.emptyArray(String.class));
-        } catch (RemoteException | FileNotFoundException e) {
-            android.util.Slog.e("PreRebootLogger", String.format("Failed to dump %s service before reboot", str), e);
-        }
+  public static void dumpServiceLocked(File file, String str) {
+    IBinder checkService = ServiceManager.checkService(str);
+    if (checkService == null) {
+      return;
     }
+    try {
+      checkService.dump(
+          ParcelFileDescriptor.open(new File(file, str), 738197504).getFileDescriptor(),
+          (String[]) ArrayUtils.emptyArray(String.class));
+    } catch (RemoteException | FileNotFoundException e) {
+      android.util.Slog.e(
+          "PreRebootLogger", String.format("Failed to dump %s service before reboot", str), e);
+    }
+  }
 }

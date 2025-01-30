@@ -4,9 +4,9 @@ import android.graphics.Canvas;
 
 /* loaded from: classes5.dex */
 public interface SPenRendererAdapterInterface {
-    boolean callOnDraw(Canvas canvas);
+  boolean callOnDraw(Canvas canvas);
 
-    boolean callOnProcess(boolean z);
+  boolean callOnProcess(boolean z);
 
-    void close();
+  void close();
 }

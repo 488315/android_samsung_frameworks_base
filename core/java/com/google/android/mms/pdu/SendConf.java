@@ -4,39 +4,39 @@ import com.google.android.mms.InvalidHeaderValueException;
 
 /* loaded from: classes5.dex */
 public class SendConf extends GenericPdu {
-    public SendConf() throws InvalidHeaderValueException {
-        setMessageType(129);
-    }
+  public SendConf() throws InvalidHeaderValueException {
+    setMessageType(129);
+  }
 
-    SendConf(PduHeaders headers) {
-        super(headers);
-    }
+  SendConf(PduHeaders headers) {
+    super(headers);
+  }
 
-    public byte[] getMessageId() {
-        return this.mPduHeaders.getTextString(139);
-    }
+  public byte[] getMessageId() {
+    return this.mPduHeaders.getTextString(139);
+  }
 
-    public void setMessageId(byte[] value) {
-        this.mPduHeaders.setTextString(value, 139);
-    }
+  public void setMessageId(byte[] value) {
+    this.mPduHeaders.setTextString(value, 139);
+  }
 
-    public int getResponseStatus() {
-        return this.mPduHeaders.getOctet(146);
-    }
+  public int getResponseStatus() {
+    return this.mPduHeaders.getOctet(146);
+  }
 
-    public void setResponseStatus(int value) throws InvalidHeaderValueException {
-        this.mPduHeaders.setOctet(value, 146);
-    }
+  public void setResponseStatus(int value) throws InvalidHeaderValueException {
+    this.mPduHeaders.setOctet(value, 146);
+  }
 
-    public byte[] getTransactionId() {
-        return this.mPduHeaders.getTextString(152);
-    }
+  public byte[] getTransactionId() {
+    return this.mPduHeaders.getTextString(152);
+  }
 
-    public void setTransactionId(byte[] value) {
-        this.mPduHeaders.setTextString(value, 152);
-    }
+  public void setTransactionId(byte[] value) {
+    this.mPduHeaders.setTextString(value, 152);
+  }
 
-    public EncodedStringValue getResponseText() {
-        return this.mPduHeaders.getEncodedStringValue(147);
-    }
+  public EncodedStringValue getResponseText() {
+    return this.mPduHeaders.getEncodedStringValue(147);
+  }
 }

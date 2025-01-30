@@ -2,13 +2,13 @@ package com.android.server.pm.pkg.component;
 
 /* loaded from: classes3.dex */
 public interface ParsedPermissionGroup extends ParsedComponent {
-    int getBackgroundRequestDetailRes();
+  int getBackgroundRequestDetailRes();
 
-    int getBackgroundRequestRes();
+  int getBackgroundRequestRes();
 
-    int getPriority();
+  int getPriority();
 
-    int getRequestDetailRes();
+  int getRequestDetailRes();
 
-    int getRequestRes();
+  int getRequestRes();
 }

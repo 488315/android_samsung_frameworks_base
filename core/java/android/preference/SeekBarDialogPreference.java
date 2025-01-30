@@ -11,45 +11,46 @@ import com.android.internal.C4337R;
 @Deprecated
 /* loaded from: classes3.dex */
 public class SeekBarDialogPreference extends DialogPreference {
-    private final Drawable mMyIcon;
+  private final Drawable mMyIcon;
 
-    public SeekBarDialogPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        createActionButtons();
-        this.mMyIcon = getDialogIcon();
-        setDialogIcon((Drawable) null);
-    }
+  public SeekBarDialogPreference(
+      Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    super(context, attrs, defStyleAttr, defStyleRes);
+    createActionButtons();
+    this.mMyIcon = getDialogIcon();
+    setDialogIcon((Drawable) null);
+  }
 
-    public SeekBarDialogPreference(Context context, AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
-    }
+  public SeekBarDialogPreference(Context context, AttributeSet attrs, int defStyleAttr) {
+    this(context, attrs, defStyleAttr, 0);
+  }
 
-    public SeekBarDialogPreference(Context context, AttributeSet attrs) {
-        this(context, attrs, C4337R.attr.seekBarDialogPreferenceStyle);
-    }
+  public SeekBarDialogPreference(Context context, AttributeSet attrs) {
+    this(context, attrs, C4337R.attr.seekBarDialogPreferenceStyle);
+  }
 
-    public SeekBarDialogPreference(Context context) {
-        this(context, null);
-    }
+  public SeekBarDialogPreference(Context context) {
+    this(context, null);
+  }
 
-    public void createActionButtons() {
-        setPositiveButtonText(17039370);
-        setNegativeButtonText(17039360);
-    }
+  public void createActionButtons() {
+    setPositiveButtonText(17039370);
+    setNegativeButtonText(17039360);
+  }
 
-    @Override // android.preference.DialogPreference
-    protected void onBindDialogView(View view) {
-        super.onBindDialogView(view);
-        ImageView iconView = (ImageView) view.findViewById(16908294);
-        Drawable drawable = this.mMyIcon;
-        if (drawable != null) {
-            iconView.setImageDrawable(drawable);
-        } else {
-            iconView.setVisibility(8);
-        }
+  @Override // android.preference.DialogPreference
+  protected void onBindDialogView(View view) {
+    super.onBindDialogView(view);
+    ImageView iconView = (ImageView) view.findViewById(16908294);
+    Drawable drawable = this.mMyIcon;
+    if (drawable != null) {
+      iconView.setImageDrawable(drawable);
+    } else {
+      iconView.setVisibility(8);
     }
+  }
 
-    protected static SeekBar getSeekBar(View dialogView) {
-        return (SeekBar) dialogView.findViewById(C4337R.id.seekbar);
-    }
+  protected static SeekBar getSeekBar(View dialogView) {
+    return (SeekBar) dialogView.findViewById(C4337R.id.seekbar);
+  }
 }

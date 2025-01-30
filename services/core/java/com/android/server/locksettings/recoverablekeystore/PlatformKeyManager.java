@@ -25,164 +25,220 @@ import javax.crypto.spec.GCMParameterSpec;
 
 /* loaded from: classes2.dex */
 public class PlatformKeyManager {
-    public static final byte[] GCM_INSECURE_NONCE_BYTES = new byte[12];
-    public final Context mContext;
-    public final RecoverableKeyStoreDb mDatabase;
-    public final KeyStoreProxy mKeyStore;
+  public static final byte[] GCM_INSECURE_NONCE_BYTES = new byte[12];
+  public final Context mContext;
+  public final RecoverableKeyStoreDb mDatabase;
+  public final KeyStoreProxy mKeyStore;
 
-    public static PlatformKeyManager getInstance(Context context, RecoverableKeyStoreDb recoverableKeyStoreDb) {
-        return new PlatformKeyManager(context.getApplicationContext(), new KeyStoreProxyImpl(getAndLoadAndroidKeyStore()), recoverableKeyStoreDb);
-    }
+  public static PlatformKeyManager getInstance(
+      Context context, RecoverableKeyStoreDb recoverableKeyStoreDb) {
+    return new PlatformKeyManager(
+        context.getApplicationContext(),
+        new KeyStoreProxyImpl(getAndLoadAndroidKeyStore()),
+        recoverableKeyStoreDb);
+  }
 
-    public PlatformKeyManager(Context context, KeyStoreProxy keyStoreProxy, RecoverableKeyStoreDb recoverableKeyStoreDb) {
-        this.mKeyStore = keyStoreProxy;
-        this.mContext = context;
-        this.mDatabase = recoverableKeyStoreDb;
-    }
+  public PlatformKeyManager(
+      Context context, KeyStoreProxy keyStoreProxy, RecoverableKeyStoreDb recoverableKeyStoreDb) {
+    this.mKeyStore = keyStoreProxy;
+    this.mContext = context;
+    this.mDatabase = recoverableKeyStoreDb;
+  }
 
-    public int getGenerationId(int i) {
-        return this.mDatabase.getPlatformKeyGenerationId(i);
-    }
+  public int getGenerationId(int i) {
+    return this.mDatabase.getPlatformKeyGenerationId(i);
+  }
 
-    public boolean isDeviceLocked(int i) {
-        return ((KeyguardManager) this.mContext.getSystemService(KeyguardManager.class)).isDeviceLocked(i);
-    }
+  public boolean isDeviceLocked(int i) {
+    return ((KeyguardManager) this.mContext.getSystemService(KeyguardManager.class))
+        .isDeviceLocked(i);
+  }
 
-    public void invalidatePlatformKey(int i, int i2) {
-        if (i2 != -1) {
-            try {
-                this.mKeyStore.deleteEntry(getEncryptAlias(i, i2));
-                this.mKeyStore.deleteEntry(getDecryptAlias(i, i2));
-            } catch (KeyStoreException unused) {
-            }
-        }
+  public void invalidatePlatformKey(int i, int i2) {
+    if (i2 != -1) {
+      try {
+        this.mKeyStore.deleteEntry(getEncryptAlias(i, i2));
+        this.mKeyStore.deleteEntry(getDecryptAlias(i, i2));
+      } catch (KeyStoreException unused) {
+      }
     }
+  }
 
-    public void regenerate(int i) {
-        int generationId = getGenerationId(i);
-        int i2 = 1;
-        if (generationId != -1) {
-            invalidatePlatformKey(i, generationId);
-            i2 = 1 + generationId;
-        }
-        generateAndLoadKey(i, i2);
+  public void regenerate(int i) {
+    int generationId = getGenerationId(i);
+    int i2 = 1;
+    if (generationId != -1) {
+      invalidatePlatformKey(i, generationId);
+      i2 = 1 + generationId;
     }
+    generateAndLoadKey(i, i2);
+  }
 
-    public PlatformEncryptionKey getEncryptKey(int i) {
-        init(i);
-        try {
-            getDecryptKeyInternal(i);
-            return getEncryptKeyInternal(i);
-        } catch (UnrecoverableKeyException unused) {
-            Log.i("PlatformKeyManager", String.format(Locale.US, "Regenerating permanently invalid Platform key for user %d.", Integer.valueOf(i)));
-            this.regenerate(i);
-            return this.getEncryptKeyInternal(i);
-        }
+  public PlatformEncryptionKey getEncryptKey(int i) {
+    init(i);
+    try {
+      getDecryptKeyInternal(i);
+      return getEncryptKeyInternal(i);
+    } catch (UnrecoverableKeyException unused) {
+      Log.i(
+          "PlatformKeyManager",
+          String.format(
+              Locale.US,
+              "Regenerating permanently invalid Platform key for user %d.",
+              Integer.valueOf(i)));
+      this.regenerate(i);
+      return this.getEncryptKeyInternal(i);
     }
+  }
 
-    public final PlatformEncryptionKey getEncryptKeyInternal(int i) {
-        int generationId = getGenerationId(i);
-        String encryptAlias = getEncryptAlias(i, generationId);
-        if (!isKeyLoaded(i, generationId)) {
-            throw new UnrecoverableKeyException("KeyStore doesn't contain key " + encryptAlias);
-        }
-        return new PlatformEncryptionKey(generationId, (SecretKey) this.mKeyStore.getKey(encryptAlias, null));
+  public final PlatformEncryptionKey getEncryptKeyInternal(int i) {
+    int generationId = getGenerationId(i);
+    String encryptAlias = getEncryptAlias(i, generationId);
+    if (!isKeyLoaded(i, generationId)) {
+      throw new UnrecoverableKeyException("KeyStore doesn't contain key " + encryptAlias);
     }
+    return new PlatformEncryptionKey(
+        generationId, (SecretKey) this.mKeyStore.getKey(encryptAlias, null));
+  }
 
-    public PlatformDecryptionKey getDecryptKey(int i) {
-        init(i);
-        try {
-            PlatformDecryptionKey decryptKeyInternal = getDecryptKeyInternal(i);
-            ensureDecryptionKeyIsValid(i, decryptKeyInternal);
-            return decryptKeyInternal;
-        } catch (UnrecoverableKeyException unused) {
-            Log.i("PlatformKeyManager", String.format(Locale.US, "Regenerating permanently invalid Platform key for user %d.", Integer.valueOf(i)));
-            regenerate(i);
-            return getDecryptKeyInternal(i);
-        }
+  public PlatformDecryptionKey getDecryptKey(int i) {
+    init(i);
+    try {
+      PlatformDecryptionKey decryptKeyInternal = getDecryptKeyInternal(i);
+      ensureDecryptionKeyIsValid(i, decryptKeyInternal);
+      return decryptKeyInternal;
+    } catch (UnrecoverableKeyException unused) {
+      Log.i(
+          "PlatformKeyManager",
+          String.format(
+              Locale.US,
+              "Regenerating permanently invalid Platform key for user %d.",
+              Integer.valueOf(i)));
+      regenerate(i);
+      return getDecryptKeyInternal(i);
     }
+  }
 
-    public final PlatformDecryptionKey getDecryptKeyInternal(int i) {
-        int generationId = getGenerationId(i);
-        String decryptAlias = getDecryptAlias(i, generationId);
-        if (!isKeyLoaded(i, generationId)) {
-            throw new UnrecoverableKeyException("KeyStore doesn't contain key " + decryptAlias);
-        }
-        return new PlatformDecryptionKey(generationId, (SecretKey) this.mKeyStore.getKey(decryptAlias, null));
+  public final PlatformDecryptionKey getDecryptKeyInternal(int i) {
+    int generationId = getGenerationId(i);
+    String decryptAlias = getDecryptAlias(i, generationId);
+    if (!isKeyLoaded(i, generationId)) {
+      throw new UnrecoverableKeyException("KeyStore doesn't contain key " + decryptAlias);
     }
+    return new PlatformDecryptionKey(
+        generationId, (SecretKey) this.mKeyStore.getKey(decryptAlias, null));
+  }
 
-    public final void ensureDecryptionKeyIsValid(int i, PlatformDecryptionKey platformDecryptionKey) {
-        try {
-            Cipher.getInstance("AES/GCM/NoPadding").init(4, platformDecryptionKey.getKey(), new GCMParameterSpec(128, GCM_INSECURE_NONCE_BYTES));
-        } catch (KeyPermanentlyInvalidatedException e) {
-            Log.e("PlatformKeyManager", String.format(Locale.US, "The platform key for user %d became invalid.", Integer.valueOf(i)));
-            throw new UnrecoverableKeyException(e.getMessage());
-        } catch (InvalidAlgorithmParameterException | InvalidKeyException | NoSuchAlgorithmException | NoSuchPaddingException unused) {
-        }
+  public final void ensureDecryptionKeyIsValid(int i, PlatformDecryptionKey platformDecryptionKey) {
+    try {
+      Cipher.getInstance("AES/GCM/NoPadding")
+          .init(
+              4,
+              platformDecryptionKey.getKey(),
+              new GCMParameterSpec(128, GCM_INSECURE_NONCE_BYTES));
+    } catch (KeyPermanentlyInvalidatedException e) {
+      Log.e(
+          "PlatformKeyManager",
+          String.format(
+              Locale.US, "The platform key for user %d became invalid.", Integer.valueOf(i)));
+      throw new UnrecoverableKeyException(e.getMessage());
+    } catch (InvalidAlgorithmParameterException
+        | InvalidKeyException
+        | NoSuchAlgorithmException
+        | NoSuchPaddingException unused) {
     }
+  }
 
-    public void init(int i) {
-        int generationId = getGenerationId(i);
-        if (isKeyLoaded(i, generationId)) {
-            Log.i("PlatformKeyManager", String.format(Locale.US, "Platform key generation %d exists already.", Integer.valueOf(generationId)));
-            return;
-        }
-        int i2 = 1;
-        if (generationId == -1) {
-            Log.i("PlatformKeyManager", "Generating initial platform key generation ID.");
-        } else {
-            Log.w("PlatformKeyManager", String.format(Locale.US, "Platform generation ID was %d but no entry was present in AndroidKeyStore. Generating fresh key.", Integer.valueOf(generationId)));
-            i2 = 1 + generationId;
-        }
-        generateAndLoadKey(i, Math.max(i2, 1001000));
+  public void init(int i) {
+    int generationId = getGenerationId(i);
+    if (isKeyLoaded(i, generationId)) {
+      Log.i(
+          "PlatformKeyManager",
+          String.format(
+              Locale.US,
+              "Platform key generation %d exists already.",
+              Integer.valueOf(generationId)));
+      return;
     }
+    int i2 = 1;
+    if (generationId == -1) {
+      Log.i("PlatformKeyManager", "Generating initial platform key generation ID.");
+    } else {
+      Log.w(
+          "PlatformKeyManager",
+          String.format(
+              Locale.US,
+              "Platform generation ID was %d but no entry was present in AndroidKeyStore."
+                  + " Generating fresh key.",
+              Integer.valueOf(generationId)));
+      i2 = 1 + generationId;
+    }
+    generateAndLoadKey(i, Math.max(i2, 1001000));
+  }
 
-    public final String getEncryptAlias(int i, int i2) {
-        return "com.android.server.locksettings.recoverablekeystore/platform/" + i + "/" + i2 + "/encrypt";
-    }
+  public final String getEncryptAlias(int i, int i2) {
+    return "com.android.server.locksettings.recoverablekeystore/platform/"
+        + i
+        + "/"
+        + i2
+        + "/encrypt";
+  }
 
-    public final String getDecryptAlias(int i, int i2) {
-        return "com.android.server.locksettings.recoverablekeystore/platform/" + i + "/" + i2 + "/decrypt";
-    }
+  public final String getDecryptAlias(int i, int i2) {
+    return "com.android.server.locksettings.recoverablekeystore/platform/"
+        + i
+        + "/"
+        + i2
+        + "/decrypt";
+  }
 
-    public final void setGenerationId(int i, int i2) {
-        this.mDatabase.setPlatformKeyGenerationId(i, i2);
-    }
+  public final void setGenerationId(int i, int i2) {
+    this.mDatabase.setPlatformKeyGenerationId(i, i2);
+  }
 
-    public final boolean isKeyLoaded(int i, int i2) {
-        return this.mKeyStore.containsAlias(getEncryptAlias(i, i2)) && this.mKeyStore.containsAlias(getDecryptAlias(i, i2));
-    }
+  public final boolean isKeyLoaded(int i, int i2) {
+    return this.mKeyStore.containsAlias(getEncryptAlias(i, i2))
+        && this.mKeyStore.containsAlias(getDecryptAlias(i, i2));
+  }
 
-    public IGateKeeperService getGateKeeperService() {
-        return GateKeeper.getService();
-    }
+  public IGateKeeperService getGateKeeperService() {
+    return GateKeeper.getService();
+  }
 
-    public final void generateAndLoadKey(int i, int i2) {
-        String encryptAlias = getEncryptAlias(i, i2);
-        String decryptAlias = getDecryptAlias(i, i2);
-        SecretKey generateAesKey = generateAesKey();
-        KeyProtection.Builder encryptionPaddings = new KeyProtection.Builder(2).setBlockModes("GCM").setEncryptionPaddings("NoPadding");
-        if (i == 0) {
-            encryptionPaddings.setUnlockedDeviceRequired(true);
-        }
-        this.mKeyStore.setEntry(decryptAlias, new KeyStore.SecretKeyEntry(generateAesKey), encryptionPaddings.build());
-        this.mKeyStore.setEntry(encryptAlias, new KeyStore.SecretKeyEntry(generateAesKey), new KeyProtection.Builder(1).setBlockModes("GCM").setEncryptionPaddings("NoPadding").build());
-        setGenerationId(i, i2);
+  public final void generateAndLoadKey(int i, int i2) {
+    String encryptAlias = getEncryptAlias(i, i2);
+    String decryptAlias = getDecryptAlias(i, i2);
+    SecretKey generateAesKey = generateAesKey();
+    KeyProtection.Builder encryptionPaddings =
+        new KeyProtection.Builder(2).setBlockModes("GCM").setEncryptionPaddings("NoPadding");
+    if (i == 0) {
+      encryptionPaddings.setUnlockedDeviceRequired(true);
     }
+    this.mKeyStore.setEntry(
+        decryptAlias, new KeyStore.SecretKeyEntry(generateAesKey), encryptionPaddings.build());
+    this.mKeyStore.setEntry(
+        encryptAlias,
+        new KeyStore.SecretKeyEntry(generateAesKey),
+        new KeyProtection.Builder(1)
+            .setBlockModes("GCM")
+            .setEncryptionPaddings("NoPadding")
+            .build());
+    setGenerationId(i, i2);
+  }
 
-    public static SecretKey generateAesKey() {
-        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-        keyGenerator.init(256);
-        return keyGenerator.generateKey();
-    }
+  public static SecretKey generateAesKey() {
+    KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+    keyGenerator.init(256);
+    return keyGenerator.generateKey();
+  }
 
-    public static KeyStore getAndLoadAndroidKeyStore() {
-        KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
-        try {
-            keyStore.load(null);
-            return keyStore;
-        } catch (IOException | NoSuchAlgorithmException | CertificateException e) {
-            throw new KeyStoreException("Unable to load keystore.", e);
-        }
+  public static KeyStore getAndLoadAndroidKeyStore() {
+    KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
+    try {
+      keyStore.load(null);
+      return keyStore;
+    } catch (IOException | NoSuchAlgorithmException | CertificateException e) {
+      throw new KeyStoreException("Unable to load keystore.", e);
     }
+  }
 }

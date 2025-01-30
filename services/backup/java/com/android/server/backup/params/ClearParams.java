@@ -6,13 +6,16 @@ import com.android.server.backup.transport.TransportConnection;
 
 /* loaded from: classes.dex */
 public class ClearParams {
-    public OnTaskFinishedListener listener;
-    public TransportConnection mTransportConnection;
-    public PackageInfo packageInfo;
+  public OnTaskFinishedListener listener;
+  public TransportConnection mTransportConnection;
+  public PackageInfo packageInfo;
 
-    public ClearParams(TransportConnection transportConnection, PackageInfo packageInfo, OnTaskFinishedListener onTaskFinishedListener) {
-        this.mTransportConnection = transportConnection;
-        this.packageInfo = packageInfo;
-        this.listener = onTaskFinishedListener;
-    }
+  public ClearParams(
+      TransportConnection transportConnection,
+      PackageInfo packageInfo,
+      OnTaskFinishedListener onTaskFinishedListener) {
+    this.mTransportConnection = transportConnection;
+    this.packageInfo = packageInfo;
+    this.listener = onTaskFinishedListener;
+  }
 }

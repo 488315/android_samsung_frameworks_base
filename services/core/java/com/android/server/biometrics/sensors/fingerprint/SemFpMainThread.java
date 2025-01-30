@@ -7,38 +7,38 @@ import java.util.concurrent.RejectedExecutionException;
 
 /* loaded from: classes.dex */
 public final class SemFpMainThread extends ServiceThread implements Executor {
-    public static SemFpMainThread sInstance;
+  public static SemFpMainThread sInstance;
 
-    public SemFpMainThread() {
-        super("biometrics.fp", -2, true);
-    }
+  public SemFpMainThread() {
+    super("biometrics.fp", -2, true);
+  }
 
-    public static SemFpMainThread get() {
+  public static SemFpMainThread get() {
+    if (sInstance == null) {
+      synchronized (SemFpMainThread.class) {
         if (sInstance == null) {
-            synchronized (SemFpMainThread.class) {
-                if (sInstance == null) {
-                    SemFpMainThread semFpMainThread = new SemFpMainThread();
-                    sInstance = semFpMainThread;
-                    semFpMainThread.start();
-                }
-            }
+          SemFpMainThread semFpMainThread = new SemFpMainThread();
+          sInstance = semFpMainThread;
+          semFpMainThread.start();
         }
-        return sInstance;
+      }
     }
+    return sInstance;
+  }
 
-    @Override // java.util.concurrent.Executor
-    public void execute(Runnable runnable) {
-        if (post(runnable)) {
-            return;
-        }
-        throw new RejectedExecutionException(getThreadHandler() + " is shutting down");
+  @Override // java.util.concurrent.Executor
+  public void execute(Runnable runnable) {
+    if (post(runnable)) {
+      return;
     }
+    throw new RejectedExecutionException(getThreadHandler() + " is shutting down");
+  }
 
-    public Handler getHandler() {
-        return getThreadHandler();
-    }
+  public Handler getHandler() {
+    return getThreadHandler();
+  }
 
-    public boolean post(Runnable runnable) {
-        return getThreadHandler().post(runnable);
-    }
+  public boolean post(Runnable runnable) {
+    return getThreadHandler().post(runnable);
+  }
 }

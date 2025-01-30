@@ -10,82 +10,80 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /* loaded from: classes.dex */
 public final class SensorDirectChannel implements Channel {
-    public static final int RATE_FAST = 2;
-    public static final int RATE_NORMAL = 1;
-    public static final int RATE_STOP = 0;
-    public static final int RATE_VERY_FAST = 3;
-    public static final int TYPE_HARDWARE_BUFFER = 2;
-    public static final int TYPE_MEMORY_FILE = 1;
-    private final CloseGuard mCloseGuard;
-    private final AtomicBoolean mClosed = new AtomicBoolean();
-    private final SensorManager mManager;
-    private final int mNativeHandle;
-    private final long mSize;
-    private final int mType;
+  public static final int RATE_FAST = 2;
+  public static final int RATE_NORMAL = 1;
+  public static final int RATE_STOP = 0;
+  public static final int RATE_VERY_FAST = 3;
+  public static final int TYPE_HARDWARE_BUFFER = 2;
+  public static final int TYPE_MEMORY_FILE = 1;
+  private final CloseGuard mCloseGuard;
+  private final AtomicBoolean mClosed = new AtomicBoolean();
+  private final SensorManager mManager;
+  private final int mNativeHandle;
+  private final long mSize;
+  private final int mType;
 
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface MemoryType {
-    }
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface MemoryType {}
 
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface RateLevel {
-    }
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface RateLevel {}
 
-    @Override // java.nio.channels.Channel
-    public boolean isOpen() {
-        return !this.mClosed.get();
-    }
+  @Override // java.nio.channels.Channel
+  public boolean isOpen() {
+    return !this.mClosed.get();
+  }
 
-    @Deprecated
-    public boolean isValid() {
-        return isOpen();
-    }
+  @Deprecated
+  public boolean isValid() {
+    return isOpen();
+  }
 
-    @Override // java.nio.channels.Channel, java.io.Closeable, java.lang.AutoCloseable
-    public void close() {
-        if (this.mClosed.compareAndSet(false, true)) {
-            this.mCloseGuard.close();
-            this.mManager.destroyDirectChannel(this);
-        }
+  @Override // java.nio.channels.Channel, java.io.Closeable, java.lang.AutoCloseable
+  public void close() {
+    if (this.mClosed.compareAndSet(false, true)) {
+      this.mCloseGuard.close();
+      this.mManager.destroyDirectChannel(this);
     }
+  }
 
-    public int configure(Sensor sensor, int rateLevel) {
-        return this.mManager.configureDirectChannelImpl(this, sensor, rateLevel);
-    }
+  public int configure(Sensor sensor, int rateLevel) {
+    return this.mManager.configureDirectChannelImpl(this, sensor, rateLevel);
+  }
 
-    SensorDirectChannel(SensorManager manager, int id, int type, long size) {
-        CloseGuard closeGuard = CloseGuard.get();
-        this.mCloseGuard = closeGuard;
-        this.mManager = manager;
-        this.mNativeHandle = id;
-        this.mType = type;
-        this.mSize = size;
-        closeGuard.open("SensorDirectChannel");
-    }
+  SensorDirectChannel(SensorManager manager, int id, int type, long size) {
+    CloseGuard closeGuard = CloseGuard.get();
+    this.mCloseGuard = closeGuard;
+    this.mManager = manager;
+    this.mNativeHandle = id;
+    this.mType = type;
+    this.mSize = size;
+    closeGuard.open("SensorDirectChannel");
+  }
 
-    int getNativeHandle() {
-        return this.mNativeHandle;
-    }
+  int getNativeHandle() {
+    return this.mNativeHandle;
+  }
 
-    static long[] encodeData(MemoryFile ashmem) {
-        int fd;
-        try {
-            fd = ashmem.getFileDescriptor().getInt$();
-        } catch (IOException e) {
-            fd = -1;
-        }
-        return new long[]{1, 0, fd};
+  static long[] encodeData(MemoryFile ashmem) {
+    int fd;
+    try {
+      fd = ashmem.getFileDescriptor().getInt$();
+    } catch (IOException e) {
+      fd = -1;
     }
+    return new long[] {1, 0, fd};
+  }
 
-    protected void finalize() throws Throwable {
-        try {
-            CloseGuard closeGuard = this.mCloseGuard;
-            if (closeGuard != null) {
-                closeGuard.warnIfOpen();
-            }
-            close();
-        } finally {
-            super.finalize();
-        }
+  protected void finalize() throws Throwable {
+    try {
+      CloseGuard closeGuard = this.mCloseGuard;
+      if (closeGuard != null) {
+        closeGuard.warnIfOpen();
+      }
+      close();
+    } finally {
+      super.finalize();
     }
+  }
 }

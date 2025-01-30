@@ -5,7 +5,8 @@ import java.security.cert.CertPathValidatorException;
 
 /* loaded from: classes5.dex */
 class RecoverableCertPathValidatorException extends CertPathValidatorException {
-    public RecoverableCertPathValidatorException(String msg, Throwable cause, CertPath certPath, int index) {
-        super(msg, cause, certPath, index);
-    }
+  public RecoverableCertPathValidatorException(
+      String msg, Throwable cause, CertPath certPath, int index) {
+    super(msg, cause, certPath, index);
+  }
 }

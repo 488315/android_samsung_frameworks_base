@@ -6,15 +6,15 @@ import android.annotation.SystemApi;
 /* loaded from: classes3.dex */
 public interface IHwBinder {
 
-    public interface DeathRecipient {
-        void serviceDied(long j);
-    }
+  public interface DeathRecipient {
+    void serviceDied(long j);
+  }
 
-    boolean linkToDeath(DeathRecipient deathRecipient, long j);
+  boolean linkToDeath(DeathRecipient deathRecipient, long j);
 
-    IHwInterface queryLocalInterface(String str);
+  IHwInterface queryLocalInterface(String str);
 
-    void transact(int i, HwParcel hwParcel, HwParcel hwParcel2, int i2) throws RemoteException;
+  void transact(int i, HwParcel hwParcel, HwParcel hwParcel2, int i2) throws RemoteException;
 
-    boolean unlinkToDeath(DeathRecipient deathRecipient);
+  boolean unlinkToDeath(DeathRecipient deathRecipient);
 }

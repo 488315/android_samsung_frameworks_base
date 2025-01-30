@@ -8,112 +8,112 @@ import com.samsung.android.allshare.Item;
 /* loaded from: classes5.dex */
 public abstract class ImageViewer extends Device {
 
-    public interface IImageViewerEventListener {
-        void onDeviceChanged(ImageViewerState imageViewerState, ERROR error);
+  public interface IImageViewerEventListener {
+    void onDeviceChanged(ImageViewerState imageViewerState, ERROR error);
+  }
+
+  public interface IImageViewerResponseListener {
+    void onGetStateResponseReceived(ImageViewerState imageViewerState, ERROR error);
+
+    void onShowResponseReceived(Item item, ContentInfo contentInfo, ERROR error);
+
+    void onStopResponseReceived(ERROR error);
+  }
+
+  @Override // com.samsung.android.allshare.Device
+  public abstract Device.DeviceDomain getDeviceDomain();
+
+  @Override // com.samsung.android.allshare.Device
+  public abstract Device.DeviceType getDeviceType();
+
+  @Override // com.samsung.android.allshare.Device
+  public abstract String getID();
+
+  @Override // com.samsung.android.allshare.Device
+  public abstract String getIPAddress();
+
+  @Override // com.samsung.android.allshare.Device
+  public abstract String getIPAdress();
+
+  @Override // com.samsung.android.allshare.Device
+  public abstract Uri getIcon();
+
+  @Override // com.samsung.android.allshare.Device
+  public abstract String getModelName();
+
+  @Override // com.samsung.android.allshare.Device
+  public abstract String getName();
+
+  public abstract PlaylistPlayer getPlaylistPlayer();
+
+  public abstract SlideShowPlayer getSlideShowPlayer();
+
+  public abstract void getState();
+
+  public abstract ViewController getViewController();
+
+  public abstract ViewController2 getViewController2();
+
+  public abstract ImageViewerState getViewerState();
+
+  @Deprecated
+  public abstract boolean isRedirectSupportable();
+
+  public abstract boolean isSupportRedirect();
+
+  @Deprecated
+  public abstract void prepare(Item item);
+
+  public abstract void setEventListener(IImageViewerEventListener iImageViewerEventListener);
+
+  public abstract void setResponseListener(
+      IImageViewerResponseListener iImageViewerResponseListener);
+
+  public abstract void show(Item item, ContentInfo contentInfo);
+
+  public abstract void stop();
+
+  public abstract void zoom(int i, int i2, int i3, int i4);
+
+  protected ImageViewer() {}
+
+  public enum ImageViewerState {
+    STOPPED("STOPPED"),
+    BUFFERING("BUFFERING"),
+    SHOWING("SHOWING"),
+    CONTENT_CHANGED("CONTENT_CHANGED"),
+    UNKNOWN("UNKNOWN");
+
+    private final String enumString;
+
+    ImageViewerState(String enumStr) {
+      this.enumString = enumStr;
     }
 
-    public interface IImageViewerResponseListener {
-        void onGetStateResponseReceived(ImageViewerState imageViewerState, ERROR error);
-
-        void onShowResponseReceived(Item item, ContentInfo contentInfo, ERROR error);
-
-        void onStopResponseReceived(ERROR error);
+    public String enumToString() {
+      return this.enumString;
     }
 
-    @Override // com.samsung.android.allshare.Device
-    public abstract Device.DeviceDomain getDeviceDomain();
-
-    @Override // com.samsung.android.allshare.Device
-    public abstract Device.DeviceType getDeviceType();
-
-    @Override // com.samsung.android.allshare.Device
-    public abstract String getID();
-
-    @Override // com.samsung.android.allshare.Device
-    public abstract String getIPAddress();
-
-    @Override // com.samsung.android.allshare.Device
-    public abstract String getIPAdress();
-
-    @Override // com.samsung.android.allshare.Device
-    public abstract Uri getIcon();
-
-    @Override // com.samsung.android.allshare.Device
-    public abstract String getModelName();
-
-    @Override // com.samsung.android.allshare.Device
-    public abstract String getName();
-
-    public abstract PlaylistPlayer getPlaylistPlayer();
-
-    public abstract SlideShowPlayer getSlideShowPlayer();
-
-    public abstract void getState();
-
-    public abstract ViewController getViewController();
-
-    public abstract ViewController2 getViewController2();
-
-    public abstract ImageViewerState getViewerState();
-
-    @Deprecated
-    public abstract boolean isRedirectSupportable();
-
-    public abstract boolean isSupportRedirect();
-
-    @Deprecated
-    public abstract void prepare(Item item);
-
-    public abstract void setEventListener(IImageViewerEventListener iImageViewerEventListener);
-
-    public abstract void setResponseListener(IImageViewerResponseListener iImageViewerResponseListener);
-
-    public abstract void show(Item item, ContentInfo contentInfo);
-
-    public abstract void stop();
-
-    public abstract void zoom(int i, int i2, int i3, int i4);
-
-    protected ImageViewer() {
+    public static ImageViewerState stringToEnum(String enumStr) {
+      if (enumStr == null) {
+        return UNKNOWN;
+      }
+      if (enumStr.equals("BUFFERING")) {
+        return BUFFERING;
+      }
+      if (enumStr.equals("CONTENT_CHANGED")) {
+        return CONTENT_CHANGED;
+      }
+      if (enumStr.equals("SHOWING")) {
+        return SHOWING;
+      }
+      if (enumStr.equals("STOPPED")) {
+        return STOPPED;
+      }
+      if (enumStr.equals("UNKNOWN")) {
+        return UNKNOWN;
+      }
+      return UNKNOWN;
     }
-
-    public enum ImageViewerState {
-        STOPPED("STOPPED"),
-        BUFFERING("BUFFERING"),
-        SHOWING("SHOWING"),
-        CONTENT_CHANGED("CONTENT_CHANGED"),
-        UNKNOWN("UNKNOWN");
-
-        private final String enumString;
-
-        ImageViewerState(String enumStr) {
-            this.enumString = enumStr;
-        }
-
-        public String enumToString() {
-            return this.enumString;
-        }
-
-        public static ImageViewerState stringToEnum(String enumStr) {
-            if (enumStr == null) {
-                return UNKNOWN;
-            }
-            if (enumStr.equals("BUFFERING")) {
-                return BUFFERING;
-            }
-            if (enumStr.equals("CONTENT_CHANGED")) {
-                return CONTENT_CHANGED;
-            }
-            if (enumStr.equals("SHOWING")) {
-                return SHOWING;
-            }
-            if (enumStr.equals("STOPPED")) {
-                return STOPPED;
-            }
-            if (enumStr.equals("UNKNOWN")) {
-                return UNKNOWN;
-            }
-            return UNKNOWN;
-        }
-    }
+  }
 }

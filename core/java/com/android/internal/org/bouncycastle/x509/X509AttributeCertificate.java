@@ -15,31 +15,36 @@ import java.util.Date;
 
 /* loaded from: classes5.dex */
 public interface X509AttributeCertificate extends X509Extension {
-    void checkValidity() throws CertificateExpiredException, CertificateNotYetValidException;
+  void checkValidity() throws CertificateExpiredException, CertificateNotYetValidException;
 
-    void checkValidity(Date date) throws CertificateExpiredException, CertificateNotYetValidException;
+  void checkValidity(Date date) throws CertificateExpiredException, CertificateNotYetValidException;
 
-    X509Attribute[] getAttributes();
+  X509Attribute[] getAttributes();
 
-    X509Attribute[] getAttributes(String str);
+  X509Attribute[] getAttributes(String str);
 
-    byte[] getEncoded() throws IOException;
+  byte[] getEncoded() throws IOException;
 
-    AttributeCertificateHolder getHolder();
+  AttributeCertificateHolder getHolder();
 
-    AttributeCertificateIssuer getIssuer();
+  AttributeCertificateIssuer getIssuer();
 
-    boolean[] getIssuerUniqueID();
+  boolean[] getIssuerUniqueID();
 
-    Date getNotAfter();
+  Date getNotAfter();
 
-    Date getNotBefore();
+  Date getNotBefore();
 
-    BigInteger getSerialNumber();
+  BigInteger getSerialNumber();
 
-    byte[] getSignature();
+  byte[] getSignature();
 
-    int getVersion();
+  int getVersion();
 
-    void verify(PublicKey publicKey, String str) throws CertificateException, NoSuchAlgorithmException, InvalidKeyException, NoSuchProviderException, SignatureException;
+  void verify(PublicKey publicKey, String str)
+      throws CertificateException,
+          NoSuchAlgorithmException,
+          InvalidKeyException,
+          NoSuchProviderException,
+          SignatureException;
 }

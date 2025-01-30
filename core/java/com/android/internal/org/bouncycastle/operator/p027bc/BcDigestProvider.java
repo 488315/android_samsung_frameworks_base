@@ -6,5 +6,5 @@ import com.android.internal.org.bouncycastle.operator.OperatorCreationException;
 
 /* loaded from: classes5.dex */
 public interface BcDigestProvider {
-    ExtendedDigest get(AlgorithmIdentifier algorithmIdentifier) throws OperatorCreationException;
+  ExtendedDigest get(AlgorithmIdentifier algorithmIdentifier) throws OperatorCreationException;
 }

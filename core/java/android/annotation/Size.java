@@ -9,11 +9,11 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 /* loaded from: classes.dex */
 public @interface Size {
-    long max() default Long.MAX_VALUE;
+  long max() default Long.MAX_VALUE;
 
-    long min() default Long.MIN_VALUE;
+  long min() default Long.MIN_VALUE;
 
-    long multiple() default 1;
+  long multiple() default 1;
 
-    long value() default -1;
+  long value() default -1;
 }

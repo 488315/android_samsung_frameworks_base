@@ -12,146 +12,143 @@ import java.util.List;
 
 /* loaded from: classes4.dex */
 public abstract class ViewStructure {
-    public static final String EXTRA_ACTIVE_CHILDREN_IDS = "android.view.ViewStructure.extra.ACTIVE_CHILDREN_IDS";
-    public static final String EXTRA_FIRST_ACTIVE_POSITION = "android.view.ViewStructure.extra.FIRST_ACTIVE_POSITION";
+  public static final String EXTRA_ACTIVE_CHILDREN_IDS =
+      "android.view.ViewStructure.extra.ACTIVE_CHILDREN_IDS";
+  public static final String EXTRA_FIRST_ACTIVE_POSITION =
+      "android.view.ViewStructure.extra.FIRST_ACTIVE_POSITION";
 
-    public static abstract class HtmlInfo {
+  public abstract static class HtmlInfo {
 
-        public static abstract class Builder {
-            public abstract Builder addAttribute(String str, String str2);
+    public abstract static class Builder {
+      public abstract Builder addAttribute(String str, String str2);
 
-            public abstract HtmlInfo build();
-        }
-
-        public abstract List<Pair<String, String>> getAttributes();
-
-        public abstract String getTag();
+      public abstract HtmlInfo build();
     }
 
-    public abstract int addChildCount(int i);
+    public abstract List<Pair<String, String>> getAttributes();
 
-    public abstract void asyncCommit();
+    public abstract String getTag();
+  }
 
-    public abstract ViewStructure asyncNewChild(int i);
+  public abstract int addChildCount(int i);
 
-    public abstract AutofillId getAutofillId();
+  public abstract void asyncCommit();
 
-    public abstract int getChildCount();
+  public abstract ViewStructure asyncNewChild(int i);
 
-    public abstract Bundle getExtras();
+  public abstract AutofillId getAutofillId();
 
-    public abstract CharSequence getHint();
+  public abstract int getChildCount();
 
-    public abstract Rect getTempRect();
+  public abstract Bundle getExtras();
 
-    public abstract CharSequence getText();
+  public abstract CharSequence getHint();
 
-    public abstract int getTextSelectionEnd();
+  public abstract Rect getTempRect();
 
-    public abstract int getTextSelectionStart();
+  public abstract CharSequence getText();
 
-    public abstract boolean hasExtras();
+  public abstract int getTextSelectionEnd();
 
-    public abstract ViewStructure newChild(int i);
+  public abstract int getTextSelectionStart();
 
-    public abstract HtmlInfo.Builder newHtmlInfoBuilder(String str);
+  public abstract boolean hasExtras();
 
-    public abstract void setAccessibilityFocused(boolean z);
+  public abstract ViewStructure newChild(int i);
 
-    public abstract void setActivated(boolean z);
+  public abstract HtmlInfo.Builder newHtmlInfoBuilder(String str);
 
-    public abstract void setAlpha(float f);
+  public abstract void setAccessibilityFocused(boolean z);
 
-    public abstract void setAssistBlocked(boolean z);
+  public abstract void setActivated(boolean z);
 
-    public abstract void setAutofillHints(String[] strArr);
+  public abstract void setAlpha(float f);
 
-    public abstract void setAutofillId(AutofillId autofillId);
+  public abstract void setAssistBlocked(boolean z);
 
-    public abstract void setAutofillId(AutofillId autofillId, int i);
+  public abstract void setAutofillHints(String[] strArr);
 
-    public abstract void setAutofillOptions(CharSequence[] charSequenceArr);
+  public abstract void setAutofillId(AutofillId autofillId);
 
-    public abstract void setAutofillType(int i);
+  public abstract void setAutofillId(AutofillId autofillId, int i);
 
-    public abstract void setAutofillValue(AutofillValue autofillValue);
+  public abstract void setAutofillOptions(CharSequence[] charSequenceArr);
 
-    public abstract void setCheckable(boolean z);
+  public abstract void setAutofillType(int i);
 
-    public abstract void setChecked(boolean z);
+  public abstract void setAutofillValue(AutofillValue autofillValue);
 
-    public abstract void setChildCount(int i);
+  public abstract void setCheckable(boolean z);
 
-    public abstract void setClassName(String str);
+  public abstract void setChecked(boolean z);
 
-    public abstract void setClickable(boolean z);
+  public abstract void setChildCount(int i);
 
-    public abstract void setContentDescription(CharSequence charSequence);
+  public abstract void setClassName(String str);
 
-    public abstract void setContextClickable(boolean z);
+  public abstract void setClickable(boolean z);
 
-    public abstract void setDataIsSensitive(boolean z);
+  public abstract void setContentDescription(CharSequence charSequence);
 
-    public abstract void setDimens(int i, int i2, int i3, int i4, int i5, int i6);
+  public abstract void setContextClickable(boolean z);
 
-    public abstract void setElevation(float f);
+  public abstract void setDataIsSensitive(boolean z);
 
-    public abstract void setEnabled(boolean z);
+  public abstract void setDimens(int i, int i2, int i3, int i4, int i5, int i6);
 
-    public abstract void setFocusable(boolean z);
+  public abstract void setElevation(float f);
 
-    public abstract void setFocused(boolean z);
+  public abstract void setEnabled(boolean z);
 
-    public abstract void setHint(CharSequence charSequence);
+  public abstract void setFocusable(boolean z);
 
-    public abstract void setHtmlInfo(HtmlInfo htmlInfo);
+  public abstract void setFocused(boolean z);
 
-    public abstract void setId(int i, String str, String str2, String str3);
+  public abstract void setHint(CharSequence charSequence);
 
-    public abstract void setInputType(int i);
+  public abstract void setHtmlInfo(HtmlInfo htmlInfo);
 
-    public abstract void setLocaleList(LocaleList localeList);
+  public abstract void setId(int i, String str, String str2, String str3);
 
-    public abstract void setLongClickable(boolean z);
+  public abstract void setInputType(int i);
 
-    public abstract void setOpaque(boolean z);
+  public abstract void setLocaleList(LocaleList localeList);
 
-    public abstract void setSelected(boolean z);
+  public abstract void setLongClickable(boolean z);
 
-    public abstract void setText(CharSequence charSequence);
+  public abstract void setOpaque(boolean z);
 
-    public abstract void setText(CharSequence charSequence, int i, int i2);
+  public abstract void setSelected(boolean z);
 
-    public abstract void setTextLines(int[] iArr, int[] iArr2);
+  public abstract void setText(CharSequence charSequence);
 
-    public abstract void setTextStyle(float f, int i, int i2, int i3);
+  public abstract void setText(CharSequence charSequence, int i, int i2);
 
-    public abstract void setTransformation(Matrix matrix);
+  public abstract void setTextLines(int[] iArr, int[] iArr2);
 
-    public abstract void setVisibility(int i);
+  public abstract void setTextStyle(float f, int i, int i2, int i3);
 
-    public abstract void setWebDomain(String str);
+  public abstract void setTransformation(Matrix matrix);
 
-    public void setTextIdEntry(String entryName) {
-        Preconditions.checkNotNull(entryName);
-    }
+  public abstract void setVisibility(int i);
 
-    public void setHintIdEntry(String entryName) {
-        Preconditions.checkNotNull(entryName);
-    }
+  public abstract void setWebDomain(String str);
 
-    public void setImportantForAutofill(int mode) {
-    }
+  public void setTextIdEntry(String entryName) {
+    Preconditions.checkNotNull(entryName);
+  }
 
-    public void setReceiveContentMimeTypes(String[] mimeTypes) {
-    }
+  public void setHintIdEntry(String entryName) {
+    Preconditions.checkNotNull(entryName);
+  }
 
-    public void setMinTextEms(int minEms) {
-    }
+  public void setImportantForAutofill(int mode) {}
 
-    public void setMaxTextEms(int maxEms) {
-    }
+  public void setReceiveContentMimeTypes(String[] mimeTypes) {}
 
-    public void setMaxTextLength(int maxLength) {
-    }
+  public void setMinTextEms(int minEms) {}
+
+  public void setMaxTextEms(int maxEms) {}
+
+  public void setMaxTextLength(int maxLength) {}
 }

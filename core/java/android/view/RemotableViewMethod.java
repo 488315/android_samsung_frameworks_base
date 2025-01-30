@@ -9,5 +9,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 /* loaded from: classes4.dex */
 public @interface RemotableViewMethod {
-    String asyncImpl() default "";
+  String asyncImpl() default "";
 }

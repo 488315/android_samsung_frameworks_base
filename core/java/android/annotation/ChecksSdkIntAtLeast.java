@@ -11,11 +11,11 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 /* loaded from: classes.dex */
 public @interface ChecksSdkIntAtLeast {
-    int api() default -1;
+  int api() default -1;
 
-    String codename() default "";
+  String codename() default "";
 
-    int lambda() default -1;
+  int lambda() default -1;
 
-    int parameter() default -1;
+  int parameter() default -1;
 }

@@ -12,54 +12,57 @@ import java.io.IOException;
 
 /* loaded from: classes2.dex */
 public class AltitudeService extends IAltitudeService.Stub {
-    public final AltitudeConverter mAltitudeConverter = new AltitudeConverter();
-    public final Context mContext;
+  public final AltitudeConverter mAltitudeConverter = new AltitudeConverter();
+  public final Context mContext;
 
-    @Override // android.frameworks.location.altitude.IAltitudeService
-    public String getInterfaceHash() {
-        return "763e0415cde10c922c590396b90bf622636470b1";
+  @Override // android.frameworks.location.altitude.IAltitudeService
+  public String getInterfaceHash() {
+    return "763e0415cde10c922c590396b90bf622636470b1";
+  }
+
+  @Override // android.frameworks.location.altitude.IAltitudeService
+  public int getInterfaceVersion() {
+    return 1;
+  }
+
+  public AltitudeService(Context context) {
+    this.mContext = context;
+  }
+
+  @Override // android.frameworks.location.altitude.IAltitudeService
+  public AddMslAltitudeToLocationResponse addMslAltitudeToLocation(
+      AddMslAltitudeToLocationRequest addMslAltitudeToLocationRequest) {
+    Location location = new Location("");
+    location.setLatitude(addMslAltitudeToLocationRequest.latitudeDegrees);
+    location.setLongitude(addMslAltitudeToLocationRequest.longitudeDegrees);
+    location.setAltitude(addMslAltitudeToLocationRequest.altitudeMeters);
+    location.setVerticalAccuracyMeters(addMslAltitudeToLocationRequest.verticalAccuracyMeters);
+    try {
+      this.mAltitudeConverter.addMslAltitudeToLocation(this.mContext, location);
+      AddMslAltitudeToLocationResponse addMslAltitudeToLocationResponse =
+          new AddMslAltitudeToLocationResponse();
+      addMslAltitudeToLocationResponse.mslAltitudeMeters = location.getMslAltitudeMeters();
+      addMslAltitudeToLocationResponse.mslAltitudeAccuracyMeters =
+          location.getMslAltitudeAccuracyMeters();
+      return addMslAltitudeToLocationResponse;
+    } catch (IOException e) {
+      throw new RemoteException(e);
+    }
+  }
+
+  public class Lifecycle extends SystemService {
+    public static final String SERVICE_NAME = IAltitudeService.DESCRIPTOR + "/default";
+    public AltitudeService mService;
+
+    public Lifecycle(Context context) {
+      super(context);
     }
 
-    @Override // android.frameworks.location.altitude.IAltitudeService
-    public int getInterfaceVersion() {
-        return 1;
+    @Override // com.android.server.SystemService
+    public void onStart() {
+      AltitudeService altitudeService = new AltitudeService(getContext());
+      this.mService = altitudeService;
+      publishBinderService(SERVICE_NAME, altitudeService);
     }
-
-    public AltitudeService(Context context) {
-        this.mContext = context;
-    }
-
-    @Override // android.frameworks.location.altitude.IAltitudeService
-    public AddMslAltitudeToLocationResponse addMslAltitudeToLocation(AddMslAltitudeToLocationRequest addMslAltitudeToLocationRequest) {
-        Location location = new Location("");
-        location.setLatitude(addMslAltitudeToLocationRequest.latitudeDegrees);
-        location.setLongitude(addMslAltitudeToLocationRequest.longitudeDegrees);
-        location.setAltitude(addMslAltitudeToLocationRequest.altitudeMeters);
-        location.setVerticalAccuracyMeters(addMslAltitudeToLocationRequest.verticalAccuracyMeters);
-        try {
-            this.mAltitudeConverter.addMslAltitudeToLocation(this.mContext, location);
-            AddMslAltitudeToLocationResponse addMslAltitudeToLocationResponse = new AddMslAltitudeToLocationResponse();
-            addMslAltitudeToLocationResponse.mslAltitudeMeters = location.getMslAltitudeMeters();
-            addMslAltitudeToLocationResponse.mslAltitudeAccuracyMeters = location.getMslAltitudeAccuracyMeters();
-            return addMslAltitudeToLocationResponse;
-        } catch (IOException e) {
-            throw new RemoteException(e);
-        }
-    }
-
-    public class Lifecycle extends SystemService {
-        public static final String SERVICE_NAME = IAltitudeService.DESCRIPTOR + "/default";
-        public AltitudeService mService;
-
-        public Lifecycle(Context context) {
-            super(context);
-        }
-
-        @Override // com.android.server.SystemService
-        public void onStart() {
-            AltitudeService altitudeService = new AltitudeService(getContext());
-            this.mService = altitudeService;
-            publishBinderService(SERVICE_NAME, altitudeService);
-        }
-    }
+  }
 }

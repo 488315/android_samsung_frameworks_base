@@ -2,7 +2,7 @@ package com.android.server.biometrics.sensors;
 
 /* loaded from: classes.dex */
 public interface LockoutConsumer {
-    void onLockoutPermanent();
+  void onLockoutPermanent();
 
-    void onLockoutTimed(long j);
+  void onLockoutTimed(long j);
 }

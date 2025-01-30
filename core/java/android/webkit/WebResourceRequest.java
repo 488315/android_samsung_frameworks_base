@@ -5,15 +5,15 @@ import java.util.Map;
 
 /* loaded from: classes4.dex */
 public interface WebResourceRequest {
-    String getMethod();
+  String getMethod();
 
-    Map<String, String> getRequestHeaders();
+  Map<String, String> getRequestHeaders();
 
-    Uri getUrl();
+  Uri getUrl();
 
-    boolean hasGesture();
+  boolean hasGesture();
 
-    boolean isForMainFrame();
+  boolean isForMainFrame();
 
-    boolean isRedirect();
+  boolean isRedirect();
 }

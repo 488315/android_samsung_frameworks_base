@@ -7,37 +7,37 @@ import com.android.server.location.settings.LocationSettings;
 
 /* loaded from: classes2.dex */
 public interface Injector {
-    AlarmHelper getAlarmHelper();
+  AlarmHelper getAlarmHelper();
 
-    AppForegroundHelper getAppForegroundHelper();
+  AppForegroundHelper getAppForegroundHelper();
 
-    AppOpsHelper getAppOpsHelper();
+  AppOpsHelper getAppOpsHelper();
 
-    DeviceIdleHelper getDeviceIdleHelper();
+  DeviceIdleHelper getDeviceIdleHelper();
 
-    DeviceStationaryHelper getDeviceStationaryHelper();
+  DeviceStationaryHelper getDeviceStationaryHelper();
 
-    EmergencyHelper getEmergencyHelper();
+  EmergencyHelper getEmergencyHelper();
 
-    LocationPermissionsHelper getLocationPermissionsHelper();
+  LocationPermissionsHelper getLocationPermissionsHelper();
 
-    LocationPowerSaveModeHelper getLocationPowerSaveModeHelper();
+  LocationPowerSaveModeHelper getLocationPowerSaveModeHelper();
 
-    LocationSettings getLocationSettings();
+  LocationSettings getLocationSettings();
 
-    LocationUsageLogger getLocationUsageLogger();
+  LocationUsageLogger getLocationUsageLogger();
 
-    NSConnectionHelper getNSConnectionHelper();
+  NSConnectionHelper getNSConnectionHelper();
 
-    NSLocationProviderHelper getNSLocationProviderHelper();
+  NSLocationProviderHelper getNSLocationProviderHelper();
 
-    NSPermissionHelper getNSPermissionHelper();
+  NSPermissionHelper getNSPermissionHelper();
 
-    PackageResetHelper getPackageResetHelper();
+  PackageResetHelper getPackageResetHelper();
 
-    ScreenInteractiveHelper getScreenInteractiveHelper();
+  ScreenInteractiveHelper getScreenInteractiveHelper();
 
-    SettingsHelper getSettingsHelper();
+  SettingsHelper getSettingsHelper();
 
-    UserInfoHelper getUserInfoHelper();
+  UserInfoHelper getUserInfoHelper();
 }

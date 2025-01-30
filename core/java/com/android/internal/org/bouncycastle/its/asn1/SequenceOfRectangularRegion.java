@@ -7,17 +7,18 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 
 /* loaded from: classes5.dex */
 public class SequenceOfRectangularRegion extends ASN1Object {
-    private final RectangularRegion[] sequence;
+  private final RectangularRegion[] sequence;
 
-    private SequenceOfRectangularRegion(ASN1Sequence seq) {
-        this.sequence = new RectangularRegion[seq.size()];
-        for (int i = 0; i != seq.size(); i++) {
-            this.sequence[i] = RectangularRegion.getInstance(seq.getObjectAt(i));
-        }
+  private SequenceOfRectangularRegion(ASN1Sequence seq) {
+    this.sequence = new RectangularRegion[seq.size()];
+    for (int i = 0; i != seq.size(); i++) {
+      this.sequence[i] = RectangularRegion.getInstance(seq.getObjectAt(i));
     }
+  }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
-    public ASN1Primitive toASN1Primitive() {
-        return new DERSequence(this.sequence);
-    }
+  @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+            // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+  public ASN1Primitive toASN1Primitive() {
+    return new DERSequence(this.sequence);
+  }
 }

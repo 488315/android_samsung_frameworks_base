@@ -2,9 +2,9 @@ package android.graphics.drawable;
 
 /* loaded from: classes.dex */
 public interface Animatable {
-    boolean isRunning();
+  boolean isRunning();
 
-    void start();
+  void start();
 
-    void stop();
+  void stop();
 }

@@ -5,18 +5,14 @@ import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes3.dex */
 public interface GroupCallCallback {
-    public static final int SIGNAL_STRENGTH_UNAVAILABLE = -1;
+  public static final int SIGNAL_STRENGTH_UNAVAILABLE = -1;
 
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface GroupCallError {
-    }
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface GroupCallError {}
 
-    default void onError(int errorCode, String message) {
-    }
+  default void onError(int errorCode, String message) {}
 
-    default void onGroupCallStateChanged(int state, int reason) {
-    }
+  default void onGroupCallStateChanged(int state, int reason) {}
 
-    default void onBroadcastSignalStrengthUpdated(int signalStrength) {
-    }
+  default void onBroadcastSignalStrengthUpdated(int signalStrength) {}
 }

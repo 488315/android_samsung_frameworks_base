@@ -6,14 +6,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 /* loaded from: classes.dex */
 public abstract class FactoryResetter {
-    public static final AtomicBoolean sFactoryResetting = new AtomicBoolean(false);
+  public static final AtomicBoolean sFactoryResetting = new AtomicBoolean(false);
 
-    public static boolean isFactoryResetting() {
-        return sFactoryResetting.get();
-    }
+  public static boolean isFactoryResetting() {
+    return sFactoryResetting.get();
+  }
 
-    public static void setFactoryResetting(Context context) {
-        Preconditions.checkCallAuthorization(context.checkCallingOrSelfPermission("android.permission.MASTER_CLEAR") == 0);
-        sFactoryResetting.set(true);
-    }
+  public static void setFactoryResetting(Context context) {
+    Preconditions.checkCallAuthorization(
+        context.checkCallingOrSelfPermission("android.permission.MASTER_CLEAR") == 0);
+    sFactoryResetting.set(true);
+  }
 }

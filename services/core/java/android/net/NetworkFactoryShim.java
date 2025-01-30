@@ -7,33 +7,33 @@ import java.io.PrintWriter;
 
 /* loaded from: classes.dex */
 public interface NetworkFactoryShim {
-    void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr);
+  void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr);
 
-    Looper getLooper();
+  Looper getLooper();
 
-    NetworkProvider getProvider();
+  NetworkProvider getProvider();
 
-    int getRequestCount();
+  int getRequestCount();
 
-    int getSerialNumber();
+  int getSerialNumber();
 
-    Message obtainMessage(int i, int i2, int i3, Object obj);
+  Message obtainMessage(int i, int i2, int i3, Object obj);
 
-    void reevaluateAllRequests();
+  void reevaluateAllRequests();
 
-    void register(String str);
+  void register(String str);
 
-    void releaseRequestAsUnfulfillableByAnyFactory(NetworkRequest networkRequest);
+  void releaseRequestAsUnfulfillableByAnyFactory(NetworkRequest networkRequest);
 
-    void setCapabilityFilter(NetworkCapabilities networkCapabilities);
+  void setCapabilityFilter(NetworkCapabilities networkCapabilities);
 
-    void setScoreFilter(int i);
+  void setScoreFilter(int i);
 
-    void setScoreFilter(NetworkScore networkScore);
+  void setScoreFilter(NetworkScore networkScore);
 
-    void terminate();
+  void terminate();
 
-    default void registerIgnoringScore(String str) {
-        throw new UnsupportedOperationException();
-    }
+  default void registerIgnoringScore(String str) {
+    throw new UnsupportedOperationException();
+  }
 }

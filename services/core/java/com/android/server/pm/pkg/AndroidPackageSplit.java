@@ -6,15 +6,15 @@ import java.util.List;
 @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
 /* loaded from: classes3.dex */
 public interface AndroidPackageSplit {
-    String getClassLoaderName();
+  String getClassLoaderName();
 
-    List getDependencies();
+  List getDependencies();
 
-    String getName();
+  String getName();
 
-    String getPath();
+  String getPath();
 
-    int getRevisionCode();
+  int getRevisionCode();
 
-    boolean isHasCode();
+  boolean isHasCode();
 }

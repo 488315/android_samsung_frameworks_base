@@ -6,14 +6,14 @@ import javax.crypto.spec.DHPublicKeySpec;
 
 /* loaded from: classes5.dex */
 public class DHExtendedPublicKeySpec extends DHPublicKeySpec {
-    private final DHParameterSpec params;
+  private final DHParameterSpec params;
 
-    public DHExtendedPublicKeySpec(BigInteger y, DHParameterSpec params) {
-        super(y, params.getP(), params.getG());
-        this.params = params;
-    }
+  public DHExtendedPublicKeySpec(BigInteger y, DHParameterSpec params) {
+    super(y, params.getP(), params.getG());
+    this.params = params;
+  }
 
-    public DHParameterSpec getParams() {
-        return this.params;
-    }
+  public DHParameterSpec getParams() {
+    return this.params;
+  }
 }

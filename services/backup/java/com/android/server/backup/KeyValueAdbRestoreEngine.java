@@ -19,102 +19,125 @@ import libcore.io.IoUtils;
 
 /* loaded from: classes.dex */
 public class KeyValueAdbRestoreEngine implements Runnable {
-    public final IBackupAgent mAgent;
-    public final UserBackupManagerService mBackupManagerService;
-    public final File mDataDir;
-    public final ParcelFileDescriptor mInFD;
-    public final FileMetadata mInfo;
-    public final int mToken;
+  public final IBackupAgent mAgent;
+  public final UserBackupManagerService mBackupManagerService;
+  public final File mDataDir;
+  public final ParcelFileDescriptor mInFD;
+  public final FileMetadata mInfo;
+  public final int mToken;
 
-    public KeyValueAdbRestoreEngine(UserBackupManagerService userBackupManagerService, File file, FileMetadata fileMetadata, ParcelFileDescriptor parcelFileDescriptor, IBackupAgent iBackupAgent, int i) {
-        this.mBackupManagerService = userBackupManagerService;
-        this.mDataDir = file;
-        this.mInfo = fileMetadata;
-        this.mInFD = parcelFileDescriptor;
-        this.mAgent = iBackupAgent;
-        this.mToken = i;
+  public KeyValueAdbRestoreEngine(
+      UserBackupManagerService userBackupManagerService,
+      File file,
+      FileMetadata fileMetadata,
+      ParcelFileDescriptor parcelFileDescriptor,
+      IBackupAgent iBackupAgent,
+      int i) {
+    this.mBackupManagerService = userBackupManagerService;
+    this.mDataDir = file;
+    this.mInfo = fileMetadata;
+    this.mInFD = parcelFileDescriptor;
+    this.mAgent = iBackupAgent;
+    this.mToken = i;
+  }
+
+  @Override // java.lang.Runnable
+  public void run() {
+    try {
+      invokeAgentForAdbRestore(this.mAgent, this.mInfo, prepareRestoreData(this.mInfo, this.mInFD));
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+  }
 
-    @Override // java.lang.Runnable
-    public void run() {
+  public final File prepareRestoreData(
+      FileMetadata fileMetadata, ParcelFileDescriptor parcelFileDescriptor) {
+    String str = fileMetadata.packageName;
+    File file = new File(this.mDataDir, str + ".restore");
+    File file2 = new File(this.mDataDir, str + ".sorted");
+    FullBackup.restoreFile(
+        parcelFileDescriptor,
+        fileMetadata.size,
+        fileMetadata.type,
+        fileMetadata.mode,
+        fileMetadata.mtime,
+        file);
+    sortKeyValueData(file, file2);
+    return file2;
+  }
+
+  public final void invokeAgentForAdbRestore(
+      IBackupAgent iBackupAgent, FileMetadata fileMetadata, File file) {
+    String str = fileMetadata.packageName;
+    try {
+      iBackupAgent.doRestore(
+          ParcelFileDescriptor.open(file, 268435456),
+          fileMetadata.version,
+          ParcelFileDescriptor.open(
+              new File(this.mDataDir, str + KeyValueBackupTask.NEW_STATE_FILE_SUFFIX), 1006632960),
+          this.mToken,
+          this.mBackupManagerService.getBackupManagerBinder());
+    } catch (RemoteException e) {
+      Slog.e("KeyValueAdbRestoreEngine", "Exception calling doRestore on agent: " + e);
+    } catch (IOException e2) {
+      Slog.e("KeyValueAdbRestoreEngine", "Exception opening file. " + e2);
+    }
+  }
+
+  public final void sortKeyValueData(File file, File file2) {
+    FileOutputStream fileOutputStream;
+    FileInputStream fileInputStream = null;
+    try {
+      FileInputStream fileInputStream2 = new FileInputStream(file);
+      try {
+        fileOutputStream = new FileOutputStream(file2);
         try {
-            invokeAgentForAdbRestore(this.mAgent, this.mInfo, prepareRestoreData(this.mInfo, this.mInFD));
-        } catch (IOException e) {
-            e.printStackTrace();
+          copyKeysInLexicalOrder(
+              new BackupDataInput(fileInputStream2.getFD()),
+              new BackupDataOutput(fileOutputStream.getFD()));
+          IoUtils.closeQuietly(fileInputStream2);
+          IoUtils.closeQuietly(fileOutputStream);
+        } catch (Throwable th) {
+          th = th;
+          fileInputStream = fileInputStream2;
+          if (fileInputStream != null) {
+            IoUtils.closeQuietly(fileInputStream);
+          }
+          if (fileOutputStream != null) {
+            IoUtils.closeQuietly(fileOutputStream);
+          }
+          throw th;
         }
+      } catch (Throwable th2) {
+        th = th2;
+        fileOutputStream = null;
+      }
+    } catch (Throwable th3) {
+      th = th3;
+      fileOutputStream = null;
     }
+  }
 
-    public final File prepareRestoreData(FileMetadata fileMetadata, ParcelFileDescriptor parcelFileDescriptor) {
-        String str = fileMetadata.packageName;
-        File file = new File(this.mDataDir, str + ".restore");
-        File file2 = new File(this.mDataDir, str + ".sorted");
-        FullBackup.restoreFile(parcelFileDescriptor, fileMetadata.size, fileMetadata.type, fileMetadata.mode, fileMetadata.mtime, file);
-        sortKeyValueData(file, file2);
-        return file2;
+  public final void copyKeysInLexicalOrder(
+      BackupDataInput backupDataInput, BackupDataOutput backupDataOutput) {
+    HashMap hashMap = new HashMap();
+    while (backupDataInput.readNextHeader()) {
+      String key = backupDataInput.getKey();
+      int dataSize = backupDataInput.getDataSize();
+      if (dataSize < 0) {
+        backupDataInput.skipEntityData();
+      } else {
+        byte[] bArr = new byte[dataSize];
+        backupDataInput.readEntityData(bArr, 0, dataSize);
+        hashMap.put(key, bArr);
+      }
     }
-
-    public final void invokeAgentForAdbRestore(IBackupAgent iBackupAgent, FileMetadata fileMetadata, File file) {
-        String str = fileMetadata.packageName;
-        try {
-            iBackupAgent.doRestore(ParcelFileDescriptor.open(file, 268435456), fileMetadata.version, ParcelFileDescriptor.open(new File(this.mDataDir, str + KeyValueBackupTask.NEW_STATE_FILE_SUFFIX), 1006632960), this.mToken, this.mBackupManagerService.getBackupManagerBinder());
-        } catch (RemoteException e) {
-            Slog.e("KeyValueAdbRestoreEngine", "Exception calling doRestore on agent: " + e);
-        } catch (IOException e2) {
-            Slog.e("KeyValueAdbRestoreEngine", "Exception opening file. " + e2);
-        }
+    ArrayList<String> arrayList = new ArrayList(hashMap.keySet());
+    Collections.sort(arrayList);
+    for (String str : arrayList) {
+      byte[] bArr2 = (byte[]) hashMap.get(str);
+      backupDataOutput.writeEntityHeader(str, bArr2.length);
+      backupDataOutput.writeEntityData(bArr2, bArr2.length);
     }
-
-    public final void sortKeyValueData(File file, File file2) {
-        FileOutputStream fileOutputStream;
-        FileInputStream fileInputStream = null;
-        try {
-            FileInputStream fileInputStream2 = new FileInputStream(file);
-            try {
-                fileOutputStream = new FileOutputStream(file2);
-                try {
-                    copyKeysInLexicalOrder(new BackupDataInput(fileInputStream2.getFD()), new BackupDataOutput(fileOutputStream.getFD()));
-                    IoUtils.closeQuietly(fileInputStream2);
-                    IoUtils.closeQuietly(fileOutputStream);
-                } catch (Throwable th) {
-                    th = th;
-                    fileInputStream = fileInputStream2;
-                    if (fileInputStream != null) {
-                        IoUtils.closeQuietly(fileInputStream);
-                    }
-                    if (fileOutputStream != null) {
-                        IoUtils.closeQuietly(fileOutputStream);
-                    }
-                    throw th;
-                }
-            } catch (Throwable th2) {
-                th = th2;
-                fileOutputStream = null;
-            }
-        } catch (Throwable th3) {
-            th = th3;
-            fileOutputStream = null;
-        }
-    }
-
-    public final void copyKeysInLexicalOrder(BackupDataInput backupDataInput, BackupDataOutput backupDataOutput) {
-        HashMap hashMap = new HashMap();
-        while (backupDataInput.readNextHeader()) {
-            String key = backupDataInput.getKey();
-            int dataSize = backupDataInput.getDataSize();
-            if (dataSize < 0) {
-                backupDataInput.skipEntityData();
-            } else {
-                byte[] bArr = new byte[dataSize];
-                backupDataInput.readEntityData(bArr, 0, dataSize);
-                hashMap.put(key, bArr);
-            }
-        }
-        ArrayList<String> arrayList = new ArrayList(hashMap.keySet());
-        Collections.sort(arrayList);
-        for (String str : arrayList) {
-            byte[] bArr2 = (byte[]) hashMap.get(str);
-            backupDataOutput.writeEntityHeader(str, bArr2.length);
-            backupDataOutput.writeEntityData(bArr2, bArr2.length);
-        }
-    }
+  }
 }

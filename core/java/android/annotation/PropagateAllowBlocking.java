@@ -8,5 +8,4 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.SOURCE)
 /* loaded from: classes.dex */
-public @interface PropagateAllowBlocking {
-}
+public @interface PropagateAllowBlocking {}

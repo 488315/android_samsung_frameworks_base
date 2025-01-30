@@ -2,9 +2,9 @@ package com.android.server.backup;
 
 /* loaded from: classes.dex */
 public interface BackupRestoreTask {
-    void execute();
+  void execute();
 
-    void handleCancel(boolean z);
+  void handleCancel(boolean z);
 
-    void operationComplete(long j);
+  void operationComplete(long j);
 }

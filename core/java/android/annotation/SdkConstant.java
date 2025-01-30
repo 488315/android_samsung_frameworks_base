@@ -10,13 +10,13 @@ import java.lang.annotation.Target;
 /* loaded from: classes.dex */
 public @interface SdkConstant {
 
-    public enum SdkConstantType {
-        ACTIVITY_INTENT_ACTION,
-        BROADCAST_INTENT_ACTION,
-        SERVICE_ACTION,
-        INTENT_CATEGORY,
-        FEATURE
-    }
+  public enum SdkConstantType {
+    ACTIVITY_INTENT_ACTION,
+    BROADCAST_INTENT_ACTION,
+    SERVICE_ACTION,
+    INTENT_CATEGORY,
+    FEATURE
+  }
 
-    SdkConstantType value();
+  SdkConstantType value();
 }

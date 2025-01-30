@@ -4,5 +4,5 @@ import java.nio.ByteBuffer;
 
 /* loaded from: classes4.dex */
 public interface ByteBufferFactory {
-    ByteBuffer create(int i);
+  ByteBuffer create(int i);
 }

@@ -10,5 +10,4 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RetentionPolicy.CLASS)
 /* loaded from: classes4.dex */
-@interface CompileTimeConstant {
-}
+@interface CompileTimeConstant {}

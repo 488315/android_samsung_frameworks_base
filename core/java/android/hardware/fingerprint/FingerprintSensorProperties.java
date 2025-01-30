@@ -9,32 +9,36 @@ import java.util.List;
 
 /* loaded from: classes2.dex */
 public class FingerprintSensorProperties extends SensorProperties {
-    public static final int TYPE_HOME_BUTTON = 5;
-    public static final int TYPE_POWER_BUTTON = 4;
-    public static final int TYPE_REAR = 1;
-    public static final int TYPE_UDFPS_OPTICAL = 3;
-    public static final int TYPE_UDFPS_ULTRASONIC = 2;
-    public static final int TYPE_UNKNOWN = 0;
-    final int mSensorType;
+  public static final int TYPE_HOME_BUTTON = 5;
+  public static final int TYPE_POWER_BUTTON = 4;
+  public static final int TYPE_REAR = 1;
+  public static final int TYPE_UDFPS_OPTICAL = 3;
+  public static final int TYPE_UDFPS_ULTRASONIC = 2;
+  public static final int TYPE_UNKNOWN = 0;
+  final int mSensorType;
 
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface SensorType {
-    }
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface SensorType {}
 
-    public static FingerprintSensorProperties from(FingerprintSensorPropertiesInternal internalProp) {
-        List<SensorProperties.ComponentInfo> componentInfo = new ArrayList<>();
-        for (ComponentInfoInternal internalComp : internalProp.componentInfo) {
-            componentInfo.add(SensorProperties.ComponentInfo.from(internalComp));
-        }
-        return new FingerprintSensorProperties(internalProp.sensorId, internalProp.sensorStrength, componentInfo, internalProp.sensorType);
+  public static FingerprintSensorProperties from(FingerprintSensorPropertiesInternal internalProp) {
+    List<SensorProperties.ComponentInfo> componentInfo = new ArrayList<>();
+    for (ComponentInfoInternal internalComp : internalProp.componentInfo) {
+      componentInfo.add(SensorProperties.ComponentInfo.from(internalComp));
     }
+    return new FingerprintSensorProperties(
+        internalProp.sensorId, internalProp.sensorStrength, componentInfo, internalProp.sensorType);
+  }
 
-    public FingerprintSensorProperties(int sensorId, int sensorStrength, List<SensorProperties.ComponentInfo> componentInfo, int sensorType) {
-        super(sensorId, sensorStrength, componentInfo);
-        this.mSensorType = sensorType;
-    }
+  public FingerprintSensorProperties(
+      int sensorId,
+      int sensorStrength,
+      List<SensorProperties.ComponentInfo> componentInfo,
+      int sensorType) {
+    super(sensorId, sensorStrength, componentInfo);
+    this.mSensorType = sensorType;
+  }
 
-    public int getSensorType() {
-        return this.mSensorType;
-    }
+  public int getSensorType() {
+    return this.mSensorType;
+  }
 }

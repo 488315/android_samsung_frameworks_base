@@ -6,13 +6,13 @@ import android.view.View;
 
 /* loaded from: classes3.dex */
 public interface KeyListener {
-    void clearMetaKeyState(View view, Editable editable, int i);
+  void clearMetaKeyState(View view, Editable editable, int i);
 
-    int getInputType();
+  int getInputType();
 
-    boolean onKeyDown(View view, Editable editable, int i, KeyEvent keyEvent);
+  boolean onKeyDown(View view, Editable editable, int i, KeyEvent keyEvent);
 
-    boolean onKeyOther(View view, Editable editable, KeyEvent keyEvent);
+  boolean onKeyOther(View view, Editable editable, KeyEvent keyEvent);
 
-    boolean onKeyUp(View view, Editable editable, int i, KeyEvent keyEvent);
+  boolean onKeyUp(View view, Editable editable, int i, KeyEvent keyEvent);
 }

@@ -5,57 +5,58 @@ import java.util.Set;
 
 /* loaded from: classes3.dex */
 public interface ParsedActivity extends ParsedMainComponent {
-    int getColorMode();
+  int getColorMode();
 
-    int getConfigChanges();
+  int getConfigChanges();
 
-    int getDocumentLaunchMode();
+  int getDocumentLaunchMode();
 
-    Set getKnownActivityEmbeddingCerts();
+  Set getKnownActivityEmbeddingCerts();
 
-    int getLaunchMode();
+  int getLaunchMode();
 
-    int getLockTaskLaunchMode();
+  int getLockTaskLaunchMode();
 
-    float getMaxAspectRatio();
+  float getMaxAspectRatio();
 
-    int getMaxRecents();
+  int getMaxRecents();
 
-    float getMinAspectRatio();
+  float getMinAspectRatio();
 
-    String getParentActivityName();
+  String getParentActivityName();
 
-    String getPermission();
+  String getPermission();
 
-    int getPersistableMode();
+  int getPersistableMode();
 
-    int getPrivateFlags();
+  int getPrivateFlags();
 
-    String getRequestedVrComponent();
+  String getRequestedVrComponent();
 
-    String getRequiredDisplayCategory();
+  String getRequiredDisplayCategory();
 
-    int getResizeMode();
+  int getResizeMode();
 
-    int getRotationAnimation();
+  int getRotationAnimation();
 
-    int getScreenOrientation();
+  int getScreenOrientation();
 
-    int getSoftInputMode();
+  int getSoftInputMode();
 
-    String getTargetActivity();
+  String getTargetActivity();
 
-    String getTaskAffinity();
+  String getTaskAffinity();
 
-    int getTheme();
+  int getTheme();
 
-    int getUiOptions();
+  int getUiOptions();
 
-    ActivityInfo.WindowLayout getWindowLayout();
+  ActivityInfo.WindowLayout getWindowLayout();
 
-    boolean isSupportsSizeChanges();
+  boolean isSupportsSizeChanges();
 
-    static ParsedActivity makeAppDetailsActivity(String str, String str2, int i, String str3, boolean z) {
-        return ParsedActivityImpl.makeAppDetailsActivity(str, str2, i, str3, z);
-    }
+  static ParsedActivity makeAppDetailsActivity(
+      String str, String str2, int i, String str3, boolean z) {
+    return ParsedActivityImpl.makeAppDetailsActivity(str, str2, i, str3, z);
+  }
 }

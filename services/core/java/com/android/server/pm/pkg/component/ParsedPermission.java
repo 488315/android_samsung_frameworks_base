@@ -4,17 +4,17 @@ import java.util.Set;
 
 /* loaded from: classes3.dex */
 public interface ParsedPermission extends ParsedComponent {
-    String getBackgroundPermission();
+  String getBackgroundPermission();
 
-    String getGroup();
+  String getGroup();
 
-    Set getKnownCerts();
+  Set getKnownCerts();
 
-    ParsedPermissionGroup getParsedPermissionGroup();
+  ParsedPermissionGroup getParsedPermissionGroup();
 
-    int getProtectionLevel();
+  int getProtectionLevel();
 
-    int getRequestRes();
+  int getRequestRes();
 
-    boolean isTree();
+  boolean isTree();
 }

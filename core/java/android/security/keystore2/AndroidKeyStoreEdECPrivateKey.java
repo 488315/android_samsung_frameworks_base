@@ -8,12 +8,17 @@ import java.security.spec.NamedParameterSpec;
 
 /* loaded from: classes3.dex */
 public class AndroidKeyStoreEdECPrivateKey extends AndroidKeyStorePrivateKey implements EdECKey {
-    public AndroidKeyStoreEdECPrivateKey(KeyDescriptor descriptor, long keyId, Authorization[] authorizations, String algorithm, KeyStoreSecurityLevel securityLevel) {
-        super(descriptor, keyId, authorizations, algorithm, securityLevel);
-    }
+  public AndroidKeyStoreEdECPrivateKey(
+      KeyDescriptor descriptor,
+      long keyId,
+      Authorization[] authorizations,
+      String algorithm,
+      KeyStoreSecurityLevel securityLevel) {
+    super(descriptor, keyId, authorizations, algorithm, securityLevel);
+  }
 
-    @Override // java.security.interfaces.EdECKey
-    public NamedParameterSpec getParams() {
-        return NamedParameterSpec.ED25519;
-    }
+  @Override // java.security.interfaces.EdECKey
+  public NamedParameterSpec getParams() {
+    return NamedParameterSpec.ED25519;
+  }
 }

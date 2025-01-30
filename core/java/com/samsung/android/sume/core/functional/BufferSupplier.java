@@ -6,5 +6,5 @@ import java.util.function.Supplier;
 @FunctionalInterface
 /* loaded from: classes4.dex */
 public interface BufferSupplier {
-    Supplier<MediaBuffer> getBufferSupplier();
+  Supplier<MediaBuffer> getBufferSupplier();
 }

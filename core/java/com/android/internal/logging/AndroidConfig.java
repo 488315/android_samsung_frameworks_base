@@ -5,14 +5,14 @@ import java.util.logging.Logger;
 
 /* loaded from: classes4.dex */
 public class AndroidConfig {
-    public AndroidConfig() {
-        try {
-            Logger rootLogger = Logger.getLogger("");
-            rootLogger.addHandler(new AndroidHandler());
-            rootLogger.setLevel(Level.INFO);
-            Logger.getLogger("org.apache").setLevel(Level.WARNING);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
+  public AndroidConfig() {
+    try {
+      Logger rootLogger = Logger.getLogger("");
+      rootLogger.addHandler(new AndroidHandler());
+      rootLogger.setLevel(Level.INFO);
+      Logger.getLogger("org.apache").setLevel(Level.WARNING);
+    } catch (Exception ex) {
+      ex.printStackTrace();
     }
+  }
 }

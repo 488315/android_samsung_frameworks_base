@@ -24,370 +24,376 @@ import java.lang.annotation.RetentionPolicy;
 
 /* loaded from: classes.dex */
 public abstract class ActionBar {
-    public static final int DISPLAY_HOME_AS_UP = 4;
-    public static final int DISPLAY_SHOW_CUSTOM = 16;
-    public static final int DISPLAY_SHOW_HOME = 2;
-    public static final int DISPLAY_SHOW_TITLE = 8;
-    public static final int DISPLAY_TITLE_MULTIPLE_LINES = 32;
-    public static final int DISPLAY_USE_LOGO = 1;
+  public static final int DISPLAY_HOME_AS_UP = 4;
+  public static final int DISPLAY_SHOW_CUSTOM = 16;
+  public static final int DISPLAY_SHOW_HOME = 2;
+  public static final int DISPLAY_SHOW_TITLE = 8;
+  public static final int DISPLAY_TITLE_MULTIPLE_LINES = 32;
+  public static final int DISPLAY_USE_LOGO = 1;
 
-    @Deprecated
-    public static final int NAVIGATION_MODE_LIST = 1;
+  @Deprecated public static final int NAVIGATION_MODE_LIST = 1;
 
-    @Deprecated
-    public static final int NAVIGATION_MODE_STANDARD = 0;
+  @Deprecated public static final int NAVIGATION_MODE_STANDARD = 0;
 
-    @Deprecated
-    public static final int NAVIGATION_MODE_TABS = 2;
+  @Deprecated public static final int NAVIGATION_MODE_TABS = 2;
 
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface DisplayOptions {
-    }
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface DisplayOptions {}
 
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface NavigationMode {
-    }
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface NavigationMode {}
 
-    public interface OnMenuVisibilityListener {
-        void onMenuVisibilityChanged(boolean z);
-    }
+  public interface OnMenuVisibilityListener {
+    void onMenuVisibilityChanged(boolean z);
+  }
 
-    @Deprecated
-    public interface OnNavigationListener {
-        boolean onNavigationItemSelected(int i, long j);
-    }
+  @Deprecated
+  public interface OnNavigationListener {
+    boolean onNavigationItemSelected(int i, long j);
+  }
 
-    @Deprecated
-    public static abstract class Tab {
-        public static final int INVALID_POSITION = -1;
+  @Deprecated
+  public abstract static class Tab {
+    public static final int INVALID_POSITION = -1;
 
-        public abstract CharSequence getContentDescription();
-
-        public abstract View getCustomView();
-
-        public abstract Drawable getIcon();
-
-        public abstract int getPosition();
-
-        public abstract Object getTag();
-
-        public abstract CharSequence getText();
-
-        public abstract void select();
-
-        public abstract Tab setContentDescription(int i);
-
-        public abstract Tab setContentDescription(CharSequence charSequence);
-
-        public abstract Tab setCustomView(int i);
-
-        public abstract Tab setCustomView(View view);
-
-        public abstract Tab setIcon(int i);
-
-        public abstract Tab setIcon(Drawable drawable);
-
-        public abstract Tab setTabListener(TabListener tabListener);
-
-        public abstract Tab setTag(Object obj);
-
-        public abstract Tab setText(int i);
-
-        public abstract Tab setText(CharSequence charSequence);
-    }
-
-    @Deprecated
-    public interface TabListener {
-        void onTabReselected(Tab tab, FragmentTransaction fragmentTransaction);
-
-        void onTabSelected(Tab tab, FragmentTransaction fragmentTransaction);
-
-        void onTabUnselected(Tab tab, FragmentTransaction fragmentTransaction);
-    }
-
-    public abstract void addOnMenuVisibilityListener(OnMenuVisibilityListener onMenuVisibilityListener);
-
-    @Deprecated
-    public abstract void addTab(Tab tab);
-
-    @Deprecated
-    public abstract void addTab(Tab tab, int i);
-
-    @Deprecated
-    public abstract void addTab(Tab tab, int i, boolean z);
-
-    @Deprecated
-    public abstract void addTab(Tab tab, boolean z);
+    public abstract CharSequence getContentDescription();
 
     public abstract View getCustomView();
 
-    public abstract int getDisplayOptions();
+    public abstract Drawable getIcon();
 
-    public abstract int getHeight();
+    public abstract int getPosition();
 
-    @Deprecated
-    public abstract int getNavigationItemCount();
+    public abstract Object getTag();
 
-    @Deprecated
-    public abstract int getNavigationMode();
+    public abstract CharSequence getText();
 
-    @Deprecated
-    public abstract int getSelectedNavigationIndex();
+    public abstract void select();
 
-    @Deprecated
-    public abstract Tab getSelectedTab();
+    public abstract Tab setContentDescription(int i);
 
-    public abstract CharSequence getSubtitle();
+    public abstract Tab setContentDescription(CharSequence charSequence);
 
-    @Deprecated
-    public abstract Tab getTabAt(int i);
+    public abstract Tab setCustomView(int i);
 
-    @Deprecated
-    public abstract int getTabCount();
+    public abstract Tab setCustomView(View view);
 
-    public abstract CharSequence getTitle();
+    public abstract Tab setIcon(int i);
 
-    public abstract void hide();
+    public abstract Tab setIcon(Drawable drawable);
 
-    public abstract boolean isShowing();
+    public abstract Tab setTabListener(TabListener tabListener);
 
-    @Deprecated
-    public abstract Tab newTab();
+    public abstract Tab setTag(Object obj);
 
-    @Deprecated
-    public abstract void removeAllTabs();
+    public abstract Tab setText(int i);
 
-    public abstract void removeOnMenuVisibilityListener(OnMenuVisibilityListener onMenuVisibilityListener);
+    public abstract Tab setText(CharSequence charSequence);
+  }
 
-    @Deprecated
-    public abstract void removeTab(Tab tab);
+  @Deprecated
+  public interface TabListener {
+    void onTabReselected(Tab tab, FragmentTransaction fragmentTransaction);
 
-    @Deprecated
-    public abstract void removeTabAt(int i);
+    void onTabSelected(Tab tab, FragmentTransaction fragmentTransaction);
 
-    @Deprecated
-    public abstract void selectTab(Tab tab);
+    void onTabUnselected(Tab tab, FragmentTransaction fragmentTransaction);
+  }
 
-    public abstract void setBackgroundDrawable(Drawable drawable);
+  public abstract void addOnMenuVisibilityListener(
+      OnMenuVisibilityListener onMenuVisibilityListener);
 
-    public abstract void setCustomView(int i);
+  @Deprecated
+  public abstract void addTab(Tab tab);
 
-    public abstract void setCustomView(View view);
+  @Deprecated
+  public abstract void addTab(Tab tab, int i);
 
-    public abstract void setCustomView(View view, LayoutParams layoutParams);
+  @Deprecated
+  public abstract void addTab(Tab tab, int i, boolean z);
 
-    public abstract void setDisplayHomeAsUpEnabled(boolean z);
+  @Deprecated
+  public abstract void addTab(Tab tab, boolean z);
 
-    public abstract void setDisplayOptions(int i);
+  public abstract View getCustomView();
 
-    public abstract void setDisplayOptions(int i, int i2);
+  public abstract int getDisplayOptions();
 
-    public abstract void setDisplayShowCustomEnabled(boolean z);
+  public abstract int getHeight();
 
-    public abstract void setDisplayShowHomeEnabled(boolean z);
+  @Deprecated
+  public abstract int getNavigationItemCount();
 
-    public abstract void setDisplayShowTitleEnabled(boolean z);
+  @Deprecated
+  public abstract int getNavigationMode();
 
-    public abstract void setDisplayUseLogoEnabled(boolean z);
+  @Deprecated
+  public abstract int getSelectedNavigationIndex();
 
-    public abstract void setIcon(int i);
+  @Deprecated
+  public abstract Tab getSelectedTab();
 
-    public abstract void setIcon(Drawable drawable);
+  public abstract CharSequence getSubtitle();
 
-    @Deprecated
-    public abstract void setListNavigationCallbacks(SpinnerAdapter spinnerAdapter, OnNavigationListener onNavigationListener);
+  @Deprecated
+  public abstract Tab getTabAt(int i);
 
-    public abstract void setLogo(int i);
+  @Deprecated
+  public abstract int getTabCount();
 
-    public abstract void setLogo(Drawable drawable);
+  public abstract CharSequence getTitle();
 
-    @Deprecated
-    public abstract void setNavigationMode(int i);
+  public abstract void hide();
 
-    @Deprecated
-    public abstract void setSelectedNavigationItem(int i);
+  public abstract boolean isShowing();
 
-    public abstract void setSubtitle(int i);
+  @Deprecated
+  public abstract Tab newTab();
 
-    public abstract void setSubtitle(CharSequence charSequence);
+  @Deprecated
+  public abstract void removeAllTabs();
 
-    public abstract void setTitle(int i);
+  public abstract void removeOnMenuVisibilityListener(
+      OnMenuVisibilityListener onMenuVisibilityListener);
 
-    public abstract void setTitle(CharSequence charSequence);
+  @Deprecated
+  public abstract void removeTab(Tab tab);
 
-    public abstract void show();
+  @Deprecated
+  public abstract void removeTabAt(int i);
 
-    public static class LayoutParams extends ViewGroup.MarginLayoutParams {
+  @Deprecated
+  public abstract void selectTab(Tab tab);
 
-        @ViewDebug.ExportedProperty(category = TtmlUtils.TAG_LAYOUT, mapping = {@ViewDebug.IntToString(from = -1, m158to = KeyProperties.DIGEST_NONE), @ViewDebug.IntToString(from = 0, m158to = KeyProperties.DIGEST_NONE), @ViewDebug.IntToString(from = 48, m158to = "TOP"), @ViewDebug.IntToString(from = 80, m158to = "BOTTOM"), @ViewDebug.IntToString(from = 3, m158to = "LEFT"), @ViewDebug.IntToString(from = 5, m158to = "RIGHT"), @ViewDebug.IntToString(from = Gravity.START, m158to = "START"), @ViewDebug.IntToString(from = Gravity.END, m158to = "END"), @ViewDebug.IntToString(from = 16, m158to = "CENTER_VERTICAL"), @ViewDebug.IntToString(from = 112, m158to = "FILL_VERTICAL"), @ViewDebug.IntToString(from = 1, m158to = "CENTER_HORIZONTAL"), @ViewDebug.IntToString(from = 7, m158to = "FILL_HORIZONTAL"), @ViewDebug.IntToString(from = 17, m158to = "CENTER"), @ViewDebug.IntToString(from = 119, m158to = "FILL")})
-        public int gravity;
+  public abstract void setBackgroundDrawable(Drawable drawable);
 
-        public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<LayoutParams> {
-            private int mLayout_gravityId;
-            private boolean mPropertiesMapped = false;
+  public abstract void setCustomView(int i);
 
-            @Override // android.view.inspector.InspectionCompanion
-            public void mapProperties(PropertyMapper propertyMapper) {
-                this.mLayout_gravityId = propertyMapper.mapGravity("layout_gravity", 16842931);
-                this.mPropertiesMapped = true;
-            }
+  public abstract void setCustomView(View view);
 
-            @Override // android.view.inspector.InspectionCompanion
-            public void readProperties(LayoutParams node, PropertyReader propertyReader) {
-                if (!this.mPropertiesMapped) {
-                    throw new InspectionCompanion.UninitializedPropertyMapException();
-                }
-                propertyReader.readGravity(this.mLayout_gravityId, node.gravity);
-            }
+  public abstract void setCustomView(View view, LayoutParams layoutParams);
+
+  public abstract void setDisplayHomeAsUpEnabled(boolean z);
+
+  public abstract void setDisplayOptions(int i);
+
+  public abstract void setDisplayOptions(int i, int i2);
+
+  public abstract void setDisplayShowCustomEnabled(boolean z);
+
+  public abstract void setDisplayShowHomeEnabled(boolean z);
+
+  public abstract void setDisplayShowTitleEnabled(boolean z);
+
+  public abstract void setDisplayUseLogoEnabled(boolean z);
+
+  public abstract void setIcon(int i);
+
+  public abstract void setIcon(Drawable drawable);
+
+  @Deprecated
+  public abstract void setListNavigationCallbacks(
+      SpinnerAdapter spinnerAdapter, OnNavigationListener onNavigationListener);
+
+  public abstract void setLogo(int i);
+
+  public abstract void setLogo(Drawable drawable);
+
+  @Deprecated
+  public abstract void setNavigationMode(int i);
+
+  @Deprecated
+  public abstract void setSelectedNavigationItem(int i);
+
+  public abstract void setSubtitle(int i);
+
+  public abstract void setSubtitle(CharSequence charSequence);
+
+  public abstract void setTitle(int i);
+
+  public abstract void setTitle(CharSequence charSequence);
+
+  public abstract void show();
+
+  public static class LayoutParams extends ViewGroup.MarginLayoutParams {
+
+    @ViewDebug.ExportedProperty(
+        category = TtmlUtils.TAG_LAYOUT,
+        mapping = {
+          @ViewDebug.IntToString(from = -1, m158to = KeyProperties.DIGEST_NONE),
+          @ViewDebug.IntToString(from = 0, m158to = KeyProperties.DIGEST_NONE),
+          @ViewDebug.IntToString(from = 48, m158to = "TOP"),
+          @ViewDebug.IntToString(from = 80, m158to = "BOTTOM"),
+          @ViewDebug.IntToString(from = 3, m158to = "LEFT"),
+          @ViewDebug.IntToString(from = 5, m158to = "RIGHT"),
+          @ViewDebug.IntToString(from = Gravity.START, m158to = "START"),
+          @ViewDebug.IntToString(from = Gravity.END, m158to = "END"),
+          @ViewDebug.IntToString(from = 16, m158to = "CENTER_VERTICAL"),
+          @ViewDebug.IntToString(from = 112, m158to = "FILL_VERTICAL"),
+          @ViewDebug.IntToString(from = 1, m158to = "CENTER_HORIZONTAL"),
+          @ViewDebug.IntToString(from = 7, m158to = "FILL_HORIZONTAL"),
+          @ViewDebug.IntToString(from = 17, m158to = "CENTER"),
+          @ViewDebug.IntToString(from = 119, m158to = "FILL")
+        })
+    public int gravity;
+
+    public final class InspectionCompanion
+        implements android.view.inspector.InspectionCompanion<LayoutParams> {
+      private int mLayout_gravityId;
+      private boolean mPropertiesMapped = false;
+
+      @Override // android.view.inspector.InspectionCompanion
+      public void mapProperties(PropertyMapper propertyMapper) {
+        this.mLayout_gravityId = propertyMapper.mapGravity("layout_gravity", 16842931);
+        this.mPropertiesMapped = true;
+      }
+
+      @Override // android.view.inspector.InspectionCompanion
+      public void readProperties(LayoutParams node, PropertyReader propertyReader) {
+        if (!this.mPropertiesMapped) {
+          throw new InspectionCompanion.UninitializedPropertyMapException();
         }
-
-        public LayoutParams(Context c, AttributeSet attrs) {
-            super(c, attrs);
-            this.gravity = 0;
-            TypedArray a = c.obtainStyledAttributes(attrs, C4337R.styleable.ActionBar_LayoutParams);
-            this.gravity = a.getInt(0, 0);
-            a.recycle();
-        }
-
-        public LayoutParams(int width, int height) {
-            super(width, height);
-            this.gravity = 0;
-            this.gravity = 8388627;
-        }
-
-        public LayoutParams(int width, int height, int gravity) {
-            super(width, height);
-            this.gravity = 0;
-            this.gravity = gravity;
-        }
-
-        public LayoutParams(int gravity) {
-            this(-2, -1, gravity);
-        }
-
-        public LayoutParams(LayoutParams source) {
-            super((ViewGroup.MarginLayoutParams) source);
-            this.gravity = 0;
-            this.gravity = source.gravity;
-        }
-
-        public LayoutParams(ViewGroup.LayoutParams source) {
-            super(source);
-            this.gravity = 0;
-        }
-
-        @Override // android.view.ViewGroup.MarginLayoutParams, android.view.ViewGroup.LayoutParams
-        protected void encodeProperties(ViewHierarchyEncoder encoder) {
-            super.encodeProperties(encoder);
-            encoder.addProperty("gravity", this.gravity);
-        }
+        propertyReader.readGravity(this.mLayout_gravityId, node.gravity);
+      }
     }
 
-    public void setStackedBackgroundDrawable(Drawable d) {
+    public LayoutParams(Context c, AttributeSet attrs) {
+      super(c, attrs);
+      this.gravity = 0;
+      TypedArray a = c.obtainStyledAttributes(attrs, C4337R.styleable.ActionBar_LayoutParams);
+      this.gravity = a.getInt(0, 0);
+      a.recycle();
     }
 
-    public void setSplitBackgroundDrawable(Drawable d) {
+    public LayoutParams(int width, int height) {
+      super(width, height);
+      this.gravity = 0;
+      this.gravity = 8388627;
     }
 
-    public void setHomeButtonEnabled(boolean enabled) {
+    public LayoutParams(int width, int height, int gravity) {
+      super(width, height);
+      this.gravity = 0;
+      this.gravity = gravity;
     }
 
-    public Context getThemedContext() {
-        return null;
+    public LayoutParams(int gravity) {
+      this(-2, -1, gravity);
     }
 
-    public boolean isTitleTruncated() {
-        return false;
+    public LayoutParams(LayoutParams source) {
+      super((ViewGroup.MarginLayoutParams) source);
+      this.gravity = 0;
+      this.gravity = source.gravity;
     }
 
-    public void setHomeAsUpIndicator(Drawable indicator) {
+    public LayoutParams(ViewGroup.LayoutParams source) {
+      super(source);
+      this.gravity = 0;
     }
 
-    public void setHomeAsUpIndicator(int resId) {
+    @Override // android.view.ViewGroup.MarginLayoutParams, android.view.ViewGroup.LayoutParams
+    protected void encodeProperties(ViewHierarchyEncoder encoder) {
+      super.encodeProperties(encoder);
+      encoder.addProperty("gravity", this.gravity);
     }
+  }
 
-    public void setHomeActionContentDescription(CharSequence description) {
-    }
+  public void setStackedBackgroundDrawable(Drawable d) {}
 
-    public void setHomeActionContentDescription(int resId) {
-    }
+  public void setSplitBackgroundDrawable(Drawable d) {}
 
-    public void setHideOnContentScrollEnabled(boolean hideOnContentScroll) {
-        if (hideOnContentScroll) {
-            throw new UnsupportedOperationException("Hide on content scroll is not supported in this action bar configuration.");
-        }
-    }
+  public void setHomeButtonEnabled(boolean enabled) {}
 
-    public boolean isHideOnContentScrollEnabled() {
-        return false;
-    }
+  public Context getThemedContext() {
+    return null;
+  }
 
-    public int getHideOffset() {
-        return 0;
-    }
+  public boolean isTitleTruncated() {
+    return false;
+  }
 
-    public void setHideOffset(int offset) {
-        if (offset != 0) {
-            throw new UnsupportedOperationException("Setting an explicit action bar hide offset is not supported in this action bar configuration.");
-        }
-    }
+  public void setHomeAsUpIndicator(Drawable indicator) {}
 
-    public void setElevation(float elevation) {
-        if (elevation != 0.0f) {
-            throw new UnsupportedOperationException("Setting a non-zero elevation is not supported in this action bar configuration.");
-        }
-    }
+  public void setHomeAsUpIndicator(int resId) {}
 
-    public float getElevation() {
-        return 0.0f;
-    }
+  public void setHomeActionContentDescription(CharSequence description) {}
 
-    public void setDefaultDisplayHomeAsUpEnabled(boolean enabled) {
-    }
+  public void setHomeActionContentDescription(int resId) {}
 
-    public void setShowHideAnimationEnabled(boolean enabled) {
+  public void setHideOnContentScrollEnabled(boolean hideOnContentScroll) {
+    if (hideOnContentScroll) {
+      throw new UnsupportedOperationException(
+          "Hide on content scroll is not supported in this action bar configuration.");
     }
+  }
 
-    public void onConfigurationChanged(Configuration config) {
-    }
+  public boolean isHideOnContentScrollEnabled() {
+    return false;
+  }
 
-    public void dispatchMenuVisibilityChanged(boolean visible) {
-    }
+  public int getHideOffset() {
+    return 0;
+  }
 
-    public ActionMode startActionMode(ActionMode.Callback callback) {
-        return null;
+  public void setHideOffset(int offset) {
+    if (offset != 0) {
+      throw new UnsupportedOperationException(
+          "Setting an explicit action bar hide offset is not supported in this action bar"
+              + " configuration.");
     }
+  }
 
-    public boolean openOptionsMenu() {
-        return false;
+  public void setElevation(float elevation) {
+    if (elevation != 0.0f) {
+      throw new UnsupportedOperationException(
+          "Setting a non-zero elevation is not supported in this action bar configuration.");
     }
+  }
 
-    public boolean closeOptionsMenu() {
-        return false;
-    }
+  public float getElevation() {
+    return 0.0f;
+  }
 
-    public boolean invalidateOptionsMenu() {
-        return false;
-    }
+  public void setDefaultDisplayHomeAsUpEnabled(boolean enabled) {}
 
-    public boolean onMenuKeyEvent(KeyEvent event) {
-        return false;
-    }
+  public void setShowHideAnimationEnabled(boolean enabled) {}
 
-    public boolean onKeyShortcut(int keyCode, KeyEvent event) {
-        return false;
-    }
+  public void onConfigurationChanged(Configuration config) {}
 
-    public boolean collapseActionView() {
-        return false;
-    }
+  public void dispatchMenuVisibilityChanged(boolean visible) {}
 
-    public void setWindowTitle(CharSequence title) {
-    }
+  public ActionMode startActionMode(ActionMode.Callback callback) {
+    return null;
+  }
 
-    public void onDestroy() {
-    }
+  public boolean openOptionsMenu() {
+    return false;
+  }
 
-    public void semInvalidateOverflowButtonBadge(int mode) {
-    }
+  public boolean closeOptionsMenu() {
+    return false;
+  }
+
+  public boolean invalidateOptionsMenu() {
+    return false;
+  }
+
+  public boolean onMenuKeyEvent(KeyEvent event) {
+    return false;
+  }
+
+  public boolean onKeyShortcut(int keyCode, KeyEvent event) {
+    return false;
+  }
+
+  public boolean collapseActionView() {
+    return false;
+  }
+
+  public void setWindowTitle(CharSequence title) {}
+
+  public void onDestroy() {}
+
+  public void semInvalidateOverflowButtonBadge(int mode) {}
 }

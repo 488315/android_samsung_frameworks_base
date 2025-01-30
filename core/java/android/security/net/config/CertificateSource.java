@@ -5,13 +5,13 @@ import java.util.Set;
 
 /* loaded from: classes3.dex */
 public interface CertificateSource {
-    Set<X509Certificate> findAllByIssuerAndSignature(X509Certificate x509Certificate);
+  Set<X509Certificate> findAllByIssuerAndSignature(X509Certificate x509Certificate);
 
-    X509Certificate findByIssuerAndSignature(X509Certificate x509Certificate);
+  X509Certificate findByIssuerAndSignature(X509Certificate x509Certificate);
 
-    X509Certificate findBySubjectAndPublicKey(X509Certificate x509Certificate);
+  X509Certificate findBySubjectAndPublicKey(X509Certificate x509Certificate);
 
-    Set<X509Certificate> getCertificates();
+  Set<X509Certificate> getCertificates();
 
-    void handleTrustStorageUpdate();
+  void handleTrustStorageUpdate();
 }

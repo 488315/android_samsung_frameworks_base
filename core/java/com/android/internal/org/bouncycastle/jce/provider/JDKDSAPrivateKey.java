@@ -23,108 +23,125 @@ import java.util.Enumeration;
 
 /* loaded from: classes5.dex */
 public class JDKDSAPrivateKey implements DSAPrivateKey, PKCS12BagAttributeCarrier {
-    private static final long serialVersionUID = -4677259546958385734L;
-    private PKCS12BagAttributeCarrierImpl attrCarrier = new PKCS12BagAttributeCarrierImpl();
-    DSAParams dsaSpec;
+  private static final long serialVersionUID = -4677259546958385734L;
+  private PKCS12BagAttributeCarrierImpl attrCarrier = new PKCS12BagAttributeCarrierImpl();
+  DSAParams dsaSpec;
 
-    /* renamed from: x */
-    BigInteger f916x;
+  /* renamed from: x */
+  BigInteger f916x;
 
-    protected JDKDSAPrivateKey() {
+  protected JDKDSAPrivateKey() {}
+
+  JDKDSAPrivateKey(DSAPrivateKey key) {
+    this.f916x = key.getX();
+    this.dsaSpec = key.getParams();
+  }
+
+  JDKDSAPrivateKey(DSAPrivateKeySpec spec) {
+    this.f916x = spec.getX();
+    this.dsaSpec = new DSAParameterSpec(spec.getP(), spec.getQ(), spec.getG());
+  }
+
+  JDKDSAPrivateKey(PrivateKeyInfo info) throws IOException {
+    DSAParameter params = DSAParameter.getInstance(info.getPrivateKeyAlgorithm().getParameters());
+    ASN1Integer derX = ASN1Integer.getInstance(info.parsePrivateKey());
+    this.f916x = derX.getValue();
+    this.dsaSpec = new DSAParameterSpec(params.getP(), params.getQ(), params.getG());
+  }
+
+  JDKDSAPrivateKey(DSAPrivateKeyParameters params) {
+    this.f916x = params.getX();
+    this.dsaSpec =
+        new DSAParameterSpec(
+            params.getParameters().getP(),
+            params.getParameters().getQ(),
+            params.getParameters().getG());
+  }
+
+  @Override // java.security.Key
+  public String getAlgorithm() {
+    return "DSA";
+  }
+
+  @Override // java.security.Key
+  public String getFormat() {
+    return "PKCS#8";
+  }
+
+  @Override // java.security.Key
+  public byte[] getEncoded() {
+    try {
+      PrivateKeyInfo info =
+          new PrivateKeyInfo(
+              new AlgorithmIdentifier(
+                  X9ObjectIdentifiers.id_dsa,
+                  new DSAParameter(this.dsaSpec.getP(), this.dsaSpec.getQ(), this.dsaSpec.getG())),
+              new ASN1Integer(getX()));
+      return info.getEncoded(ASN1Encoding.DER);
+    } catch (IOException e) {
+      return null;
     }
+  }
 
-    JDKDSAPrivateKey(DSAPrivateKey key) {
-        this.f916x = key.getX();
-        this.dsaSpec = key.getParams();
-    }
+  @Override // java.security.interfaces.DSAKey
+  public DSAParams getParams() {
+    return this.dsaSpec;
+  }
 
-    JDKDSAPrivateKey(DSAPrivateKeySpec spec) {
-        this.f916x = spec.getX();
-        this.dsaSpec = new DSAParameterSpec(spec.getP(), spec.getQ(), spec.getG());
-    }
+  @Override // java.security.interfaces.DSAPrivateKey
+  public BigInteger getX() {
+    return this.f916x;
+  }
 
-    JDKDSAPrivateKey(PrivateKeyInfo info) throws IOException {
-        DSAParameter params = DSAParameter.getInstance(info.getPrivateKeyAlgorithm().getParameters());
-        ASN1Integer derX = ASN1Integer.getInstance(info.parsePrivateKey());
-        this.f916x = derX.getValue();
-        this.dsaSpec = new DSAParameterSpec(params.getP(), params.getQ(), params.getG());
+  public boolean equals(Object o) {
+    if (!(o instanceof DSAPrivateKey)) {
+      return false;
     }
+    DSAPrivateKey other = (DSAPrivateKey) o;
+    return getX().equals(other.getX())
+        && getParams().getG().equals(other.getParams().getG())
+        && getParams().getP().equals(other.getParams().getP())
+        && getParams().getQ().equals(other.getParams().getQ());
+  }
 
-    JDKDSAPrivateKey(DSAPrivateKeyParameters params) {
-        this.f916x = params.getX();
-        this.dsaSpec = new DSAParameterSpec(params.getParameters().getP(), params.getParameters().getQ(), params.getParameters().getG());
-    }
+  public int hashCode() {
+    return ((getX().hashCode() ^ getParams().getG().hashCode()) ^ getParams().getP().hashCode())
+        ^ getParams().getQ().hashCode();
+  }
 
-    @Override // java.security.Key
-    public String getAlgorithm() {
-        return "DSA";
-    }
+  @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
+  public void setBagAttribute(ASN1ObjectIdentifier oid, ASN1Encodable attribute) {
+    this.attrCarrier.setBagAttribute(oid, attribute);
+  }
 
-    @Override // java.security.Key
-    public String getFormat() {
-        return "PKCS#8";
-    }
+  @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
+  public ASN1Encodable getBagAttribute(ASN1ObjectIdentifier oid) {
+    return this.attrCarrier.getBagAttribute(oid);
+  }
 
-    @Override // java.security.Key
-    public byte[] getEncoded() {
-        try {
-            PrivateKeyInfo info = new PrivateKeyInfo(new AlgorithmIdentifier(X9ObjectIdentifiers.id_dsa, new DSAParameter(this.dsaSpec.getP(), this.dsaSpec.getQ(), this.dsaSpec.getG())), new ASN1Integer(getX()));
-            return info.getEncoded(ASN1Encoding.DER);
-        } catch (IOException e) {
-            return null;
-        }
-    }
+  @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
+  public Enumeration getBagAttributeKeys() {
+    return this.attrCarrier.getBagAttributeKeys();
+  }
 
-    @Override // java.security.interfaces.DSAKey
-    public DSAParams getParams() {
-        return this.dsaSpec;
-    }
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    this.f916x = (BigInteger) in.readObject();
+    this.dsaSpec =
+        new DSAParameterSpec(
+            (BigInteger) in.readObject(),
+            (BigInteger) in.readObject(),
+            (BigInteger) in.readObject());
+    PKCS12BagAttributeCarrierImpl pKCS12BagAttributeCarrierImpl =
+        new PKCS12BagAttributeCarrierImpl();
+    this.attrCarrier = pKCS12BagAttributeCarrierImpl;
+    pKCS12BagAttributeCarrierImpl.readObject(in);
+  }
 
-    @Override // java.security.interfaces.DSAPrivateKey
-    public BigInteger getX() {
-        return this.f916x;
-    }
-
-    public boolean equals(Object o) {
-        if (!(o instanceof DSAPrivateKey)) {
-            return false;
-        }
-        DSAPrivateKey other = (DSAPrivateKey) o;
-        return getX().equals(other.getX()) && getParams().getG().equals(other.getParams().getG()) && getParams().getP().equals(other.getParams().getP()) && getParams().getQ().equals(other.getParams().getQ());
-    }
-
-    public int hashCode() {
-        return ((getX().hashCode() ^ getParams().getG().hashCode()) ^ getParams().getP().hashCode()) ^ getParams().getQ().hashCode();
-    }
-
-    @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
-    public void setBagAttribute(ASN1ObjectIdentifier oid, ASN1Encodable attribute) {
-        this.attrCarrier.setBagAttribute(oid, attribute);
-    }
-
-    @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
-    public ASN1Encodable getBagAttribute(ASN1ObjectIdentifier oid) {
-        return this.attrCarrier.getBagAttribute(oid);
-    }
-
-    @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
-    public Enumeration getBagAttributeKeys() {
-        return this.attrCarrier.getBagAttributeKeys();
-    }
-
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-        this.f916x = (BigInteger) in.readObject();
-        this.dsaSpec = new DSAParameterSpec((BigInteger) in.readObject(), (BigInteger) in.readObject(), (BigInteger) in.readObject());
-        PKCS12BagAttributeCarrierImpl pKCS12BagAttributeCarrierImpl = new PKCS12BagAttributeCarrierImpl();
-        this.attrCarrier = pKCS12BagAttributeCarrierImpl;
-        pKCS12BagAttributeCarrierImpl.readObject(in);
-    }
-
-    private void writeObject(ObjectOutputStream out) throws IOException {
-        out.writeObject(this.f916x);
-        out.writeObject(this.dsaSpec.getP());
-        out.writeObject(this.dsaSpec.getQ());
-        out.writeObject(this.dsaSpec.getG());
-        this.attrCarrier.writeObject(out);
-    }
+  private void writeObject(ObjectOutputStream out) throws IOException {
+    out.writeObject(this.f916x);
+    out.writeObject(this.dsaSpec.getP());
+    out.writeObject(this.dsaSpec.getQ());
+    out.writeObject(this.dsaSpec.getG());
+    this.attrCarrier.writeObject(out);
+  }
 }

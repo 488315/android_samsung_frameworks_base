@@ -4,24 +4,25 @@ import com.android.internal.org.bouncycastle.crypto.params.AsymmetricKeyParamete
 
 /* loaded from: classes5.dex */
 public class AsymmetricCipherKeyPair {
-    private AsymmetricKeyParameter privateParam;
-    private AsymmetricKeyParameter publicParam;
+  private AsymmetricKeyParameter privateParam;
+  private AsymmetricKeyParameter publicParam;
 
-    public AsymmetricCipherKeyPair(AsymmetricKeyParameter publicParam, AsymmetricKeyParameter privateParam) {
-        this.publicParam = publicParam;
-        this.privateParam = privateParam;
-    }
+  public AsymmetricCipherKeyPair(
+      AsymmetricKeyParameter publicParam, AsymmetricKeyParameter privateParam) {
+    this.publicParam = publicParam;
+    this.privateParam = privateParam;
+  }
 
-    public AsymmetricCipherKeyPair(CipherParameters publicParam, CipherParameters privateParam) {
-        this.publicParam = (AsymmetricKeyParameter) publicParam;
-        this.privateParam = (AsymmetricKeyParameter) privateParam;
-    }
+  public AsymmetricCipherKeyPair(CipherParameters publicParam, CipherParameters privateParam) {
+    this.publicParam = (AsymmetricKeyParameter) publicParam;
+    this.privateParam = (AsymmetricKeyParameter) privateParam;
+  }
 
-    public AsymmetricKeyParameter getPublic() {
-        return this.publicParam;
-    }
+  public AsymmetricKeyParameter getPublic() {
+    return this.publicParam;
+  }
 
-    public AsymmetricKeyParameter getPrivate() {
-        return this.privateParam;
-    }
+  public AsymmetricKeyParameter getPrivate() {
+    return this.privateParam;
+  }
 }

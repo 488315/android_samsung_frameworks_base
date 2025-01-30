@@ -5,7 +5,7 @@ import android.annotation.SystemApi;
 @SystemApi
 /* loaded from: classes2.dex */
 public interface SharedFilterCallback {
-    void onFilterEvent(SharedFilter sharedFilter, FilterEvent[] filterEventArr);
+  void onFilterEvent(SharedFilter sharedFilter, FilterEvent[] filterEventArr);
 
-    void onFilterStatusChanged(SharedFilter sharedFilter, int i);
+  void onFilterStatusChanged(SharedFilter sharedFilter, int i);
 }

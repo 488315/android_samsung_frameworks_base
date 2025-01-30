@@ -5,9 +5,9 @@ import com.android.internal.org.bouncycastle.cert.X509CertificateHolder;
 
 /* loaded from: classes5.dex */
 public interface ContentVerifierProvider {
-    ContentVerifier get(AlgorithmIdentifier algorithmIdentifier) throws OperatorCreationException;
+  ContentVerifier get(AlgorithmIdentifier algorithmIdentifier) throws OperatorCreationException;
 
-    X509CertificateHolder getAssociatedCertificate();
+  X509CertificateHolder getAssociatedCertificate();
 
-    boolean hasAssociatedCertificate();
+  boolean hasAssociatedCertificate();
 }

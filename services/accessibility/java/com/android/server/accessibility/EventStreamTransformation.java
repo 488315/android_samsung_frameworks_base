@@ -8,41 +8,39 @@ import java.io.PrintWriter;
 
 /* loaded from: classes.dex */
 public interface EventStreamTransformation {
-    default void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+  default void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {}
+
+  EventStreamTransformation getNext();
+
+  default void onDestroy() {}
+
+  void setNext(EventStreamTransformation eventStreamTransformation);
+
+  default void onMotionEvent(MotionEvent motionEvent, MotionEvent motionEvent2, int i) {
+    EventStreamTransformation next = getNext();
+    if (next != null) {
+      next.onMotionEvent(motionEvent, motionEvent2, i);
     }
+  }
 
-    EventStreamTransformation getNext();
-
-    default void onDestroy() {
+  default void onKeyEvent(KeyEvent keyEvent, int i) {
+    EventStreamTransformation next = getNext();
+    if (next != null) {
+      next.onKeyEvent(keyEvent, i);
     }
+  }
 
-    void setNext(EventStreamTransformation eventStreamTransformation);
-
-    default void onMotionEvent(MotionEvent motionEvent, MotionEvent motionEvent2, int i) {
-        EventStreamTransformation next = getNext();
-        if (next != null) {
-            next.onMotionEvent(motionEvent, motionEvent2, i);
-        }
+  default void onAccessibilityEvent(AccessibilityEvent accessibilityEvent) {
+    EventStreamTransformation next = getNext();
+    if (next != null) {
+      next.onAccessibilityEvent(accessibilityEvent);
     }
+  }
 
-    default void onKeyEvent(KeyEvent keyEvent, int i) {
-        EventStreamTransformation next = getNext();
-        if (next != null) {
-            next.onKeyEvent(keyEvent, i);
-        }
+  default void clearEvents(int i) {
+    EventStreamTransformation next = getNext();
+    if (next != null) {
+      next.clearEvents(i);
     }
-
-    default void onAccessibilityEvent(AccessibilityEvent accessibilityEvent) {
-        EventStreamTransformation next = getNext();
-        if (next != null) {
-            next.onAccessibilityEvent(accessibilityEvent);
-        }
-    }
-
-    default void clearEvents(int i) {
-        EventStreamTransformation next = getNext();
-        if (next != null) {
-            next.clearEvents(i);
-        }
-    }
+  }
 }

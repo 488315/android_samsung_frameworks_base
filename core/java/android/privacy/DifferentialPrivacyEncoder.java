@@ -2,13 +2,13 @@ package android.privacy;
 
 /* loaded from: classes3.dex */
 public interface DifferentialPrivacyEncoder {
-    byte[] encodeBits(byte[] bArr);
+  byte[] encodeBits(byte[] bArr);
 
-    byte[] encodeBoolean(boolean z);
+  byte[] encodeBoolean(boolean z);
 
-    byte[] encodeString(String str);
+  byte[] encodeString(String str);
 
-    DifferentialPrivacyConfig getConfig();
+  DifferentialPrivacyConfig getConfig();
 
-    boolean isInsecureEncoderForTest();
+  boolean isInsecureEncoderForTest();
 }

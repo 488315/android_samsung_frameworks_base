@@ -11,26 +11,26 @@ import java.util.Set;
 
 /* loaded from: classes2.dex */
 public class HarmfulDigests {
-    public final Set mDigestSet;
+  public final Set mDigestSet;
 
-    public HarmfulDigests(List list) {
-        HashSet hashSet = new HashSet();
-        int size = list.size();
-        for (int i = 0; i < size; i++) {
-            hashSet.add(HexDump.toHexString((byte[]) list.get(i)));
-        }
-        this.mDigestSet = Collections.unmodifiableSet(hashSet);
+  public HarmfulDigests(List list) {
+    HashSet hashSet = new HashSet();
+    int size = list.size();
+    for (int i = 0; i < size; i++) {
+      hashSet.add(HexDump.toHexString((byte[]) list.get(i)));
     }
+    this.mDigestSet = Collections.unmodifiableSet(hashSet);
+  }
 
-    public boolean contains(byte[] bArr) {
-        return this.mDigestSet.contains(HexDump.toHexString(bArr));
-    }
+  public boolean contains(byte[] bArr) {
+    return this.mDigestSet.contains(HexDump.toHexString(bArr));
+  }
 
-    public void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
-        Iterator it = this.mDigestSet.iterator();
-        while (it.hasNext()) {
-            printWriter.println((String) it.next());
-        }
-        printWriter.println("");
+  public void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+    Iterator it = this.mDigestSet.iterator();
+    while (it.hasNext()) {
+      printWriter.println((String) it.next());
     }
+    printWriter.println("");
+  }
 }

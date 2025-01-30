@@ -9,8 +9,6 @@ import android.p009os.IBinder;
 import android.p009os.Looper;
 import android.p009os.Message;
 import android.p009os.RemoteException;
-import android.service.dreams.IDreamOverlay;
-import android.service.dreams.IDreamOverlayClientCallback;
 import android.util.Log;
 import com.android.internal.util.ObservableServiceConnection;
 import com.android.internal.util.PersistentServiceConnection;
@@ -22,139 +20,174 @@ import java.util.function.Consumer;
 
 /* loaded from: classes3.dex */
 public final class DreamOverlayConnectionHandler {
-    private static final int MSG_ADD_CONSUMER = 1;
-    private static final int MSG_OVERLAY_CLIENT_READY = 3;
-    private static final int MSG_REMOVE_CONSUMER = 2;
-    private static final String TAG = "DreamOverlayConnection";
-    private final OverlayConnectionCallback mCallback;
-    private IDreamOverlayClient mClient;
-    private final PersistentServiceConnection<IDreamOverlay> mConnection;
-    private final List<Consumer<IDreamOverlayClient>> mConsumers;
-    private final Handler mHandler;
+  private static final int MSG_ADD_CONSUMER = 1;
+  private static final int MSG_OVERLAY_CLIENT_READY = 3;
+  private static final int MSG_REMOVE_CONSUMER = 2;
+  private static final String TAG = "DreamOverlayConnection";
+  private final OverlayConnectionCallback mCallback;
+  private IDreamOverlayClient mClient;
+  private final PersistentServiceConnection<IDreamOverlay> mConnection;
+  private final List<Consumer<IDreamOverlayClient>> mConsumers;
+  private final Handler mHandler;
 
-    DreamOverlayConnectionHandler(Context context, Looper looper, Intent serviceIntent, int minConnectionDurationMs, int maxReconnectAttempts, int baseReconnectDelayMs) {
-        this(context, looper, serviceIntent, minConnectionDurationMs, maxReconnectAttempts, baseReconnectDelayMs, new Injector());
+  DreamOverlayConnectionHandler(
+      Context context,
+      Looper looper,
+      Intent serviceIntent,
+      int minConnectionDurationMs,
+      int maxReconnectAttempts,
+      int baseReconnectDelayMs) {
+    this(
+        context,
+        looper,
+        serviceIntent,
+        minConnectionDurationMs,
+        maxReconnectAttempts,
+        baseReconnectDelayMs,
+        new Injector());
+  }
+
+  /* JADX WARN: Multi-variable type inference failed */
+  public DreamOverlayConnectionHandler(
+      Context context, Looper looper, Intent intent, int i, int i2, int i3, Injector injector) {
+    this.mConsumers = new ArrayList();
+    this.mCallback = new OverlayConnectionCallback();
+    Handler handler = new Handler(looper, new OverlayHandlerCallback());
+    this.mHandler = handler;
+    this.mConnection = injector.buildConnection(context, handler, intent, i, i2, i3);
+  }
+
+  public boolean bind() {
+    this.mConnection.addCallback(this.mCallback);
+    boolean success = this.mConnection.bind();
+    if (!success) {
+      unbind();
     }
+    return success;
+  }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    public DreamOverlayConnectionHandler(Context context, Looper looper, Intent intent, int i, int i2, int i3, Injector injector) {
-        this.mConsumers = new ArrayList();
-        this.mCallback = new OverlayConnectionCallback();
-        Handler handler = new Handler(looper, new OverlayHandlerCallback());
-        this.mHandler = handler;
-        this.mConnection = injector.buildConnection(context, handler, intent, i, i2, i3);
+  public void unbind() {
+    this.mConnection.removeCallback(this.mCallback);
+    this.mHandler.removeCallbacksAndMessages(null);
+    this.mClient = null;
+    this.mConsumers.clear();
+    this.mConnection.unbind();
+  }
+
+  public void addConsumer(Consumer<IDreamOverlayClient> consumer) {
+    Message msg = this.mHandler.obtainMessage(1, consumer);
+    this.mHandler.sendMessage(msg);
+  }
+
+  public void removeConsumer(Consumer<IDreamOverlayClient> consumer) {
+    Message msg = this.mHandler.obtainMessage(2, consumer);
+    this.mHandler.sendMessage(msg);
+    this.mHandler.removeMessages(1, consumer);
+  }
+
+  private final class OverlayHandlerCallback implements Handler.Callback {
+    private OverlayHandlerCallback() {}
+
+    @Override // android.os.Handler.Callback
+    public boolean handleMessage(Message msg) {
+      switch (msg.what) {
+        case 1:
+          DreamOverlayConnectionHandler.this.onAddConsumer((Consumer) msg.obj);
+          break;
+        case 2:
+          DreamOverlayConnectionHandler.this.onRemoveConsumer((Consumer) msg.obj);
+          break;
+        case 3:
+          DreamOverlayConnectionHandler.this.onOverlayClientReady((IDreamOverlayClient) msg.obj);
+          break;
+      }
+      return true;
     }
+  }
 
-    public boolean bind() {
-        this.mConnection.addCallback(this.mCallback);
-        boolean success = this.mConnection.bind();
-        if (!success) {
-            unbind();
-        }
-        return success;
+  /* JADX INFO: Access modifiers changed from: private */
+  public void onOverlayClientReady(IDreamOverlayClient client) {
+    this.mClient = client;
+    for (Consumer<IDreamOverlayClient> consumer : this.mConsumers) {
+      consumer.accept(this.mClient);
     }
+  }
 
-    public void unbind() {
-        this.mConnection.removeCallback(this.mCallback);
-        this.mHandler.removeCallbacksAndMessages(null);
-        this.mClient = null;
-        this.mConsumers.clear();
-        this.mConnection.unbind();
+  /* JADX INFO: Access modifiers changed from: private */
+  public void onAddConsumer(Consumer<IDreamOverlayClient> consumer) {
+    IDreamOverlayClient iDreamOverlayClient = this.mClient;
+    if (iDreamOverlayClient != null) {
+      consumer.accept(iDreamOverlayClient);
     }
+    this.mConsumers.add(consumer);
+  }
 
-    public void addConsumer(Consumer<IDreamOverlayClient> consumer) {
-        Message msg = this.mHandler.obtainMessage(1, consumer);
-        this.mHandler.sendMessage(msg);
-    }
+  /* JADX INFO: Access modifiers changed from: private */
+  public void onRemoveConsumer(Consumer<IDreamOverlayClient> consumer) {
+    this.mConsumers.remove(consumer);
+  }
 
-    public void removeConsumer(Consumer<IDreamOverlayClient> consumer) {
-        Message msg = this.mHandler.obtainMessage(2, consumer);
-        this.mHandler.sendMessage(msg);
-        this.mHandler.removeMessages(1, consumer);
-    }
+  private final class OverlayConnectionCallback
+      implements ObservableServiceConnection.Callback<IDreamOverlay> {
+    private final IDreamOverlayClientCallback mClientCallback;
 
-    private final class OverlayHandlerCallback implements Handler.Callback {
-        private OverlayHandlerCallback() {
-        }
-
-        @Override // android.os.Handler.Callback
-        public boolean handleMessage(Message msg) {
-            switch (msg.what) {
-                case 1:
-                    DreamOverlayConnectionHandler.this.onAddConsumer((Consumer) msg.obj);
-                    break;
-                case 2:
-                    DreamOverlayConnectionHandler.this.onRemoveConsumer((Consumer) msg.obj);
-                    break;
-                case 3:
-                    DreamOverlayConnectionHandler.this.onOverlayClientReady((IDreamOverlayClient) msg.obj);
-                    break;
+    private OverlayConnectionCallback() {
+      this.mClientCallback =
+          new IDreamOverlayClientCallback
+              .Stub() { // from class:
+                        // android.service.dreams.DreamOverlayConnectionHandler.OverlayConnectionCallback.1
+            @Override // android.service.dreams.IDreamOverlayClientCallback
+            public void onDreamOverlayClient(IDreamOverlayClient client) {
+              Message msg = DreamOverlayConnectionHandler.this.mHandler.obtainMessage(3, client);
+              DreamOverlayConnectionHandler.this.mHandler.sendMessage(msg);
             }
-            return true;
-        }
+          };
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    public void onOverlayClientReady(IDreamOverlayClient client) {
-        this.mClient = client;
-        for (Consumer<IDreamOverlayClient> consumer : this.mConsumers) {
-            consumer.accept(this.mClient);
-        }
+    @Override // com.android.internal.util.ObservableServiceConnection.Callback
+    public void onConnected(
+        ObservableServiceConnection<IDreamOverlay> connection, IDreamOverlay service) {
+      try {
+        service.getClient(this.mClientCallback);
+      } catch (RemoteException e) {
+        Log.m97e(DreamOverlayConnectionHandler.TAG, "could not get DreamOverlayClient", e);
+      }
     }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    public void onAddConsumer(Consumer<IDreamOverlayClient> consumer) {
-        IDreamOverlayClient iDreamOverlayClient = this.mClient;
-        if (iDreamOverlayClient != null) {
-            consumer.accept(iDreamOverlayClient);
-        }
-        this.mConsumers.add(consumer);
+    @Override // com.android.internal.util.ObservableServiceConnection.Callback
+    public void onDisconnected(ObservableServiceConnection<IDreamOverlay> connection, int reason) {
+      DreamOverlayConnectionHandler.this.mClient = null;
+      DreamOverlayConnectionHandler.this.mHandler.removeMessages(3);
     }
+  }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    public void onRemoveConsumer(Consumer<IDreamOverlayClient> consumer) {
-        this.mConsumers.remove(consumer);
-    }
-
-    private final class OverlayConnectionCallback implements ObservableServiceConnection.Callback<IDreamOverlay> {
-        private final IDreamOverlayClientCallback mClientCallback;
-
-        private OverlayConnectionCallback() {
-            this.mClientCallback = new IDreamOverlayClientCallback.Stub() { // from class: android.service.dreams.DreamOverlayConnectionHandler.OverlayConnectionCallback.1
-                @Override // android.service.dreams.IDreamOverlayClientCallback
-                public void onDreamOverlayClient(IDreamOverlayClient client) {
-                    Message msg = DreamOverlayConnectionHandler.this.mHandler.obtainMessage(3, client);
-                    DreamOverlayConnectionHandler.this.mHandler.sendMessage(msg);
-                }
-            };
-        }
-
-        @Override // com.android.internal.util.ObservableServiceConnection.Callback
-        public void onConnected(ObservableServiceConnection<IDreamOverlay> connection, IDreamOverlay service) {
-            try {
-                service.getClient(this.mClientCallback);
-            } catch (RemoteException e) {
-                Log.m97e(DreamOverlayConnectionHandler.TAG, "could not get DreamOverlayClient", e);
+  public static class Injector {
+    public PersistentServiceConnection<IDreamOverlay> buildConnection(
+        Context context,
+        Handler handler,
+        Intent serviceIntent,
+        int minConnectionDurationMs,
+        int maxReconnectAttempts,
+        int baseReconnectDelayMs) {
+      Objects.requireNonNull(handler);
+      Executor executor = new MidiManager$$ExternalSyntheticLambda0(handler);
+      return new PersistentServiceConnection<>(
+          context,
+          executor,
+          handler,
+          new ObservableServiceConnection
+              .ServiceTransformer() { // from class:
+                                      // android.service.dreams.DreamOverlayConnectionHandler$Injector$$ExternalSyntheticLambda0
+            @Override // com.android.internal.util.ObservableServiceConnection.ServiceTransformer
+            public final Object convert(IBinder iBinder) {
+              return IDreamOverlay.Stub.asInterface(iBinder);
             }
-        }
-
-        @Override // com.android.internal.util.ObservableServiceConnection.Callback
-        public void onDisconnected(ObservableServiceConnection<IDreamOverlay> connection, int reason) {
-            DreamOverlayConnectionHandler.this.mClient = null;
-            DreamOverlayConnectionHandler.this.mHandler.removeMessages(3);
-        }
+          },
+          serviceIntent,
+          Enums.AUDIO_FORMAT_AAC_MAIN,
+          minConnectionDurationMs,
+          maxReconnectAttempts,
+          baseReconnectDelayMs);
     }
-
-    public static class Injector {
-        public PersistentServiceConnection<IDreamOverlay> buildConnection(Context context, Handler handler, Intent serviceIntent, int minConnectionDurationMs, int maxReconnectAttempts, int baseReconnectDelayMs) {
-            Objects.requireNonNull(handler);
-            Executor executor = new MidiManager$$ExternalSyntheticLambda0(handler);
-            return new PersistentServiceConnection<>(context, executor, handler, new ObservableServiceConnection.ServiceTransformer() { // from class: android.service.dreams.DreamOverlayConnectionHandler$Injector$$ExternalSyntheticLambda0
-                @Override // com.android.internal.util.ObservableServiceConnection.ServiceTransformer
-                public final Object convert(IBinder iBinder) {
-                    return IDreamOverlay.Stub.asInterface(iBinder);
-                }
-            }, serviceIntent, Enums.AUDIO_FORMAT_AAC_MAIN, minConnectionDurationMs, maxReconnectAttempts, baseReconnectDelayMs);
-        }
-    }
+  }
 }

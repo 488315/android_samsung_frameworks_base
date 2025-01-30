@@ -7,53 +7,56 @@ import com.android.internal.inputmethod.IRemoteAccessibilityInputConnection;
 
 /* loaded from: classes.dex */
 public abstract class AccessibilityManagerInternal {
-    public static final AccessibilityManagerInternal NOP = new AccessibilityManagerInternal() { // from class: com.android.server.AccessibilityManagerInternal.1
+  public static final AccessibilityManagerInternal NOP =
+      new AccessibilityManagerInternal() { // from class:
+        // com.android.server.AccessibilityManagerInternal.1
         @Override // com.android.server.AccessibilityManagerInternal
-        public void bindInput() {
-        }
+        public void bindInput() {}
 
         @Override // com.android.server.AccessibilityManagerInternal
-        public void createImeSession(ArraySet arraySet) {
-        }
+        public void createImeSession(ArraySet arraySet) {}
 
         @Override // com.android.server.AccessibilityManagerInternal
         public boolean isTouchExplorationEnabled(int i) {
-            return false;
+          return false;
         }
 
         @Override // com.android.server.AccessibilityManagerInternal
-        public void performSystemAction(int i) {
-        }
+        public void performSystemAction(int i) {}
 
         @Override // com.android.server.AccessibilityManagerInternal
-        public void setImeSessionEnabled(SparseArray sparseArray, boolean z) {
-        }
+        public void setImeSessionEnabled(SparseArray sparseArray, boolean z) {}
 
         @Override // com.android.server.AccessibilityManagerInternal
-        public void startInput(IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection, EditorInfo editorInfo, boolean z) {
-        }
+        public void startInput(
+            IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection,
+            EditorInfo editorInfo,
+            boolean z) {}
 
         @Override // com.android.server.AccessibilityManagerInternal
-        public void unbindInput() {
-        }
-    };
+        public void unbindInput() {}
+      };
 
-    public abstract void bindInput();
+  public abstract void bindInput();
 
-    public abstract void createImeSession(ArraySet arraySet);
+  public abstract void createImeSession(ArraySet arraySet);
 
-    public abstract boolean isTouchExplorationEnabled(int i);
+  public abstract boolean isTouchExplorationEnabled(int i);
 
-    public abstract void performSystemAction(int i);
+  public abstract void performSystemAction(int i);
 
-    public abstract void setImeSessionEnabled(SparseArray sparseArray, boolean z);
+  public abstract void setImeSessionEnabled(SparseArray sparseArray, boolean z);
 
-    public abstract void startInput(IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection, EditorInfo editorInfo, boolean z);
+  public abstract void startInput(
+      IRemoteAccessibilityInputConnection iRemoteAccessibilityInputConnection,
+      EditorInfo editorInfo,
+      boolean z);
 
-    public abstract void unbindInput();
+  public abstract void unbindInput();
 
-    public static AccessibilityManagerInternal get() {
-        AccessibilityManagerInternal accessibilityManagerInternal = (AccessibilityManagerInternal) LocalServices.getService(AccessibilityManagerInternal.class);
-        return accessibilityManagerInternal != null ? accessibilityManagerInternal : NOP;
-    }
+  public static AccessibilityManagerInternal get() {
+    AccessibilityManagerInternal accessibilityManagerInternal =
+        (AccessibilityManagerInternal) LocalServices.getService(AccessibilityManagerInternal.class);
+    return accessibilityManagerInternal != null ? accessibilityManagerInternal : NOP;
+  }
 }

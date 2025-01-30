@@ -22,198 +22,203 @@ import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public abstract class BiometricUserState {
-    public final Context mContext;
-    public final File mFile;
-    public boolean mInvalidationInProgress;
-    public final ArrayList mBiometrics = new ArrayList();
-    public final Runnable mWriteStateRunnable = new Runnable() { // from class: com.android.server.biometrics.sensors.BiometricUserState$$ExternalSyntheticLambda0
+  public final Context mContext;
+  public final File mFile;
+  public boolean mInvalidationInProgress;
+  public final ArrayList mBiometrics = new ArrayList();
+  public final Runnable mWriteStateRunnable =
+      new Runnable() { // from class:
+                       // com.android.server.biometrics.sensors.BiometricUserState$$ExternalSyntheticLambda0
         @Override // java.lang.Runnable
         public final void run() {
-            BiometricUserState.this.doWriteStateInternal();
+          BiometricUserState.this.doWriteStateInternal();
         }
-    };
+      };
 
-    public abstract void doWriteState(TypedXmlSerializer typedXmlSerializer);
+  public abstract void doWriteState(TypedXmlSerializer typedXmlSerializer);
 
-    public abstract String getBiometricsTag();
+  public abstract String getBiometricsTag();
 
-    public abstract ArrayList getCopy(ArrayList arrayList);
+  public abstract ArrayList getCopy(ArrayList arrayList);
 
-    public abstract int getNameTemplateResource();
+  public abstract int getNameTemplateResource();
 
-    public abstract void parseBiometricsLocked(TypedXmlPullParser typedXmlPullParser);
+  public abstract void parseBiometricsLocked(TypedXmlPullParser typedXmlPullParser);
 
-    public final void doWriteStateInternal() {
-        AtomicFile atomicFile = new AtomicFile(this.mFile);
-        FileOutputStream fileOutputStream = null;
+  public final void doWriteStateInternal() {
+    AtomicFile atomicFile = new AtomicFile(this.mFile);
+    FileOutputStream fileOutputStream = null;
+    try {
+      FileOutputStream startWrite = atomicFile.startWrite();
+      try {
+        TypedXmlSerializer resolveSerializer = Xml.resolveSerializer(startWrite);
+        resolveSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
+        resolveSerializer.startDocument((String) null, Boolean.TRUE);
+        resolveSerializer.startTag((String) null, "authenticatorIdInvalidation_tag");
+        resolveSerializer.attributeBoolean(
+            (String) null, "authenticatorIdInvalidation_attr", this.mInvalidationInProgress);
+        resolveSerializer.endTag((String) null, "authenticatorIdInvalidation_tag");
+        doWriteState(resolveSerializer);
+        resolveSerializer.endDocument();
+        atomicFile.finishWrite(startWrite);
+        IoUtils.closeQuietly(startWrite);
+      } catch (Throwable th) {
+        th = th;
+        fileOutputStream = startWrite;
         try {
-            FileOutputStream startWrite = atomicFile.startWrite();
-            try {
-                TypedXmlSerializer resolveSerializer = Xml.resolveSerializer(startWrite);
-                resolveSerializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true);
-                resolveSerializer.startDocument((String) null, Boolean.TRUE);
-                resolveSerializer.startTag((String) null, "authenticatorIdInvalidation_tag");
-                resolveSerializer.attributeBoolean((String) null, "authenticatorIdInvalidation_attr", this.mInvalidationInProgress);
-                resolveSerializer.endTag((String) null, "authenticatorIdInvalidation_tag");
-                doWriteState(resolveSerializer);
-                resolveSerializer.endDocument();
-                atomicFile.finishWrite(startWrite);
-                IoUtils.closeQuietly(startWrite);
-            } catch (Throwable th) {
-                th = th;
-                fileOutputStream = startWrite;
-                try {
-                    Slog.wtf("UserState", "Failed to write settings, restoring backup", th);
-                    atomicFile.failWrite(fileOutputStream);
-                    throw new IllegalStateException("Failed to write to file: " + this.mFile.toString(), th);
-                } catch (Throwable th2) {
-                    IoUtils.closeQuietly(fileOutputStream);
-                    throw th2;
-                }
-            }
-        } catch (Throwable th3) {
-            th = th3;
+          Slog.wtf("UserState", "Failed to write settings, restoring backup", th);
+          atomicFile.failWrite(fileOutputStream);
+          throw new IllegalStateException("Failed to write to file: " + this.mFile.toString(), th);
+        } catch (Throwable th2) {
+          IoUtils.closeQuietly(fileOutputStream);
+          throw th2;
         }
+      }
+    } catch (Throwable th3) {
+      th = th3;
     }
+  }
 
-    public BiometricUserState(Context context, int i, String str) {
-        this.mFile = getFileForUser(i, str);
-        this.mContext = context;
-        synchronized (this) {
-            readStateSyncLocked();
+  public BiometricUserState(Context context, int i, String str) {
+    this.mFile = getFileForUser(i, str);
+    this.mContext = context;
+    synchronized (this) {
+      readStateSyncLocked();
+    }
+  }
+
+  public void setInvalidationInProgress(boolean z) {
+    synchronized (this) {
+      this.mInvalidationInProgress = z;
+      scheduleWriteStateLocked();
+    }
+  }
+
+  public boolean isInvalidationInProgress() {
+    boolean z;
+    synchronized (this) {
+      z = this.mInvalidationInProgress;
+    }
+    return z;
+  }
+
+  public void addBiometric(BiometricAuthenticator.Identifier identifier) {
+    synchronized (this) {
+      this.mBiometrics.add(identifier);
+      scheduleWriteStateLocked();
+    }
+  }
+
+  public void removeBiometric(int i) {
+    synchronized (this) {
+      int i2 = 0;
+      while (true) {
+        if (i2 >= this.mBiometrics.size()) {
+          break;
         }
-    }
-
-    public void setInvalidationInProgress(boolean z) {
-        synchronized (this) {
-            this.mInvalidationInProgress = z;
-            scheduleWriteStateLocked();
+        if (((BiometricAuthenticator.Identifier) this.mBiometrics.get(i2)).getBiometricId() == i) {
+          this.mBiometrics.remove(i2);
+          scheduleWriteStateLocked();
+          break;
         }
+        i2++;
+      }
     }
+  }
 
-    public boolean isInvalidationInProgress() {
-        boolean z;
-        synchronized (this) {
-            z = this.mInvalidationInProgress;
+  public void renameBiometric(int i, CharSequence charSequence) {
+    synchronized (this) {
+      int i2 = 0;
+      while (true) {
+        if (i2 >= this.mBiometrics.size()) {
+          break;
         }
-        return z;
-    }
-
-    public void addBiometric(BiometricAuthenticator.Identifier identifier) {
-        synchronized (this) {
-            this.mBiometrics.add(identifier);
-            scheduleWriteStateLocked();
+        if (((BiometricAuthenticator.Identifier) this.mBiometrics.get(i2)).getBiometricId() == i) {
+          ((BiometricAuthenticator.Identifier) this.mBiometrics.get(i2)).setName(charSequence);
+          scheduleWriteStateLocked();
+          break;
         }
+        i2++;
+      }
     }
+  }
 
-    public void removeBiometric(int i) {
-        synchronized (this) {
-            int i2 = 0;
-            while (true) {
-                if (i2 >= this.mBiometrics.size()) {
-                    break;
-                }
-                if (((BiometricAuthenticator.Identifier) this.mBiometrics.get(i2)).getBiometricId() == i) {
-                    this.mBiometrics.remove(i2);
-                    scheduleWriteStateLocked();
-                    break;
-                }
-                i2++;
-            }
+  public List getBiometrics() {
+    ArrayList copy;
+    synchronized (this) {
+      copy = getCopy(this.mBiometrics);
+    }
+    return copy;
+  }
+
+  public String getUniqueName() {
+    int i = 1;
+    while (true) {
+      String string = this.mContext.getString(getNameTemplateResource(), Integer.valueOf(i));
+      if (isUnique(string)) {
+        return string;
+      }
+      i++;
+    }
+  }
+
+  public final boolean isUnique(String str) {
+    Iterator it = this.mBiometrics.iterator();
+    while (it.hasNext()) {
+      if (((BiometricAuthenticator.Identifier) it.next()).getName().equals(str)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public final File getFileForUser(int i, String str) {
+    return new File(Environment.getUserSystemDirectory(i), str);
+  }
+
+  public final void scheduleWriteStateLocked() {
+    AsyncTask.execute(this.mWriteStateRunnable);
+  }
+
+  public final void readStateSyncLocked() {
+    if (this.mFile.exists()) {
+      try {
+        FileInputStream fileInputStream = new FileInputStream(this.mFile);
+        try {
+          try {
+            parseStateLocked(Xml.resolvePullParser(fileInputStream));
+          } catch (IOException | XmlPullParserException e) {
+            throw new IllegalStateException("Failed parsing settings file: " + this.mFile, e);
+          }
+        } finally {
+          IoUtils.closeQuietly(fileInputStream);
         }
+      } catch (FileNotFoundException unused) {
+        Slog.i("UserState", "No fingerprint state");
+      }
     }
+  }
 
-    public void renameBiometric(int i, CharSequence charSequence) {
-        synchronized (this) {
-            int i2 = 0;
-            while (true) {
-                if (i2 >= this.mBiometrics.size()) {
-                    break;
-                }
-                if (((BiometricAuthenticator.Identifier) this.mBiometrics.get(i2)).getBiometricId() == i) {
-                    ((BiometricAuthenticator.Identifier) this.mBiometrics.get(i2)).setName(charSequence);
-                    scheduleWriteStateLocked();
-                    break;
-                }
-                i2++;
-            }
+  public final void parseStateLocked(TypedXmlPullParser typedXmlPullParser) {
+    int depth = typedXmlPullParser.getDepth();
+    while (true) {
+      int next = typedXmlPullParser.next();
+      if (next == 1) {
+        return;
+      }
+      if (next == 3 && typedXmlPullParser.getDepth() <= depth) {
+        return;
+      }
+      if (next != 3 && next != 4) {
+        String name = typedXmlPullParser.getName();
+        if (name.equals(getBiometricsTag())) {
+          parseBiometricsLocked(typedXmlPullParser);
+        } else if (name.equals("authenticatorIdInvalidation_tag")) {
+          this.mInvalidationInProgress =
+              typedXmlPullParser.getAttributeBoolean(
+                  (String) null, "authenticatorIdInvalidation_attr");
         }
+      }
     }
-
-    public List getBiometrics() {
-        ArrayList copy;
-        synchronized (this) {
-            copy = getCopy(this.mBiometrics);
-        }
-        return copy;
-    }
-
-    public String getUniqueName() {
-        int i = 1;
-        while (true) {
-            String string = this.mContext.getString(getNameTemplateResource(), Integer.valueOf(i));
-            if (isUnique(string)) {
-                return string;
-            }
-            i++;
-        }
-    }
-
-    public final boolean isUnique(String str) {
-        Iterator it = this.mBiometrics.iterator();
-        while (it.hasNext()) {
-            if (((BiometricAuthenticator.Identifier) it.next()).getName().equals(str)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public final File getFileForUser(int i, String str) {
-        return new File(Environment.getUserSystemDirectory(i), str);
-    }
-
-    public final void scheduleWriteStateLocked() {
-        AsyncTask.execute(this.mWriteStateRunnable);
-    }
-
-    public final void readStateSyncLocked() {
-        if (this.mFile.exists()) {
-            try {
-                FileInputStream fileInputStream = new FileInputStream(this.mFile);
-                try {
-                    try {
-                        parseStateLocked(Xml.resolvePullParser(fileInputStream));
-                    } catch (IOException | XmlPullParserException e) {
-                        throw new IllegalStateException("Failed parsing settings file: " + this.mFile, e);
-                    }
-                } finally {
-                    IoUtils.closeQuietly(fileInputStream);
-                }
-            } catch (FileNotFoundException unused) {
-                Slog.i("UserState", "No fingerprint state");
-            }
-        }
-    }
-
-    public final void parseStateLocked(TypedXmlPullParser typedXmlPullParser) {
-        int depth = typedXmlPullParser.getDepth();
-        while (true) {
-            int next = typedXmlPullParser.next();
-            if (next == 1) {
-                return;
-            }
-            if (next == 3 && typedXmlPullParser.getDepth() <= depth) {
-                return;
-            }
-            if (next != 3 && next != 4) {
-                String name = typedXmlPullParser.getName();
-                if (name.equals(getBiometricsTag())) {
-                    parseBiometricsLocked(typedXmlPullParser);
-                } else if (name.equals("authenticatorIdInvalidation_tag")) {
-                    this.mInvalidationInProgress = typedXmlPullParser.getAttributeBoolean((String) null, "authenticatorIdInvalidation_attr");
-                }
-            }
-        }
-    }
+  }
 }

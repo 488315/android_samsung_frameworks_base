@@ -16,62 +16,73 @@ import java.util.function.Consumer;
 
 /* loaded from: classes4.dex */
 public class BufferedConveyorFilter extends SequentialFilter {
-    private final AtomicBoolean done;
-    private BufferChannel firstInChannel;
-    private BufferChannel lastOutChannel;
-    private final ExecutorService threadPool;
+  private final AtomicBoolean done;
+  private BufferChannel firstInChannel;
+  private BufferChannel lastOutChannel;
+  private final ExecutorService threadPool;
 
-    public BufferedConveyorFilter(SequentialDescriptor sequentialDescriptor) {
-        super(sequentialDescriptor);
-        this.done = new AtomicBoolean(false);
-        this.threadPool = Executors.newFixedThreadPool(sequentialDescriptor.getDescriptors().size());
-    }
+  public BufferedConveyorFilter(SequentialDescriptor sequentialDescriptor) {
+    super(sequentialDescriptor);
+    this.done = new AtomicBoolean(false);
+    this.threadPool = Executors.newFixedThreadPool(sequentialDescriptor.getDescriptors().size());
+  }
 
-    @Override // com.samsung.android.sume.core.filter.MediaFilterGroupBase, com.samsung.android.sume.core.filter.MediaFilterGroup
-    public MediaFilterGroup addFilter(List<MediaFilter> filters) {
-        filters.stream().forEach(new Consumer() { // from class: com.samsung.android.sume.core.filter.collection.BufferedConveyorFilter$$ExternalSyntheticLambda0
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
+  @Override // com.samsung.android.sume.core.filter.MediaFilterGroupBase,
+            // com.samsung.android.sume.core.filter.MediaFilterGroup
+  public MediaFilterGroup addFilter(List<MediaFilter> filters) {
+    filters.stream()
+        .forEach(
+            new Consumer() { // from class:
+                             // com.samsung.android.sume.core.filter.collection.BufferedConveyorFilter$$ExternalSyntheticLambda0
+              @Override // java.util.function.Consumer
+              public final void accept(Object obj) {
                 BufferedConveyorFilter.this.m384xdcaa7b8f((MediaFilter) obj);
-            }
+              }
+            });
+    return super.addFilter(filters);
+  }
+
+  /* renamed from: lambda$addFilter$1$com-samsung-android-sume-core-filter-collection-BufferedConveyorFilter */
+  /* synthetic */ void m384xdcaa7b8f(final MediaFilter it) {
+    final BufferChannel inChannel =
+        (BufferChannel)
+            Optional.ofNullable(this.lastOutChannel)
+                .orElseGet(new BufferedConveyorFilter$$ExternalSyntheticLambda1());
+    if (this.firstInChannel == null) {
+      this.firstInChannel = inChannel;
+    }
+    final BufferChannel outChannel = new BlockingBufferChannel();
+    this.threadPool.submit(
+        new Runnable() { // from class:
+                         // com.samsung.android.sume.core.filter.collection.BufferedConveyorFilter$$ExternalSyntheticLambda2
+          @Override // java.lang.Runnable
+          public final void run() {
+            BufferedConveyorFilter.this.m383x5a5fc6b0(inChannel, it, outChannel);
+          }
         });
-        return super.addFilter(filters);
-    }
+    this.lastOutChannel = outChannel;
+  }
 
-    /* renamed from: lambda$addFilter$1$com-samsung-android-sume-core-filter-collection-BufferedConveyorFilter */
-    /* synthetic */ void m384xdcaa7b8f(final MediaFilter it) {
-        final BufferChannel inChannel = (BufferChannel) Optional.ofNullable(this.lastOutChannel).orElseGet(new BufferedConveyorFilter$$ExternalSyntheticLambda1());
-        if (this.firstInChannel == null) {
-            this.firstInChannel = inChannel;
-        }
-        final BufferChannel outChannel = new BlockingBufferChannel();
-        this.threadPool.submit(new Runnable() { // from class: com.samsung.android.sume.core.filter.collection.BufferedConveyorFilter$$ExternalSyntheticLambda2
-            @Override // java.lang.Runnable
-            public final void run() {
-                BufferedConveyorFilter.this.m383x5a5fc6b0(inChannel, it, outChannel);
-            }
-        });
-        this.lastOutChannel = outChannel;
+  /* renamed from: lambda$addFilter$0$com-samsung-android-sume-core-filter-collection-BufferedConveyorFilter */
+  /* synthetic */ void m383x5a5fc6b0(
+      BufferChannel inChannel, MediaFilter it, BufferChannel outChannel) {
+    while (!this.done.get()) {
+      MediaBuffer inBuffer = inChannel.receive();
+      outChannel.send(it.run(inBuffer));
     }
+  }
 
-    /* renamed from: lambda$addFilter$0$com-samsung-android-sume-core-filter-collection-BufferedConveyorFilter */
-    /* synthetic */ void m383x5a5fc6b0(BufferChannel inChannel, MediaFilter it, BufferChannel outChannel) {
-        while (!this.done.get()) {
-            MediaBuffer inBuffer = inChannel.receive();
-            outChannel.send(it.run(inBuffer));
-        }
-    }
+  @Override // com.samsung.android.sume.core.functional.Operator
+  public MutableMediaBuffer run(MediaBuffer ibuf, MutableMediaBuffer obuf) {
+    this.firstInChannel.send(ibuf);
+    obuf.put(this.lastOutChannel.receive());
+    return obuf;
+  }
 
-    @Override // com.samsung.android.sume.core.functional.Operator
-    public MutableMediaBuffer run(MediaBuffer ibuf, MutableMediaBuffer obuf) {
-        this.firstInChannel.send(ibuf);
-        obuf.put(this.lastOutChannel.receive());
-        return obuf;
-    }
-
-    @Override // com.samsung.android.sume.core.filter.MediaFilterGroupBase, com.samsung.android.sume.core.filter.MediaFilter
-    public void release() {
-        this.done.set(true);
-        super.release();
-    }
+  @Override // com.samsung.android.sume.core.filter.MediaFilterGroupBase,
+            // com.samsung.android.sume.core.filter.MediaFilter
+  public void release() {
+    this.done.set(true);
+    super.release();
+  }
 }

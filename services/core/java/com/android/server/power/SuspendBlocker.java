@@ -4,13 +4,13 @@ import android.util.proto.ProtoOutputStream;
 
 /* loaded from: classes3.dex */
 public interface SuspendBlocker {
-    void acquire();
+  void acquire();
 
-    void acquire(String str);
+  void acquire(String str);
 
-    void dumpDebug(ProtoOutputStream protoOutputStream, long j);
+  void dumpDebug(ProtoOutputStream protoOutputStream, long j);
 
-    void release();
+  void release();
 
-    void release(String str);
+  void release(String str);
 }

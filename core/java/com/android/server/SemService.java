@@ -4,6 +4,5 @@ import android.content.Context;
 
 /* loaded from: classes5.dex */
 public final class SemService {
-    public SemService(Context context) {
-    }
+  public SemService(Context context) {}
 }

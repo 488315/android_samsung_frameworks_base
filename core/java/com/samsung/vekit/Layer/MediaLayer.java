@@ -6,20 +6,23 @@ import com.samsung.vekit.Common.VEContext;
 
 /* loaded from: classes6.dex */
 public class MediaLayer extends Layer {
-    private int volume;
+  private int volume;
 
-    public MediaLayer(VEContext context, int id, String name) {
-        super(context, LayerType.MEDIA, id, name);
-        this.volume = 100;
-        this.availableTypes = new ItemType[]{ItemType.IMAGE, ItemType.VIDEO, ItemType.COLOR, ItemType.AUDIO, ItemType.EMPTY};
-    }
+  public MediaLayer(VEContext context, int id, String name) {
+    super(context, LayerType.MEDIA, id, name);
+    this.volume = 100;
+    this.availableTypes =
+        new ItemType[] {
+          ItemType.IMAGE, ItemType.VIDEO, ItemType.COLOR, ItemType.AUDIO, ItemType.EMPTY
+        };
+  }
 
-    public int getVolume() {
-        return this.volume;
-    }
+  public int getVolume() {
+    return this.volume;
+  }
 
-    public MediaLayer setVolume(int volume) {
-        this.volume = volume;
-        return this;
-    }
+  public MediaLayer setVolume(int volume) {
+    this.volume = volume;
+    return this;
+  }
 }

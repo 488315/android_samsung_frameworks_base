@@ -7,20 +7,19 @@ import java.util.Set;
 
 /* loaded from: classes5.dex */
 final class UidAllowList {
-    private static final Set<String> mAllowList;
+  private static final Set<String> mAllowList;
 
-    UidAllowList() {
-    }
+  UidAllowList() {}
 
-    static {
-        HashSet<String> modifiableSet = new HashSet<>();
-        modifiableSet.add("OEM_UID:" + Integer.toString(Process.DSMS_UID));
-        modifiableSet.add("android.uid.dsms:" + Integer.toString(Process.DSMS_UID));
-        modifiableSet.add("android.uid.system:" + Integer.toString(1000));
-        mAllowList = Collections.unmodifiableSet(modifiableSet);
-    }
+  static {
+    HashSet<String> modifiableSet = new HashSet<>();
+    modifiableSet.add("OEM_UID:" + Integer.toString(Process.DSMS_UID));
+    modifiableSet.add("android.uid.dsms:" + Integer.toString(Process.DSMS_UID));
+    modifiableSet.add("android.uid.system:" + Integer.toString(1000));
+    mAllowList = Collections.unmodifiableSet(modifiableSet);
+  }
 
-    boolean containsUid(String uidName) {
-        return mAllowList.contains(uidName);
-    }
+  boolean containsUid(String uidName) {
+    return mAllowList.contains(uidName);
+  }
 }

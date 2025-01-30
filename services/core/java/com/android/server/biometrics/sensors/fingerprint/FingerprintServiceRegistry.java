@@ -13,39 +13,55 @@ import java.util.function.Supplier;
 
 /* loaded from: classes.dex */
 public class FingerprintServiceRegistry extends BiometricServiceRegistry {
-    public final IFingerprintService mService;
+  public final IFingerprintService mService;
 
-    public FingerprintServiceRegistry(IFingerprintService iFingerprintService, Supplier supplier) {
-        super(supplier);
-        this.mService = iFingerprintService;
+  public FingerprintServiceRegistry(IFingerprintService iFingerprintService, Supplier supplier) {
+    super(supplier);
+    this.mService = iFingerprintService;
+  }
+
+  @Override // com.android.server.biometrics.sensors.BiometricServiceRegistry
+  public void registerService(
+      IBiometricService iBiometricService,
+      FingerprintSensorPropertiesInternal fingerprintSensorPropertiesInternal) {
+    try {
+      iBiometricService.registerAuthenticator(
+          fingerprintSensorPropertiesInternal.sensorId,
+          2,
+          Utils.propertyStrengthToAuthenticatorStrength(
+              fingerprintSensorPropertiesInternal.sensorStrength),
+          new FingerprintAuthenticator(
+              this.mService, fingerprintSensorPropertiesInternal.sensorId));
+    } catch (RemoteException unused) {
+      Slog.e(
+          "FingerprintServiceRegistry",
+          "Remote exception when registering sensorId: "
+              + fingerprintSensorPropertiesInternal.sensorId);
     }
+  }
 
-    @Override // com.android.server.biometrics.sensors.BiometricServiceRegistry
-    public void registerService(IBiometricService iBiometricService, FingerprintSensorPropertiesInternal fingerprintSensorPropertiesInternal) {
-        try {
-            iBiometricService.registerAuthenticator(fingerprintSensorPropertiesInternal.sensorId, 2, Utils.propertyStrengthToAuthenticatorStrength(fingerprintSensorPropertiesInternal.sensorStrength), new FingerprintAuthenticator(this.mService, fingerprintSensorPropertiesInternal.sensorId));
-        } catch (RemoteException unused) {
-            Slog.e("FingerprintServiceRegistry", "Remote exception when registering sensorId: " + fingerprintSensorPropertiesInternal.sensorId);
-        }
-    }
+  @Override // com.android.server.biometrics.sensors.BiometricServiceRegistry
+  public void invokeRegisteredCallback(
+      IFingerprintAuthenticatorsRegisteredCallback iFingerprintAuthenticatorsRegisteredCallback,
+      List list) {
+    iFingerprintAuthenticatorsRegisteredCallback.onAllAuthenticatorsRegistered(list);
+  }
 
-    @Override // com.android.server.biometrics.sensors.BiometricServiceRegistry
-    public void invokeRegisteredCallback(IFingerprintAuthenticatorsRegisteredCallback iFingerprintAuthenticatorsRegisteredCallback, List list) {
-        iFingerprintAuthenticatorsRegisteredCallback.onAllAuthenticatorsRegistered(list);
-    }
+  /* JADX INFO: Access modifiers changed from: private */
+  public /* synthetic */ void lambda$registerAll$0(Supplier supplier) {
+    lambda$registerAll$0(supplier);
+  }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$registerAll$0(Supplier supplier) {
-        lambda$registerAll$0(supplier);
-    }
-
-    @Override // com.android.server.biometrics.sensors.BiometricServiceRegistry
-    public void registerAll(final Supplier supplier) {
-        SemFpMainThread.get().post(new Runnable() { // from class: com.android.server.biometrics.sensors.fingerprint.FingerprintServiceRegistry$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
+  @Override // com.android.server.biometrics.sensors.BiometricServiceRegistry
+  public void registerAll(final Supplier supplier) {
+    SemFpMainThread.get()
+        .post(
+            new Runnable() { // from class:
+                             // com.android.server.biometrics.sensors.fingerprint.FingerprintServiceRegistry$$ExternalSyntheticLambda0
+              @Override // java.lang.Runnable
+              public final void run() {
                 FingerprintServiceRegistry.this.lambda$registerAll$0(supplier);
-            }
-        });
-    }
+              }
+            });
+  }
 }

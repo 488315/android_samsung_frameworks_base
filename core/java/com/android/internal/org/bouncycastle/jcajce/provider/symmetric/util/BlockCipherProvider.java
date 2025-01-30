@@ -4,5 +4,5 @@ import com.android.internal.org.bouncycastle.crypto.BlockCipher;
 
 /* loaded from: classes5.dex */
 public interface BlockCipherProvider {
-    BlockCipher get();
+  BlockCipher get();
 }

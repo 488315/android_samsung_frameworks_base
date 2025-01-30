@@ -6,13 +6,13 @@ import com.samsung.android.multiwindow.FreeformResizeGuide;
 
 /* loaded from: classes3.dex */
 public interface SizeCompatDragPolicy {
-    FreeformResizeGuide createCompatResizeGuide();
+  FreeformResizeGuide createCompatResizeGuide();
 
-    boolean ensureDragBounds(Rect rect);
+  boolean ensureDragBounds(Rect rect);
 
-    void fillSizeCompatInfoForDrag(SizeCompatInfo sizeCompatInfo);
+  void fillSizeCompatInfoForDrag(SizeCompatInfo sizeCompatInfo);
 
-    void getTargetDragBounds(Rect rect, Rect rect2, SizeCompatInfo sizeCompatInfo, int i);
+  void getTargetDragBounds(Rect rect, Rect rect2, SizeCompatInfo sizeCompatInfo, int i);
 
-    boolean supportsToFreeformByCornerGesture();
+  boolean supportsToFreeformByCornerGesture();
 }

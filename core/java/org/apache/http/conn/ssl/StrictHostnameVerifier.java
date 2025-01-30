@@ -5,12 +5,12 @@ import javax.net.ssl.SSLException;
 @Deprecated
 /* loaded from: classes6.dex */
 public class StrictHostnameVerifier extends AbstractVerifier {
-    @Override // org.apache.http.conn.ssl.X509HostnameVerifier
-    public final void verify(String host, String[] cns, String[] subjectAlts) throws SSLException {
-        verify(host, cns, subjectAlts, true);
-    }
+  @Override // org.apache.http.conn.ssl.X509HostnameVerifier
+  public final void verify(String host, String[] cns, String[] subjectAlts) throws SSLException {
+    verify(host, cns, subjectAlts, true);
+  }
 
-    public final String toString() {
-        return "STRICT";
-    }
+  public final String toString() {
+    return "STRICT";
+  }
 }

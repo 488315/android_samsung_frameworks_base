@@ -4,30 +4,27 @@ import android.p009os.Bundle;
 
 /* loaded from: classes3.dex */
 public interface RecognitionListener {
-    void onBeginningOfSpeech();
+  void onBeginningOfSpeech();
 
-    void onBufferReceived(byte[] bArr);
+  void onBufferReceived(byte[] bArr);
 
-    void onEndOfSpeech();
+  void onEndOfSpeech();
 
-    void onError(int i);
+  void onError(int i);
 
-    void onEvent(int i, Bundle bundle);
+  void onEvent(int i, Bundle bundle);
 
-    void onPartialResults(Bundle bundle);
+  void onPartialResults(Bundle bundle);
 
-    void onReadyForSpeech(Bundle bundle);
+  void onReadyForSpeech(Bundle bundle);
 
-    void onResults(Bundle bundle);
+  void onResults(Bundle bundle);
 
-    void onRmsChanged(float f);
+  void onRmsChanged(float f);
 
-    default void onSegmentResults(Bundle segmentResults) {
-    }
+  default void onSegmentResults(Bundle segmentResults) {}
 
-    default void onEndOfSegmentedSession() {
-    }
+  default void onEndOfSegmentedSession() {}
 
-    default void onLanguageDetection(Bundle results) {
-    }
+  default void onLanguageDetection(Bundle results) {}
 }

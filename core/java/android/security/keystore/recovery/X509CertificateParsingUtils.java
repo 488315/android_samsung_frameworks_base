@@ -9,30 +9,30 @@ import java.util.Base64;
 
 /* loaded from: classes3.dex */
 public class X509CertificateParsingUtils {
-    private static final String CERT_FORMAT = "X.509";
+  private static final String CERT_FORMAT = "X.509";
 
-    public static X509Certificate decodeBase64Cert(String string) throws CertificateException {
-        try {
-            return decodeCert(decodeBase64(string));
-        } catch (IllegalArgumentException e) {
-            throw new CertificateException(e);
-        }
+  public static X509Certificate decodeBase64Cert(String string) throws CertificateException {
+    try {
+      return decodeCert(decodeBase64(string));
+    } catch (IllegalArgumentException e) {
+      throw new CertificateException(e);
     }
+  }
 
-    private static byte[] decodeBase64(String string) {
-        return Base64.getDecoder().decode(string);
-    }
+  private static byte[] decodeBase64(String string) {
+    return Base64.getDecoder().decode(string);
+  }
 
-    private static X509Certificate decodeCert(byte[] certBytes) throws CertificateException {
-        return decodeCert(new ByteArrayInputStream(certBytes));
-    }
+  private static X509Certificate decodeCert(byte[] certBytes) throws CertificateException {
+    return decodeCert(new ByteArrayInputStream(certBytes));
+  }
 
-    private static X509Certificate decodeCert(InputStream inStream) throws CertificateException {
-        try {
-            CertificateFactory certFactory = CertificateFactory.getInstance(CERT_FORMAT);
-            return (X509Certificate) certFactory.generateCertificate(inStream);
-        } catch (CertificateException e) {
-            throw new RuntimeException(e);
-        }
+  private static X509Certificate decodeCert(InputStream inStream) throws CertificateException {
+    try {
+      CertificateFactory certFactory = CertificateFactory.getInstance(CERT_FORMAT);
+      return (X509Certificate) certFactory.generateCertificate(inStream);
+    } catch (CertificateException e) {
+      throw new RuntimeException(e);
     }
+  }
 }

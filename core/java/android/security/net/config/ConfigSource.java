@@ -5,7 +5,7 @@ import java.util.Set;
 
 /* loaded from: classes3.dex */
 public interface ConfigSource {
-    NetworkSecurityConfig getDefaultConfig();
+  NetworkSecurityConfig getDefaultConfig();
 
-    Set<Pair<Domain, NetworkSecurityConfig>> getPerDomainConfigs();
+  Set<Pair<Domain, NetworkSecurityConfig>> getPerDomainConfigs();
 }

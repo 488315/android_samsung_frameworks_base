@@ -4,19 +4,19 @@ import java.security.SecureRandom;
 
 /* loaded from: classes5.dex */
 public class KeyGenerationParameters {
-    private SecureRandom random;
-    private int strength;
+  private SecureRandom random;
+  private int strength;
 
-    public KeyGenerationParameters(SecureRandom random, int strength) {
-        this.random = CryptoServicesRegistrar.getSecureRandom(random);
-        this.strength = strength;
-    }
+  public KeyGenerationParameters(SecureRandom random, int strength) {
+    this.random = CryptoServicesRegistrar.getSecureRandom(random);
+    this.strength = strength;
+  }
 
-    public SecureRandom getRandom() {
-        return this.random;
-    }
+  public SecureRandom getRandom() {
+    return this.random;
+  }
 
-    public int getStrength() {
-        return this.strength;
-    }
+  public int getStrength() {
+    return this.strength;
+  }
 }

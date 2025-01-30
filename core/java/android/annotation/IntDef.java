@@ -9,11 +9,11 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 /* loaded from: classes.dex */
 public @interface IntDef {
-    boolean flag() default false;
+  boolean flag() default false;
 
-    String[] prefix() default {};
+  String[] prefix() default {};
 
-    String[] suffix() default {};
+  String[] suffix() default {};
 
-    int[] value() default {};
+  int[] value() default {};
 }

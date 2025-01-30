@@ -10,39 +10,44 @@ import vendor.samsung.hardware.biometrics.fingerprint.V3_0.ISehBiometricsFingerp
 
 /* loaded from: classes.dex */
 public abstract class UdfpsHelper {
-    public static void onFingerDown(IBiometricsFingerprint iBiometricsFingerprint, int i, int i2, float f, float f2) {
-        if (iBiometricsFingerprint instanceof ISehBiometricsFingerprint) {
-            return;
-        }
-        android.hardware.biometrics.fingerprint.V2_3.IBiometricsFingerprint castFrom = android.hardware.biometrics.fingerprint.V2_3.IBiometricsFingerprint.castFrom((IHwInterface) iBiometricsFingerprint);
-        if (castFrom == null) {
-            Slog.v("UdfpsHelper", "onFingerDown | failed to cast the HIDL to V2_3");
-            return;
-        }
-        try {
-            castFrom.onFingerDown(i, i2, f, f2);
-        } catch (RemoteException e) {
-            Slog.e("UdfpsHelper", "onFingerDown | RemoteException: ", e);
-        }
+  public static void onFingerDown(
+      IBiometricsFingerprint iBiometricsFingerprint, int i, int i2, float f, float f2) {
+    if (iBiometricsFingerprint instanceof ISehBiometricsFingerprint) {
+      return;
     }
+    android.hardware.biometrics.fingerprint.V2_3.IBiometricsFingerprint castFrom =
+        android.hardware.biometrics.fingerprint.V2_3.IBiometricsFingerprint.castFrom(
+            (IHwInterface) iBiometricsFingerprint);
+    if (castFrom == null) {
+      Slog.v("UdfpsHelper", "onFingerDown | failed to cast the HIDL to V2_3");
+      return;
+    }
+    try {
+      castFrom.onFingerDown(i, i2, f, f2);
+    } catch (RemoteException e) {
+      Slog.e("UdfpsHelper", "onFingerDown | RemoteException: ", e);
+    }
+  }
 
-    public static void onFingerUp(IBiometricsFingerprint iBiometricsFingerprint) {
-        if (iBiometricsFingerprint instanceof ISehBiometricsFingerprint) {
-            return;
-        }
-        android.hardware.biometrics.fingerprint.V2_3.IBiometricsFingerprint castFrom = android.hardware.biometrics.fingerprint.V2_3.IBiometricsFingerprint.castFrom((IHwInterface) iBiometricsFingerprint);
-        if (castFrom == null) {
-            Slog.v("UdfpsHelper", "onFingerUp | failed to cast the HIDL to V2_3");
-            return;
-        }
-        try {
-            castFrom.onFingerUp();
-        } catch (RemoteException e) {
-            Slog.e("UdfpsHelper", "onFingerUp | RemoteException: ", e);
-        }
+  public static void onFingerUp(IBiometricsFingerprint iBiometricsFingerprint) {
+    if (iBiometricsFingerprint instanceof ISehBiometricsFingerprint) {
+      return;
     }
+    android.hardware.biometrics.fingerprint.V2_3.IBiometricsFingerprint castFrom =
+        android.hardware.biometrics.fingerprint.V2_3.IBiometricsFingerprint.castFrom(
+            (IHwInterface) iBiometricsFingerprint);
+    if (castFrom == null) {
+      Slog.v("UdfpsHelper", "onFingerUp | failed to cast the HIDL to V2_3");
+      return;
+    }
+    try {
+      castFrom.onFingerUp();
+    } catch (RemoteException e) {
+      Slog.e("UdfpsHelper", "onFingerUp | RemoteException: ", e);
+    }
+  }
 
-    public static boolean isValidAcquisitionMessage(Context context, int i, int i2) {
-        return FingerprintManager.getAcquiredString(context, i, i2) != null;
-    }
+  public static boolean isValidAcquisitionMessage(Context context, int i, int i2) {
+    return FingerprintManager.getAcquiredString(context, i, i2) != null;
+  }
 }

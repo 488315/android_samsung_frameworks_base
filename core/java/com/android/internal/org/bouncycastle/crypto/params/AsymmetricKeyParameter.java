@@ -4,13 +4,13 @@ import com.android.internal.org.bouncycastle.crypto.CipherParameters;
 
 /* loaded from: classes5.dex */
 public class AsymmetricKeyParameter implements CipherParameters {
-    boolean privateKey;
+  boolean privateKey;
 
-    public AsymmetricKeyParameter(boolean privateKey) {
-        this.privateKey = privateKey;
-    }
+  public AsymmetricKeyParameter(boolean privateKey) {
+    this.privateKey = privateKey;
+  }
 
-    public boolean isPrivate() {
-        return this.privateKey;
-    }
+  public boolean isPrivate() {
+    return this.privateKey;
+  }
 }

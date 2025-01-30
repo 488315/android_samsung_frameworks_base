@@ -10,20 +10,19 @@ import android.p009os.IBinder;
 @SystemApi
 /* loaded from: classes3.dex */
 public abstract class CloudSearchService extends Service {
-    public static final String SERVICE_INTERFACE = "android.service.cloudsearch.CloudSearchService";
+  public static final String SERVICE_INTERFACE = "android.service.cloudsearch.CloudSearchService";
 
-    public abstract void onSearch(SearchRequest searchRequest);
+  public abstract void onSearch(SearchRequest searchRequest);
 
-    @Override // android.app.Service
-    public void onCreate() {
-        super.onCreate();
-    }
+  @Override // android.app.Service
+  public void onCreate() {
+    super.onCreate();
+  }
 
-    public final void returnResults(String requestId, SearchResponse response) {
-    }
+  public final void returnResults(String requestId, SearchResponse response) {}
 
-    @Override // android.app.Service
-    public final IBinder onBind(Intent intent) {
-        return null;
-    }
+  @Override // android.app.Service
+  public final IBinder onBind(Intent intent) {
+    return null;
+  }
 }

@@ -5,35 +5,35 @@ import javax.microedition.khronos.opengles.InterfaceC5395GL;
 
 /* loaded from: classes5.dex */
 public class EGLContextImpl extends EGLContext {
-    long mEGLContext;
-    private GLImpl mGLContext = new GLImpl();
+  long mEGLContext;
+  private GLImpl mGLContext = new GLImpl();
 
-    public EGLContextImpl(long ctx) {
-        this.mEGLContext = ctx;
-    }
+  public EGLContextImpl(long ctx) {
+    this.mEGLContext = ctx;
+  }
 
-    @Override // javax.microedition.khronos.egl.EGLContext
-    public InterfaceC5395GL getGL() {
-        return this.mGLContext;
-    }
+  @Override // javax.microedition.khronos.egl.EGLContext
+  public InterfaceC5395GL getGL() {
+    return this.mGLContext;
+  }
 
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        EGLContextImpl that = (EGLContextImpl) o;
-        if (this.mEGLContext == that.mEGLContext) {
-            return true;
-        }
-        return false;
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    EGLContextImpl that = (EGLContextImpl) o;
+    if (this.mEGLContext == that.mEGLContext) {
+      return true;
+    }
+    return false;
+  }
 
-    public int hashCode() {
-        long j = this.mEGLContext;
-        int result = (17 * 31) + ((int) (j ^ (j >>> 32)));
-        return result;
-    }
+  public int hashCode() {
+    long j = this.mEGLContext;
+    int result = (17 * 31) + ((int) (j ^ (j >>> 32)));
+    return result;
+  }
 }

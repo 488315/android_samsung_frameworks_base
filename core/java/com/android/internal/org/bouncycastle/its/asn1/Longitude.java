@@ -5,8 +5,9 @@ import com.android.internal.org.bouncycastle.asn1.ASN1Primitive;
 
 /* loaded from: classes5.dex */
 public class Longitude extends ASN1Object {
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
-    public ASN1Primitive toASN1Primitive() {
-        return null;
-    }
+  @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+            // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+  public ASN1Primitive toASN1Primitive() {
+    return null;
+  }
 }

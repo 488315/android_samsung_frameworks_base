@@ -14,57 +14,59 @@ import java.util.List;
 
 /* loaded from: classes5.dex */
 public class CompositePublicKey implements PublicKey {
-    private final List<PublicKey> keys;
+  private final List<PublicKey> keys;
 
-    public CompositePublicKey(PublicKey... keys) {
-        if (keys == null || keys.length == 0) {
-            throw new IllegalArgumentException("at least one public key must be provided");
-        }
-        List<PublicKey> keyList = new ArrayList<>(keys.length);
-        for (int i = 0; i != keys.length; i++) {
-            keyList.add(keys[i]);
-        }
-        this.keys = Collections.unmodifiableList(keyList);
+  public CompositePublicKey(PublicKey... keys) {
+    if (keys == null || keys.length == 0) {
+      throw new IllegalArgumentException("at least one public key must be provided");
     }
+    List<PublicKey> keyList = new ArrayList<>(keys.length);
+    for (int i = 0; i != keys.length; i++) {
+      keyList.add(keys[i]);
+    }
+    this.keys = Collections.unmodifiableList(keyList);
+  }
 
-    public List<PublicKey> getPublicKeys() {
-        return this.keys;
-    }
+  public List<PublicKey> getPublicKeys() {
+    return this.keys;
+  }
 
-    @Override // java.security.Key
-    public String getAlgorithm() {
-        return "Composite";
-    }
+  @Override // java.security.Key
+  public String getAlgorithm() {
+    return "Composite";
+  }
 
-    @Override // java.security.Key
-    public String getFormat() {
-        return "X.509";
-    }
+  @Override // java.security.Key
+  public String getFormat() {
+    return "X.509";
+  }
 
-    @Override // java.security.Key
-    public byte[] getEncoded() {
-        ASN1EncodableVector v = new ASN1EncodableVector();
-        for (int i = 0; i != this.keys.size(); i++) {
-            v.add(SubjectPublicKeyInfo.getInstance(this.keys.get(i).getEncoded()));
-        }
-        try {
-            return new SubjectPublicKeyInfo(new AlgorithmIdentifier(MiscObjectIdentifiers.id_alg_composite), new DERSequence(v)).getEncoded(ASN1Encoding.DER);
-        } catch (IOException e) {
-            throw new IllegalStateException("unable to encode composite key: " + e.getMessage());
-        }
+  @Override // java.security.Key
+  public byte[] getEncoded() {
+    ASN1EncodableVector v = new ASN1EncodableVector();
+    for (int i = 0; i != this.keys.size(); i++) {
+      v.add(SubjectPublicKeyInfo.getInstance(this.keys.get(i).getEncoded()));
     }
+    try {
+      return new SubjectPublicKeyInfo(
+              new AlgorithmIdentifier(MiscObjectIdentifiers.id_alg_composite), new DERSequence(v))
+          .getEncoded(ASN1Encoding.DER);
+    } catch (IOException e) {
+      throw new IllegalStateException("unable to encode composite key: " + e.getMessage());
+    }
+  }
 
-    public int hashCode() {
-        return this.keys.hashCode();
-    }
+  public int hashCode() {
+    return this.keys.hashCode();
+  }
 
-    public boolean equals(Object o) {
-        if (o == this) {
-            return true;
-        }
-        if (o instanceof CompositePublicKey) {
-            return this.keys.equals(((CompositePublicKey) o).keys);
-        }
-        return false;
+  public boolean equals(Object o) {
+    if (o == this) {
+      return true;
     }
+    if (o instanceof CompositePublicKey) {
+      return this.keys.equals(((CompositePublicKey) o).keys);
+    }
+    return false;
+  }
 }

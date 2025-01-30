@@ -5,55 +5,63 @@ import android.annotation.SystemApi;
 @SystemApi
 /* loaded from: classes2.dex */
 public class DvbtFrontendCapabilities extends FrontendCapabilities {
-    private final int mBandwidthCap;
-    private final int mCodeRateCap;
-    private final int mConstellationCap;
-    private final int mGuardIntervalCap;
-    private final int mHierarchyCap;
-    private final boolean mIsMisoSupported;
-    private final boolean mIsT2Supported;
-    private final int mTransmissionModeCap;
+  private final int mBandwidthCap;
+  private final int mCodeRateCap;
+  private final int mConstellationCap;
+  private final int mGuardIntervalCap;
+  private final int mHierarchyCap;
+  private final boolean mIsMisoSupported;
+  private final boolean mIsT2Supported;
+  private final int mTransmissionModeCap;
 
-    private DvbtFrontendCapabilities(int transmissionModeCap, int bandwidthCap, int constellationCap, int codeRateCap, int hierarchyCap, int guardIntervalCap, boolean isT2Supported, boolean isMisoSupported) {
-        this.mTransmissionModeCap = transmissionModeCap;
-        this.mBandwidthCap = bandwidthCap;
-        this.mConstellationCap = constellationCap;
-        this.mCodeRateCap = codeRateCap;
-        this.mHierarchyCap = hierarchyCap;
-        this.mGuardIntervalCap = guardIntervalCap;
-        this.mIsT2Supported = isT2Supported;
-        this.mIsMisoSupported = isMisoSupported;
-    }
+  private DvbtFrontendCapabilities(
+      int transmissionModeCap,
+      int bandwidthCap,
+      int constellationCap,
+      int codeRateCap,
+      int hierarchyCap,
+      int guardIntervalCap,
+      boolean isT2Supported,
+      boolean isMisoSupported) {
+    this.mTransmissionModeCap = transmissionModeCap;
+    this.mBandwidthCap = bandwidthCap;
+    this.mConstellationCap = constellationCap;
+    this.mCodeRateCap = codeRateCap;
+    this.mHierarchyCap = hierarchyCap;
+    this.mGuardIntervalCap = guardIntervalCap;
+    this.mIsT2Supported = isT2Supported;
+    this.mIsMisoSupported = isMisoSupported;
+  }
 
-    public int getTransmissionModeCapability() {
-        return this.mTransmissionModeCap;
-    }
+  public int getTransmissionModeCapability() {
+    return this.mTransmissionModeCap;
+  }
 
-    public int getBandwidthCapability() {
-        return this.mBandwidthCap;
-    }
+  public int getBandwidthCapability() {
+    return this.mBandwidthCap;
+  }
 
-    public int getConstellationCapability() {
-        return this.mConstellationCap;
-    }
+  public int getConstellationCapability() {
+    return this.mConstellationCap;
+  }
 
-    public int getCodeRateCapability() {
-        return this.mCodeRateCap;
-    }
+  public int getCodeRateCapability() {
+    return this.mCodeRateCap;
+  }
 
-    public int getHierarchyCapability() {
-        return this.mHierarchyCap;
-    }
+  public int getHierarchyCapability() {
+    return this.mHierarchyCap;
+  }
 
-    public int getGuardIntervalCapability() {
-        return this.mGuardIntervalCap;
-    }
+  public int getGuardIntervalCapability() {
+    return this.mGuardIntervalCap;
+  }
 
-    public boolean isT2Supported() {
-        return this.mIsT2Supported;
-    }
+  public boolean isT2Supported() {
+    return this.mIsT2Supported;
+  }
 
-    public boolean isMisoSupported() {
-        return this.mIsMisoSupported;
-    }
+  public boolean isMisoSupported() {
+    return this.mIsMisoSupported;
+  }
 }

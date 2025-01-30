@@ -14,73 +14,76 @@ import java.util.Set;
 
 /* loaded from: classes3.dex */
 public class AmbientDisplaySuppressionController {
-    public final AmbientDisplaySuppressionChangedCallback mCallback;
-    public IStatusBarService mStatusBarService;
-    public final Set mSuppressionTokens = Collections.synchronizedSet(new ArraySet());
+  public final AmbientDisplaySuppressionChangedCallback mCallback;
+  public IStatusBarService mStatusBarService;
+  public final Set mSuppressionTokens = Collections.synchronizedSet(new ArraySet());
 
-    public interface AmbientDisplaySuppressionChangedCallback {
-        void onSuppressionChanged(boolean z);
+  public interface AmbientDisplaySuppressionChangedCallback {
+    void onSuppressionChanged(boolean z);
+  }
+
+  public AmbientDisplaySuppressionController(
+      AmbientDisplaySuppressionChangedCallback ambientDisplaySuppressionChangedCallback) {
+    Objects.requireNonNull(ambientDisplaySuppressionChangedCallback);
+    this.mCallback = ambientDisplaySuppressionChangedCallback;
+  }
+
+  public void suppress(String str, int i, boolean z) {
+    Objects.requireNonNull(str);
+    Pair create = Pair.create(str, Integer.valueOf(i));
+    boolean isSuppressed = isSuppressed();
+    if (z) {
+      this.mSuppressionTokens.add(create);
+    } else {
+      this.mSuppressionTokens.remove(create);
     }
-
-    public AmbientDisplaySuppressionController(AmbientDisplaySuppressionChangedCallback ambientDisplaySuppressionChangedCallback) {
-        Objects.requireNonNull(ambientDisplaySuppressionChangedCallback);
-        this.mCallback = ambientDisplaySuppressionChangedCallback;
+    boolean isSuppressed2 = isSuppressed();
+    if (isSuppressed2 != isSuppressed) {
+      this.mCallback.onSuppressionChanged(isSuppressed2);
     }
+    try {
+      synchronized (this.mSuppressionTokens) {
+        getStatusBar().suppressAmbientDisplay(isSuppressed2);
+      }
+    } catch (RemoteException e) {
+      android.util.Slog.e(
+          "AmbientDisplaySuppressionController", "Failed to suppress ambient display", e);
+    }
+  }
 
-    public void suppress(String str, int i, boolean z) {
-        Objects.requireNonNull(str);
-        Pair create = Pair.create(str, Integer.valueOf(i));
-        boolean isSuppressed = isSuppressed();
-        if (z) {
-            this.mSuppressionTokens.add(create);
-        } else {
-            this.mSuppressionTokens.remove(create);
+  public List getSuppressionTokens(int i) {
+    ArrayList arrayList = new ArrayList();
+    synchronized (this.mSuppressionTokens) {
+      for (Pair pair : this.mSuppressionTokens) {
+        if (((Integer) pair.second).intValue() == i) {
+          arrayList.add((String) pair.first);
         }
-        boolean isSuppressed2 = isSuppressed();
-        if (isSuppressed2 != isSuppressed) {
-            this.mCallback.onSuppressionChanged(isSuppressed2);
-        }
-        try {
-            synchronized (this.mSuppressionTokens) {
-                getStatusBar().suppressAmbientDisplay(isSuppressed2);
-            }
-        } catch (RemoteException e) {
-            android.util.Slog.e("AmbientDisplaySuppressionController", "Failed to suppress ambient display", e);
-        }
+      }
     }
+    return arrayList;
+  }
 
-    public List getSuppressionTokens(int i) {
-        ArrayList arrayList = new ArrayList();
-        synchronized (this.mSuppressionTokens) {
-            for (Pair pair : this.mSuppressionTokens) {
-                if (((Integer) pair.second).intValue() == i) {
-                    arrayList.add((String) pair.first);
-                }
-            }
-        }
-        return arrayList;
-    }
+  public boolean isSuppressed(String str, int i) {
+    Set set = this.mSuppressionTokens;
+    Objects.requireNonNull(str);
+    return set.contains(Pair.create(str, Integer.valueOf(i)));
+  }
 
-    public boolean isSuppressed(String str, int i) {
-        Set set = this.mSuppressionTokens;
-        Objects.requireNonNull(str);
-        return set.contains(Pair.create(str, Integer.valueOf(i)));
-    }
+  public boolean isSuppressed() {
+    return !this.mSuppressionTokens.isEmpty();
+  }
 
-    public boolean isSuppressed() {
-        return !this.mSuppressionTokens.isEmpty();
-    }
+  public void dump(PrintWriter printWriter) {
+    printWriter.println("AmbientDisplaySuppressionController:");
+    printWriter.println(" ambientDisplaySuppressed=" + isSuppressed());
+    printWriter.println(" mSuppressionTokens=" + this.mSuppressionTokens);
+  }
 
-    public void dump(PrintWriter printWriter) {
-        printWriter.println("AmbientDisplaySuppressionController:");
-        printWriter.println(" ambientDisplaySuppressed=" + isSuppressed());
-        printWriter.println(" mSuppressionTokens=" + this.mSuppressionTokens);
+  public final synchronized IStatusBarService getStatusBar() {
+    if (this.mStatusBarService == null) {
+      this.mStatusBarService =
+          IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
     }
-
-    public final synchronized IStatusBarService getStatusBar() {
-        if (this.mStatusBarService == null) {
-            this.mStatusBarService = IStatusBarService.Stub.asInterface(ServiceManager.getService("statusbar"));
-        }
-        return this.mStatusBarService;
-    }
+    return this.mStatusBarService;
+  }
 }

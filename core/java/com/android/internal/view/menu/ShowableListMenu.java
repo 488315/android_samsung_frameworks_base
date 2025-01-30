@@ -4,11 +4,11 @@ import android.widget.ListView;
 
 /* loaded from: classes5.dex */
 public interface ShowableListMenu {
-    void dismiss();
+  void dismiss();
 
-    ListView getListView();
+  ListView getListView();
 
-    boolean isShowing();
+  boolean isShowing();
 
-    void show();
+  void show();
 }

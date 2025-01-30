@@ -8,13 +8,13 @@ import com.android.server.utils.WatchedArraySet;
 
 /* loaded from: classes3.dex */
 public interface PackageUserStateInternal extends PackageUserState, FrameworkPackageUserState {
-    public static final PackageUserStateInternal DEFAULT = new PackageUserStateDefault();
+  public static final PackageUserStateInternal DEFAULT = new PackageUserStateDefault();
 
-    WatchedArraySet getDisabledComponentsNoCopy();
+  WatchedArraySet getDisabledComponentsNoCopy();
 
-    WatchedArraySet getEnabledComponentsNoCopy();
+  WatchedArraySet getEnabledComponentsNoCopy();
 
-    Pair getOverrideLabelIconForComponent(ComponentName componentName);
+  Pair getOverrideLabelIconForComponent(ComponentName componentName);
 
-    WatchedArrayMap getSuspendParams();
+  WatchedArrayMap getSuspendParams();
 }

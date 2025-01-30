@@ -10,30 +10,30 @@ import java.util.function.Consumer;
 
 /* loaded from: classes3.dex */
 public abstract class RegionUtils {
-    public static void rectListToRegion(List list, Region region) {
-        region.setEmpty();
-        int size = list.size();
-        for (int i = 0; i < size; i++) {
-            region.union((Rect) list.get(i));
-        }
+  public static void rectListToRegion(List list, Region region) {
+    region.setEmpty();
+    int size = list.size();
+    for (int i = 0; i < size; i++) {
+      region.union((Rect) list.get(i));
     }
+  }
 
-    public static void forEachRect(Region region, Consumer consumer) {
-        RegionIterator regionIterator = new RegionIterator(region);
-        Rect rect = new Rect();
-        while (regionIterator.next(rect)) {
-            consumer.accept(rect);
-        }
+  public static void forEachRect(Region region, Consumer consumer) {
+    RegionIterator regionIterator = new RegionIterator(region);
+    Rect rect = new Rect();
+    while (regionIterator.next(rect)) {
+      consumer.accept(rect);
     }
+  }
 
-    public static void forEachRectReverse(Region region, Consumer consumer) {
-        RegionIterator regionIterator = new RegionIterator(region);
-        ArrayList arrayList = new ArrayList();
-        Rect rect = new Rect();
-        while (regionIterator.next(rect)) {
-            arrayList.add(new Rect(rect));
-        }
-        Collections.reverse(arrayList);
-        arrayList.forEach(consumer);
+  public static void forEachRectReverse(Region region, Consumer consumer) {
+    RegionIterator regionIterator = new RegionIterator(region);
+    ArrayList arrayList = new ArrayList();
+    Rect rect = new Rect();
+    while (regionIterator.next(rect)) {
+      arrayList.add(new Rect(rect));
     }
+    Collections.reverse(arrayList);
+    arrayList.forEach(consumer);
+  }
 }

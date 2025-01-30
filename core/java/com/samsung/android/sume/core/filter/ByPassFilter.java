@@ -8,29 +8,29 @@ import java.util.stream.Stream;
 
 /* loaded from: classes4.dex */
 public class ByPassFilter implements MediaFilter {
-    private static final String TAG = Def.tagOf((Class<?>) ByPassFilter.class);
-    private final MFDescriptor mfDescriptor;
+  private static final String TAG = Def.tagOf((Class<?>) ByPassFilter.class);
+  private final MFDescriptor mfDescriptor;
 
-    public ByPassFilter(MFDescriptor mfDescriptor) {
-        this.mfDescriptor = mfDescriptor;
-    }
+  public ByPassFilter(MFDescriptor mfDescriptor) {
+    this.mfDescriptor = mfDescriptor;
+  }
 
-    @Override // com.samsung.android.sume.core.functional.Operator
-    public MutableMediaBuffer run(MediaBuffer ibuf, MutableMediaBuffer obuf) {
-        if (obuf.isEmpty()) {
-            obuf.put(ibuf.copy());
-            return obuf;
-        }
-        throw new UnsupportedOperationException("not implement yet");
+  @Override // com.samsung.android.sume.core.functional.Operator
+  public MutableMediaBuffer run(MediaBuffer ibuf, MutableMediaBuffer obuf) {
+    if (obuf.isEmpty()) {
+      obuf.put(ibuf.copy());
+      return obuf;
     }
+    throw new UnsupportedOperationException("not implement yet");
+  }
 
-    @Override // com.samsung.android.sume.core.filter.MediaFilter
-    public MFDescriptor getDescriptor() {
-        return this.mfDescriptor;
-    }
+  @Override // com.samsung.android.sume.core.filter.MediaFilter
+  public MFDescriptor getDescriptor() {
+    return this.mfDescriptor;
+  }
 
-    @Override // com.samsung.android.sume.core.filter.MediaFilter
-    public Stream<MediaFilter> stream() {
-        return Stream.of(this);
-    }
+  @Override // com.samsung.android.sume.core.filter.MediaFilter
+  public Stream<MediaFilter> stream() {
+    return Stream.of(this);
+  }
 }

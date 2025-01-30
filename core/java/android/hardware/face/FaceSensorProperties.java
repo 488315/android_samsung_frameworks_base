@@ -9,29 +9,33 @@ import java.util.List;
 
 /* loaded from: classes2.dex */
 public class FaceSensorProperties extends SensorProperties {
-    public static final int TYPE_IR = 2;
-    public static final int TYPE_RGB = 1;
-    public static final int TYPE_UNKNOWN = 0;
-    final int mSensorType;
+  public static final int TYPE_IR = 2;
+  public static final int TYPE_RGB = 1;
+  public static final int TYPE_UNKNOWN = 0;
+  final int mSensorType;
 
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface SensorType {
-    }
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface SensorType {}
 
-    public static FaceSensorProperties from(FaceSensorPropertiesInternal internalProp) {
-        List<SensorProperties.ComponentInfo> componentInfo = new ArrayList<>();
-        for (ComponentInfoInternal internalComp : internalProp.componentInfo) {
-            componentInfo.add(SensorProperties.ComponentInfo.from(internalComp));
-        }
-        return new FaceSensorProperties(internalProp.sensorId, internalProp.sensorStrength, componentInfo, internalProp.sensorType);
+  public static FaceSensorProperties from(FaceSensorPropertiesInternal internalProp) {
+    List<SensorProperties.ComponentInfo> componentInfo = new ArrayList<>();
+    for (ComponentInfoInternal internalComp : internalProp.componentInfo) {
+      componentInfo.add(SensorProperties.ComponentInfo.from(internalComp));
     }
+    return new FaceSensorProperties(
+        internalProp.sensorId, internalProp.sensorStrength, componentInfo, internalProp.sensorType);
+  }
 
-    public FaceSensorProperties(int sensorId, int sensorStrength, List<SensorProperties.ComponentInfo> componentInfo, int sensorType) {
-        super(sensorId, sensorStrength, componentInfo);
-        this.mSensorType = sensorType;
-    }
+  public FaceSensorProperties(
+      int sensorId,
+      int sensorStrength,
+      List<SensorProperties.ComponentInfo> componentInfo,
+      int sensorType) {
+    super(sensorId, sensorStrength, componentInfo);
+    this.mSensorType = sensorType;
+  }
 
-    public int getSensorType() {
-        return this.mSensorType;
-    }
+  public int getSensorType() {
+    return this.mSensorType;
+  }
 }

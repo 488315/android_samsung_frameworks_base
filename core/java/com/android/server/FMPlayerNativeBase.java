@@ -4,436 +4,382 @@ import android.util.Log;
 
 /* loaded from: classes5.dex */
 public class FMPlayerNativeBase {
-    public FMPlayerNativeBase(FMRadioService service) {
+  public FMPlayerNativeBase(FMRadioService service) {}
+
+  static class RDSData {
+    public String mChannelName;
+    public long mFreq;
+    public String mRadioText;
+
+    public RDSData(long freq, byte[] channelName, byte[] radioText) {
+      this.mFreq = freq;
+      this.mChannelName = null;
+      this.mRadioText = null;
+      try {
+        this.mChannelName = new String(channelName);
+      } catch (Exception e) {
+        Log.m97e("FMPlayerNativeBase", "Exception in new String(channelName) :", e);
+      }
+      try {
+        this.mRadioText = new String(radioText);
+      } catch (Exception e2) {
+        Log.m97e("FMPlayerNativeBase", "Exception in new String(radioText) :", e2);
+      }
+    }
+
+    public RDSData(long freq, String channelName, String radioText) {
+      this.mFreq = freq;
+      this.mChannelName = null;
+      this.mRadioText = null;
+      if (channelName != null) {
+        this.mChannelName = channelName;
+      }
+      if (radioText != null) {
+        this.mRadioText = radioText;
+      }
+    }
+
+    public String toString() {
+      return "\n== RDSData :--> \nFreq :"
+          + this.mFreq
+          + " \nChannel Name:"
+          + this.mChannelName
+          + "<-- \nRadio Text :"
+          + this.mRadioText
+          + "<--: =====";
     }
+  }
 
-    static class RDSData {
-        public String mChannelName;
-        public long mFreq;
-        public String mRadioText;
-
-        public RDSData(long freq, byte[] channelName, byte[] radioText) {
-            this.mFreq = freq;
-            this.mChannelName = null;
-            this.mRadioText = null;
-            try {
-                this.mChannelName = new String(channelName);
-            } catch (Exception e) {
-                Log.m97e("FMPlayerNativeBase", "Exception in new String(channelName) :", e);
-            }
-            try {
-                this.mRadioText = new String(radioText);
-            } catch (Exception e2) {
-                Log.m97e("FMPlayerNativeBase", "Exception in new String(radioText) :", e2);
-            }
-        }
-
-        public RDSData(long freq, String channelName, String radioText) {
-            this.mFreq = freq;
-            this.mChannelName = null;
-            this.mRadioText = null;
-            if (channelName != null) {
-                this.mChannelName = channelName;
-            }
-            if (radioText != null) {
-                this.mRadioText = radioText;
-            }
-        }
-
-        public String toString() {
-            return "\n== RDSData :--> \nFreq :" + this.mFreq + " \nChannel Name:" + this.mChannelName + "<-- \nRadio Text :" + this.mRadioText + "<--: =====";
-        }
-    }
+  static class RTPlusData {
+    public int mAdditionalLen1;
+    public int mAdditionalLen2;
+    public int mContentType1;
+    public int mContentType2;
+    public int mStartPos1;
+    public int mStartPos2;
 
-    static class RTPlusData {
-        public int mAdditionalLen1;
-        public int mAdditionalLen2;
-        public int mContentType1;
-        public int mContentType2;
-        public int mStartPos1;
-        public int mStartPos2;
-
-        public RTPlusData(int contentType1, int startPos1, int additionalLen1, int contentType2, int startPos2, int additionalLen2) {
-            this.mContentType1 = contentType1;
-            this.mStartPos1 = startPos1;
-            this.mAdditionalLen1 = additionalLen1;
-            this.mContentType2 = contentType2;
-            this.mStartPos2 = startPos2;
-            this.mAdditionalLen2 = additionalLen2;
-        }
+    public RTPlusData(
+        int contentType1,
+        int startPos1,
+        int additionalLen1,
+        int contentType2,
+        int startPos2,
+        int additionalLen2) {
+      this.mContentType1 = contentType1;
+      this.mStartPos1 = startPos1;
+      this.mAdditionalLen1 = additionalLen1;
+      this.mContentType2 = contentType2;
+      this.mStartPos2 = startPos2;
+      this.mAdditionalLen2 = additionalLen2;
     }
+  }
 
-    static class PIECCData {
-        public int mECC;
-        public int mPI;
-
-        public PIECCData(int PI, int ECC) {
-            this.mPI = PI;
-            this.mECC = ECC;
-        }
-    }
+  static class PIECCData {
+    public int mECC;
+    public int mPI;
 
-    public void tune(long freq) {
+    public PIECCData(int PI, int ECC) {
+      this.mPI = PI;
+      this.mECC = ECC;
     }
+  }
 
-    /* renamed from: on */
-    public long mo232on() {
-        return -1L;
-    }
+  public void tune(long freq) {}
 
-    public long preInitialize() {
-        return -1L;
-    }
+  /* renamed from: on */
+  public long mo232on() {
+    return -1L;
+  }
 
-    public void off() {
-    }
+  public long preInitialize() {
+    return -1L;
+  }
 
-    public void offFMService() {
-    }
+  public void off() {}
 
-    public long seekUp() {
-        return -1L;
-    }
+  public void offFMService() {}
 
-    public long seekDown() {
-        return -1L;
-    }
+  public long seekUp() {
+    return -1L;
+  }
 
-    public void cancelSeek() {
-    }
+  public long seekDown() {
+    return -1L;
+  }
 
-    public long getCurrentChannel() {
-        return -1L;
-    }
+  public void cancelSeek() {}
 
-    public long searchDown() {
-        return -1L;
-    }
+  public long getCurrentChannel() {
+    return -1L;
+  }
 
-    public long searchUp() {
-        return -1L;
-    }
+  public long searchDown() {
+    return -1L;
+  }
 
-    public long searchAll() {
-        return -1L;
-    }
+  public long searchUp() {
+    return -1L;
+  }
 
-    public void setVolume(long volume) {
-    }
+  public long searchAll() {
+    return -1L;
+  }
 
-    public long getVolume() {
-        return -1L;
-    }
+  public void setVolume(long volume) {}
 
-    public void muteOn() {
-    }
+  public long getVolume() {
+    return -1L;
+  }
 
-    public void muteOff() {
-    }
+  public void muteOn() {}
 
-    public void enableRDS() {
-    }
+  public void muteOff() {}
 
-    public void disableRDS() {
-    }
+  public void enableRDS() {}
 
-    public void enableAF() {
-    }
+  public void disableRDS() {}
 
-    public void disableAF() {
-    }
+  public void enableAF() {}
 
-    public void cancelAFSwitching() {
-    }
+  public void disableAF() {}
 
-    public void setBand(int band) {
-    }
+  public void cancelAFSwitching() {}
 
-    public void setChannelSpacing(int spacing) {
-    }
+  public void setBand(int band) {}
 
-    public void setStereo() {
-    }
+  public void setChannelSpacing(int spacing) {}
 
-    public void setMono() {
-    }
+  public void setStereo() {}
 
-    public void setSpeakerOn(boolean setSpeakerOn) {
-    }
+  public void setMono() {}
 
-    public void setRecordMode(int is_record) {
-    }
+  public void setSpeakerOn(boolean setSpeakerOn) {}
 
-    public long getMaxVolume() {
-        return -1L;
-    }
+  public void setRecordMode(int is_record) {}
 
-    public void setDEConstant(long value) {
-    }
+  public long getMaxVolume() {
+    return -1L;
+  }
 
-    public long getCurrentRSSI() {
-        return -1L;
-    }
+  public void setDEConstant(long value) {}
 
-    public long getCurrentSNR() {
-        return -1L;
-    }
+  public long getCurrentRSSI() {
+    return -1L;
+  }
 
-    public void setSeekRSSI(long value) {
-    }
+  public long getCurrentSNR() {
+    return -1L;
+  }
 
-    public void setSeekSNR(long value) {
-    }
+  public void setSeekRSSI(long value) {}
 
-    public void setRSSI_th(int value) {
-    }
+  public void setSeekSNR(long value) {}
 
-    public void setSNR_th(int value) {
-    }
+  public void setRSSI_th(int value) {}
 
-    public void setCnt_th(int value) {
-    }
+  public void setSNR_th(int value) {}
 
-    public void setRSSI_th_2(int value) {
-    }
+  public void setCnt_th(int value) {}
 
-    public void setSNR_th_2(int value) {
-    }
+  public void setRSSI_th_2(int value) {}
 
-    public void setCnt_th_2(int value) {
-    }
+  public void setSNR_th_2(int value) {}
 
-    public int getRSSI_th() {
-        return -1;
-    }
+  public void setCnt_th_2(int value) {}
 
-    public int getSNR_th() {
-        return -1;
-    }
+  public int getRSSI_th() {
+    return -1;
+  }
 
-    public int getCnt_th() {
-        return -1;
-    }
+  public int getSNR_th() {
+    return -1;
+  }
 
-    public int getRSSI_th_2() {
-        return -1;
-    }
+  public int getCnt_th() {
+    return -1;
+  }
 
-    public int getSNR_th_2() {
-        return -1;
-    }
+  public int getRSSI_th_2() {
+    return -1;
+  }
 
-    public int getCnt_th_2() {
-        return -1;
-    }
+  public int getSNR_th_2() {
+    return -1;
+  }
 
-    public void setAF_th(int value) {
-    }
+  public int getCnt_th_2() {
+    return -1;
+  }
 
-    public int getAF_th() {
-        return -1;
-    }
+  public void setAF_th(int value) {}
 
-    public void setAFValid_th(int value) {
-    }
+  public int getAF_th() {
+    return -1;
+  }
 
-    public int getAFValid_th() {
-        return -1;
-    }
+  public void setAFValid_th(int value) {}
 
-    public void setFMIntenna(boolean setFMIntenna) {
-    }
+  public int getAFValid_th() {
+    return -1;
+  }
 
-    public void setSoftmute(boolean setSoftmute) {
-    }
+  public void setFMIntenna(boolean setFMIntenna) {}
 
-    public boolean getSoftMuteMode() {
-        return false;
-    }
+  public void setSoftmute(boolean setSoftmute) {}
 
-    public void setSearchAlgoType(int value) {
-    }
+  public boolean getSoftMuteMode() {
+    return false;
+  }
 
-    public int getSearchAlgoType() {
-        return -1;
-    }
+  public void setSearchAlgoType(int value) {}
 
-    public void setSINRSamples(int value) {
-    }
+  public int getSearchAlgoType() {
+    return -1;
+  }
 
-    public int getSINRSamples() {
-        return -1;
-    }
+  public void setSINRSamples(int value) {}
 
-    public void setOnChannelThreshold(int value) {
-    }
+  public int getSINRSamples() {
+    return -1;
+  }
 
-    public int getOnChannelThreshold() {
-        return -1;
-    }
+  public void setOnChannelThreshold(int value) {}
 
-    public void setOffChannelThreshold(int value) {
-    }
+  public int getOnChannelThreshold() {
+    return -1;
+  }
 
-    public int getOffChannelThreshold() {
-        return -1;
-    }
+  public void setOffChannelThreshold(int value) {}
 
-    public void setSINRThreshold(int value) {
-    }
+  public int getOffChannelThreshold() {
+    return -1;
+  }
 
-    public int getSINRThreshold() {
-        return -1;
-    }
+  public void setSINRThreshold(int value) {}
 
-    public void setCFOTh12(int value) {
-    }
+  public int getSINRThreshold() {
+    return -1;
+  }
 
-    public int getCFOTh12() {
-        return -1;
-    }
+  public void setCFOTh12(int value) {}
 
-    public void setRMSSIFirstStage(int value) {
-    }
+  public int getCFOTh12() {
+    return -1;
+  }
 
-    public int getRMSSIFirstStage() {
-        return -1;
-    }
+  public void setRMSSIFirstStage(int value) {}
 
-    public void setSINRFirstStage(int value) {
-    }
+  public int getRMSSIFirstStage() {
+    return -1;
+  }
 
-    public int getSINRFirstStage() {
-        return -1;
-    }
+  public void setSINRFirstStage(int value) {}
 
-    public void setAFRMSSIThreshold(int value) {
-    }
+  public int getSINRFirstStage() {
+    return -1;
+  }
 
-    public int getAFRMSSIThreshold() {
-        return -1;
-    }
+  public void setAFRMSSIThreshold(int value) {}
 
-    public void setAFRMSSISamples(int value) {
-    }
+  public int getAFRMSSIThreshold() {
+    return -1;
+  }
 
-    public int getAFRMSSISamples() {
-        return -1;
-    }
+  public void setAFRMSSISamples(int value) {}
 
-    public void setGoodChannelRMSSIThreshold(int value) {
-    }
+  public int getAFRMSSISamples() {
+    return -1;
+  }
 
-    public int getGoodChannelRMSSIThreshold() {
-        return -1;
-    }
+  public void setGoodChannelRMSSIThreshold(int value) {}
 
-    public void setHybridSearch(String value) {
-    }
+  public int getGoodChannelRMSSIThreshold() {
+    return -1;
+  }
 
-    public String getHybridSearch() {
-        return null;
-    }
+  public void setHybridSearch(String value) {}
 
-    public void setBlendRmssi(int value) {
-    }
+  public String getHybridSearch() {
+    return null;
+  }
 
-    public int getBlendRmssi() {
-        return -1;
-    }
+  public void setBlendRmssi(int value) {}
 
-    public void setBlendSinr(int value) {
-    }
+  public int getBlendRmssi() {
+    return -1;
+  }
 
-    public int getBlendSinr() {
-        return -1;
-    }
+  public void setBlendSinr(int value) {}
 
-    public void setSeekDC(int value) {
-    }
+  public int getBlendSinr() {
+    return -1;
+  }
 
-    public int getSeekDC() {
-        return -1;
-    }
+  public void setSeekDC(int value) {}
 
-    public void setSeekQA(int value) {
-    }
+  public int getSeekDC() {
+    return -1;
+  }
 
-    public int getSeekQA() {
-        return -1;
-    }
+  public void setSeekQA(int value) {}
 
-    public void setScanning(boolean value) {
-    }
+  public int getSeekQA() {
+    return -1;
+  }
 
-    public void setFrequencyOffsetThreshold(int value) {
-    }
+  public void setScanning(boolean value) {}
 
-    public void setPilotPowerThreshold(int value) {
-    }
+  public void setFrequencyOffsetThreshold(int value) {}
 
-    public void setNoisePowerThreshold(int value) {
-    }
+  public void setPilotPowerThreshold(int value) {}
 
-    public int getFrequencyOffsetThreshold() {
-        return -1;
-    }
+  public void setNoisePowerThreshold(int value) {}
 
-    public int getPilotPowerThreshold() {
-        return -1;
-    }
+  public int getFrequencyOffsetThreshold() {
+    return -1;
+  }
 
-    public int getNoisePowerThreshold() {
-        return -1;
-    }
+  public int getPilotPowerThreshold() {
+    return -1;
+  }
 
-    public void setIFCount1(int value) {
-    }
+  public int getNoisePowerThreshold() {
+    return -1;
+  }
 
-    public void setIFCount2(int value) {
-    }
+  public void setIFCount1(int value) {}
 
-    public void setSoftStereoBlendCoeff(long value) {
-    }
+  public void setIFCount2(int value) {}
 
-    public void setSoftMuteCoeff(long value) {
-    }
+  public void setSoftStereoBlendCoeff(long value) {}
 
-    public void setSoftStereoBlendRef(long value) {
-    }
+  public void setSoftMuteCoeff(long value) {}
 
-    public void setSeekDesenseRSSI(int value) {
-    }
+  public void setSoftStereoBlendRef(long value) {}
 
-    public void setSeekSMG(int value) {
-    }
+  public void setSeekDesenseRSSI(int value) {}
 
-    public void setSoftmute_th(int value) {
-    }
+  public void setSeekSMG(int value) {}
 
-    public void setBlendRSSI_th(int value) {
-    }
+  public void setSoftmute_th(int value) {}
 
-    public void setBlendPAMD_th(int value) {
-    }
+  public void setBlendRSSI_th(int value) {}
 
-    public void setFakeChannel(String value) {
-    }
+  public void setBlendPAMD_th(int value) {}
 
-    public String getFakeChannel() {
-        return null;
-    }
+  public void setFakeChannel(String value) {}
 
-    public void setDeSenseList(String value) {
-    }
+  public String getFakeChannel() {
+    return null;
+  }
 
-    public String getDeSenseList() {
-        return null;
-    }
+  public void setDeSenseList(String value) {}
 
-    public void setATJ(int bATJOn) {
-    }
+  public String getDeSenseList() {
+    return null;
+  }
 
-    public void setSlimbusEnable(int mode) {
-    }
+  public void setATJ(int bATJOn) {}
+
+  public void setSlimbusEnable(int mode) {}
 }

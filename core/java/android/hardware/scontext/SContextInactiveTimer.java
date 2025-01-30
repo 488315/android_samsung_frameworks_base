@@ -7,52 +7,57 @@ import android.p009os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextInactiveTimer extends SContextEventContext {
-    public static final Parcelable.Creator<SContextInactiveTimer> CREATOR = new Parcelable.Creator<SContextInactiveTimer>() { // from class: android.hardware.scontext.SContextInactiveTimer.1
+  public static final Parcelable.Creator<SContextInactiveTimer> CREATOR =
+      new Parcelable.Creator<
+          SContextInactiveTimer>() { // from class:
+                                     // android.hardware.scontext.SContextInactiveTimer.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public SContextInactiveTimer createFromParcel(Parcel in) {
-            return new SContextInactiveTimer(in);
+          return new SContextInactiveTimer(in);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public SContextInactiveTimer[] newArray(int size) {
-            return new SContextInactiveTimer[size];
+          return new SContextInactiveTimer[size];
         }
-    };
-    private Bundle mContext;
+      };
+  private Bundle mContext;
 
-    SContextInactiveTimer() {
-        this.mContext = new Bundle();
-    }
+  SContextInactiveTimer() {
+    this.mContext = new Bundle();
+  }
 
-    SContextInactiveTimer(Parcel src) {
-        readFromParcel(src);
-    }
+  SContextInactiveTimer(Parcel src) {
+    readFromParcel(src);
+  }
 
-    public int getDuration() {
-        return this.mContext.getInt("InactiveTimeDuration");
-    }
+  public int getDuration() {
+    return this.mContext.getInt("InactiveTimeDuration");
+  }
 
-    public int getStatus() {
-        return this.mContext.getInt("InactiveStatus");
-    }
+  public int getStatus() {
+    return this.mContext.getInt("InactiveStatus");
+  }
 
-    public boolean isTimeOutExpired() {
-        return this.mContext.getBoolean("IsTimeOut");
-    }
+  public boolean isTimeOutExpired() {
+    return this.mContext.getBoolean("IsTimeOut");
+  }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
-    public void setValues(Bundle context) {
-        this.mContext = context;
-    }
+  @Override // android.hardware.scontext.SContextEventContext,
+            // com.samsung.android.hardware.context.SemContextEventContext
+  public void setValues(Bundle context) {
+    this.mContext = context;
+  }
 
-    @Override // com.samsung.android.hardware.context.SemContextEventContext, android.p009os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeBundle(this.mContext);
-    }
+  @Override // com.samsung.android.hardware.context.SemContextEventContext,
+            // android.p009os.Parcelable
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeBundle(this.mContext);
+  }
 
-    private void readFromParcel(Parcel src) {
-        this.mContext = src.readBundle();
-    }
+  private void readFromParcel(Parcel src) {
+    this.mContext = src.readBundle();
+  }
 }

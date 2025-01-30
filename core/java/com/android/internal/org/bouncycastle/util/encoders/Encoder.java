@@ -5,9 +5,9 @@ import java.io.OutputStream;
 
 /* loaded from: classes5.dex */
 public interface Encoder {
-    int decode(String str, OutputStream outputStream) throws IOException;
+  int decode(String str, OutputStream outputStream) throws IOException;
 
-    int decode(byte[] bArr, int i, int i2, OutputStream outputStream) throws IOException;
+  int decode(byte[] bArr, int i, int i2, OutputStream outputStream) throws IOException;
 
-    int encode(byte[] bArr, int i, int i2, OutputStream outputStream) throws IOException;
+  int encode(byte[] bArr, int i, int i2, OutputStream outputStream) throws IOException;
 }

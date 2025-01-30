@@ -5,52 +5,60 @@ import android.p009os.Parcelable;
 
 /* loaded from: classes.dex */
 public class ObbInfo implements Parcelable {
-    public static final Parcelable.Creator<ObbInfo> CREATOR = new Parcelable.Creator<ObbInfo>() { // from class: android.content.res.ObbInfo.1
+  public static final Parcelable.Creator<ObbInfo> CREATOR =
+      new Parcelable.Creator<ObbInfo>() { // from class: android.content.res.ObbInfo.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public ObbInfo createFromParcel(Parcel source) {
-            return new ObbInfo(source);
+          return new ObbInfo(source);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public ObbInfo[] newArray(int size) {
-            return new ObbInfo[size];
+          return new ObbInfo[size];
         }
-    };
-    public static final int OBB_OVERLAY = 1;
-    public String filename;
-    public int flags;
-    public String packageName;
-    public byte[] salt;
-    public int version;
+      };
+  public static final int OBB_OVERLAY = 1;
+  public String filename;
+  public int flags;
+  public String packageName;
+  public byte[] salt;
+  public int version;
 
-    ObbInfo() {
-    }
+  ObbInfo() {}
 
-    public String toString() {
-        return "ObbInfo{" + Integer.toHexString(System.identityHashCode(this)) + " packageName=" + this.packageName + ",version=" + this.version + ",flags=" + this.flags + '}';
-    }
+  public String toString() {
+    return "ObbInfo{"
+        + Integer.toHexString(System.identityHashCode(this))
+        + " packageName="
+        + this.packageName
+        + ",version="
+        + this.version
+        + ",flags="
+        + this.flags
+        + '}';
+  }
 
-    @Override // android.p009os.Parcelable
-    public int describeContents() {
-        return 0;
-    }
+  @Override // android.p009os.Parcelable
+  public int describeContents() {
+    return 0;
+  }
 
-    @Override // android.p009os.Parcelable
-    public void writeToParcel(Parcel dest, int parcelableFlags) {
-        dest.writeString(this.filename);
-        dest.writeString(this.packageName);
-        dest.writeInt(this.version);
-        dest.writeInt(this.flags);
-        dest.writeByteArray(this.salt);
-    }
+  @Override // android.p009os.Parcelable
+  public void writeToParcel(Parcel dest, int parcelableFlags) {
+    dest.writeString(this.filename);
+    dest.writeString(this.packageName);
+    dest.writeInt(this.version);
+    dest.writeInt(this.flags);
+    dest.writeByteArray(this.salt);
+  }
 
-    private ObbInfo(Parcel source) {
-        this.filename = source.readString();
-        this.packageName = source.readString();
-        this.version = source.readInt();
-        this.flags = source.readInt();
-        this.salt = source.createByteArray();
-    }
+  private ObbInfo(Parcel source) {
+    this.filename = source.readString();
+    this.packageName = source.readString();
+    this.version = source.readInt();
+    this.flags = source.readInt();
+    this.salt = source.createByteArray();
+  }
 }

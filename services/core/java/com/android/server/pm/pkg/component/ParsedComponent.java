@@ -7,29 +7,29 @@ import java.util.Map;
 
 /* loaded from: classes3.dex */
 public interface ParsedComponent {
-    int getBanner();
+  int getBanner();
 
-    ComponentName getComponentName();
+  ComponentName getComponentName();
 
-    int getDescriptionRes();
+  int getDescriptionRes();
 
-    int getFlags();
+  int getFlags();
 
-    int getIcon();
+  int getIcon();
 
-    List getIntents();
+  List getIntents();
 
-    int getLabelRes();
+  int getLabelRes();
 
-    int getLogo();
+  int getLogo();
 
-    Bundle getMetaData();
+  Bundle getMetaData();
 
-    String getName();
+  String getName();
 
-    CharSequence getNonLocalizedLabel();
+  CharSequence getNonLocalizedLabel();
 
-    String getPackageName();
+  String getPackageName();
 
-    Map getProperties();
+  Map getProperties();
 }

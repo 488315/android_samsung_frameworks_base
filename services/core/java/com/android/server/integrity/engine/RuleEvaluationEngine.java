@@ -10,37 +10,37 @@ import java.util.List;
 
 /* loaded from: classes2.dex */
 public class RuleEvaluationEngine {
-    public static RuleEvaluationEngine sRuleEvaluationEngine;
-    public final IntegrityFileManager mIntegrityFileManager;
+  public static RuleEvaluationEngine sRuleEvaluationEngine;
+  public final IntegrityFileManager mIntegrityFileManager;
 
-    public RuleEvaluationEngine(IntegrityFileManager integrityFileManager) {
-        this.mIntegrityFileManager = integrityFileManager;
-    }
+  public RuleEvaluationEngine(IntegrityFileManager integrityFileManager) {
+    this.mIntegrityFileManager = integrityFileManager;
+  }
 
-    public static synchronized RuleEvaluationEngine getRuleEvaluationEngine() {
-        synchronized (RuleEvaluationEngine.class) {
-            RuleEvaluationEngine ruleEvaluationEngine = sRuleEvaluationEngine;
-            if (ruleEvaluationEngine != null) {
-                return ruleEvaluationEngine;
-            }
-            return new RuleEvaluationEngine(IntegrityFileManager.getInstance());
-        }
+  public static synchronized RuleEvaluationEngine getRuleEvaluationEngine() {
+    synchronized (RuleEvaluationEngine.class) {
+      RuleEvaluationEngine ruleEvaluationEngine = sRuleEvaluationEngine;
+      if (ruleEvaluationEngine != null) {
+        return ruleEvaluationEngine;
+      }
+      return new RuleEvaluationEngine(IntegrityFileManager.getInstance());
     }
+  }
 
-    public IntegrityCheckResult evaluate(AppInstallMetadata appInstallMetadata) {
-        return RuleEvaluator.evaluateRules(loadRules(appInstallMetadata), appInstallMetadata);
-    }
+  public IntegrityCheckResult evaluate(AppInstallMetadata appInstallMetadata) {
+    return RuleEvaluator.evaluateRules(loadRules(appInstallMetadata), appInstallMetadata);
+  }
 
-    public final List loadRules(AppInstallMetadata appInstallMetadata) {
-        if (!this.mIntegrityFileManager.initialized()) {
-            Slog.w("RuleEvaluation", "Integrity rule files are not available.");
-            return Collections.emptyList();
-        }
-        try {
-            return this.mIntegrityFileManager.readRules(appInstallMetadata);
-        } catch (Exception e) {
-            Slog.e("RuleEvaluation", "Error loading rules.", e);
-            return new ArrayList();
-        }
+  public final List loadRules(AppInstallMetadata appInstallMetadata) {
+    if (!this.mIntegrityFileManager.initialized()) {
+      Slog.w("RuleEvaluation", "Integrity rule files are not available.");
+      return Collections.emptyList();
     }
+    try {
+      return this.mIntegrityFileManager.readRules(appInstallMetadata);
+    } catch (Exception e) {
+      Slog.e("RuleEvaluation", "Error loading rules.", e);
+      return new ArrayList();
+    }
+  }
 }

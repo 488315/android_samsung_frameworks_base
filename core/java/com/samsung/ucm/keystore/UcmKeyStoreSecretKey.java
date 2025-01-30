@@ -6,10 +6,16 @@ import javax.crypto.SecretKey;
 
 /* loaded from: classes6.dex */
 public class UcmKeyStoreSecretKey extends UcmKeyStoreKey implements SecretKey {
-    private static final String TAG = UcmKeyStoreSecretKey.class.getSimpleName();
+  private static final String TAG = UcmKeyStoreSecretKey.class.getSimpleName();
 
-    public UcmKeyStoreSecretKey(String alias, String algorithm) {
-        super(alias, algorithm);
-        Log.m94d(TAG, "UcmKeyStoreSecretKey(" + alias + ", " + algorithm + NavigationBarInflaterView.KEY_CODE_END);
-    }
+  public UcmKeyStoreSecretKey(String alias, String algorithm) {
+    super(alias, algorithm);
+    Log.m94d(
+        TAG,
+        "UcmKeyStoreSecretKey("
+            + alias
+            + ", "
+            + algorithm
+            + NavigationBarInflaterView.KEY_CODE_END);
+  }
 }

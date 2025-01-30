@@ -8,53 +8,53 @@ import java.util.Set;
 
 /* loaded from: classes2.dex */
 public interface IKnoxAnalyticsContainer {
-    int getActivePasswordQuality(int i);
+  int getActivePasswordQuality(int i);
 
-    ComponentName getAdminComponentForLegacy(int i);
+  ComponentName getAdminComponentForLegacy(int i);
 
-    int getCallerIdToShow(int i);
+  int getCallerIdToShow(int i);
 
-    String getDeviceOwnerPackage();
+  String getDeviceOwnerPackage();
 
-    String getDisabledPrintServices(int i);
+  String getDisabledPrintServices(int i);
 
-    String getInstallerPackageName(String str);
+  String getInstallerPackageName(String str);
 
-    int getKnoxFingerprintPlus(int i);
+  int getKnoxFingerprintPlus(int i);
 
-    int getKnoxScreenTimeOut(int i);
+  int getKnoxScreenTimeOut(int i);
 
-    int getLocationProvidersAllowed(int i);
+  int getLocationProvidersAllowed(int i);
 
-    int getLockScreenAllowPrivateNotification(int i);
+  int getLockScreenAllowPrivateNotification(int i);
 
-    PackageInfo getPackageInfo(String str, int i);
+  PackageInfo getPackageInfo(String str, int i);
 
-    Bundle getSeparatedAppsConfig();
+  Bundle getSeparatedAppsConfig();
 
-    long getSeparatedAppsContainerId();
+  long getSeparatedAppsContainerId();
 
-    int getSeparatedAppsUserId();
+  int getSeparatedAppsUserId();
 
-    Set getVisibleApps(int i);
+  Set getVisibleApps(int i);
 
-    boolean hasUserRestriction(String str, int i);
+  boolean hasUserRestriction(String str, int i);
 
-    boolean isDoEnabled(int i);
+  boolean isDoEnabled(int i);
 
-    int isIMPackage(String str, int i);
+  int isIMPackage(String str, int i);
 
-    boolean isKnoxId(int i);
+  boolean isKnoxId(int i);
 
-    boolean isLegacyClId(int i);
+  boolean isLegacyClId(int i);
 
-    boolean isOrganizationOwned();
+  boolean isOrganizationOwned();
 
-    boolean isPremiumLicenseActivated(int i);
+  boolean isPremiumLicenseActivated(int i);
 
-    boolean isSecureFolderId(int i);
+  boolean isSecureFolderId(int i);
 
-    boolean isSeparatedAppsIndepdentApp(PackageInfo packageInfo);
+  boolean isSeparatedAppsIndepdentApp(PackageInfo packageInfo);
 
-    void sendAnalyticsLog(KnoxAnalyticsData knoxAnalyticsData);
+  void sendAnalyticsLog(KnoxAnalyticsData knoxAnalyticsData);
 }

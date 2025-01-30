@@ -7,11 +7,10 @@ import android.view.View;
 
 /* loaded from: classes4.dex */
 class TransitionValuesMaps {
-    ArrayMap<View, TransitionValues> viewValues = new ArrayMap<>();
-    SparseArray<View> idValues = new SparseArray<>();
-    LongSparseArray<View> itemIdValues = new LongSparseArray<>();
-    ArrayMap<String, View> nameValues = new ArrayMap<>();
+  ArrayMap<View, TransitionValues> viewValues = new ArrayMap<>();
+  SparseArray<View> idValues = new SparseArray<>();
+  LongSparseArray<View> itemIdValues = new LongSparseArray<>();
+  ArrayMap<String, View> nameValues = new ArrayMap<>();
 
-    TransitionValuesMaps() {
-    }
+  TransitionValuesMaps() {}
 }

@@ -4,21 +4,21 @@ import android.graphics.drawable.Drawable;
 
 /* loaded from: classes4.dex */
 public interface SubMenu extends Menu {
-    void clearHeader();
+  void clearHeader();
 
-    MenuItem getItem();
+  MenuItem getItem();
 
-    SubMenu setHeaderIcon(int i);
+  SubMenu setHeaderIcon(int i);
 
-    SubMenu setHeaderIcon(Drawable drawable);
+  SubMenu setHeaderIcon(Drawable drawable);
 
-    SubMenu setHeaderTitle(int i);
+  SubMenu setHeaderTitle(int i);
 
-    SubMenu setHeaderTitle(CharSequence charSequence);
+  SubMenu setHeaderTitle(CharSequence charSequence);
 
-    SubMenu setHeaderView(View view);
+  SubMenu setHeaderView(View view);
 
-    SubMenu setIcon(int i);
+  SubMenu setIcon(int i);
 
-    SubMenu setIcon(Drawable drawable);
+  SubMenu setIcon(Drawable drawable);
 }

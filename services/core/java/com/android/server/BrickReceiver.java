@@ -7,9 +7,9 @@ import android.util.Slog;
 
 /* loaded from: classes.dex */
 public class BrickReceiver extends BroadcastReceiver {
-    @Override // android.content.BroadcastReceiver
-    public void onReceive(Context context, Intent intent) {
-        Slog.w("BrickReceiver", "!!! BRICKING DEVICE !!!");
-        android.os.SystemService.start("brick");
-    }
+  @Override // android.content.BroadcastReceiver
+  public void onReceive(Context context, Intent intent) {
+    Slog.w("BrickReceiver", "!!! BRICKING DEVICE !!!");
+    android.os.SystemService.start("brick");
+  }
 }

@@ -5,9 +5,9 @@ import android.content.res.AssetManager;
 
 /* loaded from: classes3.dex */
 public interface SplitAssetLoader extends AutoCloseable {
-    ApkAssets getBaseApkAssets();
+  ApkAssets getBaseApkAssets();
 
-    AssetManager getBaseAssetManager();
+  AssetManager getBaseAssetManager();
 
-    AssetManager getSplitAssetManager(int i);
+  AssetManager getSplitAssetManager(int i);
 }

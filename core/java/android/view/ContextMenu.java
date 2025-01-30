@@ -5,18 +5,17 @@ import android.graphics.drawable.Drawable;
 /* loaded from: classes4.dex */
 public interface ContextMenu extends Menu {
 
-    public interface ContextMenuInfo {
-    }
+  public interface ContextMenuInfo {}
 
-    void clearHeader();
+  void clearHeader();
 
-    ContextMenu setHeaderIcon(int i);
+  ContextMenu setHeaderIcon(int i);
 
-    ContextMenu setHeaderIcon(Drawable drawable);
+  ContextMenu setHeaderIcon(Drawable drawable);
 
-    ContextMenu setHeaderTitle(int i);
+  ContextMenu setHeaderTitle(int i);
 
-    ContextMenu setHeaderTitle(CharSequence charSequence);
+  ContextMenu setHeaderTitle(CharSequence charSequence);
 
-    ContextMenu setHeaderView(View view);
+  ContextMenu setHeaderView(View view);
 }

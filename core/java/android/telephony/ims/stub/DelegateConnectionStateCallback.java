@@ -11,16 +11,17 @@ import java.util.Set;
 @SystemApi
 /* loaded from: classes3.dex */
 public interface DelegateConnectionStateCallback {
-    void onConfigurationChanged(SipDelegateConfiguration sipDelegateConfiguration);
+  void onConfigurationChanged(SipDelegateConfiguration sipDelegateConfiguration);
 
-    void onCreated(SipDelegateConnection sipDelegateConnection);
+  void onCreated(SipDelegateConnection sipDelegateConnection);
 
-    void onDestroyed(int i);
+  void onDestroyed(int i);
 
-    void onFeatureTagStatusChanged(DelegateRegistrationState delegateRegistrationState, Set<FeatureTagState> set);
+  void onFeatureTagStatusChanged(
+      DelegateRegistrationState delegateRegistrationState, Set<FeatureTagState> set);
 
-    @Deprecated
-    default void onImsConfigurationChanged(SipDelegateImsConfiguration registeredSipConfig) {
-        onConfigurationChanged(registeredSipConfig.toNewConfig());
-    }
+  @Deprecated
+  default void onImsConfigurationChanged(SipDelegateImsConfiguration registeredSipConfig) {
+    onConfigurationChanged(registeredSipConfig.toNewConfig());
+  }
 }

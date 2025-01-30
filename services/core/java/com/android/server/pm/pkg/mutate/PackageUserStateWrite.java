@@ -6,29 +6,29 @@ import com.android.server.pm.pkg.SuspendParams;
 
 /* loaded from: classes3.dex */
 public interface PackageUserStateWrite {
-    PackageUserStateWrite putSuspendParams(String str, SuspendParams suspendParams);
+  PackageUserStateWrite putSuspendParams(String str, SuspendParams suspendParams);
 
-    PackageUserStateWrite removeSuspension(String str);
+  PackageUserStateWrite removeSuspension(String str);
 
-    PackageUserStateWrite setComponentLabelIcon(ComponentName componentName, String str, Integer num);
+  PackageUserStateWrite setComponentLabelIcon(ComponentName componentName, String str, Integer num);
 
-    PackageUserStateWrite setDistractionFlags(int i);
+  PackageUserStateWrite setDistractionFlags(int i);
 
-    PackageUserStateWrite setHarmfulAppWarning(String str);
+  PackageUserStateWrite setHarmfulAppWarning(String str);
 
-    PackageUserStateWrite setHidden(boolean z);
+  PackageUserStateWrite setHidden(boolean z);
 
-    PackageUserStateWrite setInstalled(boolean z);
+  PackageUserStateWrite setInstalled(boolean z);
 
-    PackageUserStateWrite setNotLaunched(boolean z);
+  PackageUserStateWrite setNotLaunched(boolean z);
 
-    PackageUserStateWrite setOverlayPaths(OverlayPaths overlayPaths);
+  PackageUserStateWrite setOverlayPaths(OverlayPaths overlayPaths);
 
-    PackageUserStateWrite setOverlayPathsForLibrary(String str, OverlayPaths overlayPaths);
+  PackageUserStateWrite setOverlayPathsForLibrary(String str, OverlayPaths overlayPaths);
 
-    PackageUserStateWrite setSplashScreenTheme(String str);
+  PackageUserStateWrite setSplashScreenTheme(String str);
 
-    PackageUserStateWrite setStopped(boolean z);
+  PackageUserStateWrite setStopped(boolean z);
 
-    PackageUserStateWrite setUninstallReason(int i);
+  PackageUserStateWrite setUninstallReason(int i);
 }

@@ -2,15 +2,15 @@ package com.android.internal.org.bouncycastle.crypto;
 
 /* loaded from: classes5.dex */
 public interface Digest {
-    int doFinal(byte[] bArr, int i);
+  int doFinal(byte[] bArr, int i);
 
-    String getAlgorithmName();
+  String getAlgorithmName();
 
-    int getDigestSize();
+  int getDigestSize();
 
-    void reset();
+  void reset();
 
-    void update(byte b);
+  void update(byte b);
 
-    void update(byte[] bArr, int i, int i2);
+  void update(byte[] bArr, int i, int i2);
 }

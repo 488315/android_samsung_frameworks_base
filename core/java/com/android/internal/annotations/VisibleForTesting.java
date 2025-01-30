@@ -7,11 +7,11 @@ import java.lang.annotation.RetentionPolicy;
 /* loaded from: classes4.dex */
 public @interface VisibleForTesting {
 
-    public enum Visibility {
-        PROTECTED,
-        PACKAGE,
-        PRIVATE
-    }
+  public enum Visibility {
+    PROTECTED,
+    PACKAGE,
+    PRIVATE
+  }
 
-    Visibility visibility() default Visibility.PRIVATE;
+  Visibility visibility() default Visibility.PRIVATE;
 }

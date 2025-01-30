@@ -5,15 +5,15 @@ import java.math.BigInteger;
 /* loaded from: classes5.dex */
 public class ECPrivateKeySpec extends ECKeySpec {
 
-    /* renamed from: d */
-    private BigInteger f924d;
+  /* renamed from: d */
+  private BigInteger f924d;
 
-    public ECPrivateKeySpec(BigInteger d, ECParameterSpec spec) {
-        super(spec);
-        this.f924d = d;
-    }
+  public ECPrivateKeySpec(BigInteger d, ECParameterSpec spec) {
+    super(spec);
+    this.f924d = d;
+  }
 
-    public BigInteger getD() {
-        return this.f924d;
-    }
+  public BigInteger getD() {
+    return this.f924d;
+  }
 }

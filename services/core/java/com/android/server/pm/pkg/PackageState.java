@@ -11,96 +11,96 @@ import java.util.Map;
 @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
 /* loaded from: classes3.dex */
 public interface PackageState {
-    AndroidPackage getAndroidPackage();
+  AndroidPackage getAndroidPackage();
 
-    String getApexModuleName();
+  String getApexModuleName();
 
-    int getAppId();
+  int getAppId();
 
-    int getCategoryOverride();
+  int getCategoryOverride();
 
-    String getCpuAbiOverride();
+  String getCpuAbiOverride();
 
-    int getHiddenApiEnforcementPolicy();
+  int getHiddenApiEnforcementPolicy();
 
-    long getLastModifiedTime();
+  long getLastModifiedTime();
 
-    long[] getLastPackageUsageTime();
+  long[] getLastPackageUsageTime();
 
-    long getLastUpdateTime();
+  long getLastUpdateTime();
 
-    Map getMimeGroups();
+  Map getMimeGroups();
 
-    String getPackageName();
+  String getPackageName();
 
-    File getPath();
+  File getPath();
 
-    String getPrimaryCpuAbi();
+  String getPrimaryCpuAbi();
 
-    String getSeInfo();
+  String getSeInfo();
 
-    String getSecondaryCpuAbi();
+  String getSecondaryCpuAbi();
 
-    List getSharedLibraryDependencies();
+  List getSharedLibraryDependencies();
 
-    int getSharedUserAppId();
+  int getSharedUserAppId();
 
-    SigningInfo getSigningInfo();
+  SigningInfo getSigningInfo();
 
-    PackageUserState getStateForUser(UserHandle userHandle);
+  PackageUserState getStateForUser(UserHandle userHandle);
 
-    SparseArray getUserStates();
+  SparseArray getUserStates();
 
-    List getUsesLibraryFiles();
+  List getUsesLibraryFiles();
 
-    String[] getUsesSdkLibraries();
+  String[] getUsesSdkLibraries();
 
-    long[] getUsesSdkLibrariesVersionsMajor();
+  long[] getUsesSdkLibrariesVersionsMajor();
 
-    String[] getUsesStaticLibraries();
+  String[] getUsesStaticLibraries();
 
-    long[] getUsesStaticLibrariesVersions();
+  long[] getUsesStaticLibrariesVersions();
 
-    long getVersionCode();
+  long getVersionCode();
 
-    String getVolumeUuid();
+  String getVolumeUuid();
 
-    boolean hasSharedUser();
+  boolean hasSharedUser();
 
-    boolean isApex();
+  boolean isApex();
 
-    boolean isApkInUpdatedApex();
+  boolean isApkInUpdatedApex();
 
-    boolean isExternalStorage();
+  boolean isExternalStorage();
 
-    boolean isForceQueryableOverride();
+  boolean isForceQueryableOverride();
 
-    boolean isHiddenUntilInstalled();
+  boolean isHiddenUntilInstalled();
 
-    boolean isInstallPermissionsFixed();
+  boolean isInstallPermissionsFixed();
 
-    boolean isOdm();
+  boolean isOdm();
 
-    boolean isOem();
+  boolean isOem();
 
-    boolean isPrivileged();
+  boolean isPrivileged();
 
-    boolean isProduct();
+  boolean isProduct();
 
-    boolean isRequiredForSystemUser();
+  boolean isRequiredForSystemUser();
 
-    boolean isSystem();
+  boolean isSystem();
 
-    boolean isSystemExt();
+  boolean isSystemExt();
 
-    boolean isUpdateAvailable();
+  boolean isUpdateAvailable();
 
-    boolean isUpdatedSystemApp();
+  boolean isUpdatedSystemApp();
 
-    boolean isVendor();
+  boolean isVendor();
 
-    default PackageUserState getUserStateOrDefault(int i) {
-        PackageUserState packageUserState = (PackageUserState) getUserStates().get(i);
-        return packageUserState == null ? PackageUserState.DEFAULT : packageUserState;
-    }
+  default PackageUserState getUserStateOrDefault(int i) {
+    PackageUserState packageUserState = (PackageUserState) getUserStates().get(i);
+    return packageUserState == null ? PackageUserState.DEFAULT : packageUserState;
+  }
 }

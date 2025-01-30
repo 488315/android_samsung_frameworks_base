@@ -31,167 +31,206 @@ import javax.crypto.spec.DHPrivateKeySpec;
 
 /* loaded from: classes5.dex */
 public class BCDHPrivateKey implements DHPrivateKey, PKCS12BagAttributeCarrier {
-    static final long serialVersionUID = 311058815616901812L;
-    private transient PKCS12BagAttributeCarrierImpl attrCarrier = new PKCS12BagAttributeCarrierImpl();
-    private transient DHPrivateKeyParameters dhPrivateKey;
-    private transient DHParameterSpec dhSpec;
-    private transient PrivateKeyInfo info;
+  static final long serialVersionUID = 311058815616901812L;
+  private transient PKCS12BagAttributeCarrierImpl attrCarrier = new PKCS12BagAttributeCarrierImpl();
+  private transient DHPrivateKeyParameters dhPrivateKey;
+  private transient DHParameterSpec dhSpec;
+  private transient PrivateKeyInfo info;
 
-    /* renamed from: x */
-    private BigInteger f893x;
+  /* renamed from: x */
+  private BigInteger f893x;
 
-    protected BCDHPrivateKey() {
+  protected BCDHPrivateKey() {}
+
+  BCDHPrivateKey(DHPrivateKey key) {
+    this.f893x = key.getX();
+    this.dhSpec = key.getParams();
+  }
+
+  BCDHPrivateKey(DHPrivateKeySpec spec) {
+    this.f893x = spec.getX();
+    if (spec instanceof DHExtendedPrivateKeySpec) {
+      this.dhSpec = ((DHExtendedPrivateKeySpec) spec).getParams();
+    } else {
+      this.dhSpec = new DHParameterSpec(spec.getP(), spec.getG());
     }
+  }
 
-    BCDHPrivateKey(DHPrivateKey key) {
-        this.f893x = key.getX();
-        this.dhSpec = key.getParams();
+  public BCDHPrivateKey(PrivateKeyInfo info) throws IOException {
+    ASN1Sequence seq = ASN1Sequence.getInstance(info.getPrivateKeyAlgorithm().getParameters());
+    ASN1Integer derX = (ASN1Integer) info.parsePrivateKey();
+    ASN1ObjectIdentifier id = info.getPrivateKeyAlgorithm().getAlgorithm();
+    this.info = info;
+    this.f893x = derX.getValue();
+    if (id.equals((ASN1Primitive) PKCSObjectIdentifiers.dhKeyAgreement)) {
+      DHParameter params = DHParameter.getInstance(seq);
+      if (params.getL() != null) {
+        this.dhSpec = new DHParameterSpec(params.getP(), params.getG(), params.getL().intValue());
+        this.dhPrivateKey =
+            new DHPrivateKeyParameters(
+                this.f893x,
+                new DHParameters(params.getP(), params.getG(), null, params.getL().intValue()));
+        return;
+      } else {
+        this.dhSpec = new DHParameterSpec(params.getP(), params.getG());
+        this.dhPrivateKey =
+            new DHPrivateKeyParameters(this.f893x, new DHParameters(params.getP(), params.getG()));
+        return;
+      }
     }
+    if (id.equals((ASN1Primitive) X9ObjectIdentifiers.dhpublicnumber)) {
+      DomainParameters params2 = DomainParameters.getInstance(seq);
+      this.dhSpec =
+          new DHDomainParameterSpec(
+              params2.getP(), params2.getQ(), params2.getG(), params2.getJ(), 0);
+      this.dhPrivateKey =
+          new DHPrivateKeyParameters(
+              this.f893x,
+              new DHParameters(
+                  params2.getP(),
+                  params2.getG(),
+                  params2.getQ(),
+                  params2.getJ(),
+                  (DHValidationParameters) null));
+      return;
+    }
+    throw new IllegalArgumentException("unknown algorithm type: " + id);
+  }
 
-    BCDHPrivateKey(DHPrivateKeySpec spec) {
-        this.f893x = spec.getX();
-        if (spec instanceof DHExtendedPrivateKeySpec) {
-            this.dhSpec = ((DHExtendedPrivateKeySpec) spec).getParams();
+  BCDHPrivateKey(DHPrivateKeyParameters params) {
+    this.f893x = params.getX();
+    this.dhSpec = new DHDomainParameterSpec(params.getParameters());
+  }
+
+  @Override // java.security.Key
+  public String getAlgorithm() {
+    return "DH";
+  }
+
+  @Override // java.security.Key
+  public String getFormat() {
+    return "PKCS#8";
+  }
+
+  @Override // java.security.Key
+  public byte[] getEncoded() {
+    PrivateKeyInfo info;
+    ValidationParams vParams;
+    try {
+      PrivateKeyInfo privateKeyInfo = this.info;
+      if (privateKeyInfo != null) {
+        return privateKeyInfo.getEncoded(ASN1Encoding.DER);
+      }
+      DHParameterSpec dHParameterSpec = this.dhSpec;
+      if ((dHParameterSpec instanceof DHDomainParameterSpec)
+          && ((DHDomainParameterSpec) dHParameterSpec).getQ() != null) {
+        DHParameters params = ((DHDomainParameterSpec) this.dhSpec).getDomainParameters();
+        DHValidationParameters validationParameters = params.getValidationParameters();
+        if (validationParameters == null) {
+          vParams = null;
         } else {
-            this.dhSpec = new DHParameterSpec(spec.getP(), spec.getG());
+          ValidationParams vParams2 =
+              new ValidationParams(
+                  validationParameters.getSeed(), validationParameters.getCounter());
+          vParams = vParams2;
         }
+        info =
+            new PrivateKeyInfo(
+                new AlgorithmIdentifier(
+                    X9ObjectIdentifiers.dhpublicnumber,
+                    new DomainParameters(
+                            params.getP(), params.getG(), params.getQ(), params.getJ(), vParams)
+                        .toASN1Primitive()),
+                new ASN1Integer(getX()));
+      } else {
+        info =
+            new PrivateKeyInfo(
+                new AlgorithmIdentifier(
+                    PKCSObjectIdentifiers.dhKeyAgreement,
+                    new DHParameter(this.dhSpec.getP(), this.dhSpec.getG(), this.dhSpec.getL())
+                        .toASN1Primitive()),
+                new ASN1Integer(getX()));
+      }
+      return info.getEncoded(ASN1Encoding.DER);
+    } catch (Exception e) {
+      return null;
     }
+  }
 
-    public BCDHPrivateKey(PrivateKeyInfo info) throws IOException {
-        ASN1Sequence seq = ASN1Sequence.getInstance(info.getPrivateKeyAlgorithm().getParameters());
-        ASN1Integer derX = (ASN1Integer) info.parsePrivateKey();
-        ASN1ObjectIdentifier id = info.getPrivateKeyAlgorithm().getAlgorithm();
-        this.info = info;
-        this.f893x = derX.getValue();
-        if (id.equals((ASN1Primitive) PKCSObjectIdentifiers.dhKeyAgreement)) {
-            DHParameter params = DHParameter.getInstance(seq);
-            if (params.getL() != null) {
-                this.dhSpec = new DHParameterSpec(params.getP(), params.getG(), params.getL().intValue());
-                this.dhPrivateKey = new DHPrivateKeyParameters(this.f893x, new DHParameters(params.getP(), params.getG(), null, params.getL().intValue()));
-                return;
-            } else {
-                this.dhSpec = new DHParameterSpec(params.getP(), params.getG());
-                this.dhPrivateKey = new DHPrivateKeyParameters(this.f893x, new DHParameters(params.getP(), params.getG()));
-                return;
-            }
-        }
-        if (id.equals((ASN1Primitive) X9ObjectIdentifiers.dhpublicnumber)) {
-            DomainParameters params2 = DomainParameters.getInstance(seq);
-            this.dhSpec = new DHDomainParameterSpec(params2.getP(), params2.getQ(), params2.getG(), params2.getJ(), 0);
-            this.dhPrivateKey = new DHPrivateKeyParameters(this.f893x, new DHParameters(params2.getP(), params2.getG(), params2.getQ(), params2.getJ(), (DHValidationParameters) null));
-            return;
-        }
-        throw new IllegalArgumentException("unknown algorithm type: " + id);
-    }
+  public String toString() {
+    return DHUtil.privateKeyToString(
+        "DH", this.f893x, new DHParameters(this.dhSpec.getP(), this.dhSpec.getG()));
+  }
 
-    BCDHPrivateKey(DHPrivateKeyParameters params) {
-        this.f893x = params.getX();
-        this.dhSpec = new DHDomainParameterSpec(params.getParameters());
-    }
+  @Override // javax.crypto.interfaces.DHKey
+  public DHParameterSpec getParams() {
+    return this.dhSpec;
+  }
 
-    @Override // java.security.Key
-    public String getAlgorithm() {
-        return "DH";
-    }
+  @Override // javax.crypto.interfaces.DHPrivateKey
+  public BigInteger getX() {
+    return this.f893x;
+  }
 
-    @Override // java.security.Key
-    public String getFormat() {
-        return "PKCS#8";
+  DHPrivateKeyParameters engineGetKeyParameters() {
+    DHPrivateKeyParameters dHPrivateKeyParameters = this.dhPrivateKey;
+    if (dHPrivateKeyParameters != null) {
+      return dHPrivateKeyParameters;
     }
+    DHParameterSpec dHParameterSpec = this.dhSpec;
+    if (dHParameterSpec instanceof DHDomainParameterSpec) {
+      return new DHPrivateKeyParameters(
+          this.f893x, ((DHDomainParameterSpec) dHParameterSpec).getDomainParameters());
+    }
+    return new DHPrivateKeyParameters(
+        this.f893x,
+        new DHParameters(dHParameterSpec.getP(), this.dhSpec.getG(), null, this.dhSpec.getL()));
+  }
 
-    @Override // java.security.Key
-    public byte[] getEncoded() {
-        PrivateKeyInfo info;
-        ValidationParams vParams;
-        try {
-            PrivateKeyInfo privateKeyInfo = this.info;
-            if (privateKeyInfo != null) {
-                return privateKeyInfo.getEncoded(ASN1Encoding.DER);
-            }
-            DHParameterSpec dHParameterSpec = this.dhSpec;
-            if ((dHParameterSpec instanceof DHDomainParameterSpec) && ((DHDomainParameterSpec) dHParameterSpec).getQ() != null) {
-                DHParameters params = ((DHDomainParameterSpec) this.dhSpec).getDomainParameters();
-                DHValidationParameters validationParameters = params.getValidationParameters();
-                if (validationParameters == null) {
-                    vParams = null;
-                } else {
-                    ValidationParams vParams2 = new ValidationParams(validationParameters.getSeed(), validationParameters.getCounter());
-                    vParams = vParams2;
-                }
-                info = new PrivateKeyInfo(new AlgorithmIdentifier(X9ObjectIdentifiers.dhpublicnumber, new DomainParameters(params.getP(), params.getG(), params.getQ(), params.getJ(), vParams).toASN1Primitive()), new ASN1Integer(getX()));
-            } else {
-                info = new PrivateKeyInfo(new AlgorithmIdentifier(PKCSObjectIdentifiers.dhKeyAgreement, new DHParameter(this.dhSpec.getP(), this.dhSpec.getG(), this.dhSpec.getL()).toASN1Primitive()), new ASN1Integer(getX()));
-            }
-            return info.getEncoded(ASN1Encoding.DER);
-        } catch (Exception e) {
-            return null;
-        }
+  public boolean equals(Object o) {
+    if (!(o instanceof DHPrivateKey)) {
+      return false;
     }
+    DHPrivateKey other = (DHPrivateKey) o;
+    return getX().equals(other.getX())
+        && getParams().getG().equals(other.getParams().getG())
+        && getParams().getP().equals(other.getParams().getP())
+        && getParams().getL() == other.getParams().getL();
+  }
 
-    public String toString() {
-        return DHUtil.privateKeyToString("DH", this.f893x, new DHParameters(this.dhSpec.getP(), this.dhSpec.getG()));
-    }
+  public int hashCode() {
+    return ((getX().hashCode() ^ getParams().getG().hashCode()) ^ getParams().getP().hashCode())
+        ^ getParams().getL();
+  }
 
-    @Override // javax.crypto.interfaces.DHKey
-    public DHParameterSpec getParams() {
-        return this.dhSpec;
-    }
+  @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
+  public void setBagAttribute(ASN1ObjectIdentifier oid, ASN1Encodable attribute) {
+    this.attrCarrier.setBagAttribute(oid, attribute);
+  }
 
-    @Override // javax.crypto.interfaces.DHPrivateKey
-    public BigInteger getX() {
-        return this.f893x;
-    }
+  @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
+  public ASN1Encodable getBagAttribute(ASN1ObjectIdentifier oid) {
+    return this.attrCarrier.getBagAttribute(oid);
+  }
 
-    DHPrivateKeyParameters engineGetKeyParameters() {
-        DHPrivateKeyParameters dHPrivateKeyParameters = this.dhPrivateKey;
-        if (dHPrivateKeyParameters != null) {
-            return dHPrivateKeyParameters;
-        }
-        DHParameterSpec dHParameterSpec = this.dhSpec;
-        if (dHParameterSpec instanceof DHDomainParameterSpec) {
-            return new DHPrivateKeyParameters(this.f893x, ((DHDomainParameterSpec) dHParameterSpec).getDomainParameters());
-        }
-        return new DHPrivateKeyParameters(this.f893x, new DHParameters(dHParameterSpec.getP(), this.dhSpec.getG(), null, this.dhSpec.getL()));
-    }
+  @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
+  public Enumeration getBagAttributeKeys() {
+    return this.attrCarrier.getBagAttributeKeys();
+  }
 
-    public boolean equals(Object o) {
-        if (!(o instanceof DHPrivateKey)) {
-            return false;
-        }
-        DHPrivateKey other = (DHPrivateKey) o;
-        return getX().equals(other.getX()) && getParams().getG().equals(other.getParams().getG()) && getParams().getP().equals(other.getParams().getP()) && getParams().getL() == other.getParams().getL();
-    }
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    in.defaultReadObject();
+    this.dhSpec =
+        new DHParameterSpec(
+            (BigInteger) in.readObject(), (BigInteger) in.readObject(), in.readInt());
+    this.info = null;
+    this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
+  }
 
-    public int hashCode() {
-        return ((getX().hashCode() ^ getParams().getG().hashCode()) ^ getParams().getP().hashCode()) ^ getParams().getL();
-    }
-
-    @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
-    public void setBagAttribute(ASN1ObjectIdentifier oid, ASN1Encodable attribute) {
-        this.attrCarrier.setBagAttribute(oid, attribute);
-    }
-
-    @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
-    public ASN1Encodable getBagAttribute(ASN1ObjectIdentifier oid) {
-        return this.attrCarrier.getBagAttribute(oid);
-    }
-
-    @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
-    public Enumeration getBagAttributeKeys() {
-        return this.attrCarrier.getBagAttributeKeys();
-    }
-
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-        in.defaultReadObject();
-        this.dhSpec = new DHParameterSpec((BigInteger) in.readObject(), (BigInteger) in.readObject(), in.readInt());
-        this.info = null;
-        this.attrCarrier = new PKCS12BagAttributeCarrierImpl();
-    }
-
-    private void writeObject(ObjectOutputStream out) throws IOException {
-        out.defaultWriteObject();
-        out.writeObject(this.dhSpec.getP());
-        out.writeObject(this.dhSpec.getG());
-        out.writeInt(this.dhSpec.getL());
-    }
+  private void writeObject(ObjectOutputStream out) throws IOException {
+    out.defaultWriteObject();
+    out.writeObject(this.dhSpec.getP());
+    out.writeObject(this.dhSpec.getG());
+    out.writeInt(this.dhSpec.getL());
+  }
 }

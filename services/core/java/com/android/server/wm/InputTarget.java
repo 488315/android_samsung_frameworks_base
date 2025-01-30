@@ -5,31 +5,31 @@ import android.view.IWindow;
 
 /* loaded from: classes3.dex */
 public interface InputTarget {
-    boolean canScreenshotIme();
+  boolean canScreenshotIme();
 
-    void dumpProto(ProtoOutputStream protoOutputStream, long j, int i);
+  void dumpProto(ProtoOutputStream protoOutputStream, long j, int i);
 
-    ActivityRecord getActivityRecord();
+  ActivityRecord getActivityRecord();
 
-    DisplayContent getDisplayContent();
+  DisplayContent getDisplayContent();
 
-    int getDisplayId();
+  int getDisplayId();
 
-    IWindow getIWindow();
+  IWindow getIWindow();
 
-    InsetsControlTarget getImeControlTarget();
+  InsetsControlTarget getImeControlTarget();
 
-    int getPid();
+  int getPid();
 
-    WindowState getWindowState();
+  WindowState getWindowState();
 
-    void handleTapOutsideFocusInsideSelf();
+  void handleTapOutsideFocusInsideSelf();
 
-    void handleTapOutsideFocusOutsideSelf();
+  void handleTapOutsideFocusOutsideSelf();
 
-    boolean isInputMethodClientFocus(int i, int i2);
+  boolean isInputMethodClientFocus(int i, int i2);
 
-    boolean receiveFocusFromTapOutside();
+  boolean receiveFocusFromTapOutside();
 
-    boolean shouldControlIme();
+  boolean shouldControlIme();
 }

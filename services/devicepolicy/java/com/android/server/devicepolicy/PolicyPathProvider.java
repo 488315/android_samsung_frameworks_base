@@ -5,11 +5,11 @@ import java.io.File;
 
 /* loaded from: classes2.dex */
 public interface PolicyPathProvider {
-    default File getDataSystemDirectory() {
-        return Environment.getDataSystemDirectory();
-    }
+  default File getDataSystemDirectory() {
+    return Environment.getDataSystemDirectory();
+  }
 
-    default File getUserSystemDirectory(int i) {
-        return Environment.getUserSystemDirectory(i);
-    }
+  default File getUserSystemDirectory(int i) {
+    return Environment.getUserSystemDirectory(i);
+  }
 }

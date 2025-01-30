@@ -7,12 +7,13 @@ import java.util.Map;
 
 /* loaded from: classes5.dex */
 public class PrivateKeyAnnotator {
-    public static AnnotatedPrivateKey annotate(PrivateKey privKey, String label) {
-        return new AnnotatedPrivateKey(privKey, label);
-    }
+  public static AnnotatedPrivateKey annotate(PrivateKey privKey, String label) {
+    return new AnnotatedPrivateKey(privKey, label);
+  }
 
-    public static AnnotatedPrivateKey annotate(PrivateKey privKey, Map<String, Object> annotations) {
-        Map savedAnnotations = new HashMap(annotations);
-        return new AnnotatedPrivateKey(privKey, (Map<String, Object>) Collections.unmodifiableMap(savedAnnotations));
-    }
+  public static AnnotatedPrivateKey annotate(PrivateKey privKey, Map<String, Object> annotations) {
+    Map savedAnnotations = new HashMap(annotations);
+    return new AnnotatedPrivateKey(
+        privKey, (Map<String, Object>) Collections.unmodifiableMap(savedAnnotations));
+  }
 }

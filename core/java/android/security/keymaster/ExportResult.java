@@ -5,40 +5,42 @@ import android.p009os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class ExportResult implements Parcelable {
-    public static final Parcelable.Creator<ExportResult> CREATOR = new Parcelable.Creator<ExportResult>() { // from class: android.security.keymaster.ExportResult.1
+  public static final Parcelable.Creator<ExportResult> CREATOR =
+      new Parcelable.Creator<
+          ExportResult>() { // from class: android.security.keymaster.ExportResult.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public ExportResult createFromParcel(Parcel in) {
-            return new ExportResult(in);
+          return new ExportResult(in);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public ExportResult[] newArray(int length) {
-            return new ExportResult[length];
+          return new ExportResult[length];
         }
-    };
-    public final byte[] exportData;
-    public final int resultCode;
+      };
+  public final byte[] exportData;
+  public final int resultCode;
 
-    public ExportResult(int resultCode) {
-        this.resultCode = resultCode;
-        this.exportData = new byte[0];
-    }
+  public ExportResult(int resultCode) {
+    this.resultCode = resultCode;
+    this.exportData = new byte[0];
+  }
 
-    protected ExportResult(Parcel in) {
-        this.resultCode = in.readInt();
-        this.exportData = in.createByteArray();
-    }
+  protected ExportResult(Parcel in) {
+    this.resultCode = in.readInt();
+    this.exportData = in.createByteArray();
+  }
 
-    @Override // android.p009os.Parcelable
-    public int describeContents() {
-        return 0;
-    }
+  @Override // android.p009os.Parcelable
+  public int describeContents() {
+    return 0;
+  }
 
-    @Override // android.p009os.Parcelable
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeInt(this.resultCode);
-        out.writeByteArray(this.exportData);
-    }
+  @Override // android.p009os.Parcelable
+  public void writeToParcel(Parcel out, int flags) {
+    out.writeInt(this.resultCode);
+    out.writeByteArray(this.exportData);
+  }
 }

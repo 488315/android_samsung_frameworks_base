@@ -2,9 +2,9 @@ package android.widget;
 
 /* loaded from: classes4.dex */
 public interface Checkable {
-    boolean isChecked();
+  boolean isChecked();
 
-    void setChecked(boolean z);
+  void setChecked(boolean z);
 
-    void toggle();
+  void toggle();
 }

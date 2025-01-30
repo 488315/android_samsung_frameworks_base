@@ -5,5 +5,5 @@ import android.view.ViewGroup;
 
 /* loaded from: classes4.dex */
 public interface SpinnerAdapter extends Adapter {
-    View getDropDownView(int i, View view, ViewGroup viewGroup);
+  View getDropDownView(int i, View view, ViewGroup viewGroup);
 }

@@ -5,9 +5,9 @@ import java.util.function.Function;
 
 /* loaded from: classes4.dex */
 public interface MediaOutputStreamFilter {
-    int getSendChannelCount();
+  int getSendChannelCount();
 
-    Function<Enum<?>, BufferChannel> getSendChannelQuery();
+  Function<Enum<?>, BufferChannel> getSendChannelQuery();
 
-    void setSendChannelQuery(Function<Enum<?>, BufferChannel> function, int i);
+  void setSendChannelQuery(Function<Enum<?>, BufferChannel> function, int i);
 }

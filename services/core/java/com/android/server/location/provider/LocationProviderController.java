@@ -2,21 +2,20 @@ package com.android.server.location.provider;
 
 import android.location.provider.ProviderRequest;
 import android.os.Bundle;
-import com.android.server.location.provider.AbstractLocationProvider;
 
 /* loaded from: classes2.dex */
 public interface LocationProviderController {
-    void flush(Runnable runnable);
+  void flush(Runnable runnable);
 
-    boolean isStarted();
+  boolean isStarted();
 
-    void sendExtraCommand(int i, int i2, String str, Bundle bundle);
+  void sendExtraCommand(int i, int i2, String str, Bundle bundle);
 
-    AbstractLocationProvider.State setListener(AbstractLocationProvider.Listener listener);
+  AbstractLocationProvider.State setListener(AbstractLocationProvider.Listener listener);
 
-    void setRequest(ProviderRequest providerRequest);
+  void setRequest(ProviderRequest providerRequest);
 
-    void start();
+  void start();
 
-    void stop();
+  void stop();
 }

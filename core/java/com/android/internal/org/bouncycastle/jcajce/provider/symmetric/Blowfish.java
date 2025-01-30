@@ -12,46 +12,51 @@ import com.android.internal.org.bouncycastle.jcajce.provider.util.AlgorithmProvi
 
 /* loaded from: classes5.dex */
 public final class Blowfish {
-    private Blowfish() {
-    }
+  private Blowfish() {}
 
-    public static class ECB extends BaseBlockCipher {
-        public ECB() {
-            super(new BlowfishEngine());
-        }
+  public static class ECB extends BaseBlockCipher {
+    public ECB() {
+      super(new BlowfishEngine());
     }
+  }
 
-    public static class CBC extends BaseBlockCipher {
-        public CBC() {
-            super(new CBCBlockCipher(new BlowfishEngine()), 64);
-        }
+  public static class CBC extends BaseBlockCipher {
+    public CBC() {
+      super(new CBCBlockCipher(new BlowfishEngine()), 64);
     }
+  }
 
-    public static class KeyGen extends BaseKeyGenerator {
-        public KeyGen() {
-            super("Blowfish", 128, new CipherKeyGenerator());
-        }
+  public static class KeyGen extends BaseKeyGenerator {
+    public KeyGen() {
+      super("Blowfish", 128, new CipherKeyGenerator());
     }
+  }
 
-    public static class AlgParams extends IvAlgorithmParameters {
-        @Override // com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.IvAlgorithmParameters, java.security.AlgorithmParametersSpi
-        protected String engineToString() {
-            return "Blowfish IV";
-        }
+  public static class AlgParams extends IvAlgorithmParameters {
+    @Override // com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.IvAlgorithmParameters, java.security.AlgorithmParametersSpi
+    protected String engineToString() {
+      return "Blowfish IV";
     }
+  }
 
-    public static class Mappings extends AlgorithmProvider {
-        private static final String PREFIX = Blowfish.class.getName();
+  public static class Mappings extends AlgorithmProvider {
+    private static final String PREFIX = Blowfish.class.getName();
 
-        @Override // com.android.internal.org.bouncycastle.jcajce.provider.util.AlgorithmProvider
-        public void configure(ConfigurableProvider provider) {
-            StringBuilder sb = new StringBuilder();
-            String str = PREFIX;
-            provider.addAlgorithm("Cipher.BLOWFISH", sb.append(str).append("$ECB").toString());
-            provider.addAlgorithm("KeyGenerator.BLOWFISH", str + "$KeyGen");
-            provider.addAlgorithm("Alg.Alias.KeyGenerator", MiscObjectIdentifiers.cryptlib_algorithm_blowfish_CBC, "BLOWFISH");
-            provider.addAlgorithm("AlgorithmParameters.BLOWFISH", str + "$AlgParams");
-            provider.addAlgorithm("Alg.Alias.AlgorithmParameters", MiscObjectIdentifiers.cryptlib_algorithm_blowfish_CBC, "BLOWFISH");
-        }
+    @Override // com.android.internal.org.bouncycastle.jcajce.provider.util.AlgorithmProvider
+    public void configure(ConfigurableProvider provider) {
+      StringBuilder sb = new StringBuilder();
+      String str = PREFIX;
+      provider.addAlgorithm("Cipher.BLOWFISH", sb.append(str).append("$ECB").toString());
+      provider.addAlgorithm("KeyGenerator.BLOWFISH", str + "$KeyGen");
+      provider.addAlgorithm(
+          "Alg.Alias.KeyGenerator",
+          MiscObjectIdentifiers.cryptlib_algorithm_blowfish_CBC,
+          "BLOWFISH");
+      provider.addAlgorithm("AlgorithmParameters.BLOWFISH", str + "$AlgParams");
+      provider.addAlgorithm(
+          "Alg.Alias.AlgorithmParameters",
+          MiscObjectIdentifiers.cryptlib_algorithm_blowfish_CBC,
+          "BLOWFISH");
     }
+  }
 }

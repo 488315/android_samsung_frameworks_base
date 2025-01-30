@@ -7,27 +7,27 @@ import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface ISemWallpaperThemeManager {
-    void applyThemeParkWallpaperColor(Uri uri);
+  void applyThemeParkWallpaperColor(Uri uri);
 
-    void applyWallpaperColor(List list, List list2, boolean z);
+  void applyWallpaperColor(List list, List list2, boolean z);
 
-    void applyWallpaperColors(List list, int i, int i2);
+  void applyWallpaperColors(List list, int i, int i2);
 
-    void dump(PrintWriter printWriter);
+  void dump(PrintWriter printWriter);
 
-    boolean getLastPalette(List list, List list2);
+  boolean getLastPalette(List list, List list2);
 
-    List getWallpaperColors();
+  List getWallpaperColors();
 
-    void initWallpaperTheme();
+  void initWallpaperTheme();
 
-    boolean isColoThemeApplied();
+  boolean isColoThemeApplied();
 
-    boolean isRequestForColorTheme(OverlayManagerTransaction overlayManagerTransaction);
+  boolean isRequestForColorTheme(OverlayManagerTransaction overlayManagerTransaction);
 
-    void onPackageAdded(String str);
+  void onPackageAdded(String str);
 
-    void onUserAdded(int i);
+  void onUserAdded(int i);
 
-    List readLastPalette();
+  List readLastPalette();
 }

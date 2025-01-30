@@ -9,5 +9,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 /* loaded from: classes4.dex */
 public @interface UiEvent {
-    String doc();
+  String doc();
 }

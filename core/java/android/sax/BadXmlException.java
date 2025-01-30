@@ -5,12 +5,12 @@ import org.xml.sax.SAXParseException;
 
 /* loaded from: classes3.dex */
 class BadXmlException extends SAXParseException {
-    public BadXmlException(String message, Locator locator) {
-        super(message, locator);
-    }
+  public BadXmlException(String message, Locator locator) {
+    super(message, locator);
+  }
 
-    @Override // org.xml.sax.SAXException, java.lang.Throwable
-    public String getMessage() {
-        return "Line " + getLineNumber() + ": " + super.getMessage();
-    }
+  @Override // org.xml.sax.SAXException, java.lang.Throwable
+  public String getMessage() {
+    return "Line " + getLineNumber() + ": " + super.getMessage();
+  }
 }

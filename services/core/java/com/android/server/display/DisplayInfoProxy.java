@@ -5,18 +5,18 @@ import android.view.DisplayInfo;
 
 /* loaded from: classes2.dex */
 public class DisplayInfoProxy {
-    public DisplayInfo mInfo;
+  public DisplayInfo mInfo;
 
-    public DisplayInfoProxy(DisplayInfo displayInfo) {
-        this.mInfo = displayInfo;
-    }
+  public DisplayInfoProxy(DisplayInfo displayInfo) {
+    this.mInfo = displayInfo;
+  }
 
-    public void set(DisplayInfo displayInfo) {
-        this.mInfo = displayInfo;
-        DisplayManagerGlobal.invalidateLocalDisplayInfoCaches();
-    }
+  public void set(DisplayInfo displayInfo) {
+    this.mInfo = displayInfo;
+    DisplayManagerGlobal.invalidateLocalDisplayInfoCaches();
+  }
 
-    public DisplayInfo get() {
-        return this.mInfo;
-    }
+  public DisplayInfo get() {
+    return this.mInfo;
+  }
 }

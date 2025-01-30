@@ -26,153 +26,155 @@ import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes.dex */
 public class LocaleConfig implements Parcelable {
-    public static final Parcelable.Creator<LocaleConfig> CREATOR = new Parcelable.Creator<LocaleConfig>() { // from class: android.app.LocaleConfig.1
+  public static final Parcelable.Creator<LocaleConfig> CREATOR =
+      new Parcelable.Creator<LocaleConfig>() { // from class: android.app.LocaleConfig.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public LocaleConfig createFromParcel(Parcel source) {
-            return new LocaleConfig(source);
+          return new LocaleConfig(source);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public LocaleConfig[] newArray(int size) {
-            return new LocaleConfig[size];
+          return new LocaleConfig[size];
         }
-    };
-    public static final int STATUS_NOT_SPECIFIED = 1;
-    public static final int STATUS_PARSING_FAILED = 2;
-    public static final int STATUS_SUCCESS = 0;
-    private static final String TAG = "LocaleConfig";
-    public static final String TAG_LOCALE = "locale";
-    public static final String TAG_LOCALE_CONFIG = "locale-config";
-    private LocaleList mLocales;
-    private int mStatus;
+      };
+  public static final int STATUS_NOT_SPECIFIED = 1;
+  public static final int STATUS_PARSING_FAILED = 2;
+  public static final int STATUS_SUCCESS = 0;
+  private static final String TAG = "LocaleConfig";
+  public static final String TAG_LOCALE = "locale";
+  public static final String TAG_LOCALE_CONFIG = "locale-config";
+  private LocaleList mLocales;
+  private int mStatus;
 
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface Status {
-    }
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface Status {}
 
-    public LocaleConfig(Context context) {
-        this(context, true);
-    }
+  public LocaleConfig(Context context) {
+    this(context, true);
+  }
 
-    public static LocaleConfig fromContextIgnoringOverride(Context context) {
-        return new LocaleConfig(context, false);
-    }
+  public static LocaleConfig fromContextIgnoringOverride(Context context) {
+    return new LocaleConfig(context, false);
+  }
 
-    private LocaleConfig(Context context, boolean allowOverride) {
+  private LocaleConfig(Context context, boolean allowOverride) {
+    this.mStatus = 1;
+    if (allowOverride) {
+      LocaleManager localeManager = (LocaleManager) context.getSystemService(LocaleManager.class);
+      if (localeManager == null) {
+        Slog.m121w(TAG, "LocaleManager is null, cannot get the override LocaleConfig");
         this.mStatus = 1;
-        if (allowOverride) {
-            LocaleManager localeManager = (LocaleManager) context.getSystemService(LocaleManager.class);
-            if (localeManager == null) {
-                Slog.m121w(TAG, "LocaleManager is null, cannot get the override LocaleConfig");
-                this.mStatus = 1;
-                return;
-            }
-            LocaleConfig localeConfig = localeManager.getOverrideLocaleConfig();
-            if (localeConfig != null) {
-                Slog.m113d(TAG, "Has the override LocaleConfig");
-                this.mStatus = localeConfig.getStatus();
-                this.mLocales = localeConfig.getSupportedLocales();
-                return;
-            }
-        }
-        int resId = 0;
-        Resources res = context.getResources();
-        try {
-            resId = new ApplicationInfo(context.getApplicationInfo()).getLocaleConfigRes();
-            XmlResourceParser parser = res.getXml(resId);
-            parseLocaleConfig(parser, res);
-        } catch (Resources.NotFoundException e) {
-            Slog.m121w(TAG, "The resource file pointed to by the given resource ID isn't found.");
-            this.mStatus = 1;
-        } catch (IOException | XmlPullParserException e2) {
-            Slog.m122w(TAG, "Failed to parse XML configuration from " + res.getResourceEntryName(resId), e2);
-            this.mStatus = 2;
-        }
+        return;
+      }
+      LocaleConfig localeConfig = localeManager.getOverrideLocaleConfig();
+      if (localeConfig != null) {
+        Slog.m113d(TAG, "Has the override LocaleConfig");
+        this.mStatus = localeConfig.getStatus();
+        this.mLocales = localeConfig.getSupportedLocales();
+        return;
+      }
     }
+    int resId = 0;
+    Resources res = context.getResources();
+    try {
+      resId = new ApplicationInfo(context.getApplicationInfo()).getLocaleConfigRes();
+      XmlResourceParser parser = res.getXml(resId);
+      parseLocaleConfig(parser, res);
+    } catch (Resources.NotFoundException e) {
+      Slog.m121w(TAG, "The resource file pointed to by the given resource ID isn't found.");
+      this.mStatus = 1;
+    } catch (IOException | XmlPullParserException e2) {
+      Slog.m122w(
+          TAG, "Failed to parse XML configuration from " + res.getResourceEntryName(resId), e2);
+      this.mStatus = 2;
+    }
+  }
 
-    public LocaleConfig(LocaleList locales) {
-        this.mStatus = 1;
-        this.mStatus = 0;
-        this.mLocales = locales;
-    }
+  public LocaleConfig(LocaleList locales) {
+    this.mStatus = 1;
+    this.mStatus = 0;
+    this.mLocales = locales;
+  }
 
-    private LocaleConfig(Parcel in) {
-        this.mStatus = 1;
-        this.mStatus = in.readInt();
-        this.mLocales = (LocaleList) in.readTypedObject(LocaleList.CREATOR);
-    }
+  private LocaleConfig(Parcel in) {
+    this.mStatus = 1;
+    this.mStatus = in.readInt();
+    this.mLocales = (LocaleList) in.readTypedObject(LocaleList.CREATOR);
+  }
 
-    private void parseLocaleConfig(XmlResourceParser parser, Resources res) throws IOException, XmlPullParserException {
-        XmlUtils.beginDocument(parser, TAG_LOCALE_CONFIG);
-        int outerDepth = parser.getDepth();
-        AttributeSet attrs = Xml.asAttributeSet(parser);
-        Set<String> localeNames = new HashSet<>();
-        while (XmlUtils.nextElementWithin(parser, outerDepth)) {
-            if ("locale".equals(parser.getName())) {
-                TypedArray attributes = res.obtainAttributes(attrs, C4337R.styleable.LocaleConfig_Locale);
-                String nameAttr = attributes.getString(0);
-                localeNames.add(nameAttr);
-                attributes.recycle();
-            } else {
-                XmlUtils.skipCurrentTag(parser);
-            }
-        }
-        this.mStatus = 0;
-        this.mLocales = LocaleList.forLanguageTags(String.join(",", localeNames));
+  private void parseLocaleConfig(XmlResourceParser parser, Resources res)
+      throws IOException, XmlPullParserException {
+    XmlUtils.beginDocument(parser, TAG_LOCALE_CONFIG);
+    int outerDepth = parser.getDepth();
+    AttributeSet attrs = Xml.asAttributeSet(parser);
+    Set<String> localeNames = new HashSet<>();
+    while (XmlUtils.nextElementWithin(parser, outerDepth)) {
+      if ("locale".equals(parser.getName())) {
+        TypedArray attributes = res.obtainAttributes(attrs, C4337R.styleable.LocaleConfig_Locale);
+        String nameAttr = attributes.getString(0);
+        localeNames.add(nameAttr);
+        attributes.recycle();
+      } else {
+        XmlUtils.skipCurrentTag(parser);
+      }
     }
+    this.mStatus = 0;
+    this.mLocales = LocaleList.forLanguageTags(String.join(",", localeNames));
+  }
 
-    public LocaleList getSupportedLocales() {
-        return this.mLocales;
-    }
+  public LocaleList getSupportedLocales() {
+    return this.mLocales;
+  }
 
-    public int getStatus() {
-        return this.mStatus;
-    }
+  public int getStatus() {
+    return this.mStatus;
+  }
 
-    @Override // android.p009os.Parcelable
-    public int describeContents() {
-        return 0;
-    }
+  @Override // android.p009os.Parcelable
+  public int describeContents() {
+    return 0;
+  }
 
-    @Override // android.p009os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.mStatus);
-        dest.writeTypedObject(this.mLocales, flags);
-    }
+  @Override // android.p009os.Parcelable
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeInt(this.mStatus);
+    dest.writeTypedObject(this.mLocales, flags);
+  }
 
-    public boolean isSameLocaleConfig(LocaleConfig other) {
-        if (other == this) {
-            return true;
-        }
-        if (other == null || this.mStatus != other.mStatus) {
-            return false;
-        }
-        LocaleList otherLocales = other.mLocales;
-        LocaleList localeList = this.mLocales;
-        if (localeList == null && otherLocales == null) {
-            return true;
-        }
-        if (localeList != null && otherLocales != null) {
-            List<String> hostStrList = Arrays.asList(localeList.toLanguageTags().split(","));
-            List<String> targetStrList = Arrays.asList(otherLocales.toLanguageTags().split(","));
-            Collections.sort(hostStrList);
-            Collections.sort(targetStrList);
-            return hostStrList.equals(targetStrList);
-        }
-        return false;
+  public boolean isSameLocaleConfig(LocaleConfig other) {
+    if (other == this) {
+      return true;
     }
+    if (other == null || this.mStatus != other.mStatus) {
+      return false;
+    }
+    LocaleList otherLocales = other.mLocales;
+    LocaleList localeList = this.mLocales;
+    if (localeList == null && otherLocales == null) {
+      return true;
+    }
+    if (localeList != null && otherLocales != null) {
+      List<String> hostStrList = Arrays.asList(localeList.toLanguageTags().split(","));
+      List<String> targetStrList = Arrays.asList(otherLocales.toLanguageTags().split(","));
+      Collections.sort(hostStrList);
+      Collections.sort(targetStrList);
+      return hostStrList.equals(targetStrList);
+    }
+    return false;
+  }
 
-    public boolean containsLocale(Locale locale) {
-        if (this.mLocales == null) {
-            return false;
-        }
-        for (int i = 0; i < this.mLocales.size(); i++) {
-            if (LocaleList.matchesLanguageAndScript(this.mLocales.get(i), locale)) {
-                return true;
-            }
-        }
-        return false;
+  public boolean containsLocale(Locale locale) {
+    if (this.mLocales == null) {
+      return false;
     }
+    for (int i = 0; i < this.mLocales.size(); i++) {
+      if (LocaleList.matchesLanguageAndScript(this.mLocales.get(i), locale)) {
+        return true;
+      }
+    }
+    return false;
+  }
 }

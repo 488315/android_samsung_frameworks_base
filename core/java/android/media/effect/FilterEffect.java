@@ -8,37 +8,37 @@ import android.filterfw.format.ImageFormat;
 
 /* loaded from: classes2.dex */
 public abstract class FilterEffect extends Effect {
-    protected EffectContext mEffectContext;
-    private String mName;
+  protected EffectContext mEffectContext;
+  private String mName;
 
-    protected FilterEffect(EffectContext context, String name) {
-        this.mEffectContext = context;
-        this.mName = name;
-    }
+  protected FilterEffect(EffectContext context, String name) {
+    this.mEffectContext = context;
+    this.mName = name;
+  }
 
-    @Override // android.media.effect.Effect
-    public String getName() {
-        return this.mName;
-    }
+  @Override // android.media.effect.Effect
+  public String getName() {
+    return this.mName;
+  }
 
-    protected void beginGLEffect() {
-        this.mEffectContext.assertValidGLState();
-        this.mEffectContext.saveGLState();
-    }
+  protected void beginGLEffect() {
+    this.mEffectContext.assertValidGLState();
+    this.mEffectContext.saveGLState();
+  }
 
-    protected void endGLEffect() {
-        this.mEffectContext.restoreGLState();
-    }
+  protected void endGLEffect() {
+    this.mEffectContext.restoreGLState();
+  }
 
-    protected FilterContext getFilterContext() {
-        return this.mEffectContext.mFilterContext;
-    }
+  protected FilterContext getFilterContext() {
+    return this.mEffectContext.mFilterContext;
+  }
 
-    protected Frame frameFromTexture(int texId, int width, int height) {
-        FrameManager manager = getFilterContext().getFrameManager();
-        FrameFormat format = ImageFormat.create(width, height, 3, 3);
-        Frame frame = manager.newBoundFrame(format, 100, texId);
-        frame.setTimestamp(-1L);
-        return frame;
-    }
+  protected Frame frameFromTexture(int texId, int width, int height) {
+    FrameManager manager = getFilterContext().getFrameManager();
+    FrameFormat format = ImageFormat.create(width, height, 3, 3);
+    Frame frame = manager.newBoundFrame(format, 100, texId);
+    frame.setTimestamp(-1L);
+    return frame;
+  }
 }

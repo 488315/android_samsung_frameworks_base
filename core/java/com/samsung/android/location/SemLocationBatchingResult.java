@@ -8,31 +8,30 @@ import java.util.List;
 
 /* loaded from: classes5.dex */
 public class SemLocationBatchingResult {
-    private boolean isFlushed;
-    private List<Location> locations;
+  private boolean isFlushed;
+  private List<Location> locations;
 
-    private SemLocationBatchingResult() {
-    }
+  private SemLocationBatchingResult() {}
 
-    public static SemLocationBatchingResult extractResult(Intent intent) {
-        if (intent == null) {
-            return null;
-        }
-        SemLocationBatchingResult result = new SemLocationBatchingResult();
-        Parcelable[] parcelables = intent.getParcelableArrayExtra(SemLocationManager.BATCHED_LOCATION);
-        result.locations = new ArrayList();
-        for (Parcelable p : parcelables) {
-            result.locations.add((Location) p);
-        }
-        result.isFlushed = intent.getBooleanExtra(SemLocationManager.FLUSH_COMPLETED, false);
-        return result;
+  public static SemLocationBatchingResult extractResult(Intent intent) {
+    if (intent == null) {
+      return null;
     }
+    SemLocationBatchingResult result = new SemLocationBatchingResult();
+    Parcelable[] parcelables = intent.getParcelableArrayExtra(SemLocationManager.BATCHED_LOCATION);
+    result.locations = new ArrayList();
+    for (Parcelable p : parcelables) {
+      result.locations.add((Location) p);
+    }
+    result.isFlushed = intent.getBooleanExtra(SemLocationManager.FLUSH_COMPLETED, false);
+    return result;
+  }
 
-    public List<Location> getLocations() {
-        return this.locations;
-    }
+  public List<Location> getLocations() {
+    return this.locations;
+  }
 
-    public boolean isFlushed() {
-        return this.isFlushed;
-    }
+  public boolean isFlushed() {
+    return this.isFlushed;
+  }
 }

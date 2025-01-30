@@ -7,21 +7,21 @@ import java.util.Map;
 
 /* loaded from: classes2.dex */
 public interface PackageManagerHelper {
-    boolean doesTargetDefineOverlayable(String str, int i);
+  boolean doesTargetDefineOverlayable(String str, int i);
 
-    void enforcePermission(String str, String str2);
+  void enforcePermission(String str, String str2);
 
-    String getConfigSignaturePackage();
+  String getConfigSignaturePackage();
 
-    Map getNamedActors();
+  Map getNamedActors();
 
-    OverlayableInfo getOverlayableForTarget(String str, String str2, int i);
+  OverlayableInfo getOverlayableForTarget(String str, String str2, int i);
 
-    PackageState getPackageStateForUser(String str, int i);
+  PackageState getPackageStateForUser(String str, int i);
 
-    String[] getPackagesForUid(int i);
+  String[] getPackagesForUid(int i);
 
-    ArrayMap initializeForUser(int i);
+  ArrayMap initializeForUser(int i);
 
-    boolean signaturesMatching(String str, String str2, int i);
+  boolean signaturesMatching(String str, String str2, int i);
 }

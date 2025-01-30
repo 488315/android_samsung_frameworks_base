@@ -2,19 +2,19 @@ package com.android.server.pm.pkg.component;
 
 /* loaded from: classes3.dex */
 public interface ParsedMainComponent extends ParsedComponent {
-    String[] getAttributionTags();
+  String[] getAttributionTags();
 
-    String getClassName();
+  String getClassName();
 
-    int getOrder();
+  int getOrder();
 
-    String getProcessName();
+  String getProcessName();
 
-    String getSplitName();
+  String getSplitName();
 
-    boolean isDirectBootAware();
+  boolean isDirectBootAware();
 
-    boolean isEnabled();
+  boolean isEnabled();
 
-    boolean isExported();
+  boolean isExported();
 }

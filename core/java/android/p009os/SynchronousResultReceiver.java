@@ -7,54 +7,54 @@ import java.util.concurrent.TimeoutException;
 
 /* loaded from: classes3.dex */
 public class SynchronousResultReceiver extends ResultReceiver {
-    private final CompletableFuture<Result> mFuture;
-    private final String mName;
+  private final CompletableFuture<Result> mFuture;
+  private final String mName;
 
-    public static class Result {
-        public Bundle bundle;
-        public int resultCode;
+  public static class Result {
+    public Bundle bundle;
+    public int resultCode;
 
-        public Result(int resultCode, Bundle bundle) {
-            this.resultCode = resultCode;
-            this.bundle = bundle;
-        }
+    public Result(int resultCode, Bundle bundle) {
+      this.resultCode = resultCode;
+      this.bundle = bundle;
     }
+  }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-    public SynchronousResultReceiver() {
-        super((Handler) null);
-        this.mFuture = new CompletableFuture<>();
-        this.mName = null;
-    }
+  /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+  public SynchronousResultReceiver() {
+    super((Handler) null);
+    this.mFuture = new CompletableFuture<>();
+    this.mName = null;
+  }
 
-    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
-    public SynchronousResultReceiver(String name) {
-        super((Handler) null);
-        this.mFuture = new CompletableFuture<>();
-        this.mName = name;
-    }
+  /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+  public SynchronousResultReceiver(String name) {
+    super((Handler) null);
+    this.mFuture = new CompletableFuture<>();
+    this.mName = name;
+  }
 
-    @Override // android.p009os.ResultReceiver
-    protected final void onReceiveResult(int resultCode, Bundle resultData) {
-        super.onReceiveResult(resultCode, resultData);
-        this.mFuture.complete(new Result(resultCode, resultData));
-    }
+  @Override // android.p009os.ResultReceiver
+  protected final void onReceiveResult(int resultCode, Bundle resultData) {
+    super.onReceiveResult(resultCode, resultData);
+    this.mFuture.complete(new Result(resultCode, resultData));
+  }
 
-    public String getName() {
-        return this.mName;
-    }
+  public String getName() {
+    return this.mName;
+  }
 
-    public Result awaitResult(long timeoutMillis) throws TimeoutException {
-        long deadline = System.currentTimeMillis() + timeoutMillis;
-        while (timeoutMillis >= 0) {
-            try {
-                return this.mFuture.get(timeoutMillis, TimeUnit.MILLISECONDS);
-            } catch (InterruptedException e) {
-                timeoutMillis -= deadline - System.currentTimeMillis();
-            } catch (ExecutionException e2) {
-                throw new AssertionError("Error receiving response", e2);
-            }
-        }
-        throw new TimeoutException();
+  public Result awaitResult(long timeoutMillis) throws TimeoutException {
+    long deadline = System.currentTimeMillis() + timeoutMillis;
+    while (timeoutMillis >= 0) {
+      try {
+        return this.mFuture.get(timeoutMillis, TimeUnit.MILLISECONDS);
+      } catch (InterruptedException e) {
+        timeoutMillis -= deadline - System.currentTimeMillis();
+      } catch (ExecutionException e2) {
+        throw new AssertionError("Error receiving response", e2);
+      }
     }
+    throw new TimeoutException();
+  }
 }

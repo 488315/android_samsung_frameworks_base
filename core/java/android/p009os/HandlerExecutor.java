@@ -6,16 +6,16 @@ import java.util.concurrent.RejectedExecutionException;
 
 /* loaded from: classes3.dex */
 public class HandlerExecutor implements Executor {
-    private final Handler mHandler;
+  private final Handler mHandler;
 
-    public HandlerExecutor(Handler handler) {
-        this.mHandler = (Handler) Preconditions.checkNotNull(handler);
-    }
+  public HandlerExecutor(Handler handler) {
+    this.mHandler = (Handler) Preconditions.checkNotNull(handler);
+  }
 
-    @Override // java.util.concurrent.Executor
-    public void execute(Runnable command) {
-        if (!this.mHandler.post(command)) {
-            throw new RejectedExecutionException(this.mHandler + " is shutting down");
-        }
+  @Override // java.util.concurrent.Executor
+  public void execute(Runnable command) {
+    if (!this.mHandler.post(command)) {
+      throw new RejectedExecutionException(this.mHandler + " is shutting down");
     }
+  }
 }

@@ -4,15 +4,19 @@ import android.hardware.hdmi.IHdmiControlCallback;
 
 /* loaded from: classes2.dex */
 public final class SystemAudioActionFromTv extends SystemAudioAction {
-    public SystemAudioActionFromTv(HdmiCecLocalDevice hdmiCecLocalDevice, int i, boolean z, IHdmiControlCallback iHdmiControlCallback) {
-        super(hdmiCecLocalDevice, i, z, iHdmiControlCallback);
-        HdmiUtils.verifyAddressType(getSourceAddress(), 0);
-    }
+  public SystemAudioActionFromTv(
+      HdmiCecLocalDevice hdmiCecLocalDevice,
+      int i,
+      boolean z,
+      IHdmiControlCallback iHdmiControlCallback) {
+    super(hdmiCecLocalDevice, i, z, iHdmiControlCallback);
+    HdmiUtils.verifyAddressType(getSourceAddress(), 0);
+  }
 
-    @Override // com.android.server.hdmi.HdmiCecFeatureAction
-    public boolean start() {
-        removeSystemAudioActionInProgress();
-        sendSystemAudioModeRequest();
-        return true;
-    }
+  @Override // com.android.server.hdmi.HdmiCecFeatureAction
+  public boolean start() {
+    removeSystemAudioActionInProgress();
+    sendSystemAudioModeRequest();
+    return true;
+  }
 }

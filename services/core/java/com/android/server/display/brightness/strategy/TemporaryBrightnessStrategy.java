@@ -7,29 +7,30 @@ import java.io.PrintWriter;
 
 /* loaded from: classes2.dex */
 public class TemporaryBrightnessStrategy implements DisplayBrightnessStrategy {
-    public float mTemporaryScreenBrightness = Float.NaN;
+  public float mTemporaryScreenBrightness = Float.NaN;
 
-    @Override // com.android.server.display.brightness.strategy.DisplayBrightnessStrategy
-    public String getName() {
-        return "TemporaryBrightnessStrategy";
-    }
+  @Override // com.android.server.display.brightness.strategy.DisplayBrightnessStrategy
+  public String getName() {
+    return "TemporaryBrightnessStrategy";
+  }
 
-    @Override // com.android.server.display.brightness.strategy.DisplayBrightnessStrategy
-    public DisplayBrightnessState updateBrightness(DisplayManagerInternal.DisplayPowerRequest displayPowerRequest) {
-        float f = this.mTemporaryScreenBrightness;
-        return BrightnessUtils.constructDisplayBrightnessState(7, f, f, getName());
-    }
+  @Override // com.android.server.display.brightness.strategy.DisplayBrightnessStrategy
+  public DisplayBrightnessState updateBrightness(
+      DisplayManagerInternal.DisplayPowerRequest displayPowerRequest) {
+    float f = this.mTemporaryScreenBrightness;
+    return BrightnessUtils.constructDisplayBrightnessState(7, f, f, getName());
+  }
 
-    public float getTemporaryScreenBrightness() {
-        return this.mTemporaryScreenBrightness;
-    }
+  public float getTemporaryScreenBrightness() {
+    return this.mTemporaryScreenBrightness;
+  }
 
-    public void setTemporaryScreenBrightness(float f) {
-        this.mTemporaryScreenBrightness = f;
-    }
+  public void setTemporaryScreenBrightness(float f) {
+    this.mTemporaryScreenBrightness = f;
+  }
 
-    public void dump(PrintWriter printWriter) {
-        printWriter.println("TemporaryBrightnessStrategy:");
-        printWriter.println("  mTemporaryScreenBrightness:" + this.mTemporaryScreenBrightness);
-    }
+  public void dump(PrintWriter printWriter) {
+    printWriter.println("TemporaryBrightnessStrategy:");
+    printWriter.println("  mTemporaryScreenBrightness:" + this.mTemporaryScreenBrightness);
+  }
 }

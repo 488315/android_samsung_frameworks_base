@@ -10,18 +10,26 @@ import java.util.function.Consumer;
 
 /* loaded from: classes3.dex */
 public class LocalIntentReceiver {
-    public final Consumer mConsumer;
-    public IIntentSender.Stub mLocalSender = new IIntentSender.Stub() { // from class: com.android.server.rollback.LocalIntentReceiver.1
-        public void send(int i, Intent intent, String str, IBinder iBinder, IIntentReceiver iIntentReceiver, String str2, Bundle bundle) {
-            LocalIntentReceiver.this.mConsumer.accept(intent);
+  public final Consumer mConsumer;
+  public IIntentSender.Stub mLocalSender =
+      new IIntentSender.Stub() { // from class: com.android.server.rollback.LocalIntentReceiver.1
+        public void send(
+            int i,
+            Intent intent,
+            String str,
+            IBinder iBinder,
+            IIntentReceiver iIntentReceiver,
+            String str2,
+            Bundle bundle) {
+          LocalIntentReceiver.this.mConsumer.accept(intent);
         }
-    };
+      };
 
-    public LocalIntentReceiver(Consumer consumer) {
-        this.mConsumer = consumer;
-    }
+  public LocalIntentReceiver(Consumer consumer) {
+    this.mConsumer = consumer;
+  }
 
-    public IntentSender getIntentSender() {
-        return new IntentSender(this.mLocalSender);
-    }
+  public IntentSender getIntentSender() {
+    return new IntentSender(this.mLocalSender);
+  }
 }

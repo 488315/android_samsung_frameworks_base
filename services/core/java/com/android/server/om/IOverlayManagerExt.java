@@ -8,25 +8,27 @@ import java.util.List;
 
 /* loaded from: classes2.dex */
 public interface IOverlayManagerExt {
-    void addOverlays(List list, ISamsungOverlayCallback iSamsungOverlayCallback, int i);
+  void addOverlays(List list, ISamsungOverlayCallback iSamsungOverlayCallback, int i);
 
-    boolean changeOverlayState(String str, int i, boolean z);
+  boolean changeOverlayState(String str, int i, boolean z);
 
-    OverlayInfoExt[] getAllOverlaysInCategory(int i, int i2);
+  OverlayInfoExt[] getAllOverlaysInCategory(int i, int i2);
 
-    OverlayInfoExt getOverlayForPath(String str, int i);
+  OverlayInfoExt getOverlayForPath(String str, int i);
 
-    OverlayInfoExt[] getOverlaysForTarget(String str, int i, int i2);
+  OverlayInfoExt[] getOverlaysForTarget(String str, int i, int i2);
 
-    String getTargetPath(String str);
+  String getTargetPath(String str);
 
-    int handleStateUpdate(AndroidPackage androidPackage, CriticalOverlayInfo criticalOverlayInfo, int i, int i2);
+  int handleStateUpdate(
+      AndroidPackage androidPackage, CriticalOverlayInfo criticalOverlayInfo, int i, int i2);
 
-    void handleUserSwitch(int i);
+  void handleUserSwitch(int i);
 
-    void removeOverlays(List list, ISamsungOverlayCallback iSamsungOverlayCallback, int i);
+  void removeOverlays(List list, ISamsungOverlayCallback iSamsungOverlayCallback, int i);
 
-    void replaceOverlays(List list, List list2, ISamsungOverlayCallback iSamsungOverlayCallback, int i);
+  void replaceOverlays(
+      List list, List list2, ISamsungOverlayCallback iSamsungOverlayCallback, int i);
 
-    void setIsInitonBoot(boolean z);
+  void setIsInitonBoot(boolean z);
 }

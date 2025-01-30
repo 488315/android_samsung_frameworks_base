@@ -6,37 +6,38 @@ import android.p009os.ParcelFileDescriptor;
 
 /* loaded from: classes3.dex */
 public abstract class PrintDocumentAdapter {
-    public static final String EXTRA_PRINT_PREVIEW = "EXTRA_PRINT_PREVIEW";
+  public static final String EXTRA_PRINT_PREVIEW = "EXTRA_PRINT_PREVIEW";
 
-    public abstract void onLayout(PrintAttributes printAttributes, PrintAttributes printAttributes2, CancellationSignal cancellationSignal, LayoutResultCallback layoutResultCallback, Bundle bundle);
+  public abstract void onLayout(
+      PrintAttributes printAttributes,
+      PrintAttributes printAttributes2,
+      CancellationSignal cancellationSignal,
+      LayoutResultCallback layoutResultCallback,
+      Bundle bundle);
 
-    public abstract void onWrite(PageRange[] pageRangeArr, ParcelFileDescriptor parcelFileDescriptor, CancellationSignal cancellationSignal, WriteResultCallback writeResultCallback);
+  public abstract void onWrite(
+      PageRange[] pageRangeArr,
+      ParcelFileDescriptor parcelFileDescriptor,
+      CancellationSignal cancellationSignal,
+      WriteResultCallback writeResultCallback);
 
-    public void onStart() {
-    }
+  public void onStart() {}
 
-    public void onFinish() {
-    }
+  public void onFinish() {}
 
-    public static abstract class WriteResultCallback {
-        public void onWriteFinished(PageRange[] pages) {
-        }
+  public abstract static class WriteResultCallback {
+    public void onWriteFinished(PageRange[] pages) {}
 
-        public void onWriteFailed(CharSequence error) {
-        }
+    public void onWriteFailed(CharSequence error) {}
 
-        public void onWriteCancelled() {
-        }
-    }
+    public void onWriteCancelled() {}
+  }
 
-    public static abstract class LayoutResultCallback {
-        public void onLayoutFinished(PrintDocumentInfo info, boolean changed) {
-        }
+  public abstract static class LayoutResultCallback {
+    public void onLayoutFinished(PrintDocumentInfo info, boolean changed) {}
 
-        public void onLayoutFailed(CharSequence error) {
-        }
+    public void onLayoutFailed(CharSequence error) {}
 
-        public void onLayoutCancelled() {
-        }
-    }
+    public void onLayoutCancelled() {}
+  }
 }

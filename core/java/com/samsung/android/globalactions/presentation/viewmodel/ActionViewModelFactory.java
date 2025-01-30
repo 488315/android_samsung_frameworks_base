@@ -4,5 +4,5 @@ import com.samsung.android.globalactions.presentation.SamsungGlobalActions;
 
 /* loaded from: classes5.dex */
 public interface ActionViewModelFactory {
-    ActionViewModel createActionViewModel(SamsungGlobalActions samsungGlobalActions, String str);
+  ActionViewModel createActionViewModel(SamsungGlobalActions samsungGlobalActions, String str);
 }

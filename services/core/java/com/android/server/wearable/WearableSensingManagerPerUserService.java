@@ -18,106 +18,120 @@ import java.io.PrintWriter;
 
 /* loaded from: classes3.dex */
 public final class WearableSensingManagerPerUserService extends AbstractPerUserSystemService {
-    public static final String TAG = "WearableSensingManagerPerUserService";
-    public ComponentName mComponentName;
-    RemoteWearableSensingService mRemoteService;
+  public static final String TAG = "WearableSensingManagerPerUserService";
+  public ComponentName mComponentName;
+  RemoteWearableSensingService mRemoteService;
 
-    public WearableSensingManagerPerUserService(WearableSensingManagerService wearableSensingManagerService, Object obj, int i) {
-        super(wearableSensingManagerService, obj, i);
-    }
+  public WearableSensingManagerPerUserService(
+      WearableSensingManagerService wearableSensingManagerService, Object obj, int i) {
+    super(wearableSensingManagerService, obj, i);
+  }
 
-    public static void notifyStatusCallback(RemoteCallback remoteCallback, int i) {
-        Bundle bundle = new Bundle();
-        bundle.putInt("android.app.wearable.WearableSensingStatusBundleKey", i);
-        remoteCallback.sendResult(bundle);
-    }
+  public static void notifyStatusCallback(RemoteCallback remoteCallback, int i) {
+    Bundle bundle = new Bundle();
+    bundle.putInt("android.app.wearable.WearableSensingStatusBundleKey", i);
+    remoteCallback.sendResult(bundle);
+  }
 
-    public void destroyLocked() {
-        Slog.d(TAG, "Trying to cancel the remote request. Reason: Service destroyed.");
-        if (this.mRemoteService != null) {
-            synchronized (this.mLock) {
-                this.mRemoteService.unbind();
-                this.mRemoteService = null;
-            }
-        }
+  public void destroyLocked() {
+    Slog.d(TAG, "Trying to cancel the remote request. Reason: Service destroyed.");
+    if (this.mRemoteService != null) {
+      synchronized (this.mLock) {
+        this.mRemoteService.unbind();
+        this.mRemoteService = null;
+      }
     }
+  }
 
-    public final void ensureRemoteServiceInitiated() {
-        if (this.mRemoteService == null) {
-            this.mRemoteService = new RemoteWearableSensingService(getContext(), this.mComponentName, getUserId());
-        }
+  public final void ensureRemoteServiceInitiated() {
+    if (this.mRemoteService == null) {
+      this.mRemoteService =
+          new RemoteWearableSensingService(getContext(), this.mComponentName, getUserId());
     }
+  }
 
-    public ComponentName getComponentName() {
-        return this.mComponentName;
-    }
+  public ComponentName getComponentName() {
+    return this.mComponentName;
+  }
 
-    public boolean setUpServiceIfNeeded() {
-        if (this.mComponentName == null) {
-            this.mComponentName = updateServiceInfoLocked();
-        }
-        if (this.mComponentName == null) {
-            return false;
-        }
-        try {
-            return AppGlobals.getPackageManager().getServiceInfo(this.mComponentName, 0L, this.mUserId) != null;
-        } catch (RemoteException unused) {
-            Slog.w(TAG, "RemoteException while setting up service");
-            return false;
-        }
+  public boolean setUpServiceIfNeeded() {
+    if (this.mComponentName == null) {
+      this.mComponentName = updateServiceInfoLocked();
     }
+    if (this.mComponentName == null) {
+      return false;
+    }
+    try {
+      return AppGlobals.getPackageManager().getServiceInfo(this.mComponentName, 0L, this.mUserId)
+          != null;
+    } catch (RemoteException unused) {
+      Slog.w(TAG, "RemoteException while setting up service");
+      return false;
+    }
+  }
 
-    @Override // com.android.server.infra.AbstractPerUserSystemService
-    public ServiceInfo newServiceInfoLocked(ComponentName componentName) {
-        try {
-            ServiceInfo serviceInfo = AppGlobals.getPackageManager().getServiceInfo(componentName, 0L, this.mUserId);
-            if (serviceInfo != null && !"android.permission.BIND_WEARABLE_SENSING_SERVICE".equals(serviceInfo.permission)) {
-                throw new SecurityException(String.format("Service %s requires %s permission. Found %s permission", serviceInfo.getComponentName(), "android.permission.BIND_WEARABLE_SENSING_SERVICE", serviceInfo.permission));
-            }
-            return serviceInfo;
-        } catch (RemoteException unused) {
-            throw new PackageManager.NameNotFoundException("Could not get service for " + componentName);
-        }
+  @Override // com.android.server.infra.AbstractPerUserSystemService
+  public ServiceInfo newServiceInfoLocked(ComponentName componentName) {
+    try {
+      ServiceInfo serviceInfo =
+          AppGlobals.getPackageManager().getServiceInfo(componentName, 0L, this.mUserId);
+      if (serviceInfo != null
+          && !"android.permission.BIND_WEARABLE_SENSING_SERVICE".equals(serviceInfo.permission)) {
+        throw new SecurityException(
+            String.format(
+                "Service %s requires %s permission. Found %s permission",
+                serviceInfo.getComponentName(),
+                "android.permission.BIND_WEARABLE_SENSING_SERVICE",
+                serviceInfo.permission));
+      }
+      return serviceInfo;
+    } catch (RemoteException unused) {
+      throw new PackageManager.NameNotFoundException("Could not get service for " + componentName);
     }
+  }
 
-    @Override // com.android.server.infra.AbstractPerUserSystemService
-    public void dumpLocked(String str, PrintWriter printWriter) {
-        synchronized (this.mLock) {
-            super.dumpLocked(str, printWriter);
-        }
-        RemoteWearableSensingService remoteWearableSensingService = this.mRemoteService;
-        if (remoteWearableSensingService != null) {
-            remoteWearableSensingService.dump("", new IndentingPrintWriter(printWriter, "  "));
-        }
+  @Override // com.android.server.infra.AbstractPerUserSystemService
+  public void dumpLocked(String str, PrintWriter printWriter) {
+    synchronized (this.mLock) {
+      super.dumpLocked(str, printWriter);
     }
+    RemoteWearableSensingService remoteWearableSensingService = this.mRemoteService;
+    if (remoteWearableSensingService != null) {
+      remoteWearableSensingService.dump("", new IndentingPrintWriter(printWriter, "  "));
+    }
+  }
 
-    public void onProvideDataStream(ParcelFileDescriptor parcelFileDescriptor, RemoteCallback remoteCallback) {
-        String str = TAG;
-        Slog.i(str, "onProvideDataStream in per user service.");
-        synchronized (this.mLock) {
-            if (!setUpServiceIfNeeded()) {
-                Slog.w(str, "Detection service is not available at this moment.");
-                notifyStatusCallback(remoteCallback, 3);
-            } else {
-                Slog.i(str, "calling over to remote servvice.");
-                ensureRemoteServiceInitiated();
-                this.mRemoteService.provideDataStream(parcelFileDescriptor, remoteCallback);
-            }
-        }
+  public void onProvideDataStream(
+      ParcelFileDescriptor parcelFileDescriptor, RemoteCallback remoteCallback) {
+    String str = TAG;
+    Slog.i(str, "onProvideDataStream in per user service.");
+    synchronized (this.mLock) {
+      if (!setUpServiceIfNeeded()) {
+        Slog.w(str, "Detection service is not available at this moment.");
+        notifyStatusCallback(remoteCallback, 3);
+      } else {
+        Slog.i(str, "calling over to remote servvice.");
+        ensureRemoteServiceInitiated();
+        this.mRemoteService.provideDataStream(parcelFileDescriptor, remoteCallback);
+      }
     }
+  }
 
-    public void onProvidedData(PersistableBundle persistableBundle, SharedMemory sharedMemory, RemoteCallback remoteCallback) {
-        synchronized (this.mLock) {
-            if (!setUpServiceIfNeeded()) {
-                Slog.w(TAG, "Detection service is not available at this moment.");
-                notifyStatusCallback(remoteCallback, 3);
-            } else {
-                ensureRemoteServiceInitiated();
-                if (sharedMemory != null) {
-                    sharedMemory.setProtect(OsConstants.PROT_READ);
-                }
-                this.mRemoteService.provideData(persistableBundle, sharedMemory, remoteCallback);
-            }
+  public void onProvidedData(
+      PersistableBundle persistableBundle,
+      SharedMemory sharedMemory,
+      RemoteCallback remoteCallback) {
+    synchronized (this.mLock) {
+      if (!setUpServiceIfNeeded()) {
+        Slog.w(TAG, "Detection service is not available at this moment.");
+        notifyStatusCallback(remoteCallback, 3);
+      } else {
+        ensureRemoteServiceInitiated();
+        if (sharedMemory != null) {
+          sharedMemory.setProtect(OsConstants.PROT_READ);
         }
+        this.mRemoteService.provideData(persistableBundle, sharedMemory, remoteCallback);
+      }
     }
+  }
 }

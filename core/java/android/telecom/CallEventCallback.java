@@ -5,13 +5,13 @@ import java.util.List;
 
 /* loaded from: classes3.dex */
 public interface CallEventCallback {
-    void onAvailableCallEndpointsChanged(List<CallEndpoint> list);
+  void onAvailableCallEndpointsChanged(List<CallEndpoint> list);
 
-    void onCallEndpointChanged(CallEndpoint callEndpoint);
+  void onCallEndpointChanged(CallEndpoint callEndpoint);
 
-    void onCallStreamingFailed(int i);
+  void onCallStreamingFailed(int i);
 
-    void onEvent(String str, Bundle bundle);
+  void onEvent(String str, Bundle bundle);
 
-    void onMuteStateChanged(boolean z);
+  void onMuteStateChanged(boolean z);
 }

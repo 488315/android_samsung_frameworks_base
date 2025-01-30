@@ -12,77 +12,79 @@ import java.io.IOException;
 
 /* loaded from: classes5.dex */
 public class KernelMemoryBandwidthStats {
-    private static final boolean DEBUG = false;
-    private static final String TAG = "KernelMemoryBandwidthStats";
-    private static final String mSysfsFile = "/sys/kernel/memory_state_time/show_stat";
-    protected final LongSparseLongArray mBandwidthEntries = new LongSparseLongArray();
-    private boolean mStatsDoNotExist = false;
+  private static final boolean DEBUG = false;
+  private static final String TAG = "KernelMemoryBandwidthStats";
+  private static final String mSysfsFile = "/sys/kernel/memory_state_time/show_stat";
+  protected final LongSparseLongArray mBandwidthEntries = new LongSparseLongArray();
+  private boolean mStatsDoNotExist = false;
 
-    public void updateStats() {
-        if (this.mStatsDoNotExist) {
-            return;
-        }
-        long startTime = SystemClock.uptimeMillis();
-        StrictMode.ThreadPolicy policy = StrictMode.allowThreadDiskReads();
+  public void updateStats() {
+    if (this.mStatsDoNotExist) {
+      return;
+    }
+    long startTime = SystemClock.uptimeMillis();
+    StrictMode.ThreadPolicy policy = StrictMode.allowThreadDiskReads();
+    try {
+      try {
+        BufferedReader reader = new BufferedReader(new FileReader(mSysfsFile));
         try {
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(mSysfsFile));
-                try {
-                    parseStats(reader);
-                    reader.close();
-                } catch (Throwable th) {
-                    try {
-                        reader.close();
-                    } catch (Throwable th2) {
-                        th.addSuppressed(th2);
-                    }
-                    throw th;
-                }
-            } catch (FileNotFoundException e) {
-                Slog.m121w(TAG, "No kernel memory bandwidth stats available");
-                this.mBandwidthEntries.clear();
-                this.mStatsDoNotExist = true;
-            } catch (IOException e2) {
-                Slog.m115e(TAG, "Failed to read memory bandwidth: " + e2.getMessage());
-                this.mBandwidthEntries.clear();
-            }
-            StrictMode.setThreadPolicy(policy);
-            long readTime = SystemClock.uptimeMillis() - startTime;
-            if (readTime > 100) {
-                Slog.m121w(TAG, "Reading memory bandwidth file took " + readTime + "ms");
-            }
-        } catch (Throwable th3) {
-            StrictMode.setThreadPolicy(policy);
-            throw th3;
+          parseStats(reader);
+          reader.close();
+        } catch (Throwable th) {
+          try {
+            reader.close();
+          } catch (Throwable th2) {
+            th.addSuppressed(th2);
+          }
+          throw th;
         }
-    }
-
-    public void parseStats(BufferedReader reader) throws IOException {
-        TextUtils.SimpleStringSplitter splitter = new TextUtils.SimpleStringSplitter(' ');
+      } catch (FileNotFoundException e) {
+        Slog.m121w(TAG, "No kernel memory bandwidth stats available");
         this.mBandwidthEntries.clear();
-        while (true) {
-            String line = reader.readLine();
-            if (line != null) {
-                splitter.setString(line);
-                splitter.next();
-                int bandwidth = 0;
-                do {
-                    int index = this.mBandwidthEntries.indexOfKey(bandwidth);
-                    if (index >= 0) {
-                        LongSparseLongArray longSparseLongArray = this.mBandwidthEntries;
-                        longSparseLongArray.put(bandwidth, longSparseLongArray.valueAt(index) + (Long.parseLong(splitter.next()) / 1000000));
-                    } else {
-                        this.mBandwidthEntries.put(bandwidth, Long.parseLong(splitter.next()) / 1000000);
-                    }
-                    bandwidth++;
-                } while (splitter.hasNext());
-            } else {
-                return;
-            }
-        }
+        this.mStatsDoNotExist = true;
+      } catch (IOException e2) {
+        Slog.m115e(TAG, "Failed to read memory bandwidth: " + e2.getMessage());
+        this.mBandwidthEntries.clear();
+      }
+      StrictMode.setThreadPolicy(policy);
+      long readTime = SystemClock.uptimeMillis() - startTime;
+      if (readTime > 100) {
+        Slog.m121w(TAG, "Reading memory bandwidth file took " + readTime + "ms");
+      }
+    } catch (Throwable th3) {
+      StrictMode.setThreadPolicy(policy);
+      throw th3;
     }
+  }
 
-    public LongSparseLongArray getBandwidthEntries() {
-        return this.mBandwidthEntries;
+  public void parseStats(BufferedReader reader) throws IOException {
+    TextUtils.SimpleStringSplitter splitter = new TextUtils.SimpleStringSplitter(' ');
+    this.mBandwidthEntries.clear();
+    while (true) {
+      String line = reader.readLine();
+      if (line != null) {
+        splitter.setString(line);
+        splitter.next();
+        int bandwidth = 0;
+        do {
+          int index = this.mBandwidthEntries.indexOfKey(bandwidth);
+          if (index >= 0) {
+            LongSparseLongArray longSparseLongArray = this.mBandwidthEntries;
+            longSparseLongArray.put(
+                bandwidth,
+                longSparseLongArray.valueAt(index) + (Long.parseLong(splitter.next()) / 1000000));
+          } else {
+            this.mBandwidthEntries.put(bandwidth, Long.parseLong(splitter.next()) / 1000000);
+          }
+          bandwidth++;
+        } while (splitter.hasNext());
+      } else {
+        return;
+      }
     }
+  }
+
+  public LongSparseLongArray getBandwidthEntries() {
+    return this.mBandwidthEntries;
+  }
 }

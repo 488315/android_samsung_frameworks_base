@@ -5,5 +5,5 @@ import java.io.InputStream;
 
 /* loaded from: classes5.dex */
 interface CMSReadable {
-    InputStream getInputStream() throws IOException, CMSException;
+  InputStream getInputStream() throws IOException, CMSException;
 }

@@ -7,56 +7,61 @@ import android.p009os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextAbnormalPressure extends SContextEventContext {
-    public static final Parcelable.Creator<SContextAbnormalPressure> CREATOR = new Parcelable.Creator<SContextAbnormalPressure>() { // from class: android.hardware.scontext.SContextAbnormalPressure.1
+  public static final Parcelable.Creator<SContextAbnormalPressure> CREATOR =
+      new Parcelable.Creator<
+          SContextAbnormalPressure>() { // from class:
+                                        // android.hardware.scontext.SContextAbnormalPressure.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public SContextAbnormalPressure createFromParcel(Parcel in) {
-            return new SContextAbnormalPressure(in);
+          return new SContextAbnormalPressure(in);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public SContextAbnormalPressure[] newArray(int size) {
-            return new SContextAbnormalPressure[size];
+          return new SContextAbnormalPressure[size];
         }
-    };
-    private Bundle mContext;
+      };
+  private Bundle mContext;
 
-    SContextAbnormalPressure() {
-        this.mContext = new Bundle();
-    }
+  SContextAbnormalPressure() {
+    this.mContext = new Bundle();
+  }
 
-    SContextAbnormalPressure(Parcel src) {
-        readFromParcel(src);
-    }
+  SContextAbnormalPressure(Parcel src) {
+    readFromParcel(src);
+  }
 
-    public float getPressure() {
-        return this.mContext.getFloat("barometer");
-    }
+  public float getPressure() {
+    return this.mContext.getFloat("barometer");
+  }
 
-    public float getAccX() {
-        return this.mContext.getFloat("xaxis");
-    }
+  public float getAccX() {
+    return this.mContext.getFloat("xaxis");
+  }
 
-    public float getAccY() {
-        return this.mContext.getFloat("yaxis");
-    }
+  public float getAccY() {
+    return this.mContext.getFloat("yaxis");
+  }
 
-    public float getAccZ() {
-        return this.mContext.getFloat("zaxis");
-    }
+  public float getAccZ() {
+    return this.mContext.getFloat("zaxis");
+  }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
-    public void setValues(Bundle context) {
-        this.mContext = context;
-    }
+  @Override // android.hardware.scontext.SContextEventContext,
+            // com.samsung.android.hardware.context.SemContextEventContext
+  public void setValues(Bundle context) {
+    this.mContext = context;
+  }
 
-    @Override // com.samsung.android.hardware.context.SemContextEventContext, android.p009os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeBundle(this.mContext);
-    }
+  @Override // com.samsung.android.hardware.context.SemContextEventContext,
+            // android.p009os.Parcelable
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeBundle(this.mContext);
+  }
 
-    private void readFromParcel(Parcel src) {
-        this.mContext = src.readBundle();
-    }
+  private void readFromParcel(Parcel src) {
+    this.mContext = src.readBundle();
+  }
 }

@@ -5,7 +5,7 @@ import java.io.OutputStream;
 
 /* loaded from: classes5.dex */
 public interface CMSProcessable {
-    Object getContent();
+  Object getContent();
 
-    void write(OutputStream outputStream) throws IOException, CMSException;
+  void write(OutputStream outputStream) throws IOException, CMSException;
 }

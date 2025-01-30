@@ -5,5 +5,5 @@ import java.security.PrivateKey;
 
 /* loaded from: classes5.dex */
 public interface ECPrivateKey extends ECKey, PrivateKey {
-    BigInteger getD();
+  BigInteger getD();
 }

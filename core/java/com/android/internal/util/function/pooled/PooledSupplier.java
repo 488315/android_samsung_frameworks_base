@@ -7,25 +7,30 @@ import java.util.function.LongSupplier;
 import java.util.function.Supplier;
 
 /* loaded from: classes5.dex */
-public interface PooledSupplier<T> extends PooledLambda, Supplier<T>, FunctionalUtils.ThrowingSupplier<T> {
+public interface PooledSupplier<T>
+    extends PooledLambda, Supplier<T>, FunctionalUtils.ThrowingSupplier<T> {
 
-    public interface OfDouble extends DoubleSupplier, PooledLambda {
-        @Override // 
-        OfDouble recycleOnUse();
-    }
+  public interface OfDouble extends DoubleSupplier, PooledLambda {
+    @Override //
+    OfDouble recycleOnUse();
+  }
 
-    public interface OfInt extends IntSupplier, PooledLambda {
-        @Override // com.android.internal.util.function.pooled.PooledSupplier.OfLong, com.android.internal.util.function.pooled.PooledSupplier.OfDouble
-        OfInt recycleOnUse();
-    }
+  public interface OfInt extends IntSupplier, PooledLambda {
+    @Override // com.android.internal.util.function.pooled.PooledSupplier.OfLong,
+              // com.android.internal.util.function.pooled.PooledSupplier.OfDouble
+    OfInt recycleOnUse();
+  }
 
-    public interface OfLong extends LongSupplier, PooledLambda {
-        @Override // com.android.internal.util.function.pooled.PooledSupplier.OfDouble
-        OfLong recycleOnUse();
-    }
+  public interface OfLong extends LongSupplier, PooledLambda {
+    @Override // com.android.internal.util.function.pooled.PooledSupplier.OfDouble
+    OfLong recycleOnUse();
+  }
 
-    PooledRunnable asRunnable();
+  PooledRunnable asRunnable();
 
-    @Override // com.android.internal.util.function.pooled.PooledRunnable, com.android.internal.util.function.pooled.PooledSupplier.OfInt, com.android.internal.util.function.pooled.PooledSupplier.OfLong, com.android.internal.util.function.pooled.PooledSupplier.OfDouble
-    PooledSupplier<T> recycleOnUse();
+  @Override // com.android.internal.util.function.pooled.PooledRunnable,
+            // com.android.internal.util.function.pooled.PooledSupplier.OfInt,
+            // com.android.internal.util.function.pooled.PooledSupplier.OfLong,
+            // com.android.internal.util.function.pooled.PooledSupplier.OfDouble
+  PooledSupplier<T> recycleOnUse();
 }

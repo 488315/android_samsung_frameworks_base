@@ -8,26 +8,26 @@ import java.util.stream.Collectors;
 /* compiled from: ColorScheme.java */
 /* loaded from: classes5.dex */
 final class TonalSpec {
-    private final Chroma chroma;
-    private final Hue hue;
+  private final Chroma chroma;
+  private final Hue hue;
 
-    public final List shades(Cam sourceColor) {
-        double hue = this.hue.get(sourceColor);
-        double chroma = this.chroma.get(sourceColor);
-        int[] shades = Shades.m489of((float) hue, (float) chroma);
-        return (List) Arrays.stream(shades).boxed().collect(Collectors.toList());
-    }
+  public final List shades(Cam sourceColor) {
+    double hue = this.hue.get(sourceColor);
+    double chroma = this.chroma.get(sourceColor);
+    int[] shades = Shades.m489of((float) hue, (float) chroma);
+    return (List) Arrays.stream(shades).boxed().collect(Collectors.toList());
+  }
 
-    public Hue getHue() {
-        return this.hue;
-    }
+  public Hue getHue() {
+    return this.hue;
+  }
 
-    public Chroma getChroma() {
-        return this.chroma;
-    }
+  public Chroma getChroma() {
+    return this.chroma;
+  }
 
-    public TonalSpec(Hue hue, Chroma chroma) {
-        this.hue = hue;
-        this.chroma = chroma;
-    }
+  public TonalSpec(Hue hue, Chroma chroma) {
+    this.hue = hue;
+    this.chroma = chroma;
+  }
 }

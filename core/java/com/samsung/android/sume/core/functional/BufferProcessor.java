@@ -6,5 +6,5 @@ import com.samsung.android.sume.core.filter.MediaFilter;
 @FunctionalInterface
 /* loaded from: classes4.dex */
 public interface BufferProcessor {
-    MediaBuffer process(MediaBuffer mediaBuffer, MediaFilter.Option option);
+  MediaBuffer process(MediaBuffer mediaBuffer, MediaFilter.Option option);
 }

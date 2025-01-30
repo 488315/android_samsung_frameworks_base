@@ -5,7 +5,7 @@ import java.util.List;
 
 /* loaded from: classes2.dex */
 public abstract class ArraysUtilJVM {
-    public static List asList(Object[] objArr) {
-        return Arrays.asList(objArr);
-    }
+  public static List asList(Object[] objArr) {
+    return Arrays.asList(objArr);
+  }
 }

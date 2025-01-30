@@ -1,67 +1,66 @@
 package com.android.server.desktopmode;
 
-import com.android.server.desktopmode.HardwareManager;
 import com.samsung.android.cover.CoverState;
 import com.samsung.android.desktopmode.SemDesktopModeState;
 import java.util.Map;
 
 /* loaded from: classes2.dex */
 public interface State {
-    DisplayInfo getConnectedDisplay();
+  DisplayInfo getConnectedDisplay();
 
-    CoverState getCoverState();
+  CoverState getCoverState();
 
-    int getCurrentUserId();
+  int getCurrentUserId();
 
-    int getDesktopDisplayId();
+  int getDesktopDisplayId();
 
-    SemDesktopModeState getDesktopModeState();
+  SemDesktopModeState getDesktopModeState();
 
-    HardwareManager.DockState getDockState();
+  HardwareManager.DockState getDockState();
 
-    Map getPackageState();
+  Map getPackageState();
 
-    DisplayInfo getPreviousConnectedDisplay();
+  DisplayInfo getPreviousConnectedDisplay();
 
-    HardwareManager.DockState getPreviousDockState();
+  HardwareManager.DockState getPreviousDockState();
 
-    boolean isCoverSupportStatePartial();
+  boolean isCoverSupportStatePartial();
 
-    boolean isDexOnPcConnected();
+  boolean isDexOnPcConnected();
 
-    boolean isDexOnPcOrWirelessDexConnected();
+  boolean isDexOnPcOrWirelessDexConnected();
 
-    boolean isDexStationConnectedWithFlipCover();
+  boolean isDexStationConnectedWithFlipCover();
 
-    boolean isDisplayResolutionUnsupported();
+  boolean isDisplayResolutionUnsupported();
 
-    boolean isDockLowChargerConnected();
+  boolean isDockLowChargerConnected();
 
-    boolean isEmergencyModeEnabled();
+  boolean isEmergencyModeEnabled();
 
-    boolean isExternalDisplayConnected();
+  boolean isExternalDisplayConnected();
 
-    boolean isForcedInternalScreenModeEnabled();
+  boolean isForcedInternalScreenModeEnabled();
 
-    boolean isHdmiConnected();
+  boolean isHdmiConnected();
 
-    boolean isModeChangeLocked();
+  boolean isModeChangeLocked();
 
-    boolean isMouseConnected();
+  boolean isMouseConnected();
 
-    boolean isNavBarGestureEnabled();
+  boolean isNavBarGestureEnabled();
 
-    boolean isPackagesAvailable();
+  boolean isPackagesAvailable();
 
-    boolean isPogoKeyboardConnected();
+  boolean isPogoKeyboardConnected();
 
-    boolean isSpenEnabled();
+  boolean isSpenEnabled();
 
-    boolean isTouchpadAvailable();
+  boolean isTouchpadAvailable();
 
-    boolean isTouchpadEnabled();
+  boolean isTouchpadEnabled();
 
-    boolean isWiredCharging();
+  boolean isWiredCharging();
 
-    boolean isWirelessDexConnected();
+  boolean isWirelessDexConnected();
 }

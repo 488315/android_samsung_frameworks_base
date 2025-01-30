@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 /* loaded from: classes.dex */
 public @interface GenerateFieldPort {
-    boolean hasDefault() default false;
+  boolean hasDefault() default false;
 
-    String name() default "";
+  String name() default "";
 }

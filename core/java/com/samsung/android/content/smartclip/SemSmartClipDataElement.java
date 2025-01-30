@@ -4,23 +4,23 @@ import android.graphics.Rect;
 
 /* loaded from: classes5.dex */
 public interface SemSmartClipDataElement {
-    boolean addTag(SemSmartClipMetaTag semSmartClipMetaTag);
+  boolean addTag(SemSmartClipMetaTag semSmartClipMetaTag);
 
-    void clearMetaData();
+  void clearMetaData();
 
-    SemSmartClipMetaTagArray getAllTags();
+  SemSmartClipMetaTagArray getAllTags();
 
-    int getExtractionMode();
+  int getExtractionMode();
 
-    Rect getMetaAreaRect();
+  Rect getMetaAreaRect();
 
-    SemSmartClipMetaTagArray getTags(String str);
+  SemSmartClipMetaTagArray getTags(String str);
 
-    int removeTags(String str);
+  int removeTags(String str);
 
-    boolean sendSuspendedExtractionData();
+  boolean sendSuspendedExtractionData();
 
-    void setMetaAreaRect(Rect rect);
+  void setMetaAreaRect(Rect rect);
 
-    boolean setTag(SemSmartClipMetaTag semSmartClipMetaTag);
+  boolean setTag(SemSmartClipMetaTag semSmartClipMetaTag);
 }

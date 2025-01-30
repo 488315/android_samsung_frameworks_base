@@ -18,29 +18,37 @@ import java.util.List;
 
 /* loaded from: classes5.dex */
 public interface FeatureFactory {
-    List<ActionInteractionStrategy> createActionInteractionStrategies(String str);
+  List<ActionInteractionStrategy> createActionInteractionStrategies(String str);
 
-    List<ActionsCreationStrategy> createActionsCreationStrategies(SamsungGlobalActions samsungGlobalActions);
+  List<ActionsCreationStrategy> createActionsCreationStrategies(
+      SamsungGlobalActions samsungGlobalActions);
 
-    List<DefaultActionsCreationStrategy> createDefaultActionsCreationStrategy(SamsungGlobalActions samsungGlobalActions, String str);
+  List<DefaultActionsCreationStrategy> createDefaultActionsCreationStrategy(
+      SamsungGlobalActions samsungGlobalActions, String str);
 
-    List<DisposingStrategy> createDisposingStrategies(SamsungGlobalActions samsungGlobalActions);
+  List<DisposingStrategy> createDisposingStrategies(SamsungGlobalActions samsungGlobalActions);
 
-    List<InitializationStrategy> createInitializationStrategies(SamsungGlobalActions samsungGlobalActions);
+  List<InitializationStrategy> createInitializationStrategies(
+      SamsungGlobalActions samsungGlobalActions);
 
-    List<OnKeyListenerStrategy> createOnKeyListenerStrategy(SamsungGlobalActions samsungGlobalActions);
+  List<OnKeyListenerStrategy> createOnKeyListenerStrategy(
+      SamsungGlobalActions samsungGlobalActions);
 
-    List<SecureConfirmStrategy> createSecureConfirmStrategy(SamsungGlobalActions samsungGlobalActions, String str);
+  List<SecureConfirmStrategy> createSecureConfirmStrategy(
+      SamsungGlobalActions samsungGlobalActions, String str);
 
-    List<SoftwareUpdateStrategy> createSoftwareUpdateStrategy(SamsungGlobalActions samsungGlobalActions, String str);
+  List<SoftwareUpdateStrategy> createSoftwareUpdateStrategy(
+      SamsungGlobalActions samsungGlobalActions, String str);
 
-    List<ViewInflateStrategy> createViewInflateStrategy();
+  List<ViewInflateStrategy> createViewInflateStrategy();
 
-    List<WindowDecorationStrategy> createWindowDecorationStrategies(SamsungGlobalActions samsungGlobalActions);
+  List<WindowDecorationStrategy> createWindowDecorationStrategies(
+      SamsungGlobalActions samsungGlobalActions);
 
-    List<WindowManagerFunctionStrategy> createWindowManagerFunctionStrategy(SamsungGlobalActions samsungGlobalActions, String str);
+  List<WindowManagerFunctionStrategy> createWindowManagerFunctionStrategy(
+      SamsungGlobalActions samsungGlobalActions, String str);
 
-    default List<ActionUpdateStrategy> createActionUpdateStrategies() {
-        return new ArrayList();
-    }
+  default List<ActionUpdateStrategy> createActionUpdateStrategies() {
+    return new ArrayList();
+  }
 }

@@ -5,8 +5,8 @@ import android.location.Location;
 
 /* loaded from: classes5.dex */
 public interface SemLocationListener {
-    @Deprecated(forRemoval = true, since = "13.0")
-    void onLocationAvailable(Location[] locationArr);
+  @Deprecated(forRemoval = true, since = "13.0")
+  void onLocationAvailable(Location[] locationArr);
 
-    void onLocationChanged(Location location, Address address);
+  void onLocationChanged(Location location, Address address);
 }

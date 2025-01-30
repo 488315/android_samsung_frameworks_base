@@ -6,29 +6,31 @@ import com.samsung.android.cocktailbar.CocktailBarStateInfo;
 /* loaded from: classes.dex */
 public interface CocktailBarStatePolicy {
 
-    public interface OnCocktailBarStateListener {
-        boolean notifyCocktailBarState(CocktailBarStateInfo cocktailBarStateInfo);
+  public interface OnCocktailBarStateListener {
+    boolean notifyCocktailBarState(CocktailBarStateInfo cocktailBarStateInfo);
 
-        boolean notifyCocktailBarStateExceptCallingPackage(CocktailBarStateInfo cocktailBarStateInfo, String str);
+    boolean notifyCocktailBarStateExceptCallingPackage(
+        CocktailBarStateInfo cocktailBarStateInfo, String str);
 
-        boolean notifyCocktailBarStateToBinder(IBinder iBinder, CocktailBarStateInfo cocktailBarStateInfo);
-    }
+    boolean notifyCocktailBarStateToBinder(
+        IBinder iBinder, CocktailBarStateInfo cocktailBarStateInfo);
+  }
 
-    String dump();
+  String dump();
 
-    CocktailBarStateInfo getCocktailBarStateInfo();
+  CocktailBarStateInfo getCocktailBarStateInfo();
 
-    int getWindowType();
+  int getWindowType();
 
-    void initialize();
+  void initialize();
 
-    void notifyStateToBinder(IBinder iBinder);
+  void notifyStateToBinder(IBinder iBinder);
 
-    void updateActivate(boolean z);
+  void updateActivate(boolean z);
 
-    void updateCocktailBarWindowType(int i, String str);
+  void updateCocktailBarWindowType(int i, String str);
 
-    void updatePosition(int i);
+  void updatePosition(int i);
 
-    void updateVisibility(int i);
+  void updateVisibility(int i);
 }

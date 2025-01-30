@@ -2,20 +2,20 @@ package android.hardware;
 
 /* loaded from: classes.dex */
 public class SensorEvent {
-    public int accuracy;
-    public boolean firstEventAfterDiscontinuity;
-    public Sensor sensor;
-    public long timestamp;
-    public final float[] values;
+  public int accuracy;
+  public boolean firstEventAfterDiscontinuity;
+  public Sensor sensor;
+  public long timestamp;
+  public final float[] values;
 
-    SensorEvent(int valueSize) {
-        this.values = new float[valueSize];
-    }
+  SensorEvent(int valueSize) {
+    this.values = new float[valueSize];
+  }
 
-    public SensorEvent(Sensor sensor, int accuracy, long timestamp, float[] values) {
-        this.sensor = sensor;
-        this.accuracy = accuracy;
-        this.timestamp = timestamp;
-        this.values = values;
-    }
+  public SensorEvent(Sensor sensor, int accuracy, long timestamp, float[] values) {
+    this.sensor = sensor;
+    this.accuracy = accuracy;
+    this.timestamp = timestamp;
+    this.values = values;
+  }
 }

@@ -4,9 +4,9 @@ import android.net.ResolverParamsParcel;
 
 /* loaded from: classes2.dex */
 public interface IDnsResolverAdapter {
-    void createNetworkCache(int i);
+  void createNetworkCache(int i);
 
-    void flushNetworkCache(int i);
+  void flushNetworkCache(int i);
 
-    void setResolverConfiguration(ResolverParamsParcel resolverParamsParcel);
+  void setResolverConfiguration(ResolverParamsParcel resolverParamsParcel);
 }

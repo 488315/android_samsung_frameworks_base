@@ -5,14 +5,14 @@ import java.security.SecureRandom;
 
 /* loaded from: classes5.dex */
 public class ECKeyGenerationParameters extends KeyGenerationParameters {
-    private ECDomainParameters domainParams;
+  private ECDomainParameters domainParams;
 
-    public ECKeyGenerationParameters(ECDomainParameters domainParams, SecureRandom random) {
-        super(random, domainParams.getN().bitLength());
-        this.domainParams = domainParams;
-    }
+  public ECKeyGenerationParameters(ECDomainParameters domainParams, SecureRandom random) {
+    super(random, domainParams.getN().bitLength());
+    this.domainParams = domainParams;
+  }
 
-    public ECDomainParameters getDomainParameters() {
-        return this.domainParams;
-    }
+  public ECDomainParameters getDomainParameters() {
+    return this.domainParams;
+  }
 }

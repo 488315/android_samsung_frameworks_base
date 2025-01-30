@@ -12,46 +12,46 @@ import com.android.internal.C4337R;
 @HasNativeInterpolator
 /* loaded from: classes4.dex */
 public class DecelerateInterpolator extends BaseInterpolator implements NativeInterpolator {
-    private float mFactor;
+  private float mFactor;
 
-    public DecelerateInterpolator() {
-        this.mFactor = 1.0f;
-    }
+  public DecelerateInterpolator() {
+    this.mFactor = 1.0f;
+  }
 
-    public DecelerateInterpolator(float factor) {
-        this.mFactor = 1.0f;
-        this.mFactor = factor;
-    }
+  public DecelerateInterpolator(float factor) {
+    this.mFactor = 1.0f;
+    this.mFactor = factor;
+  }
 
-    public DecelerateInterpolator(Context context, AttributeSet attrs) {
-        this(context.getResources(), context.getTheme(), attrs);
-    }
+  public DecelerateInterpolator(Context context, AttributeSet attrs) {
+    this(context.getResources(), context.getTheme(), attrs);
+  }
 
-    public DecelerateInterpolator(Resources res, Resources.Theme theme, AttributeSet attrs) {
-        TypedArray a;
-        this.mFactor = 1.0f;
-        if (theme != null) {
-            a = theme.obtainStyledAttributes(attrs, C4337R.styleable.DecelerateInterpolator, 0, 0);
-        } else {
-            a = res.obtainAttributes(attrs, C4337R.styleable.DecelerateInterpolator);
-        }
-        this.mFactor = a.getFloat(0, 1.0f);
-        setChangingConfiguration(a.getChangingConfigurations());
-        a.recycle();
+  public DecelerateInterpolator(Resources res, Resources.Theme theme, AttributeSet attrs) {
+    TypedArray a;
+    this.mFactor = 1.0f;
+    if (theme != null) {
+      a = theme.obtainStyledAttributes(attrs, C4337R.styleable.DecelerateInterpolator, 0, 0);
+    } else {
+      a = res.obtainAttributes(attrs, C4337R.styleable.DecelerateInterpolator);
     }
+    this.mFactor = a.getFloat(0, 1.0f);
+    setChangingConfiguration(a.getChangingConfigurations());
+    a.recycle();
+  }
 
-    @Override // android.animation.TimeInterpolator
-    public float getInterpolation(float input) {
-        if (this.mFactor == 1.0f) {
-            float result = 1.0f - ((1.0f - input) * (1.0f - input));
-            return result;
-        }
-        float result2 = 1.0f - input;
-        return (float) (1.0d - Math.pow(result2, r0 * 2.0f));
+  @Override // android.animation.TimeInterpolator
+  public float getInterpolation(float input) {
+    if (this.mFactor == 1.0f) {
+      float result = 1.0f - ((1.0f - input) * (1.0f - input));
+      return result;
     }
+    float result2 = 1.0f - input;
+    return (float) (1.0d - Math.pow(result2, r0 * 2.0f));
+  }
 
-    @Override // android.graphics.animation.NativeInterpolator
-    public long createNativeInterpolator() {
-        return NativeInterpolatorFactory.createDecelerateInterpolator(this.mFactor);
-    }
+  @Override // android.graphics.animation.NativeInterpolator
+  public long createNativeInterpolator() {
+    return NativeInterpolatorFactory.createDecelerateInterpolator(this.mFactor);
+  }
 }

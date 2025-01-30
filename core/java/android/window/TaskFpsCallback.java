@@ -6,12 +6,12 @@ import android.p009os.RemoteException;
 @SystemApi
 /* loaded from: classes4.dex */
 public abstract class TaskFpsCallback {
-    public abstract void onFpsReported(float f);
+  public abstract void onFpsReported(float f);
 
-    private static void dispatchOnFpsReported(ITaskFpsCallback listener, float fps) {
-        try {
-            listener.onFpsReported(fps);
-        } catch (RemoteException e) {
-        }
+  private static void dispatchOnFpsReported(ITaskFpsCallback listener, float fps) {
+    try {
+      listener.onFpsReported(fps);
+    } catch (RemoteException e) {
     }
+  }
 }

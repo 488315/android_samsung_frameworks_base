@@ -6,13 +6,14 @@ import com.android.server.display.brightness.BrightnessUtils;
 
 /* loaded from: classes2.dex */
 public class InvalidBrightnessStrategy implements DisplayBrightnessStrategy {
-    @Override // com.android.server.display.brightness.strategy.DisplayBrightnessStrategy
-    public String getName() {
-        return "InvalidBrightnessStrategy";
-    }
+  @Override // com.android.server.display.brightness.strategy.DisplayBrightnessStrategy
+  public String getName() {
+    return "InvalidBrightnessStrategy";
+  }
 
-    @Override // com.android.server.display.brightness.strategy.DisplayBrightnessStrategy
-    public DisplayBrightnessState updateBrightness(DisplayManagerInternal.DisplayPowerRequest displayPowerRequest) {
-        return BrightnessUtils.constructDisplayBrightnessState(0, Float.NaN, Float.NaN, getName());
-    }
+  @Override // com.android.server.display.brightness.strategy.DisplayBrightnessStrategy
+  public DisplayBrightnessState updateBrightness(
+      DisplayManagerInternal.DisplayPowerRequest displayPowerRequest) {
+    return BrightnessUtils.constructDisplayBrightnessState(0, Float.NaN, Float.NaN, getName());
+  }
 }

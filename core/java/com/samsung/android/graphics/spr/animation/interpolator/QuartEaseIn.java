@@ -6,19 +6,17 @@ import android.view.animation.Interpolator;
 
 /* loaded from: classes5.dex */
 public class QuartEaseIn implements Interpolator {
-    public QuartEaseIn() {
-    }
+  public QuartEaseIn() {}
 
-    public QuartEaseIn(Context context, AttributeSet attrs) {
-    }
+  public QuartEaseIn(Context context, AttributeSet attrs) {}
 
-    @Override // android.animation.TimeInterpolator
-    public float getInterpolation(float t) {
-        return m275in(t);
-    }
+  @Override // android.animation.TimeInterpolator
+  public float getInterpolation(float t) {
+    return m275in(t);
+  }
 
-    /* renamed from: in */
-    private float m275in(float t) {
-        return t * t * t * t;
-    }
+  /* renamed from: in */
+  private float m275in(float t) {
+    return t * t * t * t;
+  }
 }

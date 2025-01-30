@@ -5,17 +5,18 @@ import com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel;
 
 /* loaded from: classes5.dex */
 public interface SecureConfirmStrategy {
-    boolean doActionBeforeSecureConfirm(ActionViewModel actionViewModel, SamsungGlobalActions samsungGlobalActions);
+  boolean doActionBeforeSecureConfirm(
+      ActionViewModel actionViewModel, SamsungGlobalActions samsungGlobalActions);
 
-    default boolean isNeedSecureConfirm() {
-        return true;
-    }
+  default boolean isNeedSecureConfirm() {
+    return true;
+  }
 
-    default boolean hasSecureConfirmCondition() {
-        return false;
-    }
+  default boolean hasSecureConfirmCondition() {
+    return false;
+  }
 
-    default boolean isFoldedState() {
-        return false;
-    }
+  default boolean isFoldedState() {
+    return false;
+  }
 }

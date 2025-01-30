@@ -1,71 +1,71 @@
 package android.p009os;
 
-import android.p009os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class SemScreenWakeInfo implements Cloneable, Parcelable {
-    public static final Parcelable.Creator<SemScreenWakeInfo> CREATOR = new Parcelable.Creator<SemScreenWakeInfo>() { // from class: android.os.SemScreenWakeInfo.1
+  public static final Parcelable.Creator<SemScreenWakeInfo> CREATOR =
+      new Parcelable.Creator<SemScreenWakeInfo>() { // from class: android.os.SemScreenWakeInfo.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public SemScreenWakeInfo createFromParcel(Parcel in) {
-            return new SemScreenWakeInfo(in);
+          return new SemScreenWakeInfo(in);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public SemScreenWakeInfo[] newArray(int size) {
-            return new SemScreenWakeInfo[size];
+          return new SemScreenWakeInfo[size];
         }
-    };
-    private long count;
-    private String tag;
+      };
+  private long count;
+  private String tag;
 
-    public SemScreenWakeInfo(String tag) {
-        this.tag = tag;
-        this.count = 0L;
-    }
+  public SemScreenWakeInfo(String tag) {
+    this.tag = tag;
+    this.count = 0L;
+  }
 
-    public SemScreenWakeInfo(String tag, long count) {
-        this.tag = tag;
-        this.count = count;
-    }
+  public SemScreenWakeInfo(String tag, long count) {
+    this.tag = tag;
+    this.count = count;
+  }
 
-    public String getTag() {
-        return this.tag;
-    }
+  public String getTag() {
+    return this.tag;
+  }
 
-    public long getCount() {
-        return this.count;
-    }
+  public long getCount() {
+    return this.count;
+  }
 
-    public void calculateDelta(SemScreenWakeInfo prev) {
-        if (this.tag.equals(prev.getTag())) {
-            this.count = Math.max(0L, this.count - prev.getCount());
-        }
+  public void calculateDelta(SemScreenWakeInfo prev) {
+    if (this.tag.equals(prev.getTag())) {
+      this.count = Math.max(0L, this.count - prev.getCount());
     }
+  }
 
-    protected SemScreenWakeInfo(Parcel in) {
-        this.tag = in.readString();
-        this.count = in.readLong();
-    }
+  protected SemScreenWakeInfo(Parcel in) {
+    this.tag = in.readString();
+    this.count = in.readLong();
+  }
 
-    @Override // android.p009os.Parcelable
-    public int describeContents() {
-        return 0;
-    }
+  @Override // android.p009os.Parcelable
+  public int describeContents() {
+    return 0;
+  }
 
-    @Override // android.p009os.Parcelable
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(this.tag);
-        parcel.writeLong(this.count);
-    }
+  @Override // android.p009os.Parcelable
+  public void writeToParcel(Parcel parcel, int i) {
+    parcel.writeString(this.tag);
+    parcel.writeLong(this.count);
+  }
 
-    /* renamed from: clone, reason: merged with bridge method [inline-methods] */
-    public SemScreenWakeInfo m3688clone() {
-        try {
-            return (SemScreenWakeInfo) super.clone();
-        } catch (CloneNotSupportedException e) {
-            return null;
-        }
+  /* renamed from: clone, reason: merged with bridge method [inline-methods] */
+  public SemScreenWakeInfo m3688clone() {
+    try {
+      return (SemScreenWakeInfo) super.clone();
+    } catch (CloneNotSupportedException e) {
+      return null;
     }
+  }
 }

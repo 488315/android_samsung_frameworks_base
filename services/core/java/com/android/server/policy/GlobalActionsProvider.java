@@ -3,17 +3,17 @@ package com.android.server.policy;
 /* loaded from: classes3.dex */
 public interface GlobalActionsProvider {
 
-    public interface GlobalActionsListener {
-        void onGlobalActionsAvailableChanged(boolean z);
+  public interface GlobalActionsListener {
+    void onGlobalActionsAvailableChanged(boolean z);
 
-        void onGlobalActionsDismissed();
+    void onGlobalActionsDismissed();
 
-        void onGlobalActionsShown();
-    }
+    void onGlobalActionsShown();
+  }
 
-    boolean isGlobalActionsDisabled();
+  boolean isGlobalActionsDisabled();
 
-    void setGlobalActionsListener(GlobalActionsListener globalActionsListener);
+  void setGlobalActionsListener(GlobalActionsListener globalActionsListener);
 
-    void showGlobalActions(int i);
+  void showGlobalActions(int i);
 }

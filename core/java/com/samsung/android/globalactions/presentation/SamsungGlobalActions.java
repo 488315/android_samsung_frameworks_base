@@ -6,39 +6,39 @@ import com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel;
 
 /* loaded from: classes5.dex */
 public interface SamsungGlobalActions {
-    void addAction(ActionViewModel actionViewModel);
+  void addAction(ActionViewModel actionViewModel);
 
-    void clearActions(String str);
+  void clearActions(String str);
 
-    void confirmAction(ActionViewModel actionViewModel);
+  void confirmAction(ActionViewModel actionViewModel);
 
-    void confirmSafeMode(int i);
+  void confirmSafeMode(int i);
 
-    void dismissDialog(boolean z);
+  void dismissDialog(boolean z);
 
-    ExtendableGlobalActionsView getGlobalActionsView();
+  ExtendableGlobalActionsView getGlobalActionsView();
 
-    void hideDialogOnSecureConfirm();
+  void hideDialogOnSecureConfirm();
 
-    boolean isActionConfirming();
+  boolean isActionConfirming();
 
-    boolean isDeviceProvisioned();
+  boolean isDeviceProvisioned();
 
-    void onCancelDialog();
+  void onCancelDialog();
 
-    void onShowDialog();
+  void onShowDialog();
 
-    void registerContentObserver(Uri uri, Runnable runnable);
+  void registerContentObserver(Uri uri, Runnable runnable);
 
-    void registerSecureConfirmAction(ActionViewModel actionViewModel);
+  void registerSecureConfirmAction(ActionViewModel actionViewModel);
 
-    void setDisabled();
+  void setDisabled();
 
-    void setKeyguardShowing(boolean z);
+  void setKeyguardShowing(boolean z);
 
-    void setOverrideDefaultActions(boolean z);
+  void setOverrideDefaultActions(boolean z);
 
-    default int getSideKeyType() {
-        return -1;
-    }
+  default int getSideKeyType() {
+    return -1;
+  }
 }

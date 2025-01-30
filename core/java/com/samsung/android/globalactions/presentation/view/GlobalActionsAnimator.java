@@ -2,40 +2,39 @@ package com.samsung.android.globalactions.presentation.view;
 
 /* loaded from: classes5.dex */
 public interface GlobalActionsAnimator {
-    void cancelHideConfirmAnimation();
+  void cancelHideConfirmAnimation();
 
-    void cancelShowConfirmAnimation();
+  void cancelShowConfirmAnimation();
 
-    void initializeSelectedActionView();
+  void initializeSelectedActionView();
 
-    boolean isHideConfirmAnimationRunning();
+  boolean isHideConfirmAnimationRunning();
 
-    boolean isSafeModeConfirm();
+  boolean isSafeModeConfirm();
 
-    boolean isShowConfirmAnimationRunning();
+  boolean isShowConfirmAnimationRunning();
 
-    void setListViewLand();
+  void setListViewLand();
 
-    void setListViewPort();
+  void setListViewPort();
 
-    void showMainViewLand();
+  void showMainViewLand();
 
-    void showMainViewPort();
+  void showMainViewPort();
 
-    void startDismissAnimation(boolean z);
+  void startDismissAnimation(boolean z);
 
-    void startDismissConfirmAnimation();
+  void startDismissConfirmAnimation();
 
-    void startDismissSafeModeAnimation();
+  void startDismissSafeModeAnimation();
 
-    void startSetSafeModeAnimation();
+  void startSetSafeModeAnimation();
 
-    void startShowAnimation();
+  void startShowAnimation();
 
-    void startShowConfirmAnimation();
+  void startShowConfirmAnimation();
 
-    void startShowSafeModeAnimation();
+  void startShowSafeModeAnimation();
 
-    default void startToastAnimation() {
-    }
+  default void startToastAnimation() {}
 }

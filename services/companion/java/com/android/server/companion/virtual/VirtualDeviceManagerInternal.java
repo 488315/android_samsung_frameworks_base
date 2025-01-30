@@ -9,41 +9,43 @@ import java.util.Set;
 /* loaded from: classes.dex */
 public abstract class VirtualDeviceManagerInternal {
 
-    public interface AppsOnVirtualDeviceListener {
-        void onAppsOnAnyVirtualDeviceChanged(Set set);
-    }
+  public interface AppsOnVirtualDeviceListener {
+    void onAppsOnAnyVirtualDeviceChanged(Set set);
+  }
 
-    public interface VirtualDisplayListener {
-        void onVirtualDisplayCreated(int i);
+  public interface VirtualDisplayListener {
+    void onVirtualDisplayCreated(int i);
 
-        void onVirtualDisplayRemoved(int i);
-    }
+    void onVirtualDisplayRemoved(int i);
+  }
 
-    public abstract int getBaseVirtualDisplayFlags(IVirtualDevice iVirtualDevice);
+  public abstract int getBaseVirtualDisplayFlags(IVirtualDevice iVirtualDevice);
 
-    public abstract ArraySet getDeviceIdsForUid(int i);
+  public abstract ArraySet getDeviceIdsForUid(int i);
 
-    public abstract int getDeviceOwnerUid(int i);
+  public abstract int getDeviceOwnerUid(int i);
 
-    public abstract ArraySet getDisplayIdsForDevice(int i);
+  public abstract ArraySet getDisplayIdsForDevice(int i);
 
-    public abstract LocaleList getPreferredLocaleListForUid(int i);
+  public abstract LocaleList getPreferredLocaleListForUid(int i);
 
-    public abstract VirtualSensor getVirtualSensor(int i, int i2);
+  public abstract VirtualSensor getVirtualSensor(int i, int i2);
 
-    public abstract boolean isAppRunningOnAnyVirtualDevice(int i);
+  public abstract boolean isAppRunningOnAnyVirtualDevice(int i);
 
-    public abstract boolean isDisplayOwnedByAnyVirtualDevice(int i);
+  public abstract boolean isDisplayOwnedByAnyVirtualDevice(int i);
 
-    public abstract void onAppsOnVirtualDeviceChanged();
+  public abstract void onAppsOnVirtualDeviceChanged();
 
-    public abstract void onAuthenticationPrompt(int i);
+  public abstract void onAuthenticationPrompt(int i);
 
-    public abstract void onVirtualDisplayCreated(int i);
+  public abstract void onVirtualDisplayCreated(int i);
 
-    public abstract void onVirtualDisplayRemoved(IVirtualDevice iVirtualDevice, int i);
+  public abstract void onVirtualDisplayRemoved(IVirtualDevice iVirtualDevice, int i);
 
-    public abstract void registerAppsOnVirtualDeviceListener(AppsOnVirtualDeviceListener appsOnVirtualDeviceListener);
+  public abstract void registerAppsOnVirtualDeviceListener(
+      AppsOnVirtualDeviceListener appsOnVirtualDeviceListener);
 
-    public abstract void registerVirtualDisplayListener(VirtualDisplayListener virtualDisplayListener);
+  public abstract void registerVirtualDisplayListener(
+      VirtualDisplayListener virtualDisplayListener);
 }

@@ -2,9 +2,9 @@ package com.android.server.enterprise.plm;
 
 /* loaded from: classes2.dex */
 public interface IStateDelegate {
-    boolean isEdmServiceReady();
+  boolean isEdmServiceReady();
 
-    boolean isKlmActivated();
+  boolean isKlmActivated();
 
-    boolean isUserUnlocked();
+  boolean isUserUnlocked();
 }

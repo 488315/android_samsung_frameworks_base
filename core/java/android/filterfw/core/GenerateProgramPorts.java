@@ -9,5 +9,5 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 /* loaded from: classes.dex */
 public @interface GenerateProgramPorts {
-    GenerateProgramPort[] value();
+  GenerateProgramPort[] value();
 }

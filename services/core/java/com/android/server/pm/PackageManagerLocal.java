@@ -9,36 +9,37 @@ import java.util.Map;
 @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
 /* loaded from: classes3.dex */
 public interface PackageManagerLocal {
-    public static final int FLAG_STORAGE_CE = 2;
-    public static final int FLAG_STORAGE_DE = 1;
+  public static final int FLAG_STORAGE_CE = 2;
+  public static final int FLAG_STORAGE_DE = 1;
 
-    @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
-    public interface FilteredSnapshot extends AutoCloseable {
-        @Override // java.lang.AutoCloseable
-        void close();
+  @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
+  public interface FilteredSnapshot extends AutoCloseable {
+    @Override // java.lang.AutoCloseable
+    void close();
 
-        PackageState getPackageState(String str);
+    PackageState getPackageState(String str);
 
-        Map getPackageStates();
-    }
+    Map getPackageStates();
+  }
 
-    @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
-    public interface UnfilteredSnapshot extends AutoCloseable {
-        @Override // java.lang.AutoCloseable
-        void close();
+  @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
+  public interface UnfilteredSnapshot extends AutoCloseable {
+    @Override // java.lang.AutoCloseable
+    void close();
 
-        FilteredSnapshot filtered(int i, UserHandle userHandle);
+    FilteredSnapshot filtered(int i, UserHandle userHandle);
 
-        Map getDisabledSystemPackageStates();
+    Map getDisabledSystemPackageStates();
 
-        Map getPackageStates();
-    }
+    Map getPackageStates();
+  }
 
-    void reconcileSdkData(String str, String str2, List list, int i, int i2, int i3, String str3, int i4);
+  void reconcileSdkData(
+      String str, String str2, List list, int i, int i2, int i3, String str3, int i4);
 
-    FilteredSnapshot withFilteredSnapshot();
+  FilteredSnapshot withFilteredSnapshot();
 
-    FilteredSnapshot withFilteredSnapshot(int i, UserHandle userHandle);
+  FilteredSnapshot withFilteredSnapshot(int i, UserHandle userHandle);
 
-    UnfilteredSnapshot withUnfilteredSnapshot();
+  UnfilteredSnapshot withUnfilteredSnapshot();
 }

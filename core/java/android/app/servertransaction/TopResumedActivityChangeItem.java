@@ -10,82 +10,89 @@ import android.p009os.Trace;
 
 /* loaded from: classes.dex */
 public class TopResumedActivityChangeItem extends ActivityTransactionItem {
-    public static final Parcelable.Creator<TopResumedActivityChangeItem> CREATOR = new Parcelable.Creator<TopResumedActivityChangeItem>() { // from class: android.app.servertransaction.TopResumedActivityChangeItem.1
+  public static final Parcelable.Creator<TopResumedActivityChangeItem> CREATOR =
+      new Parcelable.Creator<
+          TopResumedActivityChangeItem>() { // from class:
+                                            // android.app.servertransaction.TopResumedActivityChangeItem.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public TopResumedActivityChangeItem createFromParcel(Parcel in) {
-            return new TopResumedActivityChangeItem(in);
+          return new TopResumedActivityChangeItem(in);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public TopResumedActivityChangeItem[] newArray(int size) {
-            return new TopResumedActivityChangeItem[size];
+          return new TopResumedActivityChangeItem[size];
         }
-    };
-    private boolean mOnTop;
+      };
+  private boolean mOnTop;
 
-    @Override // android.app.servertransaction.ActivityTransactionItem
-    public void execute(ClientTransactionHandler client, ActivityThread.ActivityClientRecord r, PendingTransactionActions pendingActions) {
-        Trace.traceBegin(64L, "topResumedActivityChangeItem");
-        client.handleTopResumedActivityChanged(r, this.mOnTop, "topResumedActivityChangeItem");
-        Trace.traceEnd(64L);
-    }
+  @Override // android.app.servertransaction.ActivityTransactionItem
+  public void execute(
+      ClientTransactionHandler client,
+      ActivityThread.ActivityClientRecord r,
+      PendingTransactionActions pendingActions) {
+    Trace.traceBegin(64L, "topResumedActivityChangeItem");
+    client.handleTopResumedActivityChanged(r, this.mOnTop, "topResumedActivityChangeItem");
+    Trace.traceEnd(64L);
+  }
 
-    @Override // android.app.servertransaction.BaseClientRequest
-    public void postExecute(ClientTransactionHandler client, IBinder token, PendingTransactionActions pendingActions) {
-        if (this.mOnTop) {
-            return;
-        }
-        ActivityClient.getInstance().activityTopResumedStateLost();
+  @Override // android.app.servertransaction.BaseClientRequest
+  public void postExecute(
+      ClientTransactionHandler client, IBinder token, PendingTransactionActions pendingActions) {
+    if (this.mOnTop) {
+      return;
     }
+    ActivityClient.getInstance().activityTopResumedStateLost();
+  }
 
-    private TopResumedActivityChangeItem() {
-    }
+  private TopResumedActivityChangeItem() {}
 
-    public static TopResumedActivityChangeItem obtain(boolean onTop) {
-        TopResumedActivityChangeItem instance = (TopResumedActivityChangeItem) ObjectPool.obtain(TopResumedActivityChangeItem.class);
-        if (instance == null) {
-            instance = new TopResumedActivityChangeItem();
-        }
-        instance.mOnTop = onTop;
-        return instance;
+  public static TopResumedActivityChangeItem obtain(boolean onTop) {
+    TopResumedActivityChangeItem instance =
+        (TopResumedActivityChangeItem) ObjectPool.obtain(TopResumedActivityChangeItem.class);
+    if (instance == null) {
+      instance = new TopResumedActivityChangeItem();
     }
+    instance.mOnTop = onTop;
+    return instance;
+  }
 
-    @Override // android.app.servertransaction.ObjectPoolItem
-    public void recycle() {
-        this.mOnTop = false;
-        ObjectPool.recycle(this);
-    }
+  @Override // android.app.servertransaction.ObjectPoolItem
+  public void recycle() {
+    this.mOnTop = false;
+    ObjectPool.recycle(this);
+  }
 
-    @Override // android.p009os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeBoolean(this.mOnTop);
-    }
+  @Override // android.p009os.Parcelable
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeBoolean(this.mOnTop);
+  }
 
-    private TopResumedActivityChangeItem(Parcel in) {
-        this.mOnTop = in.readBoolean();
-    }
+  private TopResumedActivityChangeItem(Parcel in) {
+    this.mOnTop = in.readBoolean();
+  }
 
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        TopResumedActivityChangeItem other = (TopResumedActivityChangeItem) o;
-        if (this.mOnTop == other.mOnTop) {
-            return true;
-        }
-        return false;
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    TopResumedActivityChangeItem other = (TopResumedActivityChangeItem) o;
+    if (this.mOnTop == other.mOnTop) {
+      return true;
+    }
+    return false;
+  }
 
-    public int hashCode() {
-        return (17 * 31) + (this.mOnTop ? 1 : 0);
-    }
+  public int hashCode() {
+    return (17 * 31) + (this.mOnTop ? 1 : 0);
+  }
 
-    public String toString() {
-        return "TopResumedActivityChangeItem{onTop=" + this.mOnTop + "}";
-    }
+  public String toString() {
+    return "TopResumedActivityChangeItem{onTop=" + this.mOnTop + "}";
+  }
 }

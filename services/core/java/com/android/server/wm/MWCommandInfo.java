@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 /* loaded from: classes3.dex */
 public @interface MWCommandInfo {
-    String cmd() default "";
+  String cmd() default "";
 
-    boolean supportsReleaseBuild() default false;
+  boolean supportsReleaseBuild() default false;
 }

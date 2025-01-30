@@ -8,85 +8,90 @@ import android.util.Size;
 @SystemApi
 /* loaded from: classes3.dex */
 public final class DisplayHashParams implements Parcelable {
-    public static final Parcelable.Creator<DisplayHashParams> CREATOR = new Parcelable.Creator<DisplayHashParams>() { // from class: android.service.displayhash.DisplayHashParams.1
+  public static final Parcelable.Creator<DisplayHashParams> CREATOR =
+      new Parcelable.Creator<
+          DisplayHashParams>() { // from class: android.service.displayhash.DisplayHashParams.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public DisplayHashParams[] newArray(int size) {
-            return new DisplayHashParams[size];
+          return new DisplayHashParams[size];
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public DisplayHashParams createFromParcel(Parcel in) {
-            return new DisplayHashParams(in);
+          return new DisplayHashParams(in);
         }
-    };
-    private final Size mBufferSize;
-    private final boolean mGrayscaleBuffer;
+      };
+  private final Size mBufferSize;
+  private final boolean mGrayscaleBuffer;
 
-    public static final class Builder {
-        private Size mBufferSize;
-        private boolean mGrayscaleBuffer;
+  public static final class Builder {
+    private Size mBufferSize;
+    private boolean mGrayscaleBuffer;
 
-        public Builder setBufferSize(int width, int height) {
-            this.mBufferSize = new Size(width, height);
-            return this;
-        }
-
-        public Builder setGrayscaleBuffer(boolean grayscaleBuffer) {
-            this.mGrayscaleBuffer = grayscaleBuffer;
-            return this;
-        }
-
-        public DisplayHashParams build() {
-            return new DisplayHashParams(this.mBufferSize, this.mGrayscaleBuffer);
-        }
+    public Builder setBufferSize(int width, int height) {
+      this.mBufferSize = new Size(width, height);
+      return this;
     }
 
-    public DisplayHashParams(Size bufferSize, boolean grayscaleBuffer) {
-        this.mBufferSize = bufferSize;
-        this.mGrayscaleBuffer = grayscaleBuffer;
+    public Builder setGrayscaleBuffer(boolean grayscaleBuffer) {
+      this.mGrayscaleBuffer = grayscaleBuffer;
+      return this;
     }
 
-    public Size getBufferSize() {
-        return this.mBufferSize;
+    public DisplayHashParams build() {
+      return new DisplayHashParams(this.mBufferSize, this.mGrayscaleBuffer);
     }
+  }
 
-    public boolean isGrayscaleBuffer() {
-        return this.mGrayscaleBuffer;
-    }
+  public DisplayHashParams(Size bufferSize, boolean grayscaleBuffer) {
+    this.mBufferSize = bufferSize;
+    this.mGrayscaleBuffer = grayscaleBuffer;
+  }
 
-    public String toString() {
-        return "DisplayHashParams { bufferSize = " + this.mBufferSize + ", grayscaleBuffer = " + this.mGrayscaleBuffer + " }";
-    }
+  public Size getBufferSize() {
+    return this.mBufferSize;
+  }
 
-    @Override // android.p009os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-        byte flg = this.mGrayscaleBuffer ? (byte) (0 | 2) : (byte) 0;
-        if (this.mBufferSize != null) {
-            flg = (byte) (flg | 1);
-        }
-        dest.writeByte(flg);
-        Size size = this.mBufferSize;
-        if (size != null) {
-            dest.writeSize(size);
-        }
-    }
+  public boolean isGrayscaleBuffer() {
+    return this.mGrayscaleBuffer;
+  }
 
-    @Override // android.p009os.Parcelable
-    public int describeContents() {
-        return 0;
-    }
+  public String toString() {
+    return "DisplayHashParams { bufferSize = "
+        + this.mBufferSize
+        + ", grayscaleBuffer = "
+        + this.mGrayscaleBuffer
+        + " }";
+  }
 
-    DisplayHashParams(Parcel in) {
-        byte flg = in.readByte();
-        boolean grayscaleBuffer = (flg & 2) != 0;
-        Size bufferSize = (flg & 1) == 0 ? null : in.readSize();
-        this.mBufferSize = bufferSize;
-        this.mGrayscaleBuffer = grayscaleBuffer;
+  @Override // android.p009os.Parcelable
+  public void writeToParcel(Parcel dest, int flags) {
+    byte flg = this.mGrayscaleBuffer ? (byte) (0 | 2) : (byte) 0;
+    if (this.mBufferSize != null) {
+      flg = (byte) (flg | 1);
     }
+    dest.writeByte(flg);
+    Size size = this.mBufferSize;
+    if (size != null) {
+      dest.writeSize(size);
+    }
+  }
 
-    @Deprecated
-    private void __metadata() {
-    }
+  @Override // android.p009os.Parcelable
+  public int describeContents() {
+    return 0;
+  }
+
+  DisplayHashParams(Parcel in) {
+    byte flg = in.readByte();
+    boolean grayscaleBuffer = (flg & 2) != 0;
+    Size bufferSize = (flg & 1) == 0 ? null : in.readSize();
+    this.mBufferSize = bufferSize;
+    this.mGrayscaleBuffer = grayscaleBuffer;
+  }
+
+  @Deprecated
+  private void __metadata() {}
 }

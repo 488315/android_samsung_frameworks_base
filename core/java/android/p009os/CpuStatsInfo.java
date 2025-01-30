@@ -1,53 +1,52 @@
 package android.p009os;
 
-import android.p009os.Parcelable;
 
 /* loaded from: classes3.dex */
 public class CpuStatsInfo implements Parcelable {
-    public static final Parcelable.Creator<CpuStatsInfo> CREATOR = new Parcelable.Creator<CpuStatsInfo>() { // from class: android.os.CpuStatsInfo.1
+  public static final Parcelable.Creator<CpuStatsInfo> CREATOR =
+      new Parcelable.Creator<CpuStatsInfo>() { // from class: android.os.CpuStatsInfo.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public CpuStatsInfo createFromParcel(Parcel in) {
-            return new CpuStatsInfo(in);
+          return new CpuStatsInfo(in);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public CpuStatsInfo[] newArray(int size) {
-            return new CpuStatsInfo[size];
+          return new CpuStatsInfo[size];
         }
-    };
-    public String name;
-    public int pid;
-    public long rel_stime;
-    public long rel_utime;
-    public int tid;
-    public int uid;
+      };
+  public String name;
+  public int pid;
+  public long rel_stime;
+  public long rel_utime;
+  public int tid;
+  public int uid;
 
-    public CpuStatsInfo() {
-    }
+  public CpuStatsInfo() {}
 
-    public CpuStatsInfo(Parcel in) {
-        this.name = in.readString();
-        this.pid = in.readInt();
-        this.uid = in.readInt();
-        this.tid = in.readInt();
-        this.rel_utime = in.readLong();
-        this.rel_stime = in.readLong();
-    }
+  public CpuStatsInfo(Parcel in) {
+    this.name = in.readString();
+    this.pid = in.readInt();
+    this.uid = in.readInt();
+    this.tid = in.readInt();
+    this.rel_utime = in.readLong();
+    this.rel_stime = in.readLong();
+  }
 
-    @Override // android.p009os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(this.name);
-        dest.writeInt(this.pid);
-        dest.writeInt(this.uid);
-        dest.writeInt(this.tid);
-        dest.writeLong(this.rel_utime);
-        dest.writeLong(this.rel_stime);
-    }
+  @Override // android.p009os.Parcelable
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeString(this.name);
+    dest.writeInt(this.pid);
+    dest.writeInt(this.uid);
+    dest.writeInt(this.tid);
+    dest.writeLong(this.rel_utime);
+    dest.writeLong(this.rel_stime);
+  }
 
-    @Override // android.p009os.Parcelable
-    public int describeContents() {
-        return 0;
-    }
+  @Override // android.p009os.Parcelable
+  public int describeContents() {
+    return 0;
+  }
 }

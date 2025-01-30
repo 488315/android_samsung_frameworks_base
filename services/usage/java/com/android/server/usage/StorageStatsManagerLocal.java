@@ -8,13 +8,14 @@ import android.os.UserHandle;
 /* loaded from: classes3.dex */
 public interface StorageStatsManagerLocal {
 
-    public interface StorageStatsAugmenter {
-        void augmentStatsForPackageForUser(PackageStats packageStats, String str, UserHandle userHandle, boolean z);
+  public interface StorageStatsAugmenter {
+    void augmentStatsForPackageForUser(
+        PackageStats packageStats, String str, UserHandle userHandle, boolean z);
 
-        void augmentStatsForUid(PackageStats packageStats, int i, boolean z);
+    void augmentStatsForUid(PackageStats packageStats, int i, boolean z);
 
-        void augmentStatsForUser(PackageStats packageStats, UserHandle userHandle);
-    }
+    void augmentStatsForUser(PackageStats packageStats, UserHandle userHandle);
+  }
 
-    void registerStorageStatsAugmenter(StorageStatsAugmenter storageStatsAugmenter, String str);
+  void registerStorageStatsAugmenter(StorageStatsAugmenter storageStatsAugmenter, String str);
 }

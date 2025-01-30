@@ -12,46 +12,46 @@ import com.android.internal.C4337R;
 @HasNativeInterpolator
 /* loaded from: classes4.dex */
 public class AccelerateInterpolator extends BaseInterpolator implements NativeInterpolator {
-    private final double mDoubleFactor;
-    private final float mFactor;
+  private final double mDoubleFactor;
+  private final float mFactor;
 
-    public AccelerateInterpolator() {
-        this.mFactor = 1.0f;
-        this.mDoubleFactor = 2.0d;
-    }
+  public AccelerateInterpolator() {
+    this.mFactor = 1.0f;
+    this.mDoubleFactor = 2.0d;
+  }
 
-    public AccelerateInterpolator(float factor) {
-        this.mFactor = factor;
-        this.mDoubleFactor = 2.0f * factor;
-    }
+  public AccelerateInterpolator(float factor) {
+    this.mFactor = factor;
+    this.mDoubleFactor = 2.0f * factor;
+  }
 
-    public AccelerateInterpolator(Context context, AttributeSet attrs) {
-        this(context.getResources(), context.getTheme(), attrs);
-    }
+  public AccelerateInterpolator(Context context, AttributeSet attrs) {
+    this(context.getResources(), context.getTheme(), attrs);
+  }
 
-    public AccelerateInterpolator(Resources res, Resources.Theme theme, AttributeSet attrs) {
-        TypedArray a;
-        if (theme != null) {
-            a = theme.obtainStyledAttributes(attrs, C4337R.styleable.AccelerateInterpolator, 0, 0);
-        } else {
-            a = res.obtainAttributes(attrs, C4337R.styleable.AccelerateInterpolator);
-        }
-        this.mFactor = a.getFloat(0, 1.0f);
-        this.mDoubleFactor = r0 * 2.0f;
-        setChangingConfiguration(a.getChangingConfigurations());
-        a.recycle();
+  public AccelerateInterpolator(Resources res, Resources.Theme theme, AttributeSet attrs) {
+    TypedArray a;
+    if (theme != null) {
+      a = theme.obtainStyledAttributes(attrs, C4337R.styleable.AccelerateInterpolator, 0, 0);
+    } else {
+      a = res.obtainAttributes(attrs, C4337R.styleable.AccelerateInterpolator);
     }
+    this.mFactor = a.getFloat(0, 1.0f);
+    this.mDoubleFactor = r0 * 2.0f;
+    setChangingConfiguration(a.getChangingConfigurations());
+    a.recycle();
+  }
 
-    @Override // android.animation.TimeInterpolator
-    public float getInterpolation(float input) {
-        if (this.mFactor == 1.0f) {
-            return input * input;
-        }
-        return (float) Math.pow(input, this.mDoubleFactor);
+  @Override // android.animation.TimeInterpolator
+  public float getInterpolation(float input) {
+    if (this.mFactor == 1.0f) {
+      return input * input;
     }
+    return (float) Math.pow(input, this.mDoubleFactor);
+  }
 
-    @Override // android.graphics.animation.NativeInterpolator
-    public long createNativeInterpolator() {
-        return NativeInterpolatorFactory.createAccelerateInterpolator(this.mFactor);
-    }
+  @Override // android.graphics.animation.NativeInterpolator
+  public long createNativeInterpolator() {
+    return NativeInterpolatorFactory.createAccelerateInterpolator(this.mFactor);
+  }
 }

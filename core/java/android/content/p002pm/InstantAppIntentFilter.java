@@ -10,55 +10,57 @@ import java.util.List;
 @SystemApi
 /* loaded from: classes.dex */
 public final class InstantAppIntentFilter implements Parcelable {
-    public static final Parcelable.Creator<InstantAppIntentFilter> CREATOR = new Parcelable.Creator<InstantAppIntentFilter>() { // from class: android.content.pm.InstantAppIntentFilter.1
+  public static final Parcelable.Creator<InstantAppIntentFilter> CREATOR =
+      new Parcelable.Creator<
+          InstantAppIntentFilter>() { // from class: android.content.pm.InstantAppIntentFilter.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public InstantAppIntentFilter createFromParcel(Parcel in) {
-            return new InstantAppIntentFilter(in);
+          return new InstantAppIntentFilter(in);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public InstantAppIntentFilter[] newArray(int size) {
-            return new InstantAppIntentFilter[size];
+          return new InstantAppIntentFilter[size];
         }
-    };
-    private final List<IntentFilter> mFilters;
-    private final String mSplitName;
+      };
+  private final List<IntentFilter> mFilters;
+  private final String mSplitName;
 
-    public InstantAppIntentFilter(String splitName, List<IntentFilter> filters) {
-        ArrayList arrayList = new ArrayList();
-        this.mFilters = arrayList;
-        if (filters == null || filters.size() == 0) {
-            throw new IllegalArgumentException();
-        }
-        this.mSplitName = splitName;
-        arrayList.addAll(filters);
+  public InstantAppIntentFilter(String splitName, List<IntentFilter> filters) {
+    ArrayList arrayList = new ArrayList();
+    this.mFilters = arrayList;
+    if (filters == null || filters.size() == 0) {
+      throw new IllegalArgumentException();
     }
+    this.mSplitName = splitName;
+    arrayList.addAll(filters);
+  }
 
-    InstantAppIntentFilter(Parcel in) {
-        ArrayList arrayList = new ArrayList();
-        this.mFilters = arrayList;
-        this.mSplitName = in.readString();
-        in.readList(arrayList, getClass().getClassLoader(), IntentFilter.class);
-    }
+  InstantAppIntentFilter(Parcel in) {
+    ArrayList arrayList = new ArrayList();
+    this.mFilters = arrayList;
+    this.mSplitName = in.readString();
+    in.readList(arrayList, getClass().getClassLoader(), IntentFilter.class);
+  }
 
-    public String getSplitName() {
-        return this.mSplitName;
-    }
+  public String getSplitName() {
+    return this.mSplitName;
+  }
 
-    public List<IntentFilter> getFilters() {
-        return this.mFilters;
-    }
+  public List<IntentFilter> getFilters() {
+    return this.mFilters;
+  }
 
-    @Override // android.p009os.Parcelable
-    public int describeContents() {
-        return 0;
-    }
+  @Override // android.p009os.Parcelable
+  public int describeContents() {
+    return 0;
+  }
 
-    @Override // android.p009os.Parcelable
-    public void writeToParcel(Parcel out, int flags) {
-        out.writeString(this.mSplitName);
-        out.writeList(this.mFilters);
-    }
+  @Override // android.p009os.Parcelable
+  public void writeToParcel(Parcel out, int flags) {
+    out.writeString(this.mSplitName);
+    out.writeList(this.mFilters);
+  }
 }

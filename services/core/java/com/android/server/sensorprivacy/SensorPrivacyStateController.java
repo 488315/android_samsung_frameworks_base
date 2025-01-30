@@ -3,123 +3,146 @@ package com.android.server.sensorprivacy;
 import android.os.Handler;
 import com.android.internal.util.dump.DualDumpOutputStream;
 import com.android.internal.util.function.pooled.PooledLambda;
-import com.android.server.sensorprivacy.SensorPrivacyStateController;
 import java.util.function.BiConsumer;
 
 /* loaded from: classes3.dex */
 public abstract class SensorPrivacyStateController {
-    public static SensorPrivacyStateController sInstance;
-    public AllSensorStateController mAllSensorStateController = AllSensorStateController.getInstance();
-    public final Object mLock = new Object();
+  public static SensorPrivacyStateController sInstance;
+  public AllSensorStateController mAllSensorStateController =
+      AllSensorStateController.getInstance();
+  public final Object mLock = new Object();
 
-    public interface AllSensorPrivacyListener {
-        void onAllSensorPrivacyChanged(boolean z);
+  public interface AllSensorPrivacyListener {
+    void onAllSensorPrivacyChanged(boolean z);
+  }
+
+  public interface SensorPrivacyListener {
+    void onSensorPrivacyChanged(int i, int i2, int i3, SensorState sensorState);
+  }
+
+  public interface SensorPrivacyStateConsumer {
+    void accept(int i, int i2, int i3, SensorState sensorState);
+  }
+
+  public interface SetStateResultCallback {
+    void callback(boolean z);
+  }
+
+  public abstract void dumpLocked(DualDumpOutputStream dualDumpOutputStream);
+
+  public abstract void forEachStateLocked(SensorPrivacyStateConsumer sensorPrivacyStateConsumer);
+
+  public abstract SensorState getStateLocked(int i, int i2, int i3);
+
+  public abstract void schedulePersistLocked();
+
+  public abstract void setSensorPrivacyListenerLocked(
+      Handler handler, SensorPrivacyListener sensorPrivacyListener);
+
+  public abstract void setStateLocked(
+      int i,
+      int i2,
+      int i3,
+      boolean z,
+      Handler handler,
+      SetStateResultCallback setStateResultCallback);
+
+  public static SensorPrivacyStateController getInstance() {
+    if (sInstance == null) {
+      sInstance = SensorPrivacyStateControllerImpl.getInstance();
     }
+    return sInstance;
+  }
 
-    public interface SensorPrivacyListener {
-        void onSensorPrivacyChanged(int i, int i2, int i3, SensorState sensorState);
+  public SensorState getState(int i, int i2, int i3) {
+    SensorState stateLocked;
+    synchronized (this.mLock) {
+      stateLocked = getStateLocked(i, i2, i3);
     }
+    return stateLocked;
+  }
 
-    public interface SensorPrivacyStateConsumer {
-        void accept(int i, int i2, int i3, SensorState sensorState);
+  public void setState(
+      int i,
+      int i2,
+      int i3,
+      boolean z,
+      Handler handler,
+      SetStateResultCallback setStateResultCallback) {
+    synchronized (this.mLock) {
+      setStateLocked(i, i2, i3, z, handler, setStateResultCallback);
     }
+  }
 
-    public interface SetStateResultCallback {
-        void callback(boolean z);
+  public void setSensorPrivacyListener(
+      Handler handler, SensorPrivacyListener sensorPrivacyListener) {
+    synchronized (this.mLock) {
+      setSensorPrivacyListenerLocked(handler, sensorPrivacyListener);
     }
+  }
 
-    public abstract void dumpLocked(DualDumpOutputStream dualDumpOutputStream);
-
-    public abstract void forEachStateLocked(SensorPrivacyStateConsumer sensorPrivacyStateConsumer);
-
-    public abstract SensorState getStateLocked(int i, int i2, int i3);
-
-    public abstract void schedulePersistLocked();
-
-    public abstract void setSensorPrivacyListenerLocked(Handler handler, SensorPrivacyListener sensorPrivacyListener);
-
-    public abstract void setStateLocked(int i, int i2, int i3, boolean z, Handler handler, SetStateResultCallback setStateResultCallback);
-
-    public static SensorPrivacyStateController getInstance() {
-        if (sInstance == null) {
-            sInstance = SensorPrivacyStateControllerImpl.getInstance();
-        }
-        return sInstance;
+  public boolean getAllSensorState() {
+    boolean allSensorStateLocked;
+    synchronized (this.mLock) {
+      allSensorStateLocked = this.mAllSensorStateController.getAllSensorStateLocked();
     }
+    return allSensorStateLocked;
+  }
 
-    public SensorState getState(int i, int i2, int i3) {
-        SensorState stateLocked;
-        synchronized (this.mLock) {
-            stateLocked = getStateLocked(i, i2, i3);
-        }
-        return stateLocked;
+  public void setAllSensorState(boolean z) {
+    synchronized (this.mLock) {
+      this.mAllSensorStateController.setAllSensorStateLocked(z);
     }
+  }
 
-    public void setState(int i, int i2, int i3, boolean z, Handler handler, SetStateResultCallback setStateResultCallback) {
-        synchronized (this.mLock) {
-            setStateLocked(i, i2, i3, z, handler, setStateResultCallback);
-        }
+  public void setAllSensorPrivacyListener(
+      Handler handler, AllSensorPrivacyListener allSensorPrivacyListener) {
+    synchronized (this.mLock) {
+      this.mAllSensorStateController.setAllSensorPrivacyListenerLocked(
+          handler, allSensorPrivacyListener);
     }
+  }
 
-    public void setSensorPrivacyListener(Handler handler, SensorPrivacyListener sensorPrivacyListener) {
-        synchronized (this.mLock) {
-            setSensorPrivacyListenerLocked(handler, sensorPrivacyListener);
-        }
+  public void persistAll() {
+    synchronized (this.mLock) {
+      this.mAllSensorStateController.schedulePersistLocked();
+      schedulePersistLocked();
     }
+  }
 
-    public boolean getAllSensorState() {
-        boolean allSensorStateLocked;
-        synchronized (this.mLock) {
-            allSensorStateLocked = this.mAllSensorStateController.getAllSensorStateLocked();
-        }
-        return allSensorStateLocked;
+  public void forEachState(SensorPrivacyStateConsumer sensorPrivacyStateConsumer) {
+    synchronized (this.mLock) {
+      forEachStateLocked(sensorPrivacyStateConsumer);
     }
+  }
 
-    public void setAllSensorState(boolean z) {
-        synchronized (this.mLock) {
-            this.mAllSensorStateController.setAllSensorStateLocked(z);
-        }
+  public void dump(DualDumpOutputStream dualDumpOutputStream) {
+    synchronized (this.mLock) {
+      this.mAllSensorStateController.dumpLocked(dualDumpOutputStream);
+      dumpLocked(dualDumpOutputStream);
     }
+    dualDumpOutputStream.flush();
+  }
 
-    public void setAllSensorPrivacyListener(Handler handler, AllSensorPrivacyListener allSensorPrivacyListener) {
-        synchronized (this.mLock) {
-            this.mAllSensorStateController.setAllSensorPrivacyListenerLocked(handler, allSensorPrivacyListener);
-        }
+  public void atomic(Runnable runnable) {
+    synchronized (this.mLock) {
+      runnable.run();
     }
+  }
 
-    public void persistAll() {
-        synchronized (this.mLock) {
-            this.mAllSensorStateController.schedulePersistLocked();
-            schedulePersistLocked();
-        }
-    }
-
-    public void forEachState(SensorPrivacyStateConsumer sensorPrivacyStateConsumer) {
-        synchronized (this.mLock) {
-            forEachStateLocked(sensorPrivacyStateConsumer);
-        }
-    }
-
-    public void dump(DualDumpOutputStream dualDumpOutputStream) {
-        synchronized (this.mLock) {
-            this.mAllSensorStateController.dumpLocked(dualDumpOutputStream);
-            dumpLocked(dualDumpOutputStream);
-        }
-        dualDumpOutputStream.flush();
-    }
-
-    public void atomic(Runnable runnable) {
-        synchronized (this.mLock) {
-            runnable.run();
-        }
-    }
-
-    public static void sendSetStateCallback(Handler handler, SetStateResultCallback setStateResultCallback, boolean z) {
-        handler.sendMessage(PooledLambda.obtainMessage(new BiConsumer() { // from class: com.android.server.sensorprivacy.SensorPrivacyStateController$$ExternalSyntheticLambda0
-            @Override // java.util.function.BiConsumer
-            public final void accept(Object obj, Object obj2) {
-                ((SensorPrivacyStateController.SetStateResultCallback) obj).callback(((Boolean) obj2).booleanValue());
-            }
-        }, setStateResultCallback, Boolean.valueOf(z)));
-    }
+  public static void sendSetStateCallback(
+      Handler handler, SetStateResultCallback setStateResultCallback, boolean z) {
+    handler.sendMessage(
+        PooledLambda.obtainMessage(
+            new BiConsumer() { // from class:
+                               // com.android.server.sensorprivacy.SensorPrivacyStateController$$ExternalSyntheticLambda0
+              @Override // java.util.function.BiConsumer
+              public final void accept(Object obj, Object obj2) {
+                ((SensorPrivacyStateController.SetStateResultCallback) obj)
+                    .callback(((Boolean) obj2).booleanValue());
+              }
+            },
+            setStateResultCallback,
+            Boolean.valueOf(z)));
+  }
 }

@@ -7,39 +7,36 @@ import org.apache.harmony.dalvik.ddmc.DdmServer;
 
 /* loaded from: classes.dex */
 public class DdmHandleNativeHeap extends DdmHandle {
-    public static final int CHUNK_NHGT = ChunkHandler.type("NHGT");
-    private static DdmHandleNativeHeap mInstance = new DdmHandleNativeHeap();
+  public static final int CHUNK_NHGT = ChunkHandler.type("NHGT");
+  private static DdmHandleNativeHeap mInstance = new DdmHandleNativeHeap();
 
-    private native byte[] getLeakInfo();
+  private native byte[] getLeakInfo();
 
-    private DdmHandleNativeHeap() {
+  private DdmHandleNativeHeap() {}
+
+  public static void register() {
+    DdmServer.registerHandler(CHUNK_NHGT, mInstance);
+  }
+
+  public void onConnected() {}
+
+  public void onDisconnected() {}
+
+  public Chunk handleChunk(Chunk request) {
+    Log.m98i("ddm-nativeheap", "Handling " + name(request.type) + " chunk");
+    int type = request.type;
+    if (type == CHUNK_NHGT) {
+      return handleNHGT(request);
     }
+    throw new RuntimeException("Unknown packet " + name(type));
+  }
 
-    public static void register() {
-        DdmServer.registerHandler(CHUNK_NHGT, mInstance);
+  private Chunk handleNHGT(Chunk request) {
+    byte[] data = getLeakInfo();
+    if (data != null) {
+      Log.m98i("ddm-nativeheap", "Sending " + data.length + " bytes");
+      return new Chunk(ChunkHandler.type("NHGT"), data, 0, data.length);
     }
-
-    public void onConnected() {
-    }
-
-    public void onDisconnected() {
-    }
-
-    public Chunk handleChunk(Chunk request) {
-        Log.m98i("ddm-nativeheap", "Handling " + name(request.type) + " chunk");
-        int type = request.type;
-        if (type == CHUNK_NHGT) {
-            return handleNHGT(request);
-        }
-        throw new RuntimeException("Unknown packet " + name(type));
-    }
-
-    private Chunk handleNHGT(Chunk request) {
-        byte[] data = getLeakInfo();
-        if (data != null) {
-            Log.m98i("ddm-nativeheap", "Sending " + data.length + " bytes");
-            return new Chunk(ChunkHandler.type("NHGT"), data, 0, data.length);
-        }
-        return createFailChunk(1, "Something went wrong");
-    }
+    return createFailChunk(1, "Something went wrong");
+  }
 }

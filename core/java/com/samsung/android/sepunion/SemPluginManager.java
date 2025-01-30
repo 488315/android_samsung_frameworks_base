@@ -4,37 +4,37 @@ import android.content.Context;
 import android.p009os.IBinder;
 import android.p009os.RemoteException;
 import com.samsung.android.cover.CoverState;
-import com.samsung.android.sepunion.IPluginManager;
 
 /* loaded from: classes5.dex */
 public class SemPluginManager {
-    private static final String TAG = SemPluginManager.class.getSimpleName();
-    private Context mContext;
-    private IPluginManager mService;
+  private static final String TAG = SemPluginManager.class.getSimpleName();
+  private Context mContext;
+  private IPluginManager mService;
 
-    public SemPluginManager(Context context) {
-        this.mContext = context;
-    }
+  public SemPluginManager(Context context) {
+    this.mContext = context;
+  }
 
-    private IPluginManager getService() {
-        if (this.mService == null) {
-            SemUnionManager um = (SemUnionManager) this.mContext.getSystemService(Context.SEP_UNION_SERVICE);
-            IBinder b = um.getSemSystemService(UnionConstants.SERVICE_PLUGIN);
-            this.mService = IPluginManager.Stub.asInterface(b);
-        }
-        return this.mService;
+  private IPluginManager getService() {
+    if (this.mService == null) {
+      SemUnionManager um =
+          (SemUnionManager) this.mContext.getSystemService(Context.SEP_UNION_SERVICE);
+      IBinder b = um.getSemSystemService(UnionConstants.SERVICE_PLUGIN);
+      this.mService = IPluginManager.Stub.asInterface(b);
     }
+    return this.mService;
+  }
 
-    public CoverState getCoverState() {
-        try {
-            IPluginManager service = getService();
-            if (service != null) {
-                return service.getCoverState();
-            }
-            return null;
-        } catch (RemoteException e) {
-            e.printStackTrace();
-            return null;
-        }
+  public CoverState getCoverState() {
+    try {
+      IPluginManager service = getService();
+      if (service != null) {
+        return service.getCoverState();
+      }
+      return null;
+    } catch (RemoteException e) {
+      e.printStackTrace();
+      return null;
     }
+  }
 }

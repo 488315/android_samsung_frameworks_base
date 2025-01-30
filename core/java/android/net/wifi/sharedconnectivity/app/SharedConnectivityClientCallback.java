@@ -6,19 +6,22 @@ import java.util.List;
 @SystemApi
 /* loaded from: classes3.dex */
 public interface SharedConnectivityClientCallback {
-    void onHotspotNetworkConnectionStatusChanged(HotspotNetworkConnectionStatus hotspotNetworkConnectionStatus);
+  void onHotspotNetworkConnectionStatusChanged(
+      HotspotNetworkConnectionStatus hotspotNetworkConnectionStatus);
 
-    void onHotspotNetworksUpdated(List<HotspotNetwork> list);
+  void onHotspotNetworksUpdated(List<HotspotNetwork> list);
 
-    void onKnownNetworkConnectionStatusChanged(KnownNetworkConnectionStatus knownNetworkConnectionStatus);
+  void onKnownNetworkConnectionStatusChanged(
+      KnownNetworkConnectionStatus knownNetworkConnectionStatus);
 
-    void onKnownNetworksUpdated(List<KnownNetwork> list);
+  void onKnownNetworksUpdated(List<KnownNetwork> list);
 
-    void onRegisterCallbackFailed(Exception exc);
+  void onRegisterCallbackFailed(Exception exc);
 
-    void onServiceConnected();
+  void onServiceConnected();
 
-    void onServiceDisconnected();
+  void onServiceDisconnected();
 
-    void onSharedConnectivitySettingsChanged(SharedConnectivitySettingsState sharedConnectivitySettingsState);
+  void onSharedConnectivitySettingsChanged(
+      SharedConnectivitySettingsState sharedConnectivitySettingsState);
 }

@@ -2,21 +2,21 @@ package com.android.internal.protolog.common;
 
 /* loaded from: classes5.dex */
 public interface IProtoLogGroup {
-    String getTag();
+  String getTag();
 
-    boolean isEnabled();
+  boolean isEnabled();
 
-    boolean isLogToLogcat();
+  boolean isLogToLogcat();
 
-    boolean isLogToProto();
+  boolean isLogToProto();
 
-    String name();
+  String name();
 
-    void setLogToLogcat(boolean z);
+  void setLogToLogcat(boolean z);
 
-    void setLogToProto(boolean z);
+  void setLogToProto(boolean z);
 
-    default boolean isLogToAny() {
-        return isLogToLogcat() || isLogToProto();
-    }
+  default boolean isLogToAny() {
+    return isLogToLogcat() || isLogToProto();
+  }
 }

@@ -6,24 +6,23 @@ import java.util.function.BiConsumer;
 
 /* loaded from: classes4.dex */
 public interface UpdatableMediaFormat extends MediaFormat {
-    public static final String UPDATE_AT_ALLOC = "update-at-alloc";
+  public static final String UPDATE_AT_ALLOC = "update-at-alloc";
 
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface UpdatableAttribute {
-    }
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface UpdatableAttribute {}
 
-    Shape getCroppedShape();
+  Shape getCroppedShape();
 
-    UpdatableMediaFormat set(String str);
+  UpdatableMediaFormat set(String str);
 
-    UpdatableMediaFormat setUpdater(BiConsumer<MediaFormat, MutableMediaFormat> biConsumer);
+  UpdatableMediaFormat setUpdater(BiConsumer<MediaFormat, MutableMediaFormat> biConsumer);
 
-    MediaFormat update();
+  MediaFormat update();
 
-    UpdatableMediaFormat with(MediaFormat mediaFormat);
+  UpdatableMediaFormat with(MediaFormat mediaFormat);
 
-    /* renamed from: of */
-    static UpdatableMediaFormat m408of(MediaFormat format) {
-        return new StapleUpdatableMediaFormat(format);
-    }
+  /* renamed from: of */
+  static UpdatableMediaFormat m408of(MediaFormat format) {
+    return new StapleUpdatableMediaFormat(format);
+  }
 }

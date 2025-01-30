@@ -8,16 +8,14 @@ import android.widget.TextView;
 /* loaded from: classes4.dex */
 abstract class TargetAdapter extends BaseAdapter {
 
-    static class ViewHolder {
-        CheckBox mCheckBoxView;
-        ImageView mIconView;
-        TextView mLabelView;
-        TextView mStatusView;
+  static class ViewHolder {
+    CheckBox mCheckBoxView;
+    ImageView mIconView;
+    TextView mLabelView;
+    TextView mStatusView;
 
-        ViewHolder() {
-        }
-    }
+    ViewHolder() {}
+  }
 
-    TargetAdapter() {
-    }
+  TargetAdapter() {}
 }

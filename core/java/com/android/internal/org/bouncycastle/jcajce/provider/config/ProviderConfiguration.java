@@ -8,13 +8,13 @@ import javax.crypto.spec.DHParameterSpec;
 
 /* loaded from: classes5.dex */
 public interface ProviderConfiguration {
-    Set getAcceptableNamedCurves();
+  Set getAcceptableNamedCurves();
 
-    Map getAdditionalECParameters();
+  Map getAdditionalECParameters();
 
-    DHParameterSpec getDHDefaultParameters(int i);
+  DHParameterSpec getDHDefaultParameters(int i);
 
-    DSAParameterSpec getDSADefaultParameters(int i);
+  DSAParameterSpec getDSADefaultParameters(int i);
 
-    ECParameterSpec getEcImplicitlyCa();
+  ECParameterSpec getEcImplicitlyCa();
 }

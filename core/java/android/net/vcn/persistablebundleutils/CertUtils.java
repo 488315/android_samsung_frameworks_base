@@ -14,28 +14,28 @@ import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public class CertUtils {
-    private static final String CERT_TYPE_X509 = "X.509";
-    private static final String PRIVATE_KEY_TYPE_RSA = "RSA";
+  private static final String CERT_TYPE_X509 = "X.509";
+  private static final String PRIVATE_KEY_TYPE_RSA = "RSA";
 
-    public static X509Certificate certificateFromByteArray(byte[] derEncoded) {
-        Objects.requireNonNull(derEncoded, "derEncoded is null");
-        try {
-            CertificateFactory certFactory = CertificateFactory.getInstance(CERT_TYPE_X509);
-            InputStream in = new ByteArrayInputStream(derEncoded);
-            return (X509Certificate) certFactory.generateCertificate(in);
-        } catch (CertificateException e) {
-            throw new IllegalArgumentException("Fail to decode certificate", e);
-        }
+  public static X509Certificate certificateFromByteArray(byte[] derEncoded) {
+    Objects.requireNonNull(derEncoded, "derEncoded is null");
+    try {
+      CertificateFactory certFactory = CertificateFactory.getInstance(CERT_TYPE_X509);
+      InputStream in = new ByteArrayInputStream(derEncoded);
+      return (X509Certificate) certFactory.generateCertificate(in);
+    } catch (CertificateException e) {
+      throw new IllegalArgumentException("Fail to decode certificate", e);
     }
+  }
 
-    public static RSAPrivateKey privateKeyFromByteArray(byte[] pkcs8Encoded) {
-        Objects.requireNonNull(pkcs8Encoded, "pkcs8Encoded was null");
-        PKCS8EncodedKeySpec privateKeySpec = new PKCS8EncodedKeySpec(pkcs8Encoded);
-        try {
-            KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-            return (RSAPrivateKey) keyFactory.generatePrivate(privateKeySpec);
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            throw new IllegalArgumentException("Fail to decode PrivateKey", e);
-        }
+  public static RSAPrivateKey privateKeyFromByteArray(byte[] pkcs8Encoded) {
+    Objects.requireNonNull(pkcs8Encoded, "pkcs8Encoded was null");
+    PKCS8EncodedKeySpec privateKeySpec = new PKCS8EncodedKeySpec(pkcs8Encoded);
+    try {
+      KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+      return (RSAPrivateKey) keyFactory.generatePrivate(privateKeySpec);
+    } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+      throw new IllegalArgumentException("Fail to decode PrivateKey", e);
     }
+  }
 }

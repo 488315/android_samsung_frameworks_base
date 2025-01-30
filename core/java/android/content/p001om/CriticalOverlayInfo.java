@@ -2,15 +2,15 @@ package android.content.p001om;
 
 /* loaded from: classes.dex */
 public interface CriticalOverlayInfo {
-    OverlayIdentifier getOverlayIdentifier();
+  OverlayIdentifier getOverlayIdentifier();
 
-    String getOverlayName();
+  String getOverlayName();
 
-    String getPackageName();
+  String getPackageName();
 
-    String getTargetOverlayableName();
+  String getTargetOverlayableName();
 
-    String getTargetPackageName();
+  String getTargetPackageName();
 
-    boolean isFabricated();
+  boolean isFabricated();
 }

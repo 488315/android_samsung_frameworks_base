@@ -5,5 +5,5 @@ import android.annotation.SystemApi;
 @SystemApi
 /* loaded from: classes3.dex */
 public interface SatelliteModemStateCallback {
-    void onSatelliteModemStateChanged(int i);
+  void onSatelliteModemStateChanged(int i);
 }

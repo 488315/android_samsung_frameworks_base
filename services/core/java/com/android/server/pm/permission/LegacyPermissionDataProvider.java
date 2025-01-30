@@ -5,13 +5,13 @@ import java.util.Map;
 
 /* loaded from: classes3.dex */
 public interface LegacyPermissionDataProvider {
-    Map getAllAppOpPermissionPackages();
+  Map getAllAppOpPermissionPackages();
 
-    int[] getGidsForUid(int i);
+  int[] getGidsForUid(int i);
 
-    LegacyPermissionState getLegacyPermissionState(int i);
+  LegacyPermissionState getLegacyPermissionState(int i);
 
-    List getLegacyPermissions();
+  List getLegacyPermissions();
 
-    void writeLegacyPermissionStateTEMP();
+  void writeLegacyPermissionStateTEMP();
 }

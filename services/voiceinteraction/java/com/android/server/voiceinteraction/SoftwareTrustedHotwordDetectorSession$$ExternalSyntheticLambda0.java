@@ -5,8 +5,9 @@ import com.android.internal.infra.ServiceConnector;
 
 /* compiled from: R8$$SyntheticClass */
 /* loaded from: classes3.dex */
-public final /* synthetic */ class SoftwareTrustedHotwordDetectorSession$$ExternalSyntheticLambda0 implements ServiceConnector.VoidJob {
-    public final void runNoResult(Object obj) {
-        ((ISandboxedDetectionService) obj).stopDetection();
-    }
+public final /* synthetic */ class SoftwareTrustedHotwordDetectorSession$$ExternalSyntheticLambda0
+    implements ServiceConnector.VoidJob {
+  public final void runNoResult(Object obj) {
+    ((ISandboxedDetectionService) obj).stopDetection();
+  }
 }

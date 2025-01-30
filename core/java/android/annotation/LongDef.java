@@ -9,9 +9,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 /* loaded from: classes.dex */
 public @interface LongDef {
-    boolean flag() default false;
+  boolean flag() default false;
 
-    String[] prefix() default {""};
+  String[] prefix() default {""};
 
-    long[] value() default {};
+  long[] value() default {};
 }

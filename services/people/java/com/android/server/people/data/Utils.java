@@ -7,10 +7,14 @@ import java.util.Locale;
 
 /* loaded from: classes2.dex */
 public abstract class Utils {
-    public static String getCurrentCountryIso(Context context) {
-        Country detectCountry;
-        CountryDetector countryDetector = (CountryDetector) context.getSystemService("country_detector");
-        String countryIso = (countryDetector == null || (detectCountry = countryDetector.detectCountry()) == null) ? null : detectCountry.getCountryIso();
-        return countryIso == null ? Locale.getDefault().getCountry() : countryIso;
-    }
+  public static String getCurrentCountryIso(Context context) {
+    Country detectCountry;
+    CountryDetector countryDetector =
+        (CountryDetector) context.getSystemService("country_detector");
+    String countryIso =
+        (countryDetector == null || (detectCountry = countryDetector.detectCountry()) == null)
+            ? null
+            : detectCountry.getCountryIso();
+    return countryIso == null ? Locale.getDefault().getCountry() : countryIso;
+  }
 }

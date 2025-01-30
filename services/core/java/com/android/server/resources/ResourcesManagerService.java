@@ -15,52 +15,71 @@ import java.io.PrintWriter;
 
 /* loaded from: classes3.dex */
 public class ResourcesManagerService extends SystemService {
-    public ActivityManagerService mActivityManagerService;
-    public final IBinder mService;
+  public ActivityManagerService mActivityManagerService;
+  public final IBinder mService;
 
-    public ResourcesManagerService(Context context) {
-        super(context);
-        IResourcesManager.Stub stub = new IResourcesManager.Stub() { // from class: com.android.server.resources.ResourcesManagerService.1
-            public boolean dumpResources(String str, ParcelFileDescriptor parcelFileDescriptor, RemoteCallback remoteCallback) {
-                int callingUid = Binder.getCallingUid();
-                if (callingUid != 0 && callingUid != 2000) {
-                    remoteCallback.sendResult((Bundle) null);
-                    throw new SecurityException("dump should only be called by shell");
+  public ResourcesManagerService(Context context) {
+    super(context);
+    IResourcesManager.Stub stub =
+        new IResourcesManager
+            .Stub() { // from class: com.android.server.resources.ResourcesManagerService.1
+          public boolean dumpResources(
+              String str,
+              ParcelFileDescriptor parcelFileDescriptor,
+              RemoteCallback remoteCallback) {
+            int callingUid = Binder.getCallingUid();
+            if (callingUid != 0 && callingUid != 2000) {
+              remoteCallback.sendResult((Bundle) null);
+              throw new SecurityException("dump should only be called by shell");
+            }
+            return ResourcesManagerService.this.mActivityManagerService.dumpResources(
+                str, parcelFileDescriptor, remoteCallback);
+          }
+
+          public void dump(
+              FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
+            try {
+              ParcelFileDescriptor dup = ParcelFileDescriptor.dup(fileDescriptor);
+              try {
+                ResourcesManagerService.this.mActivityManagerService.dumpAllResources(
+                    dup, printWriter);
+                if (dup != null) {
+                  dup.close();
                 }
-                return ResourcesManagerService.this.mActivityManagerService.dumpResources(str, parcelFileDescriptor, remoteCallback);
+              } finally {
+              }
+            } catch (Exception e) {
+              printWriter.println(
+                  "Exception while trying to dump all resources: " + e.getMessage());
+              e.printStackTrace(printWriter);
             }
+          }
 
-            public void dump(FileDescriptor fileDescriptor, PrintWriter printWriter, String[] strArr) {
-                try {
-                    ParcelFileDescriptor dup = ParcelFileDescriptor.dup(fileDescriptor);
-                    try {
-                        ResourcesManagerService.this.mActivityManagerService.dumpAllResources(dup, printWriter);
-                        if (dup != null) {
-                            dup.close();
-                        }
-                    } finally {
-                    }
-                } catch (Exception e) {
-                    printWriter.println("Exception while trying to dump all resources: " + e.getMessage());
-                    e.printStackTrace(printWriter);
-                }
-            }
-
-            /* JADX WARN: Multi-variable type inference failed */
-            public int handleShellCommand(ParcelFileDescriptor parcelFileDescriptor, ParcelFileDescriptor parcelFileDescriptor2, ParcelFileDescriptor parcelFileDescriptor3, String[] strArr) {
-                return new ResourcesManagerShellCommand(this).exec(this, parcelFileDescriptor.getFileDescriptor(), parcelFileDescriptor2.getFileDescriptor(), parcelFileDescriptor3.getFileDescriptor(), strArr);
-            }
+          /* JADX WARN: Multi-variable type inference failed */
+          public int handleShellCommand(
+              ParcelFileDescriptor parcelFileDescriptor,
+              ParcelFileDescriptor parcelFileDescriptor2,
+              ParcelFileDescriptor parcelFileDescriptor3,
+              String[] strArr) {
+            return new ResourcesManagerShellCommand(this)
+                .exec(
+                    this,
+                    parcelFileDescriptor.getFileDescriptor(),
+                    parcelFileDescriptor2.getFileDescriptor(),
+                    parcelFileDescriptor3.getFileDescriptor(),
+                    strArr);
+          }
         };
-        this.mService = stub;
-        publishBinderService("resources", stub);
-    }
+    this.mService = stub;
+    publishBinderService("resources", stub);
+  }
 
-    @Override // com.android.server.SystemService
-    public void onStart() {
-        ResourceTimer.start();
-    }
+  @Override // com.android.server.SystemService
+  public void onStart() {
+    ResourceTimer.start();
+  }
 
-    public void setActivityManagerService(ActivityManagerService activityManagerService) {
-        this.mActivityManagerService = activityManagerService;
-    }
+  public void setActivityManagerService(ActivityManagerService activityManagerService) {
+    this.mActivityManagerService = activityManagerService;
+  }
 }

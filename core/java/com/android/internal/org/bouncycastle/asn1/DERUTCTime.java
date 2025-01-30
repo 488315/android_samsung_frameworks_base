@@ -4,15 +4,15 @@ import java.util.Date;
 
 /* loaded from: classes5.dex */
 public class DERUTCTime extends ASN1UTCTime {
-    DERUTCTime(byte[] bytes) {
-        super(bytes);
-    }
+  DERUTCTime(byte[] bytes) {
+    super(bytes);
+  }
 
-    public DERUTCTime(Date time) {
-        super(time);
-    }
+  public DERUTCTime(Date time) {
+    super(time);
+  }
 
-    public DERUTCTime(String time) {
-        super(time);
-    }
+  public DERUTCTime(String time) {
+    super(time);
+  }
 }

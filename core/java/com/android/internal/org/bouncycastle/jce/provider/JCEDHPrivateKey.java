@@ -26,114 +26,124 @@ import javax.crypto.spec.DHPrivateKeySpec;
 
 /* loaded from: classes5.dex */
 public class JCEDHPrivateKey implements DHPrivateKey, PKCS12BagAttributeCarrier {
-    static final long serialVersionUID = 311058815616901812L;
-    private PKCS12BagAttributeCarrier attrCarrier = new PKCS12BagAttributeCarrierImpl();
-    private DHParameterSpec dhSpec;
-    private PrivateKeyInfo info;
+  static final long serialVersionUID = 311058815616901812L;
+  private PKCS12BagAttributeCarrier attrCarrier = new PKCS12BagAttributeCarrierImpl();
+  private DHParameterSpec dhSpec;
+  private PrivateKeyInfo info;
 
-    /* renamed from: x */
-    BigInteger f912x;
+  /* renamed from: x */
+  BigInteger f912x;
 
-    protected JCEDHPrivateKey() {
+  protected JCEDHPrivateKey() {}
+
+  JCEDHPrivateKey(DHPrivateKey key) {
+    this.f912x = key.getX();
+    this.dhSpec = key.getParams();
+  }
+
+  JCEDHPrivateKey(DHPrivateKeySpec spec) {
+    this.f912x = spec.getX();
+    this.dhSpec = new DHParameterSpec(spec.getP(), spec.getG());
+  }
+
+  JCEDHPrivateKey(PrivateKeyInfo info) throws IOException {
+    ASN1Sequence seq = ASN1Sequence.getInstance(info.getPrivateKeyAlgorithm().getParameters());
+    ASN1Integer derX = ASN1Integer.getInstance(info.parsePrivateKey());
+    ASN1ObjectIdentifier id = info.getPrivateKeyAlgorithm().getAlgorithm();
+    this.info = info;
+    this.f912x = derX.getValue();
+    if (id.equals((ASN1Primitive) PKCSObjectIdentifiers.dhKeyAgreement)) {
+      DHParameter params = DHParameter.getInstance(seq);
+      if (params.getL() != null) {
+        this.dhSpec = new DHParameterSpec(params.getP(), params.getG(), params.getL().intValue());
+        return;
+      } else {
+        this.dhSpec = new DHParameterSpec(params.getP(), params.getG());
+        return;
+      }
     }
-
-    JCEDHPrivateKey(DHPrivateKey key) {
-        this.f912x = key.getX();
-        this.dhSpec = key.getParams();
+    if (id.equals((ASN1Primitive) X9ObjectIdentifiers.dhpublicnumber)) {
+      DHDomainParameters params2 = DHDomainParameters.getInstance(seq);
+      this.dhSpec = new DHParameterSpec(params2.getP().getValue(), params2.getG().getValue());
+      return;
     }
+    throw new IllegalArgumentException("unknown algorithm type: " + id);
+  }
 
-    JCEDHPrivateKey(DHPrivateKeySpec spec) {
-        this.f912x = spec.getX();
-        this.dhSpec = new DHParameterSpec(spec.getP(), spec.getG());
-    }
+  JCEDHPrivateKey(DHPrivateKeyParameters params) {
+    this.f912x = params.getX();
+    this.dhSpec =
+        new DHParameterSpec(
+            params.getParameters().getP(),
+            params.getParameters().getG(),
+            params.getParameters().getL());
+  }
 
-    JCEDHPrivateKey(PrivateKeyInfo info) throws IOException {
-        ASN1Sequence seq = ASN1Sequence.getInstance(info.getPrivateKeyAlgorithm().getParameters());
-        ASN1Integer derX = ASN1Integer.getInstance(info.parsePrivateKey());
-        ASN1ObjectIdentifier id = info.getPrivateKeyAlgorithm().getAlgorithm();
-        this.info = info;
-        this.f912x = derX.getValue();
-        if (id.equals((ASN1Primitive) PKCSObjectIdentifiers.dhKeyAgreement)) {
-            DHParameter params = DHParameter.getInstance(seq);
-            if (params.getL() != null) {
-                this.dhSpec = new DHParameterSpec(params.getP(), params.getG(), params.getL().intValue());
-                return;
-            } else {
-                this.dhSpec = new DHParameterSpec(params.getP(), params.getG());
-                return;
-            }
-        }
-        if (id.equals((ASN1Primitive) X9ObjectIdentifiers.dhpublicnumber)) {
-            DHDomainParameters params2 = DHDomainParameters.getInstance(seq);
-            this.dhSpec = new DHParameterSpec(params2.getP().getValue(), params2.getG().getValue());
-            return;
-        }
-        throw new IllegalArgumentException("unknown algorithm type: " + id);
-    }
+  @Override // java.security.Key
+  public String getAlgorithm() {
+    return "DH";
+  }
 
-    JCEDHPrivateKey(DHPrivateKeyParameters params) {
-        this.f912x = params.getX();
-        this.dhSpec = new DHParameterSpec(params.getParameters().getP(), params.getParameters().getG(), params.getParameters().getL());
-    }
+  @Override // java.security.Key
+  public String getFormat() {
+    return "PKCS#8";
+  }
 
-    @Override // java.security.Key
-    public String getAlgorithm() {
-        return "DH";
+  @Override // java.security.Key
+  public byte[] getEncoded() {
+    try {
+      PrivateKeyInfo privateKeyInfo = this.info;
+      if (privateKeyInfo != null) {
+        return privateKeyInfo.getEncoded(ASN1Encoding.DER);
+      }
+      PrivateKeyInfo info =
+          new PrivateKeyInfo(
+              new AlgorithmIdentifier(
+                  PKCSObjectIdentifiers.dhKeyAgreement,
+                  new DHParameter(this.dhSpec.getP(), this.dhSpec.getG(), this.dhSpec.getL())),
+              new ASN1Integer(getX()));
+      return info.getEncoded(ASN1Encoding.DER);
+    } catch (IOException e) {
+      return null;
     }
+  }
 
-    @Override // java.security.Key
-    public String getFormat() {
-        return "PKCS#8";
-    }
+  @Override // javax.crypto.interfaces.DHKey
+  public DHParameterSpec getParams() {
+    return this.dhSpec;
+  }
 
-    @Override // java.security.Key
-    public byte[] getEncoded() {
-        try {
-            PrivateKeyInfo privateKeyInfo = this.info;
-            if (privateKeyInfo != null) {
-                return privateKeyInfo.getEncoded(ASN1Encoding.DER);
-            }
-            PrivateKeyInfo info = new PrivateKeyInfo(new AlgorithmIdentifier(PKCSObjectIdentifiers.dhKeyAgreement, new DHParameter(this.dhSpec.getP(), this.dhSpec.getG(), this.dhSpec.getL())), new ASN1Integer(getX()));
-            return info.getEncoded(ASN1Encoding.DER);
-        } catch (IOException e) {
-            return null;
-        }
-    }
+  @Override // javax.crypto.interfaces.DHPrivateKey
+  public BigInteger getX() {
+    return this.f912x;
+  }
 
-    @Override // javax.crypto.interfaces.DHKey
-    public DHParameterSpec getParams() {
-        return this.dhSpec;
-    }
+  private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+    this.f912x = (BigInteger) in.readObject();
+    this.dhSpec =
+        new DHParameterSpec(
+            (BigInteger) in.readObject(), (BigInteger) in.readObject(), in.readInt());
+  }
 
-    @Override // javax.crypto.interfaces.DHPrivateKey
-    public BigInteger getX() {
-        return this.f912x;
-    }
+  private void writeObject(ObjectOutputStream out) throws IOException {
+    out.writeObject(getX());
+    out.writeObject(this.dhSpec.getP());
+    out.writeObject(this.dhSpec.getG());
+    out.writeInt(this.dhSpec.getL());
+  }
 
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-        this.f912x = (BigInteger) in.readObject();
-        this.dhSpec = new DHParameterSpec((BigInteger) in.readObject(), (BigInteger) in.readObject(), in.readInt());
-    }
+  @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
+  public void setBagAttribute(ASN1ObjectIdentifier oid, ASN1Encodable attribute) {
+    this.attrCarrier.setBagAttribute(oid, attribute);
+  }
 
-    private void writeObject(ObjectOutputStream out) throws IOException {
-        out.writeObject(getX());
-        out.writeObject(this.dhSpec.getP());
-        out.writeObject(this.dhSpec.getG());
-        out.writeInt(this.dhSpec.getL());
-    }
+  @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
+  public ASN1Encodable getBagAttribute(ASN1ObjectIdentifier oid) {
+    return this.attrCarrier.getBagAttribute(oid);
+  }
 
-    @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
-    public void setBagAttribute(ASN1ObjectIdentifier oid, ASN1Encodable attribute) {
-        this.attrCarrier.setBagAttribute(oid, attribute);
-    }
-
-    @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
-    public ASN1Encodable getBagAttribute(ASN1ObjectIdentifier oid) {
-        return this.attrCarrier.getBagAttribute(oid);
-    }
-
-    @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
-    public Enumeration getBagAttributeKeys() {
-        return this.attrCarrier.getBagAttributeKeys();
-    }
+  @Override // com.android.internal.org.bouncycastle.jce.interfaces.PKCS12BagAttributeCarrier
+  public Enumeration getBagAttributeKeys() {
+    return this.attrCarrier.getBagAttributeKeys();
+  }
 }

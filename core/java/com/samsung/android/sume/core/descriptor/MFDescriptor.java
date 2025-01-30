@@ -5,13 +5,13 @@ import java.io.Serializable;
 
 /* loaded from: classes4.dex */
 public interface MFDescriptor extends Serializable {
-    String getFilterId();
+  String getFilterId();
 
-    MediaFilter.Option getOption();
+  MediaFilter.Option getOption();
 
-    void setOption(MediaFilter.Option option);
+  void setOption(MediaFilter.Option option);
 
-    default Class<?> getFilterType() {
-        return MediaFilter.class;
-    }
+  default Class<?> getFilterType() {
+    return MediaFilter.class;
+  }
 }

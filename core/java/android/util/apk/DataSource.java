@@ -7,14 +7,15 @@ import java.security.DigestException;
 
 /* loaded from: classes4.dex */
 interface DataSource {
-    void feedIntoDataDigester(DataDigester dataDigester, long j, int i) throws IOException, DigestException;
+  void feedIntoDataDigester(DataDigester dataDigester, long j, int i)
+      throws IOException, DigestException;
 
-    long size();
+  long size();
 
-    static DataSource create(FileDescriptor fd, long pos, long size) {
-        if (IncrementalManager.isIncrementalFileFd(fd)) {
-            return new ReadFileDataSource(fd, pos, size);
-        }
-        return new MemoryMappedFileDataSource(fd, pos, size);
+  static DataSource create(FileDescriptor fd, long pos, long size) {
+    if (IncrementalManager.isIncrementalFileFd(fd)) {
+      return new ReadFileDataSource(fd, pos, size);
     }
+    return new MemoryMappedFileDataSource(fd, pos, size);
+  }
 }

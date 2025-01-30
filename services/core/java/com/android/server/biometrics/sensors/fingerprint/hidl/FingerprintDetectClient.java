@@ -24,90 +24,121 @@ import java.util.ArrayList;
 import java.util.function.Supplier;
 
 /* loaded from: classes.dex */
-public class FingerprintDetectClient extends AcquisitionClient implements AuthenticationConsumer, Udfps {
-    public boolean mIsPointerDown;
-    public final boolean mIsStrongBiometric;
-    public final SensorOverlays mSensorOverlays;
+public class FingerprintDetectClient extends AcquisitionClient
+    implements AuthenticationConsumer, Udfps {
+  public boolean mIsPointerDown;
+  public final boolean mIsStrongBiometric;
+  public final SensorOverlays mSensorOverlays;
 
-    @Override // com.android.server.biometrics.sensors.BaseClientMonitor
-    public int getProtoEnum() {
-        return 13;
-    }
+  @Override // com.android.server.biometrics.sensors.BaseClientMonitor
+  public int getProtoEnum() {
+    return 13;
+  }
 
-    @Override // com.android.server.biometrics.sensors.BaseClientMonitor
-    public boolean interruptsPrecedingClients() {
-        return true;
-    }
+  @Override // com.android.server.biometrics.sensors.BaseClientMonitor
+  public boolean interruptsPrecedingClients() {
+    return true;
+  }
 
-    @Override // com.android.server.biometrics.sensors.fingerprint.Udfps
-    public void onUiReady() {
-    }
+  @Override // com.android.server.biometrics.sensors.fingerprint.Udfps
+  public void onUiReady() {}
 
-    public FingerprintDetectClient(Context context, Supplier supplier, IBinder iBinder, long j, ClientMonitorCallbackConverter clientMonitorCallbackConverter, FingerprintAuthenticateOptions fingerprintAuthenticateOptions, BiometricLogger biometricLogger, BiometricContext biometricContext, IUdfpsOverlayController iUdfpsOverlayController, IUdfpsOverlay iUdfpsOverlay, boolean z) {
-        super(context, supplier, iBinder, clientMonitorCallbackConverter, fingerprintAuthenticateOptions.getUserId(), fingerprintAuthenticateOptions.getOpPackageName(), 0, fingerprintAuthenticateOptions.getSensorId(), true, biometricLogger, biometricContext);
-        setRequestId(j);
-        this.mSensorOverlays = new SensorOverlays(iUdfpsOverlayController, null, iUdfpsOverlay);
-        this.mIsStrongBiometric = z;
-    }
+  public FingerprintDetectClient(
+      Context context,
+      Supplier supplier,
+      IBinder iBinder,
+      long j,
+      ClientMonitorCallbackConverter clientMonitorCallbackConverter,
+      FingerprintAuthenticateOptions fingerprintAuthenticateOptions,
+      BiometricLogger biometricLogger,
+      BiometricContext biometricContext,
+      IUdfpsOverlayController iUdfpsOverlayController,
+      IUdfpsOverlay iUdfpsOverlay,
+      boolean z) {
+    super(
+        context,
+        supplier,
+        iBinder,
+        clientMonitorCallbackConverter,
+        fingerprintAuthenticateOptions.getUserId(),
+        fingerprintAuthenticateOptions.getOpPackageName(),
+        0,
+        fingerprintAuthenticateOptions.getSensorId(),
+        true,
+        biometricLogger,
+        biometricContext);
+    setRequestId(j);
+    this.mSensorOverlays = new SensorOverlays(iUdfpsOverlayController, null, iUdfpsOverlay);
+    this.mIsStrongBiometric = z;
+  }
 
-    @Override // com.android.server.biometrics.sensors.AcquisitionClient
-    public void stopHalOperation() {
-        this.mSensorOverlays.hide(getSensorId());
-        try {
-            ((IBiometricsFingerprint) getFreshDaemon()).cancel();
-        } catch (RemoteException e) {
-            Slog.e("FingerprintDetectClient", "Remote exception when requesting cancel", e);
-            onError(1, 0);
-            this.mCallback.onClientFinished(this, false);
-        }
+  @Override // com.android.server.biometrics.sensors.AcquisitionClient
+  public void stopHalOperation() {
+    this.mSensorOverlays.hide(getSensorId());
+    try {
+      ((IBiometricsFingerprint) getFreshDaemon()).cancel();
+    } catch (RemoteException e) {
+      Slog.e("FingerprintDetectClient", "Remote exception when requesting cancel", e);
+      onError(1, 0);
+      this.mCallback.onClientFinished(this, false);
     }
+  }
 
-    @Override // com.android.server.biometrics.sensors.BaseClientMonitor
-    public void start(ClientMonitorCallback clientMonitorCallback) {
-        super.start(clientMonitorCallback);
-        startHalOperation();
-    }
+  @Override // com.android.server.biometrics.sensors.BaseClientMonitor
+  public void start(ClientMonitorCallback clientMonitorCallback) {
+    super.start(clientMonitorCallback);
+    startHalOperation();
+  }
 
-    @Override // com.android.server.biometrics.sensors.HalClientMonitor
-    public void startHalOperation() {
-        this.mSensorOverlays.show(getSensorId(), 4, this);
-        try {
-            ((IBiometricsFingerprint) getFreshDaemon()).authenticate(0L, getTargetUserId());
-        } catch (RemoteException e) {
-            Slog.e("FingerprintDetectClient", "Remote exception when requesting auth", e);
-            onError(1, 0);
-            this.mSensorOverlays.hide(getSensorId());
-            this.mCallback.onClientFinished(this, false);
-        }
+  @Override // com.android.server.biometrics.sensors.HalClientMonitor
+  public void startHalOperation() {
+    this.mSensorOverlays.show(getSensorId(), 4, this);
+    try {
+      ((IBiometricsFingerprint) getFreshDaemon()).authenticate(0L, getTargetUserId());
+    } catch (RemoteException e) {
+      Slog.e("FingerprintDetectClient", "Remote exception when requesting auth", e);
+      onError(1, 0);
+      this.mSensorOverlays.hide(getSensorId());
+      this.mCallback.onClientFinished(this, false);
     }
+  }
 
-    @Override // com.android.server.biometrics.sensors.fingerprint.Udfps
-    public void onPointerDown(PointerContext pointerContext) {
-        this.mIsPointerDown = true;
-        UdfpsHelper.onFingerDown((IBiometricsFingerprint) getFreshDaemon(), (int) pointerContext.x, (int) pointerContext.y, pointerContext.minor, pointerContext.major);
-    }
+  @Override // com.android.server.biometrics.sensors.fingerprint.Udfps
+  public void onPointerDown(PointerContext pointerContext) {
+    this.mIsPointerDown = true;
+    UdfpsHelper.onFingerDown(
+        (IBiometricsFingerprint) getFreshDaemon(),
+        (int) pointerContext.x,
+        (int) pointerContext.y,
+        pointerContext.minor,
+        pointerContext.major);
+  }
 
-    @Override // com.android.server.biometrics.sensors.fingerprint.Udfps
-    public void onPointerUp(PointerContext pointerContext) {
-        this.mIsPointerDown = false;
-        UdfpsHelper.onFingerUp((IBiometricsFingerprint) getFreshDaemon());
-    }
+  @Override // com.android.server.biometrics.sensors.fingerprint.Udfps
+  public void onPointerUp(PointerContext pointerContext) {
+    this.mIsPointerDown = false;
+    UdfpsHelper.onFingerUp((IBiometricsFingerprint) getFreshDaemon());
+  }
 
-    @Override // com.android.server.biometrics.sensors.AuthenticationConsumer
-    public void onAuthenticated(BiometricAuthenticator.Identifier identifier, boolean z, ArrayList arrayList) {
-        getLogger().logOnAuthenticated(getContext(), getOperationContext(), z, false, getTargetUserId(), false);
-        PerformanceTracker.getInstanceForSensorId(getSensorId()).incrementAuthForUser(getTargetUserId(), z);
-        if (getListener() != null) {
-            try {
-                getListener().onDetected(getSensorId(), getTargetUserId(), this.mIsStrongBiometric);
-            } catch (RemoteException e) {
-                Slog.e("FingerprintDetectClient", "Remote exception when sending onDetected", e);
-            }
-        }
-        if (z) {
-            this.mCallback.onClientFinished(this, true);
-        } else {
-            cancel();
-        }
+  @Override // com.android.server.biometrics.sensors.AuthenticationConsumer
+  public void onAuthenticated(
+      BiometricAuthenticator.Identifier identifier, boolean z, ArrayList arrayList) {
+    getLogger()
+        .logOnAuthenticated(
+            getContext(), getOperationContext(), z, false, getTargetUserId(), false);
+    PerformanceTracker.getInstanceForSensorId(getSensorId())
+        .incrementAuthForUser(getTargetUserId(), z);
+    if (getListener() != null) {
+      try {
+        getListener().onDetected(getSensorId(), getTargetUserId(), this.mIsStrongBiometric);
+      } catch (RemoteException e) {
+        Slog.e("FingerprintDetectClient", "Remote exception when sending onDetected", e);
+      }
     }
+    if (z) {
+      this.mCallback.onClientFinished(this, true);
+    } else {
+      cancel();
+    }
+  }
 }

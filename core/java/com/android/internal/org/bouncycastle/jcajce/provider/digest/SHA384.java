@@ -10,40 +10,39 @@ import com.android.internal.org.bouncycastle.jcajce.provider.symmetric.util.Base
 
 /* loaded from: classes5.dex */
 public class SHA384 {
-    private SHA384() {
+  private SHA384() {}
+
+  public static class Digest extends BCMessageDigest implements Cloneable {
+    public Digest() {
+      super(new SHA384Digest());
     }
 
-    public static class Digest extends BCMessageDigest implements Cloneable {
-        public Digest() {
-            super(new SHA384Digest());
-        }
-
-        @Override // java.security.MessageDigest, java.security.MessageDigestSpi
-        public Object clone() throws CloneNotSupportedException {
-            Digest d = (Digest) super.clone();
-            d.digest = new SHA384Digest((SHA384Digest) this.digest);
-            return d;
-        }
+    @Override // java.security.MessageDigest, java.security.MessageDigestSpi
+    public Object clone() throws CloneNotSupportedException {
+      Digest d = (Digest) super.clone();
+      d.digest = new SHA384Digest((SHA384Digest) this.digest);
+      return d;
     }
+  }
 
-    public static class HashMac extends BaseMac {
-        public HashMac() {
-            super(new HMac(new SHA384Digest()));
-        }
+  public static class HashMac extends BaseMac {
+    public HashMac() {
+      super(new HMac(new SHA384Digest()));
     }
+  }
 
-    public static class KeyGenerator extends BaseKeyGenerator {
-        public KeyGenerator() {
-            super("HMACSHA384", 384, new CipherKeyGenerator());
-        }
+  public static class KeyGenerator extends BaseKeyGenerator {
+    public KeyGenerator() {
+      super("HMACSHA384", 384, new CipherKeyGenerator());
     }
+  }
 
-    public static class Mappings extends DigestAlgorithmProvider {
-        private static final String PREFIX = SHA384.class.getName();
+  public static class Mappings extends DigestAlgorithmProvider {
+    private static final String PREFIX = SHA384.class.getName();
 
-        @Override // com.android.internal.org.bouncycastle.jcajce.provider.util.AlgorithmProvider
-        public void configure(ConfigurableProvider provider) {
-            provider.addPrivateAlgorithm("Mac", NISTObjectIdentifiers.id_sha384, PREFIX + "$HashMac");
-        }
+    @Override // com.android.internal.org.bouncycastle.jcajce.provider.util.AlgorithmProvider
+    public void configure(ConfigurableProvider provider) {
+      provider.addPrivateAlgorithm("Mac", NISTObjectIdentifiers.id_sha384, PREFIX + "$HashMac");
     }
+  }
 }

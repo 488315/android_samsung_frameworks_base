@@ -11,34 +11,41 @@ import java.util.stream.Collectors;
 
 /* loaded from: classes4.dex */
 public class MediaMuxerDescriptor extends MFDescriptorBase {
-    private final Set<Integer> mediaTypesToNotifyEvent = new HashSet();
-    private final int outputFormat;
+  private final Set<Integer> mediaTypesToNotifyEvent = new HashSet();
+  private final int outputFormat;
 
-    public MediaMuxerDescriptor(int outputFormat) {
-        this.outputFormat = outputFormat;
-    }
+  public MediaMuxerDescriptor(int outputFormat) {
+    this.outputFormat = outputFormat;
+  }
 
-    public void setMediaTypeToNotifyEvent(MediaType... mediaTypes) {
-        this.mediaTypesToNotifyEvent.addAll((Collection) Arrays.stream(mediaTypes).map(new Function() { // from class: com.samsung.android.sume.core.descriptor.MediaMuxerDescriptor$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Integer valueOf;
-                valueOf = Integer.valueOf(((MediaType) obj).rank().getValue());
-                return valueOf;
-            }
-        }).collect(Collectors.toList()));
-    }
+  public void setMediaTypeToNotifyEvent(MediaType... mediaTypes) {
+    this.mediaTypesToNotifyEvent.addAll(
+        (Collection)
+            Arrays.stream(mediaTypes)
+                .map(
+                    new Function() { // from class:
+                                     // com.samsung.android.sume.core.descriptor.MediaMuxerDescriptor$$ExternalSyntheticLambda0
+                      @Override // java.util.function.Function
+                      public final Object apply(Object obj) {
+                        Integer valueOf;
+                        valueOf = Integer.valueOf(((MediaType) obj).rank().getValue());
+                        return valueOf;
+                      }
+                    })
+                .collect(Collectors.toList()));
+  }
 
-    public boolean isMediaTypeToNotifyEvent(MediaType mediaType) {
-        return this.mediaTypesToNotifyEvent.contains(Integer.valueOf(mediaType.rank().getValue()));
-    }
+  public boolean isMediaTypeToNotifyEvent(MediaType mediaType) {
+    return this.mediaTypesToNotifyEvent.contains(Integer.valueOf(mediaType.rank().getValue()));
+  }
 
-    public int getOutputFormat() {
-        return this.outputFormat;
-    }
+  public int getOutputFormat() {
+    return this.outputFormat;
+  }
 
-    @Override // com.samsung.android.sume.core.descriptor.MFDescriptorBase, com.samsung.android.sume.core.descriptor.MFDescriptor
-    public String getFilterId() {
-        return MediaMuxerFilter.class.getName();
-    }
+  @Override // com.samsung.android.sume.core.descriptor.MFDescriptorBase,
+            // com.samsung.android.sume.core.descriptor.MFDescriptor
+  public String getFilterId() {
+    return MediaMuxerFilter.class.getName();
+  }
 }

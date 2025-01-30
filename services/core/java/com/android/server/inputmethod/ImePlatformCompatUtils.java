@@ -6,21 +6,22 @@ import com.android.internal.compat.IPlatformCompat;
 
 /* loaded from: classes2.dex */
 public final class ImePlatformCompatUtils {
-    public final IPlatformCompat mPlatformCompat = IPlatformCompat.Stub.asInterface(ServiceManager.getService("platform_compat"));
+  public final IPlatformCompat mPlatformCompat =
+      IPlatformCompat.Stub.asInterface(ServiceManager.getService("platform_compat"));
 
-    public boolean shouldUseSetInteractiveProtocol(int i) {
-        return isChangeEnabledByUid(156215187L, i);
-    }
+  public boolean shouldUseSetInteractiveProtocol(int i) {
+    return isChangeEnabledByUid(156215187L, i);
+  }
 
-    public boolean shouldClearShowForcedFlag(int i) {
-        return isChangeEnabledByUid(214016041L, i);
-    }
+  public boolean shouldClearShowForcedFlag(int i) {
+    return isChangeEnabledByUid(214016041L, i);
+  }
 
-    public final boolean isChangeEnabledByUid(long j, int i) {
-        try {
-            return this.mPlatformCompat.isChangeEnabledByUid(j, i);
-        } catch (RemoteException unused) {
-            return false;
-        }
+  public final boolean isChangeEnabledByUid(long j, int i) {
+    try {
+      return this.mPlatformCompat.isChangeEnabledByUid(j, i);
+    } catch (RemoteException unused) {
+      return false;
     }
+  }
 }

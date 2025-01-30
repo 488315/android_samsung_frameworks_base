@@ -7,22 +7,25 @@ import java.util.ArrayList;
 
 /* loaded from: classes.dex */
 public class BroadcastRadioService extends SystemService {
-    public final IRadioService mServiceImpl;
+  public final IRadioService mServiceImpl;
 
-    public BroadcastRadioService(Context context) {
-        super(context);
-        ArrayList servicesNames = IRadioServiceAidlImpl.getServicesNames();
-        this.mServiceImpl = servicesNames.isEmpty() ? new IRadioServiceHidlImpl(this) : new IRadioServiceAidlImpl(this, servicesNames);
-    }
+  public BroadcastRadioService(Context context) {
+    super(context);
+    ArrayList servicesNames = IRadioServiceAidlImpl.getServicesNames();
+    this.mServiceImpl =
+        servicesNames.isEmpty()
+            ? new IRadioServiceHidlImpl(this)
+            : new IRadioServiceAidlImpl(this, servicesNames);
+  }
 
-    @Override // com.android.server.SystemService
-    public void onStart() {
-        publishBinderService("broadcastradio", this.mServiceImpl.asBinder());
-    }
+  @Override // com.android.server.SystemService
+  public void onStart() {
+    publishBinderService("broadcastradio", this.mServiceImpl.asBinder());
+  }
 
-    public void enforcePolicyAccess() {
-        if (getContext().checkCallingPermission("android.permission.ACCESS_BROADCAST_RADIO") != 0) {
-            throw new SecurityException("ACCESS_BROADCAST_RADIO permission not granted");
-        }
+  public void enforcePolicyAccess() {
+    if (getContext().checkCallingPermission("android.permission.ACCESS_BROADCAST_RADIO") != 0) {
+      throw new SecurityException("ACCESS_BROADCAST_RADIO permission not granted");
     }
+  }
 }

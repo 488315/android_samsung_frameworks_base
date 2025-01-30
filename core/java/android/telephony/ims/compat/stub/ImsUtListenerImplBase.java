@@ -11,39 +11,35 @@ import com.android.ims.internal.IImsUtListener;
 
 /* loaded from: classes3.dex */
 public class ImsUtListenerImplBase extends IImsUtListener.Stub {
-    @Override // com.android.ims.internal.IImsUtListener
-    public void utConfigurationUpdated(IImsUt ut, int id) throws RemoteException {
-    }
+  @Override // com.android.ims.internal.IImsUtListener
+  public void utConfigurationUpdated(IImsUt ut, int id) throws RemoteException {}
 
-    @Override // com.android.ims.internal.IImsUtListener
-    public void utConfigurationUpdateFailed(IImsUt ut, int id, ImsReasonInfo error) throws RemoteException {
-    }
+  @Override // com.android.ims.internal.IImsUtListener
+  public void utConfigurationUpdateFailed(IImsUt ut, int id, ImsReasonInfo error)
+      throws RemoteException {}
 
-    @Override // com.android.ims.internal.IImsUtListener
-    public void utConfigurationQueried(IImsUt ut, int id, Bundle ssInfo) throws RemoteException {
-    }
+  @Override // com.android.ims.internal.IImsUtListener
+  public void utConfigurationQueried(IImsUt ut, int id, Bundle ssInfo) throws RemoteException {}
 
-    @Override // com.android.ims.internal.IImsUtListener
-    public void utConfigurationQueryFailed(IImsUt ut, int id, ImsReasonInfo error) throws RemoteException {
-    }
+  @Override // com.android.ims.internal.IImsUtListener
+  public void utConfigurationQueryFailed(IImsUt ut, int id, ImsReasonInfo error)
+      throws RemoteException {}
 
-    @Override // com.android.ims.internal.IImsUtListener
-    public void lineIdentificationSupplementaryServiceResponse(int id, ImsSsInfo config) {
-    }
+  @Override // com.android.ims.internal.IImsUtListener
+  public void lineIdentificationSupplementaryServiceResponse(int id, ImsSsInfo config) {}
 
-    @Override // com.android.ims.internal.IImsUtListener
-    public void utConfigurationCallBarringQueried(IImsUt ut, int id, ImsSsInfo[] cbInfo) throws RemoteException {
-    }
+  @Override // com.android.ims.internal.IImsUtListener
+  public void utConfigurationCallBarringQueried(IImsUt ut, int id, ImsSsInfo[] cbInfo)
+      throws RemoteException {}
 
-    @Override // com.android.ims.internal.IImsUtListener
-    public void utConfigurationCallForwardQueried(IImsUt ut, int id, ImsCallForwardInfo[] cfInfo) throws RemoteException {
-    }
+  @Override // com.android.ims.internal.IImsUtListener
+  public void utConfigurationCallForwardQueried(IImsUt ut, int id, ImsCallForwardInfo[] cfInfo)
+      throws RemoteException {}
 
-    @Override // com.android.ims.internal.IImsUtListener
-    public void utConfigurationCallWaitingQueried(IImsUt ut, int id, ImsSsInfo[] cwInfo) throws RemoteException {
-    }
+  @Override // com.android.ims.internal.IImsUtListener
+  public void utConfigurationCallWaitingQueried(IImsUt ut, int id, ImsSsInfo[] cwInfo)
+      throws RemoteException {}
 
-    @Override // com.android.ims.internal.IImsUtListener
-    public void onSupplementaryServiceIndication(ImsSsData ssData) {
-    }
+  @Override // com.android.ims.internal.IImsUtListener
+  public void onSupplementaryServiceIndication(ImsSsData ssData) {}
 }

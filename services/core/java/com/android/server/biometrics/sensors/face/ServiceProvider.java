@@ -15,82 +15,136 @@ import java.util.List;
 
 /* loaded from: classes.dex */
 public interface ServiceProvider extends BiometricServiceProvider {
-    void cancelAuthentication(int i, IBinder iBinder, long j);
+  void cancelAuthentication(int i, IBinder iBinder, long j);
 
-    void cancelEnrollment(int i, IBinder iBinder, long j);
+  void cancelEnrollment(int i, IBinder iBinder, long j);
 
-    void cancelFaceDetect(int i, IBinder iBinder, long j);
+  void cancelFaceDetect(int i, IBinder iBinder, long j);
 
-    ITestSession createTestSession(int i, ITestSessionCallback iTestSessionCallback, String str);
+  ITestSession createTestSession(int i, ITestSessionCallback iTestSessionCallback, String str);
 
-    void dumpHal(int i, FileDescriptor fileDescriptor, String[] strArr);
+  void dumpHal(int i, FileDescriptor fileDescriptor, String[] strArr);
 
-    List getEnrolledFaces(int i, int i2);
+  List getEnrolledFaces(int i, int i2);
 
-    void onBootPhase(int i);
+  void onBootPhase(int i);
 
-    long scheduleAuthenticate(IBinder iBinder, long j, int i, ClientMonitorCallbackConverter clientMonitorCallbackConverter, FaceAuthenticateOptions faceAuthenticateOptions, boolean z, int i2, boolean z2);
+  long scheduleAuthenticate(
+      IBinder iBinder,
+      long j,
+      int i,
+      ClientMonitorCallbackConverter clientMonitorCallbackConverter,
+      FaceAuthenticateOptions faceAuthenticateOptions,
+      boolean z,
+      int i2,
+      boolean z2);
 
-    void scheduleAuthenticate(IBinder iBinder, long j, int i, ClientMonitorCallbackConverter clientMonitorCallbackConverter, FaceAuthenticateOptions faceAuthenticateOptions, long j2, boolean z, int i2, boolean z2);
+  void scheduleAuthenticate(
+      IBinder iBinder,
+      long j,
+      int i,
+      ClientMonitorCallbackConverter clientMonitorCallbackConverter,
+      FaceAuthenticateOptions faceAuthenticateOptions,
+      long j2,
+      boolean z,
+      int i2,
+      boolean z2);
 
-    long scheduleEnroll(int i, IBinder iBinder, byte[] bArr, int i2, IFaceServiceReceiver iFaceServiceReceiver, String str, int[] iArr, Surface surface, boolean z);
+  long scheduleEnroll(
+      int i,
+      IBinder iBinder,
+      byte[] bArr,
+      int i2,
+      IFaceServiceReceiver iFaceServiceReceiver,
+      String str,
+      int[] iArr,
+      Surface surface,
+      boolean z);
 
-    long scheduleFaceDetect(IBinder iBinder, ClientMonitorCallbackConverter clientMonitorCallbackConverter, FaceAuthenticateOptions faceAuthenticateOptions, int i);
+  long scheduleFaceDetect(
+      IBinder iBinder,
+      ClientMonitorCallbackConverter clientMonitorCallbackConverter,
+      FaceAuthenticateOptions faceAuthenticateOptions,
+      int i);
 
-    void scheduleGenerateChallenge(int i, int i2, IBinder iBinder, IFaceServiceReceiver iFaceServiceReceiver, String str);
+  void scheduleGenerateChallenge(
+      int i, int i2, IBinder iBinder, IFaceServiceReceiver iFaceServiceReceiver, String str);
 
-    void scheduleGetFeature(int i, IBinder iBinder, int i2, int i3, ClientMonitorCallbackConverter clientMonitorCallbackConverter, String str);
+  void scheduleGetFeature(
+      int i,
+      IBinder iBinder,
+      int i2,
+      int i3,
+      ClientMonitorCallbackConverter clientMonitorCallbackConverter,
+      String str);
 
-    void scheduleInternalCleanup(int i, int i2, ClientMonitorCallback clientMonitorCallback, boolean z);
+  void scheduleInternalCleanup(
+      int i, int i2, ClientMonitorCallback clientMonitorCallback, boolean z);
 
-    void scheduleRemove(int i, IBinder iBinder, int i2, int i3, IFaceServiceReceiver iFaceServiceReceiver, String str);
+  void scheduleRemove(
+      int i,
+      IBinder iBinder,
+      int i2,
+      int i3,
+      IFaceServiceReceiver iFaceServiceReceiver,
+      String str);
 
-    void scheduleRemoveAll(int i, IBinder iBinder, int i2, IFaceServiceReceiver iFaceServiceReceiver, String str);
+  void scheduleRemoveAll(
+      int i, IBinder iBinder, int i2, IFaceServiceReceiver iFaceServiceReceiver, String str);
 
-    void scheduleResetLockout(int i, int i2, byte[] bArr);
+  void scheduleResetLockout(int i, int i2, byte[] bArr);
 
-    void scheduleRevokeChallenge(int i, int i2, IBinder iBinder, String str, long j);
+  void scheduleRevokeChallenge(int i, int i2, IBinder iBinder, String str, long j);
 
-    void scheduleSetFeature(int i, IBinder iBinder, int i2, int i3, boolean z, byte[] bArr, IFaceServiceReceiver iFaceServiceReceiver, String str);
+  void scheduleSetFeature(
+      int i,
+      IBinder iBinder,
+      int i2,
+      int i3,
+      boolean z,
+      byte[] bArr,
+      IFaceServiceReceiver iFaceServiceReceiver,
+      String str);
 
-    default void scheduleWatchdog(int i) {
-    }
+  default void scheduleWatchdog(int i) {}
 
-    String semGetInfo(int i);
+  String semGetInfo(int i);
 
-    int semGetRemainingLockoutTime(int i);
+  int semGetRemainingLockoutTime(int i);
 
-    int semGetSecurityLevel(boolean z);
+  int semGetSecurityLevel(boolean z);
 
-    boolean semIsFrameworkHandleLockout();
+  boolean semIsFrameworkHandleLockout();
 
-    boolean semIsSessionClose();
+  boolean semIsSessionClose();
 
-    void semPauseAuth();
+  void semPauseAuth();
 
-    void semPauseEnroll();
+  void semPauseEnroll();
 
-    boolean semResetAuthenticationTimeout();
+  boolean semResetAuthenticationTimeout();
 
-    void semResumeAuth();
+  void semResumeAuth();
 
-    void semResumeEnroll();
+  void semResumeEnroll();
 
-    void semSessionClose();
+  void semSessionClose();
 
-    void semSessionOpen();
+  void semSessionOpen();
 
-    void semSetTpaHalEnabled(boolean z);
+  void semSetTpaHalEnabled(boolean z);
 
-    default boolean semShouldRemoveTemplate() {
-        return false;
-    }
+  default boolean semShouldRemoveTemplate() {
+    return false;
+  }
 
-    void semUpdateTpaAction();
+  void semUpdateTpaAction();
 
-    void startPreparedClient(int i, int i2);
+  void startPreparedClient(int i, int i2);
 
-    default void scheduleInvalidateAuthenticatorId(int i, int i2, IInvalidationCallback iInvalidationCallback) {
-        throw new IllegalStateException("Providers that support invalidation must override this method");
-    }
+  default void scheduleInvalidateAuthenticatorId(
+      int i, int i2, IInvalidationCallback iInvalidationCallback) {
+    throw new IllegalStateException(
+        "Providers that support invalidation must override this method");
+  }
 }

@@ -4,5 +4,5 @@ import android.os.UserHandle;
 
 /* loaded from: classes.dex */
 public interface GameClassifier {
-    boolean isGame(String str, UserHandle userHandle);
+  boolean isGame(String str, UserHandle userHandle);
 }

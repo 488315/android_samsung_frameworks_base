@@ -8,19 +8,19 @@ import com.sec.android.allshare.iface.CVMessage;
 
 /* loaded from: classes5.dex */
 abstract class AllShareResponseHandler extends Handler {
-    private static final String TAG = "AllShareResponseHandler";
+  private static final String TAG = "AllShareResponseHandler";
 
-    public abstract void handleResponseMessage(CVMessage cVMessage);
+  public abstract void handleResponseMessage(CVMessage cVMessage);
 
-    protected AllShareResponseHandler(Looper looper) {
-        super(looper);
-    }
+  protected AllShareResponseHandler(Looper looper) {
+    super(looper);
+  }
 
-    @Override // android.p009os.Handler
-    public void handleMessage(Message msg) {
-        Bundle bundle = msg.getData();
-        bundle.setClassLoader(getClass().getClassLoader());
-        CVMessage cvm = (CVMessage) bundle.getParcelable(CVMessage.RES_MSG_KEY);
-        handleResponseMessage(cvm);
-    }
+  @Override // android.p009os.Handler
+  public void handleMessage(Message msg) {
+    Bundle bundle = msg.getData();
+    bundle.setClassLoader(getClass().getClassLoader());
+    CVMessage cvm = (CVMessage) bundle.getParcelable(CVMessage.RES_MSG_KEY);
+    handleResponseMessage(cvm);
+  }
 }

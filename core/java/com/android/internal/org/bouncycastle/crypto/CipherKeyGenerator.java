@@ -4,17 +4,17 @@ import java.security.SecureRandom;
 
 /* loaded from: classes5.dex */
 public class CipherKeyGenerator {
-    protected SecureRandom random;
-    protected int strength;
+  protected SecureRandom random;
+  protected int strength;
 
-    public void init(KeyGenerationParameters param) {
-        this.random = param.getRandom();
-        this.strength = (param.getStrength() + 7) / 8;
-    }
+  public void init(KeyGenerationParameters param) {
+    this.random = param.getRandom();
+    this.strength = (param.getStrength() + 7) / 8;
+  }
 
-    public byte[] generateKey() {
-        byte[] key = new byte[this.strength];
-        this.random.nextBytes(key);
-        return key;
-    }
+  public byte[] generateKey() {
+    byte[] key = new byte[this.strength];
+    this.random.nextBytes(key);
+    return key;
+  }
 }

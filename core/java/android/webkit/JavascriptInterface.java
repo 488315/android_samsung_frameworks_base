@@ -8,5 +8,4 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 /* loaded from: classes4.dex */
-public @interface JavascriptInterface {
-}
+public @interface JavascriptInterface {}

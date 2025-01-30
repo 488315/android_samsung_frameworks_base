@@ -6,7 +6,7 @@ import android.media.effect.SingleFilterEffect;
 
 /* loaded from: classes2.dex */
 public class RedEyeEffect extends SingleFilterEffect {
-    public RedEyeEffect(EffectContext context, String name) {
-        super(context, name, RedEyeFilter.class, "image", "image", new Object[0]);
-    }
+  public RedEyeEffect(EffectContext context, String name) {
+    super(context, name, RedEyeFilter.class, "image", "image", new Object[0]);
+  }
 }

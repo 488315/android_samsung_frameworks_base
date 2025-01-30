@@ -8,7 +8,19 @@ import com.android.server.biometrics.sensors.fingerprint.GestureAvailabilityDisp
 
 /* loaded from: classes.dex */
 public class SemFaceUserAwareScheduler extends UserAwareBiometricScheduler {
-    public SemFaceUserAwareScheduler(String str, int i, GestureAvailabilityDispatcher gestureAvailabilityDispatcher, UserAwareBiometricScheduler.CurrentUserRetriever currentUserRetriever, UserAwareBiometricScheduler.UserSwitchCallback userSwitchCallback) {
-        super(str, new Handler(SemFaceMainThread.get().getLooper()), i, gestureAvailabilityDispatcher, IBiometricService.Stub.asInterface(ServiceManager.getService("biometric")), currentUserRetriever, userSwitchCallback);
-    }
+  public SemFaceUserAwareScheduler(
+      String str,
+      int i,
+      GestureAvailabilityDispatcher gestureAvailabilityDispatcher,
+      UserAwareBiometricScheduler.CurrentUserRetriever currentUserRetriever,
+      UserAwareBiometricScheduler.UserSwitchCallback userSwitchCallback) {
+    super(
+        str,
+        new Handler(SemFaceMainThread.get().getLooper()),
+        i,
+        gestureAvailabilityDispatcher,
+        IBiometricService.Stub.asInterface(ServiceManager.getService("biometric")),
+        currentUserRetriever,
+        userSwitchCallback);
+  }
 }

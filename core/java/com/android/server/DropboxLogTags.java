@@ -4,12 +4,11 @@ import android.util.EventLog;
 
 /* loaded from: classes5.dex */
 public class DropboxLogTags {
-    public static final int DROPBOX_FILE_COPY = 81002;
+  public static final int DROPBOX_FILE_COPY = 81002;
 
-    private DropboxLogTags() {
-    }
+  private DropboxLogTags() {}
 
-    public static void writeDropboxFileCopy(String filename, int size, String tag) {
-        EventLog.writeEvent(DROPBOX_FILE_COPY, filename, Integer.valueOf(size), tag);
-    }
+  public static void writeDropboxFileCopy(String filename, int size, String tag) {
+    EventLog.writeEvent(DROPBOX_FILE_COPY, filename, Integer.valueOf(size), tag);
+  }
 }

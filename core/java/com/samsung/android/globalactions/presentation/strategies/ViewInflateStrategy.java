@@ -4,6 +4,5 @@ import android.view.View;
 
 /* loaded from: classes5.dex */
 public interface ViewInflateStrategy {
-    default void onInflateView(View view) {
-    }
+  default void onInflateView(View view) {}
 }

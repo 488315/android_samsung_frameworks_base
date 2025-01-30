@@ -4,23 +4,23 @@ import android.content.pm.ApplicationInfo;
 
 /* loaded from: classes3.dex */
 public interface AndroidPackageHidden {
-    String getPrimaryCpuAbi();
+  String getPrimaryCpuAbi();
 
-    String getSecondaryCpuAbi();
+  String getSecondaryCpuAbi();
 
-    boolean isOdm();
+  boolean isOdm();
 
-    boolean isOem();
+  boolean isOem();
 
-    boolean isPrivileged();
+  boolean isPrivileged();
 
-    boolean isProduct();
+  boolean isProduct();
 
-    boolean isSystem();
+  boolean isSystem();
 
-    boolean isSystemExt();
+  boolean isSystemExt();
 
-    boolean isVendor();
+  boolean isVendor();
 
-    ApplicationInfo toAppInfoWithoutState();
+  ApplicationInfo toAppInfoWithoutState();
 }

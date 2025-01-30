@@ -8,27 +8,28 @@ import android.graphics.Bitmap;
 /* loaded from: classes4.dex */
 public abstract class WebIconDatabase {
 
-    @Deprecated
-    public interface IconListener {
-        void onReceivedIcon(String str, Bitmap bitmap);
-    }
+  @Deprecated
+  public interface IconListener {
+    void onReceivedIcon(String str, Bitmap bitmap);
+  }
 
-    @SystemApi
-    public abstract void bulkRequestIconForPageUrl(ContentResolver contentResolver, String str, IconListener iconListener);
+  @SystemApi
+  public abstract void bulkRequestIconForPageUrl(
+      ContentResolver contentResolver, String str, IconListener iconListener);
 
-    public abstract void close();
+  public abstract void close();
 
-    public abstract void open(String str);
+  public abstract void open(String str);
 
-    public abstract void releaseIconForPageUrl(String str);
+  public abstract void releaseIconForPageUrl(String str);
 
-    public abstract void removeAllIcons();
+  public abstract void removeAllIcons();
 
-    public abstract void requestIconForPageUrl(String str, IconListener iconListener);
+  public abstract void requestIconForPageUrl(String str, IconListener iconListener);
 
-    public abstract void retainIconForPageUrl(String str);
+  public abstract void retainIconForPageUrl(String str);
 
-    public static WebIconDatabase getInstance() {
-        return WebViewFactory.getProvider().getWebIconDatabase();
-    }
+  public static WebIconDatabase getInstance() {
+    return WebViewFactory.getProvider().getWebIconDatabase();
+  }
 }

@@ -6,7 +6,7 @@ import android.media.effect.SingleFilterEffect;
 
 /* loaded from: classes2.dex */
 public class FisheyeEffect extends SingleFilterEffect {
-    public FisheyeEffect(EffectContext context, String name) {
-        super(context, name, FisheyeFilter.class, "image", "image", new Object[0]);
-    }
+  public FisheyeEffect(EffectContext context, String name) {
+    super(context, name, FisheyeFilter.class, "image", "image", new Object[0]);
+  }
 }

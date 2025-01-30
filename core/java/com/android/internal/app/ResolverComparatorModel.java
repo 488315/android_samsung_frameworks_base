@@ -6,9 +6,9 @@ import java.util.Comparator;
 
 /* loaded from: classes4.dex */
 interface ResolverComparatorModel {
-    Comparator<ResolveInfo> getComparator();
+  Comparator<ResolveInfo> getComparator();
 
-    float getScore(TargetInfo targetInfo);
+  float getScore(TargetInfo targetInfo);
 
-    void notifyOnTargetSelected(TargetInfo targetInfo);
+  void notifyOnTargetSelected(TargetInfo targetInfo);
 }

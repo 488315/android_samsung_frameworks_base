@@ -6,7 +6,7 @@ import android.media.effect.SingleFilterEffect;
 
 /* loaded from: classes2.dex */
 public class BrightnessEffect extends SingleFilterEffect {
-    public BrightnessEffect(EffectContext context, String name) {
-        super(context, name, BrightnessFilter.class, "image", "image", new Object[0]);
-    }
+  public BrightnessEffect(EffectContext context, String name) {
+    super(context, name, BrightnessFilter.class, "image", "image", new Object[0]);
+  }
 }

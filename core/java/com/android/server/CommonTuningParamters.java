@@ -2,15 +2,15 @@ package com.android.server;
 
 /* loaded from: classes5.dex */
 public interface CommonTuningParamters {
-    int getCntThreshold();
+  int getCntThreshold();
 
-    int getRssiThreshold();
+  int getRssiThreshold();
 
-    int getSnrThreshold();
+  int getSnrThreshold();
 
-    void setCntThreshold(int i);
+  void setCntThreshold(int i);
 
-    void setRssiThreshold(int i);
+  void setRssiThreshold(int i);
 
-    void setSnrThreshold(int i);
+  void setSnrThreshold(int i);
 }

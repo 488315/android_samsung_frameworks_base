@@ -21,146 +21,168 @@ import java.util.List;
 
 /* loaded from: classes3.dex */
 public class UsbUserSettingsManager {
-    public static final String TAG = "UsbUserSettingsManager";
-    public final Object mLock = new Object();
-    public final PackageManager mPackageManager;
-    public final UserHandle mUser;
-    public final Context mUserContext;
+  public static final String TAG = "UsbUserSettingsManager";
+  public final Object mLock = new Object();
+  public final PackageManager mPackageManager;
+  public final UserHandle mUser;
+  public final Context mUserContext;
 
-    public UsbUserSettingsManager(Context context, UserHandle userHandle) {
-        Slog.v(TAG, "Creating settings for " + userHandle);
+  public UsbUserSettingsManager(Context context, UserHandle userHandle) {
+    Slog.v(TAG, "Creating settings for " + userHandle);
+    try {
+      Context createPackageContextAsUser =
+          context.createPackageContextAsUser("android", 0, userHandle);
+      this.mUserContext = createPackageContextAsUser;
+      this.mPackageManager = createPackageContextAsUser.getPackageManager();
+      this.mUser = userHandle;
+    } catch (PackageManager.NameNotFoundException unused) {
+      throw new RuntimeException("Missing android package");
+    }
+  }
+
+  public List queryIntentActivities(Intent intent) {
+    return this.mPackageManager.queryIntentActivitiesAsUser(
+        intent, 128, this.mUser.getIdentifier());
+  }
+
+  public boolean canBeDefault(UsbDevice usbDevice, String str) {
+    XmlResourceParser loadXmlMetaData;
+    ActivityInfo[] packageActivities = getPackageActivities(str);
+    if (packageActivities != null) {
+      for (ActivityInfo activityInfo : packageActivities) {
         try {
-            Context createPackageContextAsUser = context.createPackageContextAsUser("android", 0, userHandle);
-            this.mUserContext = createPackageContextAsUser;
-            this.mPackageManager = createPackageContextAsUser.getPackageManager();
-            this.mUser = userHandle;
-        } catch (PackageManager.NameNotFoundException unused) {
-            throw new RuntimeException("Missing android package");
+          loadXmlMetaData =
+              activityInfo.loadXmlMetaData(
+                  this.mPackageManager, "android.hardware.usb.action.USB_DEVICE_ATTACHED");
+        } catch (Exception e) {
+          Slog.w(TAG, "Unable to load component info " + activityInfo.toString(), e);
         }
-    }
-
-    public List queryIntentActivities(Intent intent) {
-        return this.mPackageManager.queryIntentActivitiesAsUser(intent, 128, this.mUser.getIdentifier());
-    }
-
-    public boolean canBeDefault(UsbDevice usbDevice, String str) {
-        XmlResourceParser loadXmlMetaData;
-        ActivityInfo[] packageActivities = getPackageActivities(str);
-        if (packageActivities != null) {
-            for (ActivityInfo activityInfo : packageActivities) {
-                try {
-                    loadXmlMetaData = activityInfo.loadXmlMetaData(this.mPackageManager, "android.hardware.usb.action.USB_DEVICE_ATTACHED");
-                } catch (Exception e) {
-                    Slog.w(TAG, "Unable to load component info " + activityInfo.toString(), e);
-                }
-                if (loadXmlMetaData != null) {
-                    try {
-                        XmlUtils.nextElement(loadXmlMetaData);
-                        while (loadXmlMetaData.getEventType() != 1) {
-                            if (!"usb-device".equals(loadXmlMetaData.getName()) || !DeviceFilter.read(loadXmlMetaData).matches(usbDevice)) {
-                                XmlUtils.nextElement(loadXmlMetaData);
-                            } else {
-                                loadXmlMetaData.close();
-                                return true;
-                            }
-                        }
-                    } finally {
-                    }
-                } else if (loadXmlMetaData == null) {
-                }
+        if (loadXmlMetaData != null) {
+          try {
+            XmlUtils.nextElement(loadXmlMetaData);
+            while (loadXmlMetaData.getEventType() != 1) {
+              if (!"usb-device".equals(loadXmlMetaData.getName())
+                  || !DeviceFilter.read(loadXmlMetaData).matches(usbDevice)) {
+                XmlUtils.nextElement(loadXmlMetaData);
+              } else {
                 loadXmlMetaData.close();
+                return true;
+              }
             }
+          } finally {
+          }
+        } else if (loadXmlMetaData == null) {
         }
-        return false;
+        loadXmlMetaData.close();
+      }
     }
+    return false;
+  }
 
-    public boolean canBeDefault(UsbAccessory usbAccessory, String str) {
-        XmlResourceParser loadXmlMetaData;
-        ActivityInfo[] packageActivities = getPackageActivities(str);
-        if (packageActivities != null) {
-            for (ActivityInfo activityInfo : packageActivities) {
-                try {
-                    loadXmlMetaData = activityInfo.loadXmlMetaData(this.mPackageManager, "android.hardware.usb.action.USB_ACCESSORY_ATTACHED");
-                } catch (Exception e) {
-                    Slog.w(TAG, "Unable to load component info " + activityInfo.toString(), e);
-                }
-                if (loadXmlMetaData != null) {
-                    try {
-                        XmlUtils.nextElement(loadXmlMetaData);
-                        while (loadXmlMetaData.getEventType() != 1) {
-                            if (!"usb-accessory".equals(loadXmlMetaData.getName()) || !AccessoryFilter.read(loadXmlMetaData).matches(usbAccessory)) {
-                                XmlUtils.nextElement(loadXmlMetaData);
-                            } else {
-                                loadXmlMetaData.close();
-                                return true;
-                            }
-                        }
-                    } finally {
-                    }
-                } else if (loadXmlMetaData == null) {
-                }
-                loadXmlMetaData.close();
-            }
-        }
-        return false;
-    }
-
-    public final ActivityInfo[] getPackageActivities(String str) {
+  public boolean canBeDefault(UsbAccessory usbAccessory, String str) {
+    XmlResourceParser loadXmlMetaData;
+    ActivityInfo[] packageActivities = getPackageActivities(str);
+    if (packageActivities != null) {
+      for (ActivityInfo activityInfo : packageActivities) {
         try {
-            return this.mPackageManager.getPackageInfo(str, 129).activities;
-        } catch (PackageManager.NameNotFoundException unused) {
-            return null;
+          loadXmlMetaData =
+              activityInfo.loadXmlMetaData(
+                  this.mPackageManager, "android.hardware.usb.action.USB_ACCESSORY_ATTACHED");
+        } catch (Exception e) {
+          Slog.w(TAG, "Unable to load component info " + activityInfo.toString(), e);
         }
+        if (loadXmlMetaData != null) {
+          try {
+            XmlUtils.nextElement(loadXmlMetaData);
+            while (loadXmlMetaData.getEventType() != 1) {
+              if (!"usb-accessory".equals(loadXmlMetaData.getName())
+                  || !AccessoryFilter.read(loadXmlMetaData).matches(usbAccessory)) {
+                XmlUtils.nextElement(loadXmlMetaData);
+              } else {
+                loadXmlMetaData.close();
+                return true;
+              }
+            }
+          } finally {
+          }
+        } else if (loadXmlMetaData == null) {
+        }
+        loadXmlMetaData.close();
+      }
     }
+    return false;
+  }
 
-    public void dump(DualDumpOutputStream dualDumpOutputStream, String str, long j) {
-        long start = dualDumpOutputStream.start(str, j);
-        synchronized (this.mLock) {
-            dualDumpOutputStream.write("user_id", 1120986464257L, this.mUser.getIdentifier());
-            List queryIntentActivities = queryIntentActivities(new Intent("android.hardware.usb.action.USB_DEVICE_ATTACHED"));
-            int size = queryIntentActivities.size();
-            int i = 0;
-            while (i < size) {
-                ResolveInfo resolveInfo = (ResolveInfo) queryIntentActivities.get(i);
-                int i2 = i;
-                long start2 = dualDumpOutputStream.start("device_attached_activities", 2246267895812L);
-                ActivityInfo activityInfo = resolveInfo.activityInfo;
-                DumpUtils.writeComponentName(dualDumpOutputStream, "activity", 1146756268033L, new ComponentName(activityInfo.packageName, activityInfo.name));
-                ArrayList deviceFilters = UsbProfileGroupSettingsManager.getDeviceFilters(this.mPackageManager, resolveInfo);
-                if (deviceFilters != null) {
-                    int size2 = deviceFilters.size();
-                    for (int i3 = 0; i3 < size2; i3++) {
-                        ((DeviceFilter) deviceFilters.get(i3)).dump(dualDumpOutputStream, "filters", 2246267895810L);
-                    }
-                }
-                dualDumpOutputStream.end(start2);
-                i = i2 + 1;
-            }
-            List queryIntentActivities2 = queryIntentActivities(new Intent("android.hardware.usb.action.USB_ACCESSORY_ATTACHED"));
-            int size3 = queryIntentActivities2.size();
-            int i4 = 0;
-            while (i4 < size3) {
-                ResolveInfo resolveInfo2 = (ResolveInfo) queryIntentActivities2.get(i4);
-                long start3 = dualDumpOutputStream.start("accessory_attached_activities", 2246267895813L);
-                ActivityInfo activityInfo2 = resolveInfo2.activityInfo;
-                DumpUtils.writeComponentName(dualDumpOutputStream, "activity", 1146756268033L, new ComponentName(activityInfo2.packageName, activityInfo2.name));
-                ArrayList accessoryFilters = UsbProfileGroupSettingsManager.getAccessoryFilters(this.mPackageManager, resolveInfo2);
-                if (accessoryFilters != null) {
-                    int size4 = accessoryFilters.size();
-                    int i5 = 0;
-                    while (i5 < size4) {
-                        ((AccessoryFilter) accessoryFilters.get(i5)).dump(dualDumpOutputStream, "filters", 2246267895810L);
-                        i5++;
-                        queryIntentActivities2 = queryIntentActivities2;
-                        size3 = size3;
-                    }
-                }
-                dualDumpOutputStream.end(start3);
-                i4++;
-                queryIntentActivities2 = queryIntentActivities2;
-                size3 = size3;
-            }
-        }
-        dualDumpOutputStream.end(start);
+  public final ActivityInfo[] getPackageActivities(String str) {
+    try {
+      return this.mPackageManager.getPackageInfo(str, 129).activities;
+    } catch (PackageManager.NameNotFoundException unused) {
+      return null;
     }
+  }
+
+  public void dump(DualDumpOutputStream dualDumpOutputStream, String str, long j) {
+    long start = dualDumpOutputStream.start(str, j);
+    synchronized (this.mLock) {
+      dualDumpOutputStream.write("user_id", 1120986464257L, this.mUser.getIdentifier());
+      List queryIntentActivities =
+          queryIntentActivities(new Intent("android.hardware.usb.action.USB_DEVICE_ATTACHED"));
+      int size = queryIntentActivities.size();
+      int i = 0;
+      while (i < size) {
+        ResolveInfo resolveInfo = (ResolveInfo) queryIntentActivities.get(i);
+        int i2 = i;
+        long start2 = dualDumpOutputStream.start("device_attached_activities", 2246267895812L);
+        ActivityInfo activityInfo = resolveInfo.activityInfo;
+        DumpUtils.writeComponentName(
+            dualDumpOutputStream,
+            "activity",
+            1146756268033L,
+            new ComponentName(activityInfo.packageName, activityInfo.name));
+        ArrayList deviceFilters =
+            UsbProfileGroupSettingsManager.getDeviceFilters(this.mPackageManager, resolveInfo);
+        if (deviceFilters != null) {
+          int size2 = deviceFilters.size();
+          for (int i3 = 0; i3 < size2; i3++) {
+            ((DeviceFilter) deviceFilters.get(i3))
+                .dump(dualDumpOutputStream, "filters", 2246267895810L);
+          }
+        }
+        dualDumpOutputStream.end(start2);
+        i = i2 + 1;
+      }
+      List queryIntentActivities2 =
+          queryIntentActivities(new Intent("android.hardware.usb.action.USB_ACCESSORY_ATTACHED"));
+      int size3 = queryIntentActivities2.size();
+      int i4 = 0;
+      while (i4 < size3) {
+        ResolveInfo resolveInfo2 = (ResolveInfo) queryIntentActivities2.get(i4);
+        long start3 = dualDumpOutputStream.start("accessory_attached_activities", 2246267895813L);
+        ActivityInfo activityInfo2 = resolveInfo2.activityInfo;
+        DumpUtils.writeComponentName(
+            dualDumpOutputStream,
+            "activity",
+            1146756268033L,
+            new ComponentName(activityInfo2.packageName, activityInfo2.name));
+        ArrayList accessoryFilters =
+            UsbProfileGroupSettingsManager.getAccessoryFilters(this.mPackageManager, resolveInfo2);
+        if (accessoryFilters != null) {
+          int size4 = accessoryFilters.size();
+          int i5 = 0;
+          while (i5 < size4) {
+            ((AccessoryFilter) accessoryFilters.get(i5))
+                .dump(dualDumpOutputStream, "filters", 2246267895810L);
+            i5++;
+            queryIntentActivities2 = queryIntentActivities2;
+            size3 = size3;
+          }
+        }
+        dualDumpOutputStream.end(start3);
+        i4++;
+        queryIntentActivities2 = queryIntentActivities2;
+        size3 = size3;
+      }
+    }
+    dualDumpOutputStream.end(start);
+  }
 }

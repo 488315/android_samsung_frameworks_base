@@ -4,11 +4,9 @@ import java.io.PrintWriter;
 
 /* loaded from: classes3.dex */
 public interface IController {
-    default void dumpLocked(PrintWriter printWriter, String str) {
-    }
+  default void dumpLocked(PrintWriter printWriter, String str) {}
 
-    void initialize();
+  void initialize();
 
-    default void setWindowManager(WindowManagerService windowManagerService) {
-    }
+  default void setWindowManager(WindowManagerService windowManagerService) {}
 }

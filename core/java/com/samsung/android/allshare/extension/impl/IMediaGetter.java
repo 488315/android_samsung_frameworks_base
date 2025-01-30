@@ -9,21 +9,27 @@ import java.util.ArrayList;
 /* loaded from: classes5.dex */
 public interface IMediaGetter {
 
-    public interface IMediaGetterConnection {
-        void onCancel();
+  public interface IMediaGetterConnection {
+    void onCancel();
 
-        void onError(ERROR error);
+    void onError(ERROR error);
 
-        void onFinish();
+    void onFinish();
 
-        void onProgress(Item[] itemArr);
+    void onProgress(Item[] itemArr);
 
-        void onStart();
-    }
+    void onStart();
+  }
 
-    void cancel(FlatProvider.IFlatProviderConnection iFlatProviderConnection);
+  void cancel(FlatProvider.IFlatProviderConnection iFlatProviderConnection);
 
-    void start(Provider provider, Item.MediaType mediaType, FlatProvider.IFlatProviderConnection iFlatProviderConnection);
+  void start(
+      Provider provider,
+      Item.MediaType mediaType,
+      FlatProvider.IFlatProviderConnection iFlatProviderConnection);
 
-    void start(Provider provider, ArrayList<Item.MediaType> arrayList, FlatProvider.IFlatProviderConnection iFlatProviderConnection);
+  void start(
+      Provider provider,
+      ArrayList<Item.MediaType> arrayList,
+      FlatProvider.IFlatProviderConnection iFlatProviderConnection);
 }

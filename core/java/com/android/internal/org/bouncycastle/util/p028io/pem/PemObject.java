@@ -6,35 +6,35 @@ import java.util.List;
 
 /* loaded from: classes5.dex */
 public class PemObject implements PemObjectGenerator {
-    private static final List EMPTY_LIST = Collections.unmodifiableList(new ArrayList());
-    private byte[] content;
-    private List headers;
-    private String type;
+  private static final List EMPTY_LIST = Collections.unmodifiableList(new ArrayList());
+  private byte[] content;
+  private List headers;
+  private String type;
 
-    public PemObject(String type, byte[] content) {
-        this(type, EMPTY_LIST, content);
-    }
+  public PemObject(String type, byte[] content) {
+    this(type, EMPTY_LIST, content);
+  }
 
-    public PemObject(String type, List headers, byte[] content) {
-        this.type = type;
-        this.headers = Collections.unmodifiableList(headers);
-        this.content = content;
-    }
+  public PemObject(String type, List headers, byte[] content) {
+    this.type = type;
+    this.headers = Collections.unmodifiableList(headers);
+    this.content = content;
+  }
 
-    public String getType() {
-        return this.type;
-    }
+  public String getType() {
+    return this.type;
+  }
 
-    public List getHeaders() {
-        return this.headers;
-    }
+  public List getHeaders() {
+    return this.headers;
+  }
 
-    public byte[] getContent() {
-        return this.content;
-    }
+  public byte[] getContent() {
+    return this.content;
+  }
 
-    @Override // com.android.internal.org.bouncycastle.util.p028io.pem.PemObjectGenerator
-    public PemObject generate() throws PemGenerationException {
-        return this;
-    }
+  @Override // com.android.internal.org.bouncycastle.util.p028io.pem.PemObjectGenerator
+  public PemObject generate() throws PemGenerationException {
+    return this;
+  }
 }

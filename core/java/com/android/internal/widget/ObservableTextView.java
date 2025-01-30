@@ -10,34 +10,35 @@ import java.util.function.Consumer;
 @RemoteViews.RemoteView
 /* loaded from: classes5.dex */
 public class ObservableTextView extends TextView {
-    private Consumer<Integer> mOnVisibilityChangedListener;
+  private Consumer<Integer> mOnVisibilityChangedListener;
 
-    public ObservableTextView(Context context) {
-        super(context);
-    }
+  public ObservableTextView(Context context) {
+    super(context);
+  }
 
-    public ObservableTextView(Context context, AttributeSet attrs) {
-        super(context, attrs);
-    }
+  public ObservableTextView(Context context, AttributeSet attrs) {
+    super(context, attrs);
+  }
 
-    public ObservableTextView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-    }
+  public ObservableTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+    super(context, attrs, defStyleAttr);
+  }
 
-    public ObservableTextView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
+  public ObservableTextView(
+      Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    super(context, attrs, defStyleAttr, defStyleRes);
+  }
 
-    @Override // android.widget.TextView, android.view.View
-    protected void onVisibilityChanged(View changedView, int visibility) {
-        Consumer<Integer> consumer;
-        super.onVisibilityChanged(changedView, visibility);
-        if (changedView == this && (consumer = this.mOnVisibilityChangedListener) != null) {
-            consumer.accept(Integer.valueOf(visibility));
-        }
+  @Override // android.widget.TextView, android.view.View
+  protected void onVisibilityChanged(View changedView, int visibility) {
+    Consumer<Integer> consumer;
+    super.onVisibilityChanged(changedView, visibility);
+    if (changedView == this && (consumer = this.mOnVisibilityChangedListener) != null) {
+      consumer.accept(Integer.valueOf(visibility));
     }
+  }
 
-    public void setOnVisibilityChangedListener(Consumer<Integer> listener) {
-        this.mOnVisibilityChangedListener = listener;
-    }
+  public void setOnVisibilityChangedListener(Consumer<Integer> listener) {
+    this.mOnVisibilityChangedListener = listener;
+  }
 }

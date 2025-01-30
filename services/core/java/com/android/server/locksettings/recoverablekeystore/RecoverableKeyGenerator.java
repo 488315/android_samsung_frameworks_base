@@ -9,34 +9,53 @@ import javax.crypto.spec.SecretKeySpec;
 
 /* loaded from: classes2.dex */
 public class RecoverableKeyGenerator {
-    public final RecoverableKeyStoreDb mDatabase;
-    public final KeyGenerator mKeyGenerator;
+  public final RecoverableKeyStoreDb mDatabase;
+  public final KeyGenerator mKeyGenerator;
 
-    public static RecoverableKeyGenerator newInstance(RecoverableKeyStoreDb recoverableKeyStoreDb) {
-        return new RecoverableKeyGenerator(KeyGenerator.getInstance("AES"), recoverableKeyStoreDb);
-    }
+  public static RecoverableKeyGenerator newInstance(RecoverableKeyStoreDb recoverableKeyStoreDb) {
+    return new RecoverableKeyGenerator(KeyGenerator.getInstance("AES"), recoverableKeyStoreDb);
+  }
 
-    public RecoverableKeyGenerator(KeyGenerator keyGenerator, RecoverableKeyStoreDb recoverableKeyStoreDb) {
-        this.mKeyGenerator = keyGenerator;
-        this.mDatabase = recoverableKeyStoreDb;
-    }
+  public RecoverableKeyGenerator(
+      KeyGenerator keyGenerator, RecoverableKeyStoreDb recoverableKeyStoreDb) {
+    this.mKeyGenerator = keyGenerator;
+    this.mDatabase = recoverableKeyStoreDb;
+  }
 
-    public byte[] generateAndStoreKey(PlatformEncryptionKey platformEncryptionKey, int i, int i2, String str, byte[] bArr) {
-        this.mKeyGenerator.init(256);
-        SecretKey generateKey = this.mKeyGenerator.generateKey();
-        if (this.mDatabase.insertKey(i, i2, str, WrappedKey.fromSecretKey(platformEncryptionKey, generateKey, bArr)) == -1) {
-            throw new RecoverableKeyStorageException(String.format(Locale.US, "Failed writing (%d, %s) to database.", Integer.valueOf(i2), str));
-        }
-        if (this.mDatabase.setShouldCreateSnapshot(i, i2, true) < 0) {
-            Log.e("PlatformKeyGen", "Failed to set the shoudCreateSnapshot flag in the local DB.");
-        }
-        return generateKey.getEncoded();
+  public byte[] generateAndStoreKey(
+      PlatformEncryptionKey platformEncryptionKey, int i, int i2, String str, byte[] bArr) {
+    this.mKeyGenerator.init(256);
+    SecretKey generateKey = this.mKeyGenerator.generateKey();
+    if (this.mDatabase.insertKey(
+            i, i2, str, WrappedKey.fromSecretKey(platformEncryptionKey, generateKey, bArr))
+        == -1) {
+      throw new RecoverableKeyStorageException(
+          String.format(
+              Locale.US, "Failed writing (%d, %s) to database.", Integer.valueOf(i2), str));
     }
+    if (this.mDatabase.setShouldCreateSnapshot(i, i2, true) < 0) {
+      Log.e("PlatformKeyGen", "Failed to set the shoudCreateSnapshot flag in the local DB.");
+    }
+    return generateKey.getEncoded();
+  }
 
-    public void importKey(PlatformEncryptionKey platformEncryptionKey, int i, int i2, String str, byte[] bArr, byte[] bArr2) {
-        if (this.mDatabase.insertKey(i, i2, str, WrappedKey.fromSecretKey(platformEncryptionKey, new SecretKeySpec(bArr, "AES"), bArr2)) == -1) {
-            throw new RecoverableKeyStorageException(String.format(Locale.US, "Failed writing (%d, %s) to database.", Integer.valueOf(i2), str));
-        }
-        this.mDatabase.setShouldCreateSnapshot(i, i2, true);
+  public void importKey(
+      PlatformEncryptionKey platformEncryptionKey,
+      int i,
+      int i2,
+      String str,
+      byte[] bArr,
+      byte[] bArr2) {
+    if (this.mDatabase.insertKey(
+            i,
+            i2,
+            str,
+            WrappedKey.fromSecretKey(platformEncryptionKey, new SecretKeySpec(bArr, "AES"), bArr2))
+        == -1) {
+      throw new RecoverableKeyStorageException(
+          String.format(
+              Locale.US, "Failed writing (%d, %s) to database.", Integer.valueOf(i2), str));
     }
+    this.mDatabase.setShouldCreateSnapshot(i, i2, true);
+  }
 }

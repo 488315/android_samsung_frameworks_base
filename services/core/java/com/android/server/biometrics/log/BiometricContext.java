@@ -8,37 +8,38 @@ import java.util.function.Consumer;
 
 /* loaded from: classes.dex */
 public interface BiometricContext {
-    void ensureBiometricContextListener(SemBiometricDisplayStateMonitor semBiometricDisplayStateMonitor);
+  void ensureBiometricContextListener(
+      SemBiometricDisplayStateMonitor semBiometricDisplayStateMonitor);
 
-    AuthSessionCoordinator getAuthSessionCoordinator();
+  AuthSessionCoordinator getAuthSessionCoordinator();
 
-    BiometricContextSessionInfo getBiometricPromptSessionInfo();
+  BiometricContextSessionInfo getBiometricPromptSessionInfo();
 
-    int getCurrentRotation();
+  int getCurrentRotation();
 
-    int getDisplayState();
+  int getDisplayState();
 
-    int getDockedState();
+  int getDockedState();
 
-    int getFoldState();
+  int getFoldState();
 
-    ISessionListener getISessionListener();
+  ISessionListener getISessionListener();
 
-    BiometricContextSessionInfo getKeyguardEntrySessionInfo();
+  BiometricContextSessionInfo getKeyguardEntrySessionInfo();
 
-    boolean isAod();
+  boolean isAod();
 
-    boolean isAwake();
+  boolean isAwake();
 
-    boolean isDisplayOn();
+  boolean isDisplayOn();
 
-    void subscribe(OperationContextExt operationContextExt, Consumer consumer);
+  void subscribe(OperationContextExt operationContextExt, Consumer consumer);
 
-    void unsubscribe(OperationContextExt operationContextExt);
+  void unsubscribe(OperationContextExt operationContextExt);
 
-    OperationContextExt updateContext(OperationContextExt operationContextExt, boolean z);
+  OperationContextExt updateContext(OperationContextExt operationContextExt, boolean z);
 
-    static BiometricContext getInstance(Context context) {
-        return BiometricContextProvider.defaultProvider(context);
-    }
+  static BiometricContext getInstance(Context context) {
+    return BiometricContextProvider.defaultProvider(context);
+  }
 }

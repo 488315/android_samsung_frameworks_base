@@ -5,26 +5,25 @@ import com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel;
 
 /* loaded from: classes5.dex */
 public interface ExtendableGlobalActionsView {
-    void addWindowDecorator(WindowDecorationStrategy windowDecorationStrategy);
+  void addWindowDecorator(WindowDecorationStrategy windowDecorationStrategy);
 
-    void cancelConfirming();
+  void cancelConfirming();
 
-    void dismiss();
+  void dismiss();
 
-    void dismissWithAnimation();
+  void dismissWithAnimation();
 
-    void forceRequestLayout();
+  void forceRequestLayout();
 
-    boolean getCoverSecureConfirmState();
+  boolean getCoverSecureConfirmState();
 
-    void hideDialogOnSecureConfirm();
+  void hideDialogOnSecureConfirm();
 
-    void notifyDataSetChanged();
+  void notifyDataSetChanged();
 
-    void showActionConfirming(ActionViewModel actionViewModel);
+  void showActionConfirming(ActionViewModel actionViewModel);
 
-    void updateViewList();
+  void updateViewList();
 
-    default void setCoverSecureConfirmState(boolean state) {
-    }
+  default void setCoverSecureConfirmState(boolean state) {}
 }

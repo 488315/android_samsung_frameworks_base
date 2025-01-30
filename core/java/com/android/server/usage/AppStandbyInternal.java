@@ -11,130 +11,132 @@ import java.util.Set;
 
 /* loaded from: classes5.dex */
 public interface AppStandbyInternal {
-    void addActiveDeviceAdmin(String str, int i);
+  void addActiveDeviceAdmin(String str, int i);
 
-    void addListener(AppIdleStateChangeListener appIdleStateChangeListener);
+  void addListener(AppIdleStateChangeListener appIdleStateChangeListener);
 
-    void clearCarrierPrivilegedApps();
+  void clearCarrierPrivilegedApps();
 
-    void clearLastUsedTimestampsForTest(String str, int i);
+  void clearLastUsedTimestampsForTest(String str, int i);
 
-    void dumpState(String[] strArr, PrintWriter printWriter);
+  void dumpState(String[] strArr, PrintWriter printWriter);
 
-    void dumpUsers(IndentingPrintWriter indentingPrintWriter, int[] iArr, List<String> list);
+  void dumpUsers(IndentingPrintWriter indentingPrintWriter, int[] iArr, List<String> list);
 
-    void flushToDisk();
+  void flushToDisk();
 
-    int getAppId(String str);
+  int getAppId(String str);
 
-    int getAppMinStandbyBucket(String str, int i, int i2, boolean z);
+  int getAppMinStandbyBucket(String str, int i, int i2, boolean z);
 
-    int getAppStandbyBucket(String str, int i, long j, boolean z);
+  int getAppStandbyBucket(String str, int i, long j, boolean z);
 
-    int getAppStandbyBucketReason(String str, int i, long j);
+  int getAppStandbyBucketReason(String str, int i, long j);
 
-    List<AppStandbyInfo> getAppStandbyBuckets(int i);
+  List<AppStandbyInfo> getAppStandbyBuckets(int i);
 
-    String getAppStandbyConstant(String str);
+  String getAppStandbyConstant(String str);
 
-    List<String> getBroadcastResponseExemptedPermissions();
+  List<String> getBroadcastResponseExemptedPermissions();
 
-    List<String> getBroadcastResponseExemptedRoles();
+  List<String> getBroadcastResponseExemptedRoles();
 
-    int getBroadcastResponseFgThresholdState();
+  int getBroadcastResponseFgThresholdState();
 
-    long getBroadcastResponseWindowDurationMs();
+  long getBroadcastResponseWindowDurationMs();
 
-    long getBroadcastSessionsDurationMs();
+  long getBroadcastSessionsDurationMs();
 
-    long getBroadcastSessionsWithResponseDurationMs();
+  long getBroadcastSessionsWithResponseDurationMs();
 
-    long getEstimatedLaunchTime(String str, int i);
+  long getEstimatedLaunchTime(String str, int i);
 
-    int[] getIdleUidsForUser(int i);
+  int[] getIdleUidsForUser(int i);
 
-    long getTimeSinceLastJobRun(String str, int i);
+  long getTimeSinceLastJobRun(String str, int i);
 
-    long getTimeSinceLastUsedByUser(String str, int i);
+  long getTimeSinceLastUsedByUser(String str, int i);
 
-    void initializeDefaultsForSystemApps(int i);
+  void initializeDefaultsForSystemApps(int i);
 
-    boolean isActiveDeviceAdmin(String str, int i);
+  boolean isActiveDeviceAdmin(String str, int i);
 
-    boolean isAppIdleEnabled();
+  boolean isAppIdleEnabled();
 
-    boolean isAppIdleFiltered(String str, int i, int i2, long j);
+  boolean isAppIdleFiltered(String str, int i, int i2, long j);
 
-    boolean isAppIdleFiltered(String str, int i, long j, boolean z);
+  boolean isAppIdleFiltered(String str, int i, long j, boolean z);
 
-    boolean isInParole();
+  boolean isInParole();
 
-    void maybeUnrestrictApp(String str, int i, int i2, int i3, int i4, int i5);
+  void maybeUnrestrictApp(String str, int i, int i2, int i3, int i4, int i5);
 
-    void onAdminDataAvailable();
+  void onAdminDataAvailable();
 
-    void onBootPhase(int i);
+  void onBootPhase(int i);
 
-    void onUserRemoved(int i);
+  void onUserRemoved(int i);
 
-    void postCheckIdleStates(int i);
+  void postCheckIdleStates(int i);
 
-    void postOneTimeCheckIdleStates();
+  void postOneTimeCheckIdleStates();
 
-    void postReportContentProviderUsage(String str, String str2, int i);
+  void postReportContentProviderUsage(String str, String str2, int i);
 
-    void postReportExemptedSyncStart(String str, int i);
+  void postReportExemptedSyncStart(String str, int i);
 
-    void postReportSyncScheduled(String str, int i, boolean z);
+  void postReportSyncScheduled(String str, int i, boolean z);
 
-    void removeListener(AppIdleStateChangeListener appIdleStateChangeListener);
+  void removeListener(AppIdleStateChangeListener appIdleStateChangeListener);
 
-    void restoreAppsToRare(Set<String> set, int i);
+  void restoreAppsToRare(Set<String> set, int i);
 
-    void restrictApp(String str, int i, int i2);
+  void restrictApp(String str, int i, int i2);
 
-    void restrictApp(String str, int i, int i2, int i3);
+  void restrictApp(String str, int i, int i2, int i3);
 
-    void setActiveAdminApps(Set<String> set, int i);
+  void setActiveAdminApps(Set<String> set, int i);
 
-    void setAdminProtectedPackages(Set<String> set, int i);
+  void setAdminProtectedPackages(Set<String> set, int i);
 
-    void setAppIdleAsync(String str, boolean z, int i);
+  void setAppIdleAsync(String str, boolean z, int i);
 
-    void setAppStandbyBucket(String str, int i, int i2, int i3, int i4);
+  void setAppStandbyBucket(String str, int i, int i2, int i3, int i4);
 
-    void setAppStandbyBucketForMARs(String str, int i, int i2, int i3, boolean z, boolean z2);
+  void setAppStandbyBucketForMARs(String str, int i, int i2, int i3, boolean z, boolean z2);
 
-    void setAppStandbyBuckets(List<AppStandbyInfo> list, int i, int i2, int i3);
+  void setAppStandbyBuckets(List<AppStandbyInfo> list, int i, int i2, int i3);
 
-    void setAppStandbyBucketsForMARs(List<AppStandbyInfo> list, int i, int i2, int i3, boolean z, boolean z2);
+  void setAppStandbyBucketsForMARs(
+      List<AppStandbyInfo> list, int i, int i2, int i3, boolean z, boolean z2);
 
-    void setEstimatedLaunchTime(String str, int i, long j);
+  void setEstimatedLaunchTime(String str, int i, long j);
 
-    void setLastJobRunTime(String str, int i, long j);
+  void setLastJobRunTime(String str, int i, long j);
 
-    boolean shouldNoteResponseEventForAllBroadcastSessions();
+  boolean shouldNoteResponseEventForAllBroadcastSessions();
 
-    static AppStandbyInternal newAppStandbyController(ClassLoader loader, Context context) {
-        try {
-            Class<?> clazz = Class.forName("com.android.server.usage.AppStandbyController", true, loader);
-            Constructor<?> ctor = clazz.getConstructor(Context.class);
-            return (AppStandbyInternal) ctor.newInstance(context);
-        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | NoSuchMethodException | InvocationTargetException e) {
-            throw new RuntimeException("Unable to instantiate AppStandbyController!", e);
-        }
+  static AppStandbyInternal newAppStandbyController(ClassLoader loader, Context context) {
+    try {
+      Class<?> clazz = Class.forName("com.android.server.usage.AppStandbyController", true, loader);
+      Constructor<?> ctor = clazz.getConstructor(Context.class);
+      return (AppStandbyInternal) ctor.newInstance(context);
+    } catch (ClassNotFoundException
+        | IllegalAccessException
+        | InstantiationException
+        | NoSuchMethodException
+        | InvocationTargetException e) {
+      throw new RuntimeException("Unable to instantiate AppStandbyController!", e);
     }
+  }
 
-    public static abstract class AppIdleStateChangeListener {
-        public abstract void onAppIdleStateChanged(String str, int i, boolean z, int i2, int i3);
+  public abstract static class AppIdleStateChangeListener {
+    public abstract void onAppIdleStateChanged(String str, int i, boolean z, int i2, int i3);
 
-        public void onParoleStateChanged(boolean isParoleOn) {
-        }
+    public void onParoleStateChanged(boolean isParoleOn) {}
 
-        public void onUserInteractionStarted(String packageName, int userId) {
-        }
+    public void onUserInteractionStarted(String packageName, int userId) {}
 
-        public void triggerTemporaryQuotaBump(String packageName, int userId) {
-        }
-    }
+    public void triggerTemporaryQuotaBump(String packageName, int userId) {}
+  }
 }

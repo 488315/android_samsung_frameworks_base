@@ -10,31 +10,35 @@ import java.util.ArrayList;
 
 /* loaded from: classes2.dex */
 public class ProcessLifecycleManager {
-    public static volatile ProcessLifecycleManager sInstance;
-    public final ProcessStateTracker mStateTracker;
+  public static volatile ProcessLifecycleManager sInstance;
+  public final ProcessStateTracker mStateTracker;
 
-    public static ProcessLifecycleManager getInstance(Context context) {
+  public static ProcessLifecycleManager getInstance(Context context) {
+    if (sInstance == null) {
+      synchronized (ProcessLifecycleManager.class) {
         if (sInstance == null) {
-            synchronized (ProcessLifecycleManager.class) {
-                if (sInstance == null) {
-                    sInstance = new ProcessLifecycleManager(context);
-                }
-            }
+          sInstance = new ProcessLifecycleManager(context);
         }
-        return sInstance;
+      }
     }
+    return sInstance;
+  }
 
-    public ProcessLifecycleManager(Context context) {
-        HandlerThread handlerThread = new HandlerThread("ProcessLifecycleManager");
-        handlerThread.start();
-        Looper looper = handlerThread.getLooper();
-        ArrayList arrayList = new ArrayList();
-        arrayList.add(new ProcessAdapter(looper, context, new BindServiceImpl(context, new PeripheralContext(context))));
-        arrayList.add(new ProcessAdapter(looper, context, new BindServiceImpl(context, new KnoxZtContext(context))));
-        this.mStateTracker = new ProcessStateTracker(looper, context, arrayList);
-    }
+  public ProcessLifecycleManager(Context context) {
+    HandlerThread handlerThread = new HandlerThread("ProcessLifecycleManager");
+    handlerThread.start();
+    Looper looper = handlerThread.getLooper();
+    ArrayList arrayList = new ArrayList();
+    arrayList.add(
+        new ProcessAdapter(
+            looper, context, new BindServiceImpl(context, new PeripheralContext(context))));
+    arrayList.add(
+        new ProcessAdapter(
+            looper, context, new BindServiceImpl(context, new KnoxZtContext(context))));
+    this.mStateTracker = new ProcessStateTracker(looper, context, arrayList);
+  }
 
-    public void start(StartReason startReason) {
-        this.mStateTracker.start(startReason);
-    }
+  public void start(StartReason startReason) {
+    this.mStateTracker.start(startReason);
+  }
 }

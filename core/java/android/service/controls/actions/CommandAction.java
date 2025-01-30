@@ -4,22 +4,22 @@ import android.p009os.Bundle;
 
 /* loaded from: classes3.dex */
 public final class CommandAction extends ControlAction {
-    private static final int TYPE = 5;
+  private static final int TYPE = 5;
 
-    public CommandAction(String templateId, String challengeValue) {
-        super(templateId, challengeValue);
-    }
+  public CommandAction(String templateId, String challengeValue) {
+    super(templateId, challengeValue);
+  }
 
-    public CommandAction(String templateId) {
-        this(templateId, null);
-    }
+  public CommandAction(String templateId) {
+    this(templateId, null);
+  }
 
-    CommandAction(Bundle b) {
-        super(b);
-    }
+  CommandAction(Bundle b) {
+    super(b);
+  }
 
-    @Override // android.service.controls.actions.ControlAction
-    public int getActionType() {
-        return 5;
-    }
+  @Override // android.service.controls.actions.ControlAction
+  public int getActionType() {
+    return 5;
+  }
 }

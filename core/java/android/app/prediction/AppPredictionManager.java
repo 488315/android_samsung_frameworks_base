@@ -7,13 +7,13 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes.dex */
 public final class AppPredictionManager {
-    private final Context mContext;
+  private final Context mContext;
 
-    public AppPredictionManager(Context context) {
-        this.mContext = (Context) Objects.requireNonNull(context);
-    }
+  public AppPredictionManager(Context context) {
+    this.mContext = (Context) Objects.requireNonNull(context);
+  }
 
-    public AppPredictor createAppPredictionSession(AppPredictionContext predictionContext) {
-        return new AppPredictor(this.mContext, predictionContext);
-    }
+  public AppPredictor createAppPredictionSession(AppPredictionContext predictionContext) {
+    return new AppPredictor(this.mContext, predictionContext);
+  }
 }

@@ -11,26 +11,26 @@ import java.io.OutputStream;
 /* loaded from: classes.dex */
 public class ImageEncoder extends Filter {
 
-    @GenerateFieldPort(name = "stream")
-    private OutputStream mOutputStream;
+  @GenerateFieldPort(name = "stream")
+  private OutputStream mOutputStream;
 
-    @GenerateFieldPort(hasDefault = true, name = "quality")
-    private int mQuality;
+  @GenerateFieldPort(hasDefault = true, name = "quality")
+  private int mQuality;
 
-    public ImageEncoder(String name) {
-        super(name);
-        this.mQuality = 80;
-    }
+  public ImageEncoder(String name) {
+    super(name);
+    this.mQuality = 80;
+  }
 
-    @Override // android.filterfw.core.Filter
-    public void setupPorts() {
-        addMaskedInputPort("image", ImageFormat.create(3, 0));
-    }
+  @Override // android.filterfw.core.Filter
+  public void setupPorts() {
+    addMaskedInputPort("image", ImageFormat.create(3, 0));
+  }
 
-    @Override // android.filterfw.core.Filter
-    public void process(FilterContext env) {
-        Frame input = pullInput("image");
-        Bitmap bitmap = input.getBitmap();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, this.mQuality, this.mOutputStream);
-    }
+  @Override // android.filterfw.core.Filter
+  public void process(FilterContext env) {
+    Frame input = pullInput("image");
+    Bitmap bitmap = input.getBitmap();
+    bitmap.compress(Bitmap.CompressFormat.JPEG, this.mQuality, this.mOutputStream);
+  }
 }

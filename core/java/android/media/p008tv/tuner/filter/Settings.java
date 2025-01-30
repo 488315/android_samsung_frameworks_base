@@ -5,13 +5,13 @@ import android.annotation.SystemApi;
 @SystemApi
 /* loaded from: classes2.dex */
 public abstract class Settings {
-    private final int mType;
+  private final int mType;
 
-    Settings(int type) {
-        this.mType = type;
-    }
+  Settings(int type) {
+    this.mType = type;
+  }
 
-    public int getType() {
-        return this.mType;
-    }
+  public int getType() {
+    return this.mType;
+  }
 }

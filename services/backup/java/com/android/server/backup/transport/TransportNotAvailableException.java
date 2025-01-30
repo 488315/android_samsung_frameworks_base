@@ -4,7 +4,7 @@ import android.util.AndroidException;
 
 /* loaded from: classes.dex */
 public class TransportNotAvailableException extends AndroidException {
-    public TransportNotAvailableException() {
-        super("Transport not available");
-    }
+  public TransportNotAvailableException() {
+    super("Transport not available");
+  }
 }

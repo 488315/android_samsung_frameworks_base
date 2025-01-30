@@ -10,26 +10,26 @@ import java.util.Locale;
 
 /* loaded from: classes.dex */
 public class ToUpperCase extends Filter {
-    private FrameFormat mOutputFormat;
+  private FrameFormat mOutputFormat;
 
-    public ToUpperCase(String name) {
-        super(name);
-    }
+  public ToUpperCase(String name) {
+    super(name);
+  }
 
-    @Override // android.filterfw.core.Filter
-    public void setupPorts() {
-        MutableFrameFormat fromClass = ObjectFormat.fromClass(String.class, 1);
-        this.mOutputFormat = fromClass;
-        addMaskedInputPort("mixedcase", fromClass);
-        addOutputPort("uppercase", this.mOutputFormat);
-    }
+  @Override // android.filterfw.core.Filter
+  public void setupPorts() {
+    MutableFrameFormat fromClass = ObjectFormat.fromClass(String.class, 1);
+    this.mOutputFormat = fromClass;
+    addMaskedInputPort("mixedcase", fromClass);
+    addOutputPort("uppercase", this.mOutputFormat);
+  }
 
-    @Override // android.filterfw.core.Filter
-    public void process(FilterContext env) {
-        Frame input = pullInput("mixedcase");
-        String inputString = (String) input.getObjectValue();
-        Frame output = env.getFrameManager().newFrame(this.mOutputFormat);
-        output.setObjectValue(inputString.toUpperCase(Locale.getDefault()));
-        pushOutput("uppercase", output);
-    }
+  @Override // android.filterfw.core.Filter
+  public void process(FilterContext env) {
+    Frame input = pullInput("mixedcase");
+    String inputString = (String) input.getObjectValue();
+    Frame output = env.getFrameManager().newFrame(this.mOutputFormat);
+    output.setObjectValue(inputString.toUpperCase(Locale.getDefault()));
+    pushOutput("uppercase", output);
+  }
 }

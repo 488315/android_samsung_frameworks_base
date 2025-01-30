@@ -2,7 +2,7 @@ package android.p009os.strictmode;
 
 /* loaded from: classes3.dex */
 public final class CleartextNetworkViolation extends Violation {
-    public CleartextNetworkViolation(String msg) {
-        super(msg);
-    }
+  public CleartextNetworkViolation(String msg) {
+    super(msg);
+  }
 }

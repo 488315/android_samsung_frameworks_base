@@ -7,28 +7,30 @@ import com.sec.android.allshare.iface.CVMessage;
 /* loaded from: classes5.dex */
 public interface IAllShareConnector {
 
-    public enum AllShareServiceState {
-        ALLSHARE_SERVICE_CONNECTED,
-        ALLSHARE_SERVICE_DISCONNECTED
-    }
+  public enum AllShareServiceState {
+    ALLSHARE_SERVICE_CONNECTED,
+    ALLSHARE_SERVICE_DISCONNECTED
+  }
 
-    void connect();
+  void connect();
 
-    void destroyInstance();
+  void destroyInstance();
 
-    void disconnect();
+  void disconnect();
 
-    String getCaptionFilePathFromURI(String str);
+  String getCaptionFilePathFromURI(String str);
 
-    ContentResolver getContentResolver();
+  ContentResolver getContentResolver();
 
-    boolean isAllShareServiceConnected();
+  boolean isAllShareServiceConnected();
 
-    long requestCVMAsync(CVMessage cVMessage, AllShareResponseHandler allShareResponseHandler);
+  long requestCVMAsync(CVMessage cVMessage, AllShareResponseHandler allShareResponseHandler);
 
-    CVMessage requestCVMSync(CVMessage cVMessage);
+  CVMessage requestCVMSync(CVMessage cVMessage);
 
-    boolean subscribeAllShareEvent(String str, Bundle bundle, AllShareEventHandler allShareEventHandler);
+  boolean subscribeAllShareEvent(
+      String str, Bundle bundle, AllShareEventHandler allShareEventHandler);
 
-    void unsubscribeAllShareEvent(String str, Bundle bundle, AllShareEventHandler allShareEventHandler);
+  void unsubscribeAllShareEvent(
+      String str, Bundle bundle, AllShareEventHandler allShareEventHandler);
 }

@@ -10,17 +10,18 @@ import java.security.SecureRandom;
 
 /* loaded from: classes5.dex */
 public abstract class BaseAlgorithmParameterGenerator extends AlgorithmParameterGeneratorSpi {
-    protected SecureRandom random;
-    private final JcaJceHelper helper = new DefaultJcaJceHelper();
-    protected int strength = 1024;
+  protected SecureRandom random;
+  private final JcaJceHelper helper = new DefaultJcaJceHelper();
+  protected int strength = 1024;
 
-    protected final AlgorithmParameters createParametersInstance(String algorithm) throws NoSuchAlgorithmException, NoSuchProviderException {
-        return this.helper.createAlgorithmParameters(algorithm);
-    }
+  protected final AlgorithmParameters createParametersInstance(String algorithm)
+      throws NoSuchAlgorithmException, NoSuchProviderException {
+    return this.helper.createAlgorithmParameters(algorithm);
+  }
 
-    @Override // java.security.AlgorithmParameterGeneratorSpi
-    protected void engineInit(int strength, SecureRandom random) {
-        this.strength = strength;
-        this.random = random;
-    }
+  @Override // java.security.AlgorithmParameterGeneratorSpi
+  protected void engineInit(int strength, SecureRandom random) {
+    this.strength = strength;
+    this.random = random;
+  }
 }

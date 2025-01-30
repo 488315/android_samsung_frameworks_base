@@ -1,28 +1,29 @@
 package com.android.framework.protobuf;
 
-import com.android.framework.protobuf.ArrayDecoders;
 import java.io.IOException;
 
 @CheckReturnValue
 /* loaded from: classes4.dex */
 interface Schema<T> {
-    boolean equals(T t, T t2);
+  boolean equals(T t, T t2);
 
-    int getSerializedSize(T t);
+  int getSerializedSize(T t);
 
-    int hashCode(T t);
+  int hashCode(T t);
 
-    boolean isInitialized(T t);
+  boolean isInitialized(T t);
 
-    void makeImmutable(T t);
+  void makeImmutable(T t);
 
-    void mergeFrom(T t, Reader reader, ExtensionRegistryLite extensionRegistryLite) throws IOException;
+  void mergeFrom(T t, Reader reader, ExtensionRegistryLite extensionRegistryLite)
+      throws IOException;
 
-    void mergeFrom(T t, T t2);
+  void mergeFrom(T t, T t2);
 
-    void mergeFrom(T t, byte[] bArr, int i, int i2, ArrayDecoders.Registers registers) throws IOException;
+  void mergeFrom(T t, byte[] bArr, int i, int i2, ArrayDecoders.Registers registers)
+      throws IOException;
 
-    T newInstance();
+  T newInstance();
 
-    void writeTo(T t, Writer writer) throws IOException;
+  void writeTo(T t, Writer writer) throws IOException;
 }

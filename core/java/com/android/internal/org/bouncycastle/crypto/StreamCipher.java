@@ -2,13 +2,13 @@ package com.android.internal.org.bouncycastle.crypto;
 
 /* loaded from: classes5.dex */
 public interface StreamCipher {
-    String getAlgorithmName();
+  String getAlgorithmName();
 
-    void init(boolean z, CipherParameters cipherParameters) throws IllegalArgumentException;
+  void init(boolean z, CipherParameters cipherParameters) throws IllegalArgumentException;
 
-    int processBytes(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws DataLengthException;
+  int processBytes(byte[] bArr, int i, int i2, byte[] bArr2, int i3) throws DataLengthException;
 
-    void reset();
+  void reset();
 
-    byte returnByte(byte b);
+  byte returnByte(byte b);
 }

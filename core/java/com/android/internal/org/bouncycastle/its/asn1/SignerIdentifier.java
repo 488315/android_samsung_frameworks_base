@@ -8,9 +8,10 @@ import com.android.internal.org.bouncycastle.asn1.DERSequence;
 
 /* loaded from: classes5.dex */
 public class SignerIdentifier extends ASN1Object implements ASN1Choice {
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
-    public ASN1Primitive toASN1Primitive() {
-        ASN1EncodableVector v = new ASN1EncodableVector();
-        return new DERSequence(v);
-    }
+  @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+            // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+  public ASN1Primitive toASN1Primitive() {
+    ASN1EncodableVector v = new ASN1EncodableVector();
+    return new DERSequence(v);
+  }
 }

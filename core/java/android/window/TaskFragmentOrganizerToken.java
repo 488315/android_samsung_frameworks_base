@@ -3,56 +3,59 @@ package android.window;
 import android.p009os.IBinder;
 import android.p009os.Parcel;
 import android.p009os.Parcelable;
-import android.window.ITaskFragmentOrganizer;
 
 /* loaded from: classes4.dex */
 public final class TaskFragmentOrganizerToken implements Parcelable {
-    public static final Parcelable.Creator<TaskFragmentOrganizerToken> CREATOR = new Parcelable.Creator<TaskFragmentOrganizerToken>() { // from class: android.window.TaskFragmentOrganizerToken.1
+  public static final Parcelable.Creator<TaskFragmentOrganizerToken> CREATOR =
+      new Parcelable.Creator<
+          TaskFragmentOrganizerToken>() { // from class: android.window.TaskFragmentOrganizerToken.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public TaskFragmentOrganizerToken createFromParcel(Parcel in) {
-            ITaskFragmentOrganizer realToken = ITaskFragmentOrganizer.Stub.asInterface(in.readStrongBinder());
-            if (realToken == null) {
-                return null;
-            }
-            return new TaskFragmentOrganizerToken(realToken);
+          ITaskFragmentOrganizer realToken =
+              ITaskFragmentOrganizer.Stub.asInterface(in.readStrongBinder());
+          if (realToken == null) {
+            return null;
+          }
+          return new TaskFragmentOrganizerToken(realToken);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public TaskFragmentOrganizerToken[] newArray(int size) {
-            return new TaskFragmentOrganizerToken[size];
+          return new TaskFragmentOrganizerToken[size];
         }
-    };
-    private final ITaskFragmentOrganizer mRealToken;
+      };
+  private final ITaskFragmentOrganizer mRealToken;
 
-    TaskFragmentOrganizerToken(ITaskFragmentOrganizer realToken) {
-        this.mRealToken = realToken;
-    }
+  TaskFragmentOrganizerToken(ITaskFragmentOrganizer realToken) {
+    this.mRealToken = realToken;
+  }
 
-    public IBinder asBinder() {
-        return this.mRealToken.asBinder();
-    }
+  public IBinder asBinder() {
+    return this.mRealToken.asBinder();
+  }
 
-    @Override // android.p009os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeStrongInterface(this.mRealToken);
-    }
+  @Override // android.p009os.Parcelable
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeStrongInterface(this.mRealToken);
+  }
 
-    @Override // android.p009os.Parcelable
-    public int describeContents() {
-        return 0;
-    }
+  @Override // android.p009os.Parcelable
+  public int describeContents() {
+    return 0;
+  }
 
-    public int hashCode() {
-        return this.mRealToken.asBinder().hashCode();
-    }
+  public int hashCode() {
+    return this.mRealToken.asBinder().hashCode();
+  }
 
-    public String toString() {
-        return "TaskFragmentOrganizerToken{" + this.mRealToken + "}";
-    }
+  public String toString() {
+    return "TaskFragmentOrganizerToken{" + this.mRealToken + "}";
+  }
 
-    public boolean equals(Object obj) {
-        return (obj instanceof TaskFragmentOrganizerToken) && this.mRealToken.asBinder() == ((TaskFragmentOrganizerToken) obj).asBinder();
-    }
+  public boolean equals(Object obj) {
+    return (obj instanceof TaskFragmentOrganizerToken)
+        && this.mRealToken.asBinder() == ((TaskFragmentOrganizerToken) obj).asBinder();
+  }
 }

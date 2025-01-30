@@ -5,11 +5,11 @@ import com.android.server.timezonedetector.StateChangeListener;
 
 /* loaded from: classes3.dex */
 public interface ServiceConfigAccessor {
-    void addConfigurationInternalChangeListener(StateChangeListener stateChangeListener);
+  void addConfigurationInternalChangeListener(StateChangeListener stateChangeListener);
 
-    ConfigurationInternal getConfigurationInternal(int i);
+  ConfigurationInternal getConfigurationInternal(int i);
 
-    ConfigurationInternal getCurrentUserConfigurationInternal();
+  ConfigurationInternal getCurrentUserConfigurationInternal();
 
-    boolean updateConfiguration(int i, TimeConfiguration timeConfiguration, boolean z);
+  boolean updateConfiguration(int i, TimeConfiguration timeConfiguration, boolean z);
 }

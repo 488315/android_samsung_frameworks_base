@@ -9,113 +9,115 @@ import java.util.StringJoiner;
 
 /* loaded from: classes.dex */
 public class ProgramSelector implements Parcelable {
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() { // from class: android.hardware.broadcastradio.ProgramSelector.1
+  public static final Parcelable.Creator CREATOR =
+      new Parcelable.Creator() { // from class: android.hardware.broadcastradio.ProgramSelector.1
         @Override // android.os.Parcelable.Creator
         public ProgramSelector createFromParcel(Parcel parcel) {
-            ProgramSelector programSelector = new ProgramSelector();
-            programSelector.readFromParcel(parcel);
-            return programSelector;
+          ProgramSelector programSelector = new ProgramSelector();
+          programSelector.readFromParcel(parcel);
+          return programSelector;
         }
 
         @Override // android.os.Parcelable.Creator
         public ProgramSelector[] newArray(int i) {
-            return new ProgramSelector[i];
+          return new ProgramSelector[i];
         }
-    };
-    public ProgramIdentifier primaryId;
-    public ProgramIdentifier[] secondaryIds;
+      };
+  public ProgramIdentifier primaryId;
+  public ProgramIdentifier[] secondaryIds;
 
-    public final int getStability() {
-        return 1;
-    }
+  public final int getStability() {
+    return 1;
+  }
 
-    @Override // android.os.Parcelable
-    public final void writeToParcel(Parcel parcel, int i) {
-        int dataPosition = parcel.dataPosition();
-        parcel.writeInt(0);
-        parcel.writeTypedObject(this.primaryId, i);
-        parcel.writeTypedArray(this.secondaryIds, i);
-        int dataPosition2 = parcel.dataPosition();
-        parcel.setDataPosition(dataPosition);
-        parcel.writeInt(dataPosition2 - dataPosition);
-        parcel.setDataPosition(dataPosition2);
-    }
+  @Override // android.os.Parcelable
+  public final void writeToParcel(Parcel parcel, int i) {
+    int dataPosition = parcel.dataPosition();
+    parcel.writeInt(0);
+    parcel.writeTypedObject(this.primaryId, i);
+    parcel.writeTypedArray(this.secondaryIds, i);
+    int dataPosition2 = parcel.dataPosition();
+    parcel.setDataPosition(dataPosition);
+    parcel.writeInt(dataPosition2 - dataPosition);
+    parcel.setDataPosition(dataPosition2);
+  }
 
-    public final void readFromParcel(Parcel parcel) {
-        int dataPosition = parcel.dataPosition();
-        int readInt = parcel.readInt();
-        try {
-            if (readInt < 4) {
-                throw new BadParcelableException("Parcelable too small");
-            }
-            if (parcel.dataPosition() - dataPosition < readInt) {
-                Parcelable.Creator creator = ProgramIdentifier.CREATOR;
-                this.primaryId = (ProgramIdentifier) parcel.readTypedObject(creator);
-                if (parcel.dataPosition() - dataPosition < readInt) {
-                    this.secondaryIds = (ProgramIdentifier[]) parcel.createTypedArray(creator);
-                    if (dataPosition > Integer.MAX_VALUE - readInt) {
-                        throw new BadParcelableException("Overflow in the size of parcelable");
-                    }
-                    parcel.setDataPosition(dataPosition + readInt);
-                    return;
-                }
-                if (dataPosition > Integer.MAX_VALUE - readInt) {
-                    throw new BadParcelableException("Overflow in the size of parcelable");
-                }
-            } else if (dataPosition > Integer.MAX_VALUE - readInt) {
-                throw new BadParcelableException("Overflow in the size of parcelable");
-            }
-            parcel.setDataPosition(dataPosition + readInt);
-        } catch (Throwable th) {
-            if (dataPosition > Integer.MAX_VALUE - readInt) {
-                throw new BadParcelableException("Overflow in the size of parcelable");
-            }
-            parcel.setDataPosition(dataPosition + readInt);
-            throw th;
+  public final void readFromParcel(Parcel parcel) {
+    int dataPosition = parcel.dataPosition();
+    int readInt = parcel.readInt();
+    try {
+      if (readInt < 4) {
+        throw new BadParcelableException("Parcelable too small");
+      }
+      if (parcel.dataPosition() - dataPosition < readInt) {
+        Parcelable.Creator creator = ProgramIdentifier.CREATOR;
+        this.primaryId = (ProgramIdentifier) parcel.readTypedObject(creator);
+        if (parcel.dataPosition() - dataPosition < readInt) {
+          this.secondaryIds = (ProgramIdentifier[]) parcel.createTypedArray(creator);
+          if (dataPosition > Integer.MAX_VALUE - readInt) {
+            throw new BadParcelableException("Overflow in the size of parcelable");
+          }
+          parcel.setDataPosition(dataPosition + readInt);
+          return;
         }
-    }
-
-    public String toString() {
-        StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
-        stringJoiner.add("primaryId: " + Objects.toString(this.primaryId));
-        stringJoiner.add("secondaryIds: " + Arrays.toString(this.secondaryIds));
-        return "android.hardware.broadcastradio.ProgramSelector" + stringJoiner.toString();
-    }
-
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
+        if (dataPosition > Integer.MAX_VALUE - readInt) {
+          throw new BadParcelableException("Overflow in the size of parcelable");
         }
-        if (obj == null || !(obj instanceof ProgramSelector)) {
-            return false;
-        }
-        ProgramSelector programSelector = (ProgramSelector) obj;
-        return Objects.deepEquals(this.primaryId, programSelector.primaryId) && Objects.deepEquals(this.secondaryIds, programSelector.secondaryIds);
+      } else if (dataPosition > Integer.MAX_VALUE - readInt) {
+        throw new BadParcelableException("Overflow in the size of parcelable");
+      }
+      parcel.setDataPosition(dataPosition + readInt);
+    } catch (Throwable th) {
+      if (dataPosition > Integer.MAX_VALUE - readInt) {
+        throw new BadParcelableException("Overflow in the size of parcelable");
+      }
+      parcel.setDataPosition(dataPosition + readInt);
+      throw th;
     }
+  }
 
-    public int hashCode() {
-        return Arrays.deepHashCode(Arrays.asList(this.primaryId, this.secondaryIds).toArray());
-    }
+  public String toString() {
+    StringJoiner stringJoiner = new StringJoiner(", ", "{", "}");
+    stringJoiner.add("primaryId: " + Objects.toString(this.primaryId));
+    stringJoiner.add("secondaryIds: " + Arrays.toString(this.secondaryIds));
+    return "android.hardware.broadcastradio.ProgramSelector" + stringJoiner.toString();
+  }
 
-    @Override // android.os.Parcelable
-    public int describeContents() {
-        return describeContents(this.secondaryIds) | describeContents(this.primaryId) | 0;
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
     }
+    if (obj == null || !(obj instanceof ProgramSelector)) {
+      return false;
+    }
+    ProgramSelector programSelector = (ProgramSelector) obj;
+    return Objects.deepEquals(this.primaryId, programSelector.primaryId)
+        && Objects.deepEquals(this.secondaryIds, programSelector.secondaryIds);
+  }
 
-    public final int describeContents(Object obj) {
-        if (obj == null) {
-            return 0;
-        }
-        if (obj instanceof Object[]) {
-            int i = 0;
-            for (Object obj2 : (Object[]) obj) {
-                i |= describeContents(obj2);
-            }
-            return i;
-        }
-        if (obj instanceof Parcelable) {
-            return ((Parcelable) obj).describeContents();
-        }
-        return 0;
+  public int hashCode() {
+    return Arrays.deepHashCode(Arrays.asList(this.primaryId, this.secondaryIds).toArray());
+  }
+
+  @Override // android.os.Parcelable
+  public int describeContents() {
+    return describeContents(this.secondaryIds) | describeContents(this.primaryId) | 0;
+  }
+
+  public final int describeContents(Object obj) {
+    if (obj == null) {
+      return 0;
     }
+    if (obj instanceof Object[]) {
+      int i = 0;
+      for (Object obj2 : (Object[]) obj) {
+        i |= describeContents(obj2);
+      }
+      return i;
+    }
+    if (obj instanceof Parcelable) {
+      return ((Parcelable) obj).describeContents();
+    }
+    return 0;
+  }
 }

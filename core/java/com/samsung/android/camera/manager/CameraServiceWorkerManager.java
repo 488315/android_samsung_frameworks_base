@@ -5,18 +5,18 @@ import android.util.Log;
 
 /* loaded from: classes5.dex */
 public class CameraServiceWorkerManager {
-    private static final String TAG = "CameraServiceWorkerManager";
-    private IBinder binder;
+  private static final String TAG = "CameraServiceWorkerManager";
+  private IBinder binder;
 
-    public CameraServiceWorkerManager(IBinder binder) {
-        if (binder == null) {
-            Log.m94d(TAG, "binder is null");
-        } else {
-            this.binder = binder;
-        }
+  public CameraServiceWorkerManager(IBinder binder) {
+    if (binder == null) {
+      Log.m94d(TAG, "binder is null");
+    } else {
+      this.binder = binder;
     }
+  }
 
-    public IBinder getMyBinder() {
-        return this.binder;
-    }
+  public IBinder getMyBinder() {
+    return this.binder;
+  }
 }

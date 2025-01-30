@@ -4,13 +4,13 @@ import com.android.internal.p029os.IResultReceiver;
 
 /* loaded from: classes.dex */
 public interface DevicePolicySafetyChecker {
-    int getUnsafeOperationReason(int i);
+  int getUnsafeOperationReason(int i);
 
-    boolean isSafeOperation(int i);
+  boolean isSafeOperation(int i);
 
-    void onFactoryReset(IResultReceiver iResultReceiver);
+  void onFactoryReset(IResultReceiver iResultReceiver);
 
-    default UnsafeStateException newUnsafeStateException(int operation, int reason) {
-        return new UnsafeStateException(operation, reason);
-    }
+  default UnsafeStateException newUnsafeStateException(int operation, int reason) {
+    return new UnsafeStateException(operation, reason);
+  }
 }

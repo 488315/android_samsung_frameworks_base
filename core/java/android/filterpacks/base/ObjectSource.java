@@ -11,58 +11,58 @@ import android.provider.Telephony;
 
 /* loaded from: classes.dex */
 public class ObjectSource extends Filter {
-    private Frame mFrame;
+  private Frame mFrame;
 
-    @GenerateFieldPort(name = "object")
-    private Object mObject;
+  @GenerateFieldPort(name = "object")
+  private Object mObject;
 
-    @GenerateFinalPort(hasDefault = true, name = Telephony.CellBroadcasts.MESSAGE_FORMAT)
-    private FrameFormat mOutputFormat;
+  @GenerateFinalPort(hasDefault = true, name = Telephony.CellBroadcasts.MESSAGE_FORMAT)
+  private FrameFormat mOutputFormat;
 
-    @GenerateFieldPort(hasDefault = true, name = "repeatFrame")
-    boolean mRepeatFrame;
+  @GenerateFieldPort(hasDefault = true, name = "repeatFrame")
+  boolean mRepeatFrame;
 
-    public ObjectSource(String name) {
-        super(name);
-        this.mOutputFormat = FrameFormat.unspecified();
-        this.mRepeatFrame = false;
+  public ObjectSource(String name) {
+    super(name);
+    this.mOutputFormat = FrameFormat.unspecified();
+    this.mRepeatFrame = false;
+  }
+
+  @Override // android.filterfw.core.Filter
+  public void setupPorts() {
+    addOutputPort("frame", this.mOutputFormat);
+  }
+
+  @Override // android.filterfw.core.Filter
+  public void process(FilterContext context) {
+    if (this.mFrame == null) {
+      Object obj = this.mObject;
+      if (obj == null) {
+        throw new NullPointerException("ObjectSource producing frame with no object set!");
+      }
+      FrameFormat outputFormat = ObjectFormat.fromObject(obj, 1);
+      Frame newFrame = context.getFrameManager().newFrame(outputFormat);
+      this.mFrame = newFrame;
+      newFrame.setObjectValue(this.mObject);
+      this.mFrame.setTimestamp(-1L);
     }
-
-    @Override // android.filterfw.core.Filter
-    public void setupPorts() {
-        addOutputPort("frame", this.mOutputFormat);
+    pushOutput("frame", this.mFrame);
+    if (!this.mRepeatFrame) {
+      closeOutputPort("frame");
     }
+  }
 
-    @Override // android.filterfw.core.Filter
-    public void process(FilterContext context) {
-        if (this.mFrame == null) {
-            Object obj = this.mObject;
-            if (obj == null) {
-                throw new NullPointerException("ObjectSource producing frame with no object set!");
-            }
-            FrameFormat outputFormat = ObjectFormat.fromObject(obj, 1);
-            Frame newFrame = context.getFrameManager().newFrame(outputFormat);
-            this.mFrame = newFrame;
-            newFrame.setObjectValue(this.mObject);
-            this.mFrame.setTimestamp(-1L);
-        }
-        pushOutput("frame", this.mFrame);
-        if (!this.mRepeatFrame) {
-            closeOutputPort("frame");
-        }
-    }
+  @Override // android.filterfw.core.Filter
+  public void tearDown(FilterContext context) {
+    this.mFrame.release();
+  }
 
-    @Override // android.filterfw.core.Filter
-    public void tearDown(FilterContext context) {
-        this.mFrame.release();
+  @Override // android.filterfw.core.Filter
+  public void fieldPortValueUpdated(String name, FilterContext context) {
+    Frame frame;
+    if (name.equals("object") && (frame = this.mFrame) != null) {
+      frame.release();
+      this.mFrame = null;
     }
-
-    @Override // android.filterfw.core.Filter
-    public void fieldPortValueUpdated(String name, FilterContext context) {
-        Frame frame;
-        if (name.equals("object") && (frame = this.mFrame) != null) {
-            frame.release();
-            this.mFrame = null;
-        }
-    }
+  }
 }

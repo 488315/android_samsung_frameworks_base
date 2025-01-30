@@ -8,21 +8,17 @@ import java.io.PrintWriter;
 
 /* loaded from: classes2.dex */
 interface InputMethodServiceInternal {
-    Context getContext();
+  Context getContext();
 
-    default void exposeContent(InputContentInfo inputContentInfo, InputConnection inputConnection) {
-    }
+  default void exposeContent(InputContentInfo inputContentInfo, InputConnection inputConnection) {}
 
-    default void notifyUserActionIfNecessary() {
-    }
+  default void notifyUserActionIfNecessary() {}
 
-    default void dump(FileDescriptor fd, PrintWriter fout, String[] args) {
-    }
+  default void dump(FileDescriptor fd, PrintWriter fout, String[] args) {}
 
-    default void triggerServiceDump(String where, byte[] icProto) {
-    }
+  default void triggerServiceDump(String where, byte[] icProto) {}
 
-    default boolean isServiceDestroyed() {
-        return false;
-    }
+  default boolean isServiceDestroyed() {
+    return false;
+  }
 }

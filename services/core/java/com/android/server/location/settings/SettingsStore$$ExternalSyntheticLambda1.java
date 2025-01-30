@@ -5,10 +5,10 @@ import java.util.concurrent.CountDownLatch;
 /* compiled from: R8$$SyntheticClass */
 /* loaded from: classes2.dex */
 public final /* synthetic */ class SettingsStore$$ExternalSyntheticLambda1 implements Runnable {
-    public final /* synthetic */ CountDownLatch f$0;
+  public final /* synthetic */ CountDownLatch f$0;
 
-    @Override // java.lang.Runnable
-    public final void run() {
-        this.f$0.countDown();
-    }
+  @Override // java.lang.Runnable
+  public final void run() {
+    this.f$0.countDown();
+  }
 }

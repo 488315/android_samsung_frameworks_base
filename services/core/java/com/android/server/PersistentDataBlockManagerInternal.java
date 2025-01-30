@@ -2,17 +2,17 @@ package com.android.server;
 
 /* loaded from: classes.dex */
 public interface PersistentDataBlockManagerInternal {
-    void clearTestHarnessModeData();
+  void clearTestHarnessModeData();
 
-    void forceOemUnlockEnabled(boolean z);
+  void forceOemUnlockEnabled(boolean z);
 
-    int getAllowedUid();
+  int getAllowedUid();
 
-    byte[] getFrpCredentialHandle();
+  byte[] getFrpCredentialHandle();
 
-    byte[] getTestHarnessModeData();
+  byte[] getTestHarnessModeData();
 
-    void setFrpCredentialHandle(byte[] bArr);
+  void setFrpCredentialHandle(byte[] bArr);
 
-    void setTestHarnessModeData(byte[] bArr);
+  void setTestHarnessModeData(byte[] bArr);
 }

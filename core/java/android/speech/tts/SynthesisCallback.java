@@ -6,26 +6,24 @@ import java.lang.annotation.RetentionPolicy;
 /* loaded from: classes3.dex */
 public interface SynthesisCallback {
 
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface SupportedAudioFormat {
-    }
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface SupportedAudioFormat {}
 
-    int audioAvailable(byte[] bArr, int i, int i2);
+  int audioAvailable(byte[] bArr, int i, int i2);
 
-    int done();
+  int done();
 
-    void error();
+  void error();
 
-    void error(int i);
+  void error(int i);
 
-    int getMaxBufferSize();
+  int getMaxBufferSize();
 
-    boolean hasFinished();
+  boolean hasFinished();
 
-    boolean hasStarted();
+  boolean hasStarted();
 
-    int start(int i, int i2, int i3);
+  int start(int i, int i2, int i3);
 
-    default void rangeStart(int markerInFrames, int start, int end) {
-    }
+  default void rangeStart(int markerInFrames, int start, int end) {}
 }

@@ -6,10 +6,10 @@ import java.util.function.Consumer;
 /* renamed from: com.android.server.soundtrigger.SoundTriggerService$LocalSoundTriggerService$SessionImpl$$ExternalSyntheticLambda2 */
 /* loaded from: classes3.dex */
 public final /* synthetic */ class C2602x6269e71c implements Consumer {
-    public final /* synthetic */ SoundTriggerHelper f$0;
+  public final /* synthetic */ SoundTriggerHelper f$0;
 
-    @Override // java.util.function.Consumer
-    public final void accept(Object obj) {
-        this.f$0.onAppOpStateChanged(((Boolean) obj).booleanValue());
-    }
+  @Override // java.util.function.Consumer
+  public final void accept(Object obj) {
+    this.f$0.onAppOpStateChanged(((Boolean) obj).booleanValue());
+  }
 }

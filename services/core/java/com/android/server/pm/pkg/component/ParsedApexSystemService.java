@@ -2,13 +2,13 @@ package com.android.server.pm.pkg.component;
 
 /* loaded from: classes3.dex */
 public interface ParsedApexSystemService {
-    int getInitOrder();
+  int getInitOrder();
 
-    String getJarPath();
+  String getJarPath();
 
-    String getMaxSdkVersion();
+  String getMaxSdkVersion();
 
-    String getMinSdkVersion();
+  String getMinSdkVersion();
 
-    String getName();
+  String getName();
 }

@@ -6,87 +6,91 @@ import java.util.Objects;
 
 /* loaded from: classes.dex */
 public class OverlayPaths {
-    private final List<String> mOverlayPaths;
-    private final List<String> mResourceDirs;
+  private final List<String> mOverlayPaths;
+  private final List<String> mResourceDirs;
 
-    public static class Builder {
-        final OverlayPaths mPaths = new OverlayPaths();
+  public static class Builder {
+    final OverlayPaths mPaths = new OverlayPaths();
 
-        public Builder addNonApkPath(String idmapPath) {
-            this.mPaths.mOverlayPaths.add(idmapPath);
-            return this;
+    public Builder addNonApkPath(String idmapPath) {
+      this.mPaths.mOverlayPaths.add(idmapPath);
+      return this;
+    }
+
+    public Builder addApkPath(String overlayPath) {
+      addUniquePath(this.mPaths.mResourceDirs, overlayPath);
+      addUniquePath(this.mPaths.mOverlayPaths, overlayPath);
+      return this;
+    }
+
+    public Builder addAll(OverlayPaths other) {
+      if (other != null) {
+        for (String path : other.getResourceDirs()) {
+          addUniquePath(this.mPaths.mResourceDirs, path);
         }
-
-        public Builder addApkPath(String overlayPath) {
-            addUniquePath(this.mPaths.mResourceDirs, overlayPath);
-            addUniquePath(this.mPaths.mOverlayPaths, overlayPath);
-            return this;
+        for (String path2 : other.getOverlayPaths()) {
+          addUniquePath(this.mPaths.mOverlayPaths, path2);
         }
-
-        public Builder addAll(OverlayPaths other) {
-            if (other != null) {
-                for (String path : other.getResourceDirs()) {
-                    addUniquePath(this.mPaths.mResourceDirs, path);
-                }
-                for (String path2 : other.getOverlayPaths()) {
-                    addUniquePath(this.mPaths.mOverlayPaths, path2);
-                }
-            }
-            return this;
-        }
-
-        public OverlayPaths build() {
-            return this.mPaths;
-        }
-
-        private static void addUniquePath(List<String> paths, String path) {
-            if (!paths.contains(path)) {
-                paths.add(path);
-            }
-        }
+      }
+      return this;
     }
 
-    public boolean isEmpty() {
-        return this.mResourceDirs.isEmpty() && this.mOverlayPaths.isEmpty();
+    public OverlayPaths build() {
+      return this.mPaths;
     }
 
-    private OverlayPaths() {
-        this.mResourceDirs = new ArrayList();
-        this.mOverlayPaths = new ArrayList();
+    private static void addUniquePath(List<String> paths, String path) {
+      if (!paths.contains(path)) {
+        paths.add(path);
+      }
     }
+  }
 
-    public List<String> getResourceDirs() {
-        return this.mResourceDirs;
-    }
+  public boolean isEmpty() {
+    return this.mResourceDirs.isEmpty() && this.mOverlayPaths.isEmpty();
+  }
 
-    public List<String> getOverlayPaths() {
-        return this.mOverlayPaths;
-    }
+  private OverlayPaths() {
+    this.mResourceDirs = new ArrayList();
+    this.mOverlayPaths = new ArrayList();
+  }
 
-    public String toString() {
-        return "OverlayPaths { resourceDirs = " + this.mResourceDirs + ", overlayPaths = " + this.mOverlayPaths + " }";
-    }
+  public List<String> getResourceDirs() {
+    return this.mResourceDirs;
+  }
 
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        OverlayPaths that = (OverlayPaths) o;
-        if (Objects.equals(this.mResourceDirs, that.mResourceDirs) && Objects.equals(this.mOverlayPaths, that.mOverlayPaths)) {
-            return true;
-        }
-        return false;
-    }
+  public List<String> getOverlayPaths() {
+    return this.mOverlayPaths;
+  }
 
-    public int hashCode() {
-        int _hash = (1 * 31) + Objects.hashCode(this.mResourceDirs);
-        return (_hash * 31) + Objects.hashCode(this.mOverlayPaths);
-    }
+  public String toString() {
+    return "OverlayPaths { resourceDirs = "
+        + this.mResourceDirs
+        + ", overlayPaths = "
+        + this.mOverlayPaths
+        + " }";
+  }
 
-    @Deprecated
-    private void __metadata() {
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    OverlayPaths that = (OverlayPaths) o;
+    if (Objects.equals(this.mResourceDirs, that.mResourceDirs)
+        && Objects.equals(this.mOverlayPaths, that.mOverlayPaths)) {
+      return true;
+    }
+    return false;
+  }
+
+  public int hashCode() {
+    int _hash = (1 * 31) + Objects.hashCode(this.mResourceDirs);
+    return (_hash * 31) + Objects.hashCode(this.mOverlayPaths);
+  }
+
+  @Deprecated
+  private void __metadata() {}
 }

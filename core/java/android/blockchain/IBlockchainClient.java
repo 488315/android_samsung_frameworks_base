@@ -8,76 +8,77 @@ import android.p009os.RemoteException;
 
 /* loaded from: classes.dex */
 public interface IBlockchainClient extends IInterface {
-    public static final String DESCRIPTOR = "android.blockchain.IBlockchainClient";
+  public static final String DESCRIPTOR = "android.blockchain.IBlockchainClient";
 
-    public static class Default implements IBlockchainClient {
-        @Override // android.p009os.IInterface
-        public IBinder asBinder() {
-            return null;
-        }
+  public static class Default implements IBlockchainClient {
+    @Override // android.p009os.IInterface
+    public IBinder asBinder() {
+      return null;
+    }
+  }
+
+  public abstract static class Stub extends Binder implements IBlockchainClient {
+    public Stub() {
+      attachInterface(this, IBlockchainClient.DESCRIPTOR);
     }
 
-    public static abstract class Stub extends Binder implements IBlockchainClient {
-        public Stub() {
-            attachInterface(this, IBlockchainClient.DESCRIPTOR);
-        }
-
-        public static IBlockchainClient asInterface(IBinder obj) {
-            if (obj == null) {
-                return null;
-            }
-            IInterface iin = obj.queryLocalInterface(IBlockchainClient.DESCRIPTOR);
-            if (iin != null && (iin instanceof IBlockchainClient)) {
-                return (IBlockchainClient) iin;
-            }
-            return new Proxy(obj);
-        }
-
-        @Override // android.p009os.IInterface
-        public IBinder asBinder() {
-            return this;
-        }
-
-        public static String getDefaultTransactionName(int transactionCode) {
-            return null;
-        }
-
-        @Override // android.p009os.Binder
-        public String getTransactionName(int transactionCode) {
-            return getDefaultTransactionName(transactionCode);
-        }
-
-        @Override // android.p009os.Binder
-        public boolean onTransact(int code, Parcel data, Parcel reply, int flags) throws RemoteException {
-            switch (code) {
-                case IBinder.INTERFACE_TRANSACTION /* 1598968902 */:
-                    reply.writeString(IBlockchainClient.DESCRIPTOR);
-                    return true;
-                default:
-                    return super.onTransact(code, data, reply, flags);
-            }
-        }
-
-        private static class Proxy implements IBlockchainClient {
-            private IBinder mRemote;
-
-            Proxy(IBinder remote) {
-                this.mRemote = remote;
-            }
-
-            @Override // android.p009os.IInterface
-            public IBinder asBinder() {
-                return this.mRemote;
-            }
-
-            public String getInterfaceDescriptor() {
-                return IBlockchainClient.DESCRIPTOR;
-            }
-        }
-
-        @Override // android.p009os.Binder
-        public int getMaxTransactionId() {
-            return 0;
-        }
+    public static IBlockchainClient asInterface(IBinder obj) {
+      if (obj == null) {
+        return null;
+      }
+      IInterface iin = obj.queryLocalInterface(IBlockchainClient.DESCRIPTOR);
+      if (iin != null && (iin instanceof IBlockchainClient)) {
+        return (IBlockchainClient) iin;
+      }
+      return new Proxy(obj);
     }
+
+    @Override // android.p009os.IInterface
+    public IBinder asBinder() {
+      return this;
+    }
+
+    public static String getDefaultTransactionName(int transactionCode) {
+      return null;
+    }
+
+    @Override // android.p009os.Binder
+    public String getTransactionName(int transactionCode) {
+      return getDefaultTransactionName(transactionCode);
+    }
+
+    @Override // android.p009os.Binder
+    public boolean onTransact(int code, Parcel data, Parcel reply, int flags)
+        throws RemoteException {
+      switch (code) {
+        case IBinder.INTERFACE_TRANSACTION /* 1598968902 */:
+          reply.writeString(IBlockchainClient.DESCRIPTOR);
+          return true;
+        default:
+          return super.onTransact(code, data, reply, flags);
+      }
+    }
+
+    private static class Proxy implements IBlockchainClient {
+      private IBinder mRemote;
+
+      Proxy(IBinder remote) {
+        this.mRemote = remote;
+      }
+
+      @Override // android.p009os.IInterface
+      public IBinder asBinder() {
+        return this.mRemote;
+      }
+
+      public String getInterfaceDescriptor() {
+        return IBlockchainClient.DESCRIPTOR;
+      }
+    }
+
+    @Override // android.p009os.Binder
+    public int getMaxTransactionId() {
+      return 0;
+    }
+  }
 }

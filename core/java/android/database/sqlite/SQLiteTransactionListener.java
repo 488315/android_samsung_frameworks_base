@@ -2,9 +2,9 @@ package android.database.sqlite;
 
 /* loaded from: classes.dex */
 public interface SQLiteTransactionListener {
-    void onBegin();
+  void onBegin();
 
-    void onCommit();
+  void onCommit();
 
-    void onRollback();
+  void onRollback();
 }

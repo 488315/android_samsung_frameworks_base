@@ -6,17 +6,17 @@ import com.samsung.android.globalactions.util.SystemConditions;
 
 /* loaded from: classes5.dex */
 public class ReserveBatteryModeStrategy implements DefaultActionsCreationStrategy {
-    private final ConditionChecker mConditionChecker;
+  private final ConditionChecker mConditionChecker;
 
-    public ReserveBatteryModeStrategy(ConditionChecker conditionChecker) {
-        this.mConditionChecker = conditionChecker;
-    }
+  public ReserveBatteryModeStrategy(ConditionChecker conditionChecker) {
+    this.mConditionChecker = conditionChecker;
+  }
 
-    @Override // com.samsung.android.globalactions.presentation.strategies.DefaultActionsCreationStrategy
-    public boolean onCreateEmergencyAction() {
-        if (this.mConditionChecker.isEnabled(SystemConditions.IS_RBM_MODE)) {
-            return false;
-        }
-        return true;
+  @Override // com.samsung.android.globalactions.presentation.strategies.DefaultActionsCreationStrategy
+  public boolean onCreateEmergencyAction() {
+    if (this.mConditionChecker.isEnabled(SystemConditions.IS_RBM_MODE)) {
+      return false;
     }
+    return true;
+  }
 }

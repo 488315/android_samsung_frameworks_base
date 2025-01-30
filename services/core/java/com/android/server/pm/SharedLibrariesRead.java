@@ -8,13 +8,13 @@ import java.io.PrintWriter;
 
 /* loaded from: classes3.dex */
 public interface SharedLibrariesRead {
-    void dump(PrintWriter printWriter, DumpState dumpState);
+  void dump(PrintWriter printWriter, DumpState dumpState);
 
-    void dumpProto(ProtoOutputStream protoOutputStream);
+  void dumpProto(ProtoOutputStream protoOutputStream);
 
-    WatchedArrayMap getAll();
+  WatchedArrayMap getAll();
 
-    SharedLibraryInfo getSharedLibraryInfo(String str, long j);
+  SharedLibraryInfo getSharedLibraryInfo(String str, long j);
 
-    WatchedLongSparseArray getStaticLibraryInfos(String str);
+  WatchedLongSparseArray getStaticLibraryInfos(String str);
 }

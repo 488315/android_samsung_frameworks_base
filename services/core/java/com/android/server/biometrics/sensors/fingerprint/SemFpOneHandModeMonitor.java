@@ -8,49 +8,55 @@ import com.android.server.biometrics.Utils;
 
 /* loaded from: classes.dex */
 public class SemFpOneHandModeMonitor implements SemFpEventListener {
-    ContentObserver mContentObserver;
-    public final Context mContext;
-    public final Injector mInjector;
-    public final ServiceProvider mServiceProvider;
+  ContentObserver mContentObserver;
+  public final Context mContext;
+  public final Injector mInjector;
+  public final ServiceProvider mServiceProvider;
 
-    public class Injector {
-        public void registerContentObserver(Context context, Uri uri, ContentObserver contentObserver) {
-            context.getContentResolver().registerContentObserver(uri, false, contentObserver, -2);
-        }
-
-        public boolean isOneHandModeRunning(Context context) {
-            return Utils.isOneHandMode(context);
-        }
+  public class Injector {
+    public void registerContentObserver(Context context, Uri uri, ContentObserver contentObserver) {
+      context.getContentResolver().registerContentObserver(uri, false, contentObserver, -2);
     }
 
-    public SemFpOneHandModeMonitor(Context context, ServiceProvider serviceProvider) {
-        this(context, serviceProvider, new Injector());
+    public boolean isOneHandModeRunning(Context context) {
+      return Utils.isOneHandMode(context);
     }
+  }
 
-    public SemFpOneHandModeMonitor(Context context, ServiceProvider serviceProvider, Injector injector) {
-        this.mContext = context;
-        this.mServiceProvider = serviceProvider;
-        this.mInjector = injector;
-    }
+  public SemFpOneHandModeMonitor(Context context, ServiceProvider serviceProvider) {
+    this(context, serviceProvider, new Injector());
+  }
 
-    public void start() {
-        this.mServiceProvider.semAddEventListener(this);
-        observe();
-    }
+  public SemFpOneHandModeMonitor(
+      Context context, ServiceProvider serviceProvider, Injector injector) {
+    this.mContext = context;
+    this.mServiceProvider = serviceProvider;
+    this.mInjector = injector;
+  }
 
-    public final void observe() {
-        this.mContentObserver = new ContentObserver(SemFpMainThread.get().getHandler()) { // from class: com.android.server.biometrics.sensors.fingerprint.SemFpOneHandModeMonitor.1
-            @Override // android.database.ContentObserver
-            public void onChange(boolean z) {
-                SemFpOneHandModeMonitor.this.handleContentChanged();
-            }
+  public void start() {
+    this.mServiceProvider.semAddEventListener(this);
+    observe();
+  }
+
+  public final void observe() {
+    this.mContentObserver =
+        new ContentObserver(
+            SemFpMainThread.get()
+                .getHandler()) { // from class:
+                                 // com.android.server.biometrics.sensors.fingerprint.SemFpOneHandModeMonitor.1
+          @Override // android.database.ContentObserver
+          public void onChange(boolean z) {
+            SemFpOneHandModeMonitor.this.handleContentChanged();
+          }
         };
-        this.mInjector.registerContentObserver(this.mContext, Settings.System.getUriFor("any_screen_running"), this.mContentObserver);
-    }
+    this.mInjector.registerContentObserver(
+        this.mContext, Settings.System.getUriFor("any_screen_running"), this.mContentObserver);
+  }
 
-    public final void handleContentChanged() {
-        if (this.mInjector.isOneHandModeRunning(this.mContext)) {
-            this.mServiceProvider.onOneHandModeEnabled();
-        }
+  public final void handleContentChanged() {
+    if (this.mInjector.isOneHandModeRunning(this.mContext)) {
+      this.mServiceProvider.onOneHandModeEnabled();
     }
+  }
 }

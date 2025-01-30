@@ -8,49 +8,53 @@ import com.samsung.android.globalactions.util.LogWrapper;
 
 /* loaded from: classes5.dex */
 public class LogoutActionViewModel implements ActionViewModel {
-    private static final String TAG = "LogoutActionViewModel";
-    private final SamsungGlobalActions mGlobalActions;
-    private final HandlerUtil mHandler;
-    private ActionInfo mInfo;
-    private final LogWrapper mLogWrapper;
+  private static final String TAG = "LogoutActionViewModel";
+  private final SamsungGlobalActions mGlobalActions;
+  private final HandlerUtil mHandler;
+  private ActionInfo mInfo;
+  private final LogWrapper mLogWrapper;
 
-    public LogoutActionViewModel(SamsungGlobalActions samsungGlobalActions, HandlerUtil handlerUtil, LogWrapper logWrapper) {
-        this.mGlobalActions = samsungGlobalActions;
-        this.mHandler = handlerUtil;
-        this.mLogWrapper = logWrapper;
-    }
+  public LogoutActionViewModel(
+      SamsungGlobalActions samsungGlobalActions, HandlerUtil handlerUtil, LogWrapper logWrapper) {
+    this.mGlobalActions = samsungGlobalActions;
+    this.mHandler = handlerUtil;
+    this.mLogWrapper = logWrapper;
+  }
 
-    @Override // com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel
-    public ActionInfo getActionInfo() {
-        return this.mInfo;
-    }
+  @Override // com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel
+  public ActionInfo getActionInfo() {
+    return this.mInfo;
+  }
 
-    @Override // com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel
-    public void setActionInfo(ActionInfo info) {
-        this.mInfo = info;
-    }
+  @Override // com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel
+  public void setActionInfo(ActionInfo info) {
+    this.mInfo = info;
+  }
 
-    @Override // com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel
-    public void onPress() {
-        this.mHandler.postDelayed(new Runnable() { // from class: com.samsung.android.globalactions.presentation.viewmodel.LogoutActionViewModel$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                LogoutActionViewModel.this.lambda$onPress$0();
-            }
-        }, 500L);
-        this.mGlobalActions.dismissDialog(true);
-    }
+  @Override // com.samsung.android.globalactions.presentation.viewmodel.ActionViewModel
+  public void onPress() {
+    this.mHandler.postDelayed(
+        new Runnable() { // from class:
+                         // com.samsung.android.globalactions.presentation.viewmodel.LogoutActionViewModel$$ExternalSyntheticLambda0
+          @Override // java.lang.Runnable
+          public final void run() {
+            LogoutActionViewModel.this.lambda$onPress$0();
+          }
+        },
+        500L);
+    this.mGlobalActions.dismissDialog(true);
+  }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$onPress$0() {
-        try {
-            int currentUserID = ActivityManager.getService().getCurrentUser().f54id;
-            ActivityManager.getService().switchUser(0);
-            ActivityManager.getService().stopUser(currentUserID, true, null);
-        } catch (RemoteException re) {
-            this.mLogWrapper.m264e(TAG, "Couldn't logout user " + re);
-        } catch (NullPointerException e) {
-            this.mLogWrapper.m264e(TAG, "getCurrentUser() return null");
-        }
+  /* JADX INFO: Access modifiers changed from: private */
+  public /* synthetic */ void lambda$onPress$0() {
+    try {
+      int currentUserID = ActivityManager.getService().getCurrentUser().f54id;
+      ActivityManager.getService().switchUser(0);
+      ActivityManager.getService().stopUser(currentUserID, true, null);
+    } catch (RemoteException re) {
+      this.mLogWrapper.m264e(TAG, "Couldn't logout user " + re);
+    } catch (NullPointerException e) {
+      this.mLogWrapper.m264e(TAG, "getCurrentUser() return null");
     }
+  }
 }

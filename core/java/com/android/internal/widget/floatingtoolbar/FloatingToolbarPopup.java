@@ -11,39 +11,41 @@ import java.util.List;
 
 /* loaded from: classes5.dex */
 public interface FloatingToolbarPopup {
-    void dismiss();
+  void dismiss();
 
-    Point getMovedPos();
+  Point getMovedPos();
 
-    void hide();
+  void hide();
 
-    boolean isDiscardTouch();
+  boolean isDiscardTouch();
 
-    boolean isDismissed();
+  boolean isDismissed();
 
-    boolean isHidden();
+  boolean isHidden();
 
-    boolean isMovingStarted();
+  boolean isMovingStarted();
 
-    boolean isShowing();
+  boolean isShowing();
 
-    void onDetachFromWindow();
+  void onDetachFromWindow();
 
-    void setIsMovingStarted(boolean z);
+  void setIsMovingStarted(boolean z);
 
-    boolean setOutsideTouchable(boolean z, PopupWindow.OnDismissListener onDismissListener);
+  boolean setOutsideTouchable(boolean z, PopupWindow.OnDismissListener onDismissListener);
 
-    void setSuggestedWidth(int i);
+  void setSuggestedWidth(int i);
 
-    void setWidthChanged(boolean z);
+  void setWidthChanged(boolean z);
 
-    void show(List<MenuItem> list, MenuItem.OnMenuItemClickListener onMenuItemClickListener, Rect rect);
+  void show(
+      List<MenuItem> list, MenuItem.OnMenuItemClickListener onMenuItemClickListener, Rect rect);
 
-    static FloatingToolbarPopup createInstance(Context context, View parent, boolean isSemTypeFloating) {
-        boolean enabled = SelectionToolbarManager.isRemoteSelectionToolbarEnabled(context);
-        if (enabled) {
-            return new RemoteFloatingToolbarPopup(context, parent);
-        }
-        return new LocalFloatingToolbarPopup(context, parent, isSemTypeFloating);
+  static FloatingToolbarPopup createInstance(
+      Context context, View parent, boolean isSemTypeFloating) {
+    boolean enabled = SelectionToolbarManager.isRemoteSelectionToolbarEnabled(context);
+    if (enabled) {
+      return new RemoteFloatingToolbarPopup(context, parent);
     }
+    return new LocalFloatingToolbarPopup(context, parent, isSemTypeFloating);
+  }
 }

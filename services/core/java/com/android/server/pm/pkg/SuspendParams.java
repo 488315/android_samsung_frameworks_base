@@ -11,133 +11,144 @@ import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes3.dex */
 public final class SuspendParams {
-    public final PersistableBundle appExtras;
-    public final SuspendDialogInfo dialogInfo;
-    public final PersistableBundle launcherExtras;
+  public final PersistableBundle appExtras;
+  public final SuspendDialogInfo dialogInfo;
+  public final PersistableBundle launcherExtras;
 
-    public SuspendParams(SuspendDialogInfo suspendDialogInfo, PersistableBundle persistableBundle, PersistableBundle persistableBundle2) {
-        this.dialogInfo = suspendDialogInfo;
-        this.appExtras = persistableBundle;
-        this.launcherExtras = persistableBundle2;
+  public SuspendParams(
+      SuspendDialogInfo suspendDialogInfo,
+      PersistableBundle persistableBundle,
+      PersistableBundle persistableBundle2) {
+    this.dialogInfo = suspendDialogInfo;
+    this.appExtras = persistableBundle;
+    this.launcherExtras = persistableBundle2;
+  }
+
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
     }
-
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof SuspendParams)) {
-            return false;
-        }
-        SuspendParams suspendParams = (SuspendParams) obj;
-        return Objects.equals(this.dialogInfo, suspendParams.dialogInfo) && BaseBundle.kindofEquals(this.appExtras, suspendParams.appExtras) && BaseBundle.kindofEquals(this.launcherExtras, suspendParams.launcherExtras);
+    if (!(obj instanceof SuspendParams)) {
+      return false;
     }
+    SuspendParams suspendParams = (SuspendParams) obj;
+    return Objects.equals(this.dialogInfo, suspendParams.dialogInfo)
+        && BaseBundle.kindofEquals(this.appExtras, suspendParams.appExtras)
+        && BaseBundle.kindofEquals(this.launcherExtras, suspendParams.launcherExtras);
+  }
 
-    public int hashCode() {
-        int hashCode = Objects.hashCode(this.dialogInfo) * 31;
-        PersistableBundle persistableBundle = this.appExtras;
-        int size = (hashCode + (persistableBundle != null ? persistableBundle.size() : 0)) * 31;
-        PersistableBundle persistableBundle2 = this.launcherExtras;
-        return size + (persistableBundle2 != null ? persistableBundle2.size() : 0);
+  public int hashCode() {
+    int hashCode = Objects.hashCode(this.dialogInfo) * 31;
+    PersistableBundle persistableBundle = this.appExtras;
+    int size = (hashCode + (persistableBundle != null ? persistableBundle.size() : 0)) * 31;
+    PersistableBundle persistableBundle2 = this.launcherExtras;
+    return size + (persistableBundle2 != null ? persistableBundle2.size() : 0);
+  }
+
+  public void saveToXml(TypedXmlSerializer typedXmlSerializer) {
+    if (this.dialogInfo != null) {
+      typedXmlSerializer.startTag((String) null, "dialog-info");
+      this.dialogInfo.saveToXml(typedXmlSerializer);
+      typedXmlSerializer.endTag((String) null, "dialog-info");
     }
+    if (this.appExtras != null) {
+      typedXmlSerializer.startTag((String) null, "app-extras");
+      try {
+        this.appExtras.saveToXml(typedXmlSerializer);
+      } catch (XmlPullParserException e) {
+        Slog.e(
+            "FrameworkPackageUserState",
+            "Exception while trying to write appExtras. Will be lost on reboot",
+            e);
+      }
+      typedXmlSerializer.endTag((String) null, "app-extras");
+    }
+    if (this.launcherExtras != null) {
+      typedXmlSerializer.startTag((String) null, "launcher-extras");
+      try {
+        this.launcherExtras.saveToXml(typedXmlSerializer);
+      } catch (XmlPullParserException e2) {
+        Slog.e(
+            "FrameworkPackageUserState",
+            "Exception while trying to write launcherExtras. Will be lost on reboot",
+            e2);
+      }
+      typedXmlSerializer.endTag((String) null, "launcher-extras");
+    }
+  }
 
-    public void saveToXml(TypedXmlSerializer typedXmlSerializer) {
-        if (this.dialogInfo != null) {
-            typedXmlSerializer.startTag((String) null, "dialog-info");
-            this.dialogInfo.saveToXml(typedXmlSerializer);
-            typedXmlSerializer.endTag((String) null, "dialog-info");
+  /* JADX WARN: Removed duplicated region for block: B:27:0x0085 A[SYNTHETIC] */
+  /* JADX WARN: Removed duplicated region for block: B:31:0x0059 A[SYNTHETIC] */
+  /*
+      Code decompiled incorrectly, please refer to instructions dump.
+  */
+  public static SuspendParams restoreFromXml(TypedXmlPullParser typedXmlPullParser) {
+    char c;
+    int depth = typedXmlPullParser.getDepth();
+    SuspendDialogInfo suspendDialogInfo = null;
+    PersistableBundle persistableBundle = null;
+    PersistableBundle persistableBundle2 = null;
+    while (true) {
+      try {
+        int next = typedXmlPullParser.next();
+        if (next == 1 || (next == 3 && typedXmlPullParser.getDepth() <= depth)) {
+          break;
         }
-        if (this.appExtras != null) {
-            typedXmlSerializer.startTag((String) null, "app-extras");
-            try {
-                this.appExtras.saveToXml(typedXmlSerializer);
-            } catch (XmlPullParserException e) {
-                Slog.e("FrameworkPackageUserState", "Exception while trying to write appExtras. Will be lost on reboot", e);
+        if (next != 3 && next != 4) {
+          String name = typedXmlPullParser.getName();
+          int hashCode = name.hashCode();
+          if (hashCode == -538220657) {
+            if (name.equals("app-extras")) {
+              c = 1;
+              if (c != 0) {}
             }
-            typedXmlSerializer.endTag((String) null, "app-extras");
-        }
-        if (this.launcherExtras != null) {
-            typedXmlSerializer.startTag((String) null, "launcher-extras");
-            try {
-                this.launcherExtras.saveToXml(typedXmlSerializer);
-            } catch (XmlPullParserException e2) {
-                Slog.e("FrameworkPackageUserState", "Exception while trying to write launcherExtras. Will be lost on reboot", e2);
+            c = 65535;
+            if (c != 0) {}
+          } else if (hashCode != -22768109) {
+            if (hashCode == 1627485488 && name.equals("launcher-extras")) {
+              c = 2;
+              if (c != 0) {
+                suspendDialogInfo = SuspendDialogInfo.restoreFromXml(typedXmlPullParser);
+              } else if (c == 1) {
+                persistableBundle = PersistableBundle.restoreFromXml(typedXmlPullParser);
+              } else if (c == 2) {
+                persistableBundle2 = PersistableBundle.restoreFromXml(typedXmlPullParser);
+              } else {
+                Slog.w(
+                    "FrameworkPackageUserState",
+                    "Unknown tag " + typedXmlPullParser.getName() + " in SuspendParams. Ignoring");
+              }
             }
-            typedXmlSerializer.endTag((String) null, "launcher-extras");
-        }
-    }
-
-    /* JADX WARN: Removed duplicated region for block: B:27:0x0085 A[SYNTHETIC] */
-    /* JADX WARN: Removed duplicated region for block: B:31:0x0059 A[SYNTHETIC] */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-    */
-    public static SuspendParams restoreFromXml(TypedXmlPullParser typedXmlPullParser) {
-        char c;
-        int depth = typedXmlPullParser.getDepth();
-        SuspendDialogInfo suspendDialogInfo = null;
-        PersistableBundle persistableBundle = null;
-        PersistableBundle persistableBundle2 = null;
-        while (true) {
-            try {
-                int next = typedXmlPullParser.next();
-                if (next == 1 || (next == 3 && typedXmlPullParser.getDepth() <= depth)) {
-                    break;
-                }
-                if (next != 3 && next != 4) {
-                    String name = typedXmlPullParser.getName();
-                    int hashCode = name.hashCode();
-                    if (hashCode == -538220657) {
-                        if (name.equals("app-extras")) {
-                            c = 1;
-                            if (c != 0) {
-                            }
-                        }
-                        c = 65535;
-                        if (c != 0) {
-                        }
-                    } else if (hashCode != -22768109) {
-                        if (hashCode == 1627485488 && name.equals("launcher-extras")) {
-                            c = 2;
-                            if (c != 0) {
-                                suspendDialogInfo = SuspendDialogInfo.restoreFromXml(typedXmlPullParser);
-                            } else if (c == 1) {
-                                persistableBundle = PersistableBundle.restoreFromXml(typedXmlPullParser);
-                            } else if (c == 2) {
-                                persistableBundle2 = PersistableBundle.restoreFromXml(typedXmlPullParser);
-                            } else {
-                                Slog.w("FrameworkPackageUserState", "Unknown tag " + typedXmlPullParser.getName() + " in SuspendParams. Ignoring");
-                            }
-                        }
-                        c = 65535;
-                        if (c != 0) {
-                        }
-                    } else {
-                        if (name.equals("dialog-info")) {
-                            c = 0;
-                            if (c != 0) {
-                            }
-                        }
-                        c = 65535;
-                        if (c != 0) {
-                        }
-                    }
-                }
-            } catch (XmlPullParserException e) {
-                Slog.e("FrameworkPackageUserState", "Exception while trying to parse SuspendParams, some fields may default", e);
+            c = 65535;
+            if (c != 0) {}
+          } else {
+            if (name.equals("dialog-info")) {
+              c = 0;
+              if (c != 0) {}
             }
+            c = 65535;
+            if (c != 0) {}
+          }
         }
-        return new SuspendParams(suspendDialogInfo, persistableBundle, persistableBundle2);
+      } catch (XmlPullParserException e) {
+        Slog.e(
+            "FrameworkPackageUserState",
+            "Exception while trying to parse SuspendParams, some fields may default",
+            e);
+      }
     }
+    return new SuspendParams(suspendDialogInfo, persistableBundle, persistableBundle2);
+  }
 
-    public SuspendDialogInfo getDialogInfo() {
-        return this.dialogInfo;
-    }
+  public SuspendDialogInfo getDialogInfo() {
+    return this.dialogInfo;
+  }
 
-    public PersistableBundle getAppExtras() {
-        return this.appExtras;
-    }
+  public PersistableBundle getAppExtras() {
+    return this.appExtras;
+  }
 
-    public PersistableBundle getLauncherExtras() {
-        return this.launcherExtras;
-    }
+  public PersistableBundle getLauncherExtras() {
+    return this.launcherExtras;
+  }
 }

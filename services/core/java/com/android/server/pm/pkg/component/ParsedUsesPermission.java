@@ -6,11 +6,10 @@ import java.lang.annotation.RetentionPolicy;
 /* loaded from: classes3.dex */
 public interface ParsedUsesPermission {
 
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface UsesPermissionFlags {
-    }
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface UsesPermissionFlags {}
 
-    String getName();
+  String getName();
 
-    int getUsesPermissionFlags();
+  int getUsesPermissionFlags();
 }

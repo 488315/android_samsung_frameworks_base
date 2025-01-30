@@ -10,5 +10,4 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(RetentionPolicy.SOURCE)
 /* loaded from: classes.dex */
-public @interface PluralsRes {
-}
+public @interface PluralsRes {}

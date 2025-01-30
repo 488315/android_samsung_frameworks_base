@@ -4,15 +4,15 @@ import java.math.BigInteger;
 
 /* loaded from: classes5.dex */
 public class DEREnumerated extends ASN1Enumerated {
-    DEREnumerated(byte[] bytes) {
-        super(bytes);
-    }
+  DEREnumerated(byte[] bytes) {
+    super(bytes);
+  }
 
-    public DEREnumerated(BigInteger value) {
-        super(value);
-    }
+  public DEREnumerated(BigInteger value) {
+    super(value);
+  }
 
-    public DEREnumerated(int value) {
-        super(value);
-    }
+  public DEREnumerated(int value) {
+    super(value);
+  }
 }

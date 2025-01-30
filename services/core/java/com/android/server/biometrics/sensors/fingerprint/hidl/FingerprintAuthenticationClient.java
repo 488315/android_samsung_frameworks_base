@@ -31,187 +31,259 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 /* loaded from: classes.dex */
-public class FingerprintAuthenticationClient extends SemFpBaseAuthenticationClient implements Udfps, LockoutConsumer {
-    public final CallbackWithProbe mALSProbeCallback;
-    public boolean mIsPointerDown;
-    public final LockoutFrameworkImpl mLockoutFrameworkImpl;
-    public final SensorOverlays mSensorOverlays;
-    public final FingerprintSensorPropertiesInternal mSensorProps;
+public class FingerprintAuthenticationClient extends SemFpBaseAuthenticationClient
+    implements Udfps, LockoutConsumer {
+  public final CallbackWithProbe mALSProbeCallback;
+  public boolean mIsPointerDown;
+  public final LockoutFrameworkImpl mLockoutFrameworkImpl;
+  public final SensorOverlays mSensorOverlays;
+  public final FingerprintSensorPropertiesInternal mSensorProps;
 
-    @Override // com.android.server.biometrics.sensors.fingerprint.Udfps
-    public void onUiReady() {
-    }
+  @Override // com.android.server.biometrics.sensors.fingerprint.Udfps
+  public void onUiReady() {}
 
-    public FingerprintAuthenticationClient(Context context, Supplier supplier, IBinder iBinder, long j, ClientMonitorCallbackConverter clientMonitorCallbackConverter, long j2, boolean z, FingerprintAuthenticateOptions fingerprintAuthenticateOptions, int i, boolean z2, BiometricLogger biometricLogger, BiometricContext biometricContext, boolean z3, TaskStackListener taskStackListener, LockoutFrameworkImpl lockoutFrameworkImpl, IUdfpsOverlayController iUdfpsOverlayController, ISidefpsController iSidefpsController, IUdfpsOverlay iUdfpsOverlay, boolean z4, FingerprintSensorPropertiesInternal fingerprintSensorPropertiesInternal, int i2) {
-        super(context, supplier, iBinder, clientMonitorCallbackConverter, j2, z, fingerprintAuthenticateOptions, i, z2, biometricLogger, biometricContext, z3, taskStackListener, lockoutFrameworkImpl, z4, false, i2);
-        setRequestId(j);
-        this.mLockoutFrameworkImpl = lockoutFrameworkImpl;
-        this.mSensorOverlays = new SensorOverlays(iUdfpsOverlayController, iSidefpsController, iUdfpsOverlay);
-        this.mSensorProps = fingerprintSensorPropertiesInternal;
-        this.mALSProbeCallback = getLogger().getAmbientLightProbe(false);
-    }
+  public FingerprintAuthenticationClient(
+      Context context,
+      Supplier supplier,
+      IBinder iBinder,
+      long j,
+      ClientMonitorCallbackConverter clientMonitorCallbackConverter,
+      long j2,
+      boolean z,
+      FingerprintAuthenticateOptions fingerprintAuthenticateOptions,
+      int i,
+      boolean z2,
+      BiometricLogger biometricLogger,
+      BiometricContext biometricContext,
+      boolean z3,
+      TaskStackListener taskStackListener,
+      LockoutFrameworkImpl lockoutFrameworkImpl,
+      IUdfpsOverlayController iUdfpsOverlayController,
+      ISidefpsController iSidefpsController,
+      IUdfpsOverlay iUdfpsOverlay,
+      boolean z4,
+      FingerprintSensorPropertiesInternal fingerprintSensorPropertiesInternal,
+      int i2) {
+    super(
+        context,
+        supplier,
+        iBinder,
+        clientMonitorCallbackConverter,
+        j2,
+        z,
+        fingerprintAuthenticateOptions,
+        i,
+        z2,
+        biometricLogger,
+        biometricContext,
+        z3,
+        taskStackListener,
+        lockoutFrameworkImpl,
+        z4,
+        false,
+        i2);
+    setRequestId(j);
+    this.mLockoutFrameworkImpl = lockoutFrameworkImpl;
+    this.mSensorOverlays =
+        new SensorOverlays(iUdfpsOverlayController, iSidefpsController, iUdfpsOverlay);
+    this.mSensorProps = fingerprintSensorPropertiesInternal;
+    this.mALSProbeCallback = getLogger().getAmbientLightProbe(false);
+  }
 
-    @Override // com.android.server.biometrics.sensors.fingerprint.SemFpBaseAuthenticationClient, com.android.server.biometrics.sensors.AuthenticationClient, com.android.server.biometrics.sensors.BaseClientMonitor
-    public void start(ClientMonitorCallback clientMonitorCallback) {
-        super.start(clientMonitorCallback);
-        if (this.mSensorProps.isAnyUdfpsType()) {
-            this.mState = 2;
-        } else {
-            this.mState = 1;
-        }
+  @Override // com.android.server.biometrics.sensors.fingerprint.SemFpBaseAuthenticationClient,
+            // com.android.server.biometrics.sensors.AuthenticationClient,
+            // com.android.server.biometrics.sensors.BaseClientMonitor
+  public void start(ClientMonitorCallback clientMonitorCallback) {
+    super.start(clientMonitorCallback);
+    if (this.mSensorProps.isAnyUdfpsType()) {
+      this.mState = 2;
+    } else {
+      this.mState = 1;
     }
+  }
 
-    @Override // com.android.server.biometrics.sensors.BaseClientMonitor
-    public ClientMonitorCallback wrapCallbackForStart(ClientMonitorCallback clientMonitorCallback) {
-        return new ClientMonitorCompositeCallback(this.mALSProbeCallback, clientMonitorCallback);
-    }
+  @Override // com.android.server.biometrics.sensors.BaseClientMonitor
+  public ClientMonitorCallback wrapCallbackForStart(ClientMonitorCallback clientMonitorCallback) {
+    return new ClientMonitorCompositeCallback(this.mALSProbeCallback, clientMonitorCallback);
+  }
 
-    @Override // com.android.server.biometrics.sensors.fingerprint.SemFpBaseAuthenticationClient, com.android.server.biometrics.sensors.AuthenticationClient, com.android.server.biometrics.sensors.AuthenticationConsumer
-    public void onAuthenticated(BiometricAuthenticator.Identifier identifier, boolean z, ArrayList arrayList) {
-        super.onAuthenticated(identifier, z, arrayList);
-        if (z) {
-            this.mState = 4;
-            resetFailedAttempts(getTargetUserId());
-            this.mSensorOverlays.hide(getSensorId());
-            return;
-        }
-        this.mState = 3;
-        int lockoutModeForUser = this.mLockoutFrameworkImpl.getLockoutModeForUser(getTargetUserId());
-        if (lockoutModeForUser != 0) {
-            Slog.w("Biometrics/FingerprintAuthClient", "Fingerprint locked out, lockoutMode(" + lockoutModeForUser + ")");
-            int i = lockoutModeForUser == 1 ? 7 : 9;
-            this.mSensorOverlays.hide(getSensorId());
-            onErrorInternal(i, 0, false);
-            cancel();
-        }
+  @Override // com.android.server.biometrics.sensors.fingerprint.SemFpBaseAuthenticationClient,
+            // com.android.server.biometrics.sensors.AuthenticationClient,
+            // com.android.server.biometrics.sensors.AuthenticationConsumer
+  public void onAuthenticated(
+      BiometricAuthenticator.Identifier identifier, boolean z, ArrayList arrayList) {
+    super.onAuthenticated(identifier, z, arrayList);
+    if (z) {
+      this.mState = 4;
+      resetFailedAttempts(getTargetUserId());
+      this.mSensorOverlays.hide(getSensorId());
+      return;
     }
+    this.mState = 3;
+    int lockoutModeForUser = this.mLockoutFrameworkImpl.getLockoutModeForUser(getTargetUserId());
+    if (lockoutModeForUser != 0) {
+      Slog.w(
+          "Biometrics/FingerprintAuthClient",
+          "Fingerprint locked out, lockoutMode(" + lockoutModeForUser + ")");
+      int i = lockoutModeForUser == 1 ? 7 : 9;
+      this.mSensorOverlays.hide(getSensorId());
+      onErrorInternal(i, 0, false);
+      cancel();
+    }
+  }
 
-    @Override // com.android.server.biometrics.sensors.fingerprint.SemFpBaseAuthenticationClient, com.android.server.biometrics.sensors.AuthenticationClient, com.android.server.biometrics.sensors.AcquisitionClient, com.android.server.biometrics.sensors.ErrorConsumer
-    public void onError(int i, int i2) {
-        super.onError(i, i2);
-        if (i == 18) {
-            BiometricNotificationUtils.showBadCalibrationNotification(getContext());
-        }
-        this.mSensorOverlays.hide(getSensorId());
+  @Override // com.android.server.biometrics.sensors.fingerprint.SemFpBaseAuthenticationClient,
+            // com.android.server.biometrics.sensors.AuthenticationClient,
+            // com.android.server.biometrics.sensors.AcquisitionClient,
+            // com.android.server.biometrics.sensors.ErrorConsumer
+  public void onError(int i, int i2) {
+    super.onError(i, i2);
+    if (i == 18) {
+      BiometricNotificationUtils.showBadCalibrationNotification(getContext());
     }
+    this.mSensorOverlays.hide(getSensorId());
+  }
 
-    public final void resetFailedAttempts(int i) {
-        this.mLockoutFrameworkImpl.resetFailedAttemptsForUser(true, i);
-    }
+  public final void resetFailedAttempts(int i) {
+    this.mLockoutFrameworkImpl.resetFailedAttemptsForUser(true, i);
+  }
 
-    @Override // com.android.server.biometrics.sensors.AuthenticationClient
-    public void handleLifecycleAfterAuth(boolean z) {
-        if (z) {
-            this.mCallback.onClientFinished(this, true);
-        }
+  @Override // com.android.server.biometrics.sensors.AuthenticationClient
+  public void handleLifecycleAfterAuth(boolean z) {
+    if (z) {
+      this.mCallback.onClientFinished(this, true);
     }
+  }
 
-    @Override // com.android.server.biometrics.sensors.fingerprint.SemFpBaseAuthenticationClient, com.android.server.biometrics.sensors.AuthenticationClient, com.android.server.biometrics.sensors.AcquisitionClient
-    public void onAcquired(int i, int i2) {
-        super.onAcquired(i, i2);
-        if (getLockoutTracker().getLockoutModeForUser(getTargetUserId()) == 0) {
-            PerformanceTracker.getInstanceForSensorId(getSensorId()).incrementAcquireForUser(getTargetUserId(), isCryptoOperation());
-        }
+  @Override // com.android.server.biometrics.sensors.fingerprint.SemFpBaseAuthenticationClient,
+            // com.android.server.biometrics.sensors.AuthenticationClient,
+            // com.android.server.biometrics.sensors.AcquisitionClient
+  public void onAcquired(int i, int i2) {
+    super.onAcquired(i, i2);
+    if (getLockoutTracker().getLockoutModeForUser(getTargetUserId()) == 0) {
+      PerformanceTracker.getInstanceForSensorId(getSensorId())
+          .incrementAcquireForUser(getTargetUserId(), isCryptoOperation());
     }
+  }
 
-    @Override // com.android.server.biometrics.sensors.AuthenticationClient
-    public int handleFailedAttempt(int i) {
-        if (canIgnoreLockout()) {
-            return 0;
-        }
-        this.mLockoutFrameworkImpl.addFailedAttemptForUser(i);
-        int lockoutModeForUser = getLockoutTracker().getLockoutModeForUser(i);
-        PerformanceTracker instanceForSensorId = PerformanceTracker.getInstanceForSensorId(getSensorId());
-        if (lockoutModeForUser == 2) {
-            onLockoutPermanent();
-            instanceForSensorId.incrementPermanentLockoutForUser(i);
-        } else if (lockoutModeForUser == 1) {
-            onLockoutTimed(30000L);
-            instanceForSensorId.incrementTimedLockoutForUser(i);
-        }
-        return lockoutModeForUser;
+  @Override // com.android.server.biometrics.sensors.AuthenticationClient
+  public int handleFailedAttempt(int i) {
+    if (canIgnoreLockout()) {
+      return 0;
     }
+    this.mLockoutFrameworkImpl.addFailedAttemptForUser(i);
+    int lockoutModeForUser = getLockoutTracker().getLockoutModeForUser(i);
+    PerformanceTracker instanceForSensorId =
+        PerformanceTracker.getInstanceForSensorId(getSensorId());
+    if (lockoutModeForUser == 2) {
+      onLockoutPermanent();
+      instanceForSensorId.incrementPermanentLockoutForUser(i);
+    } else if (lockoutModeForUser == 1) {
+      onLockoutTimed(30000L);
+      instanceForSensorId.incrementTimedLockoutForUser(i);
+    }
+    return lockoutModeForUser;
+  }
 
-    @Override // com.android.server.biometrics.sensors.HalClientMonitor
-    public void startHalOperation() {
-        this.mSensorOverlays.show(getSensorId(), getShowOverlayReason(), this);
-        try {
-            updateAuthenticatorIdsIfInvalid();
-            ((IBiometricsFingerprint) getFreshDaemon()).authenticate(this.mOperationId, getTargetUserId());
-        } catch (RemoteException e) {
-            Slog.e("Biometrics/FingerprintAuthClient", "Remote exception when requesting auth", e);
-            onError(1, 0);
-            this.mSensorOverlays.hide(getSensorId());
-            this.mCallback.onClientFinished(this, false);
-        }
+  @Override // com.android.server.biometrics.sensors.HalClientMonitor
+  public void startHalOperation() {
+    this.mSensorOverlays.show(getSensorId(), getShowOverlayReason(), this);
+    try {
+      updateAuthenticatorIdsIfInvalid();
+      ((IBiometricsFingerprint) getFreshDaemon())
+          .authenticate(this.mOperationId, getTargetUserId());
+    } catch (RemoteException e) {
+      Slog.e("Biometrics/FingerprintAuthClient", "Remote exception when requesting auth", e);
+      onError(1, 0);
+      this.mSensorOverlays.hide(getSensorId());
+      this.mCallback.onClientFinished(this, false);
     }
+  }
 
-    public final void updateAuthenticatorIdsIfInvalid() {
-        Map authenticatorIds = getAuthenticatorIds();
-        if (authenticatorIds == null) {
-            return;
-        }
-        try {
-            if (((Long) authenticatorIds.getOrDefault(Integer.valueOf(getTargetUserId()), 0L)).longValue() == 0) {
-                long authenticatorId = ((IBiometricsFingerprint) getFreshDaemon()).getAuthenticatorId();
-                Slog.w("Biometrics/FingerprintAuthClient", "something wrong: update authenticatorId, " + getTargetUserId() + ", " + authenticatorId);
-                authenticatorIds.put(Integer.valueOf(getTargetUserId()), Long.valueOf(authenticatorId));
-            }
-        } catch (RemoteException | ClassCastException | NullPointerException e) {
-            Slog.w("Biometrics/FingerprintAuthClient", "updateAuthenticatorIdsIfInvalied: " + e.getMessage());
-        }
+  public final void updateAuthenticatorIdsIfInvalid() {
+    Map authenticatorIds = getAuthenticatorIds();
+    if (authenticatorIds == null) {
+      return;
     }
+    try {
+      if (((Long) authenticatorIds.getOrDefault(Integer.valueOf(getTargetUserId()), 0L)).longValue()
+          == 0) {
+        long authenticatorId = ((IBiometricsFingerprint) getFreshDaemon()).getAuthenticatorId();
+        Slog.w(
+            "Biometrics/FingerprintAuthClient",
+            "something wrong: update authenticatorId, "
+                + getTargetUserId()
+                + ", "
+                + authenticatorId);
+        authenticatorIds.put(Integer.valueOf(getTargetUserId()), Long.valueOf(authenticatorId));
+      }
+    } catch (RemoteException | ClassCastException | NullPointerException e) {
+      Slog.w(
+          "Biometrics/FingerprintAuthClient",
+          "updateAuthenticatorIdsIfInvalied: " + e.getMessage());
+    }
+  }
 
-    @Override // com.android.server.biometrics.sensors.fingerprint.SemFpBaseAuthenticationClient, com.android.server.biometrics.sensors.AcquisitionClient
-    public void stopHalOperation() {
-        super.stopHalOperation();
-        this.mSensorOverlays.hide(getSensorId());
-        try {
-            ((IBiometricsFingerprint) getFreshDaemon()).cancel();
-        } catch (RemoteException e) {
-            Slog.e("Biometrics/FingerprintAuthClient", "Remote exception when requesting cancel", e);
-            onError(1, 0);
-            this.mCallback.onClientFinished(this, false);
-        }
+  @Override // com.android.server.biometrics.sensors.fingerprint.SemFpBaseAuthenticationClient,
+            // com.android.server.biometrics.sensors.AcquisitionClient
+  public void stopHalOperation() {
+    super.stopHalOperation();
+    this.mSensorOverlays.hide(getSensorId());
+    try {
+      ((IBiometricsFingerprint) getFreshDaemon()).cancel();
+    } catch (RemoteException e) {
+      Slog.e("Biometrics/FingerprintAuthClient", "Remote exception when requesting cancel", e);
+      onError(1, 0);
+      this.mCallback.onClientFinished(this, false);
     }
+  }
 
-    @Override // com.android.server.biometrics.sensors.fingerprint.Udfps
-    public void onPointerDown(PointerContext pointerContext) {
-        this.mIsPointerDown = true;
-        this.mState = 1;
-        this.mALSProbeCallback.getProbe().enable();
-        UdfpsHelper.onFingerDown((IBiometricsFingerprint) getFreshDaemon(), (int) pointerContext.x, (int) pointerContext.y, pointerContext.minor, pointerContext.major);
-        if (getListener() != null) {
-            try {
-                getListener().onUdfpsPointerDown(getSensorId());
-            } catch (RemoteException e) {
-                Slog.e("Biometrics/FingerprintAuthClient", "Remote exception", e);
-            }
-        }
+  @Override // com.android.server.biometrics.sensors.fingerprint.Udfps
+  public void onPointerDown(PointerContext pointerContext) {
+    this.mIsPointerDown = true;
+    this.mState = 1;
+    this.mALSProbeCallback.getProbe().enable();
+    UdfpsHelper.onFingerDown(
+        (IBiometricsFingerprint) getFreshDaemon(),
+        (int) pointerContext.x,
+        (int) pointerContext.y,
+        pointerContext.minor,
+        pointerContext.major);
+    if (getListener() != null) {
+      try {
+        getListener().onUdfpsPointerDown(getSensorId());
+      } catch (RemoteException e) {
+        Slog.e("Biometrics/FingerprintAuthClient", "Remote exception", e);
+      }
     }
+  }
 
-    @Override // com.android.server.biometrics.sensors.fingerprint.Udfps
-    public void onPointerUp(PointerContext pointerContext) {
-        this.mIsPointerDown = false;
-        this.mState = 3;
-        this.mALSProbeCallback.getProbe().disable();
-        UdfpsHelper.onFingerUp((IBiometricsFingerprint) getFreshDaemon());
-        if (getListener() != null) {
-            try {
-                getListener().onUdfpsPointerUp(getSensorId());
-            } catch (RemoteException e) {
-                Slog.e("Biometrics/FingerprintAuthClient", "Remote exception", e);
-            }
-        }
+  @Override // com.android.server.biometrics.sensors.fingerprint.Udfps
+  public void onPointerUp(PointerContext pointerContext) {
+    this.mIsPointerDown = false;
+    this.mState = 3;
+    this.mALSProbeCallback.getProbe().disable();
+    UdfpsHelper.onFingerUp((IBiometricsFingerprint) getFreshDaemon());
+    if (getListener() != null) {
+      try {
+        getListener().onUdfpsPointerUp(getSensorId());
+      } catch (RemoteException e) {
+        Slog.e("Biometrics/FingerprintAuthClient", "Remote exception", e);
+      }
     }
+  }
 
-    @Override // com.android.server.biometrics.sensors.LockoutConsumer
-    public void onLockoutTimed(long j) {
-        getBiometricContext().getAuthSessionCoordinator().lockOutTimed(getTargetUserId(), getSensorStrength(), getSensorId(), j, getRequestId());
-    }
+  @Override // com.android.server.biometrics.sensors.LockoutConsumer
+  public void onLockoutTimed(long j) {
+    getBiometricContext()
+        .getAuthSessionCoordinator()
+        .lockOutTimed(getTargetUserId(), getSensorStrength(), getSensorId(), j, getRequestId());
+  }
 
-    @Override // com.android.server.biometrics.sensors.LockoutConsumer
-    public void onLockoutPermanent() {
-        getBiometricContext().getAuthSessionCoordinator().lockedOutFor(getTargetUserId(), getSensorStrength(), getSensorId(), getRequestId());
-    }
+  @Override // com.android.server.biometrics.sensors.LockoutConsumer
+  public void onLockoutPermanent() {
+    getBiometricContext()
+        .getAuthSessionCoordinator()
+        .lockedOutFor(getTargetUserId(), getSensorStrength(), getSensorId(), getRequestId());
+  }
 }

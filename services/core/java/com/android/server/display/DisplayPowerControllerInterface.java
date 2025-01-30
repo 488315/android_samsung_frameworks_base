@@ -9,95 +9,99 @@ import java.io.PrintWriter;
 
 /* loaded from: classes2.dex */
 public interface DisplayPowerControllerInterface {
-    void addBrightnessWeights(float f, float f2, float f3, float f4);
+  void addBrightnessWeights(float f, float f2, float f3, float f4);
 
-    void addDisplayBrightnessFollower(DisplayPowerControllerInterface displayPowerControllerInterface);
+  void addDisplayBrightnessFollower(
+      DisplayPowerControllerInterface displayPowerControllerInterface);
 
-    void clearAdaptiveBrightnessLongtermModelBuilder();
+  void clearAdaptiveBrightnessLongtermModelBuilder();
 
-    int convertToBrightness(float f);
+  int convertToBrightness(float f);
 
-    void doShortTermReset();
+  void doShortTermReset();
 
-    void dump(PrintWriter printWriter);
+  void dump(PrintWriter printWriter);
 
-    float getAdaptiveBrightness(float f);
+  float getAdaptiveBrightness(float f);
 
-    String getAmbientBrightnessInfo(float f);
+  String getAmbientBrightnessInfo(float f);
 
-    ParceledListSlice getAmbientBrightnessStats(int i);
+  ParceledListSlice getAmbientBrightnessStats(int i);
 
-    BrightnessConfiguration getAppliedBackupConfiguration(BrightnessConfiguration brightnessConfiguration);
+  BrightnessConfiguration getAppliedBackupConfiguration(
+      BrightnessConfiguration brightnessConfiguration);
 
-    ParceledListSlice getBrightnessEvents(int i, boolean z);
+  ParceledListSlice getBrightnessEvents(int i, boolean z);
 
-    BrightnessInfo getBrightnessInfo();
+  BrightnessInfo getBrightnessInfo();
 
-    int[] getBrightnessLearningMaxLimitCount();
+  int[] getBrightnessLearningMaxLimitCount();
 
-    float getCurrentScreenBrightness();
+  float getCurrentScreenBrightness();
 
-    BrightnessConfiguration getDefaultBrightnessConfiguration();
+  BrightnessConfiguration getDefaultBrightnessConfiguration();
 
-    int getDisplayId();
+  int getDisplayId();
 
-    float getLastAutomaticScreenBrightness();
+  float getLastAutomaticScreenBrightness();
 
-    long getLastUserSetScreenBrightnessTime();
+  long getLastUserSetScreenBrightnessTime();
 
-    int getLeadDisplayId();
+  int getLeadDisplayId();
 
-    float getScreenBrightnessSetting();
+  float getScreenBrightnessSetting();
 
-    void ignoreProximitySensorUntilChanged();
+  void ignoreProximitySensorUntilChanged();
 
-    void injectLux(SensorEvent sensorEvent);
+  void injectLux(SensorEvent sensorEvent);
 
-    boolean isProximitySensorAvailable();
+  boolean isProximitySensorAvailable();
 
-    void onBootCompleted();
+  void onBootCompleted();
 
-    void onDisplayChanged(HighBrightnessModeMetadata highBrightnessModeMetadata, int i);
+  void onDisplayChanged(HighBrightnessModeMetadata highBrightnessModeMetadata, int i);
 
-    void onScreenBrightnessSettingTimeChanged();
+  void onScreenBrightnessSettingTimeChanged();
 
-    void onSwitchUser(int i);
+  void onSwitchUser(int i);
 
-    void persistBrightnessTrackerState();
+  void persistBrightnessTrackerState();
 
-    void removeDisplayBrightnessFollower(DisplayPowerControllerInterface displayPowerControllerInterface);
+  void removeDisplayBrightnessFollower(
+      DisplayPowerControllerInterface displayPowerControllerInterface);
 
-    boolean requestPowerState(DisplayManagerInternal.DisplayPowerRequest displayPowerRequest, boolean z);
+  boolean requestPowerState(
+      DisplayManagerInternal.DisplayPowerRequest displayPowerRequest, boolean z);
 
-    void restartAdaptiveBrightnessLongtermModelBuilderFromBnr();
+  void restartAdaptiveBrightnessLongtermModelBuilderFromBnr();
 
-    void setActualDisplayState(int i);
+  void setActualDisplayState(int i);
 
-    void setAmbientColorTemperatureOverride(float f);
+  void setAmbientColorTemperatureOverride(float f);
 
-    void setAutoBrightnessLoggingEnabled(boolean z);
+  void setAutoBrightnessLoggingEnabled(boolean z);
 
-    void setAutomaticScreenBrightnessMode(boolean z);
+  void setAutomaticScreenBrightnessMode(boolean z);
 
-    void setBrightness(float f);
+  void setBrightness(float f);
 
-    void setBrightnessConfiguration(BrightnessConfiguration brightnessConfiguration, boolean z);
+  void setBrightnessConfiguration(BrightnessConfiguration brightnessConfiguration, boolean z);
 
-    void setBrightnessToFollow(float f, float f2, float f3);
+  void setBrightnessToFollow(float f, float f2, float f3);
 
-    void setDisplayWhiteBalanceLoggingEnabled(boolean z);
+  void setDisplayWhiteBalanceLoggingEnabled(boolean z);
 
-    void setHdrRampRate(float f, float f2);
+  void setHdrRampRate(float f, float f2);
 
-    void setRampSpeedToFollower(float f, float f2);
+  void setRampSpeedToFollower(float f, float f2);
 
-    void setTemporaryAutoBrightnessAdjustment(float f);
+  void setTemporaryAutoBrightnessAdjustment(float f);
 
-    void setTemporaryBrightness(float f);
+  void setTemporaryBrightness(float f);
 
-    void setTemporaryBrightnessForSlowChange(float f, boolean z);
+  void setTemporaryBrightnessForSlowChange(float f, boolean z);
 
-    void setTestModeEnabled(boolean z);
+  void setTestModeEnabled(boolean z);
 
-    void stop();
+  void stop();
 }

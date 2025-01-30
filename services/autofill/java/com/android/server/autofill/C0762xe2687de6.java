@@ -8,7 +8,9 @@ import com.android.internal.util.function.TriConsumer;
 /* renamed from: com.android.server.autofill.AutofillInlineSuggestionsRequestSession$InlineSuggestionsRequestCallbackImpl$$ExternalSyntheticLambda0 */
 /* loaded from: classes.dex */
 public final /* synthetic */ class C0762xe2687de6 implements TriConsumer {
-    public final void accept(Object obj, Object obj2, Object obj3) {
-        ((AutofillInlineSuggestionsRequestSession) obj).handleOnReceiveImeRequest((InlineSuggestionsRequest) obj2, (IInlineSuggestionsResponseCallback) obj3);
-    }
+  public final void accept(Object obj, Object obj2, Object obj3) {
+    ((AutofillInlineSuggestionsRequestSession) obj)
+        .handleOnReceiveImeRequest(
+            (InlineSuggestionsRequest) obj2, (IInlineSuggestionsResponseCallback) obj3);
+  }
 }

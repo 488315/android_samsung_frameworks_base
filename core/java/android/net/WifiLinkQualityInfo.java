@@ -4,70 +4,70 @@ import android.p009os.Parcel;
 
 /* loaded from: classes2.dex */
 public class WifiLinkQualityInfo extends LinkQualityInfo {
-    private String mBssid;
-    private int mType = Integer.MAX_VALUE;
-    private int mRssi = Integer.MAX_VALUE;
-    private long mTxGood = Long.MAX_VALUE;
-    private long mTxBad = Long.MAX_VALUE;
+  private String mBssid;
+  private int mType = Integer.MAX_VALUE;
+  private int mRssi = Integer.MAX_VALUE;
+  private long mTxGood = Long.MAX_VALUE;
+  private long mTxBad = Long.MAX_VALUE;
 
-    @Override // android.net.LinkQualityInfo, android.p009os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-        super.writeToParcel(dest, flags, 2);
-        dest.writeInt(this.mType);
-        dest.writeInt(this.mRssi);
-        dest.writeLong(this.mTxGood);
-        dest.writeLong(this.mTxBad);
-        dest.writeString(this.mBssid);
-    }
+  @Override // android.net.LinkQualityInfo, android.p009os.Parcelable
+  public void writeToParcel(Parcel dest, int flags) {
+    super.writeToParcel(dest, flags, 2);
+    dest.writeInt(this.mType);
+    dest.writeInt(this.mRssi);
+    dest.writeLong(this.mTxGood);
+    dest.writeLong(this.mTxBad);
+    dest.writeString(this.mBssid);
+  }
 
-    public static WifiLinkQualityInfo createFromParcelBody(Parcel in) {
-        WifiLinkQualityInfo li = new WifiLinkQualityInfo();
-        li.initializeFromParcel(in);
-        li.mType = in.readInt();
-        li.mRssi = in.readInt();
-        li.mTxGood = in.readLong();
-        li.mTxBad = in.readLong();
-        li.mBssid = in.readString();
-        return li;
-    }
+  public static WifiLinkQualityInfo createFromParcelBody(Parcel in) {
+    WifiLinkQualityInfo li = new WifiLinkQualityInfo();
+    li.initializeFromParcel(in);
+    li.mType = in.readInt();
+    li.mRssi = in.readInt();
+    li.mTxGood = in.readLong();
+    li.mTxBad = in.readLong();
+    li.mBssid = in.readString();
+    return li;
+  }
 
-    public int getType() {
-        return this.mType;
-    }
+  public int getType() {
+    return this.mType;
+  }
 
-    public void setType(int type) {
-        this.mType = type;
-    }
+  public void setType(int type) {
+    this.mType = type;
+  }
 
-    public String getBssid() {
-        return this.mBssid;
-    }
+  public String getBssid() {
+    return this.mBssid;
+  }
 
-    public void setBssid(String bssid) {
-        this.mBssid = bssid;
-    }
+  public void setBssid(String bssid) {
+    this.mBssid = bssid;
+  }
 
-    public int getRssi() {
-        return this.mRssi;
-    }
+  public int getRssi() {
+    return this.mRssi;
+  }
 
-    public void setRssi(int rssi) {
-        this.mRssi = rssi;
-    }
+  public void setRssi(int rssi) {
+    this.mRssi = rssi;
+  }
 
-    public long getTxGood() {
-        return this.mTxGood;
-    }
+  public long getTxGood() {
+    return this.mTxGood;
+  }
 
-    public void setTxGood(long txGood) {
-        this.mTxGood = txGood;
-    }
+  public void setTxGood(long txGood) {
+    this.mTxGood = txGood;
+  }
 
-    public long getTxBad() {
-        return this.mTxBad;
-    }
+  public long getTxBad() {
+    return this.mTxBad;
+  }
 
-    public void setTxBad(long txBad) {
-        this.mTxBad = txBad;
-    }
+  public void setTxBad(long txBad) {
+    this.mTxBad = txBad;
+  }
 }

@@ -4,11 +4,11 @@ import com.android.server.job.JobSchedulerService;
 
 /* loaded from: classes2.dex */
 public abstract class RestrictingController extends StateController {
-    public abstract void startTrackingRestrictedJobLocked(JobStatus jobStatus);
+  public abstract void startTrackingRestrictedJobLocked(JobStatus jobStatus);
 
-    public abstract void stopTrackingRestrictedJobLocked(JobStatus jobStatus);
+  public abstract void stopTrackingRestrictedJobLocked(JobStatus jobStatus);
 
-    public RestrictingController(JobSchedulerService jobSchedulerService) {
-        super(jobSchedulerService);
-    }
+  public RestrictingController(JobSchedulerService jobSchedulerService) {
+    super(jobSchedulerService);
+  }
 }

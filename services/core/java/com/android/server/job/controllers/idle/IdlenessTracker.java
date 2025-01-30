@@ -6,11 +6,11 @@ import java.io.PrintWriter;
 
 /* loaded from: classes2.dex */
 public interface IdlenessTracker {
-    void dump(ProtoOutputStream protoOutputStream, long j);
+  void dump(ProtoOutputStream protoOutputStream, long j);
 
-    void dump(PrintWriter printWriter);
+  void dump(PrintWriter printWriter);
 
-    boolean isIdle();
+  boolean isIdle();
 
-    void startTracking(Context context, IdlenessListener idlenessListener);
+  void startTracking(Context context, IdlenessListener idlenessListener);
 }

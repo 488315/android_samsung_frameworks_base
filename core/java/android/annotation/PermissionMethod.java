@@ -9,9 +9,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.CLASS)
 /* loaded from: classes.dex */
 public @interface PermissionMethod {
-    boolean anyOf() default false;
+  boolean anyOf() default false;
 
-    boolean orSelf() default false;
+  boolean orSelf() default false;
 
-    String[] value() default {};
+  String[] value() default {};
 }

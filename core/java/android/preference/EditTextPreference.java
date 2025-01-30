@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.p009os.Bundle;
 import android.p009os.Parcel;
 import android.p009os.Parcelable;
-import android.preference.Preference;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -18,159 +17,162 @@ import com.android.internal.C4337R;
 @Deprecated
 /* loaded from: classes3.dex */
 public class EditTextPreference extends DialogPreference {
-    private EditText mEditText;
-    private String mText;
-    private boolean mTextSet;
+  private EditText mEditText;
+  private String mText;
+  private boolean mTextSet;
 
-    public EditTextPreference(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        EditText editText = new EditText(context, attrs);
-        this.mEditText = editText;
-        editText.setId(16908291);
-        this.mEditText.setEnabled(true);
+  public EditTextPreference(
+      Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    super(context, attrs, defStyleAttr, defStyleRes);
+    EditText editText = new EditText(context, attrs);
+    this.mEditText = editText;
+    editText.setId(16908291);
+    this.mEditText.setEnabled(true);
+  }
+
+  public EditTextPreference(Context context, AttributeSet attrs, int defStyleAttr) {
+    this(context, attrs, defStyleAttr, 0);
+  }
+
+  public EditTextPreference(Context context, AttributeSet attrs) {
+    this(context, attrs, 16842898);
+  }
+
+  public EditTextPreference(Context context) {
+    this(context, null);
+  }
+
+  public void setText(String text) {
+    boolean changed = !TextUtils.equals(this.mText, text);
+    if (changed || !this.mTextSet) {
+      this.mText = text;
+      this.mTextSet = true;
+      persistString(text);
+      if (changed) {
+        notifyDependencyChange(shouldDisableDependents());
+        notifyChanged();
+      }
     }
+  }
 
-    public EditTextPreference(Context context, AttributeSet attrs, int defStyleAttr) {
-        this(context, attrs, defStyleAttr, 0);
+  public String getText() {
+    return this.mText;
+  }
+
+  @Override // android.preference.DialogPreference
+  protected void onBindDialogView(View view) {
+    super.onBindDialogView(view);
+    EditText editText = this.mEditText;
+    editText.setText(getText());
+    if (editText.length() != 0) {
+      editText.setSelection(editText.length());
     }
-
-    public EditTextPreference(Context context, AttributeSet attrs) {
-        this(context, attrs, 16842898);
+    ViewParent oldParent = editText.getParent();
+    if (oldParent != view) {
+      if (oldParent != null) {
+        ((ViewGroup) oldParent).removeView(editText);
+      }
+      onAddEditTextToDialogView(view, editText);
     }
+  }
 
-    public EditTextPreference(Context context) {
-        this(context, null);
+  @Override // android.preference.DialogPreference
+  protected void showDialog(Bundle state) {
+    super.showDialog(state);
+    this.mEditText.requestFocus();
+    this.mEditText.getWindowInsetsController().show(WindowInsets.Type.ime());
+  }
+
+  protected void onAddEditTextToDialogView(View dialogView, EditText editText) {
+    ViewGroup container = (ViewGroup) dialogView.findViewById(C4337R.id.edittext_container);
+    if (container != null) {
+      container.addView(editText, -1, -2);
     }
+  }
 
-    public void setText(String text) {
-        boolean changed = !TextUtils.equals(this.mText, text);
-        if (changed || !this.mTextSet) {
-            this.mText = text;
-            this.mTextSet = true;
-            persistString(text);
-            if (changed) {
-                notifyDependencyChange(shouldDisableDependents());
-                notifyChanged();
-            }
-        }
+  @Override // android.preference.DialogPreference
+  protected void onDialogClosed(boolean positiveResult) {
+    super.onDialogClosed(positiveResult);
+    if (positiveResult) {
+      String value = this.mEditText.getText().toString();
+      if (callChangeListener(value)) {
+        setText(value);
+      }
     }
+  }
 
-    public String getText() {
-        return this.mText;
+  @Override // android.preference.Preference
+  protected Object onGetDefaultValue(TypedArray a, int index) {
+    return a.getString(index);
+  }
+
+  @Override // android.preference.Preference
+  protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
+    setText(restoreValue ? getPersistedString(this.mText) : (String) defaultValue);
+  }
+
+  @Override // android.preference.Preference
+  public boolean shouldDisableDependents() {
+    return TextUtils.isEmpty(this.mText) || super.shouldDisableDependents();
+  }
+
+  public EditText getEditText() {
+    return this.mEditText;
+  }
+
+  @Override // android.preference.DialogPreference, android.preference.Preference
+  protected Parcelable onSaveInstanceState() {
+    Parcelable superState = super.onSaveInstanceState();
+    if (isPersistent()) {
+      return superState;
     }
+    SavedState myState = new SavedState(superState);
+    myState.text = getText();
+    return myState;
+  }
 
-    @Override // android.preference.DialogPreference
-    protected void onBindDialogView(View view) {
-        super.onBindDialogView(view);
-        EditText editText = this.mEditText;
-        editText.setText(getText());
-        if (editText.length() != 0) {
-            editText.setSelection(editText.length());
-        }
-        ViewParent oldParent = editText.getParent();
-        if (oldParent != view) {
-            if (oldParent != null) {
-                ((ViewGroup) oldParent).removeView(editText);
-            }
-            onAddEditTextToDialogView(view, editText);
-        }
+  @Override // android.preference.DialogPreference, android.preference.Preference
+  protected void onRestoreInstanceState(Parcelable state) {
+    if (state == null || !state.getClass().equals(SavedState.class)) {
+      super.onRestoreInstanceState(state);
+      return;
     }
+    SavedState myState = (SavedState) state;
+    super.onRestoreInstanceState(myState.getSuperState());
+    setText(myState.text);
+  }
 
-    @Override // android.preference.DialogPreference
-    protected void showDialog(Bundle state) {
-        super.showDialog(state);
-        this.mEditText.requestFocus();
-        this.mEditText.getWindowInsetsController().show(WindowInsets.Type.ime());
-    }
+  private static class SavedState extends Preference.BaseSavedState {
+    public static final Parcelable.Creator<SavedState> CREATOR =
+        new Parcelable.Creator<
+            SavedState>() { // from class: android.preference.EditTextPreference.SavedState.1
+          /* JADX WARN: Can't rename method to resolve collision */
+          @Override // android.os.Parcelable.Creator
+          public SavedState createFromParcel(Parcel in) {
+            return new SavedState(in);
+          }
 
-    protected void onAddEditTextToDialogView(View dialogView, EditText editText) {
-        ViewGroup container = (ViewGroup) dialogView.findViewById(C4337R.id.edittext_container);
-        if (container != null) {
-            container.addView(editText, -1, -2);
-        }
-    }
-
-    @Override // android.preference.DialogPreference
-    protected void onDialogClosed(boolean positiveResult) {
-        super.onDialogClosed(positiveResult);
-        if (positiveResult) {
-            String value = this.mEditText.getText().toString();
-            if (callChangeListener(value)) {
-                setText(value);
-            }
-        }
-    }
-
-    @Override // android.preference.Preference
-    protected Object onGetDefaultValue(TypedArray a, int index) {
-        return a.getString(index);
-    }
-
-    @Override // android.preference.Preference
-    protected void onSetInitialValue(boolean restoreValue, Object defaultValue) {
-        setText(restoreValue ? getPersistedString(this.mText) : (String) defaultValue);
-    }
-
-    @Override // android.preference.Preference
-    public boolean shouldDisableDependents() {
-        return TextUtils.isEmpty(this.mText) || super.shouldDisableDependents();
-    }
-
-    public EditText getEditText() {
-        return this.mEditText;
-    }
-
-    @Override // android.preference.DialogPreference, android.preference.Preference
-    protected Parcelable onSaveInstanceState() {
-        Parcelable superState = super.onSaveInstanceState();
-        if (isPersistent()) {
-            return superState;
-        }
-        SavedState myState = new SavedState(superState);
-        myState.text = getText();
-        return myState;
-    }
-
-    @Override // android.preference.DialogPreference, android.preference.Preference
-    protected void onRestoreInstanceState(Parcelable state) {
-        if (state == null || !state.getClass().equals(SavedState.class)) {
-            super.onRestoreInstanceState(state);
-            return;
-        }
-        SavedState myState = (SavedState) state;
-        super.onRestoreInstanceState(myState.getSuperState());
-        setText(myState.text);
-    }
-
-    private static class SavedState extends Preference.BaseSavedState {
-        public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() { // from class: android.preference.EditTextPreference.SavedState.1
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SavedState createFromParcel(Parcel in) {
-                return new SavedState(in);
-            }
-
-            /* JADX WARN: Can't rename method to resolve collision */
-            @Override // android.os.Parcelable.Creator
-            public SavedState[] newArray(int size) {
-                return new SavedState[size];
-            }
+          /* JADX WARN: Can't rename method to resolve collision */
+          @Override // android.os.Parcelable.Creator
+          public SavedState[] newArray(int size) {
+            return new SavedState[size];
+          }
         };
-        String text;
+    String text;
 
-        public SavedState(Parcel source) {
-            super(source);
-            this.text = source.readString();
-        }
-
-        @Override // android.view.AbsSavedState, android.p009os.Parcelable
-        public void writeToParcel(Parcel dest, int flags) {
-            super.writeToParcel(dest, flags);
-            dest.writeString(this.text);
-        }
-
-        public SavedState(Parcelable superState) {
-            super(superState);
-        }
+    public SavedState(Parcel source) {
+      super(source);
+      this.text = source.readString();
     }
+
+    @Override // android.view.AbsSavedState, android.p009os.Parcelable
+    public void writeToParcel(Parcel dest, int flags) {
+      super.writeToParcel(dest, flags);
+      dest.writeString(this.text);
+    }
+
+    public SavedState(Parcelable superState) {
+      super(superState);
+    }
+  }
 }

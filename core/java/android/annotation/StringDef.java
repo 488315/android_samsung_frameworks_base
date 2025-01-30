@@ -9,9 +9,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 /* loaded from: classes.dex */
 public @interface StringDef {
-    String[] prefix() default {};
+  String[] prefix() default {};
 
-    String[] suffix() default {};
+  String[] suffix() default {};
 
-    String[] value() default {};
+  String[] value() default {};
 }

@@ -3,19 +3,17 @@ package android.service.carrier;
 import android.app.Service;
 import android.content.Intent;
 import android.p009os.IBinder;
-import android.service.carrier.ICarrierMessagingClientService;
 
 /* loaded from: classes3.dex */
 public class CarrierMessagingClientService extends Service {
-    private final ICarrierMessagingClientServiceImpl mImpl = new ICarrierMessagingClientServiceImpl();
+  private final ICarrierMessagingClientServiceImpl mImpl = new ICarrierMessagingClientServiceImpl();
 
-    @Override // android.app.Service
-    public final IBinder onBind(Intent intent) {
-        return this.mImpl.asBinder();
-    }
+  @Override // android.app.Service
+  public final IBinder onBind(Intent intent) {
+    return this.mImpl.asBinder();
+  }
 
-    private class ICarrierMessagingClientServiceImpl extends ICarrierMessagingClientService.Stub {
-        private ICarrierMessagingClientServiceImpl() {
-        }
-    }
+  private class ICarrierMessagingClientServiceImpl extends ICarrierMessagingClientService.Stub {
+    private ICarrierMessagingClientServiceImpl() {}
+  }
 }

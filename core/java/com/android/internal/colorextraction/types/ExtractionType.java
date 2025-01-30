@@ -5,5 +5,9 @@ import com.android.internal.colorextraction.ColorExtractor;
 
 /* loaded from: classes4.dex */
 public interface ExtractionType {
-    void extractInto(WallpaperColors wallpaperColors, ColorExtractor.GradientColors gradientColors, ColorExtractor.GradientColors gradientColors2, ColorExtractor.GradientColors gradientColors3);
+  void extractInto(
+      WallpaperColors wallpaperColors,
+      ColorExtractor.GradientColors gradientColors,
+      ColorExtractor.GradientColors gradientColors2,
+      ColorExtractor.GradientColors gradientColors3);
 }

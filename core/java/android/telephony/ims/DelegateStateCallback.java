@@ -7,14 +7,14 @@ import java.util.Set;
 @SystemApi
 /* loaded from: classes3.dex */
 public interface DelegateStateCallback {
-    void onConfigurationChanged(SipDelegateConfiguration sipDelegateConfiguration);
+  void onConfigurationChanged(SipDelegateConfiguration sipDelegateConfiguration);
 
-    void onCreated(SipDelegate sipDelegate, Set<FeatureTagState> set);
+  void onCreated(SipDelegate sipDelegate, Set<FeatureTagState> set);
 
-    void onDestroyed(int i);
+  void onDestroyed(int i);
 
-    void onFeatureTagRegistrationChanged(DelegateRegistrationState delegateRegistrationState);
+  void onFeatureTagRegistrationChanged(DelegateRegistrationState delegateRegistrationState);
 
-    @Deprecated
-    void onImsConfigurationChanged(SipDelegateImsConfiguration sipDelegateImsConfiguration);
+  @Deprecated
+  void onImsConfigurationChanged(SipDelegateImsConfiguration sipDelegateImsConfiguration);
 }

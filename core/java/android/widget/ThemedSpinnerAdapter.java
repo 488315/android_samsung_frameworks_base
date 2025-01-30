@@ -4,7 +4,7 @@ import android.content.res.Resources;
 
 /* loaded from: classes4.dex */
 public interface ThemedSpinnerAdapter extends SpinnerAdapter {
-    Resources.Theme getDropDownViewTheme();
+  Resources.Theme getDropDownViewTheme();
 
-    void setDropDownViewTheme(Resources.Theme theme);
+  void setDropDownViewTheme(Resources.Theme theme);
 }

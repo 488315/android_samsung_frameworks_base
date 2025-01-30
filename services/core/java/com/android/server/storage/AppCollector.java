@@ -25,76 +25,93 @@ import java.util.concurrent.TimeoutException;
 
 /* loaded from: classes3.dex */
 public class AppCollector {
-    public static String TAG = "AppCollector";
-    public final BackgroundHandler mBackgroundHandler;
-    public CompletableFuture mStats;
+  public static String TAG = "AppCollector";
+  public final BackgroundHandler mBackgroundHandler;
+  public CompletableFuture mStats;
 
-    public AppCollector(Context context, VolumeInfo volumeInfo) {
-        Objects.requireNonNull(volumeInfo);
-        this.mBackgroundHandler = new BackgroundHandler(BackgroundThread.get().getLooper(), volumeInfo, context.getPackageManager(), (UserManager) context.getSystemService("user"), (StorageStatsManager) context.getSystemService("storagestats"));
+  public AppCollector(Context context, VolumeInfo volumeInfo) {
+    Objects.requireNonNull(volumeInfo);
+    this.mBackgroundHandler =
+        new BackgroundHandler(
+            BackgroundThread.get().getLooper(),
+            volumeInfo,
+            context.getPackageManager(),
+            (UserManager) context.getSystemService("user"),
+            (StorageStatsManager) context.getSystemService("storagestats"));
+  }
+
+  public List getPackageStats(long j) {
+    synchronized (this) {
+      if (this.mStats == null) {
+        this.mStats = new CompletableFuture();
+        this.mBackgroundHandler.sendEmptyMessage(0);
+      }
+    }
+    try {
+      return (List) this.mStats.get(j, TimeUnit.MILLISECONDS);
+    } catch (InterruptedException | ExecutionException e) {
+      Log.e(TAG, "An exception occurred while getting app storage", e);
+      return null;
+    } catch (TimeoutException unused) {
+      Log.e(TAG, "AppCollector timed out");
+      return null;
+    }
+  }
+
+  public class BackgroundHandler extends Handler {
+    public final PackageManager mPm;
+    public final StorageStatsManager mStorageStatsManager;
+    public final UserManager mUm;
+    public final VolumeInfo mVolume;
+
+    public BackgroundHandler(
+        Looper looper,
+        VolumeInfo volumeInfo,
+        PackageManager packageManager,
+        UserManager userManager,
+        StorageStatsManager storageStatsManager) {
+      super(looper);
+      this.mVolume = volumeInfo;
+      this.mPm = packageManager;
+      this.mUm = userManager;
+      this.mStorageStatsManager = storageStatsManager;
     }
 
-    public List getPackageStats(long j) {
-        synchronized (this) {
-            if (this.mStats == null) {
-                this.mStats = new CompletableFuture();
-                this.mBackgroundHandler.sendEmptyMessage(0);
+    @Override // android.os.Handler
+    public void handleMessage(Message message) {
+      if (message.what != 0) {
+        return;
+      }
+      ArrayList arrayList = new ArrayList();
+      List users = this.mUm.getUsers();
+      int size = users.size();
+      for (int i = 0; i < size; i++) {
+        UserInfo userInfo = (UserInfo) users.get(i);
+        List installedApplicationsAsUser =
+            this.mPm.getInstalledApplicationsAsUser(512, userInfo.id);
+        int size2 = installedApplicationsAsUser.size();
+        for (int i2 = 0; i2 < size2; i2++) {
+          ApplicationInfo applicationInfo = (ApplicationInfo) installedApplicationsAsUser.get(i2);
+          if (Objects.equals(applicationInfo.volumeUuid, this.mVolume.getFsUuid())) {
+            try {
+              StorageStats queryStatsForPackage =
+                  this.mStorageStatsManager.queryStatsForPackage(
+                      applicationInfo.storageUuid,
+                      applicationInfo.packageName,
+                      userInfo.getUserHandle());
+              PackageStats packageStats =
+                  new PackageStats(applicationInfo.packageName, userInfo.id);
+              packageStats.cacheSize = queryStatsForPackage.getCacheBytes();
+              packageStats.codeSize = queryStatsForPackage.getAppBytes();
+              packageStats.dataSize = queryStatsForPackage.getDataBytes();
+              arrayList.add(packageStats);
+            } catch (PackageManager.NameNotFoundException | IOException e) {
+              Log.e(AppCollector.TAG, "An exception occurred while fetching app size", e);
             }
+          }
         }
-        try {
-            return (List) this.mStats.get(j, TimeUnit.MILLISECONDS);
-        } catch (InterruptedException | ExecutionException e) {
-            Log.e(TAG, "An exception occurred while getting app storage", e);
-            return null;
-        } catch (TimeoutException unused) {
-            Log.e(TAG, "AppCollector timed out");
-            return null;
-        }
+      }
+      AppCollector.this.mStats.complete(arrayList);
     }
-
-    public class BackgroundHandler extends Handler {
-        public final PackageManager mPm;
-        public final StorageStatsManager mStorageStatsManager;
-        public final UserManager mUm;
-        public final VolumeInfo mVolume;
-
-        public BackgroundHandler(Looper looper, VolumeInfo volumeInfo, PackageManager packageManager, UserManager userManager, StorageStatsManager storageStatsManager) {
-            super(looper);
-            this.mVolume = volumeInfo;
-            this.mPm = packageManager;
-            this.mUm = userManager;
-            this.mStorageStatsManager = storageStatsManager;
-        }
-
-        @Override // android.os.Handler
-        public void handleMessage(Message message) {
-            if (message.what != 0) {
-                return;
-            }
-            ArrayList arrayList = new ArrayList();
-            List users = this.mUm.getUsers();
-            int size = users.size();
-            for (int i = 0; i < size; i++) {
-                UserInfo userInfo = (UserInfo) users.get(i);
-                List installedApplicationsAsUser = this.mPm.getInstalledApplicationsAsUser(512, userInfo.id);
-                int size2 = installedApplicationsAsUser.size();
-                for (int i2 = 0; i2 < size2; i2++) {
-                    ApplicationInfo applicationInfo = (ApplicationInfo) installedApplicationsAsUser.get(i2);
-                    if (Objects.equals(applicationInfo.volumeUuid, this.mVolume.getFsUuid())) {
-                        try {
-                            StorageStats queryStatsForPackage = this.mStorageStatsManager.queryStatsForPackage(applicationInfo.storageUuid, applicationInfo.packageName, userInfo.getUserHandle());
-                            PackageStats packageStats = new PackageStats(applicationInfo.packageName, userInfo.id);
-                            packageStats.cacheSize = queryStatsForPackage.getCacheBytes();
-                            packageStats.codeSize = queryStatsForPackage.getAppBytes();
-                            packageStats.dataSize = queryStatsForPackage.getDataBytes();
-                            arrayList.add(packageStats);
-                        } catch (PackageManager.NameNotFoundException | IOException e) {
-                            Log.e(AppCollector.TAG, "An exception occurred while fetching app size", e);
-                        }
-                    }
-                }
-            }
-            AppCollector.this.mStats.complete(arrayList);
-        }
-    }
+  }
 }

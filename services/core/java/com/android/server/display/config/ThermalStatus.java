@@ -2,30 +2,30 @@ package com.android.server.display.config;
 
 /* loaded from: classes2.dex */
 public enum ThermalStatus {
-    none("none"),
-    light("light"),
-    moderate("moderate"),
-    severe("severe"),
-    critical("critical"),
-    emergency("emergency"),
-    shutdown("shutdown");
+  none("none"),
+  light("light"),
+  moderate("moderate"),
+  severe("severe"),
+  critical("critical"),
+  emergency("emergency"),
+  shutdown("shutdown");
 
-    private final String rawName;
+  private final String rawName;
 
-    ThermalStatus(String str) {
-        this.rawName = str;
+  ThermalStatus(String str) {
+    this.rawName = str;
+  }
+
+  public String getRawName() {
+    return this.rawName;
+  }
+
+  public static ThermalStatus fromString(String str) {
+    for (ThermalStatus thermalStatus : values()) {
+      if (thermalStatus.getRawName().equals(str)) {
+        return thermalStatus;
+      }
     }
-
-    public String getRawName() {
-        return this.rawName;
-    }
-
-    public static ThermalStatus fromString(String str) {
-        for (ThermalStatus thermalStatus : values()) {
-            if (thermalStatus.getRawName().equals(str)) {
-                return thermalStatus;
-            }
-        }
-        throw new IllegalArgumentException(str);
-    }
+    throw new IllegalArgumentException(str);
+  }
 }

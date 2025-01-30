@@ -7,33 +7,33 @@ import android.view.ViewGroup;
 /* loaded from: classes5.dex */
 public interface MenuPresenter {
 
-    public interface Callback {
-        void onCloseMenu(MenuBuilder menuBuilder, boolean z);
-
-        boolean onOpenSubMenu(MenuBuilder menuBuilder);
-    }
-
-    boolean collapseItemActionView(MenuBuilder menuBuilder, MenuItemImpl menuItemImpl);
-
-    boolean expandItemActionView(MenuBuilder menuBuilder, MenuItemImpl menuItemImpl);
-
-    boolean flagActionItems();
-
-    int getId();
-
-    MenuView getMenuView(ViewGroup viewGroup);
-
-    void initForMenu(Context context, MenuBuilder menuBuilder);
-
+  public interface Callback {
     void onCloseMenu(MenuBuilder menuBuilder, boolean z);
 
-    void onRestoreInstanceState(Parcelable parcelable);
+    boolean onOpenSubMenu(MenuBuilder menuBuilder);
+  }
 
-    Parcelable onSaveInstanceState();
+  boolean collapseItemActionView(MenuBuilder menuBuilder, MenuItemImpl menuItemImpl);
 
-    boolean onSubMenuSelected(SubMenuBuilder subMenuBuilder);
+  boolean expandItemActionView(MenuBuilder menuBuilder, MenuItemImpl menuItemImpl);
 
-    void setCallback(Callback callback);
+  boolean flagActionItems();
 
-    void updateMenuView(boolean z);
+  int getId();
+
+  MenuView getMenuView(ViewGroup viewGroup);
+
+  void initForMenu(Context context, MenuBuilder menuBuilder);
+
+  void onCloseMenu(MenuBuilder menuBuilder, boolean z);
+
+  void onRestoreInstanceState(Parcelable parcelable);
+
+  Parcelable onSaveInstanceState();
+
+  boolean onSubMenuSelected(SubMenuBuilder subMenuBuilder);
+
+  void setCallback(Callback callback);
+
+  void updateMenuView(boolean z);
 }

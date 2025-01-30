@@ -12,47 +12,47 @@ import android.os.IBinder;
 /* loaded from: classes3.dex */
 public interface ISoundTriggerHal {
 
-    public interface GlobalCallback {
-        void onResourcesAvailable();
-    }
+  public interface GlobalCallback {
+    void onResourcesAvailable();
+  }
 
-    public interface ModelCallback {
-        void modelUnloaded(int i);
+  public interface ModelCallback {
+    void modelUnloaded(int i);
 
-        void phraseRecognitionCallback(int i, PhraseRecognitionEventSys phraseRecognitionEventSys);
+    void phraseRecognitionCallback(int i, PhraseRecognitionEventSys phraseRecognitionEventSys);
 
-        void recognitionCallback(int i, RecognitionEventSys recognitionEventSys);
-    }
+    void recognitionCallback(int i, RecognitionEventSys recognitionEventSys);
+  }
 
-    void clientAttached(IBinder iBinder);
+  void clientAttached(IBinder iBinder);
 
-    void clientDetached(IBinder iBinder);
+  void clientDetached(IBinder iBinder);
 
-    void detach();
+  void detach();
 
-    void forceRecognitionEvent(int i);
+  void forceRecognitionEvent(int i);
 
-    int getModelParameter(int i, int i2);
+  int getModelParameter(int i, int i2);
 
-    Properties getProperties();
+  Properties getProperties();
 
-    void linkToDeath(IBinder.DeathRecipient deathRecipient);
+  void linkToDeath(IBinder.DeathRecipient deathRecipient);
 
-    int loadPhraseSoundModel(PhraseSoundModel phraseSoundModel, ModelCallback modelCallback);
+  int loadPhraseSoundModel(PhraseSoundModel phraseSoundModel, ModelCallback modelCallback);
 
-    int loadSoundModel(SoundModel soundModel, ModelCallback modelCallback);
+  int loadSoundModel(SoundModel soundModel, ModelCallback modelCallback);
 
-    ModelParameterRange queryParameter(int i, int i2);
+  ModelParameterRange queryParameter(int i, int i2);
 
-    void reboot();
+  void reboot();
 
-    void registerCallback(GlobalCallback globalCallback);
+  void registerCallback(GlobalCallback globalCallback);
 
-    void setModelParameter(int i, int i2, int i3);
+  void setModelParameter(int i, int i2, int i3);
 
-    void startRecognition(int i, int i2, int i3, RecognitionConfig recognitionConfig);
+  void startRecognition(int i, int i2, int i3, RecognitionConfig recognitionConfig);
 
-    void stopRecognition(int i);
+  void stopRecognition(int i);
 
-    void unloadSoundModel(int i);
+  void unloadSoundModel(int i);
 }

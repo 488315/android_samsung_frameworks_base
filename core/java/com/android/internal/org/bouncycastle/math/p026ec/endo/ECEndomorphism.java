@@ -4,7 +4,7 @@ import com.android.internal.org.bouncycastle.math.p026ec.ECPointMap;
 
 /* loaded from: classes5.dex */
 public interface ECEndomorphism {
-    ECPointMap getPointMap();
+  ECPointMap getPointMap();
 
-    boolean hasEfficientPointMap();
+  boolean hasEfficientPointMap();
 }

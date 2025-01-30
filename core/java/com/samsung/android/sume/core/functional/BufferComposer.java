@@ -7,5 +7,5 @@ import java.util.List;
 @FunctionalInterface
 /* loaded from: classes4.dex */
 public interface BufferComposer {
-    MediaBuffer compose(List<MediaBuffer> list, MediaFilter.Option option);
+  MediaBuffer compose(List<MediaBuffer> list, MediaFilter.Option option);
 }

@@ -2,40 +2,43 @@ package com.android.server.wm;
 
 import android.util.proto.ProtoOutputStream;
 import android.view.SurfaceControl;
-import com.android.server.wm.SurfaceAnimator;
 import java.io.PrintWriter;
 
 /* loaded from: classes3.dex */
 public interface AnimationAdapter {
-    void dump(PrintWriter printWriter, String str);
+  void dump(PrintWriter printWriter, String str);
 
-    void dumpDebug(ProtoOutputStream protoOutputStream);
+  void dumpDebug(ProtoOutputStream protoOutputStream);
 
-    default int getBackgroundColor() {
-        return 0;
-    }
+  default int getBackgroundColor() {
+    return 0;
+  }
 
-    long getDurationHint();
+  long getDurationHint();
 
-    default boolean getShowBackground() {
-        return false;
-    }
+  default boolean getShowBackground() {
+    return false;
+  }
 
-    boolean getShowWallpaper();
+  boolean getShowWallpaper();
 
-    long getStatusBarTransitionsStartTime();
+  long getStatusBarTransitionsStartTime();
 
-    void onAnimationCancelled(SurfaceControl surfaceControl);
+  void onAnimationCancelled(SurfaceControl surfaceControl);
 
-    default boolean shouldDeferAnimationFinish(Runnable runnable) {
-        return false;
-    }
+  default boolean shouldDeferAnimationFinish(Runnable runnable) {
+    return false;
+  }
 
-    void startAnimation(SurfaceControl surfaceControl, SurfaceControl.Transaction transaction, int i, SurfaceAnimator.OnAnimationFinishedCallback onAnimationFinishedCallback);
+  void startAnimation(
+      SurfaceControl surfaceControl,
+      SurfaceControl.Transaction transaction,
+      int i,
+      SurfaceAnimator.OnAnimationFinishedCallback onAnimationFinishedCallback);
 
-    default void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
-        dumpDebug(protoOutputStream);
-        protoOutputStream.end(start);
-    }
+  default void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
+    long start = protoOutputStream.start(j);
+    dumpDebug(protoOutputStream);
+    protoOutputStream.end(start);
+  }
 }

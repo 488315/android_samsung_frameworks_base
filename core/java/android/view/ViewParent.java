@@ -5,129 +5,128 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.Region;
 import android.p009os.Bundle;
-import android.view.ActionMode;
 import android.view.accessibility.AccessibilityEvent;
 import android.window.OnBackInvokedDispatcher;
 
 /* loaded from: classes4.dex */
 public interface ViewParent {
-    void bringChildToFront(View view);
+  void bringChildToFront(View view);
 
-    boolean canResolveLayoutDirection();
+  boolean canResolveLayoutDirection();
 
-    boolean canResolveTextAlignment();
+  boolean canResolveTextAlignment();
 
-    boolean canResolveTextDirection();
+  boolean canResolveTextDirection();
 
-    void childDrawableStateChanged(View view);
+  void childDrawableStateChanged(View view);
 
-    void childHasTransientStateChanged(View view, boolean z);
+  void childHasTransientStateChanged(View view, boolean z);
 
-    void clearChildFocus(View view);
+  void clearChildFocus(View view);
 
-    void createContextMenu(ContextMenu contextMenu);
+  void createContextMenu(ContextMenu contextMenu);
 
-    View focusSearch(View view, int i);
+  View focusSearch(View view, int i);
 
-    void focusableViewAvailable(View view);
+  void focusableViewAvailable(View view);
 
-    boolean getChildVisibleRect(View view, Rect rect, Point point);
+  boolean getChildVisibleRect(View view, Rect rect, Point point);
 
-    int getLayoutDirection();
+  int getLayoutDirection();
 
-    ViewParent getParent();
+  ViewParent getParent();
 
-    ViewParent getParentForAccessibility();
+  ViewParent getParentForAccessibility();
 
-    int getTextAlignment();
+  int getTextAlignment();
 
-    int getTextDirection();
+  int getTextDirection();
 
-    @Deprecated
-    void invalidateChild(View view, Rect rect);
+  @Deprecated
+  void invalidateChild(View view, Rect rect);
 
-    @Deprecated
-    ViewParent invalidateChildInParent(int[] iArr, Rect rect);
+  @Deprecated
+  ViewParent invalidateChildInParent(int[] iArr, Rect rect);
 
-    boolean isLayoutDirectionResolved();
+  boolean isLayoutDirectionResolved();
 
-    boolean isLayoutRequested();
+  boolean isLayoutRequested();
 
-    boolean isTextAlignmentResolved();
+  boolean isTextAlignmentResolved();
 
-    boolean isTextDirectionResolved();
+  boolean isTextDirectionResolved();
 
-    View keyboardNavigationClusterSearch(View view, int i);
+  View keyboardNavigationClusterSearch(View view, int i);
 
-    void notifySubtreeAccessibilityStateChanged(View view, View view2, int i);
+  void notifySubtreeAccessibilityStateChanged(View view, View view2, int i);
 
-    boolean onNestedFling(View view, float f, float f2, boolean z);
+  boolean onNestedFling(View view, float f, float f2, boolean z);
 
-    boolean onNestedPreFling(View view, float f, float f2);
+  boolean onNestedPreFling(View view, float f, float f2);
 
-    boolean onNestedPrePerformAccessibilityAction(View view, int i, Bundle bundle);
+  boolean onNestedPrePerformAccessibilityAction(View view, int i, Bundle bundle);
 
-    void onNestedPreScroll(View view, int i, int i2, int[] iArr);
+  void onNestedPreScroll(View view, int i, int i2, int[] iArr);
 
-    void onNestedScroll(View view, int i, int i2, int i3, int i4);
+  void onNestedScroll(View view, int i, int i2, int i3, int i4);
 
-    void onNestedScrollAccepted(View view, View view2, int i);
+  void onNestedScrollAccepted(View view, View view2, int i);
 
-    boolean onStartNestedScroll(View view, View view2, int i);
+  boolean onStartNestedScroll(View view, View view2, int i);
 
-    void onStopNestedScroll(View view);
+  void onStopNestedScroll(View view);
 
-    void recomputeViewAttributes(View view);
+  void recomputeViewAttributes(View view);
 
-    void requestChildFocus(View view, View view2);
+  void requestChildFocus(View view, View view2);
 
-    boolean requestChildRectangleOnScreen(View view, Rect rect, boolean z);
+  boolean requestChildRectangleOnScreen(View view, Rect rect, boolean z);
 
-    void requestDisallowInterceptTouchEvent(boolean z);
+  void requestDisallowInterceptTouchEvent(boolean z);
 
-    void requestFitSystemWindows();
+  void requestFitSystemWindows();
 
-    void requestLayout();
+  void requestLayout();
 
-    boolean requestSendAccessibilityEvent(View view, AccessibilityEvent accessibilityEvent);
+  boolean requestSendAccessibilityEvent(View view, AccessibilityEvent accessibilityEvent);
 
-    void requestTransparentRegion(View view);
+  void requestTransparentRegion(View view);
 
-    boolean showContextMenuForChild(View view);
+  boolean showContextMenuForChild(View view);
 
-    boolean showContextMenuForChild(View view, float f, float f2);
+  boolean showContextMenuForChild(View view, float f, float f2);
 
-    ActionMode startActionModeForChild(View view, ActionMode.Callback callback);
+  ActionMode startActionModeForChild(View view, ActionMode.Callback callback);
 
-    ActionMode startActionModeForChild(View view, ActionMode.Callback callback, int i);
+  ActionMode startActionModeForChild(View view, ActionMode.Callback callback, int i);
 
-    default void onDescendantInvalidated(View child, View target) {
-        if (getParent() != null) {
-            getParent().onDescendantInvalidated(child, target);
-        }
+  default void onDescendantInvalidated(View child, View target) {
+    if (getParent() != null) {
+      getParent().onDescendantInvalidated(child, target);
     }
+  }
 
-    default void subtractObscuredTouchableRegion(Region touchableRegion, View view) {
-    }
+  default void subtractObscuredTouchableRegion(Region touchableRegion, View view) {}
 
-    default boolean getChildLocalHitRegion(View child, Region region, Matrix matrix, boolean isHover) {
-        region.setEmpty();
-        return false;
-    }
+  default boolean getChildLocalHitRegion(
+      View child, Region region, Matrix matrix, boolean isHover) {
+    region.setEmpty();
+    return false;
+  }
 
-    default void onDescendantUnbufferedRequested() {
-        if (getParent() != null) {
-            getParent().onDescendantUnbufferedRequested();
-        }
+  default void onDescendantUnbufferedRequested() {
+    if (getParent() != null) {
+      getParent().onDescendantUnbufferedRequested();
     }
+  }
 
-    default OnBackInvokedDispatcher findOnBackInvokedDispatcherForChild(View child, View requester) {
-        return null;
-    }
+  default OnBackInvokedDispatcher findOnBackInvokedDispatcherForChild(View child, View requester) {
+    return null;
+  }
 
-    default void requestSendStickyDragStartedEvent(View child) {
-        if (getParent() != null) {
-            getParent().requestSendStickyDragStartedEvent(child);
-        }
+  default void requestSendStickyDragStartedEvent(View child) {
+    if (getParent() != null) {
+      getParent().requestSendStickyDragStartedEvent(child);
     }
+  }
 }

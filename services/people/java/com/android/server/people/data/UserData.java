@@ -19,154 +19,173 @@ import java.util.function.Function;
 
 /* loaded from: classes2.dex */
 public class UserData {
-    public static final String TAG = "UserData";
-    public String mDefaultDialer;
-    public String mDefaultSmsApp;
-    public boolean mIsUnlocked;
-    public Map mPackageDataMap = new ArrayMap();
-    public final File mPerUserPeopleDataDir;
-    public final ScheduledExecutorService mScheduledExecutorService;
-    public final int mUserId;
+  public static final String TAG = "UserData";
+  public String mDefaultDialer;
+  public String mDefaultSmsApp;
+  public boolean mIsUnlocked;
+  public Map mPackageDataMap = new ArrayMap();
+  public final File mPerUserPeopleDataDir;
+  public final ScheduledExecutorService mScheduledExecutorService;
+  public final int mUserId;
 
-    public UserData(int i, ScheduledExecutorService scheduledExecutorService) {
-        this.mUserId = i;
-        this.mPerUserPeopleDataDir = new File(Environment.getDataSystemCeDirectory(i), "people");
-        this.mScheduledExecutorService = scheduledExecutorService;
+  public UserData(int i, ScheduledExecutorService scheduledExecutorService) {
+    this.mUserId = i;
+    this.mPerUserPeopleDataDir = new File(Environment.getDataSystemCeDirectory(i), "people");
+    this.mScheduledExecutorService = scheduledExecutorService;
+  }
+
+  public int getUserId() {
+    return this.mUserId;
+  }
+
+  public void forAllPackages(Consumer consumer) {
+    Iterator it = this.mPackageDataMap.values().iterator();
+    while (it.hasNext()) {
+      consumer.accept((PackageData) it.next());
     }
+  }
 
-    public int getUserId() {
-        return this.mUserId;
-    }
+  public void setUserUnlocked() {
+    this.mIsUnlocked = true;
+  }
 
-    public void forAllPackages(Consumer consumer) {
-        Iterator it = this.mPackageDataMap.values().iterator();
-        while (it.hasNext()) {
-            consumer.accept((PackageData) it.next());
-        }
-    }
+  public void setUserStopped() {
+    this.mIsUnlocked = false;
+  }
 
-    public void setUserUnlocked() {
-        this.mIsUnlocked = true;
-    }
+  public boolean isUnlocked() {
+    return this.mIsUnlocked;
+  }
 
-    public void setUserStopped() {
-        this.mIsUnlocked = false;
-    }
+  public void loadUserData() {
+    this.mPerUserPeopleDataDir.mkdir();
+    this.mPackageDataMap.putAll(
+        PackageData.packagesDataFromDisk(
+            this.mUserId,
+            new UserData$$ExternalSyntheticLambda1(this),
+            new UserData$$ExternalSyntheticLambda2(this),
+            this.mScheduledExecutorService,
+            this.mPerUserPeopleDataDir));
+  }
 
-    public boolean isUnlocked() {
-        return this.mIsUnlocked;
-    }
+  /* JADX INFO: Access modifiers changed from: private */
+  public /* synthetic */ PackageData lambda$getOrCreatePackageData$0(String str, String str2) {
+    return createPackageData(str);
+  }
 
-    public void loadUserData() {
-        this.mPerUserPeopleDataDir.mkdir();
-        this.mPackageDataMap.putAll(PackageData.packagesDataFromDisk(this.mUserId, new UserData$$ExternalSyntheticLambda1(this), new UserData$$ExternalSyntheticLambda2(this), this.mScheduledExecutorService, this.mPerUserPeopleDataDir));
-    }
-
-    /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ PackageData lambda$getOrCreatePackageData$0(String str, String str2) {
-        return createPackageData(str);
-    }
-
-    public PackageData getOrCreatePackageData(final String str) {
-        return (PackageData) this.mPackageDataMap.computeIfAbsent(str, new Function() { // from class: com.android.server.people.data.UserData$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
+  public PackageData getOrCreatePackageData(final String str) {
+    return (PackageData)
+        this.mPackageDataMap.computeIfAbsent(
+            str,
+            new Function() { // from class:
+              // com.android.server.people.data.UserData$$ExternalSyntheticLambda0
+              @Override // java.util.function.Function
+              public final Object apply(Object obj) {
                 PackageData lambda$getOrCreatePackageData$0;
-                lambda$getOrCreatePackageData$0 = UserData.this.lambda$getOrCreatePackageData$0(str, (String) obj);
+                lambda$getOrCreatePackageData$0 =
+                    UserData.this.lambda$getOrCreatePackageData$0(str, (String) obj);
                 return lambda$getOrCreatePackageData$0;
-            }
-        });
-    }
+              }
+            });
+  }
 
-    public PackageData getPackageData(String str) {
-        return (PackageData) this.mPackageDataMap.get(str);
-    }
+  public PackageData getPackageData(String str) {
+    return (PackageData) this.mPackageDataMap.get(str);
+  }
 
-    public void deletePackageData(String str) {
-        PackageData packageData = (PackageData) this.mPackageDataMap.remove(str);
-        if (packageData != null) {
-            packageData.onDestroy();
-        }
+  public void deletePackageData(String str) {
+    PackageData packageData = (PackageData) this.mPackageDataMap.remove(str);
+    if (packageData != null) {
+      packageData.onDestroy();
     }
+  }
 
-    public void setDefaultDialer(String str) {
-        this.mDefaultDialer = str;
+  public void setDefaultDialer(String str) {
+    this.mDefaultDialer = str;
+  }
+
+  public PackageData getDefaultDialer() {
+    String str = this.mDefaultDialer;
+    if (str != null) {
+      return getPackageData(str);
     }
+    return null;
+  }
 
-    public PackageData getDefaultDialer() {
-        String str = this.mDefaultDialer;
-        if (str != null) {
-            return getPackageData(str);
-        }
+  public void setDefaultSmsApp(String str) {
+    this.mDefaultSmsApp = str;
+  }
+
+  public PackageData getDefaultSmsApp() {
+    String str = this.mDefaultSmsApp;
+    if (str != null) {
+      return getPackageData(str);
+    }
+    return null;
+  }
+
+  public byte[] getBackupPayload() {
+    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+    DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
+    for (PackageData packageData : this.mPackageDataMap.values()) {
+      try {
+        byte[] backupPayload = packageData.getConversationStore().getBackupPayload();
+        dataOutputStream.writeInt(backupPayload.length);
+        dataOutputStream.write(backupPayload);
+        dataOutputStream.writeUTF(packageData.getPackageName());
+      } catch (IOException e) {
+        Slog.e(TAG, "Failed to write conversations to backup payload.", e);
         return null;
+      }
     }
+    try {
+      dataOutputStream.writeInt(-1);
+      return byteArrayOutputStream.toByteArray();
+    } catch (IOException e2) {
+      Slog.e(TAG, "Failed to write conversations end token to backup payload.", e2);
+      return null;
+    }
+  }
 
-    public void setDefaultSmsApp(String str) {
-        this.mDefaultSmsApp = str;
+  public void restore(byte[] bArr) {
+    DataInputStream dataInputStream = new DataInputStream(new ByteArrayInputStream(bArr));
+    try {
+      for (int readInt = dataInputStream.readInt();
+          readInt != -1;
+          readInt = dataInputStream.readInt()) {
+        byte[] bArr2 = new byte[readInt];
+        dataInputStream.readFully(bArr2, 0, readInt);
+        getOrCreatePackageData(dataInputStream.readUTF()).getConversationStore().restore(bArr2);
+      }
+    } catch (IOException e) {
+      Slog.e(TAG, "Failed to restore conversations from backup payload.", e);
     }
+  }
 
-    public PackageData getDefaultSmsApp() {
-        String str = this.mDefaultSmsApp;
-        if (str != null) {
-            return getPackageData(str);
-        }
-        return null;
-    }
+  public final PackageData createPackageData(String str) {
+    return new PackageData(
+        str,
+        this.mUserId,
+        new UserData$$ExternalSyntheticLambda1(this),
+        new UserData$$ExternalSyntheticLambda2(this),
+        this.mScheduledExecutorService,
+        this.mPerUserPeopleDataDir);
+  }
 
-    public byte[] getBackupPayload() {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        DataOutputStream dataOutputStream = new DataOutputStream(byteArrayOutputStream);
-        for (PackageData packageData : this.mPackageDataMap.values()) {
-            try {
-                byte[] backupPayload = packageData.getConversationStore().getBackupPayload();
-                dataOutputStream.writeInt(backupPayload.length);
-                dataOutputStream.write(backupPayload);
-                dataOutputStream.writeUTF(packageData.getPackageName());
-            } catch (IOException e) {
-                Slog.e(TAG, "Failed to write conversations to backup payload.", e);
-                return null;
-            }
-        }
-        try {
-            dataOutputStream.writeInt(-1);
-            return byteArrayOutputStream.toByteArray();
-        } catch (IOException e2) {
-            Slog.e(TAG, "Failed to write conversations end token to backup payload.", e2);
-            return null;
-        }
-    }
+  public final boolean isDefaultDialer(String str) {
+    return TextUtils.equals(this.mDefaultDialer, str);
+  }
 
-    public void restore(byte[] bArr) {
-        DataInputStream dataInputStream = new DataInputStream(new ByteArrayInputStream(bArr));
-        try {
-            for (int readInt = dataInputStream.readInt(); readInt != -1; readInt = dataInputStream.readInt()) {
-                byte[] bArr2 = new byte[readInt];
-                dataInputStream.readFully(bArr2, 0, readInt);
-                getOrCreatePackageData(dataInputStream.readUTF()).getConversationStore().restore(bArr2);
-            }
-        } catch (IOException e) {
-            Slog.e(TAG, "Failed to restore conversations from backup payload.", e);
-        }
-    }
+  public final boolean isDefaultSmsApp(String str) {
+    return TextUtils.equals(this.mDefaultSmsApp, str);
+  }
 
-    public final PackageData createPackageData(String str) {
-        return new PackageData(str, this.mUserId, new UserData$$ExternalSyntheticLambda1(this), new UserData$$ExternalSyntheticLambda2(this), this.mScheduledExecutorService, this.mPerUserPeopleDataDir);
+  public void dump(String[] strArr, IndentingPrintWriter indentingPrintWriter) {
+    indentingPrintWriter.println(", mPackageDataMap size : " + this.mPackageDataMap.size());
+    for (PackageData packageData : this.mPackageDataMap.values()) {
+      indentingPrintWriter.printPair("packageName", packageData.getPackageName());
+      packageData.dump(indentingPrintWriter);
     }
-
-    public final boolean isDefaultDialer(String str) {
-        return TextUtils.equals(this.mDefaultDialer, str);
-    }
-
-    public final boolean isDefaultSmsApp(String str) {
-        return TextUtils.equals(this.mDefaultSmsApp, str);
-    }
-
-    public void dump(String[] strArr, IndentingPrintWriter indentingPrintWriter) {
-        indentingPrintWriter.println(", mPackageDataMap size : " + this.mPackageDataMap.size());
-        for (PackageData packageData : this.mPackageDataMap.values()) {
-            indentingPrintWriter.printPair("packageName", packageData.getPackageName());
-            packageData.dump(indentingPrintWriter);
-        }
-        indentingPrintWriter.println();
-    }
+    indentingPrintWriter.println();
+  }
 }

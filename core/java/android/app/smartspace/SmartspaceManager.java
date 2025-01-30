@@ -7,13 +7,13 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes.dex */
 public final class SmartspaceManager {
-    private final Context mContext;
+  private final Context mContext;
 
-    public SmartspaceManager(Context context) {
-        this.mContext = (Context) Objects.requireNonNull(context);
-    }
+  public SmartspaceManager(Context context) {
+    this.mContext = (Context) Objects.requireNonNull(context);
+  }
 
-    public SmartspaceSession createSmartspaceSession(SmartspaceConfig smartspaceConfig) {
-        return new SmartspaceSession(this.mContext, smartspaceConfig);
-    }
+  public SmartspaceSession createSmartspaceSession(SmartspaceConfig smartspaceConfig) {
+    return new SmartspaceSession(this.mContext, smartspaceConfig);
+  }
 }

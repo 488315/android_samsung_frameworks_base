@@ -5,14 +5,17 @@ import android.view.accessibility.AccessibilityManager;
 
 /* loaded from: classes5.dex */
 public class AccessibilityManagerWrapper {
-    AccessibilityManager mAccessibilityManager;
+  AccessibilityManager mAccessibilityManager;
 
-    public AccessibilityManagerWrapper(Context context) {
-        this.mAccessibilityManager = (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
-    }
+  public AccessibilityManagerWrapper(Context context) {
+    this.mAccessibilityManager =
+        (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
+  }
 
-    public boolean isVoiceAssistantMode() {
-        AccessibilityManager accessibilityManager = this.mAccessibilityManager;
-        return accessibilityManager != null && (accessibilityManager.semIsAccessibilityServiceEnabled(32) || this.mAccessibilityManager.semIsAccessibilityServiceEnabled(16));
-    }
+  public boolean isVoiceAssistantMode() {
+    AccessibilityManager accessibilityManager = this.mAccessibilityManager;
+    return accessibilityManager != null
+        && (accessibilityManager.semIsAccessibilityServiceEnabled(32)
+            || this.mAccessibilityManager.semIsAccessibilityServiceEnabled(16));
+  }
 }

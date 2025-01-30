@@ -13,368 +13,368 @@ import java.util.UUID;
 @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
 /* loaded from: classes3.dex */
 public interface AndroidPackage {
-    List getActivities();
+  List getActivities();
 
-    List getAdoptPermissions();
+  List getAdoptPermissions();
 
-    List getApexSystemServices();
+  List getApexSystemServices();
 
-    String getAppComponentFactory();
+  String getAppComponentFactory();
 
-    String getApplicationClassName();
+  String getApplicationClassName();
 
-    List getAttributions();
+  List getAttributions();
 
-    int getAutoRevokePermissions();
+  int getAutoRevokePermissions();
 
-    String getBackupAgentName();
+  String getBackupAgentName();
 
-    int getBannerResourceId();
+  int getBannerResourceId();
 
-    @Deprecated
-    String getBaseApkPath();
+  @Deprecated
+  String getBaseApkPath();
 
-    int getBaseRevisionCode();
+  int getBaseRevisionCode();
 
-    int getCategory();
+  int getCategory();
 
-    String getClassLoaderName();
+  String getClassLoaderName();
 
-    int getCompatibleWidthLimitDp();
+  int getCompatibleWidthLimitDp();
 
-    int getCompileSdkVersion();
+  int getCompileSdkVersion();
 
-    String getCompileSdkVersionCodeName();
+  String getCompileSdkVersionCodeName();
 
-    List getConfigPreferences();
+  List getConfigPreferences();
 
-    int getDataExtractionRulesResourceId();
+  int getDataExtractionRulesResourceId();
 
-    int getDescriptionResourceId();
+  int getDescriptionResourceId();
 
-    List getFeatureGroups();
+  List getFeatureGroups();
 
-    int getFullBackupContentResourceId();
+  int getFullBackupContentResourceId();
 
-    int getGwpAsanMode();
+  int getGwpAsanMode();
 
-    int getIconResourceId();
+  int getIconResourceId();
 
-    List getImplicitPermissions();
+  List getImplicitPermissions();
 
-    int getInstallLocation();
+  int getInstallLocation();
 
-    List getInstrumentations();
+  List getInstrumentations();
 
-    Map getKeySetMapping();
+  Map getKeySetMapping();
 
-    Set getKnownActivityEmbeddingCerts();
+  Set getKnownActivityEmbeddingCerts();
 
-    int getLabelResourceId();
+  int getLabelResourceId();
 
-    int getLargestWidthLimitDp();
+  int getLargestWidthLimitDp();
 
-    List getLibraryNames();
+  List getLibraryNames();
 
-    int getLocaleConfigResourceId();
+  int getLocaleConfigResourceId();
 
-    int getLogoResourceId();
+  int getLogoResourceId();
 
-    long getLongVersionCode();
+  long getLongVersionCode();
 
-    String getManageSpaceActivityName();
+  String getManageSpaceActivityName();
 
-    String getManifestPackageName();
+  String getManifestPackageName();
 
-    float getMaxAspectRatio();
+  float getMaxAspectRatio();
 
-    int getMaxSdkVersion();
+  int getMaxSdkVersion();
 
-    int getMemtagMode();
+  int getMemtagMode();
 
-    Bundle getMetaData();
+  Bundle getMetaData();
 
-    Set getMimeGroups();
+  Set getMimeGroups();
 
-    float getMinAspectRatio();
+  float getMinAspectRatio();
 
-    SparseIntArray getMinExtensionVersions();
+  SparseIntArray getMinExtensionVersions();
 
-    int getMinSdkVersion();
+  int getMinSdkVersion();
 
-    int getNativeHeapZeroInitialized();
+  int getNativeHeapZeroInitialized();
 
-    String getNativeLibraryDir();
+  String getNativeLibraryDir();
 
-    String getNativeLibraryRootDir();
+  String getNativeLibraryRootDir();
 
-    int getNetworkSecurityConfigResourceId();
+  int getNetworkSecurityConfigResourceId();
 
-    CharSequence getNonLocalizedLabel();
+  CharSequence getNonLocalizedLabel();
 
-    List getOriginalPackages();
+  List getOriginalPackages();
 
-    String getOverlayCategory();
+  String getOverlayCategory();
 
-    int getOverlayPriority();
+  int getOverlayPriority();
 
-    String getOverlayTarget();
+  String getOverlayTarget();
 
-    String getOverlayTargetOverlayableName();
+  String getOverlayTargetOverlayableName();
 
-    Map getOverlayables();
+  Map getOverlayables();
 
-    String getPackageName();
+  String getPackageName();
 
-    String getPath();
+  String getPath();
 
-    String getPermission();
+  String getPermission();
 
-    List getPermissionGroups();
+  List getPermissionGroups();
 
-    List getPermissions();
+  List getPermissions();
 
-    List getPreferredActivityFilters();
+  List getPreferredActivityFilters();
 
-    String getProcessName();
+  String getProcessName();
 
-    Map getProcesses();
+  Map getProcesses();
 
-    Map getProperties();
+  Map getProperties();
 
-    List getProtectedBroadcasts();
+  List getProtectedBroadcasts();
 
-    List getProviders();
+  List getProviders();
 
-    List getQueriesIntents();
+  List getQueriesIntents();
 
-    List getQueriesPackages();
+  List getQueriesPackages();
 
-    Set getQueriesProviders();
+  Set getQueriesProviders();
 
-    List getReceivers();
+  List getReceivers();
 
-    List getRequestedFeatures();
+  List getRequestedFeatures();
 
-    List getRequestedPermissions();
+  List getRequestedPermissions();
 
-    String getRequiredAccountType();
+  String getRequiredAccountType();
 
-    int getRequiresSmallestWidthDp();
+  int getRequiresSmallestWidthDp();
 
-    Boolean getResizeableActivity();
+  Boolean getResizeableActivity();
 
-    byte[] getRestrictUpdateHash();
+  byte[] getRestrictUpdateHash();
 
-    String getRestrictedAccountType();
+  String getRestrictedAccountType();
 
-    int getRoundIconResourceId();
+  int getRoundIconResourceId();
 
-    int getSdkLibVersionMajor();
+  int getSdkLibVersionMajor();
 
-    String getSdkLibraryName();
+  String getSdkLibraryName();
 
-    String getSecondaryNativeLibraryDir();
+  String getSecondaryNativeLibraryDir();
 
-    List getServices();
+  List getServices();
 
-    String getSharedUserId();
+  String getSharedUserId();
 
-    int getSharedUserLabelResourceId();
+  int getSharedUserLabelResourceId();
 
-    SigningDetails getSigningDetails();
+  SigningDetails getSigningDetails();
 
-    String[] getSplitClassLoaderNames();
+  String[] getSplitClassLoaderNames();
 
-    String[] getSplitCodePaths();
+  String[] getSplitCodePaths();
 
-    SparseArray getSplitDependencies();
+  SparseArray getSplitDependencies();
 
-    int[] getSplitFlags();
+  int[] getSplitFlags();
 
-    String[] getSplitNames();
+  String[] getSplitNames();
 
-    int[] getSplitRevisionCodes();
+  int[] getSplitRevisionCodes();
 
-    List getSplits();
+  List getSplits();
 
-    String getStaticSharedLibraryName();
+  String getStaticSharedLibraryName();
 
-    long getStaticSharedLibraryVersion();
+  long getStaticSharedLibraryVersion();
 
-    UUID getStorageUuid();
+  UUID getStorageUuid();
 
-    int getTargetSandboxVersion();
+  int getTargetSandboxVersion();
 
-    int getTargetSdkVersion();
+  int getTargetSdkVersion();
 
-    String getTaskAffinity();
+  String getTaskAffinity();
 
-    int getThemeResourceId();
+  int getThemeResourceId();
 
-    int getUiOptions();
+  int getUiOptions();
 
-    @Deprecated
-    int getUid();
+  @Deprecated
+  int getUid();
 
-    Set getUpgradeKeySets();
+  Set getUpgradeKeySets();
 
-    List getUsesLibraries();
+  List getUsesLibraries();
 
-    List getUsesNativeLibraries();
+  List getUsesNativeLibraries();
 
-    List getUsesOptionalLibraries();
+  List getUsesOptionalLibraries();
 
-    List getUsesOptionalNativeLibraries();
+  List getUsesOptionalNativeLibraries();
 
-    List getUsesPermissions();
+  List getUsesPermissions();
 
-    List getUsesSdkLibraries();
+  List getUsesSdkLibraries();
 
-    String[][] getUsesSdkLibrariesCertDigests();
+  String[][] getUsesSdkLibrariesCertDigests();
 
-    long[] getUsesSdkLibrariesVersionsMajor();
+  long[] getUsesSdkLibrariesVersionsMajor();
 
-    List getUsesStaticLibraries();
+  List getUsesStaticLibraries();
 
-    String[][] getUsesStaticLibrariesCertDigests();
+  String[][] getUsesStaticLibrariesCertDigests();
 
-    long[] getUsesStaticLibrariesVersions();
+  long[] getUsesStaticLibrariesVersions();
 
-    String getVersionName();
+  String getVersionName();
 
-    String getVolumeUuid();
+  String getVolumeUuid();
 
-    String getZygotePreloadName();
+  String getZygotePreloadName();
 
-    boolean hasPreserveLegacyExternalStorage();
+  boolean hasPreserveLegacyExternalStorage();
 
-    boolean hasRequestForegroundServiceExemption();
+  boolean hasRequestForegroundServiceExemption();
 
-    Boolean hasRequestRawExternalStorageAccess();
+  Boolean hasRequestRawExternalStorageAccess();
 
-    boolean is32BitAbiPreferred();
+  boolean is32BitAbiPreferred();
 
-    boolean isAllowAudioPlaybackCapture();
+  boolean isAllowAudioPlaybackCapture();
 
-    boolean isAllowNativeHeapPointerTagging();
+  boolean isAllowNativeHeapPointerTagging();
 
-    boolean isAnyDensity();
+  boolean isAnyDensity();
 
-    boolean isApex();
+  boolean isApex();
 
-    boolean isAttributionsUserVisible();
+  boolean isAttributionsUserVisible();
 
-    boolean isBackupAllowed();
+  boolean isBackupAllowed();
 
-    boolean isBackupInForeground();
+  boolean isBackupInForeground();
 
-    boolean isClearUserDataAllowed();
+  boolean isClearUserDataAllowed();
 
-    boolean isClearUserDataOnFailedRestoreAllowed();
+  boolean isClearUserDataOnFailedRestoreAllowed();
 
-    boolean isCleartextTrafficAllowed();
+  boolean isCleartextTrafficAllowed();
 
-    boolean isCoreApp();
+  boolean isCoreApp();
 
-    boolean isCrossProfile();
+  boolean isCrossProfile();
 
-    boolean isDebuggable();
+  boolean isDebuggable();
 
-    boolean isDeclaredHavingCode();
+  boolean isDeclaredHavingCode();
 
-    boolean isDefaultToDeviceProtectedStorage();
+  boolean isDefaultToDeviceProtectedStorage();
 
-    boolean isDirectBootAware();
+  boolean isDirectBootAware();
 
-    boolean isEnabled();
+  boolean isEnabled();
 
-    boolean isExternalStorage();
+  boolean isExternalStorage();
 
-    boolean isExtraLargeScreensSupported();
+  boolean isExtraLargeScreensSupported();
 
-    boolean isExtractNativeLibrariesRequested();
+  boolean isExtractNativeLibrariesRequested();
 
-    boolean isFactoryTest();
+  boolean isFactoryTest();
 
-    boolean isForceQueryable();
+  boolean isForceQueryable();
 
-    boolean isFullBackupOnly();
+  boolean isFullBackupOnly();
 
-    @Deprecated
-    boolean isGame();
+  @Deprecated
+  boolean isGame();
 
-    boolean isHardwareAccelerated();
+  boolean isHardwareAccelerated();
 
-    boolean isHasDomainUrls();
+  boolean isHasDomainUrls();
 
-    boolean isIsolatedSplitLoading();
+  boolean isIsolatedSplitLoading();
 
-    boolean isKillAfterRestoreAllowed();
+  boolean isKillAfterRestoreAllowed();
 
-    boolean isLargeHeap();
+  boolean isLargeHeap();
 
-    boolean isLargeScreensSupported();
+  boolean isLargeScreensSupported();
 
-    boolean isLeavingSharedUser();
+  boolean isLeavingSharedUser();
 
-    boolean isMultiArch();
+  boolean isMultiArch();
 
-    boolean isNativeLibraryRootRequiresIsa();
+  boolean isNativeLibraryRootRequiresIsa();
 
-    boolean isNonSdkApiRequested();
+  boolean isNonSdkApiRequested();
 
-    boolean isNormalScreensSupported();
+  boolean isNormalScreensSupported();
 
-    boolean isOnBackInvokedCallbackEnabled();
+  boolean isOnBackInvokedCallbackEnabled();
 
-    boolean isOverlayIsStatic();
+  boolean isOverlayIsStatic();
 
-    boolean isPartiallyDirectBootAware();
+  boolean isPartiallyDirectBootAware();
 
-    boolean isPersistent();
+  boolean isPersistent();
 
-    boolean isProfileable();
+  boolean isProfileable();
 
-    boolean isProfileableByShell();
+  boolean isProfileableByShell();
 
-    boolean isRequestLegacyExternalStorage();
+  boolean isRequestLegacyExternalStorage();
 
-    boolean isRequiredForAllUsers();
+  boolean isRequiredForAllUsers();
 
-    boolean isResetEnabledSettingsOnAppDataCleared();
+  boolean isResetEnabledSettingsOnAppDataCleared();
 
-    boolean isResizeable();
+  boolean isResizeable();
 
-    boolean isResizeableActivityViaSdkVersion();
+  boolean isResizeableActivityViaSdkVersion();
 
-    boolean isResourceOverlay();
+  boolean isResourceOverlay();
 
-    boolean isRestoreAnyVersion();
+  boolean isRestoreAnyVersion();
 
-    boolean isRtlSupported();
+  boolean isRtlSupported();
 
-    boolean isSaveStateDisallowed();
+  boolean isSaveStateDisallowed();
 
-    boolean isSdkLibrary();
+  boolean isSdkLibrary();
 
-    boolean isSignedWithPlatformKey();
+  boolean isSignedWithPlatformKey();
 
-    boolean isSmallScreensSupported();
+  boolean isSmallScreensSupported();
 
-    boolean isStaticSharedLibrary();
+  boolean isStaticSharedLibrary();
 
-    boolean isStub();
+  boolean isStub();
 
-    boolean isTaskReparentingAllowed();
+  boolean isTaskReparentingAllowed();
 
-    boolean isTestOnly();
+  boolean isTestOnly();
 
-    boolean isUseEmbeddedDex();
+  boolean isUseEmbeddedDex();
 
-    boolean isUserDataFragile();
+  boolean isUserDataFragile();
 
-    boolean isVisibleToInstantApps();
+  boolean isVisibleToInstantApps();
 
-    boolean isVmSafeMode();
+  boolean isVmSafeMode();
 }

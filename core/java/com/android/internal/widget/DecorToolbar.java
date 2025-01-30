@@ -16,127 +16,128 @@ import com.android.internal.view.menu.MenuPresenter;
 
 /* loaded from: classes5.dex */
 public interface DecorToolbar {
-    void animateToVisibility(int i);
+  void animateToVisibility(int i);
 
-    boolean canShowOverflowMenu();
+  boolean canShowOverflowMenu();
 
-    boolean canSplit();
+  boolean canSplit();
 
-    void collapseActionView();
+  void collapseActionView();
 
-    void dismissPopupMenus();
+  void dismissPopupMenus();
 
-    Context getContext();
+  Context getContext();
 
-    View getCustomView();
+  View getCustomView();
 
-    int getDisplayOptions();
+  int getDisplayOptions();
 
-    int getDropdownItemCount();
+  int getDropdownItemCount();
 
-    int getDropdownSelectedPosition();
+  int getDropdownSelectedPosition();
 
-    int getHeight();
+  int getHeight();
 
-    Menu getMenu();
+  Menu getMenu();
 
-    int getNavigationMode();
+  int getNavigationMode();
 
-    CharSequence getSubtitle();
+  CharSequence getSubtitle();
 
-    CharSequence getTitle();
+  CharSequence getTitle();
 
-    ViewGroup getViewGroup();
+  ViewGroup getViewGroup();
 
-    int getVisibility();
+  int getVisibility();
 
-    boolean hasEmbeddedTabs();
+  boolean hasEmbeddedTabs();
 
-    boolean hasExpandedActionView();
+  boolean hasExpandedActionView();
 
-    boolean hasIcon();
+  boolean hasIcon();
 
-    boolean hasLogo();
+  boolean hasLogo();
 
-    boolean hideOverflowMenu();
+  boolean hideOverflowMenu();
 
-    void initIndeterminateProgress();
+  void initIndeterminateProgress();
 
-    void initProgress();
+  void initProgress();
 
-    boolean isOverflowMenuShowPending();
+  boolean isOverflowMenuShowPending();
 
-    boolean isOverflowMenuShowing();
+  boolean isOverflowMenuShowing();
 
-    boolean isSplit();
+  boolean isSplit();
 
-    boolean isTitleTruncated();
+  boolean isTitleTruncated();
 
-    void restoreHierarchyState(SparseArray<Parcelable> sparseArray);
+  void restoreHierarchyState(SparseArray<Parcelable> sparseArray);
 
-    void saveHierarchyState(SparseArray<Parcelable> sparseArray);
+  void saveHierarchyState(SparseArray<Parcelable> sparseArray);
 
-    void setBackgroundDrawable(Drawable drawable);
+  void setBackgroundDrawable(Drawable drawable);
 
-    void setCollapsible(boolean z);
+  void setCollapsible(boolean z);
 
-    void setCustomView(View view);
+  void setCustomView(View view);
 
-    void setDefaultNavigationContentDescription(int i);
+  void setDefaultNavigationContentDescription(int i);
 
-    void setDefaultNavigationIcon(Drawable drawable);
+  void setDefaultNavigationIcon(Drawable drawable);
 
-    void setDisplayOptions(int i);
+  void setDisplayOptions(int i);
 
-    void setDropdownParams(SpinnerAdapter spinnerAdapter, AdapterView.OnItemSelectedListener onItemSelectedListener);
+  void setDropdownParams(
+      SpinnerAdapter spinnerAdapter, AdapterView.OnItemSelectedListener onItemSelectedListener);
 
-    void setDropdownSelectedPosition(int i);
+  void setDropdownSelectedPosition(int i);
 
-    void setEmbeddedTabView(ScrollingTabContainerView scrollingTabContainerView);
+  void setEmbeddedTabView(ScrollingTabContainerView scrollingTabContainerView);
 
-    void setHomeButtonEnabled(boolean z);
+  void setHomeButtonEnabled(boolean z);
 
-    void setIcon(int i);
+  void setIcon(int i);
 
-    void setIcon(Drawable drawable);
+  void setIcon(Drawable drawable);
 
-    void setLogo(int i);
+  void setLogo(int i);
 
-    void setLogo(Drawable drawable);
+  void setLogo(Drawable drawable);
 
-    void setMenu(Menu menu, MenuPresenter.Callback callback);
+  void setMenu(Menu menu, MenuPresenter.Callback callback);
 
-    void setMenuCallbacks(MenuPresenter.Callback callback, MenuBuilder.Callback callback2);
+  void setMenuCallbacks(MenuPresenter.Callback callback, MenuBuilder.Callback callback2);
 
-    void setMenuPrepared();
+  void setMenuPrepared();
 
-    void setNavigationContentDescription(int i);
+  void setNavigationContentDescription(int i);
 
-    void setNavigationContentDescription(CharSequence charSequence);
+  void setNavigationContentDescription(CharSequence charSequence);
 
-    void setNavigationIcon(int i);
+  void setNavigationIcon(int i);
 
-    void setNavigationIcon(Drawable drawable);
+  void setNavigationIcon(Drawable drawable);
 
-    void setNavigationMode(int i);
+  void setNavigationMode(int i);
 
-    void setSplitToolbar(boolean z);
+  void setSplitToolbar(boolean z);
 
-    void setSplitView(ViewGroup viewGroup);
+  void setSplitView(ViewGroup viewGroup);
 
-    void setSplitWhenNarrow(boolean z);
+  void setSplitWhenNarrow(boolean z);
 
-    void setSubtitle(CharSequence charSequence);
+  void setSubtitle(CharSequence charSequence);
 
-    void setTitle(CharSequence charSequence);
+  void setTitle(CharSequence charSequence);
 
-    void setVisibility(int i);
+  void setVisibility(int i);
 
-    void setWindowCallback(Window.Callback callback);
+  void setWindowCallback(Window.Callback callback);
 
-    void setWindowTitle(CharSequence charSequence);
+  void setWindowTitle(CharSequence charSequence);
 
-    Animator setupAnimatorToVisibility(int i, long j);
+  Animator setupAnimatorToVisibility(int i, long j);
 
-    boolean showOverflowMenu();
+  boolean showOverflowMenu();
 }

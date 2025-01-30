@@ -4,34 +4,34 @@ import com.android.internal.org.bouncycastle.util.Arrays;
 
 /* loaded from: classes5.dex */
 public class DHValidationParameters {
-    private int counter;
-    private byte[] seed;
+  private int counter;
+  private byte[] seed;
 
-    public DHValidationParameters(byte[] seed, int counter) {
-        this.seed = Arrays.clone(seed);
-        this.counter = counter;
-    }
+  public DHValidationParameters(byte[] seed, int counter) {
+    this.seed = Arrays.clone(seed);
+    this.counter = counter;
+  }
 
-    public int getCounter() {
-        return this.counter;
-    }
+  public int getCounter() {
+    return this.counter;
+  }
 
-    public byte[] getSeed() {
-        return Arrays.clone(this.seed);
-    }
+  public byte[] getSeed() {
+    return Arrays.clone(this.seed);
+  }
 
-    public boolean equals(Object o) {
-        if (!(o instanceof DHValidationParameters)) {
-            return false;
-        }
-        DHValidationParameters other = (DHValidationParameters) o;
-        if (other.counter != this.counter) {
-            return false;
-        }
-        return Arrays.areEqual(this.seed, other.seed);
+  public boolean equals(Object o) {
+    if (!(o instanceof DHValidationParameters)) {
+      return false;
     }
+    DHValidationParameters other = (DHValidationParameters) o;
+    if (other.counter != this.counter) {
+      return false;
+    }
+    return Arrays.areEqual(this.seed, other.seed);
+  }
 
-    public int hashCode() {
-        return this.counter ^ Arrays.hashCode(this.seed);
-    }
+  public int hashCode() {
+    return this.counter ^ Arrays.hashCode(this.seed);
+  }
 }

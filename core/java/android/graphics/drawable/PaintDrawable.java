@@ -9,51 +9,63 @@ import org.xmlpull.v1.XmlPullParser;
 
 /* loaded from: classes.dex */
 public class PaintDrawable extends ShapeDrawable {
-    public PaintDrawable() {
-    }
+  public PaintDrawable() {}
 
-    public PaintDrawable(int color) {
-        getPaint().setColor(color);
-    }
+  public PaintDrawable(int color) {
+    getPaint().setColor(color);
+  }
 
-    public void setCornerRadius(float radius) {
-        float[] radii = null;
-        if (radius > 0.0f) {
-            radii = new float[8];
-            for (int i = 0; i < 8; i++) {
-                radii[i] = radius;
-            }
-        }
-        setCornerRadii(radii);
+  public void setCornerRadius(float radius) {
+    float[] radii = null;
+    if (radius > 0.0f) {
+      radii = new float[8];
+      for (int i = 0; i < 8; i++) {
+        radii[i] = radius;
+      }
     }
+    setCornerRadii(radii);
+  }
 
-    public void setCornerRadii(float[] radii) {
-        if (radii == null) {
-            if (getShape() != null) {
-                setShape(null);
-            }
-        } else {
-            setShape(new RoundRectShape(radii, null, null));
-        }
-        invalidateSelf();
+  public void setCornerRadii(float[] radii) {
+    if (radii == null) {
+      if (getShape() != null) {
+        setShape(null);
+      }
+    } else {
+      setShape(new RoundRectShape(radii, null, null));
     }
+    invalidateSelf();
+  }
 
-    @Override // android.graphics.drawable.ShapeDrawable
-    protected boolean inflateTag(String name, Resources r, XmlPullParser parser, AttributeSet attrs) {
-        if (!name.equals("corners")) {
-            return super.inflateTag(name, r, parser, attrs);
-        }
-        TypedArray a = r.obtainAttributes(attrs, C4337R.styleable.DrawableCorners);
-        int radius = a.getDimensionPixelSize(0, 0);
-        setCornerRadius(radius);
-        int topLeftRadius = a.getDimensionPixelSize(1, radius);
-        int topRightRadius = a.getDimensionPixelSize(2, radius);
-        int bottomLeftRadius = a.getDimensionPixelSize(3, radius);
-        int bottomRightRadius = a.getDimensionPixelSize(4, radius);
-        if (topLeftRadius != radius || topRightRadius != radius || bottomLeftRadius != radius || bottomRightRadius != radius) {
-            setCornerRadii(new float[]{topLeftRadius, topLeftRadius, topRightRadius, topRightRadius, bottomLeftRadius, bottomLeftRadius, bottomRightRadius, bottomRightRadius});
-        }
-        a.recycle();
-        return true;
+  @Override // android.graphics.drawable.ShapeDrawable
+  protected boolean inflateTag(String name, Resources r, XmlPullParser parser, AttributeSet attrs) {
+    if (!name.equals("corners")) {
+      return super.inflateTag(name, r, parser, attrs);
     }
+    TypedArray a = r.obtainAttributes(attrs, C4337R.styleable.DrawableCorners);
+    int radius = a.getDimensionPixelSize(0, 0);
+    setCornerRadius(radius);
+    int topLeftRadius = a.getDimensionPixelSize(1, radius);
+    int topRightRadius = a.getDimensionPixelSize(2, radius);
+    int bottomLeftRadius = a.getDimensionPixelSize(3, radius);
+    int bottomRightRadius = a.getDimensionPixelSize(4, radius);
+    if (topLeftRadius != radius
+        || topRightRadius != radius
+        || bottomLeftRadius != radius
+        || bottomRightRadius != radius) {
+      setCornerRadii(
+          new float[] {
+            topLeftRadius,
+            topLeftRadius,
+            topRightRadius,
+            topRightRadius,
+            bottomLeftRadius,
+            bottomLeftRadius,
+            bottomRightRadius,
+            bottomRightRadius
+          });
+    }
+    a.recycle();
+    return true;
+  }
 }

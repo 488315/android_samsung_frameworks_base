@@ -12,144 +12,184 @@ import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class UiccCardInfo implements Parcelable {
-    public static final Parcelable.Creator<UiccCardInfo> CREATOR = new Parcelable.Creator<UiccCardInfo>() { // from class: android.telephony.UiccCardInfo.1
+  public static final Parcelable.Creator<UiccCardInfo> CREATOR =
+      new Parcelable.Creator<UiccCardInfo>() { // from class: android.telephony.UiccCardInfo.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public UiccCardInfo createFromParcel(Parcel in) {
-            return new UiccCardInfo(in);
+          return new UiccCardInfo(in);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public UiccCardInfo[] newArray(int size) {
-            return new UiccCardInfo[size];
+          return new UiccCardInfo[size];
         }
-    };
-    private final int mCardId;
-    private final String mEid;
-    private final String mIccId;
-    private boolean mIccIdAccessRestricted;
-    private final boolean mIsEuicc;
-    private final boolean mIsMultipleEnabledProfilesSupported;
-    private final boolean mIsRemovable;
-    private final int mPhysicalSlotIndex;
-    private final List<UiccPortInfo> mPortList;
+      };
+  private final int mCardId;
+  private final String mEid;
+  private final String mIccId;
+  private boolean mIccIdAccessRestricted;
+  private final boolean mIsEuicc;
+  private final boolean mIsMultipleEnabledProfilesSupported;
+  private final boolean mIsRemovable;
+  private final int mPhysicalSlotIndex;
+  private final List<UiccPortInfo> mPortList;
 
-    private UiccCardInfo(Parcel in) {
-        this.mIccIdAccessRestricted = false;
-        this.mIsEuicc = in.readBoolean();
-        this.mCardId = in.readInt();
-        this.mEid = in.readString8();
-        this.mIccId = in.readString8();
-        this.mPhysicalSlotIndex = in.readInt();
-        this.mIsRemovable = in.readBoolean();
-        this.mIsMultipleEnabledProfilesSupported = in.readBoolean();
-        ArrayList arrayList = new ArrayList();
-        this.mPortList = arrayList;
-        in.readTypedList(arrayList, UiccPortInfo.CREATOR);
-        this.mIccIdAccessRestricted = in.readBoolean();
-    }
+  private UiccCardInfo(Parcel in) {
+    this.mIccIdAccessRestricted = false;
+    this.mIsEuicc = in.readBoolean();
+    this.mCardId = in.readInt();
+    this.mEid = in.readString8();
+    this.mIccId = in.readString8();
+    this.mPhysicalSlotIndex = in.readInt();
+    this.mIsRemovable = in.readBoolean();
+    this.mIsMultipleEnabledProfilesSupported = in.readBoolean();
+    ArrayList arrayList = new ArrayList();
+    this.mPortList = arrayList;
+    in.readTypedList(arrayList, UiccPortInfo.CREATOR);
+    this.mIccIdAccessRestricted = in.readBoolean();
+  }
 
-    @Override // android.p009os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeBoolean(this.mIsEuicc);
-        dest.writeInt(this.mCardId);
-        dest.writeString8(this.mEid);
-        dest.writeString8(this.mIccId);
-        dest.writeInt(this.mPhysicalSlotIndex);
-        dest.writeBoolean(this.mIsRemovable);
-        dest.writeBoolean(this.mIsMultipleEnabledProfilesSupported);
-        dest.writeTypedList(this.mPortList, flags);
-        dest.writeBoolean(this.mIccIdAccessRestricted);
-    }
+  @Override // android.p009os.Parcelable
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeBoolean(this.mIsEuicc);
+    dest.writeInt(this.mCardId);
+    dest.writeString8(this.mEid);
+    dest.writeString8(this.mIccId);
+    dest.writeInt(this.mPhysicalSlotIndex);
+    dest.writeBoolean(this.mIsRemovable);
+    dest.writeBoolean(this.mIsMultipleEnabledProfilesSupported);
+    dest.writeTypedList(this.mPortList, flags);
+    dest.writeBoolean(this.mIccIdAccessRestricted);
+  }
 
-    @Override // android.p009os.Parcelable
-    public int describeContents() {
-        return 0;
-    }
+  @Override // android.p009os.Parcelable
+  public int describeContents() {
+    return 0;
+  }
 
-    public UiccCardInfo(boolean isEuicc, int cardId, String eid, int physicalSlotIndex, boolean isRemovable, boolean isMultipleEnabledProfilesSupported, List<UiccPortInfo> portList) {
-        this.mIccIdAccessRestricted = false;
-        this.mIsEuicc = isEuicc;
-        this.mCardId = cardId;
-        this.mEid = eid;
-        this.mIccId = null;
-        this.mPhysicalSlotIndex = physicalSlotIndex;
-        this.mIsRemovable = isRemovable;
-        this.mIsMultipleEnabledProfilesSupported = isMultipleEnabledProfilesSupported;
-        this.mPortList = portList;
-    }
+  public UiccCardInfo(
+      boolean isEuicc,
+      int cardId,
+      String eid,
+      int physicalSlotIndex,
+      boolean isRemovable,
+      boolean isMultipleEnabledProfilesSupported,
+      List<UiccPortInfo> portList) {
+    this.mIccIdAccessRestricted = false;
+    this.mIsEuicc = isEuicc;
+    this.mCardId = cardId;
+    this.mEid = eid;
+    this.mIccId = null;
+    this.mPhysicalSlotIndex = physicalSlotIndex;
+    this.mIsRemovable = isRemovable;
+    this.mIsMultipleEnabledProfilesSupported = isMultipleEnabledProfilesSupported;
+    this.mPortList = portList;
+  }
 
-    public boolean isEuicc() {
-        return this.mIsEuicc;
-    }
+  public boolean isEuicc() {
+    return this.mIsEuicc;
+  }
 
-    public int getCardId() {
-        return this.mCardId;
-    }
+  public int getCardId() {
+    return this.mCardId;
+  }
 
-    public String getEid() {
-        if (!this.mIsEuicc) {
-            return null;
-        }
-        return this.mEid;
+  public String getEid() {
+    if (!this.mIsEuicc) {
+      return null;
     }
+    return this.mEid;
+  }
 
-    @Deprecated
-    public String getIccId() {
-        if (this.mIccIdAccessRestricted) {
-            throw new UnsupportedOperationException("getIccId() is not supported by UiccCardInfo. Please Use UiccPortInfo API instead");
-        }
-        if (this.mPortList.isEmpty()) {
-            return null;
-        }
-        return this.mPortList.get(0).getIccId();
+  @Deprecated
+  public String getIccId() {
+    if (this.mIccIdAccessRestricted) {
+      throw new UnsupportedOperationException(
+          "getIccId() is not supported by UiccCardInfo. Please Use UiccPortInfo API instead");
     }
+    if (this.mPortList.isEmpty()) {
+      return null;
+    }
+    return this.mPortList.get(0).getIccId();
+  }
 
-    @Deprecated
-    public int getSlotIndex() {
-        return this.mPhysicalSlotIndex;
-    }
+  @Deprecated
+  public int getSlotIndex() {
+    return this.mPhysicalSlotIndex;
+  }
 
-    public int getPhysicalSlotIndex() {
-        return this.mPhysicalSlotIndex;
-    }
+  public int getPhysicalSlotIndex() {
+    return this.mPhysicalSlotIndex;
+  }
 
-    public boolean isRemovable() {
-        return this.mIsRemovable;
-    }
+  public boolean isRemovable() {
+    return this.mIsRemovable;
+  }
 
-    public boolean isMultipleEnabledProfilesSupported() {
-        return this.mIsMultipleEnabledProfilesSupported;
-    }
+  public boolean isMultipleEnabledProfilesSupported() {
+    return this.mIsMultipleEnabledProfilesSupported;
+  }
 
-    public Collection<UiccPortInfo> getPorts() {
-        return Collections.unmodifiableList(this.mPortList);
-    }
+  public Collection<UiccPortInfo> getPorts() {
+    return Collections.unmodifiableList(this.mPortList);
+  }
 
-    public void setIccIdAccessRestricted(boolean iccIdAccessRestricted) {
-        this.mIccIdAccessRestricted = iccIdAccessRestricted;
-    }
+  public void setIccIdAccessRestricted(boolean iccIdAccessRestricted) {
+    this.mIccIdAccessRestricted = iccIdAccessRestricted;
+  }
 
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        UiccCardInfo that = (UiccCardInfo) obj;
-        if (this.mIsEuicc == that.mIsEuicc && this.mCardId == that.mCardId && Objects.equals(this.mEid, that.mEid) && Objects.equals(this.mIccId, that.mIccId) && this.mPhysicalSlotIndex == that.mPhysicalSlotIndex && this.mIsRemovable == that.mIsRemovable && this.mIsMultipleEnabledProfilesSupported == that.mIsMultipleEnabledProfilesSupported && Objects.equals(this.mPortList, that.mPortList)) {
-            return true;
-        }
-        return false;
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
     }
+    if (obj == null || getClass() != obj.getClass()) {
+      return false;
+    }
+    UiccCardInfo that = (UiccCardInfo) obj;
+    if (this.mIsEuicc == that.mIsEuicc
+        && this.mCardId == that.mCardId
+        && Objects.equals(this.mEid, that.mEid)
+        && Objects.equals(this.mIccId, that.mIccId)
+        && this.mPhysicalSlotIndex == that.mPhysicalSlotIndex
+        && this.mIsRemovable == that.mIsRemovable
+        && this.mIsMultipleEnabledProfilesSupported == that.mIsMultipleEnabledProfilesSupported
+        && Objects.equals(this.mPortList, that.mPortList)) {
+      return true;
+    }
+    return false;
+  }
 
-    public int hashCode() {
-        return Objects.hash(Boolean.valueOf(this.mIsEuicc), Integer.valueOf(this.mCardId), this.mEid, this.mIccId, Integer.valueOf(this.mPhysicalSlotIndex), Boolean.valueOf(this.mIsRemovable), Boolean.valueOf(this.mIsMultipleEnabledProfilesSupported), this.mPortList);
-    }
+  public int hashCode() {
+    return Objects.hash(
+        Boolean.valueOf(this.mIsEuicc),
+        Integer.valueOf(this.mCardId),
+        this.mEid,
+        this.mIccId,
+        Integer.valueOf(this.mPhysicalSlotIndex),
+        Boolean.valueOf(this.mIsRemovable),
+        Boolean.valueOf(this.mIsMultipleEnabledProfilesSupported),
+        this.mPortList);
+  }
 
-    public String toString() {
-        return "UiccCardInfo (mIsEuicc=" + this.mIsEuicc + ", mCardId=" + this.mCardId + ", mEid=" + com.android.telephony.Rlog.pii(TelephonyUtils.IS_DEBUGGABLE, this.mEid) + ", mPhysicalSlotIndex=" + this.mPhysicalSlotIndex + ", mIsRemovable=" + this.mIsRemovable + ", mIsMultipleEnabledProfilesSupported=" + this.mIsMultipleEnabledProfilesSupported + ", mPortList=" + this.mPortList + ", mIccIdAccessRestricted=" + this.mIccIdAccessRestricted + NavigationBarInflaterView.KEY_CODE_END;
-    }
+  public String toString() {
+    return "UiccCardInfo (mIsEuicc="
+        + this.mIsEuicc
+        + ", mCardId="
+        + this.mCardId
+        + ", mEid="
+        + com.android.telephony.Rlog.pii(TelephonyUtils.IS_DEBUGGABLE, this.mEid)
+        + ", mPhysicalSlotIndex="
+        + this.mPhysicalSlotIndex
+        + ", mIsRemovable="
+        + this.mIsRemovable
+        + ", mIsMultipleEnabledProfilesSupported="
+        + this.mIsMultipleEnabledProfilesSupported
+        + ", mPortList="
+        + this.mPortList
+        + ", mIccIdAccessRestricted="
+        + this.mIccIdAccessRestricted
+        + NavigationBarInflaterView.KEY_CODE_END;
+  }
 }

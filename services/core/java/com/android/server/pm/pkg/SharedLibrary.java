@@ -7,23 +7,23 @@ import java.util.List;
 @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
 /* loaded from: classes3.dex */
 public interface SharedLibrary {
-    List getAllCodePaths();
+  List getAllCodePaths();
 
-    VersionedPackage getDeclaringPackage();
+  VersionedPackage getDeclaringPackage();
 
-    List getDependencies();
+  List getDependencies();
 
-    List getDependentPackages();
+  List getDependentPackages();
 
-    String getName();
+  String getName();
 
-    String getPackageName();
+  String getPackageName();
 
-    String getPath();
+  String getPath();
 
-    int getType();
+  int getType();
 
-    long getVersion();
+  long getVersion();
 
-    boolean isNative();
+  boolean isNative();
 }

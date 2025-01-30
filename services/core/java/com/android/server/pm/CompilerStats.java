@@ -21,213 +21,220 @@ import libcore.io.IoUtils;
 
 /* loaded from: classes3.dex */
 public class CompilerStats extends AbstractStatsBase {
-    public final Map packageStats;
+  public final Map packageStats;
 
-    public class PackageStats {
-        public final Map compileTimePerCodePath = new ArrayMap(2);
-        public final String packageName;
+  public class PackageStats {
+    public final Map compileTimePerCodePath = new ArrayMap(2);
+    public final String packageName;
 
-        public PackageStats(String str) {
-            this.packageName = str;
-        }
-
-        public String getPackageName() {
-            return this.packageName;
-        }
-
-        public long getCompileTime(String str) {
-            String storedPathFromCodePath = getStoredPathFromCodePath(str);
-            synchronized (this.compileTimePerCodePath) {
-                Long l = (Long) this.compileTimePerCodePath.get(storedPathFromCodePath);
-                if (l == null) {
-                    return 0L;
-                }
-                return l.longValue();
-            }
-        }
-
-        public void setCompileTime(String str, long j) {
-            String storedPathFromCodePath = getStoredPathFromCodePath(str);
-            synchronized (this.compileTimePerCodePath) {
-                if (j <= 0) {
-                    this.compileTimePerCodePath.remove(storedPathFromCodePath);
-                } else {
-                    this.compileTimePerCodePath.put(storedPathFromCodePath, Long.valueOf(j));
-                }
-            }
-        }
-
-        public static String getStoredPathFromCodePath(String str) {
-            return str.substring(str.lastIndexOf(File.separatorChar) + 1);
-        }
-
-        public void dump(IndentingPrintWriter indentingPrintWriter) {
-            synchronized (this.compileTimePerCodePath) {
-                if (this.compileTimePerCodePath.size() == 0) {
-                    indentingPrintWriter.println("(No recorded stats)");
-                } else {
-                    for (Map.Entry entry : this.compileTimePerCodePath.entrySet()) {
-                        indentingPrintWriter.println(" " + ((String) entry.getKey()) + " - " + entry.getValue());
-                    }
-                }
-            }
-        }
+    public PackageStats(String str) {
+      this.packageName = str;
     }
 
-    public CompilerStats() {
-        super("package-cstats.list", "CompilerStats_DiskWriter", false);
-        this.packageStats = new HashMap();
+    public String getPackageName() {
+      return this.packageName;
     }
 
-    public PackageStats getPackageStats(String str) {
-        PackageStats packageStats;
-        synchronized (this.packageStats) {
-            packageStats = (PackageStats) this.packageStats.get(str);
+    public long getCompileTime(String str) {
+      String storedPathFromCodePath = getStoredPathFromCodePath(str);
+      synchronized (this.compileTimePerCodePath) {
+        Long l = (Long) this.compileTimePerCodePath.get(storedPathFromCodePath);
+        if (l == null) {
+          return 0L;
         }
+        return l.longValue();
+      }
+    }
+
+    public void setCompileTime(String str, long j) {
+      String storedPathFromCodePath = getStoredPathFromCodePath(str);
+      synchronized (this.compileTimePerCodePath) {
+        if (j <= 0) {
+          this.compileTimePerCodePath.remove(storedPathFromCodePath);
+        } else {
+          this.compileTimePerCodePath.put(storedPathFromCodePath, Long.valueOf(j));
+        }
+      }
+    }
+
+    public static String getStoredPathFromCodePath(String str) {
+      return str.substring(str.lastIndexOf(File.separatorChar) + 1);
+    }
+
+    public void dump(IndentingPrintWriter indentingPrintWriter) {
+      synchronized (this.compileTimePerCodePath) {
+        if (this.compileTimePerCodePath.size() == 0) {
+          indentingPrintWriter.println("(No recorded stats)");
+        } else {
+          for (Map.Entry entry : this.compileTimePerCodePath.entrySet()) {
+            indentingPrintWriter.println(
+                " " + ((String) entry.getKey()) + " - " + entry.getValue());
+          }
+        }
+      }
+    }
+  }
+
+  public CompilerStats() {
+    super("package-cstats.list", "CompilerStats_DiskWriter", false);
+    this.packageStats = new HashMap();
+  }
+
+  public PackageStats getPackageStats(String str) {
+    PackageStats packageStats;
+    synchronized (this.packageStats) {
+      packageStats = (PackageStats) this.packageStats.get(str);
+    }
+    return packageStats;
+  }
+
+  public PackageStats createPackageStats(String str) {
+    PackageStats packageStats;
+    synchronized (this.packageStats) {
+      packageStats = new PackageStats(str);
+      this.packageStats.put(str, packageStats);
+    }
+    return packageStats;
+  }
+
+  public PackageStats getOrCreatePackageStats(String str) {
+    synchronized (this.packageStats) {
+      PackageStats packageStats = (PackageStats) this.packageStats.get(str);
+      if (packageStats != null) {
         return packageStats;
+      }
+      return createPackageStats(str);
     }
+  }
 
-    public PackageStats createPackageStats(String str) {
-        PackageStats packageStats;
-        synchronized (this.packageStats) {
-            packageStats = new PackageStats(str);
-            this.packageStats.put(str, packageStats);
-        }
-        return packageStats;
-    }
-
-    public PackageStats getOrCreatePackageStats(String str) {
-        synchronized (this.packageStats) {
-            PackageStats packageStats = (PackageStats) this.packageStats.get(str);
-            if (packageStats != null) {
-                return packageStats;
+  public void write(Writer writer) {
+    FastPrintWriter fastPrintWriter = new FastPrintWriter(writer);
+    fastPrintWriter.print("PACKAGE_MANAGER__COMPILER_STATS__");
+    fastPrintWriter.println(1);
+    synchronized (this.packageStats) {
+      for (PackageStats packageStats : this.packageStats.values()) {
+        synchronized (packageStats.compileTimePerCodePath) {
+          if (!packageStats.compileTimePerCodePath.isEmpty()) {
+            fastPrintWriter.println(packageStats.getPackageName());
+            for (Map.Entry entry : packageStats.compileTimePerCodePath.entrySet()) {
+              fastPrintWriter.println(
+                  PackageManagerShellCommandDataLoader.STDIN_PATH
+                      + ((String) entry.getKey())
+                      + XmlUtils.STRING_ARRAY_SEPARATOR
+                      + entry.getValue());
             }
-            return createPackageStats(str);
+          }
         }
+      }
     }
+    fastPrintWriter.flush();
+  }
 
-    public void write(Writer writer) {
-        FastPrintWriter fastPrintWriter = new FastPrintWriter(writer);
-        fastPrintWriter.print("PACKAGE_MANAGER__COMPILER_STATS__");
-        fastPrintWriter.println(1);
-        synchronized (this.packageStats) {
-            for (PackageStats packageStats : this.packageStats.values()) {
-                synchronized (packageStats.compileTimePerCodePath) {
-                    if (!packageStats.compileTimePerCodePath.isEmpty()) {
-                        fastPrintWriter.println(packageStats.getPackageName());
-                        for (Map.Entry entry : packageStats.compileTimePerCodePath.entrySet()) {
-                            fastPrintWriter.println(PackageManagerShellCommandDataLoader.STDIN_PATH + ((String) entry.getKey()) + XmlUtils.STRING_ARRAY_SEPARATOR + entry.getValue());
-                        }
-                    }
-                }
+  /* JADX WARN: Code restructure failed: missing block: B:29:0x0070, code lost:
+
+     throw new java.lang.IllegalArgumentException("Could not parse data " + r3);
+  */
+  /*
+      Code decompiled incorrectly, please refer to instructions dump.
+  */
+  public boolean read(Reader reader) {
+    synchronized (this.packageStats) {
+      this.packageStats.clear();
+      try {
+        BufferedReader bufferedReader = new BufferedReader(reader);
+        String readLine = bufferedReader.readLine();
+        if (readLine == null) {
+          throw new IllegalArgumentException("No version line found.");
+        }
+        if (!readLine.startsWith("PACKAGE_MANAGER__COMPILER_STATS__")) {
+          throw new IllegalArgumentException("Invalid version line: " + readLine);
+        }
+        int parseInt = Integer.parseInt(readLine.substring(33));
+        if (parseInt != 1) {
+          throw new IllegalArgumentException("Unexpected version: " + parseInt);
+        }
+        PackageStats packageStats = new PackageStats("fake package");
+        while (true) {
+          String readLine2 = bufferedReader.readLine();
+          if (readLine2 != null) {
+            if (readLine2.startsWith(PackageManagerShellCommandDataLoader.STDIN_PATH)) {
+              int indexOf = readLine2.indexOf(58);
+              if (indexOf == -1 || indexOf == 1) {
+                break;
+              }
+              packageStats.setCompileTime(
+                  readLine2.substring(1, indexOf),
+                  Long.parseLong(readLine2.substring(indexOf + 1)));
+            } else {
+              packageStats = getOrCreatePackageStats(readLine2);
             }
+          }
         }
-        fastPrintWriter.flush();
+      } catch (Exception e) {
+        Log.e("PackageManager", "Error parsing compiler stats", e);
+        return false;
+      }
     }
+    return true;
+  }
 
-    /* JADX WARN: Code restructure failed: missing block: B:29:0x0070, code lost:
-    
-        throw new java.lang.IllegalArgumentException("Could not parse data " + r3);
-     */
-    /*
-        Code decompiled incorrectly, please refer to instructions dump.
-    */
-    public boolean read(Reader reader) {
-        synchronized (this.packageStats) {
-            this.packageStats.clear();
-            try {
-                BufferedReader bufferedReader = new BufferedReader(reader);
-                String readLine = bufferedReader.readLine();
-                if (readLine == null) {
-                    throw new IllegalArgumentException("No version line found.");
-                }
-                if (!readLine.startsWith("PACKAGE_MANAGER__COMPILER_STATS__")) {
-                    throw new IllegalArgumentException("Invalid version line: " + readLine);
-                }
-                int parseInt = Integer.parseInt(readLine.substring(33));
-                if (parseInt != 1) {
-                    throw new IllegalArgumentException("Unexpected version: " + parseInt);
-                }
-                PackageStats packageStats = new PackageStats("fake package");
-                while (true) {
-                    String readLine2 = bufferedReader.readLine();
-                    if (readLine2 != null) {
-                        if (readLine2.startsWith(PackageManagerShellCommandDataLoader.STDIN_PATH)) {
-                            int indexOf = readLine2.indexOf(58);
-                            if (indexOf == -1 || indexOf == 1) {
-                                break;
-                            }
-                            packageStats.setCompileTime(readLine2.substring(1, indexOf), Long.parseLong(readLine2.substring(indexOf + 1)));
-                        } else {
-                            packageStats = getOrCreatePackageStats(readLine2);
-                        }
-                    }
-                }
-            } catch (Exception e) {
-                Log.e("PackageManager", "Error parsing compiler stats", e);
-                return false;
-            }
-        }
-        return true;
-    }
+  public void writeNow() {
+    writeNow(null);
+  }
 
-    public void writeNow() {
-        writeNow(null);
-    }
+  public boolean maybeWriteAsync() {
+    return maybeWriteAsync(null);
+  }
 
-    public boolean maybeWriteAsync() {
-        return maybeWriteAsync(null);
+  @Override // com.android.server.pm.AbstractStatsBase
+  public void writeInternal(Void r3) {
+    FileOutputStream fileOutputStream;
+    AtomicFile file = getFile();
+    try {
+      fileOutputStream = file.startWrite();
+    } catch (IOException e) {
+      e = e;
+      fileOutputStream = null;
     }
+    try {
+      OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
+      write(outputStreamWriter);
+      outputStreamWriter.flush();
+      file.finishWrite(fileOutputStream);
+    } catch (IOException e2) {
+      e = e2;
+      if (fileOutputStream != null) {
+        file.failWrite(fileOutputStream);
+      }
+      Log.e("PackageManager", "Failed to write compiler stats", e);
+    }
+  }
 
-    @Override // com.android.server.pm.AbstractStatsBase
-    public void writeInternal(Void r3) {
-        FileOutputStream fileOutputStream;
-        AtomicFile file = getFile();
-        try {
-            fileOutputStream = file.startWrite();
-        } catch (IOException e) {
-            e = e;
-            fileOutputStream = null;
-        }
-        try {
-            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(fileOutputStream);
-            write(outputStreamWriter);
-            outputStreamWriter.flush();
-            file.finishWrite(fileOutputStream);
-        } catch (IOException e2) {
-            e = e2;
-            if (fileOutputStream != null) {
-                file.failWrite(fileOutputStream);
-            }
-            Log.e("PackageManager", "Failed to write compiler stats", e);
-        }
-    }
+  public void read() {
+    read((Object) null);
+  }
 
-    public void read() {
-        read((Object) null);
+  @Override // com.android.server.pm.AbstractStatsBase
+  public void readInternal(Void r4) {
+    BufferedReader bufferedReader;
+    BufferedReader bufferedReader2 = null;
+    try {
+      bufferedReader = new BufferedReader(new InputStreamReader(getFile().openRead()));
+    } catch (FileNotFoundException unused) {
+    } catch (Throwable th) {
+      th = th;
     }
-
-    @Override // com.android.server.pm.AbstractStatsBase
-    public void readInternal(Void r4) {
-        BufferedReader bufferedReader;
-        BufferedReader bufferedReader2 = null;
-        try {
-            bufferedReader = new BufferedReader(new InputStreamReader(getFile().openRead()));
-        } catch (FileNotFoundException unused) {
-        } catch (Throwable th) {
-            th = th;
-        }
-        try {
-            read((Reader) bufferedReader);
-            IoUtils.closeQuietly(bufferedReader);
-        } catch (FileNotFoundException unused2) {
-            bufferedReader2 = bufferedReader;
-            IoUtils.closeQuietly(bufferedReader2);
-        } catch (Throwable th2) {
-            th = th2;
-            bufferedReader2 = bufferedReader;
-            IoUtils.closeQuietly(bufferedReader2);
-            throw th;
-        }
+    try {
+      read((Reader) bufferedReader);
+      IoUtils.closeQuietly(bufferedReader);
+    } catch (FileNotFoundException unused2) {
+      bufferedReader2 = bufferedReader;
+      IoUtils.closeQuietly(bufferedReader2);
+    } catch (Throwable th2) {
+      th = th2;
+      bufferedReader2 = bufferedReader;
+      IoUtils.closeQuietly(bufferedReader2);
+      throw th;
     }
+  }
 }

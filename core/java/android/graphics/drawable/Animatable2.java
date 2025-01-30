@@ -2,17 +2,15 @@ package android.graphics.drawable;
 
 /* loaded from: classes.dex */
 public interface Animatable2 extends Animatable {
-    void clearAnimationCallbacks();
+  void clearAnimationCallbacks();
 
-    void registerAnimationCallback(AnimationCallback animationCallback);
+  void registerAnimationCallback(AnimationCallback animationCallback);
 
-    boolean unregisterAnimationCallback(AnimationCallback animationCallback);
+  boolean unregisterAnimationCallback(AnimationCallback animationCallback);
 
-    public static abstract class AnimationCallback {
-        public void onAnimationStart(Drawable drawable) {
-        }
+  public abstract static class AnimationCallback {
+    public void onAnimationStart(Drawable drawable) {}
 
-        public void onAnimationEnd(Drawable drawable) {
-        }
-    }
+    public void onAnimationEnd(Drawable drawable) {}
+  }
 }

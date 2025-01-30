@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 /* loaded from: classes.dex */
 public interface EntityIterator extends Iterator<Entity> {
-    void close();
+  void close();
 
-    void reset();
+  void reset();
 }

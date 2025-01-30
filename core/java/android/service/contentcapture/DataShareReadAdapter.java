@@ -6,7 +6,7 @@ import android.p009os.ParcelFileDescriptor;
 @SystemApi
 /* loaded from: classes3.dex */
 public interface DataShareReadAdapter {
-    void onError(int i);
+  void onError(int i);
 
-    void onStart(ParcelFileDescriptor parcelFileDescriptor);
+  void onStart(ParcelFileDescriptor parcelFileDescriptor);
 }

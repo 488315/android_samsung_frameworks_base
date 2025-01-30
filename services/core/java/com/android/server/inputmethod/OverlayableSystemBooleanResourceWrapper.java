@@ -13,65 +13,76 @@ import java.util.function.Consumer;
 
 /* loaded from: classes2.dex */
 public final class OverlayableSystemBooleanResourceWrapper implements AutoCloseable {
-    public final AtomicReference mCleanerRef;
-    public final int mUserId;
-    public final AtomicBoolean mValueRef;
+  public final AtomicReference mCleanerRef;
+  public final int mUserId;
+  public final AtomicBoolean mValueRef;
 
-    public static OverlayableSystemBooleanResourceWrapper create(final Context context, final int i, Handler handler, final Consumer consumer) {
-        final AtomicBoolean atomicBoolean = new AtomicBoolean(evaluate(context, i));
-        AtomicReference atomicReference = new AtomicReference();
-        final OverlayableSystemBooleanResourceWrapper overlayableSystemBooleanResourceWrapper = new OverlayableSystemBooleanResourceWrapper(context.getUserId(), atomicBoolean, atomicReference);
-        IntentFilter intentFilter = new IntentFilter("android.intent.action.OVERLAY_CHANGED");
-        intentFilter.addDataScheme("package");
-        intentFilter.addDataSchemeSpecificPart("android", 0);
-        final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { // from class: com.android.server.inputmethod.OverlayableSystemBooleanResourceWrapper.1
-            @Override // android.content.BroadcastReceiver
-            public void onReceive(Context context2, Intent intent) {
-                boolean evaluate = OverlayableSystemBooleanResourceWrapper.evaluate(context, i);
-                if (evaluate != atomicBoolean.getAndSet(evaluate)) {
-                    consumer.accept(overlayableSystemBooleanResourceWrapper);
-                }
+  public static OverlayableSystemBooleanResourceWrapper create(
+      final Context context, final int i, Handler handler, final Consumer consumer) {
+    final AtomicBoolean atomicBoolean = new AtomicBoolean(evaluate(context, i));
+    AtomicReference atomicReference = new AtomicReference();
+    final OverlayableSystemBooleanResourceWrapper overlayableSystemBooleanResourceWrapper =
+        new OverlayableSystemBooleanResourceWrapper(
+            context.getUserId(), atomicBoolean, atomicReference);
+    IntentFilter intentFilter = new IntentFilter("android.intent.action.OVERLAY_CHANGED");
+    intentFilter.addDataScheme("package");
+    intentFilter.addDataSchemeSpecificPart("android", 0);
+    final BroadcastReceiver broadcastReceiver =
+        new BroadcastReceiver() { // from class:
+                                  // com.android.server.inputmethod.OverlayableSystemBooleanResourceWrapper.1
+          @Override // android.content.BroadcastReceiver
+          public void onReceive(Context context2, Intent intent) {
+            boolean evaluate = OverlayableSystemBooleanResourceWrapper.evaluate(context, i);
+            if (evaluate != atomicBoolean.getAndSet(evaluate)) {
+              consumer.accept(overlayableSystemBooleanResourceWrapper);
             }
+          }
         };
-        context.registerReceiver(broadcastReceiver, intentFilter, null, handler, 4);
-        atomicReference.set(new Runnable() { // from class: com.android.server.inputmethod.OverlayableSystemBooleanResourceWrapper$$ExternalSyntheticLambda0
-            @Override // java.lang.Runnable
-            public final void run() {
-                context.unregisterReceiver(broadcastReceiver);
-            }
+    context.registerReceiver(broadcastReceiver, intentFilter, null, handler, 4);
+    atomicReference.set(
+        new Runnable() { // from class:
+                         // com.android.server.inputmethod.OverlayableSystemBooleanResourceWrapper$$ExternalSyntheticLambda0
+          @Override // java.lang.Runnable
+          public final void run() {
+            context.unregisterReceiver(broadcastReceiver);
+          }
         });
-        atomicBoolean.set(evaluate(context, i));
-        return overlayableSystemBooleanResourceWrapper;
-    }
+    atomicBoolean.set(evaluate(context, i));
+    return overlayableSystemBooleanResourceWrapper;
+  }
 
-    public OverlayableSystemBooleanResourceWrapper(int i, AtomicBoolean atomicBoolean, AtomicReference atomicReference) {
-        this.mUserId = i;
-        this.mValueRef = atomicBoolean;
-        this.mCleanerRef = atomicReference;
-    }
+  public OverlayableSystemBooleanResourceWrapper(
+      int i, AtomicBoolean atomicBoolean, AtomicReference atomicReference) {
+    this.mUserId = i;
+    this.mValueRef = atomicBoolean;
+    this.mCleanerRef = atomicReference;
+  }
 
-    public boolean get() {
-        return this.mValueRef.get();
-    }
+  public boolean get() {
+    return this.mValueRef.get();
+  }
 
-    public int getUserId() {
-        return this.mUserId;
-    }
+  public int getUserId() {
+    return this.mUserId;
+  }
 
-    public static boolean evaluate(Context context, int i) {
-        try {
-            return context.getPackageManager().getResourcesForApplication("android").getBoolean(i);
-        } catch (PackageManager.NameNotFoundException e) {
-            Slog.e("OverlayableSystemBooleanResourceWrapper", "getResourcesForApplication(\"android\") failed", e);
-            return false;
-        }
+  public static boolean evaluate(Context context, int i) {
+    try {
+      return context.getPackageManager().getResourcesForApplication("android").getBoolean(i);
+    } catch (PackageManager.NameNotFoundException e) {
+      Slog.e(
+          "OverlayableSystemBooleanResourceWrapper",
+          "getResourcesForApplication(\"android\") failed",
+          e);
+      return false;
     }
+  }
 
-    @Override // java.lang.AutoCloseable
-    public void close() {
-        Runnable runnable = (Runnable) this.mCleanerRef.getAndSet(null);
-        if (runnable != null) {
-            runnable.run();
-        }
+  @Override // java.lang.AutoCloseable
+  public void close() {
+    Runnable runnable = (Runnable) this.mCleanerRef.getAndSet(null);
+    if (runnable != null) {
+      runnable.run();
     }
+  }
 }

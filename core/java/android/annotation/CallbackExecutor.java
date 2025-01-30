@@ -8,5 +8,4 @@ import java.lang.annotation.Target;
 @Target({ElementType.PARAMETER})
 @Retention(RetentionPolicy.SOURCE)
 /* loaded from: classes.dex */
-public @interface CallbackExecutor {
-}
+public @interface CallbackExecutor {}

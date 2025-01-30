@@ -2,21 +2,21 @@ package android.security.keystore;
 
 /* loaded from: classes3.dex */
 public interface UserAuthArgs {
-    long getBoundToSpecificSecureUserId();
+  long getBoundToSpecificSecureUserId();
 
-    int getUserAuthenticationType();
+  int getUserAuthenticationType();
 
-    int getUserAuthenticationValidityDurationSeconds();
+  int getUserAuthenticationValidityDurationSeconds();
 
-    boolean isInvalidatedByBiometricEnrollment();
+  boolean isInvalidatedByBiometricEnrollment();
 
-    boolean isUnlockedDeviceRequired();
+  boolean isUnlockedDeviceRequired();
 
-    boolean isUserAuthenticationRequired();
+  boolean isUserAuthenticationRequired();
 
-    boolean isUserAuthenticationValidWhileOnBody();
+  boolean isUserAuthenticationValidWhileOnBody();
 
-    boolean isUserConfirmationRequired();
+  boolean isUserConfirmationRequired();
 
-    boolean isUserPresenceRequired();
+  boolean isUserPresenceRequired();
 }

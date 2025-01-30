@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 /* loaded from: classes.dex */
 public @interface RequiresFeature {
-    String enforcement() default "android.content.pm.PackageManager#hasSystemFeature";
+  String enforcement() default "android.content.pm.PackageManager#hasSystemFeature";
 
-    String value();
+  String value();
 }

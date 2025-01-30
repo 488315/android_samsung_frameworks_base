@@ -5,51 +5,51 @@ import java.time.Duration;
 
 /* loaded from: classes3.dex */
 public interface ServiceConfigAccessor {
-    void addConfigurationInternalChangeListener(StateChangeListener stateChangeListener);
+  void addConfigurationInternalChangeListener(StateChangeListener stateChangeListener);
 
-    void addLocationTimeZoneManagerConfigListener(StateChangeListener stateChangeListener);
+  void addLocationTimeZoneManagerConfigListener(StateChangeListener stateChangeListener);
 
-    ConfigurationInternal getConfigurationInternal(int i);
+  ConfigurationInternal getConfigurationInternal(int i);
 
-    ConfigurationInternal getCurrentUserConfigurationInternal();
+  ConfigurationInternal getCurrentUserConfigurationInternal();
 
-    Duration getLocationTimeZoneProviderEventFilteringAgeThreshold();
+  Duration getLocationTimeZoneProviderEventFilteringAgeThreshold();
 
-    Duration getLocationTimeZoneProviderInitializationTimeout();
+  Duration getLocationTimeZoneProviderInitializationTimeout();
 
-    Duration getLocationTimeZoneProviderInitializationTimeoutFuzz();
+  Duration getLocationTimeZoneProviderInitializationTimeoutFuzz();
 
-    Duration getLocationTimeZoneUncertaintyDelay();
+  Duration getLocationTimeZoneUncertaintyDelay();
 
-    String getPrimaryLocationTimeZoneProviderMode();
+  String getPrimaryLocationTimeZoneProviderMode();
 
-    String getPrimaryLocationTimeZoneProviderPackageName();
+  String getPrimaryLocationTimeZoneProviderPackageName();
 
-    boolean getRecordStateChangesForTests();
+  boolean getRecordStateChangesForTests();
 
-    String getSecondaryLocationTimeZoneProviderMode();
+  String getSecondaryLocationTimeZoneProviderMode();
 
-    String getSecondaryLocationTimeZoneProviderPackageName();
+  String getSecondaryLocationTimeZoneProviderPackageName();
 
-    boolean isGeoTimeZoneDetectionFeatureSupported();
+  boolean isGeoTimeZoneDetectionFeatureSupported();
 
-    boolean isGeoTimeZoneDetectionFeatureSupportedInConfig();
+  boolean isGeoTimeZoneDetectionFeatureSupportedInConfig();
 
-    boolean isGeolocationFallbackEnabled();
+  boolean isGeolocationFallbackEnabled();
 
-    boolean isTestPrimaryLocationTimeZoneProvider();
+  boolean isTestPrimaryLocationTimeZoneProvider();
 
-    boolean isTestSecondaryLocationTimeZoneProvider();
+  boolean isTestSecondaryLocationTimeZoneProvider();
 
-    void removeConfigurationInternalChangeListener(StateChangeListener stateChangeListener);
+  void removeConfigurationInternalChangeListener(StateChangeListener stateChangeListener);
 
-    void resetVolatileTestConfig();
+  void resetVolatileTestConfig();
 
-    void setRecordStateChangesForTests(boolean z);
+  void setRecordStateChangesForTests(boolean z);
 
-    void setTestPrimaryLocationTimeZoneProviderPackageName(String str);
+  void setTestPrimaryLocationTimeZoneProviderPackageName(String str);
 
-    void setTestSecondaryLocationTimeZoneProviderPackageName(String str);
+  void setTestSecondaryLocationTimeZoneProviderPackageName(String str);
 
-    boolean updateConfiguration(int i, TimeZoneConfiguration timeZoneConfiguration, boolean z);
+  boolean updateConfiguration(int i, TimeZoneConfiguration timeZoneConfiguration, boolean z);
 }

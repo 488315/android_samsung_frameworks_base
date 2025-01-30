@@ -5,9 +5,9 @@ import android.p009os.Parcelable;
 
 /* loaded from: classes3.dex */
 public interface ParcelableSpan extends Parcelable {
-    int getSpanTypeId();
+  int getSpanTypeId();
 
-    int getSpanTypeIdInternal();
+  int getSpanTypeIdInternal();
 
-    void writeToParcelInternal(Parcel parcel, int i);
+  void writeToParcelInternal(Parcel parcel, int i);
 }

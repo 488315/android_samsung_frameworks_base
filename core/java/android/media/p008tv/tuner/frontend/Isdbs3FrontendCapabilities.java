@@ -5,19 +5,19 @@ import android.annotation.SystemApi;
 @SystemApi
 /* loaded from: classes2.dex */
 public class Isdbs3FrontendCapabilities extends FrontendCapabilities {
-    private final int mCodeRateCap;
-    private final int mModulationCap;
+  private final int mCodeRateCap;
+  private final int mModulationCap;
 
-    private Isdbs3FrontendCapabilities(int modulationCap, int codeRateCap) {
-        this.mModulationCap = modulationCap;
-        this.mCodeRateCap = codeRateCap;
-    }
+  private Isdbs3FrontendCapabilities(int modulationCap, int codeRateCap) {
+    this.mModulationCap = modulationCap;
+    this.mCodeRateCap = codeRateCap;
+  }
 
-    public int getModulationCapability() {
-        return this.mModulationCap;
-    }
+  public int getModulationCapability() {
+    return this.mModulationCap;
+  }
 
-    public int getCodeRateCapability() {
-        return this.mCodeRateCap;
-    }
+  public int getCodeRateCapability() {
+    return this.mCodeRateCap;
+  }
 }

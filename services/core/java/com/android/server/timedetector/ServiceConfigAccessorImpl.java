@@ -17,7 +17,6 @@ import android.os.UserManager;
 import android.provider.Settings;
 import com.android.internal.util.Preconditions;
 import com.android.server.LocalServices;
-import com.android.server.timedetector.ConfigurationInternal;
 import com.android.server.timezonedetector.StateChangeListener;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -30,223 +29,268 @@ import java.util.function.Supplier;
 
 /* loaded from: classes3.dex */
 public final class ServiceConfigAccessorImpl implements ServiceConfigAccessor {
-    public static final int[] DEFAULT_AUTOMATIC_TIME_ORIGIN_PRIORITIES = {1, 3};
-    public static final Set SERVER_FLAGS_KEYS_TO_WATCH = Set.of("time_detector_lower_bound_millis_override", "time_detector_origin_priorities_override");
-    public static final Object SLOCK = new Object();
-    public static ServiceConfigAccessor sInstance;
-    public final ConfigOriginPrioritiesSupplier mConfigOriginPrioritiesSupplier;
-    public final List mConfigurationInternalListeners = new ArrayList();
-    public final Context mContext;
-    public final ContentResolver mCr;
-    public final ServerFlags mServerFlags;
-    public final ServerFlagsOriginPrioritiesSupplier mServerFlagsOriginPrioritiesSupplier;
-    public final int mSystemClockUpdateThresholdMillis;
-    public final UserManager mUserManager;
+  public static final int[] DEFAULT_AUTOMATIC_TIME_ORIGIN_PRIORITIES = {1, 3};
+  public static final Set SERVER_FLAGS_KEYS_TO_WATCH =
+      Set.of(
+          "time_detector_lower_bound_millis_override", "time_detector_origin_priorities_override");
+  public static final Object SLOCK = new Object();
+  public static ServiceConfigAccessor sInstance;
+  public final ConfigOriginPrioritiesSupplier mConfigOriginPrioritiesSupplier;
+  public final List mConfigurationInternalListeners = new ArrayList();
+  public final Context mContext;
+  public final ContentResolver mCr;
+  public final ServerFlags mServerFlags;
+  public final ServerFlagsOriginPrioritiesSupplier mServerFlagsOriginPrioritiesSupplier;
+  public final int mSystemClockUpdateThresholdMillis;
+  public final UserManager mUserManager;
 
-    public final int getSystemClockConfidenceUpgradeThresholdMillis() {
-        return 1000;
-    }
+  public final int getSystemClockConfidenceUpgradeThresholdMillis() {
+    return 1000;
+  }
 
-    /* JADX WARN: Multi-variable type inference failed */
-    public ServiceConfigAccessorImpl(Context context) {
-        Objects.requireNonNull(context);
-        this.mContext = context;
-        this.mCr = context.getContentResolver();
-        this.mUserManager = (UserManager) context.getSystemService(UserManager.class);
-        ServerFlags serverFlags = ServerFlags.getInstance(context);
-        this.mServerFlags = serverFlags;
-        this.mConfigOriginPrioritiesSupplier = new ConfigOriginPrioritiesSupplier(context);
-        this.mServerFlagsOriginPrioritiesSupplier = new ServerFlagsOriginPrioritiesSupplier(serverFlags);
-        this.mSystemClockUpdateThresholdMillis = SystemProperties.getInt("ro.sys.time_detector_update_diff", 2000);
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("android.intent.action.USER_SWITCHED");
-        context.registerReceiverForAllUsers(new BroadcastReceiver() { // from class: com.android.server.timedetector.ServiceConfigAccessorImpl.1
-            @Override // android.content.BroadcastReceiver
-            public void onReceive(Context context2, Intent intent) {
+  /* JADX WARN: Multi-variable type inference failed */
+  public ServiceConfigAccessorImpl(Context context) {
+    Objects.requireNonNull(context);
+    this.mContext = context;
+    this.mCr = context.getContentResolver();
+    this.mUserManager = (UserManager) context.getSystemService(UserManager.class);
+    ServerFlags serverFlags = ServerFlags.getInstance(context);
+    this.mServerFlags = serverFlags;
+    this.mConfigOriginPrioritiesSupplier = new ConfigOriginPrioritiesSupplier(context);
+    this.mServerFlagsOriginPrioritiesSupplier =
+        new ServerFlagsOriginPrioritiesSupplier(serverFlags);
+    this.mSystemClockUpdateThresholdMillis =
+        SystemProperties.getInt("ro.sys.time_detector_update_diff", 2000);
+    IntentFilter intentFilter = new IntentFilter();
+    intentFilter.addAction("android.intent.action.USER_SWITCHED");
+    context.registerReceiverForAllUsers(
+        new BroadcastReceiver() { // from class:
+                                  // com.android.server.timedetector.ServiceConfigAccessorImpl.1
+          @Override // android.content.BroadcastReceiver
+          public void onReceive(Context context2, Intent intent) {
+            ServiceConfigAccessorImpl.this.handleConfigurationInternalChangeOnMainThread();
+          }
+        },
+        intentFilter,
+        null,
+        null);
+    context
+        .getContentResolver()
+        .registerContentObserver(
+            Settings.Global.getUriFor("auto_time"),
+            true,
+            new ContentObserver(
+                context
+                    .getMainThreadHandler()) { // from class:
+                                               // com.android.server.timedetector.ServiceConfigAccessorImpl.2
+              @Override // android.database.ContentObserver
+              public void onChange(boolean z) {
                 ServiceConfigAccessorImpl.this.handleConfigurationInternalChangeOnMainThread();
-            }
-        }, intentFilter, null, null);
-        context.getContentResolver().registerContentObserver(Settings.Global.getUriFor("auto_time"), true, new ContentObserver(context.getMainThreadHandler()) { // from class: com.android.server.timedetector.ServiceConfigAccessorImpl.2
-            @Override // android.database.ContentObserver
-            public void onChange(boolean z) {
-                ServiceConfigAccessorImpl.this.handleConfigurationInternalChangeOnMainThread();
-            }
-        });
-        serverFlags.addListener(new StateChangeListener() { // from class: com.android.server.timedetector.ServiceConfigAccessorImpl$$ExternalSyntheticLambda0
-            @Override // com.android.server.timezonedetector.StateChangeListener
-            public final void onChange() {
-                ServiceConfigAccessorImpl.this.handleConfigurationInternalChangeOnMainThread();
-            }
-        }, SERVER_FLAGS_KEYS_TO_WATCH);
-    }
+              }
+            });
+    serverFlags.addListener(
+        new StateChangeListener() { // from class:
+                                    // com.android.server.timedetector.ServiceConfigAccessorImpl$$ExternalSyntheticLambda0
+          @Override // com.android.server.timezonedetector.StateChangeListener
+          public final void onChange() {
+            ServiceConfigAccessorImpl.this.handleConfigurationInternalChangeOnMainThread();
+          }
+        },
+        SERVER_FLAGS_KEYS_TO_WATCH);
+  }
 
-    public static ServiceConfigAccessor getInstance(Context context) {
-        ServiceConfigAccessor serviceConfigAccessor;
-        synchronized (SLOCK) {
-            if (sInstance == null) {
-                sInstance = new ServiceConfigAccessorImpl(context);
-            }
-            serviceConfigAccessor = sInstance;
-        }
-        return serviceConfigAccessor;
+  public static ServiceConfigAccessor getInstance(Context context) {
+    ServiceConfigAccessor serviceConfigAccessor;
+    synchronized (SLOCK) {
+      if (sInstance == null) {
+        sInstance = new ServiceConfigAccessorImpl(context);
+      }
+      serviceConfigAccessor = sInstance;
     }
+    return serviceConfigAccessor;
+  }
 
-    public final void handleConfigurationInternalChangeOnMainThread() {
-        ArrayList arrayList;
-        synchronized (this) {
-            arrayList = new ArrayList(this.mConfigurationInternalListeners);
-        }
-        Iterator it = arrayList.iterator();
-        while (it.hasNext()) {
-            ((StateChangeListener) it.next()).onChange();
-        }
+  public final void handleConfigurationInternalChangeOnMainThread() {
+    ArrayList arrayList;
+    synchronized (this) {
+      arrayList = new ArrayList(this.mConfigurationInternalListeners);
     }
-
-    @Override // com.android.server.timedetector.ServiceConfigAccessor
-    public synchronized void addConfigurationInternalChangeListener(StateChangeListener stateChangeListener) {
-        List list = this.mConfigurationInternalListeners;
-        Objects.requireNonNull(stateChangeListener);
-        list.add(stateChangeListener);
+    Iterator it = arrayList.iterator();
+    while (it.hasNext()) {
+      ((StateChangeListener) it.next()).onChange();
     }
+  }
 
-    @Override // com.android.server.timedetector.ServiceConfigAccessor
-    public synchronized ConfigurationInternal getCurrentUserConfigurationInternal() {
-        return getConfigurationInternal(((ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class)).getCurrentUserId());
+  @Override // com.android.server.timedetector.ServiceConfigAccessor
+  public synchronized void addConfigurationInternalChangeListener(
+      StateChangeListener stateChangeListener) {
+    List list = this.mConfigurationInternalListeners;
+    Objects.requireNonNull(stateChangeListener);
+    list.add(stateChangeListener);
+  }
+
+  @Override // com.android.server.timedetector.ServiceConfigAccessor
+  public synchronized ConfigurationInternal getCurrentUserConfigurationInternal() {
+    return getConfigurationInternal(
+        ((ActivityManagerInternal) LocalServices.getService(ActivityManagerInternal.class))
+            .getCurrentUserId());
+  }
+
+  @Override // com.android.server.timedetector.ServiceConfigAccessor
+  public synchronized boolean updateConfiguration(
+      int i, TimeConfiguration timeConfiguration, boolean z) {
+    Objects.requireNonNull(timeConfiguration);
+    TimeCapabilitiesAndConfig createCapabilitiesAndConfig =
+        getCurrentUserConfigurationInternal().createCapabilitiesAndConfig(z);
+    TimeConfiguration tryApplyConfigChanges =
+        createCapabilitiesAndConfig
+            .getCapabilities()
+            .tryApplyConfigChanges(
+                createCapabilitiesAndConfig.getConfiguration(), timeConfiguration);
+    if (tryApplyConfigChanges == null) {
+      return false;
     }
+    storeConfiguration(i, tryApplyConfigChanges);
+    return true;
+  }
 
-    @Override // com.android.server.timedetector.ServiceConfigAccessor
-    public synchronized boolean updateConfiguration(int i, TimeConfiguration timeConfiguration, boolean z) {
-        Objects.requireNonNull(timeConfiguration);
-        TimeCapabilitiesAndConfig createCapabilitiesAndConfig = getCurrentUserConfigurationInternal().createCapabilitiesAndConfig(z);
-        TimeConfiguration tryApplyConfigChanges = createCapabilitiesAndConfig.getCapabilities().tryApplyConfigChanges(createCapabilitiesAndConfig.getConfiguration(), timeConfiguration);
-        if (tryApplyConfigChanges == null) {
-            return false;
-        }
-        storeConfiguration(i, tryApplyConfigChanges);
+  public final void storeConfiguration(int i, TimeConfiguration timeConfiguration) {
+    Objects.requireNonNull(timeConfiguration);
+    if (isAutoDetectionSupported()) {
+      setAutoDetectionEnabledIfRequired(timeConfiguration.isAutoDetectionEnabled());
+    }
+  }
+
+  @Override // com.android.server.timedetector.ServiceConfigAccessor
+  public synchronized ConfigurationInternal getConfigurationInternal(int i) {
+    TimeDetectorHelper timeDetectorHelper;
+    timeDetectorHelper = TimeDetectorHelper.INSTANCE;
+    return new ConfigurationInternal.Builder(i)
+        .setUserConfigAllowed(isUserConfigAllowed(i))
+        .setAutoDetectionSupported(isAutoDetectionSupported())
+        .setAutoDetectionEnabledSetting(getAutoDetectionEnabledSetting())
+        .setSystemClockUpdateThresholdMillis(getSystemClockUpdateThresholdMillis())
+        .setSystemClockConfidenceThresholdMillis(getSystemClockConfidenceUpgradeThresholdMillis())
+        .setAutoSuggestionLowerBound(getAutoSuggestionLowerBound())
+        .setManualSuggestionLowerBound(timeDetectorHelper.getManualSuggestionLowerBound())
+        .setSuggestionUpperBound(timeDetectorHelper.getSuggestionUpperBound())
+        .setOriginPriorities(getOriginPriorities())
+        .build();
+  }
+
+  public final void setAutoDetectionEnabledIfRequired(boolean z) {
+    if (getAutoDetectionEnabledSetting() != z) {
+      Settings.Global.putInt(this.mCr, "auto_time", z ? 1 : 0);
+    }
+  }
+
+  public final boolean isUserConfigAllowed(int i) {
+    return !this.mUserManager.hasUserRestriction("no_config_date_time", UserHandle.of(i));
+  }
+
+  public final boolean getAutoDetectionEnabledSetting() {
+    return Settings.Global.getInt(this.mCr, "auto_time", 1) > 0;
+  }
+
+  public final boolean isAutoDetectionSupported() {
+    for (int i : getOriginPriorities()) {
+      if (i == 3 || i == 5 || i == 4) {
         return true;
+      }
+      if (i == 1
+          && this.mContext.getPackageManager().hasSystemFeature("android.hardware.telephony")) {
+        return true;
+      }
     }
+    return false;
+  }
 
-    public final void storeConfiguration(int i, TimeConfiguration timeConfiguration) {
-        Objects.requireNonNull(timeConfiguration);
-        if (isAutoDetectionSupported()) {
-            setAutoDetectionEnabledIfRequired(timeConfiguration.isAutoDetectionEnabled());
+  public final int getSystemClockUpdateThresholdMillis() {
+    return this.mSystemClockUpdateThresholdMillis;
+  }
+
+  public final Instant getAutoSuggestionLowerBound() {
+    return (Instant)
+        this.mServerFlags
+            .getOptionalInstant("time_detector_lower_bound_millis_override")
+            .orElse(TimeDetectorHelper.INSTANCE.getAutoSuggestionLowerBoundDefault());
+  }
+
+  public final int[] getOriginPriorities() {
+    int[] iArr = this.mServerFlagsOriginPrioritiesSupplier.get();
+    if (iArr != null) {
+      return iArr;
+    }
+    int[] iArr2 = this.mConfigOriginPrioritiesSupplier.get();
+    return iArr2 != null ? iArr2 : DEFAULT_AUTOMATIC_TIME_ORIGIN_PRIORITIES;
+  }
+
+  public abstract class BaseOriginPrioritiesSupplier implements Supplier {
+    public int[] mLastPriorityInts;
+    public String[] mLastPriorityStrings;
+
+    public BaseOriginPrioritiesSupplier() {}
+
+    public abstract String[] lookupPriorityStrings();
+
+    @Override // java.util.function.Supplier
+    public int[] get() {
+      String[] lookupPriorityStrings = lookupPriorityStrings();
+      synchronized (this) {
+        if (Arrays.equals(this.mLastPriorityStrings, lookupPriorityStrings)) {
+          return this.mLastPriorityInts;
         }
-    }
-
-    @Override // com.android.server.timedetector.ServiceConfigAccessor
-    public synchronized ConfigurationInternal getConfigurationInternal(int i) {
-        TimeDetectorHelper timeDetectorHelper;
-        timeDetectorHelper = TimeDetectorHelper.INSTANCE;
-        return new ConfigurationInternal.Builder(i).setUserConfigAllowed(isUserConfigAllowed(i)).setAutoDetectionSupported(isAutoDetectionSupported()).setAutoDetectionEnabledSetting(getAutoDetectionEnabledSetting()).setSystemClockUpdateThresholdMillis(getSystemClockUpdateThresholdMillis()).setSystemClockConfidenceThresholdMillis(getSystemClockConfidenceUpgradeThresholdMillis()).setAutoSuggestionLowerBound(getAutoSuggestionLowerBound()).setManualSuggestionLowerBound(timeDetectorHelper.getManualSuggestionLowerBound()).setSuggestionUpperBound(timeDetectorHelper.getSuggestionUpperBound()).setOriginPriorities(getOriginPriorities()).build();
-    }
-
-    public final void setAutoDetectionEnabledIfRequired(boolean z) {
-        if (getAutoDetectionEnabledSetting() != z) {
-            Settings.Global.putInt(this.mCr, "auto_time", z ? 1 : 0);
-        }
-    }
-
-    public final boolean isUserConfigAllowed(int i) {
-        return !this.mUserManager.hasUserRestriction("no_config_date_time", UserHandle.of(i));
-    }
-
-    public final boolean getAutoDetectionEnabledSetting() {
-        return Settings.Global.getInt(this.mCr, "auto_time", 1) > 0;
-    }
-
-    public final boolean isAutoDetectionSupported() {
-        for (int i : getOriginPriorities()) {
-            if (i == 3 || i == 5 || i == 4) {
-                return true;
+        int[] iArr = null;
+        if (lookupPriorityStrings != null) {
+          int length = lookupPriorityStrings.length;
+          int[] iArr2 = new int[length];
+          for (int i = 0; i < length; i++) {
+            try {
+              String str = lookupPriorityStrings[i];
+              Preconditions.checkArgument(str != null);
+              iArr2[i] = TimeDetectorStrategy.stringToOrigin(str.trim());
+            } catch (IllegalArgumentException unused) {
             }
-            if (i == 1 && this.mContext.getPackageManager().hasSystemFeature("android.hardware.telephony")) {
-                return true;
-            }
+          }
+          iArr = iArr2;
         }
-        return false;
+        this.mLastPriorityStrings = lookupPriorityStrings;
+        this.mLastPriorityInts = iArr;
+        return iArr;
+      }
+    }
+  }
+
+  public class ConfigOriginPrioritiesSupplier extends BaseOriginPrioritiesSupplier {
+    public final Context mContext;
+
+    public ConfigOriginPrioritiesSupplier(Context context) {
+      super();
+      Objects.requireNonNull(context);
+      this.mContext = context;
     }
 
-    public final int getSystemClockUpdateThresholdMillis() {
-        return this.mSystemClockUpdateThresholdMillis;
+    @Override // com.android.server.timedetector.ServiceConfigAccessorImpl.BaseOriginPrioritiesSupplier
+    public String[] lookupPriorityStrings() {
+      return this.mContext.getResources().getStringArray(R.array.config_ntpServers);
+    }
+  }
+
+  public class ServerFlagsOriginPrioritiesSupplier extends BaseOriginPrioritiesSupplier {
+    public final ServerFlags mServerFlags;
+
+    public ServerFlagsOriginPrioritiesSupplier(ServerFlags serverFlags) {
+      super();
+      Objects.requireNonNull(serverFlags);
+      this.mServerFlags = serverFlags;
     }
 
-    public final Instant getAutoSuggestionLowerBound() {
-        return (Instant) this.mServerFlags.getOptionalInstant("time_detector_lower_bound_millis_override").orElse(TimeDetectorHelper.INSTANCE.getAutoSuggestionLowerBoundDefault());
+    @Override // com.android.server.timedetector.ServiceConfigAccessorImpl.BaseOriginPrioritiesSupplier
+    public String[] lookupPriorityStrings() {
+      return (String[])
+          this.mServerFlags
+              .getOptionalStringArray("time_detector_origin_priorities_override")
+              .orElse(null);
     }
-
-    public final int[] getOriginPriorities() {
-        int[] iArr = this.mServerFlagsOriginPrioritiesSupplier.get();
-        if (iArr != null) {
-            return iArr;
-        }
-        int[] iArr2 = this.mConfigOriginPrioritiesSupplier.get();
-        return iArr2 != null ? iArr2 : DEFAULT_AUTOMATIC_TIME_ORIGIN_PRIORITIES;
-    }
-
-    public abstract class BaseOriginPrioritiesSupplier implements Supplier {
-        public int[] mLastPriorityInts;
-        public String[] mLastPriorityStrings;
-
-        public BaseOriginPrioritiesSupplier() {
-        }
-
-        public abstract String[] lookupPriorityStrings();
-
-        @Override // java.util.function.Supplier
-        public int[] get() {
-            String[] lookupPriorityStrings = lookupPriorityStrings();
-            synchronized (this) {
-                if (Arrays.equals(this.mLastPriorityStrings, lookupPriorityStrings)) {
-                    return this.mLastPriorityInts;
-                }
-                int[] iArr = null;
-                if (lookupPriorityStrings != null) {
-                    int length = lookupPriorityStrings.length;
-                    int[] iArr2 = new int[length];
-                    for (int i = 0; i < length; i++) {
-                        try {
-                            String str = lookupPriorityStrings[i];
-                            Preconditions.checkArgument(str != null);
-                            iArr2[i] = TimeDetectorStrategy.stringToOrigin(str.trim());
-                        } catch (IllegalArgumentException unused) {
-                        }
-                    }
-                    iArr = iArr2;
-                }
-                this.mLastPriorityStrings = lookupPriorityStrings;
-                this.mLastPriorityInts = iArr;
-                return iArr;
-            }
-        }
-    }
-
-    public class ConfigOriginPrioritiesSupplier extends BaseOriginPrioritiesSupplier {
-        public final Context mContext;
-
-        public ConfigOriginPrioritiesSupplier(Context context) {
-            super();
-            Objects.requireNonNull(context);
-            this.mContext = context;
-        }
-
-        @Override // com.android.server.timedetector.ServiceConfigAccessorImpl.BaseOriginPrioritiesSupplier
-        public String[] lookupPriorityStrings() {
-            return this.mContext.getResources().getStringArray(R.array.config_ntpServers);
-        }
-    }
-
-    public class ServerFlagsOriginPrioritiesSupplier extends BaseOriginPrioritiesSupplier {
-        public final ServerFlags mServerFlags;
-
-        public ServerFlagsOriginPrioritiesSupplier(ServerFlags serverFlags) {
-            super();
-            Objects.requireNonNull(serverFlags);
-            this.mServerFlags = serverFlags;
-        }
-
-        @Override // com.android.server.timedetector.ServiceConfigAccessorImpl.BaseOriginPrioritiesSupplier
-        public String[] lookupPriorityStrings() {
-            return (String[]) this.mServerFlags.getOptionalStringArray("time_detector_origin_priorities_override").orElse(null);
-        }
-    }
+  }
 }

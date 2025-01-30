@@ -4,5 +4,5 @@ import java.security.SecureRandom;
 
 /* loaded from: classes5.dex */
 public interface BCKeyStore {
-    void setRandom(SecureRandom secureRandom);
+  void setRandom(SecureRandom secureRandom);
 }

@@ -10,32 +10,36 @@ import com.android.internal.accessibility.util.ShortcutUtils;
 
 /* loaded from: classes4.dex */
 class VolumeShortcutToggleAccessibilityServiceTarget extends AccessibilityServiceTarget {
-    VolumeShortcutToggleAccessibilityServiceTarget(Context context, int shortcutType, AccessibilityServiceInfo serviceInfo) {
-        super(context, shortcutType, 0, serviceInfo);
-    }
+  VolumeShortcutToggleAccessibilityServiceTarget(
+      Context context, int shortcutType, AccessibilityServiceInfo serviceInfo) {
+    super(context, shortcutType, 0, serviceInfo);
+  }
 
-    @Override // com.android.internal.accessibility.dialog.AccessibilityTarget, com.android.internal.accessibility.dialog.OnTargetCheckedChangeListener
-    public void onCheckedChanged(boolean isChecked) {
-        switch (getShortcutType()) {
-            case 0:
-                onCheckedFromAccessibilityButton(isChecked);
-                return;
-            case 1:
-                super.onCheckedChanged(isChecked);
-                return;
-            default:
-                throw new IllegalStateException("Unexpected shortcut type");
-        }
+  @Override // com.android.internal.accessibility.dialog.AccessibilityTarget,
+            // com.android.internal.accessibility.dialog.OnTargetCheckedChangeListener
+  public void onCheckedChanged(boolean isChecked) {
+    switch (getShortcutType()) {
+      case 0:
+        onCheckedFromAccessibilityButton(isChecked);
+        return;
+      case 1:
+        super.onCheckedChanged(isChecked);
+        return;
+      default:
+        throw new IllegalStateException("Unexpected shortcut type");
     }
+  }
 
-    private void onCheckedFromAccessibilityButton(boolean isChecked) {
-        setShortcutEnabled(isChecked);
-        ComponentName componentName = ComponentName.unflattenFromString(getId());
-        AccessibilityUtils.setAccessibilityServiceState(getContext(), componentName, isChecked);
-        if (!isChecked) {
-            ShortcutUtils.optOutValueFromSettings(getContext(), 2, getId());
-            String warningText = getContext().getString(C4337R.string.accessibility_uncheck_legacy_item_warning, getLabel());
-            Toast.makeText(getContext(), warningText, 0).show();
-        }
+  private void onCheckedFromAccessibilityButton(boolean isChecked) {
+    setShortcutEnabled(isChecked);
+    ComponentName componentName = ComponentName.unflattenFromString(getId());
+    AccessibilityUtils.setAccessibilityServiceState(getContext(), componentName, isChecked);
+    if (!isChecked) {
+      ShortcutUtils.optOutValueFromSettings(getContext(), 2, getId());
+      String warningText =
+          getContext()
+              .getString(C4337R.string.accessibility_uncheck_legacy_item_warning, getLabel());
+      Toast.makeText(getContext(), warningText, 0).show();
     }
+  }
 }

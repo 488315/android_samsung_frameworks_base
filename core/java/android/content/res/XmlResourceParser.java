@@ -5,8 +5,8 @@ import org.xmlpull.v1.XmlPullParser;
 
 /* loaded from: classes.dex */
 public interface XmlResourceParser extends XmlPullParser, AttributeSet, AutoCloseable {
-    void close();
+  void close();
 
-    @Override // org.xmlpull.v1.XmlPullParser, android.util.AttributeSet
-    String getAttributeNamespace(int i);
+  @Override // org.xmlpull.v1.XmlPullParser, android.util.AttributeSet
+  String getAttributeNamespace(int i);
 }

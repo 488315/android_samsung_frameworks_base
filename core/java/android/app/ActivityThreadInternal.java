@@ -5,13 +5,13 @@ import java.util.ArrayList;
 
 /* loaded from: classes.dex */
 interface ActivityThreadInternal {
-    ArrayList<ComponentCallbacks2> collectComponentCallbacks(boolean z);
+  ArrayList<ComponentCallbacks2> collectComponentCallbacks(boolean z);
 
-    Application getApplication();
+  Application getApplication();
 
-    ContextImpl getSystemContext();
+  ContextImpl getSystemContext();
 
-    ContextImpl getSystemUiContextNoCreate();
+  ContextImpl getSystemUiContextNoCreate();
 
-    boolean isInDensityCompatMode();
+  boolean isInDensityCompatMode();
 }

@@ -8,7 +8,10 @@ import android.os.UserHandle;
 @SystemApi(client = SystemApi.Client.SYSTEM_SERVER)
 /* loaded from: classes3.dex */
 public final class StatsHelper {
-    public static void sendStatsdReadyBroadcast(Context context) {
-        context.sendBroadcastAsUser(new Intent("android.app.action.STATSD_STARTED").addFlags(16777216), UserHandle.SYSTEM, "android.permission.DUMP");
-    }
+  public static void sendStatsdReadyBroadcast(Context context) {
+    context.sendBroadcastAsUser(
+        new Intent("android.app.action.STATSD_STARTED").addFlags(16777216),
+        UserHandle.SYSTEM,
+        "android.permission.DUMP");
+  }
 }

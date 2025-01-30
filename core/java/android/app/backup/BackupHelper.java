@@ -4,9 +4,12 @@ import android.p009os.ParcelFileDescriptor;
 
 /* loaded from: classes.dex */
 public interface BackupHelper {
-    void performBackup(ParcelFileDescriptor parcelFileDescriptor, BackupDataOutput backupDataOutput, ParcelFileDescriptor parcelFileDescriptor2);
+  void performBackup(
+      ParcelFileDescriptor parcelFileDescriptor,
+      BackupDataOutput backupDataOutput,
+      ParcelFileDescriptor parcelFileDescriptor2);
 
-    void restoreEntity(BackupDataInputStream backupDataInputStream);
+  void restoreEntity(BackupDataInputStream backupDataInputStream);
 
-    void writeNewStateDescription(ParcelFileDescriptor parcelFileDescriptor);
+  void writeNewStateDescription(ParcelFileDescriptor parcelFileDescriptor);
 }

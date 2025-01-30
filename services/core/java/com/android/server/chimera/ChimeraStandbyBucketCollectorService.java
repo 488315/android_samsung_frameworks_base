@@ -10,14 +10,24 @@ import com.android.server.backup.BackupManagerConstants;
 
 /* loaded from: classes.dex */
 public abstract class ChimeraStandbyBucketCollectorService extends JobService {
-    public static ComponentName sSBCollectorService = new ComponentName("android", ChimeraStandbyBucketCollectorService.class.getName());
+  public static ComponentName sSBCollectorService =
+      new ComponentName("android", ChimeraStandbyBucketCollectorService.class.getName());
 
-    public static void schedule(Context context) {
-        try {
-            ((JobScheduler) context.getSystemService("jobscheduler")).schedule(new JobInfo.Builder(9900, sSBCollectorService).setPeriodic(BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS, 5184000L).setRequiresDeviceIdle(true).setPersisted(true).build());
-            Log.d("ChimeraStandbyBucketCollectorService", "Collect StandbyBucket job...");
-        } catch (Exception e) {
-            Log.d("ChimeraStandbyBucketCollectorService", "Collect StandbyBucket has exception : " + e.getMessage());
-        }
+  public static void schedule(Context context) {
+    try {
+      ((JobScheduler) context.getSystemService("jobscheduler"))
+          .schedule(
+              new JobInfo.Builder(9900, sSBCollectorService)
+                  .setPeriodic(
+                      BackupManagerConstants.DEFAULT_FULL_BACKUP_INTERVAL_MILLISECONDS, 5184000L)
+                  .setRequiresDeviceIdle(true)
+                  .setPersisted(true)
+                  .build());
+      Log.d("ChimeraStandbyBucketCollectorService", "Collect StandbyBucket job...");
+    } catch (Exception e) {
+      Log.d(
+          "ChimeraStandbyBucketCollectorService",
+          "Collect StandbyBucket has exception : " + e.getMessage());
     }
+  }
 }

@@ -6,34 +6,40 @@ import android.view.autofill.IAutoFillManagerClient;
 
 /* loaded from: classes.dex */
 public final class PendingUi {
-    public final IAutoFillManagerClient client;
-    public int mState = 1;
-    public final IBinder mToken;
-    public final int sessionId;
+  public final IAutoFillManagerClient client;
+  public int mState = 1;
+  public final IBinder mToken;
+  public final int sessionId;
 
-    public PendingUi(IBinder iBinder, int i, IAutoFillManagerClient iAutoFillManagerClient) {
-        this.mToken = iBinder;
-        this.sessionId = i;
-        this.client = iAutoFillManagerClient;
-    }
+  public PendingUi(IBinder iBinder, int i, IAutoFillManagerClient iAutoFillManagerClient) {
+    this.mToken = iBinder;
+    this.sessionId = i;
+    this.client = iAutoFillManagerClient;
+  }
 
-    public IBinder getToken() {
-        return this.mToken;
-    }
+  public IBinder getToken() {
+    return this.mToken;
+  }
 
-    public void setState(int i) {
-        this.mState = i;
-    }
+  public void setState(int i) {
+    this.mState = i;
+  }
 
-    public int getState() {
-        return this.mState;
-    }
+  public int getState() {
+    return this.mState;
+  }
 
-    public boolean matches(IBinder iBinder) {
-        return this.mToken.equals(iBinder);
-    }
+  public boolean matches(IBinder iBinder) {
+    return this.mToken.equals(iBinder);
+  }
 
-    public String toString() {
-        return "PendingUi: [token=" + this.mToken + ", sessionId=" + this.sessionId + ", state=" + DebugUtils.flagsToString(PendingUi.class, "STATE_", this.mState) + "]";
-    }
+  public String toString() {
+    return "PendingUi: [token="
+        + this.mToken
+        + ", sessionId="
+        + this.sessionId
+        + ", state="
+        + DebugUtils.flagsToString(PendingUi.class, "STATE_", this.mState)
+        + "]";
+  }
 }

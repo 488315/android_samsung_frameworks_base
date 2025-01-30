@@ -5,9 +5,9 @@ import java.io.OutputStream;
 
 /* loaded from: classes5.dex */
 public interface DigestCalculator {
-    AlgorithmIdentifier getAlgorithmIdentifier();
+  AlgorithmIdentifier getAlgorithmIdentifier();
 
-    byte[] getDigest();
+  byte[] getDigest();
 
-    OutputStream getOutputStream();
+  OutputStream getOutputStream();
 }

@@ -6,17 +6,17 @@ import android.view.SurfaceHolder;
 
 /* loaded from: classes5.dex */
 public interface RootViewSurfaceTaker {
-    void onRootViewScrollYChanged(int i);
+  void onRootViewScrollYChanged(int i);
 
-    PendingInsetsController providePendingInsetsController();
+  PendingInsetsController providePendingInsetsController();
 
-    void setSurfaceFormat(int i);
+  void setSurfaceFormat(int i);
 
-    void setSurfaceKeepScreenOn(boolean z);
+  void setSurfaceKeepScreenOn(boolean z);
 
-    void setSurfaceType(int i);
+  void setSurfaceType(int i);
 
-    InputQueue.Callback willYouTakeTheInputQueue();
+  InputQueue.Callback willYouTakeTheInputQueue();
 
-    SurfaceHolder.Callback2 willYouTakeTheSurface();
+  SurfaceHolder.Callback2 willYouTakeTheSurface();
 }

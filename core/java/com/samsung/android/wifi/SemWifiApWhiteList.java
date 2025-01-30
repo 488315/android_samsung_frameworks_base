@@ -13,266 +13,271 @@ import java.util.regex.Pattern;
 
 /* loaded from: classes6.dex */
 public class SemWifiApWhiteList {
-    public static final int WL_ALREADY_IN_TABLE = 4;
-    public static final int WL_DENY_SUCCESS = 6;
-    public static final int WL_FAIL = 2;
-    public static final int WL_NOT_IN_TABLE = 5;
-    public static final int WL_NOT_MAC = 3;
-    public static final int WL_SUCCESS = 1;
-    private static volatile SemWifiApWhiteList uniqueInstance;
-    private String TAG = "SemWifiApWhiteList";
-    private final String HOSTAPD_DENY = "/data/misc/wifi_hostapd/hostapd.accept";
-    private final int BUFFER_SIZE = 64;
-    private Vector<WhiteList> mWhiteList = new Vector<>();
+  public static final int WL_ALREADY_IN_TABLE = 4;
+  public static final int WL_DENY_SUCCESS = 6;
+  public static final int WL_FAIL = 2;
+  public static final int WL_NOT_IN_TABLE = 5;
+  public static final int WL_NOT_MAC = 3;
+  public static final int WL_SUCCESS = 1;
+  private static volatile SemWifiApWhiteList uniqueInstance;
+  private String TAG = "SemWifiApWhiteList";
+  private final String HOSTAPD_DENY = "/data/misc/wifi_hostapd/hostapd.accept";
+  private final int BUFFER_SIZE = 64;
+  private Vector<WhiteList> mWhiteList = new Vector<>();
 
-    public static class WhiteList {
-        private boolean mEnable;
-        private String mMac;
-        private String mName;
+  public static class WhiteList {
+    private boolean mEnable;
+    private String mMac;
+    private String mName;
 
-        WhiteList(String mac, String name, boolean enable) {
-            this.mMac = mac;
-            this.mName = name;
-            this.mEnable = enable;
-        }
-
-        public void setName(String name) {
-            this.mName = name;
-        }
-
-        public String getMac() {
-            return this.mMac;
-        }
-
-        public String getName() {
-            return this.mName;
-        }
-
-        public void setEnable(boolean enable) {
-            this.mEnable = enable;
-        }
-
-        public boolean getEnable() {
-            return this.mEnable;
-        }
+    WhiteList(String mac, String name, boolean enable) {
+      this.mMac = mac;
+      this.mName = name;
+      this.mEnable = enable;
     }
 
-    private SemWifiApWhiteList() {
-        createOrChangePermission();
-        readWhiteListFile();
+    public void setName(String name) {
+      this.mName = name;
     }
 
-    public static SemWifiApWhiteList getInstance() {
-        if (uniqueInstance == null) {
-            uniqueInstance = new SemWifiApWhiteList();
+    public String getMac() {
+      return this.mMac;
+    }
+
+    public String getName() {
+      return this.mName;
+    }
+
+    public void setEnable(boolean enable) {
+      this.mEnable = enable;
+    }
+
+    public boolean getEnable() {
+      return this.mEnable;
+    }
+  }
+
+  private SemWifiApWhiteList() {
+    createOrChangePermission();
+    readWhiteListFile();
+  }
+
+  public static SemWifiApWhiteList getInstance() {
+    if (uniqueInstance == null) {
+      uniqueInstance = new SemWifiApWhiteList();
+    }
+    return uniqueInstance;
+  }
+
+  private void createOrChangePermission() {
+    File file = new File("/data/misc/wifi_hostapd/hostapd.accept");
+    if (!file.exists()) {
+      try {
+        file.createNewFile();
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+      try {
+        String[] cmd = {
+          "/system/bin/sh", "-c", "/system/bin/chmod 665 /data/misc/wifi_hostapd/hostapd.accept"
+        };
+        Process p = Runtime.getRuntime().exec(cmd);
+        try {
+          p.waitFor();
+          p.destroy();
+        } catch (InterruptedException e2) {
+          e2.printStackTrace();
         }
-        return uniqueInstance;
+      } catch (IOException e3) {
+        e3.printStackTrace();
+      }
     }
+  }
 
-    private void createOrChangePermission() {
-        File file = new File("/data/misc/wifi_hostapd/hostapd.accept");
-        if (!file.exists()) {
+  private void readWhiteListFile() {
+    this.mWhiteList.clear();
+    BufferedReader buf = null;
+    try {
+      try {
+        buf = new BufferedReader(new FileReader("/data/misc/wifi_hostapd/hostapd.accept"), 64);
+        while (true) {
+          String bufReadLine = buf.readLine();
+          if (bufReadLine == null) {
             try {
-                file.createNewFile();
+              buf.close();
+              return;
             } catch (IOException e) {
-                e.printStackTrace();
+              e.printStackTrace();
+              return;
             }
-            try {
-                String[] cmd = {"/system/bin/sh", "-c", "/system/bin/chmod 665 /data/misc/wifi_hostapd/hostapd.accept"};
-                Process p = Runtime.getRuntime().exec(cmd);
-                try {
-                    p.waitFor();
-                    p.destroy();
-                } catch (InterruptedException e2) {
-                    e2.printStackTrace();
-                }
-            } catch (IOException e3) {
-                e3.printStackTrace();
+          }
+          if (bufReadLine.startsWith("#")) {
+            boolean z = true;
+            String name = bufReadLine.substring(1);
+            String mac = buf.readLine();
+            String strenable = buf.readLine();
+            if (strenable != "1") {
+              z = false;
             }
+            boolean enable = z;
+            this.mWhiteList.add(new WhiteList(mac, name, enable));
+          }
         }
-    }
-
-    private void readWhiteListFile() {
-        this.mWhiteList.clear();
-        BufferedReader buf = null;
+      } catch (IOException e2) {
+        e2.printStackTrace();
+        if (buf != null) {
+          try {
+            buf.close();
+          } catch (IOException e3) {
+            e3.printStackTrace();
+          }
+        }
+      }
+    } catch (Throwable th) {
+      if (buf != null) {
         try {
-            try {
-                buf = new BufferedReader(new FileReader("/data/misc/wifi_hostapd/hostapd.accept"), 64);
-                while (true) {
-                    String bufReadLine = buf.readLine();
-                    if (bufReadLine == null) {
-                        try {
-                            buf.close();
-                            return;
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            return;
-                        }
-                    }
-                    if (bufReadLine.startsWith("#")) {
-                        boolean z = true;
-                        String name = bufReadLine.substring(1);
-                        String mac = buf.readLine();
-                        String strenable = buf.readLine();
-                        if (strenable != "1") {
-                            z = false;
-                        }
-                        boolean enable = z;
-                        this.mWhiteList.add(new WhiteList(mac, name, enable));
-                    }
-                }
-            } catch (IOException e2) {
-                e2.printStackTrace();
-                if (buf != null) {
-                    try {
-                        buf.close();
-                    } catch (IOException e3) {
-                        e3.printStackTrace();
-                    }
-                }
-            }
-        } catch (Throwable th) {
-            if (buf != null) {
-                try {
-                    buf.close();
-                } catch (IOException e4) {
-                    e4.printStackTrace();
-                }
-            }
-            throw th;
+          buf.close();
+        } catch (IOException e4) {
+          e4.printStackTrace();
         }
+      }
+      throw th;
     }
+  }
 
-    private void writeWhiteListFile() {
-        FileWriter fw = null;
+  private void writeWhiteListFile() {
+    FileWriter fw = null;
+    try {
+      try {
         try {
-            try {
-                try {
-                    fw = new FileWriter("/data/misc/wifi_hostapd/hostapd.accept");
-                    Iterator<WhiteList> it = this.mWhiteList.iterator();
-                    while (it.hasNext()) {
-                        WhiteList wl = it.next();
-                        fw.write("#");
-                        if (wl.getName() != null) {
-                            fw.write(wl.getName());
-                        }
-                        fw.write("\n");
-                        fw.write(wl.getMac());
-                        fw.write("\n");
-                        fw.write(wl.getEnable() ? "1" : "0");
-                        fw.write("\n");
-                    }
-                    fw.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    if (fw != null) {
-                        fw.close();
-                    }
-                }
-            } catch (IOException e2) {
-                e2.printStackTrace();
+          fw = new FileWriter("/data/misc/wifi_hostapd/hostapd.accept");
+          Iterator<WhiteList> it = this.mWhiteList.iterator();
+          while (it.hasNext()) {
+            WhiteList wl = it.next();
+            fw.write("#");
+            if (wl.getName() != null) {
+              fw.write(wl.getName());
             }
-        } catch (Throwable th) {
-            if (fw != null) {
-                try {
-                    fw.close();
-                } catch (IOException e3) {
-                    e3.printStackTrace();
-                }
-            }
-            throw th;
+            fw.write("\n");
+            fw.write(wl.getMac());
+            fw.write("\n");
+            fw.write(wl.getEnable() ? "1" : "0");
+            fw.write("\n");
+          }
+          fw.close();
+        } catch (IOException e) {
+          e.printStackTrace();
+          if (fw != null) {
+            fw.close();
+          }
         }
+      } catch (IOException e2) {
+        e2.printStackTrace();
+      }
+    } catch (Throwable th) {
+      if (fw != null) {
+        try {
+          fw.close();
+        } catch (IOException e3) {
+          e3.printStackTrace();
+        }
+      }
+      throw th;
     }
+  }
 
-    public int addWhiteList(String mac, String name, boolean enable) {
-        if (!isMacAddress(mac)) {
-            return 3;
-        }
-        Iterator<WhiteList> it = this.mWhiteList.iterator();
-        while (it.hasNext()) {
-            if (it.next().getMac().equalsIgnoreCase(mac)) {
-                return 4;
-            }
-        }
-        Log.m94d(this.TAG, "addWhiteList::" + mac + ":," + name + ":" + enable);
-        this.mWhiteList.add(new WhiteList(mac, name, enable));
+  public int addWhiteList(String mac, String name, boolean enable) {
+    if (!isMacAddress(mac)) {
+      return 3;
+    }
+    Iterator<WhiteList> it = this.mWhiteList.iterator();
+    while (it.hasNext()) {
+      if (it.next().getMac().equalsIgnoreCase(mac)) {
+        return 4;
+      }
+    }
+    Log.m94d(this.TAG, "addWhiteList::" + mac + ":," + name + ":" + enable);
+    this.mWhiteList.add(new WhiteList(mac, name, enable));
+    writeWhiteListFile();
+    return 1;
+  }
+
+  public int removeWhiteList(String mac) {
+    Iterator<WhiteList> it = this.mWhiteList.iterator();
+    while (it.hasNext()) {
+      WhiteList wl = it.next();
+      if (wl.getMac().equalsIgnoreCase(mac)) {
+        Log.m94d(this.TAG, "removeWhiteList::" + mac);
+        boolean oldenable = wl.getEnable();
+        this.mWhiteList.remove(wl);
         writeWhiteListFile();
+        if (oldenable) {
+          return 6;
+        }
         return 1;
+      }
     }
+    return 2;
+  }
 
-    public int removeWhiteList(String mac) {
-        Iterator<WhiteList> it = this.mWhiteList.iterator();
-        while (it.hasNext()) {
-            WhiteList wl = it.next();
-            if (wl.getMac().equalsIgnoreCase(mac)) {
-                Log.m94d(this.TAG, "removeWhiteList::" + mac);
-                boolean oldenable = wl.getEnable();
-                this.mWhiteList.remove(wl);
-                writeWhiteListFile();
-                if (oldenable) {
-                    return 6;
-                }
-                return 1;
-            }
+  public int modifyWhiteList(String mac, String name, boolean enable) {
+    Iterator<WhiteList> it = this.mWhiteList.iterator();
+    while (it.hasNext()) {
+      WhiteList wl = it.next();
+      if (wl.getMac().equalsIgnoreCase(mac)) {
+        wl.setName(name);
+        boolean oldenable = wl.getEnable();
+        wl.setEnable(enable);
+        writeWhiteListFile();
+        if (oldenable != enable) {
+          return 6;
         }
-        return 2;
+        return 1;
+      }
     }
+    return 2;
+  }
 
-    public int modifyWhiteList(String mac, String name, boolean enable) {
-        Iterator<WhiteList> it = this.mWhiteList.iterator();
-        while (it.hasNext()) {
-            WhiteList wl = it.next();
-            if (wl.getMac().equalsIgnoreCase(mac)) {
-                wl.setName(name);
-                boolean oldenable = wl.getEnable();
-                wl.setEnable(enable);
-                writeWhiteListFile();
-                if (oldenable != enable) {
-                    return 6;
-                }
-                return 1;
-            }
-        }
-        return 2;
+  public String getDeviceName(String mac) {
+    Iterator<WhiteList> it = this.mWhiteList.iterator();
+    while (it.hasNext()) {
+      WhiteList wl = it.next();
+      if (wl.getMac().equalsIgnoreCase(mac)) {
+        return wl.getName();
+      }
     }
+    return "";
+  }
 
-    public String getDeviceName(String mac) {
-        Iterator<WhiteList> it = this.mWhiteList.iterator();
-        while (it.hasNext()) {
-            WhiteList wl = it.next();
-            if (wl.getMac().equalsIgnoreCase(mac)) {
-                return wl.getName();
-            }
-        }
-        return "";
+  public boolean isContains(String mac) {
+    Log.m94d(this.TAG, "isContains::" + mac);
+    Iterator<WhiteList> it = this.mWhiteList.iterator();
+    while (it.hasNext()) {
+      WhiteList wl = it.next();
+      if (wl.getMac().equalsIgnoreCase(mac)) {
+        return true;
+      }
     }
+    return false;
+  }
 
-    public boolean isContains(String mac) {
-        Log.m94d(this.TAG, "isContains::" + mac);
-        Iterator<WhiteList> it = this.mWhiteList.iterator();
-        while (it.hasNext()) {
-            WhiteList wl = it.next();
-            if (wl.getMac().equalsIgnoreCase(mac)) {
-                return true;
-            }
-        }
-        return false;
+  public Iterator<WhiteList> getIterator() {
+    if (this.mWhiteList.isEmpty()) {
+      return null;
     }
+    return this.mWhiteList.iterator();
+  }
 
-    public Iterator<WhiteList> getIterator() {
-        if (this.mWhiteList.isEmpty()) {
-            return null;
-        }
-        return this.mWhiteList.iterator();
-    }
+  public int getSize() {
+    return this.mWhiteList.size();
+  }
 
-    public int getSize() {
-        return this.mWhiteList.size();
-    }
-
-    private boolean isMacAddress(String macAddressCandidate) {
-        Pattern macPattern = Pattern.compile("[0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0 -9a-fA-F]{2}[-:][0-9a-fA-F]{2}");
-        Matcher m = macPattern.matcher(macAddressCandidate);
-        return m.matches();
-    }
+  private boolean isMacAddress(String macAddressCandidate) {
+    Pattern macPattern =
+        Pattern.compile(
+            "[0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0-9a-fA-F]{2}[-:][0"
+                + " -9a-fA-F]{2}[-:][0-9a-fA-F]{2}");
+    Matcher m = macPattern.matcher(macAddressCandidate);
+    return m.matches();
+  }
 }

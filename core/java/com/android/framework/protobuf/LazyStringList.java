@@ -5,29 +5,29 @@ import java.util.List;
 
 /* loaded from: classes4.dex */
 public interface LazyStringList extends ProtocolStringList {
-    void add(ByteString byteString);
+  void add(ByteString byteString);
 
-    void add(byte[] bArr);
+  void add(byte[] bArr);
 
-    boolean addAllByteArray(Collection<byte[]> collection);
+  boolean addAllByteArray(Collection<byte[]> collection);
 
-    boolean addAllByteString(Collection<? extends ByteString> collection);
+  boolean addAllByteString(Collection<? extends ByteString> collection);
 
-    List<byte[]> asByteArrayList();
+  List<byte[]> asByteArrayList();
 
-    byte[] getByteArray(int i);
+  byte[] getByteArray(int i);
 
-    ByteString getByteString(int i);
+  ByteString getByteString(int i);
 
-    Object getRaw(int i);
+  Object getRaw(int i);
 
-    List<?> getUnderlyingElements();
+  List<?> getUnderlyingElements();
 
-    LazyStringList getUnmodifiableView();
+  LazyStringList getUnmodifiableView();
 
-    void mergeFrom(LazyStringList lazyStringList);
+  void mergeFrom(LazyStringList lazyStringList);
 
-    void set(int i, ByteString byteString);
+  void set(int i, ByteString byteString);
 
-    void set(int i, byte[] bArr);
+  void set(int i, byte[] bArr);
 }

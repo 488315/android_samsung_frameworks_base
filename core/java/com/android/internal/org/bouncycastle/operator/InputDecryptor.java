@@ -5,7 +5,7 @@ import java.io.InputStream;
 
 /* loaded from: classes5.dex */
 public interface InputDecryptor {
-    AlgorithmIdentifier getAlgorithmIdentifier();
+  AlgorithmIdentifier getAlgorithmIdentifier();
 
-    InputStream getInputStream(InputStream inputStream);
+  InputStream getInputStream(InputStream inputStream);
 }

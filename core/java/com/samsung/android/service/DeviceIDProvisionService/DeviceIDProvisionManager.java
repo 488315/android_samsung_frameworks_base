@@ -4,13 +4,11 @@ import android.content.Context;
 
 /* loaded from: classes5.dex */
 public class DeviceIDProvisionManager {
-    public DeviceIDProvisionManager(Context context) {
-    }
+  public DeviceIDProvisionManager(Context context) {}
 
-    public boolean isAvailable() {
-        return false;
-    }
+  public boolean isAvailable() {
+    return false;
+  }
 
-    public void provision() {
-    }
+  public void provision() {}
 }

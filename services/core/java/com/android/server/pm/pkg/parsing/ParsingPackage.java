@@ -27,407 +27,407 @@ import java.util.Set;
 
 /* loaded from: classes3.dex */
 public interface ParsingPackage {
-    ParsingPackage addActivity(ParsedActivity parsedActivity);
+  ParsingPackage addActivity(ParsedActivity parsedActivity);
 
-    ParsingPackage addAdoptPermission(String str);
+  ParsingPackage addAdoptPermission(String str);
 
-    ParsingPackage addApexSystemService(ParsedApexSystemService parsedApexSystemService);
+  ParsingPackage addApexSystemService(ParsedApexSystemService parsedApexSystemService);
 
-    ParsingPackage addAttribution(ParsedAttribution parsedAttribution);
+  ParsingPackage addAttribution(ParsedAttribution parsedAttribution);
 
-    ParsingPackage addConfigPreference(ConfigurationInfo configurationInfo);
+  ParsingPackage addConfigPreference(ConfigurationInfo configurationInfo);
 
-    ParsingPackage addFeatureGroup(FeatureGroupInfo featureGroupInfo);
+  ParsingPackage addFeatureGroup(FeatureGroupInfo featureGroupInfo);
 
-    ParsingPackage addImplicitPermission(String str);
+  ParsingPackage addImplicitPermission(String str);
 
-    ParsingPackage addInstrumentation(ParsedInstrumentation parsedInstrumentation);
+  ParsingPackage addInstrumentation(ParsedInstrumentation parsedInstrumentation);
 
-    ParsingPackage addKeySet(String str, PublicKey publicKey);
+  ParsingPackage addKeySet(String str, PublicKey publicKey);
 
-    ParsingPackage addLibraryName(String str);
+  ParsingPackage addLibraryName(String str);
 
-    ParsingPackage addOriginalPackage(String str);
+  ParsingPackage addOriginalPackage(String str);
 
-    ParsingPackage addOverlayable(String str, String str2);
+  ParsingPackage addOverlayable(String str, String str2);
 
-    ParsingPackage addPermission(ParsedPermission parsedPermission);
+  ParsingPackage addPermission(ParsedPermission parsedPermission);
 
-    ParsingPackage addPermissionGroup(ParsedPermissionGroup parsedPermissionGroup);
+  ParsingPackage addPermissionGroup(ParsedPermissionGroup parsedPermissionGroup);
 
-    ParsingPackage addPreferredActivityFilter(String str, ParsedIntentInfo parsedIntentInfo);
+  ParsingPackage addPreferredActivityFilter(String str, ParsedIntentInfo parsedIntentInfo);
 
-    ParsingPackage addProperty(PackageManager.Property property);
+  ParsingPackage addProperty(PackageManager.Property property);
 
-    ParsingPackage addProtectedBroadcast(String str);
+  ParsingPackage addProtectedBroadcast(String str);
 
-    ParsingPackage addProvider(ParsedProvider parsedProvider);
+  ParsingPackage addProvider(ParsedProvider parsedProvider);
 
-    ParsingPackage addQueriesIntent(Intent intent);
+  ParsingPackage addQueriesIntent(Intent intent);
 
-    ParsingPackage addQueriesPackage(String str);
+  ParsingPackage addQueriesPackage(String str);
 
-    ParsingPackage addQueriesProvider(String str);
+  ParsingPackage addQueriesProvider(String str);
 
-    ParsingPackage addReceiver(ParsedActivity parsedActivity);
+  ParsingPackage addReceiver(ParsedActivity parsedActivity);
 
-    ParsingPackage addReqFeature(FeatureInfo featureInfo);
+  ParsingPackage addReqFeature(FeatureInfo featureInfo);
 
-    ParsingPackage addService(ParsedService parsedService);
+  ParsingPackage addService(ParsedService parsedService);
 
-    ParsingPackage addUsesLibrary(String str);
+  ParsingPackage addUsesLibrary(String str);
 
-    ParsingPackage addUsesNativeLibrary(String str);
+  ParsingPackage addUsesNativeLibrary(String str);
 
-    ParsingPackage addUsesOptionalLibrary(String str);
+  ParsingPackage addUsesOptionalLibrary(String str);
 
-    ParsingPackage addUsesOptionalNativeLibrary(String str);
+  ParsingPackage addUsesOptionalNativeLibrary(String str);
 
-    ParsingPackage addUsesPermission(ParsedUsesPermission parsedUsesPermission);
+  ParsingPackage addUsesPermission(ParsedUsesPermission parsedUsesPermission);
 
-    ParsingPackage addUsesSdkLibrary(String str, long j, String[] strArr);
+  ParsingPackage addUsesSdkLibrary(String str, long j, String[] strArr);
 
-    ParsingPackage addUsesStaticLibrary(String str, long j, String[] strArr);
+  ParsingPackage addUsesStaticLibrary(String str, long j, String[] strArr);
 
-    ParsingPackage asSplit(String[] strArr, String[] strArr2, int[] iArr, SparseArray sparseArray);
+  ParsingPackage asSplit(String[] strArr, String[] strArr2, int[] iArr, SparseArray sparseArray);
 
-    List getActivities();
+  List getActivities();
 
-    List getAttributions();
+  List getAttributions();
 
-    String getBaseApkPath();
+  String getBaseApkPath();
 
-    String getClassLoaderName();
+  String getClassLoaderName();
 
-    List getInstrumentations();
+  List getInstrumentations();
 
-    Map getKeySetMapping();
+  Map getKeySetMapping();
 
-    List getLibraryNames();
+  List getLibraryNames();
 
-    float getMaxAspectRatio();
+  float getMaxAspectRatio();
 
-    Bundle getMetaData();
+  Bundle getMetaData();
 
-    float getMinAspectRatio();
+  float getMinAspectRatio();
 
-    String getPackageName();
+  String getPackageName();
 
-    String getPermission();
+  String getPermission();
 
-    List getPermissions();
+  List getPermissions();
 
-    String getProcessName();
+  String getProcessName();
 
-    List getProviders();
+  List getProviders();
 
-    List getReceivers();
+  List getReceivers();
 
-    List getRequestedPermissions();
+  List getRequestedPermissions();
 
-    Boolean getResizeableActivity();
+  Boolean getResizeableActivity();
 
-    String getSdkLibraryName();
+  String getSdkLibraryName();
 
-    List getServices();
+  List getServices();
 
-    String getSharedUserId();
+  String getSharedUserId();
 
-    String[] getSplitCodePaths();
+  String[] getSplitCodePaths();
 
-    String[] getSplitNames();
+  String[] getSplitNames();
 
-    String getStaticSharedLibraryName();
+  String getStaticSharedLibraryName();
 
-    int getTargetSdkVersion();
+  int getTargetSdkVersion();
 
-    String getTaskAffinity();
+  String getTaskAffinity();
 
-    int getUiOptions();
+  int getUiOptions();
 
-    List getUsesLibraries();
+  List getUsesLibraries();
 
-    List getUsesNativeLibraries();
+  List getUsesNativeLibraries();
 
-    List getUsesPermissions();
+  List getUsesPermissions();
 
-    List getUsesSdkLibraries();
+  List getUsesSdkLibraries();
 
-    List getUsesStaticLibraries();
+  List getUsesStaticLibraries();
 
-    ParsedPackage hideAsParsed();
+  ParsedPackage hideAsParsed();
 
-    boolean isAnyDensity();
+  boolean isAnyDensity();
 
-    boolean isBackupAllowed();
+  boolean isBackupAllowed();
 
-    boolean isExtraLargeScreensSupported();
+  boolean isExtraLargeScreensSupported();
 
-    boolean isHardwareAccelerated();
+  boolean isHardwareAccelerated();
 
-    boolean isLargeScreensSupported();
+  boolean isLargeScreensSupported();
 
-    boolean isNormalScreensSupported();
+  boolean isNormalScreensSupported();
 
-    boolean isProfileable();
+  boolean isProfileable();
 
-    boolean isProfileableByShell();
+  boolean isProfileableByShell();
 
-    boolean isResizeable();
+  boolean isResizeable();
 
-    boolean isResizeableActivityViaSdkVersion();
+  boolean isResizeableActivityViaSdkVersion();
 
-    boolean isSaveStateDisallowed();
+  boolean isSaveStateDisallowed();
 
-    boolean isSmallScreensSupported();
+  boolean isSmallScreensSupported();
 
-    boolean isStaticSharedLibrary();
+  boolean isStaticSharedLibrary();
 
-    boolean isTaskReparentingAllowed();
+  boolean isTaskReparentingAllowed();
 
-    ParsingPackage removeUsesOptionalLibrary(String str);
+  ParsingPackage removeUsesOptionalLibrary(String str);
 
-    ParsingPackage removeUsesOptionalNativeLibrary(String str);
+  ParsingPackage removeUsesOptionalNativeLibrary(String str);
 
-    ParsingPackage set32BitAbiPreferred(boolean z);
+  ParsingPackage set32BitAbiPreferred(boolean z);
 
-    ParsingPackage setAllowAudioPlaybackCapture(boolean z);
+  ParsingPackage setAllowAudioPlaybackCapture(boolean z);
 
-    ParsingPackage setAllowNativeHeapPointerTagging(boolean z);
+  ParsingPackage setAllowNativeHeapPointerTagging(boolean z);
 
-    ParsingPackage setAnyDensity(int i);
+  ParsingPackage setAnyDensity(int i);
 
-    ParsingPackage setAppComponentFactory(String str);
+  ParsingPackage setAppComponentFactory(String str);
 
-    ParsingPackage setApplicationClassName(String str);
+  ParsingPackage setApplicationClassName(String str);
 
-    ParsingPackage setAttributionsAreUserVisible(boolean z);
+  ParsingPackage setAttributionsAreUserVisible(boolean z);
 
-    ParsingPackage setAutoRevokePermissions(int i);
+  ParsingPackage setAutoRevokePermissions(int i);
 
-    ParsingPackage setBackupAgentName(String str);
+  ParsingPackage setBackupAgentName(String str);
 
-    ParsingPackage setBackupAllowed(boolean z);
+  ParsingPackage setBackupAllowed(boolean z);
 
-    ParsingPackage setBackupInForeground(boolean z);
+  ParsingPackage setBackupInForeground(boolean z);
 
-    ParsingPackage setBannerResourceId(int i);
+  ParsingPackage setBannerResourceId(int i);
 
-    ParsingPackage setCategory(int i);
+  ParsingPackage setCategory(int i);
 
-    ParsingPackage setClassLoaderName(String str);
+  ParsingPackage setClassLoaderName(String str);
 
-    ParsingPackage setClearUserDataAllowed(boolean z);
+  ParsingPackage setClearUserDataAllowed(boolean z);
 
-    ParsingPackage setClearUserDataOnFailedRestoreAllowed(boolean z);
+  ParsingPackage setClearUserDataOnFailedRestoreAllowed(boolean z);
 
-    ParsingPackage setCleartextTrafficAllowed(boolean z);
+  ParsingPackage setCleartextTrafficAllowed(boolean z);
 
-    ParsingPackage setCompatibleWidthLimitDp(int i);
+  ParsingPackage setCompatibleWidthLimitDp(int i);
 
-    ParsingPackage setCrossProfile(boolean z);
+  ParsingPackage setCrossProfile(boolean z);
 
-    ParsingPackage setDataExtractionRulesResourceId(int i);
+  ParsingPackage setDataExtractionRulesResourceId(int i);
 
-    ParsingPackage setDebuggable(boolean z);
+  ParsingPackage setDebuggable(boolean z);
 
-    ParsingPackage setDeclaredHavingCode(boolean z);
+  ParsingPackage setDeclaredHavingCode(boolean z);
 
-    ParsingPackage setDefaultToDeviceProtectedStorage(boolean z);
+  ParsingPackage setDefaultToDeviceProtectedStorage(boolean z);
 
-    ParsingPackage setDescriptionResourceId(int i);
+  ParsingPackage setDescriptionResourceId(int i);
 
-    ParsingPackage setDirectBootAware(boolean z);
+  ParsingPackage setDirectBootAware(boolean z);
 
-    ParsingPackage setEnabled(boolean z);
+  ParsingPackage setEnabled(boolean z);
 
-    ParsingPackage setExternalStorage(boolean z);
+  ParsingPackage setExternalStorage(boolean z);
 
-    ParsingPackage setExtraLargeScreensSupported(int i);
+  ParsingPackage setExtraLargeScreensSupported(int i);
 
-    ParsingPackage setExtractNativeLibrariesRequested(boolean z);
+  ParsingPackage setExtractNativeLibrariesRequested(boolean z);
 
-    ParsingPackage setForceQueryable(boolean z);
+  ParsingPackage setForceQueryable(boolean z);
 
-    ParsingPackage setFullBackupContentResourceId(int i);
+  ParsingPackage setFullBackupContentResourceId(int i);
 
-    ParsingPackage setFullBackupOnly(boolean z);
+  ParsingPackage setFullBackupOnly(boolean z);
 
-    ParsingPackage setGame(boolean z);
+  ParsingPackage setGame(boolean z);
 
-    ParsingPackage setGwpAsanMode(int i);
+  ParsingPackage setGwpAsanMode(int i);
 
-    ParsingPackage setHardwareAccelerated(boolean z);
+  ParsingPackage setHardwareAccelerated(boolean z);
 
-    ParsingPackage setHasDomainUrls(boolean z);
+  ParsingPackage setHasDomainUrls(boolean z);
 
-    ParsingPackage setIconResourceId(int i);
+  ParsingPackage setIconResourceId(int i);
 
-    ParsingPackage setInstallLocation(int i);
+  ParsingPackage setInstallLocation(int i);
 
-    ParsingPackage setKillAfterRestoreAllowed(boolean z);
+  ParsingPackage setKillAfterRestoreAllowed(boolean z);
 
-    ParsingPackage setKnownActivityEmbeddingCerts(Set set);
+  ParsingPackage setKnownActivityEmbeddingCerts(Set set);
 
-    ParsingPackage setLabelResourceId(int i);
+  ParsingPackage setLabelResourceId(int i);
 
-    ParsingPackage setLargeHeap(boolean z);
+  ParsingPackage setLargeHeap(boolean z);
 
-    ParsingPackage setLargeScreensSupported(int i);
+  ParsingPackage setLargeScreensSupported(int i);
 
-    ParsingPackage setLargestWidthLimitDp(int i);
+  ParsingPackage setLargestWidthLimitDp(int i);
 
-    ParsingPackage setLeavingSharedUser(boolean z);
+  ParsingPackage setLeavingSharedUser(boolean z);
 
-    ParsingPackage setLocaleConfigResourceId(int i);
+  ParsingPackage setLocaleConfigResourceId(int i);
 
-    ParsingPackage setLogoResourceId(int i);
+  ParsingPackage setLogoResourceId(int i);
 
-    ParsingPackage setManageSpaceActivityName(String str);
+  ParsingPackage setManageSpaceActivityName(String str);
 
-    ParsingPackage setMaxAspectRatio(float f);
+  ParsingPackage setMaxAspectRatio(float f);
 
-    ParsingPackage setMaxSdkVersion(int i);
+  ParsingPackage setMaxSdkVersion(int i);
 
-    ParsingPackage setMemtagMode(int i);
+  ParsingPackage setMemtagMode(int i);
 
-    ParsingPackage setMetaData(Bundle bundle);
+  ParsingPackage setMetaData(Bundle bundle);
 
-    ParsingPackage setMinAspectRatio(float f);
+  ParsingPackage setMinAspectRatio(float f);
 
-    ParsingPackage setMinExtensionVersions(SparseIntArray sparseIntArray);
+  ParsingPackage setMinExtensionVersions(SparseIntArray sparseIntArray);
 
-    ParsingPackage setMinSdkVersion(int i);
+  ParsingPackage setMinSdkVersion(int i);
 
-    ParsingPackage setMultiArch(boolean z);
+  ParsingPackage setMultiArch(boolean z);
 
-    ParsingPackage setNativeHeapZeroInitialized(int i);
+  ParsingPackage setNativeHeapZeroInitialized(int i);
 
-    ParsingPackage setNetworkSecurityConfigResourceId(int i);
+  ParsingPackage setNetworkSecurityConfigResourceId(int i);
 
-    ParsingPackage setNonLocalizedLabel(CharSequence charSequence);
+  ParsingPackage setNonLocalizedLabel(CharSequence charSequence);
 
-    ParsingPackage setNonSdkApiRequested(boolean z);
+  ParsingPackage setNonSdkApiRequested(boolean z);
 
-    ParsingPackage setNormalScreensSupported(int i);
+  ParsingPackage setNormalScreensSupported(int i);
 
-    ParsingPackage setOnBackInvokedCallbackEnabled(boolean z);
+  ParsingPackage setOnBackInvokedCallbackEnabled(boolean z);
 
-    ParsingPackage setOverlayCategory(String str);
+  ParsingPackage setOverlayCategory(String str);
 
-    ParsingPackage setOverlayIsStatic(boolean z);
+  ParsingPackage setOverlayIsStatic(boolean z);
 
-    ParsingPackage setOverlayPriority(int i);
+  ParsingPackage setOverlayPriority(int i);
 
-    ParsingPackage setOverlayTarget(String str);
+  ParsingPackage setOverlayTarget(String str);
 
-    ParsingPackage setOverlayTargetOverlayableName(String str);
+  ParsingPackage setOverlayTargetOverlayableName(String str);
 
-    ParsingPackage setPartiallyDirectBootAware(boolean z);
+  ParsingPackage setPartiallyDirectBootAware(boolean z);
 
-    ParsingPackage setPermission(String str);
+  ParsingPackage setPermission(String str);
 
-    ParsingPackage setPersistent(boolean z);
+  ParsingPackage setPersistent(boolean z);
 
-    ParsingPackage setPreserveLegacyExternalStorage(boolean z);
+  ParsingPackage setPreserveLegacyExternalStorage(boolean z);
 
-    ParsingPackage setProcessName(String str);
+  ParsingPackage setProcessName(String str);
 
-    ParsingPackage setProcesses(Map map);
+  ParsingPackage setProcesses(Map map);
 
-    ParsingPackage setProfileable(boolean z);
+  ParsingPackage setProfileable(boolean z);
 
-    ParsingPackage setProfileableByShell(boolean z);
+  ParsingPackage setProfileableByShell(boolean z);
 
-    ParsingPackage setRequestForegroundServiceExemption(boolean z);
+  ParsingPackage setRequestForegroundServiceExemption(boolean z);
 
-    ParsingPackage setRequestLegacyExternalStorage(boolean z);
+  ParsingPackage setRequestLegacyExternalStorage(boolean z);
 
-    ParsingPackage setRequestRawExternalStorageAccess(Boolean bool);
+  ParsingPackage setRequestRawExternalStorageAccess(Boolean bool);
 
-    ParsingPackage setRequiredAccountType(String str);
+  ParsingPackage setRequiredAccountType(String str);
 
-    ParsingPackage setRequiredForAllUsers(boolean z);
+  ParsingPackage setRequiredForAllUsers(boolean z);
 
-    ParsingPackage setRequiresSmallestWidthDp(int i);
+  ParsingPackage setRequiresSmallestWidthDp(int i);
 
-    ParsingPackage setResetEnabledSettingsOnAppDataCleared(boolean z);
+  ParsingPackage setResetEnabledSettingsOnAppDataCleared(boolean z);
 
-    ParsingPackage setResizeable(int i);
+  ParsingPackage setResizeable(int i);
 
-    ParsingPackage setResizeableActivity(Boolean bool);
+  ParsingPackage setResizeableActivity(Boolean bool);
 
-    ParsingPackage setResizeableActivityViaSdkVersion(boolean z);
+  ParsingPackage setResizeableActivityViaSdkVersion(boolean z);
 
-    ParsingPackage setResourceOverlay(boolean z);
+  ParsingPackage setResourceOverlay(boolean z);
 
-    ParsingPackage setRestoreAnyVersion(boolean z);
+  ParsingPackage setRestoreAnyVersion(boolean z);
 
-    ParsingPackage setRestrictUpdateHash(byte[] bArr);
+  ParsingPackage setRestrictUpdateHash(byte[] bArr);
 
-    ParsingPackage setRestrictedAccountType(String str);
+  ParsingPackage setRestrictedAccountType(String str);
 
-    ParsingPackage setRoundIconResourceId(int i);
+  ParsingPackage setRoundIconResourceId(int i);
 
-    ParsingPackage setRtlSupported(boolean z);
+  ParsingPackage setRtlSupported(boolean z);
 
-    ParsingPackage setSaveStateDisallowed(boolean z);
+  ParsingPackage setSaveStateDisallowed(boolean z);
 
-    ParsingPackage setSdkLibVersionMajor(int i);
+  ParsingPackage setSdkLibVersionMajor(int i);
 
-    ParsingPackage setSdkLibrary(boolean z);
+  ParsingPackage setSdkLibrary(boolean z);
 
-    ParsingPackage setSdkLibraryName(String str);
+  ParsingPackage setSdkLibraryName(String str);
 
-    ParsingPackage setSharedUserId(String str);
+  ParsingPackage setSharedUserId(String str);
 
-    ParsingPackage setSharedUserLabelResourceId(int i);
+  ParsingPackage setSharedUserLabelResourceId(int i);
 
-    ParsingPackage setSigningDetails(SigningDetails signingDetails);
+  ParsingPackage setSigningDetails(SigningDetails signingDetails);
 
-    ParsingPackage setSmallScreensSupported(int i);
+  ParsingPackage setSmallScreensSupported(int i);
 
-    ParsingPackage setSplitClassLoaderName(int i, String str);
+  ParsingPackage setSplitClassLoaderName(int i, String str);
 
-    ParsingPackage setSplitHasCode(int i, boolean z);
+  ParsingPackage setSplitHasCode(int i, boolean z);
 
-    ParsingPackage setStaticSharedLibrary(boolean z);
+  ParsingPackage setStaticSharedLibrary(boolean z);
 
-    ParsingPackage setStaticSharedLibraryName(String str);
+  ParsingPackage setStaticSharedLibraryName(String str);
 
-    ParsingPackage setStaticSharedLibraryVersion(long j);
+  ParsingPackage setStaticSharedLibraryVersion(long j);
 
-    ParsingPackage setTargetSandboxVersion(int i);
+  ParsingPackage setTargetSandboxVersion(int i);
 
-    ParsingPackage setTargetSdkVersion(int i);
+  ParsingPackage setTargetSdkVersion(int i);
 
-    ParsingPackage setTaskAffinity(String str);
+  ParsingPackage setTaskAffinity(String str);
 
-    ParsingPackage setTaskReparentingAllowed(boolean z);
+  ParsingPackage setTaskReparentingAllowed(boolean z);
 
-    ParsingPackage setTestOnly(boolean z);
+  ParsingPackage setTestOnly(boolean z);
 
-    ParsingPackage setThemeResourceId(int i);
+  ParsingPackage setThemeResourceId(int i);
 
-    ParsingPackage setUiOptions(int i);
+  ParsingPackage setUiOptions(int i);
 
-    ParsingPackage setUpgradeKeySets(Set set);
+  ParsingPackage setUpgradeKeySets(Set set);
 
-    ParsingPackage setUseEmbeddedDex(boolean z);
+  ParsingPackage setUseEmbeddedDex(boolean z);
 
-    ParsingPackage setUserDataFragile(boolean z);
+  ParsingPackage setUserDataFragile(boolean z);
 
-    ParsingPackage setVisibleToInstantApps(boolean z);
+  ParsingPackage setVisibleToInstantApps(boolean z);
 
-    ParsingPackage setVmSafeMode(boolean z);
+  ParsingPackage setVmSafeMode(boolean z);
 
-    ParsingPackage setVolumeUuid(String str);
+  ParsingPackage setVolumeUuid(String str);
 
-    ParsingPackage setZygotePreloadName(String str);
+  ParsingPackage setZygotePreloadName(String str);
 
-    ParsingPackage sortActivities();
+  ParsingPackage sortActivities();
 
-    ParsingPackage sortReceivers();
+  ParsingPackage sortReceivers();
 
-    ParsingPackage sortServices();
+  ParsingPackage sortServices();
 }

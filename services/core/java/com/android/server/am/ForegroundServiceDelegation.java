@@ -7,12 +7,14 @@ import android.os.IBinder;
 
 /* loaded from: classes.dex */
 public class ForegroundServiceDelegation {
-    public final IBinder mBinder = new Binder();
-    public final ServiceConnection mConnection;
-    public final ForegroundServiceDelegationOptions mOptions;
+  public final IBinder mBinder = new Binder();
+  public final ServiceConnection mConnection;
+  public final ForegroundServiceDelegationOptions mOptions;
 
-    public ForegroundServiceDelegation(ForegroundServiceDelegationOptions foregroundServiceDelegationOptions, ServiceConnection serviceConnection) {
-        this.mOptions = foregroundServiceDelegationOptions;
-        this.mConnection = serviceConnection;
-    }
+  public ForegroundServiceDelegation(
+      ForegroundServiceDelegationOptions foregroundServiceDelegationOptions,
+      ServiceConnection serviceConnection) {
+    this.mOptions = foregroundServiceDelegationOptions;
+    this.mConnection = serviceConnection;
+  }
 }

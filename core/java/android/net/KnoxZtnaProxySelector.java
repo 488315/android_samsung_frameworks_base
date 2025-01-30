@@ -13,20 +13,22 @@ import java.util.List;
 
 /* loaded from: classes2.dex */
 public class KnoxZtnaProxySelector extends ProxySelector {
-    private static final String TAG = "knoxNwFilter-KnoxZtnaProxySelector";
+  private static final String TAG = "knoxNwFilter-KnoxZtnaProxySelector";
 
-    @Override // java.net.ProxySelector
-    public List<java.net.Proxy> select(URI uri) {
-        List<java.net.Proxy> ret = Lists.newArrayList();
-        String port = System.getProperty("http.proxyPort");
-        Log.m94d(TAG, "Proxy port configured is " + port + "for the caller " + Process.myUid());
-        java.net.Proxy proxy = new java.net.Proxy(Proxy.Type.HTTP, InetSocketAddress.createUnresolved("::1", Integer.parseInt(port)));
-        ret.add(proxy);
-        return ret;
-    }
+  @Override // java.net.ProxySelector
+  public List<java.net.Proxy> select(URI uri) {
+    List<java.net.Proxy> ret = Lists.newArrayList();
+    String port = System.getProperty("http.proxyPort");
+    Log.m94d(TAG, "Proxy port configured is " + port + "for the caller " + Process.myUid());
+    java.net.Proxy proxy =
+        new java.net.Proxy(
+            Proxy.Type.HTTP, InetSocketAddress.createUnresolved("::1", Integer.parseInt(port)));
+    ret.add(proxy);
+    return ret;
+  }
 
-    @Override // java.net.ProxySelector
-    public void connectFailed(URI uri, SocketAddress address, IOException failure) {
-        Log.m94d(TAG, "connection failed happened");
-    }
+  @Override // java.net.ProxySelector
+  public void connectFailed(URI uri, SocketAddress address, IOException failure) {
+    Log.m94d(TAG, "connection failed happened");
+  }
 }

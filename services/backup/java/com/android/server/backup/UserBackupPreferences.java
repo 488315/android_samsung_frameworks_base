@@ -10,23 +10,24 @@ import java.util.Set;
 
 /* loaded from: classes.dex */
 public class UserBackupPreferences {
-    public final SharedPreferences.Editor mEditor;
-    public final SharedPreferences mPreferences;
+  public final SharedPreferences.Editor mEditor;
+  public final SharedPreferences mPreferences;
 
-    public UserBackupPreferences(Context context, File file) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences(new File(file, "backup_preferences"), 0);
-        this.mPreferences = sharedPreferences;
-        this.mEditor = sharedPreferences.edit();
-    }
+  public UserBackupPreferences(Context context, File file) {
+    SharedPreferences sharedPreferences =
+        context.getSharedPreferences(new File(file, "backup_preferences"), 0);
+    this.mPreferences = sharedPreferences;
+    this.mEditor = sharedPreferences.edit();
+  }
 
-    public void addExcludedKeys(String str, List list) {
-        HashSet hashSet = new HashSet(this.mPreferences.getStringSet(str, Collections.emptySet()));
-        hashSet.addAll(list);
-        this.mEditor.putStringSet(str, hashSet);
-        this.mEditor.commit();
-    }
+  public void addExcludedKeys(String str, List list) {
+    HashSet hashSet = new HashSet(this.mPreferences.getStringSet(str, Collections.emptySet()));
+    hashSet.addAll(list);
+    this.mEditor.putStringSet(str, hashSet);
+    this.mEditor.commit();
+  }
 
-    public Set getExcludedRestoreKeysForPackage(String str) {
-        return this.mPreferences.getStringSet(str, Collections.emptySet());
-    }
+  public Set getExcludedRestoreKeysForPackage(String str) {
+    return this.mPreferences.getStringSet(str, Collections.emptySet());
+  }
 }

@@ -3,71 +3,70 @@ package com.android.server;
 import android.p009os.IBinder;
 import android.p009os.ServiceManager;
 import android.util.Slog;
-import com.android.server.IRealTimeTokenService;
 
 /* loaded from: classes5.dex */
 public final class RealTimeTokenManager {
-    public static final int RTTS_ERR_GENERAL_ERROR = -101;
-    public static final int RTTS_ERR_INVALID_ARGUMENT = -102;
-    public static final int RTTS_ERR_INVALID_DEVICE_TIME = -105;
-    public static final int RTTS_ERR_OUT_OF_STORAGE = -108;
-    public static final int RTTS_ERR_PERMISSION_DENIED = -104;
-    public static final int RTTS_ERR_SERVICE_NOT_READY = -103;
-    public static final int RTTS_ERR_TOKEN_ALREADY_EXIST = -106;
-    public static final int RTTS_ERR_TOKEN_NOT_EXIST = -107;
-    public static final int RTTS_ERR_TOKEN_NOT_SUPPORTED = -109;
-    public static final int RTTS_SUCCESS = 0;
-    private static final String TAG = "RealTimeTokenManager";
-    private IRealTimeTokenService mService;
+  public static final int RTTS_ERR_GENERAL_ERROR = -101;
+  public static final int RTTS_ERR_INVALID_ARGUMENT = -102;
+  public static final int RTTS_ERR_INVALID_DEVICE_TIME = -105;
+  public static final int RTTS_ERR_OUT_OF_STORAGE = -108;
+  public static final int RTTS_ERR_PERMISSION_DENIED = -104;
+  public static final int RTTS_ERR_SERVICE_NOT_READY = -103;
+  public static final int RTTS_ERR_TOKEN_ALREADY_EXIST = -106;
+  public static final int RTTS_ERR_TOKEN_NOT_EXIST = -107;
+  public static final int RTTS_ERR_TOKEN_NOT_SUPPORTED = -109;
+  public static final int RTTS_SUCCESS = 0;
+  private static final String TAG = "RealTimeTokenManager";
+  private IRealTimeTokenService mService;
 
-    private RealTimeTokenManager() {
-        Slog.m117i(TAG, "RealTimeTokenManager getService");
-        IBinder b = ServiceManager.getService("RealTimeTokenService");
-        IRealTimeTokenService asInterface = IRealTimeTokenService.Stub.asInterface(b);
-        this.mService = asInterface;
-        if (asInterface == null) {
-            Slog.m117i(TAG, " Failed to getService, return null");
-        }
+  private RealTimeTokenManager() {
+    Slog.m117i(TAG, "RealTimeTokenManager getService");
+    IBinder b = ServiceManager.getService("RealTimeTokenService");
+    IRealTimeTokenService asInterface = IRealTimeTokenService.Stub.asInterface(b);
+    this.mService = asInterface;
+    if (asInterface == null) {
+      Slog.m117i(TAG, " Failed to getService, return null");
     }
+  }
 
-    public static RealTimeTokenManager getInstance() {
-        RealTimeTokenManager rtts = new RealTimeTokenManager();
-        return rtts;
-    }
+  public static RealTimeTokenManager getInstance() {
+    RealTimeTokenManager rtts = new RealTimeTokenManager();
+    return rtts;
+  }
 
-    public int registerTokenInfo(long tag, long expiry) {
-        try {
-            return this.mService.registerTokenInfo(tag, expiry);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return -101;
-        }
+  public int registerTokenInfo(long tag, long expiry) {
+    try {
+      return this.mService.registerTokenInfo(tag, expiry);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return -101;
     }
+  }
 
-    public int checkTokenInfoExpiry(long tag) {
-        try {
-            return this.mService.checkTokenInfoExpiry(tag);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return -101;
-        }
+  public int checkTokenInfoExpiry(long tag) {
+    try {
+      return this.mService.checkTokenInfoExpiry(tag);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return -101;
     }
+  }
 
-    public int unregisterTokenInfo(long tag) {
-        try {
-            return this.mService.unregisterTokenInfo(tag);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return -101;
-        }
+  public int unregisterTokenInfo(long tag) {
+    try {
+      return this.mService.unregisterTokenInfo(tag);
+    } catch (Exception e) {
+      e.printStackTrace();
+      return -101;
     }
+  }
 
-    public int unregisterAllTokenInfo() {
-        try {
-            return this.mService.unregisterAllTokenInfo();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return -101;
-        }
+  public int unregisterAllTokenInfo() {
+    try {
+      return this.mService.unregisterAllTokenInfo();
+    } catch (Exception e) {
+      e.printStackTrace();
+      return -101;
     }
+  }
 }

@@ -12,92 +12,93 @@ import java.util.Objects;
 @SystemApi
 /* loaded from: classes.dex */
 public final class Rule implements Parcelable {
-    public static final Parcelable.Creator<Rule> CREATOR = new Parcelable.Creator<Rule>() { // from class: android.content.integrity.Rule.1
+  public static final Parcelable.Creator<Rule> CREATOR =
+      new Parcelable.Creator<Rule>() { // from class: android.content.integrity.Rule.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public Rule createFromParcel(Parcel in) {
-            return new Rule(in);
+          return new Rule(in);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public Rule[] newArray(int size) {
-            return new Rule[size];
+          return new Rule[size];
         }
-    };
-    public static final int DENY = 0;
-    public static final int FORCE_ALLOW = 1;
-    private final int mEffect;
-    private final IntegrityFormula mFormula;
+      };
+  public static final int DENY = 0;
+  public static final int FORCE_ALLOW = 1;
+  private final int mEffect;
+  private final IntegrityFormula mFormula;
 
-    @Retention(RetentionPolicy.SOURCE)
-    public @interface Effect {
-    }
+  @Retention(RetentionPolicy.SOURCE)
+  public @interface Effect {}
 
-    public Rule(IntegrityFormula formula, int effect) {
-        Preconditions.checkArgument(isValidEffect(effect), "Unknown effect: %d", Integer.valueOf(effect));
-        this.mFormula = (IntegrityFormula) Objects.requireNonNull(formula);
-        this.mEffect = effect;
-    }
+  public Rule(IntegrityFormula formula, int effect) {
+    Preconditions.checkArgument(
+        isValidEffect(effect), "Unknown effect: %d", Integer.valueOf(effect));
+    this.mFormula = (IntegrityFormula) Objects.requireNonNull(formula);
+    this.mEffect = effect;
+  }
 
-    Rule(Parcel in) {
-        this.mFormula = IntegrityFormula.readFromParcel(in);
-        this.mEffect = in.readInt();
-    }
+  Rule(Parcel in) {
+    this.mFormula = IntegrityFormula.readFromParcel(in);
+    this.mEffect = in.readInt();
+  }
 
-    @Override // android.p009os.Parcelable
-    public int describeContents() {
-        return 0;
-    }
+  @Override // android.p009os.Parcelable
+  public int describeContents() {
+    return 0;
+  }
 
-    @Override // android.p009os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-        IntegrityFormula.writeToParcel(this.mFormula, dest, flags);
-        dest.writeInt(this.mEffect);
-    }
+  @Override // android.p009os.Parcelable
+  public void writeToParcel(Parcel dest, int flags) {
+    IntegrityFormula.writeToParcel(this.mFormula, dest, flags);
+    dest.writeInt(this.mEffect);
+  }
 
-    public IntegrityFormula getFormula() {
-        return this.mFormula;
-    }
+  public IntegrityFormula getFormula() {
+    return this.mFormula;
+  }
 
-    public int getEffect() {
-        return this.mEffect;
-    }
+  public int getEffect() {
+    return this.mEffect;
+  }
 
-    public String toString() {
-        return String.format("Rule: %s, %s", this.mFormula, effectToString(this.mEffect));
-    }
+  public String toString() {
+    return String.format("Rule: %s, %s", this.mFormula, effectToString(this.mEffect));
+  }
 
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Rule that = (Rule) o;
-        if (this.mEffect == that.mEffect && Objects.equals(this.mFormula, that.mFormula)) {
-            return true;
-        }
-        return false;
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Rule that = (Rule) o;
+    if (this.mEffect == that.mEffect && Objects.equals(this.mFormula, that.mFormula)) {
+      return true;
+    }
+    return false;
+  }
 
-    public int hashCode() {
-        return Objects.hash(this.mFormula, Integer.valueOf(this.mEffect));
-    }
+  public int hashCode() {
+    return Objects.hash(this.mFormula, Integer.valueOf(this.mEffect));
+  }
 
-    private static String effectToString(int effect) {
-        switch (effect) {
-            case 0:
-                return ASKSManager.TYPE_DENY;
-            case 1:
-                return "FORCE_ALLOW";
-            default:
-                throw new IllegalArgumentException("Unknown effect " + effect);
-        }
+  private static String effectToString(int effect) {
+    switch (effect) {
+      case 0:
+        return ASKSManager.TYPE_DENY;
+      case 1:
+        return "FORCE_ALLOW";
+      default:
+        throw new IllegalArgumentException("Unknown effect " + effect);
     }
+  }
 
-    private static boolean isValidEffect(int effect) {
-        return effect == 0 || effect == 1;
-    }
+  private static boolean isValidEffect(int effect) {
+    return effect == 0 || effect == 1;
+  }
 }

@@ -4,9 +4,9 @@ import java.util.List;
 
 /* loaded from: classes3.dex */
 public interface ParsedAttribution {
-    List getInheritFrom();
+  List getInheritFrom();
 
-    int getLabel();
+  int getLabel();
 
-    String getTag();
+  String getTag();
 }

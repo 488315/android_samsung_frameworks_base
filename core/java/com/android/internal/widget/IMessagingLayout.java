@@ -5,11 +5,11 @@ import java.util.ArrayList;
 
 /* loaded from: classes5.dex */
 public interface IMessagingLayout {
-    Context getContext();
+  Context getContext();
 
-    ArrayList<MessagingGroup> getMessagingGroups();
+  ArrayList<MessagingGroup> getMessagingGroups();
 
-    MessagingLinearLayout getMessagingLinearLayout();
+  MessagingLinearLayout getMessagingLinearLayout();
 
-    void setMessagingClippingDisabled(boolean z);
+  void setMessagingClippingDisabled(boolean z);
 }

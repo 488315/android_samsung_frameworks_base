@@ -19,31 +19,33 @@ import java.security.SecureRandom;
 
 /* loaded from: classes5.dex */
 public class ECKeyPairGenerator implements AsymmetricCipherKeyPairGenerator, ECConstants {
-    ECDomainParameters params;
-    SecureRandom random;
+  ECDomainParameters params;
+  SecureRandom random;
 
-    @Override // com.android.internal.org.bouncycastle.crypto.AsymmetricCipherKeyPairGenerator
-    public void init(KeyGenerationParameters param) {
-        ECKeyGenerationParameters ecP = (ECKeyGenerationParameters) param;
-        this.random = ecP.getRandom();
-        this.params = ecP.getDomainParameters();
-    }
+  @Override // com.android.internal.org.bouncycastle.crypto.AsymmetricCipherKeyPairGenerator
+  public void init(KeyGenerationParameters param) {
+    ECKeyGenerationParameters ecP = (ECKeyGenerationParameters) param;
+    this.random = ecP.getRandom();
+    this.params = ecP.getDomainParameters();
+  }
 
-    @Override // com.android.internal.org.bouncycastle.crypto.AsymmetricCipherKeyPairGenerator
-    public AsymmetricCipherKeyPair generateKeyPair() {
-        BigInteger n = this.params.getN();
-        int nBitLength = n.bitLength();
-        int minWeight = nBitLength >>> 2;
-        while (true) {
-            BigInteger d = BigIntegers.createRandomBigInteger(nBitLength, this.random);
-            if (d.compareTo(ONE) >= 0 && d.compareTo(n) < 0 && WNafUtil.getNafWeight(d) >= minWeight) {
-                ECPoint Q = createBasePointMultiplier().multiply(this.params.getG(), d);
-                return new AsymmetricCipherKeyPair((AsymmetricKeyParameter) new ECPublicKeyParameters(Q, this.params), (AsymmetricKeyParameter) new ECPrivateKeyParameters(d, this.params));
-            }
-        }
+  @Override // com.android.internal.org.bouncycastle.crypto.AsymmetricCipherKeyPairGenerator
+  public AsymmetricCipherKeyPair generateKeyPair() {
+    BigInteger n = this.params.getN();
+    int nBitLength = n.bitLength();
+    int minWeight = nBitLength >>> 2;
+    while (true) {
+      BigInteger d = BigIntegers.createRandomBigInteger(nBitLength, this.random);
+      if (d.compareTo(ONE) >= 0 && d.compareTo(n) < 0 && WNafUtil.getNafWeight(d) >= minWeight) {
+        ECPoint Q = createBasePointMultiplier().multiply(this.params.getG(), d);
+        return new AsymmetricCipherKeyPair(
+            (AsymmetricKeyParameter) new ECPublicKeyParameters(Q, this.params),
+            (AsymmetricKeyParameter) new ECPrivateKeyParameters(d, this.params));
+      }
     }
+  }
 
-    protected ECMultiplier createBasePointMultiplier() {
-        return new FixedPointCombMultiplier();
-    }
+  protected ECMultiplier createBasePointMultiplier() {
+    return new FixedPointCombMultiplier();
+  }
 }

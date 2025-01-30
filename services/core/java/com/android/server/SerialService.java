@@ -8,49 +8,49 @@ import java.util.ArrayList;
 
 /* loaded from: classes.dex */
 public class SerialService extends ISerialManager.Stub {
-    public final Context mContext;
-    public final String[] mSerialPorts;
+  public final Context mContext;
+  public final String[] mSerialPorts;
 
-    private native ParcelFileDescriptor native_open(String str);
+  private native ParcelFileDescriptor native_open(String str);
 
-    public SerialService(Context context) {
-        this.mContext = context;
-        this.mSerialPorts = context.getResources().getStringArray(17236302);
-    }
+  public SerialService(Context context) {
+    this.mContext = context;
+    this.mSerialPorts = context.getResources().getStringArray(17236302);
+  }
 
-    public String[] getSerialPorts() {
-        super.getSerialPorts_enforcePermission();
-        ArrayList arrayList = new ArrayList();
-        int i = 0;
-        while (true) {
-            String[] strArr = this.mSerialPorts;
-            if (i < strArr.length) {
-                String str = strArr[i];
-                if (new File(str).exists()) {
-                    arrayList.add(str);
-                }
-                i++;
-            } else {
-                String[] strArr2 = new String[arrayList.size()];
-                arrayList.toArray(strArr2);
-                return strArr2;
-            }
+  public String[] getSerialPorts() {
+    super.getSerialPorts_enforcePermission();
+    ArrayList arrayList = new ArrayList();
+    int i = 0;
+    while (true) {
+      String[] strArr = this.mSerialPorts;
+      if (i < strArr.length) {
+        String str = strArr[i];
+        if (new File(str).exists()) {
+          arrayList.add(str);
         }
+        i++;
+      } else {
+        String[] strArr2 = new String[arrayList.size()];
+        arrayList.toArray(strArr2);
+        return strArr2;
+      }
     }
+  }
 
-    public ParcelFileDescriptor openSerialPort(String str) {
-        super.openSerialPort_enforcePermission();
-        int i = 0;
-        while (true) {
-            String[] strArr = this.mSerialPorts;
-            if (i < strArr.length) {
-                if (strArr[i].equals(str)) {
-                    return native_open(str);
-                }
-                i++;
-            } else {
-                throw new IllegalArgumentException("Invalid serial port " + str);
-            }
+  public ParcelFileDescriptor openSerialPort(String str) {
+    super.openSerialPort_enforcePermission();
+    int i = 0;
+    while (true) {
+      String[] strArr = this.mSerialPorts;
+      if (i < strArr.length) {
+        if (strArr[i].equals(str)) {
+          return native_open(str);
         }
+        i++;
+      } else {
+        throw new IllegalArgumentException("Invalid serial port " + str);
+      }
     }
+  }
 }

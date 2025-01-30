@@ -22,71 +22,71 @@ import javax.crypto.spec.DHPublicKeySpec;
 
 /* loaded from: classes5.dex */
 public class KeyFactorySpi extends BaseKeyFactorySpi {
-    @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseKeyFactorySpi, java.security.KeyFactorySpi
-    protected KeySpec engineGetKeySpec(Key key, Class spec) throws InvalidKeySpecException {
-        if (spec.isAssignableFrom(DHPrivateKeySpec.class) && (key instanceof DHPrivateKey)) {
-            DHPrivateKey k = (DHPrivateKey) key;
-            return new DHPrivateKeySpec(k.getX(), k.getParams().getP(), k.getParams().getG());
-        }
-        if (spec.isAssignableFrom(DHPublicKeySpec.class) && (key instanceof DHPublicKey)) {
-            DHPublicKey k2 = (DHPublicKey) key;
-            return new DHPublicKeySpec(k2.getY(), k2.getParams().getP(), k2.getParams().getG());
-        }
-        return super.engineGetKeySpec(key, spec);
+  @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseKeyFactorySpi, java.security.KeyFactorySpi
+  protected KeySpec engineGetKeySpec(Key key, Class spec) throws InvalidKeySpecException {
+    if (spec.isAssignableFrom(DHPrivateKeySpec.class) && (key instanceof DHPrivateKey)) {
+      DHPrivateKey k = (DHPrivateKey) key;
+      return new DHPrivateKeySpec(k.getX(), k.getParams().getP(), k.getParams().getG());
     }
+    if (spec.isAssignableFrom(DHPublicKeySpec.class) && (key instanceof DHPublicKey)) {
+      DHPublicKey k2 = (DHPublicKey) key;
+      return new DHPublicKeySpec(k2.getY(), k2.getParams().getP(), k2.getParams().getG());
+    }
+    return super.engineGetKeySpec(key, spec);
+  }
 
-    @Override // java.security.KeyFactorySpi
-    protected Key engineTranslateKey(Key key) throws InvalidKeyException {
-        if (key instanceof DHPublicKey) {
-            return new BCDHPublicKey((DHPublicKey) key);
-        }
-        if (key instanceof DHPrivateKey) {
-            return new BCDHPrivateKey((DHPrivateKey) key);
-        }
-        throw new InvalidKeyException("key type unknown");
+  @Override // java.security.KeyFactorySpi
+  protected Key engineTranslateKey(Key key) throws InvalidKeyException {
+    if (key instanceof DHPublicKey) {
+      return new BCDHPublicKey((DHPublicKey) key);
     }
+    if (key instanceof DHPrivateKey) {
+      return new BCDHPrivateKey((DHPrivateKey) key);
+    }
+    throw new InvalidKeyException("key type unknown");
+  }
 
-    @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseKeyFactorySpi, java.security.KeyFactorySpi
-    protected PrivateKey engineGeneratePrivate(KeySpec keySpec) throws InvalidKeySpecException {
-        if (keySpec instanceof DHPrivateKeySpec) {
-            return new BCDHPrivateKey((DHPrivateKeySpec) keySpec);
-        }
-        return super.engineGeneratePrivate(keySpec);
+  @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseKeyFactorySpi, java.security.KeyFactorySpi
+  protected PrivateKey engineGeneratePrivate(KeySpec keySpec) throws InvalidKeySpecException {
+    if (keySpec instanceof DHPrivateKeySpec) {
+      return new BCDHPrivateKey((DHPrivateKeySpec) keySpec);
     }
+    return super.engineGeneratePrivate(keySpec);
+  }
 
-    @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseKeyFactorySpi, java.security.KeyFactorySpi
-    protected PublicKey engineGeneratePublic(KeySpec keySpec) throws InvalidKeySpecException {
-        if (keySpec instanceof DHPublicKeySpec) {
-            try {
-                return new BCDHPublicKey((DHPublicKeySpec) keySpec);
-            } catch (IllegalArgumentException e) {
-                throw new ExtendedInvalidKeySpecException(e.getMessage(), e);
-            }
-        }
-        return super.engineGeneratePublic(keySpec);
+  @Override // com.android.internal.org.bouncycastle.jcajce.provider.asymmetric.util.BaseKeyFactorySpi, java.security.KeyFactorySpi
+  protected PublicKey engineGeneratePublic(KeySpec keySpec) throws InvalidKeySpecException {
+    if (keySpec instanceof DHPublicKeySpec) {
+      try {
+        return new BCDHPublicKey((DHPublicKeySpec) keySpec);
+      } catch (IllegalArgumentException e) {
+        throw new ExtendedInvalidKeySpecException(e.getMessage(), e);
+      }
     }
+    return super.engineGeneratePublic(keySpec);
+  }
 
-    @Override // com.android.internal.org.bouncycastle.jcajce.provider.util.AsymmetricKeyInfoConverter
-    public PrivateKey generatePrivate(PrivateKeyInfo keyInfo) throws IOException {
-        ASN1ObjectIdentifier algOid = keyInfo.getPrivateKeyAlgorithm().getAlgorithm();
-        if (algOid.equals((ASN1Primitive) PKCSObjectIdentifiers.dhKeyAgreement)) {
-            return new BCDHPrivateKey(keyInfo);
-        }
-        if (algOid.equals((ASN1Primitive) X9ObjectIdentifiers.dhpublicnumber)) {
-            return new BCDHPrivateKey(keyInfo);
-        }
-        throw new IOException("algorithm identifier " + algOid + " in key not recognised");
+  @Override // com.android.internal.org.bouncycastle.jcajce.provider.util.AsymmetricKeyInfoConverter
+  public PrivateKey generatePrivate(PrivateKeyInfo keyInfo) throws IOException {
+    ASN1ObjectIdentifier algOid = keyInfo.getPrivateKeyAlgorithm().getAlgorithm();
+    if (algOid.equals((ASN1Primitive) PKCSObjectIdentifiers.dhKeyAgreement)) {
+      return new BCDHPrivateKey(keyInfo);
     }
+    if (algOid.equals((ASN1Primitive) X9ObjectIdentifiers.dhpublicnumber)) {
+      return new BCDHPrivateKey(keyInfo);
+    }
+    throw new IOException("algorithm identifier " + algOid + " in key not recognised");
+  }
 
-    @Override // com.android.internal.org.bouncycastle.jcajce.provider.util.AsymmetricKeyInfoConverter
-    public PublicKey generatePublic(SubjectPublicKeyInfo keyInfo) throws IOException {
-        ASN1ObjectIdentifier algOid = keyInfo.getAlgorithm().getAlgorithm();
-        if (algOid.equals((ASN1Primitive) PKCSObjectIdentifiers.dhKeyAgreement)) {
-            return new BCDHPublicKey(keyInfo);
-        }
-        if (algOid.equals((ASN1Primitive) X9ObjectIdentifiers.dhpublicnumber)) {
-            return new BCDHPublicKey(keyInfo);
-        }
-        throw new IOException("algorithm identifier " + algOid + " in key not recognised");
+  @Override // com.android.internal.org.bouncycastle.jcajce.provider.util.AsymmetricKeyInfoConverter
+  public PublicKey generatePublic(SubjectPublicKeyInfo keyInfo) throws IOException {
+    ASN1ObjectIdentifier algOid = keyInfo.getAlgorithm().getAlgorithm();
+    if (algOid.equals((ASN1Primitive) PKCSObjectIdentifiers.dhKeyAgreement)) {
+      return new BCDHPublicKey(keyInfo);
     }
+    if (algOid.equals((ASN1Primitive) X9ObjectIdentifiers.dhpublicnumber)) {
+      return new BCDHPublicKey(keyInfo);
+    }
+    throw new IOException("algorithm identifier " + algOid + " in key not recognised");
+  }
 }

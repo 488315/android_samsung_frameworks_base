@@ -14,49 +14,55 @@ import java.util.Set;
 
 /* loaded from: classes.dex */
 public final class RegisterCredentialDescriptionRequest implements Parcelable {
-    public static final Parcelable.Creator<RegisterCredentialDescriptionRequest> CREATOR = new Parcelable.Creator<RegisterCredentialDescriptionRequest>() { // from class: android.credentials.RegisterCredentialDescriptionRequest.1
+  public static final Parcelable.Creator<RegisterCredentialDescriptionRequest> CREATOR =
+      new Parcelable.Creator<
+          RegisterCredentialDescriptionRequest>() { // from class:
+                                                    // android.credentials.RegisterCredentialDescriptionRequest.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public RegisterCredentialDescriptionRequest createFromParcel(Parcel in) {
-            return new RegisterCredentialDescriptionRequest(in);
+          return new RegisterCredentialDescriptionRequest(in);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public RegisterCredentialDescriptionRequest[] newArray(int size) {
-            return new RegisterCredentialDescriptionRequest[size];
+          return new RegisterCredentialDescriptionRequest[size];
         }
-    };
-    private final List<CredentialDescription> mCredentialDescriptions;
+      };
+  private final List<CredentialDescription> mCredentialDescriptions;
 
-    public RegisterCredentialDescriptionRequest(CredentialDescription credentialDescription) {
-        this.mCredentialDescriptions = Arrays.asList((CredentialDescription) Objects.requireNonNull(credentialDescription));
-    }
+  public RegisterCredentialDescriptionRequest(CredentialDescription credentialDescription) {
+    this.mCredentialDescriptions =
+        Arrays.asList((CredentialDescription) Objects.requireNonNull(credentialDescription));
+  }
 
-    public RegisterCredentialDescriptionRequest(Set<CredentialDescription> credentialDescriptions) {
-        this.mCredentialDescriptions = new ArrayList((Collection) Objects.requireNonNull(credentialDescriptions));
-    }
+  public RegisterCredentialDescriptionRequest(Set<CredentialDescription> credentialDescriptions) {
+    this.mCredentialDescriptions =
+        new ArrayList((Collection) Objects.requireNonNull(credentialDescriptions));
+  }
 
-    private RegisterCredentialDescriptionRequest(Parcel in) {
-        ArrayList arrayList = new ArrayList();
-        in.readTypedList(arrayList, CredentialDescription.CREATOR);
-        ArrayList arrayList2 = new ArrayList();
-        this.mCredentialDescriptions = arrayList2;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) arrayList);
-        arrayList2.addAll(arrayList);
-    }
+  private RegisterCredentialDescriptionRequest(Parcel in) {
+    ArrayList arrayList = new ArrayList();
+    in.readTypedList(arrayList, CredentialDescription.CREATOR);
+    ArrayList arrayList2 = new ArrayList();
+    this.mCredentialDescriptions = arrayList2;
+    AnnotationValidations.validate(
+        (Class<NonNull>) NonNull.class, (NonNull) null, (Object) arrayList);
+    arrayList2.addAll(arrayList);
+  }
 
-    @Override // android.p009os.Parcelable
-    public int describeContents() {
-        return 0;
-    }
+  @Override // android.p009os.Parcelable
+  public int describeContents() {
+    return 0;
+  }
 
-    @Override // android.p009os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeTypedList(this.mCredentialDescriptions, flags);
-    }
+  @Override // android.p009os.Parcelable
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeTypedList(this.mCredentialDescriptions, flags);
+  }
 
-    public Set<CredentialDescription> getCredentialDescriptions() {
-        return new HashSet(this.mCredentialDescriptions);
-    }
+  public Set<CredentialDescription> getCredentialDescriptions() {
+    return new HashSet(this.mCredentialDescriptions);
+  }
 }

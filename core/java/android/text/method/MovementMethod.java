@@ -7,21 +7,21 @@ import android.widget.TextView;
 
 /* loaded from: classes3.dex */
 public interface MovementMethod {
-    boolean canSelectArbitrarily();
+  boolean canSelectArbitrarily();
 
-    void initialize(TextView textView, Spannable spannable);
+  void initialize(TextView textView, Spannable spannable);
 
-    boolean onGenericMotionEvent(TextView textView, Spannable spannable, MotionEvent motionEvent);
+  boolean onGenericMotionEvent(TextView textView, Spannable spannable, MotionEvent motionEvent);
 
-    boolean onKeyDown(TextView textView, Spannable spannable, int i, KeyEvent keyEvent);
+  boolean onKeyDown(TextView textView, Spannable spannable, int i, KeyEvent keyEvent);
 
-    boolean onKeyOther(TextView textView, Spannable spannable, KeyEvent keyEvent);
+  boolean onKeyOther(TextView textView, Spannable spannable, KeyEvent keyEvent);
 
-    boolean onKeyUp(TextView textView, Spannable spannable, int i, KeyEvent keyEvent);
+  boolean onKeyUp(TextView textView, Spannable spannable, int i, KeyEvent keyEvent);
 
-    void onTakeFocus(TextView textView, Spannable spannable, int i);
+  void onTakeFocus(TextView textView, Spannable spannable, int i);
 
-    boolean onTouchEvent(TextView textView, Spannable spannable, MotionEvent motionEvent);
+  boolean onTouchEvent(TextView textView, Spannable spannable, MotionEvent motionEvent);
 
-    boolean onTrackballEvent(TextView textView, Spannable spannable, MotionEvent motionEvent);
+  boolean onTrackballEvent(TextView textView, Spannable spannable, MotionEvent motionEvent);
 }

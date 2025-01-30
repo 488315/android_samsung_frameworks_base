@@ -2,15 +2,15 @@ package com.android.internal.widget;
 
 /* loaded from: classes5.dex */
 public interface ScrollingView {
-    int computeHorizontalScrollExtent();
+  int computeHorizontalScrollExtent();
 
-    int computeHorizontalScrollOffset();
+  int computeHorizontalScrollOffset();
 
-    int computeHorizontalScrollRange();
+  int computeHorizontalScrollRange();
 
-    int computeVerticalScrollExtent();
+  int computeVerticalScrollExtent();
 
-    int computeVerticalScrollOffset();
+  int computeVerticalScrollOffset();
 
-    int computeVerticalScrollRange();
+  int computeVerticalScrollRange();
 }

@@ -4,29 +4,29 @@ import android.graphics.Insets;
 
 /* loaded from: classes4.dex */
 public interface WindowInsetsAnimationController {
-    void finish(boolean z);
+  void finish(boolean z);
 
-    float getCurrentAlpha();
+  float getCurrentAlpha();
 
-    float getCurrentFraction();
+  float getCurrentFraction();
 
-    Insets getCurrentInsets();
+  Insets getCurrentInsets();
 
-    Insets getHiddenStateInsets();
+  Insets getHiddenStateInsets();
 
-    Insets getShownStateInsets();
+  Insets getShownStateInsets();
 
-    int getTypes();
+  int getTypes();
 
-    boolean hasZeroInsetsIme();
+  boolean hasZeroInsetsIme();
 
-    boolean isCancelled();
+  boolean isCancelled();
 
-    boolean isFinished();
+  boolean isFinished();
 
-    void setInsetsAndAlpha(Insets insets, float f, float f2);
+  void setInsetsAndAlpha(Insets insets, float f, float f2);
 
-    default boolean isReady() {
-        return (isFinished() || isCancelled()) ? false : true;
-    }
+  default boolean isReady() {
+    return (isFinished() || isCancelled()) ? false : true;
+  }
 }

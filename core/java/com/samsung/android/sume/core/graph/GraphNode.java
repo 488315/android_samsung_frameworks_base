@@ -2,52 +2,51 @@ package com.samsung.android.sume.core.graph;
 
 import com.samsung.android.sume.core.channel.BufferChannel;
 import com.samsung.android.sume.core.descriptor.MFDescriptor;
-import com.samsung.android.sume.core.graph.Graph;
 import com.samsung.android.sume.core.message.MessagePublisher;
 import com.samsung.android.sume.core.message.MessageSubscriber;
 import java.util.function.Function;
 
 /* loaded from: classes4.dex */
 public interface GraphNode<T> extends MessageSubscriber {
-    GraphNode<T> addInputEdge(GraphEdge graphEdge);
+  GraphNode<T> addInputEdge(GraphEdge graphEdge);
 
-    GraphNode<T> addOutputEdge(GraphEdge graphEdge);
+  GraphNode<T> addOutputEdge(GraphEdge graphEdge);
 
-    boolean containsOption(int i);
+  boolean containsOption(int i);
 
-    T get();
+  T get();
 
-    MFDescriptor getDescriptor();
+  MFDescriptor getDescriptor();
 
-    Function<Exception, Boolean> getExceptionHandler();
+  Function<Exception, Boolean> getExceptionHandler();
 
-    String getNodeId();
+  String getNodeId();
 
-    <V> V getOption(int i);
+  <V> V getOption(int i);
 
-    <V> V getOption(int i, V v);
+  <V> V getOption(int i, V v);
 
-    BufferChannel getReceiveChannelRouter();
+  BufferChannel getReceiveChannelRouter();
 
-    BufferChannel getSendChannelRouter();
+  BufferChannel getSendChannelRouter();
 
-    boolean hasInputEdge();
+  boolean hasInputEdge();
 
-    boolean hasOutputEdge();
+  boolean hasOutputEdge();
 
-    void pause();
+  void pause();
 
-    void prepare(Graph.Option option);
+  void prepare(Graph.Option option);
 
-    void release();
+  void release();
 
-    void resume();
+  void resume();
 
-    void setExceptionHandler(Function<Exception, Boolean> function);
+  void setExceptionHandler(Function<Exception, Boolean> function);
 
-    void setMessagePublisher(MessagePublisher messagePublisher);
+  void setMessagePublisher(MessagePublisher messagePublisher);
 
-    void setOption(int i);
+  void setOption(int i);
 
-    void setOption(int i, Object obj);
+  void setOption(int i, Object obj);
 }

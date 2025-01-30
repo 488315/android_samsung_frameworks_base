@@ -5,25 +5,25 @@ import android.annotation.SystemApi;
 @SystemApi
 /* loaded from: classes2.dex */
 public class TemiEvent extends FilterEvent {
-    private final byte[] mDescrData;
-    private final byte mDescrTag;
-    private final long mPts;
+  private final byte[] mDescrData;
+  private final byte mDescrTag;
+  private final long mPts;
 
-    private TemiEvent(long pts, byte descrTag, byte[] descrData) {
-        this.mPts = pts;
-        this.mDescrTag = descrTag;
-        this.mDescrData = descrData;
-    }
+  private TemiEvent(long pts, byte descrTag, byte[] descrData) {
+    this.mPts = pts;
+    this.mDescrTag = descrTag;
+    this.mDescrData = descrData;
+  }
 
-    public long getPts() {
-        return this.mPts;
-    }
+  public long getPts() {
+    return this.mPts;
+  }
 
-    public byte getDescriptorTag() {
-        return this.mDescrTag;
-    }
+  public byte getDescriptorTag() {
+    return this.mDescrTag;
+  }
 
-    public byte[] getDescriptorData() {
-        return this.mDescrData;
-    }
+  public byte[] getDescriptorData() {
+    return this.mDescrData;
+  }
 }

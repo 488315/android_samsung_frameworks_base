@@ -15,247 +15,248 @@ import com.android.internal.C4337R;
 
 /* loaded from: classes4.dex */
 public class ViewAnimator extends FrameLayout {
-    boolean mAnimateFirstTime;
-    boolean mFirstTime;
-    Animation mInAnimation;
-    Animation mOutAnimation;
-    int mWhichChild;
+  boolean mAnimateFirstTime;
+  boolean mFirstTime;
+  Animation mInAnimation;
+  Animation mOutAnimation;
+  int mWhichChild;
 
-    public final class InspectionCompanion implements android.view.inspector.InspectionCompanion<ViewAnimator> {
-        private int mAnimateFirstViewId;
-        private int mInAnimationId;
-        private int mOutAnimationId;
-        private boolean mPropertiesMapped = false;
+  public final class InspectionCompanion
+      implements android.view.inspector.InspectionCompanion<ViewAnimator> {
+    private int mAnimateFirstViewId;
+    private int mInAnimationId;
+    private int mOutAnimationId;
+    private boolean mPropertiesMapped = false;
 
-        @Override // android.view.inspector.InspectionCompanion
-        public void mapProperties(PropertyMapper propertyMapper) {
-            this.mAnimateFirstViewId = propertyMapper.mapBoolean("animateFirstView", 16843477);
-            this.mInAnimationId = propertyMapper.mapObject("inAnimation", 16843127);
-            this.mOutAnimationId = propertyMapper.mapObject("outAnimation", 16843128);
-            this.mPropertiesMapped = true;
+    @Override // android.view.inspector.InspectionCompanion
+    public void mapProperties(PropertyMapper propertyMapper) {
+      this.mAnimateFirstViewId = propertyMapper.mapBoolean("animateFirstView", 16843477);
+      this.mInAnimationId = propertyMapper.mapObject("inAnimation", 16843127);
+      this.mOutAnimationId = propertyMapper.mapObject("outAnimation", 16843128);
+      this.mPropertiesMapped = true;
+    }
+
+    @Override // android.view.inspector.InspectionCompanion
+    public void readProperties(ViewAnimator node, PropertyReader propertyReader) {
+      if (!this.mPropertiesMapped) {
+        throw new InspectionCompanion.UninitializedPropertyMapException();
+      }
+      propertyReader.readBoolean(this.mAnimateFirstViewId, node.getAnimateFirstView());
+      propertyReader.readObject(this.mInAnimationId, node.getInAnimation());
+      propertyReader.readObject(this.mOutAnimationId, node.getOutAnimation());
+    }
+  }
+
+  public ViewAnimator(Context context) {
+    super(context);
+    this.mWhichChild = 0;
+    this.mFirstTime = true;
+    this.mAnimateFirstTime = true;
+    initViewAnimator(context, null);
+  }
+
+  public ViewAnimator(Context context, AttributeSet attrs) {
+    super(context, attrs);
+    this.mWhichChild = 0;
+    this.mFirstTime = true;
+    this.mAnimateFirstTime = true;
+    TypedArray a = context.obtainStyledAttributes(attrs, C4337R.styleable.ViewAnimator);
+    saveAttributeDataForStyleable(context, C4337R.styleable.ViewAnimator, attrs, a, 0, 0);
+    int resource = a.getResourceId(0, 0);
+    if (resource > 0) {
+      setInAnimation(context, resource);
+    }
+    int resource2 = a.getResourceId(1, 0);
+    if (resource2 > 0) {
+      setOutAnimation(context, resource2);
+    }
+    boolean flag = a.getBoolean(2, true);
+    setAnimateFirstView(flag);
+    a.recycle();
+    initViewAnimator(context, attrs);
+  }
+
+  private void initViewAnimator(Context context, AttributeSet attrs) {
+    if (attrs == null) {
+      this.mMeasureAllChildren = true;
+      return;
+    }
+    TypedArray a = context.obtainStyledAttributes(attrs, C4337R.styleable.FrameLayout);
+    saveAttributeDataForStyleable(context, C4337R.styleable.FrameLayout, attrs, a, 0, 0);
+    boolean measureAllChildren = a.getBoolean(0, true);
+    setMeasureAllChildren(measureAllChildren);
+    a.recycle();
+  }
+
+  @RemotableViewMethod
+  public void setDisplayedChild(int whichChild) {
+    this.mWhichChild = whichChild;
+    if (whichChild >= getChildCount()) {
+      this.mWhichChild = 0;
+    } else if (whichChild < 0) {
+      this.mWhichChild = getChildCount() - 1;
+    }
+    boolean hasFocus = getFocusedChild() != null;
+    showOnly(this.mWhichChild);
+    if (hasFocus) {
+      requestFocus(2);
+    }
+  }
+
+  public int getDisplayedChild() {
+    return this.mWhichChild;
+  }
+
+  @RemotableViewMethod
+  public void showNext() {
+    setDisplayedChild(this.mWhichChild + 1);
+  }
+
+  @RemotableViewMethod
+  public void showPrevious() {
+    setDisplayedChild(this.mWhichChild - 1);
+  }
+
+  void showOnly(int childIndex, boolean animate) {
+    Animation animation;
+    int count = getChildCount();
+    for (int i = 0; i < count; i++) {
+      View child = getChildAt(i);
+      if (i == childIndex) {
+        if (animate && (animation = this.mInAnimation) != null) {
+          child.startAnimation(animation);
         }
-
-        @Override // android.view.inspector.InspectionCompanion
-        public void readProperties(ViewAnimator node, PropertyReader propertyReader) {
-            if (!this.mPropertiesMapped) {
-                throw new InspectionCompanion.UninitializedPropertyMapException();
-            }
-            propertyReader.readBoolean(this.mAnimateFirstViewId, node.getAnimateFirstView());
-            propertyReader.readObject(this.mInAnimationId, node.getInAnimation());
-            propertyReader.readObject(this.mOutAnimationId, node.getOutAnimation());
+        child.setVisibility(0);
+        this.mFirstTime = false;
+      } else {
+        if (animate && this.mOutAnimation != null && child.getVisibility() == 0) {
+          child.startAnimation(this.mOutAnimation);
+        } else if (child.getAnimation() == this.mInAnimation) {
+          child.clearAnimation();
         }
+        child.setVisibility(8);
+      }
     }
+  }
 
-    public ViewAnimator(Context context) {
-        super(context);
-        this.mWhichChild = 0;
-        this.mFirstTime = true;
-        this.mAnimateFirstTime = true;
-        initViewAnimator(context, null);
-    }
+  void showOnly(int childIndex) {
+    boolean animate = !this.mFirstTime || this.mAnimateFirstTime;
+    showOnly(childIndex, animate);
+  }
 
-    public ViewAnimator(Context context, AttributeSet attrs) {
-        super(context, attrs);
-        this.mWhichChild = 0;
-        this.mFirstTime = true;
-        this.mAnimateFirstTime = true;
-        TypedArray a = context.obtainStyledAttributes(attrs, C4337R.styleable.ViewAnimator);
-        saveAttributeDataForStyleable(context, C4337R.styleable.ViewAnimator, attrs, a, 0, 0);
-        int resource = a.getResourceId(0, 0);
-        if (resource > 0) {
-            setInAnimation(context, resource);
-        }
-        int resource2 = a.getResourceId(1, 0);
-        if (resource2 > 0) {
-            setOutAnimation(context, resource2);
-        }
-        boolean flag = a.getBoolean(2, true);
-        setAnimateFirstView(flag);
-        a.recycle();
-        initViewAnimator(context, attrs);
+  @Override // android.view.ViewGroup
+  public void addView(View child, int index, ViewGroup.LayoutParams params) {
+    int i;
+    super.addView(child, index, params);
+    if (getChildCount() == 1) {
+      child.setVisibility(0);
+    } else {
+      child.setVisibility(8);
     }
+    if (index >= 0 && (i = this.mWhichChild) >= index) {
+      setDisplayedChild(i + 1);
+    }
+  }
 
-    private void initViewAnimator(Context context, AttributeSet attrs) {
-        if (attrs == null) {
-            this.mMeasureAllChildren = true;
-            return;
-        }
-        TypedArray a = context.obtainStyledAttributes(attrs, C4337R.styleable.FrameLayout);
-        saveAttributeDataForStyleable(context, C4337R.styleable.FrameLayout, attrs, a, 0, 0);
-        boolean measureAllChildren = a.getBoolean(0, true);
-        setMeasureAllChildren(measureAllChildren);
-        a.recycle();
-    }
+  @Override // android.view.ViewGroup
+  public void removeAllViews() {
+    super.removeAllViews();
+    this.mWhichChild = 0;
+    this.mFirstTime = true;
+  }
 
-    @RemotableViewMethod
-    public void setDisplayedChild(int whichChild) {
-        this.mWhichChild = whichChild;
-        if (whichChild >= getChildCount()) {
-            this.mWhichChild = 0;
-        } else if (whichChild < 0) {
-            this.mWhichChild = getChildCount() - 1;
-        }
-        boolean hasFocus = getFocusedChild() != null;
-        showOnly(this.mWhichChild);
-        if (hasFocus) {
-            requestFocus(2);
-        }
+  @Override // android.view.ViewGroup, android.view.ViewManager
+  public void removeView(View view) {
+    int index = indexOfChild(view);
+    if (index >= 0) {
+      removeViewAt(index);
     }
+  }
 
-    public int getDisplayedChild() {
-        return this.mWhichChild;
+  @Override // android.view.ViewGroup
+  public void removeViewAt(int index) {
+    super.removeViewAt(index);
+    int childCount = getChildCount();
+    if (childCount == 0) {
+      this.mWhichChild = 0;
+      this.mFirstTime = true;
+      return;
     }
+    int i = this.mWhichChild;
+    if (i >= childCount) {
+      setDisplayedChild(childCount - 1);
+    } else if (i == index) {
+      setDisplayedChild(i);
+    }
+  }
 
-    @RemotableViewMethod
-    public void showNext() {
-        setDisplayedChild(this.mWhichChild + 1);
-    }
+  @Override // android.view.ViewGroup
+  public void removeViewInLayout(View view) {
+    removeView(view);
+  }
 
-    @RemotableViewMethod
-    public void showPrevious() {
-        setDisplayedChild(this.mWhichChild - 1);
+  @Override // android.view.ViewGroup
+  public void removeViews(int start, int count) {
+    super.removeViews(start, count);
+    if (getChildCount() == 0) {
+      this.mWhichChild = 0;
+      this.mFirstTime = true;
+      return;
     }
+    int i = this.mWhichChild;
+    if (i >= start && i < start + count) {
+      setDisplayedChild(i);
+    }
+  }
 
-    void showOnly(int childIndex, boolean animate) {
-        Animation animation;
-        int count = getChildCount();
-        for (int i = 0; i < count; i++) {
-            View child = getChildAt(i);
-            if (i == childIndex) {
-                if (animate && (animation = this.mInAnimation) != null) {
-                    child.startAnimation(animation);
-                }
-                child.setVisibility(0);
-                this.mFirstTime = false;
-            } else {
-                if (animate && this.mOutAnimation != null && child.getVisibility() == 0) {
-                    child.startAnimation(this.mOutAnimation);
-                } else if (child.getAnimation() == this.mInAnimation) {
-                    child.clearAnimation();
-                }
-                child.setVisibility(8);
-            }
-        }
-    }
+  @Override // android.view.ViewGroup
+  public void removeViewsInLayout(int start, int count) {
+    removeViews(start, count);
+  }
 
-    void showOnly(int childIndex) {
-        boolean animate = !this.mFirstTime || this.mAnimateFirstTime;
-        showOnly(childIndex, animate);
-    }
+  public View getCurrentView() {
+    return getChildAt(this.mWhichChild);
+  }
 
-    @Override // android.view.ViewGroup
-    public void addView(View child, int index, ViewGroup.LayoutParams params) {
-        int i;
-        super.addView(child, index, params);
-        if (getChildCount() == 1) {
-            child.setVisibility(0);
-        } else {
-            child.setVisibility(8);
-        }
-        if (index >= 0 && (i = this.mWhichChild) >= index) {
-            setDisplayedChild(i + 1);
-        }
-    }
+  public Animation getInAnimation() {
+    return this.mInAnimation;
+  }
 
-    @Override // android.view.ViewGroup
-    public void removeAllViews() {
-        super.removeAllViews();
-        this.mWhichChild = 0;
-        this.mFirstTime = true;
-    }
+  public void setInAnimation(Animation inAnimation) {
+    this.mInAnimation = inAnimation;
+  }
 
-    @Override // android.view.ViewGroup, android.view.ViewManager
-    public void removeView(View view) {
-        int index = indexOfChild(view);
-        if (index >= 0) {
-            removeViewAt(index);
-        }
-    }
+  public Animation getOutAnimation() {
+    return this.mOutAnimation;
+  }
 
-    @Override // android.view.ViewGroup
-    public void removeViewAt(int index) {
-        super.removeViewAt(index);
-        int childCount = getChildCount();
-        if (childCount == 0) {
-            this.mWhichChild = 0;
-            this.mFirstTime = true;
-            return;
-        }
-        int i = this.mWhichChild;
-        if (i >= childCount) {
-            setDisplayedChild(childCount - 1);
-        } else if (i == index) {
-            setDisplayedChild(i);
-        }
-    }
+  public void setOutAnimation(Animation outAnimation) {
+    this.mOutAnimation = outAnimation;
+  }
 
-    @Override // android.view.ViewGroup
-    public void removeViewInLayout(View view) {
-        removeView(view);
-    }
+  public void setInAnimation(Context context, int resourceID) {
+    setInAnimation(AnimationUtils.loadAnimation(context, resourceID));
+  }
 
-    @Override // android.view.ViewGroup
-    public void removeViews(int start, int count) {
-        super.removeViews(start, count);
-        if (getChildCount() == 0) {
-            this.mWhichChild = 0;
-            this.mFirstTime = true;
-            return;
-        }
-        int i = this.mWhichChild;
-        if (i >= start && i < start + count) {
-            setDisplayedChild(i);
-        }
-    }
+  public void setOutAnimation(Context context, int resourceID) {
+    setOutAnimation(AnimationUtils.loadAnimation(context, resourceID));
+  }
 
-    @Override // android.view.ViewGroup
-    public void removeViewsInLayout(int start, int count) {
-        removeViews(start, count);
-    }
+  public boolean getAnimateFirstView() {
+    return this.mAnimateFirstTime;
+  }
 
-    public View getCurrentView() {
-        return getChildAt(this.mWhichChild);
-    }
+  public void setAnimateFirstView(boolean animate) {
+    this.mAnimateFirstTime = animate;
+  }
 
-    public Animation getInAnimation() {
-        return this.mInAnimation;
-    }
+  @Override // android.view.View
+  public int getBaseline() {
+    return getCurrentView() != null ? getCurrentView().getBaseline() : super.getBaseline();
+  }
 
-    public void setInAnimation(Animation inAnimation) {
-        this.mInAnimation = inAnimation;
-    }
-
-    public Animation getOutAnimation() {
-        return this.mOutAnimation;
-    }
-
-    public void setOutAnimation(Animation outAnimation) {
-        this.mOutAnimation = outAnimation;
-    }
-
-    public void setInAnimation(Context context, int resourceID) {
-        setInAnimation(AnimationUtils.loadAnimation(context, resourceID));
-    }
-
-    public void setOutAnimation(Context context, int resourceID) {
-        setOutAnimation(AnimationUtils.loadAnimation(context, resourceID));
-    }
-
-    public boolean getAnimateFirstView() {
-        return this.mAnimateFirstTime;
-    }
-
-    public void setAnimateFirstView(boolean animate) {
-        this.mAnimateFirstTime = animate;
-    }
-
-    @Override // android.view.View
-    public int getBaseline() {
-        return getCurrentView() != null ? getCurrentView().getBaseline() : super.getBaseline();
-    }
-
-    @Override // android.widget.FrameLayout, android.view.ViewGroup, android.view.View
-    public CharSequence getAccessibilityClassName() {
-        return ViewAnimator.class.getName();
-    }
+  @Override // android.widget.FrameLayout, android.view.ViewGroup, android.view.View
+  public CharSequence getAccessibilityClassName() {
+    return ViewAnimator.class.getName();
+  }
 }

@@ -7,33 +7,33 @@ import java.util.List;
 
 /* loaded from: classes3.dex */
 public interface SystemInterface {
-    void enablePackageForAllUsers(Context context, String str, boolean z);
+  void enablePackageForAllUsers(Context context, String str, boolean z);
 
-    void ensureZygoteStarted();
+  void ensureZygoteStarted();
 
-    long getFactoryPackageVersion(String str);
+  long getFactoryPackageVersion(String str);
 
-    int getMultiProcessSetting(Context context);
+  int getMultiProcessSetting(Context context);
 
-    PackageInfo getPackageInfoForProvider(WebViewProviderInfo webViewProviderInfo);
+  PackageInfo getPackageInfoForProvider(WebViewProviderInfo webViewProviderInfo);
 
-    List getPackageInfoForProviderAllUsers(Context context, WebViewProviderInfo webViewProviderInfo);
+  List getPackageInfoForProviderAllUsers(Context context, WebViewProviderInfo webViewProviderInfo);
 
-    String getUserChosenWebViewProvider(Context context);
+  String getUserChosenWebViewProvider(Context context);
 
-    WebViewProviderInfo[] getWebViewPackages();
+  WebViewProviderInfo[] getWebViewPackages();
 
-    boolean isMultiProcessDefaultEnabled();
+  boolean isMultiProcessDefaultEnabled();
 
-    void killPackageDependents(String str);
+  void killPackageDependents(String str);
 
-    void notifyZygote(boolean z);
+  void notifyZygote(boolean z);
 
-    int onWebViewProviderChanged(PackageInfo packageInfo);
+  int onWebViewProviderChanged(PackageInfo packageInfo);
 
-    void setMultiProcessSetting(Context context, int i);
+  void setMultiProcessSetting(Context context, int i);
 
-    boolean systemIsDebuggable();
+  boolean systemIsDebuggable();
 
-    void updateUserSetting(Context context, String str);
+  void updateUserSetting(Context context, String str);
 }

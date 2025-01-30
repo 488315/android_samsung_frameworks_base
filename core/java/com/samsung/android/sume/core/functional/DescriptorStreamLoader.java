@@ -6,5 +6,5 @@ import java.io.InputStream;
 @FunctionalInterface
 /* loaded from: classes4.dex */
 public interface DescriptorStreamLoader {
-    InputStream load(Context context);
+  InputStream load(Context context);
 }

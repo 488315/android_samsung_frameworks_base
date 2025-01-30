@@ -4,23 +4,23 @@ import java.util.List;
 
 /* loaded from: classes3.dex */
 public interface ParsedProvider extends ParsedMainComponent {
-    String getAuthority();
+  String getAuthority();
 
-    int getInitOrder();
+  int getInitOrder();
 
-    List getPathPermissions();
+  List getPathPermissions();
 
-    String getReadPermission();
+  String getReadPermission();
 
-    List getUriPermissionPatterns();
+  List getUriPermissionPatterns();
 
-    String getWritePermission();
+  String getWritePermission();
 
-    boolean isForceUriPermissions();
+  boolean isForceUriPermissions();
 
-    boolean isGrantUriPermissions();
+  boolean isGrantUriPermissions();
 
-    boolean isMultiProcess();
+  boolean isMultiProcess();
 
-    boolean isSyncable();
+  boolean isSyncable();
 }

@@ -13,97 +13,131 @@ import java.util.function.Supplier;
 
 /* loaded from: classes.dex */
 public abstract class EnrollClient extends AcquisitionClient implements EnrollmentModifier {
-    public final BiometricUtils mBiometricUtils;
-    public long mEnrollmentStartTimeMs;
-    public final byte[] mHardwareAuthToken;
-    public final boolean mHasEnrollmentsBeforeStarting;
-    public int mPrevRemaining;
-    public final int mTimeoutSec;
+  public final BiometricUtils mBiometricUtils;
+  public long mEnrollmentStartTimeMs;
+  public final byte[] mHardwareAuthToken;
+  public final boolean mHasEnrollmentsBeforeStarting;
+  public int mPrevRemaining;
+  public final int mTimeoutSec;
 
-    public int getOverlayReasonFromEnrollReason(int i) {
-        if (i != 1) {
-            return i != 2 ? 0 : 2;
-        }
-        return 1;
+  public int getOverlayReasonFromEnrollReason(int i) {
+    if (i != 1) {
+      return i != 2 ? 0 : 2;
     }
+    return 1;
+  }
 
-    @Override // com.android.server.biometrics.sensors.BaseClientMonitor
-    public int getProtoEnum() {
-        return 2;
+  @Override // com.android.server.biometrics.sensors.BaseClientMonitor
+  public int getProtoEnum() {
+    return 2;
+  }
+
+  public abstract boolean hasReachedEnrollmentLimit();
+
+  @Override // com.android.server.biometrics.sensors.BaseClientMonitor
+  public boolean interruptsPrecedingClients() {
+    return true;
+  }
+
+  public EnrollClient(
+      Context context,
+      Supplier supplier,
+      IBinder iBinder,
+      ClientMonitorCallbackConverter clientMonitorCallbackConverter,
+      int i,
+      byte[] bArr,
+      String str,
+      BiometricUtils biometricUtils,
+      int i2,
+      int i3,
+      boolean z,
+      BiometricLogger biometricLogger,
+      BiometricContext biometricContext) {
+    super(
+        context,
+        supplier,
+        iBinder,
+        clientMonitorCallbackConverter,
+        i,
+        str,
+        0,
+        i3,
+        z,
+        biometricLogger,
+        biometricContext);
+    this.mBiometricUtils = biometricUtils;
+    this.mHardwareAuthToken = Arrays.copyOf(bArr, bArr.length);
+    this.mTimeoutSec = i2;
+    this.mHasEnrollmentsBeforeStarting = hasEnrollments();
+  }
+
+  @Override // com.android.server.biometrics.sensors.EnrollmentModifier
+  public boolean hasEnrollmentStateChanged() {
+    return hasEnrollments() != this.mHasEnrollmentsBeforeStarting;
+  }
+
+  @Override // com.android.server.biometrics.sensors.EnrollmentModifier
+  public boolean hasEnrollments() {
+    return !this.mBiometricUtils.getBiometricsForUser(getContext(), getTargetUserId()).isEmpty();
+  }
+
+  public void onEnrollResult(BiometricAuthenticator.Identifier identifier, int i) {
+    if (this.mShouldVibrate) {
+      if (i < this.mPrevRemaining) {
+        vibrateSuccess();
+      }
+      this.mPrevRemaining = i;
     }
-
-    public abstract boolean hasReachedEnrollmentLimit();
-
-    @Override // com.android.server.biometrics.sensors.BaseClientMonitor
-    public boolean interruptsPrecedingClients() {
-        return true;
+    ClientMonitorCallbackConverter listener = getListener();
+    if (listener != null) {
+      try {
+        listener.onEnrollResult(identifier, i);
+      } catch (RemoteException e) {
+        Slog.e("Biometrics/EnrollClient", "Remote exception", e);
+      }
     }
-
-    public EnrollClient(Context context, Supplier supplier, IBinder iBinder, ClientMonitorCallbackConverter clientMonitorCallbackConverter, int i, byte[] bArr, String str, BiometricUtils biometricUtils, int i2, int i3, boolean z, BiometricLogger biometricLogger, BiometricContext biometricContext) {
-        super(context, supplier, iBinder, clientMonitorCallbackConverter, i, str, 0, i3, z, biometricLogger, biometricContext);
-        this.mBiometricUtils = biometricUtils;
-        this.mHardwareAuthToken = Arrays.copyOf(bArr, bArr.length);
-        this.mTimeoutSec = i2;
-        this.mHasEnrollmentsBeforeStarting = hasEnrollments();
+    if (i == 0) {
+      this.mBiometricUtils.addBiometricForUser(getContext(), getTargetUserId(), identifier);
+      getLogger()
+          .logOnEnrolled(
+              getTargetUserId(), System.currentTimeMillis() - this.mEnrollmentStartTimeMs, true);
+      updateEnrollTimeStampIfNeeded();
+      this.mCallback.onClientFinished(this, true);
     }
+    notifyUserActivity();
+  }
 
-    @Override // com.android.server.biometrics.sensors.EnrollmentModifier
-    public boolean hasEnrollmentStateChanged() {
-        return hasEnrollments() != this.mHasEnrollmentsBeforeStarting;
+  @Override // com.android.server.biometrics.sensors.BaseClientMonitor
+  public void start(ClientMonitorCallback clientMonitorCallback) {
+    super.start(clientMonitorCallback);
+    if (hasReachedEnrollmentLimit()) {
+      Slog.e("Biometrics/EnrollClient", "Reached enrollment limit");
+      clientMonitorCallback.onClientFinished(this, false);
+    } else {
+      this.mEnrollmentStartTimeMs = System.currentTimeMillis();
+      startHalOperation();
+      this.mPrevRemaining = 100;
     }
+  }
 
-    @Override // com.android.server.biometrics.sensors.EnrollmentModifier
-    public boolean hasEnrollments() {
-        return !this.mBiometricUtils.getBiometricsForUser(getContext(), getTargetUserId()).isEmpty();
-    }
+  @Override // com.android.server.biometrics.sensors.AcquisitionClient,
+            // com.android.server.biometrics.sensors.ErrorConsumer
+  public void onError(int i, int i2) {
+    getLogger()
+        .logOnEnrolled(
+            getTargetUserId(), System.currentTimeMillis() - this.mEnrollmentStartTimeMs, false);
+    super.onError(i, i2);
+  }
 
-    public void onEnrollResult(BiometricAuthenticator.Identifier identifier, int i) {
-        if (this.mShouldVibrate) {
-            if (i < this.mPrevRemaining) {
-                vibrateSuccess();
-            }
-            this.mPrevRemaining = i;
-        }
-        ClientMonitorCallbackConverter listener = getListener();
-        if (listener != null) {
-            try {
-                listener.onEnrollResult(identifier, i);
-            } catch (RemoteException e) {
-                Slog.e("Biometrics/EnrollClient", "Remote exception", e);
-            }
-        }
-        if (i == 0) {
-            this.mBiometricUtils.addBiometricForUser(getContext(), getTargetUserId(), identifier);
-            getLogger().logOnEnrolled(getTargetUserId(), System.currentTimeMillis() - this.mEnrollmentStartTimeMs, true);
-            updateEnrollTimeStampIfNeeded();
-            this.mCallback.onClientFinished(this, true);
-        }
-        notifyUserActivity();
+  public void updateEnrollTimeStampIfNeeded() {
+    if (Utils.isStrongBiometric(getSensorId()) && Utils.isAutoTime(getContext())) {
+      Slog.d("Biometrics/EnrollClient", "onEnrollResult: set timestamp");
+      Utils.putLongDb(
+          getContext(),
+          "biometrics_strong_enroll_timestamp",
+          true,
+          System.currentTimeMillis(),
+          getTargetUserId());
     }
-
-    @Override // com.android.server.biometrics.sensors.BaseClientMonitor
-    public void start(ClientMonitorCallback clientMonitorCallback) {
-        super.start(clientMonitorCallback);
-        if (hasReachedEnrollmentLimit()) {
-            Slog.e("Biometrics/EnrollClient", "Reached enrollment limit");
-            clientMonitorCallback.onClientFinished(this, false);
-        } else {
-            this.mEnrollmentStartTimeMs = System.currentTimeMillis();
-            startHalOperation();
-            this.mPrevRemaining = 100;
-        }
-    }
-
-    @Override // com.android.server.biometrics.sensors.AcquisitionClient, com.android.server.biometrics.sensors.ErrorConsumer
-    public void onError(int i, int i2) {
-        getLogger().logOnEnrolled(getTargetUserId(), System.currentTimeMillis() - this.mEnrollmentStartTimeMs, false);
-        super.onError(i, i2);
-    }
-
-    public void updateEnrollTimeStampIfNeeded() {
-        if (Utils.isStrongBiometric(getSensorId()) && Utils.isAutoTime(getContext())) {
-            Slog.d("Biometrics/EnrollClient", "onEnrollResult: set timestamp");
-            Utils.putLongDb(getContext(), "biometrics_strong_enroll_timestamp", true, System.currentTimeMillis(), getTargetUserId());
-        }
-    }
+  }
 }

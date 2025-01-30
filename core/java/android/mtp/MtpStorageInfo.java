@@ -2,32 +2,31 @@ package android.mtp;
 
 /* loaded from: classes2.dex */
 public final class MtpStorageInfo {
-    private String mDescription;
-    private long mFreeSpace;
-    private long mMaxCapacity;
-    private int mStorageId;
-    private String mVolumeIdentifier;
+  private String mDescription;
+  private long mFreeSpace;
+  private long mMaxCapacity;
+  private int mStorageId;
+  private String mVolumeIdentifier;
 
-    private MtpStorageInfo() {
-    }
+  private MtpStorageInfo() {}
 
-    public final int getStorageId() {
-        return this.mStorageId;
-    }
+  public final int getStorageId() {
+    return this.mStorageId;
+  }
 
-    public final long getMaxCapacity() {
-        return this.mMaxCapacity;
-    }
+  public final long getMaxCapacity() {
+    return this.mMaxCapacity;
+  }
 
-    public final long getFreeSpace() {
-        return this.mFreeSpace;
-    }
+  public final long getFreeSpace() {
+    return this.mFreeSpace;
+  }
 
-    public final String getDescription() {
-        return this.mDescription;
-    }
+  public final String getDescription() {
+    return this.mDescription;
+  }
 
-    public final String getVolumeIdentifier() {
-        return this.mVolumeIdentifier;
-    }
+  public final String getVolumeIdentifier() {
+    return this.mVolumeIdentifier;
+  }
 }

@@ -6,7 +6,7 @@ import android.media.effect.SingleFilterEffect;
 
 /* loaded from: classes2.dex */
 public class FillLightEffect extends SingleFilterEffect {
-    public FillLightEffect(EffectContext context, String name) {
-        super(context, name, FillLightFilter.class, "image", "image", new Object[0]);
-    }
+  public FillLightEffect(EffectContext context, String name) {
+    super(context, name, FillLightFilter.class, "image", "image", new Object[0]);
+  }
 }

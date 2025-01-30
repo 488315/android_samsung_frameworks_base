@@ -10,46 +10,49 @@ import java.util.UUID;
 
 /* loaded from: classes3.dex */
 public interface PackageStateInternal extends PackageState {
-    String getAppMetadataFilePath();
+  String getAppMetadataFilePath();
 
-    UUID getDomainSetId();
+  UUID getDomainSetId();
 
-    int getFlags();
+  int getFlags();
 
-    InstallSource getInstallSource();
+  InstallSource getInstallSource();
 
-    PackageKeySetData getKeySetData();
+  PackageKeySetData getKeySetData();
 
-    LegacyPermissionState getLegacyPermissionState();
+  LegacyPermissionState getLegacyPermissionState();
 
-    long getLoadingCompletedTime();
+  long getLoadingCompletedTime();
 
-    float getLoadingProgress();
+  float getLoadingProgress();
 
-    String getPathString();
+  String getPathString();
 
-    AndroidPackageInternal getPkg();
+  AndroidPackageInternal getPkg();
 
-    String getPrimaryCpuAbiLegacy();
+  String getPrimaryCpuAbiLegacy();
 
-    int getPrivateFlags();
+  int getPrivateFlags();
 
-    String getRealName();
+  String getRealName();
 
-    String getSecondaryCpuAbiLegacy();
+  String getSecondaryCpuAbiLegacy();
 
-    SigningDetails getSigningDetails();
+  SigningDetails getSigningDetails();
 
-    PackageStateUnserialized getTransientState();
+  PackageStateUnserialized getTransientState();
 
-    @Override // com.android.server.pm.pkg.PackageState
-    SparseArray getUserStates();
+  @Override // com.android.server.pm.pkg.PackageState
+  SparseArray getUserStates();
 
-    boolean isLoading();
+  boolean isLoading();
 
-    @Override // com.android.server.pm.pkg.PackageState
-    default PackageUserStateInternal getUserStateOrDefault(int i) {
-        PackageUserStateInternal packageUserStateInternal = (PackageUserStateInternal) getUserStates().get(i);
-        return packageUserStateInternal == null ? PackageUserStateInternal.DEFAULT : packageUserStateInternal;
-    }
+  @Override // com.android.server.pm.pkg.PackageState
+  default PackageUserStateInternal getUserStateOrDefault(int i) {
+    PackageUserStateInternal packageUserStateInternal =
+        (PackageUserStateInternal) getUserStates().get(i);
+    return packageUserStateInternal == null
+        ? PackageUserStateInternal.DEFAULT
+        : packageUserStateInternal;
+  }
 }

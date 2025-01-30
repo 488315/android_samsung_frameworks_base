@@ -1,17 +1,16 @@
 package android.database.sqlite;
 
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 
 /* loaded from: classes.dex */
 public interface SQLiteCursorDriver {
-    void cursorClosed();
+  void cursorClosed();
 
-    void cursorDeactivated();
+  void cursorDeactivated();
 
-    void cursorRequeried(Cursor cursor);
+  void cursorRequeried(Cursor cursor);
 
-    Cursor query(SQLiteDatabase.CursorFactory cursorFactory, String[] strArr);
+  Cursor query(SQLiteDatabase.CursorFactory cursorFactory, String[] strArr);
 
-    void setBindArguments(String[] strArr);
+  void setBindArguments(String[] strArr);
 }

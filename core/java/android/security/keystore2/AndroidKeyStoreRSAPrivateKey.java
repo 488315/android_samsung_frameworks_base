@@ -8,15 +8,20 @@ import java.security.interfaces.RSAKey;
 
 /* loaded from: classes3.dex */
 public class AndroidKeyStoreRSAPrivateKey extends AndroidKeyStorePrivateKey implements RSAKey {
-    private final BigInteger mModulus;
+  private final BigInteger mModulus;
 
-    public AndroidKeyStoreRSAPrivateKey(KeyDescriptor descriptor, long keyId, Authorization[] authorizations, KeyStoreSecurityLevel securityLevel, BigInteger modulus) {
-        super(descriptor, keyId, authorizations, "RSA", securityLevel);
-        this.mModulus = modulus;
-    }
+  public AndroidKeyStoreRSAPrivateKey(
+      KeyDescriptor descriptor,
+      long keyId,
+      Authorization[] authorizations,
+      KeyStoreSecurityLevel securityLevel,
+      BigInteger modulus) {
+    super(descriptor, keyId, authorizations, "RSA", securityLevel);
+    this.mModulus = modulus;
+  }
 
-    @Override // java.security.interfaces.RSAKey
-    public BigInteger getModulus() {
-        return this.mModulus;
-    }
+  @Override // java.security.interfaces.RSAKey
+  public BigInteger getModulus() {
+    return this.mModulus;
+  }
 }

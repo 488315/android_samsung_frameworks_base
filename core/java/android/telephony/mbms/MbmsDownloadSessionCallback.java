@@ -7,16 +7,12 @@ import java.util.List;
 /* loaded from: classes3.dex */
 public class MbmsDownloadSessionCallback {
 
-    @Retention(RetentionPolicy.SOURCE)
-    private @interface DownloadError {
-    }
+  @Retention(RetentionPolicy.SOURCE)
+  private @interface DownloadError {}
 
-    public void onError(int errorCode, String message) {
-    }
+  public void onError(int errorCode, String message) {}
 
-    public void onFileServicesUpdated(List<FileServiceInfo> services) {
-    }
+  public void onFileServicesUpdated(List<FileServiceInfo> services) {}
 
-    public void onMiddlewareReady() {
-    }
+  public void onMiddlewareReady() {}
 }

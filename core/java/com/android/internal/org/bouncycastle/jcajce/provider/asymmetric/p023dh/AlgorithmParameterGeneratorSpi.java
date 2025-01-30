@@ -14,41 +14,43 @@ import javax.crypto.spec.DHParameterSpec;
 
 /* loaded from: classes5.dex */
 public class AlgorithmParameterGeneratorSpi extends BaseAlgorithmParameterGeneratorSpi {
-    protected SecureRandom random;
-    protected int strength = 2048;
+  protected SecureRandom random;
+  protected int strength = 2048;
 
-    /* renamed from: l */
-    private int f892l = 0;
+  /* renamed from: l */
+  private int f892l = 0;
 
-    @Override // java.security.AlgorithmParameterGeneratorSpi
-    protected void engineInit(int strength, SecureRandom random) {
-        this.strength = strength;
-        this.random = random;
+  @Override // java.security.AlgorithmParameterGeneratorSpi
+  protected void engineInit(int strength, SecureRandom random) {
+    this.strength = strength;
+    this.random = random;
+  }
+
+  @Override // java.security.AlgorithmParameterGeneratorSpi
+  protected void engineInit(AlgorithmParameterSpec genParamSpec, SecureRandom random)
+      throws InvalidAlgorithmParameterException {
+    if (!(genParamSpec instanceof DHGenParameterSpec)) {
+      throw new InvalidAlgorithmParameterException(
+          "DH parameter generator requires a DHGenParameterSpec for initialisation");
     }
+    DHGenParameterSpec spec = (DHGenParameterSpec) genParamSpec;
+    this.strength = spec.getPrimeSize();
+    this.f892l = spec.getExponentSize();
+    this.random = random;
+  }
 
-    @Override // java.security.AlgorithmParameterGeneratorSpi
-    protected void engineInit(AlgorithmParameterSpec genParamSpec, SecureRandom random) throws InvalidAlgorithmParameterException {
-        if (!(genParamSpec instanceof DHGenParameterSpec)) {
-            throw new InvalidAlgorithmParameterException("DH parameter generator requires a DHGenParameterSpec for initialisation");
-        }
-        DHGenParameterSpec spec = (DHGenParameterSpec) genParamSpec;
-        this.strength = spec.getPrimeSize();
-        this.f892l = spec.getExponentSize();
-        this.random = random;
+  @Override // java.security.AlgorithmParameterGeneratorSpi
+  protected AlgorithmParameters engineGenerateParameters() {
+    DHParametersGenerator pGen = new DHParametersGenerator();
+    int certainty = PrimeCertaintyCalculator.getDefaultCertainty(this.strength);
+    pGen.init(this.strength, certainty, CryptoServicesRegistrar.getSecureRandom(this.random));
+    DHParameters p = pGen.generateParameters();
+    try {
+      AlgorithmParameters params = createParametersInstance("DH");
+      params.init(new DHParameterSpec(p.getP(), p.getG(), this.f892l));
+      return params;
+    } catch (Exception e) {
+      throw new RuntimeException(e.getMessage());
     }
-
-    @Override // java.security.AlgorithmParameterGeneratorSpi
-    protected AlgorithmParameters engineGenerateParameters() {
-        DHParametersGenerator pGen = new DHParametersGenerator();
-        int certainty = PrimeCertaintyCalculator.getDefaultCertainty(this.strength);
-        pGen.init(this.strength, certainty, CryptoServicesRegistrar.getSecureRandom(this.random));
-        DHParameters p = pGen.generateParameters();
-        try {
-            AlgorithmParameters params = createParametersInstance("DH");
-            params.init(new DHParameterSpec(p.getP(), p.getG(), this.f892l));
-            return params;
-        } catch (Exception e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }
+  }
 }

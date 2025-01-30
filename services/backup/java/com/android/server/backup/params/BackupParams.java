@@ -9,27 +9,37 @@ import java.util.ArrayList;
 
 /* loaded from: classes.dex */
 public class BackupParams {
-    public String dirName;
-    public ArrayList fullPackages;
-    public ArrayList kvPackages;
-    public OnTaskFinishedListener listener;
-    public BackupEligibilityRules mBackupEligibilityRules;
-    public TransportConnection mTransportConnection;
-    public IBackupManagerMonitor monitor;
-    public boolean nonIncrementalBackup;
-    public IBackupObserver observer;
-    public boolean userInitiated;
+  public String dirName;
+  public ArrayList fullPackages;
+  public ArrayList kvPackages;
+  public OnTaskFinishedListener listener;
+  public BackupEligibilityRules mBackupEligibilityRules;
+  public TransportConnection mTransportConnection;
+  public IBackupManagerMonitor monitor;
+  public boolean nonIncrementalBackup;
+  public IBackupObserver observer;
+  public boolean userInitiated;
 
-    public BackupParams(TransportConnection transportConnection, String str, ArrayList arrayList, ArrayList arrayList2, IBackupObserver iBackupObserver, IBackupManagerMonitor iBackupManagerMonitor, OnTaskFinishedListener onTaskFinishedListener, boolean z, boolean z2, BackupEligibilityRules backupEligibilityRules) {
-        this.mTransportConnection = transportConnection;
-        this.dirName = str;
-        this.kvPackages = arrayList;
-        this.fullPackages = arrayList2;
-        this.observer = iBackupObserver;
-        this.monitor = iBackupManagerMonitor;
-        this.listener = onTaskFinishedListener;
-        this.userInitiated = z;
-        this.nonIncrementalBackup = z2;
-        this.mBackupEligibilityRules = backupEligibilityRules;
-    }
+  public BackupParams(
+      TransportConnection transportConnection,
+      String str,
+      ArrayList arrayList,
+      ArrayList arrayList2,
+      IBackupObserver iBackupObserver,
+      IBackupManagerMonitor iBackupManagerMonitor,
+      OnTaskFinishedListener onTaskFinishedListener,
+      boolean z,
+      boolean z2,
+      BackupEligibilityRules backupEligibilityRules) {
+    this.mTransportConnection = transportConnection;
+    this.dirName = str;
+    this.kvPackages = arrayList;
+    this.fullPackages = arrayList2;
+    this.observer = iBackupObserver;
+    this.monitor = iBackupManagerMonitor;
+    this.listener = onTaskFinishedListener;
+    this.userInitiated = z;
+    this.nonIncrementalBackup = z2;
+    this.mBackupEligibilityRules = backupEligibilityRules;
+  }
 }

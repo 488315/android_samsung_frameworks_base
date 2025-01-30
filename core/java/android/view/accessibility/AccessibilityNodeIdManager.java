@@ -4,43 +4,42 @@ import android.view.View;
 
 /* loaded from: classes4.dex */
 public final class AccessibilityNodeIdManager {
-    private static AccessibilityNodeIdManager sIdManager;
-    private WeakSparseArray<View> mIdsToViews = new WeakSparseArray<>();
+  private static AccessibilityNodeIdManager sIdManager;
+  private WeakSparseArray<View> mIdsToViews = new WeakSparseArray<>();
 
-    public static synchronized AccessibilityNodeIdManager getInstance() {
-        AccessibilityNodeIdManager accessibilityNodeIdManager;
-        synchronized (AccessibilityNodeIdManager.class) {
-            if (sIdManager == null) {
-                sIdManager = new AccessibilityNodeIdManager();
-            }
-            accessibilityNodeIdManager = sIdManager;
-        }
-        return accessibilityNodeIdManager;
+  public static synchronized AccessibilityNodeIdManager getInstance() {
+    AccessibilityNodeIdManager accessibilityNodeIdManager;
+    synchronized (AccessibilityNodeIdManager.class) {
+      if (sIdManager == null) {
+        sIdManager = new AccessibilityNodeIdManager();
+      }
+      accessibilityNodeIdManager = sIdManager;
     }
+    return accessibilityNodeIdManager;
+  }
 
-    private AccessibilityNodeIdManager() {
-    }
+  private AccessibilityNodeIdManager() {}
 
-    public void registerViewWithId(View view, int id) {
-        synchronized (this.mIdsToViews) {
-            this.mIdsToViews.append(id, view);
-        }
+  public void registerViewWithId(View view, int id) {
+    synchronized (this.mIdsToViews) {
+      this.mIdsToViews.append(id, view);
     }
+  }
 
-    public void unregisterViewWithId(int id) {
-        synchronized (this.mIdsToViews) {
-            this.mIdsToViews.remove(id);
-        }
+  public void unregisterViewWithId(int id) {
+    synchronized (this.mIdsToViews) {
+      this.mIdsToViews.remove(id);
     }
+  }
 
-    public View findView(int id) {
-        View view;
-        synchronized (this.mIdsToViews) {
-            view = this.mIdsToViews.get(id);
-        }
-        if (view == null || !view.includeForAccessibility()) {
-            return null;
-        }
-        return view;
+  public View findView(int id) {
+    View view;
+    synchronized (this.mIdsToViews) {
+      view = this.mIdsToViews.get(id);
     }
+    if (view == null || !view.includeForAccessibility()) {
+      return null;
+    }
+    return view;
+  }
 }

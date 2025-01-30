@@ -9,96 +9,109 @@ import java.util.Objects;
 
 /* loaded from: classes3.dex */
 public final class NetworkTimeSuggestion {
-    public ArrayList mDebugInfo;
-    public final int mUncertaintyMillis;
-    public final UnixEpochTime mUnixEpochTime;
+  public ArrayList mDebugInfo;
+  public final int mUncertaintyMillis;
+  public final UnixEpochTime mUnixEpochTime;
 
-    public NetworkTimeSuggestion(UnixEpochTime unixEpochTime, int i) {
-        Objects.requireNonNull(unixEpochTime);
-        this.mUnixEpochTime = unixEpochTime;
-        if (i < 0) {
-            throw new IllegalArgumentException("uncertaintyMillis < 0");
+  public NetworkTimeSuggestion(UnixEpochTime unixEpochTime, int i) {
+    Objects.requireNonNull(unixEpochTime);
+    this.mUnixEpochTime = unixEpochTime;
+    if (i < 0) {
+      throw new IllegalArgumentException("uncertaintyMillis < 0");
+    }
+    this.mUncertaintyMillis = i;
+  }
+
+  public UnixEpochTime getUnixEpochTime() {
+    return this.mUnixEpochTime;
+  }
+
+  public int getUncertaintyMillis() {
+    return this.mUncertaintyMillis;
+  }
+
+  public void addDebugInfo(String... strArr) {
+    if (this.mDebugInfo == null) {
+      this.mDebugInfo = new ArrayList();
+    }
+    this.mDebugInfo.addAll(Arrays.asList(strArr));
+  }
+
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (!(obj instanceof NetworkTimeSuggestion)) {
+      return false;
+    }
+    NetworkTimeSuggestion networkTimeSuggestion = (NetworkTimeSuggestion) obj;
+    return this.mUnixEpochTime.equals(networkTimeSuggestion.mUnixEpochTime)
+        && this.mUncertaintyMillis == networkTimeSuggestion.mUncertaintyMillis;
+  }
+
+  public int hashCode() {
+    return Objects.hash(this.mUnixEpochTime, Integer.valueOf(this.mUncertaintyMillis));
+  }
+
+  public String toString() {
+    return "NetworkTimeSuggestion{mUnixEpochTime="
+        + this.mUnixEpochTime
+        + ", mUncertaintyMillis="
+        + this.mUncertaintyMillis
+        + ", mDebugInfo="
+        + this.mDebugInfo
+        + '}';
+  }
+
+  public static NetworkTimeSuggestion parseCommandLineArg(ShellCommand shellCommand) {
+    Long l = null;
+    Long l2 = null;
+    Integer num = null;
+    while (true) {
+      String nextArg = shellCommand.getNextArg();
+      if (nextArg == null) {
+        if (l == null) {
+          throw new IllegalArgumentException("No elapsedRealtimeMillis specified.");
         }
-        this.mUncertaintyMillis = i;
-    }
-
-    public UnixEpochTime getUnixEpochTime() {
-        return this.mUnixEpochTime;
-    }
-
-    public int getUncertaintyMillis() {
-        return this.mUncertaintyMillis;
-    }
-
-    public void addDebugInfo(String... strArr) {
-        if (this.mDebugInfo == null) {
-            this.mDebugInfo = new ArrayList();
+        if (l2 == null) {
+          throw new IllegalArgumentException("No unixEpochTimeMillis specified.");
         }
-        this.mDebugInfo.addAll(Arrays.asList(strArr));
-    }
-
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
+        if (num == null) {
+          throw new IllegalArgumentException("No uncertaintyMillis specified.");
         }
-        if (!(obj instanceof NetworkTimeSuggestion)) {
-            return false;
-        }
-        NetworkTimeSuggestion networkTimeSuggestion = (NetworkTimeSuggestion) obj;
-        return this.mUnixEpochTime.equals(networkTimeSuggestion.mUnixEpochTime) && this.mUncertaintyMillis == networkTimeSuggestion.mUncertaintyMillis;
+        NetworkTimeSuggestion networkTimeSuggestion =
+            new NetworkTimeSuggestion(
+                new UnixEpochTime(l.longValue(), l2.longValue()), num.intValue());
+        networkTimeSuggestion.addDebugInfo("Command line injection");
+        return networkTimeSuggestion;
+      }
+      switch (nextArg) {
+        case "--reference_time":
+        case "--elapsed_realtime":
+          l = Long.valueOf(Long.parseLong(shellCommand.getNextArgRequired()));
+          break;
+        case "--unix_epoch_time":
+          l2 = Long.valueOf(Long.parseLong(shellCommand.getNextArgRequired()));
+          break;
+        case "--uncertainty_millis":
+          num = Integer.valueOf(Integer.parseInt(shellCommand.getNextArgRequired()));
+          break;
+        default:
+          throw new IllegalArgumentException("Unknown option: " + nextArg);
+      }
     }
+  }
 
-    public int hashCode() {
-        return Objects.hash(this.mUnixEpochTime, Integer.valueOf(this.mUncertaintyMillis));
-    }
-
-    public String toString() {
-        return "NetworkTimeSuggestion{mUnixEpochTime=" + this.mUnixEpochTime + ", mUncertaintyMillis=" + this.mUncertaintyMillis + ", mDebugInfo=" + this.mDebugInfo + '}';
-    }
-
-    public static NetworkTimeSuggestion parseCommandLineArg(ShellCommand shellCommand) {
-        Long l = null;
-        Long l2 = null;
-        Integer num = null;
-        while (true) {
-            String nextArg = shellCommand.getNextArg();
-            if (nextArg == null) {
-                if (l == null) {
-                    throw new IllegalArgumentException("No elapsedRealtimeMillis specified.");
-                }
-                if (l2 == null) {
-                    throw new IllegalArgumentException("No unixEpochTimeMillis specified.");
-                }
-                if (num == null) {
-                    throw new IllegalArgumentException("No uncertaintyMillis specified.");
-                }
-                NetworkTimeSuggestion networkTimeSuggestion = new NetworkTimeSuggestion(new UnixEpochTime(l.longValue(), l2.longValue()), num.intValue());
-                networkTimeSuggestion.addDebugInfo("Command line injection");
-                return networkTimeSuggestion;
-            }
-            switch (nextArg) {
-                case "--reference_time":
-                case "--elapsed_realtime":
-                    l = Long.valueOf(Long.parseLong(shellCommand.getNextArgRequired()));
-                    break;
-                case "--unix_epoch_time":
-                    l2 = Long.valueOf(Long.parseLong(shellCommand.getNextArgRequired()));
-                    break;
-                case "--uncertainty_millis":
-                    num = Integer.valueOf(Integer.parseInt(shellCommand.getNextArgRequired()));
-                    break;
-                default:
-                    throw new IllegalArgumentException("Unknown option: " + nextArg);
-            }
-        }
-    }
-
-    public static void printCommandLineOpts(PrintWriter printWriter) {
-        printWriter.printf("%s suggestion options:\n", "Network");
-        printWriter.println("  --elapsed_realtime <elapsed realtime millis> - the elapsed realtime millis when unix epoch time was read");
-        printWriter.println("  --unix_epoch_time <Unix epoch time millis>");
-        printWriter.println("  --uncertainty_millis <Uncertainty millis> - a positive error bound (+/-) estimate for unix epoch time");
-        printWriter.println();
-        printWriter.println("See " + NetworkTimeSuggestion.class.getName() + " for more information");
-    }
+  public static void printCommandLineOpts(PrintWriter printWriter) {
+    printWriter.printf("%s suggestion options:\n", "Network");
+    printWriter.println(
+        "  --elapsed_realtime <elapsed realtime millis> - the elapsed realtime millis when unix"
+            + " epoch time was read");
+    printWriter.println("  --unix_epoch_time <Unix epoch time millis>");
+    printWriter.println(
+        "  --uncertainty_millis <Uncertainty millis> - a positive error bound (+/-) estimate for"
+            + " unix epoch time");
+    printWriter.println();
+    printWriter.println("See " + NetworkTimeSuggestion.class.getName() + " for more information");
+  }
 }

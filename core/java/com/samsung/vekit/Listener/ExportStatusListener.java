@@ -2,9 +2,9 @@ package com.samsung.vekit.Listener;
 
 /* loaded from: classes6.dex */
 public interface ExportStatusListener extends NativeInterfaceListener {
-    void onExportCompleted();
+  void onExportCompleted();
 
-    void onExportPaused();
+  void onExportPaused();
 
-    void onExportStarted();
+  void onExportStarted();
 }

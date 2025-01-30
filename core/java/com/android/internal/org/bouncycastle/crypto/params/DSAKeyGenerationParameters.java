@@ -5,14 +5,14 @@ import java.security.SecureRandom;
 
 /* loaded from: classes5.dex */
 public class DSAKeyGenerationParameters extends KeyGenerationParameters {
-    private DSAParameters params;
+  private DSAParameters params;
 
-    public DSAKeyGenerationParameters(SecureRandom random, DSAParameters params) {
-        super(random, params.getP().bitLength() - 1);
-        this.params = params;
-    }
+  public DSAKeyGenerationParameters(SecureRandom random, DSAParameters params) {
+    super(random, params.getP().bitLength() - 1);
+    this.params = params;
+  }
 
-    public DSAParameters getParameters() {
-        return this.params;
-    }
+  public DSAParameters getParameters() {
+    return this.params;
+  }
 }

@@ -5,23 +5,22 @@ import java.io.IOException;
 
 /* loaded from: classes.dex */
 public class ObbScanner {
-    private static native void getObbInfo_native(String str, ObbInfo obbInfo) throws IOException;
+  private static native void getObbInfo_native(String str, ObbInfo obbInfo) throws IOException;
 
-    private ObbScanner() {
-    }
+  private ObbScanner() {}
 
-    public static ObbInfo getObbInfo(String filePath) throws IOException {
-        if (filePath == null) {
-            throw new IllegalArgumentException("file path cannot be null");
-        }
-        File obbFile = new File(filePath);
-        if (!obbFile.exists()) {
-            throw new IllegalArgumentException("OBB file does not exist: " + filePath);
-        }
-        String canonicalFilePath = obbFile.getCanonicalPath();
-        ObbInfo obbInfo = new ObbInfo();
-        obbInfo.filename = canonicalFilePath;
-        getObbInfo_native(canonicalFilePath, obbInfo);
-        return obbInfo;
+  public static ObbInfo getObbInfo(String filePath) throws IOException {
+    if (filePath == null) {
+      throw new IllegalArgumentException("file path cannot be null");
     }
+    File obbFile = new File(filePath);
+    if (!obbFile.exists()) {
+      throw new IllegalArgumentException("OBB file does not exist: " + filePath);
+    }
+    String canonicalFilePath = obbFile.getCanonicalPath();
+    ObbInfo obbInfo = new ObbInfo();
+    obbInfo.filename = canonicalFilePath;
+    getObbInfo_native(canonicalFilePath, obbInfo);
+    return obbInfo;
+  }
 }

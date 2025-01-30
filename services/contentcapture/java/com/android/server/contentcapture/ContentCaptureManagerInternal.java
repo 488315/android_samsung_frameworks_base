@@ -8,11 +8,12 @@ import android.os.IBinder;
 
 /* loaded from: classes.dex */
 public abstract class ContentCaptureManagerInternal {
-    public abstract ContentCaptureOptions getOptionsForPackage(int i, String str);
+  public abstract ContentCaptureOptions getOptionsForPackage(int i, String str);
 
-    public abstract boolean isContentCaptureServiceForUser(int i, int i2);
+  public abstract boolean isContentCaptureServiceForUser(int i, int i2);
 
-    public abstract void notifyActivityEvent(int i, ComponentName componentName, int i2, ActivityId activityId);
+  public abstract void notifyActivityEvent(
+      int i, ComponentName componentName, int i2, ActivityId activityId);
 
-    public abstract boolean sendActivityAssistData(int i, IBinder iBinder, Bundle bundle);
+  public abstract boolean sendActivityAssistData(int i, IBinder iBinder, Bundle bundle);
 }

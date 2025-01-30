@@ -6,41 +6,38 @@ import java.util.List;
 
 /* loaded from: classes.dex */
 public interface AssociationStore {
-    AssociationInfo getAssociationById(int i);
+  AssociationInfo getAssociationById(int i);
 
-    Collection getAssociations();
+  Collection getAssociations();
 
-    List getAssociationsByAddress(String str);
+  List getAssociationsByAddress(String str);
 
-    List getAssociationsForPackage(int i, String str);
+  List getAssociationsForPackage(int i, String str);
 
-    void registerListener(OnChangeListener onChangeListener);
+  void registerListener(OnChangeListener onChangeListener);
 
-    public interface OnChangeListener {
-        default void onAssociationAdded(AssociationInfo associationInfo) {
+  public interface OnChangeListener {
+    default void onAssociationAdded(AssociationInfo associationInfo) {}
+
+    default void onAssociationRemoved(AssociationInfo associationInfo) {}
+
+    default void onAssociationUpdated(AssociationInfo associationInfo, boolean z) {}
+
+    default void onAssociationChanged(int i, AssociationInfo associationInfo) {
+      if (i == 0) {
+        onAssociationAdded(associationInfo);
+        return;
+      }
+      if (i == 1) {
+        onAssociationRemoved(associationInfo);
+      } else if (i == 2) {
+        onAssociationUpdated(associationInfo, true);
+      } else {
+        if (i != 3) {
+          return;
         }
-
-        default void onAssociationRemoved(AssociationInfo associationInfo) {
-        }
-
-        default void onAssociationUpdated(AssociationInfo associationInfo, boolean z) {
-        }
-
-        default void onAssociationChanged(int i, AssociationInfo associationInfo) {
-            if (i == 0) {
-                onAssociationAdded(associationInfo);
-                return;
-            }
-            if (i == 1) {
-                onAssociationRemoved(associationInfo);
-            } else if (i == 2) {
-                onAssociationUpdated(associationInfo, true);
-            } else {
-                if (i != 3) {
-                    return;
-                }
-                onAssociationUpdated(associationInfo, false);
-            }
-        }
+        onAssociationUpdated(associationInfo, false);
+      }
     }
+  }
 }

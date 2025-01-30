@@ -2,44 +2,44 @@ package android.media;
 
 /* loaded from: classes2.dex */
 public class AudioPatch {
-    private final AudioHandle mHandle;
-    private final AudioPortConfig[] mSinks;
-    private final AudioPortConfig[] mSources;
+  private final AudioHandle mHandle;
+  private final AudioPortConfig[] mSinks;
+  private final AudioPortConfig[] mSources;
 
-    AudioPatch(AudioHandle patchHandle, AudioPortConfig[] sources, AudioPortConfig[] sinks) {
-        this.mHandle = patchHandle;
-        this.mSources = sources;
-        this.mSinks = sinks;
-    }
+  AudioPatch(AudioHandle patchHandle, AudioPortConfig[] sources, AudioPortConfig[] sinks) {
+    this.mHandle = patchHandle;
+    this.mSources = sources;
+    this.mSinks = sinks;
+  }
 
-    public AudioPortConfig[] sources() {
-        return this.mSources;
-    }
+  public AudioPortConfig[] sources() {
+    return this.mSources;
+  }
 
-    public AudioPortConfig[] sinks() {
-        return this.mSinks;
-    }
+  public AudioPortConfig[] sinks() {
+    return this.mSinks;
+  }
 
-    /* renamed from: id */
-    public int m49id() {
-        return this.mHandle.m48id();
-    }
+  /* renamed from: id */
+  public int m49id() {
+    return this.mHandle.m48id();
+  }
 
-    public String toString() {
-        StringBuilder s = new StringBuilder();
-        s.append("mHandle: ");
-        s.append(this.mHandle.toString());
-        s.append(" mSources: {");
-        for (AudioPortConfig source : this.mSources) {
-            s.append(source.toString());
-            s.append(", ");
-        }
-        s.append("} mSinks: {");
-        for (AudioPortConfig sink : this.mSinks) {
-            s.append(sink.toString());
-            s.append(", ");
-        }
-        s.append("}");
-        return s.toString();
+  public String toString() {
+    StringBuilder s = new StringBuilder();
+    s.append("mHandle: ");
+    s.append(this.mHandle.toString());
+    s.append(" mSources: {");
+    for (AudioPortConfig source : this.mSources) {
+      s.append(source.toString());
+      s.append(", ");
     }
+    s.append("} mSinks: {");
+    for (AudioPortConfig sink : this.mSinks) {
+      s.append(sink.toString());
+      s.append(", ");
+    }
+    s.append("}");
+    return s.toString();
+  }
 }

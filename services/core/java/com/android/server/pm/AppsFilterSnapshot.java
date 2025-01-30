@@ -10,11 +10,25 @@ import java.io.PrintWriter;
 
 /* loaded from: classes3.dex */
 public interface AppsFilterSnapshot {
-    boolean canQueryPackage(AndroidPackage androidPackage, String str);
+  boolean canQueryPackage(AndroidPackage androidPackage, String str);
 
-    void dumpQueries(PrintWriter printWriter, Integer num, DumpState dumpState, int[] iArr, QuadFunction quadFunction);
+  void dumpQueries(
+      PrintWriter printWriter,
+      Integer num,
+      DumpState dumpState,
+      int[] iArr,
+      QuadFunction quadFunction);
 
-    SparseArray getVisibilityAllowList(PackageDataSnapshot packageDataSnapshot, PackageStateInternal packageStateInternal, int[] iArr, ArrayMap arrayMap);
+  SparseArray getVisibilityAllowList(
+      PackageDataSnapshot packageDataSnapshot,
+      PackageStateInternal packageStateInternal,
+      int[] iArr,
+      ArrayMap arrayMap);
 
-    boolean shouldFilterApplication(PackageDataSnapshot packageDataSnapshot, int i, Object obj, PackageStateInternal packageStateInternal, int i2);
+  boolean shouldFilterApplication(
+      PackageDataSnapshot packageDataSnapshot,
+      int i,
+      Object obj,
+      PackageStateInternal packageStateInternal,
+      int i2);
 }

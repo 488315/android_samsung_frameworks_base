@@ -5,11 +5,12 @@ import android.p009os.IBinder;
 
 /* loaded from: classes4.dex */
 public interface WindowProvider {
-    public static final String KEY_IS_WINDOW_PROVIDER_SERVICE = "android.windowContext.isWindowProviderService";
+  public static final String KEY_IS_WINDOW_PROVIDER_SERVICE =
+      "android.windowContext.isWindowProviderService";
 
-    Bundle getWindowContextOptions();
+  Bundle getWindowContextOptions();
 
-    IBinder getWindowContextToken();
+  IBinder getWindowContextToken();
 
-    int getWindowType();
+  int getWindowType();
 }

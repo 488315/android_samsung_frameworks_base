@@ -4,24 +4,24 @@ import java.util.UUID;
 
 /* loaded from: classes3.dex */
 public class TelephonyLocalConnection {
-    private static ConnectionImpl sInstance;
+  private static ConnectionImpl sInstance;
 
-    public interface ConnectionImpl {
-        String getCallComposerServerUrlForHandle(int i, UUID uuid);
-    }
+  public interface ConnectionImpl {
+    String getCallComposerServerUrlForHandle(int i, UUID uuid);
+  }
 
-    public static String getCallComposerServerUrlForHandle(int subscriptionId, UUID uuid) {
-        checkInstance();
-        return sInstance.getCallComposerServerUrlForHandle(subscriptionId, uuid);
-    }
+  public static String getCallComposerServerUrlForHandle(int subscriptionId, UUID uuid) {
+    checkInstance();
+    return sInstance.getCallComposerServerUrlForHandle(subscriptionId, uuid);
+  }
 
-    private static void checkInstance() {
-        if (sInstance == null) {
-            throw new IllegalStateException("Connection impl is null!");
-        }
+  private static void checkInstance() {
+    if (sInstance == null) {
+      throw new IllegalStateException("Connection impl is null!");
     }
+  }
 
-    public static void setInstance(ConnectionImpl impl) {
-        sInstance = impl;
-    }
+  public static void setInstance(ConnectionImpl impl) {
+    sInstance = impl;
+  }
 }

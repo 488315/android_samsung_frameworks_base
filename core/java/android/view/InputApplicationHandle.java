@@ -4,30 +4,30 @@ import android.p009os.IBinder;
 
 /* loaded from: classes4.dex */
 public final class InputApplicationHandle {
-    public final long dispatchingTimeoutMillis;
-    public final String name;
-    private long ptr;
-    public final IBinder token;
+  public final long dispatchingTimeoutMillis;
+  public final String name;
+  private long ptr;
+  public final IBinder token;
 
-    private native void nativeDispose();
+  private native void nativeDispose();
 
-    public InputApplicationHandle(IBinder token, String name, long dispatchingTimeoutMillis) {
-        this.token = token;
-        this.name = name;
-        this.dispatchingTimeoutMillis = dispatchingTimeoutMillis;
+  public InputApplicationHandle(IBinder token, String name, long dispatchingTimeoutMillis) {
+    this.token = token;
+    this.name = name;
+    this.dispatchingTimeoutMillis = dispatchingTimeoutMillis;
+  }
+
+  public InputApplicationHandle(InputApplicationHandle handle) {
+    this.token = handle.token;
+    this.dispatchingTimeoutMillis = handle.dispatchingTimeoutMillis;
+    this.name = handle.name;
+  }
+
+  protected void finalize() throws Throwable {
+    try {
+      nativeDispose();
+    } finally {
+      super.finalize();
     }
-
-    public InputApplicationHandle(InputApplicationHandle handle) {
-        this.token = handle.token;
-        this.dispatchingTimeoutMillis = handle.dispatchingTimeoutMillis;
-        this.name = handle.name;
-    }
-
-    protected void finalize() throws Throwable {
-        try {
-            nativeDispose();
-        } finally {
-            super.finalize();
-        }
-    }
+  }
 }

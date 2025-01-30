@@ -4,26 +4,26 @@ import java.io.PrintWriter;
 
 /* loaded from: classes2.dex */
 public interface MediaSessionRecordImpl extends AutoCloseable {
-    void adjustVolume(String str, String str2, int i, int i2, boolean z, int i3, int i4, boolean z2);
+  void adjustVolume(String str, String str2, int i, int i2, boolean z, int i3, int i4, boolean z2);
 
-    boolean checkPlaybackActiveState(boolean z);
+  boolean checkPlaybackActiveState(boolean z);
 
-    @Override // java.lang.AutoCloseable
-    void close();
+  @Override // java.lang.AutoCloseable
+  void close();
 
-    void dump(PrintWriter printWriter, String str);
+  void dump(PrintWriter printWriter, String str);
 
-    String getPackageName();
+  String getPackageName();
 
-    int getSessionPolicies();
+  int getSessionPolicies();
 
-    int getUid();
+  int getUid();
 
-    int getUserId();
+  int getUserId();
 
-    boolean isActive();
+  boolean isActive();
 
-    boolean isClosed();
+  boolean isClosed();
 
-    boolean isSystemPriority();
+  boolean isSystemPriority();
 }

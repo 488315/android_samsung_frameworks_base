@@ -6,13 +6,13 @@ import java.util.function.Function;
 
 /* loaded from: classes2.dex */
 public interface PolicyUpgraderDataProvider {
-    Function getAdminInfoSupplier(int i);
+  Function getAdminInfoSupplier(int i);
 
-    List getPlatformSuspendedPackages(int i);
+  List getPlatformSuspendedPackages(int i);
 
-    int[] getUsersForUpgrade();
+  int[] getUsersForUpgrade();
 
-    JournaledFile makeDevicePoliciesJournaledFile(int i);
+  JournaledFile makeDevicePoliciesJournaledFile(int i);
 
-    JournaledFile makePoliciesVersionJournaledFile(int i);
+  JournaledFile makePoliciesVersionJournaledFile(int i);
 }

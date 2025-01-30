@@ -4,9 +4,9 @@ import android.p009os.Bundle;
 
 /* loaded from: classes2.dex */
 public interface SemWifiDisplayNotifyListener {
-    void onDmrSupportChanged(boolean z);
+  void onDmrSupportChanged(boolean z);
 
-    void onNotify(Bundle bundle);
+  void onNotify(Bundle bundle);
 
-    void onPlayStateChanged(int i);
+  void onPlayStateChanged(int i);
 }

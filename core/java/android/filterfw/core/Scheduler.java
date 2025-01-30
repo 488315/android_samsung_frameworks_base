@@ -2,21 +2,21 @@ package android.filterfw.core;
 
 /* loaded from: classes.dex */
 public abstract class Scheduler {
-    private FilterGraph mGraph;
+  private FilterGraph mGraph;
 
-    abstract void reset();
+  abstract void reset();
 
-    abstract Filter scheduleNextNode();
+  abstract Filter scheduleNextNode();
 
-    Scheduler(FilterGraph graph) {
-        this.mGraph = graph;
-    }
+  Scheduler(FilterGraph graph) {
+    this.mGraph = graph;
+  }
 
-    FilterGraph getGraph() {
-        return this.mGraph;
-    }
+  FilterGraph getGraph() {
+    return this.mGraph;
+  }
 
-    boolean finished() {
-        return true;
-    }
+  boolean finished() {
+    return true;
+  }
 }

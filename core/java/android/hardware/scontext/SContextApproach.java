@@ -7,48 +7,52 @@ import android.p009os.Parcelable;
 @Deprecated
 /* loaded from: classes2.dex */
 public class SContextApproach extends SContextEventContext {
-    public static final Parcelable.Creator<SContextApproach> CREATOR = new Parcelable.Creator<SContextApproach>() { // from class: android.hardware.scontext.SContextApproach.1
+  public static final Parcelable.Creator<SContextApproach> CREATOR =
+      new Parcelable.Creator<
+          SContextApproach>() { // from class: android.hardware.scontext.SContextApproach.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public SContextApproach createFromParcel(Parcel in) {
-            return new SContextApproach(in);
+          return new SContextApproach(in);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public SContextApproach[] newArray(int size) {
-            return new SContextApproach[size];
+          return new SContextApproach[size];
         }
-    };
-    private Bundle mContext;
+      };
+  private Bundle mContext;
 
-    SContextApproach() {
-        this.mContext = new Bundle();
-    }
+  SContextApproach() {
+    this.mContext = new Bundle();
+  }
 
-    SContextApproach(Parcel src) {
-        readFromParcel(src);
-    }
+  SContextApproach(Parcel src) {
+    readFromParcel(src);
+  }
 
-    public int getApproach() {
-        return this.mContext.getInt("Proximity");
-    }
+  public int getApproach() {
+    return this.mContext.getInt("Proximity");
+  }
 
-    public int getUserID() {
-        return this.mContext.getInt("UserID");
-    }
+  public int getUserID() {
+    return this.mContext.getInt("UserID");
+  }
 
-    @Override // android.hardware.scontext.SContextEventContext, com.samsung.android.hardware.context.SemContextEventContext
-    public void setValues(Bundle context) {
-        this.mContext = context;
-    }
+  @Override // android.hardware.scontext.SContextEventContext,
+            // com.samsung.android.hardware.context.SemContextEventContext
+  public void setValues(Bundle context) {
+    this.mContext = context;
+  }
 
-    @Override // com.samsung.android.hardware.context.SemContextEventContext, android.p009os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeBundle(this.mContext);
-    }
+  @Override // com.samsung.android.hardware.context.SemContextEventContext,
+            // android.p009os.Parcelable
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeBundle(this.mContext);
+  }
 
-    private void readFromParcel(Parcel src) {
-        this.mContext = src.readBundle();
-    }
+  private void readFromParcel(Parcel src) {
+    this.mContext = src.readBundle();
+  }
 }

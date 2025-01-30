@@ -4,5 +4,5 @@ import android.view.Window;
 
 /* loaded from: classes5.dex */
 public interface WindowDecorationStrategy {
-    void onDecorateWindow(Window window);
+  void onDecorateWindow(Window window);
 }

@@ -6,5 +6,6 @@ import java.io.Writer;
 
 /* loaded from: classes.dex */
 public abstract class ActivityManagerDebugConfig {
-    public static final PrintWriter LOG_WRITER_INFO = new PrintWriter((Writer) new LogWriter(4, "ActivityManager"));
+  public static final PrintWriter LOG_WRITER_INFO =
+      new PrintWriter((Writer) new LogWriter(4, "ActivityManager"));
 }

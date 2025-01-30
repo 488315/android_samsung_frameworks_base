@@ -12,212 +12,205 @@ import java.util.concurrent.Executor;
 
 /* loaded from: classes5.dex */
 public class SemMediaRouterManager {
-    private static final String TAG = "SemMRManager";
-    private static SemMediaRouterManager sInstance;
-    private static final Object sLock = new Object();
-    private final MediaRouter2Manager mManager;
+  private static final String TAG = "SemMRManager";
+  private static SemMediaRouterManager sInstance;
+  private static final Object sLock = new Object();
+  private final MediaRouter2Manager mManager;
 
-    public static SemMediaRouterManager getInstance(Context context) {
-        SemMediaRouterManager semMediaRouterManager;
-        Objects.requireNonNull(context, "context must not be null");
-        synchronized (sLock) {
-            if (sInstance == null) {
-                sInstance = new SemMediaRouterManager(context);
-            }
-            semMediaRouterManager = sInstance;
-        }
-        return semMediaRouterManager;
+  public static SemMediaRouterManager getInstance(Context context) {
+    SemMediaRouterManager semMediaRouterManager;
+    Objects.requireNonNull(context, "context must not be null");
+    synchronized (sLock) {
+      if (sInstance == null) {
+        sInstance = new SemMediaRouterManager(context);
+      }
+      semMediaRouterManager = sInstance;
+    }
+    return semMediaRouterManager;
+  }
+
+  private SemMediaRouterManager(Context context) {
+    this.mManager = MediaRouter2Manager.getInstance(context);
+  }
+
+  public void registerCallback(Executor executor, Callback callback) {
+    this.mManager.registerCallback(executor, new CallbackRecord(callback));
+  }
+
+  public void unregisterCallback(Callback callback) {
+    this.mManager.unregisterCallback(new CallbackRecord(callback));
+  }
+
+  final class CallbackRecord implements MediaRouter2Manager.Callback {
+    public final Callback mCallback;
+
+    CallbackRecord(Callback callback) {
+      this.mCallback = callback;
     }
 
-    private SemMediaRouterManager(Context context) {
-        this.mManager = MediaRouter2Manager.getInstance(context);
+    public boolean equals(Object obj) {
+      if (this == obj) {
+        return true;
+      }
+      return (obj instanceof CallbackRecord) && this.mCallback == ((CallbackRecord) obj).mCallback;
     }
 
-    public void registerCallback(Executor executor, Callback callback) {
-        this.mManager.registerCallback(executor, new CallbackRecord(callback));
+    public int hashCode() {
+      return this.mCallback.hashCode();
     }
 
-    public void unregisterCallback(Callback callback) {
-        this.mManager.unregisterCallback(new CallbackRecord(callback));
+    @Override // android.media.MediaRouter2Manager.Callback
+    public void onRoutesUpdated() {
+      this.mCallback.onRoutesUpdated();
     }
 
-    final class CallbackRecord implements MediaRouter2Manager.Callback {
-        public final Callback mCallback;
-
-        CallbackRecord(Callback callback) {
-            this.mCallback = callback;
-        }
-
-        public boolean equals(Object obj) {
-            if (this == obj) {
-                return true;
-            }
-            return (obj instanceof CallbackRecord) && this.mCallback == ((CallbackRecord) obj).mCallback;
-        }
-
-        public int hashCode() {
-            return this.mCallback.hashCode();
-        }
-
-        @Override // android.media.MediaRouter2Manager.Callback
-        public void onRoutesUpdated() {
-            this.mCallback.onRoutesUpdated();
-        }
-
-        @Override // android.media.MediaRouter2Manager.Callback
-        public void onSessionUpdated(RoutingSessionInfo session) {
-            this.mCallback.onSessionUpdated(session);
-        }
-
-        @Override // android.media.MediaRouter2Manager.Callback
-        public void onSessionReleased(RoutingSessionInfo session) {
-            this.mCallback.onSessionReleased(session);
-        }
-
-        @Override // android.media.MediaRouter2Manager.Callback
-        public void onTransferred(RoutingSessionInfo oldSession, RoutingSessionInfo newSession) {
-            this.mCallback.onTransferred(oldSession, newSession);
-        }
-
-        @Override // android.media.MediaRouter2Manager.Callback
-        public void onTransferFailed(RoutingSessionInfo session, MediaRoute2Info route) {
-            this.mCallback.onTransferFailed(session, route);
-        }
-
-        @Override // android.media.MediaRouter2Manager.Callback
-        public void onPreferredFeaturesChanged(String packageName, List<String> preferredFeatures) {
-            this.mCallback.onPreferredFeaturesChanged(packageName, preferredFeatures);
-        }
-
-        @Override // android.media.MediaRouter2Manager.Callback
-        public void onRequestFailed(int reason) {
-            this.mCallback.onRequestFailed(reason);
-        }
+    @Override // android.media.MediaRouter2Manager.Callback
+    public void onSessionUpdated(RoutingSessionInfo session) {
+      this.mCallback.onSessionUpdated(session);
     }
 
-    public void startScan() {
-        this.mManager.registerScanRequest();
+    @Override // android.media.MediaRouter2Manager.Callback
+    public void onSessionReleased(RoutingSessionInfo session) {
+      this.mCallback.onSessionReleased(session);
     }
 
-    public void stopScan() {
-        this.mManager.unregisterScanRequest();
+    @Override // android.media.MediaRouter2Manager.Callback
+    public void onTransferred(RoutingSessionInfo oldSession, RoutingSessionInfo newSession) {
+      this.mCallback.onTransferred(oldSession, newSession);
     }
 
-    public MediaController getMediaControllerForRoutingSession(RoutingSessionInfo sessionInfo) {
-        return this.mManager.getMediaControllerForRoutingSession(sessionInfo);
+    @Override // android.media.MediaRouter2Manager.Callback
+    public void onTransferFailed(RoutingSessionInfo session, MediaRoute2Info route) {
+      this.mCallback.onTransferFailed(session, route);
     }
 
-    public List<MediaRoute2Info> getAvailableRoutes(String packageName) {
-        return this.mManager.getAvailableRoutes(packageName);
+    @Override // android.media.MediaRouter2Manager.Callback
+    public void onPreferredFeaturesChanged(String packageName, List<String> preferredFeatures) {
+      this.mCallback.onPreferredFeaturesChanged(packageName, preferredFeatures);
     }
 
-    public List<MediaRoute2Info> getTransferableRoutes(String packageName) {
-        return this.mManager.getTransferableRoutes(packageName);
+    @Override // android.media.MediaRouter2Manager.Callback
+    public void onRequestFailed(int reason) {
+      this.mCallback.onRequestFailed(reason);
     }
+  }
 
-    public List<MediaRoute2Info> getAvailableRoutes(RoutingSessionInfo sessionInfo) {
-        return this.mManager.getAvailableRoutes(sessionInfo);
-    }
+  public void startScan() {
+    this.mManager.registerScanRequest();
+  }
 
-    public List<MediaRoute2Info> getTransferableRoutes(RoutingSessionInfo sessionInfo) {
-        return this.mManager.getTransferableRoutes(sessionInfo);
-    }
+  public void stopScan() {
+    this.mManager.unregisterScanRequest();
+  }
 
-    public RouteDiscoveryPreference getDiscoveryPreference(String packageName) {
-        return this.mManager.getDiscoveryPreference(packageName);
-    }
+  public MediaController getMediaControllerForRoutingSession(RoutingSessionInfo sessionInfo) {
+    return this.mManager.getMediaControllerForRoutingSession(sessionInfo);
+  }
 
-    public RoutingSessionInfo getSystemRoutingSession(String packageName) {
-        return this.mManager.getSystemRoutingSession(packageName);
-    }
+  public List<MediaRoute2Info> getAvailableRoutes(String packageName) {
+    return this.mManager.getAvailableRoutes(packageName);
+  }
 
-    public RoutingSessionInfo getRoutingSessionForMediaController(MediaController mediaController) {
-        return this.mManager.getRoutingSessionForMediaController(mediaController);
-    }
+  public List<MediaRoute2Info> getTransferableRoutes(String packageName) {
+    return this.mManager.getTransferableRoutes(packageName);
+  }
 
-    public List<RoutingSessionInfo> getRoutingSessions(String packageName) {
-        return this.mManager.getRoutingSessions(packageName);
-    }
+  public List<MediaRoute2Info> getAvailableRoutes(RoutingSessionInfo sessionInfo) {
+    return this.mManager.getAvailableRoutes(sessionInfo);
+  }
 
-    public List<RoutingSessionInfo> getRemoteSessions() {
-        return this.mManager.getRemoteSessions();
-    }
+  public List<MediaRoute2Info> getTransferableRoutes(RoutingSessionInfo sessionInfo) {
+    return this.mManager.getTransferableRoutes(sessionInfo);
+  }
 
-    public List<MediaRoute2Info> getAllRoutes() {
-        return this.mManager.getAllRoutes();
-    }
+  public RouteDiscoveryPreference getDiscoveryPreference(String packageName) {
+    return this.mManager.getDiscoveryPreference(packageName);
+  }
 
-    public void selectRoute(String packageName, MediaRoute2Info route) {
-        this.mManager.transfer(packageName, route);
-    }
+  public RoutingSessionInfo getSystemRoutingSession(String packageName) {
+    return this.mManager.getSystemRoutingSession(packageName);
+  }
 
-    public void transfer(RoutingSessionInfo sessionInfo, MediaRoute2Info route) {
-        this.mManager.transfer(sessionInfo, route);
-    }
+  public RoutingSessionInfo getRoutingSessionForMediaController(MediaController mediaController) {
+    return this.mManager.getRoutingSessionForMediaController(mediaController);
+  }
 
-    public void setRouteVolume(MediaRoute2Info route, int volume) {
-        this.mManager.setRouteVolume(route, volume);
-    }
+  public List<RoutingSessionInfo> getRoutingSessions(String packageName) {
+    return this.mManager.getRoutingSessions(packageName);
+  }
 
-    public void setSessionVolume(RoutingSessionInfo sessionInfo, int volume) {
-        this.mManager.setSessionVolume(sessionInfo, volume);
-    }
+  public List<RoutingSessionInfo> getRemoteSessions() {
+    return this.mManager.getRemoteSessions();
+  }
 
-    public List<MediaRoute2Info> getSelectedRoutes(RoutingSessionInfo sessionInfo) {
-        return this.mManager.getSelectedRoutes(sessionInfo);
-    }
+  public List<MediaRoute2Info> getAllRoutes() {
+    return this.mManager.getAllRoutes();
+  }
 
-    public List<MediaRoute2Info> getSelectableRoutes(RoutingSessionInfo sessionInfo) {
-        return this.mManager.getSelectableRoutes(sessionInfo);
-    }
+  public void selectRoute(String packageName, MediaRoute2Info route) {
+    this.mManager.transfer(packageName, route);
+  }
 
-    public List<MediaRoute2Info> getDeselectableRoutes(RoutingSessionInfo sessionInfo) {
-        return this.mManager.getDeselectableRoutes(sessionInfo);
-    }
+  public void transfer(RoutingSessionInfo sessionInfo, MediaRoute2Info route) {
+    this.mManager.transfer(sessionInfo, route);
+  }
 
-    public void selectRoute(RoutingSessionInfo sessionInfo, MediaRoute2Info route) {
-        this.mManager.selectRoute(sessionInfo, route);
-    }
+  public void setRouteVolume(MediaRoute2Info route, int volume) {
+    this.mManager.setRouteVolume(route, volume);
+  }
 
-    public void deselectRoute(RoutingSessionInfo sessionInfo, MediaRoute2Info route) {
-        this.mManager.deselectRoute(sessionInfo, route);
-    }
+  public void setSessionVolume(RoutingSessionInfo sessionInfo, int volume) {
+    this.mManager.setSessionVolume(sessionInfo, volume);
+  }
 
-    public void releaseSession(RoutingSessionInfo sessionInfo) {
-        this.mManager.releaseSession(sessionInfo);
-    }
+  public List<MediaRoute2Info> getSelectedRoutes(RoutingSessionInfo sessionInfo) {
+    return this.mManager.getSelectedRoutes(sessionInfo);
+  }
 
-    public String getRouteAddress(MediaRoute2Info route) {
-        return route.getAddress();
-    }
+  public List<MediaRoute2Info> getSelectableRoutes(RoutingSessionInfo sessionInfo) {
+    return this.mManager.getSelectableRoutes(sessionInfo);
+  }
 
-    public int getRouteType(MediaRoute2Info route) {
-        return route.getType();
-    }
+  public List<MediaRoute2Info> getDeselectableRoutes(RoutingSessionInfo sessionInfo) {
+    return this.mManager.getDeselectableRoutes(sessionInfo);
+  }
 
-    public interface Callback {
-        default void onRoutesUpdated() {
-        }
+  public void selectRoute(RoutingSessionInfo sessionInfo, MediaRoute2Info route) {
+    this.mManager.selectRoute(sessionInfo, route);
+  }
 
-        default void onSessionUpdated(RoutingSessionInfo session) {
-        }
+  public void deselectRoute(RoutingSessionInfo sessionInfo, MediaRoute2Info route) {
+    this.mManager.deselectRoute(sessionInfo, route);
+  }
 
-        default void onSessionReleased(RoutingSessionInfo session) {
-        }
+  public void releaseSession(RoutingSessionInfo sessionInfo) {
+    this.mManager.releaseSession(sessionInfo);
+  }
 
-        default void onTransferred(RoutingSessionInfo oldSession, RoutingSessionInfo newSession) {
-        }
+  public String getRouteAddress(MediaRoute2Info route) {
+    return route.getAddress();
+  }
 
-        default void onTransferFailed(RoutingSessionInfo session, MediaRoute2Info route) {
-        }
+  public int getRouteType(MediaRoute2Info route) {
+    return route.getType();
+  }
 
-        default void onPreferredFeaturesChanged(String packageName, List<String> preferredFeatures) {
-        }
+  public interface Callback {
+    default void onRoutesUpdated() {}
 
-        default void onRequestFailed(int reason) {
-        }
+    default void onSessionUpdated(RoutingSessionInfo session) {}
 
-        default void onDiscoveryPreferenceChanged(String packageName, RouteDiscoveryPreference discoveryPreference) {
-        }
-    }
+    default void onSessionReleased(RoutingSessionInfo session) {}
+
+    default void onTransferred(RoutingSessionInfo oldSession, RoutingSessionInfo newSession) {}
+
+    default void onTransferFailed(RoutingSessionInfo session, MediaRoute2Info route) {}
+
+    default void onPreferredFeaturesChanged(String packageName, List<String> preferredFeatures) {}
+
+    default void onRequestFailed(int reason) {}
+
+    default void onDiscoveryPreferenceChanged(
+        String packageName, RouteDiscoveryPreference discoveryPreference) {}
+  }
 }

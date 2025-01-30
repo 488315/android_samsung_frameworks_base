@@ -2,14 +2,13 @@ package android.media.effect;
 
 /* loaded from: classes2.dex */
 public abstract class Effect {
-    public abstract void apply(int i, int i2, int i3, int i4);
+  public abstract void apply(int i, int i2, int i3, int i4);
 
-    public abstract String getName();
+  public abstract String getName();
 
-    public abstract void release();
+  public abstract void release();
 
-    public abstract void setParameter(String str, Object obj);
+  public abstract void setParameter(String str, Object obj);
 
-    public void setUpdateListener(EffectUpdateListener listener) {
-    }
+  public void setUpdateListener(EffectUpdateListener listener) {}
 }

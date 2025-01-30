@@ -8,18 +8,24 @@ import java.security.spec.NamedParameterSpec;
 import java.util.Optional;
 
 /* loaded from: classes3.dex */
-public class AndroidKeyStoreXDHPrivateKey extends AndroidKeyStorePrivateKey implements XECPrivateKey {
-    public AndroidKeyStoreXDHPrivateKey(KeyDescriptor descriptor, long keyId, Authorization[] authorizations, String algorithm, KeyStoreSecurityLevel securityLevel) {
-        super(descriptor, keyId, authorizations, algorithm, securityLevel);
-    }
+public class AndroidKeyStoreXDHPrivateKey extends AndroidKeyStorePrivateKey
+    implements XECPrivateKey {
+  public AndroidKeyStoreXDHPrivateKey(
+      KeyDescriptor descriptor,
+      long keyId,
+      Authorization[] authorizations,
+      String algorithm,
+      KeyStoreSecurityLevel securityLevel) {
+    super(descriptor, keyId, authorizations, algorithm, securityLevel);
+  }
 
-    @Override // java.security.interfaces.XECKey
-    public NamedParameterSpec getParams() {
-        return NamedParameterSpec.X25519;
-    }
+  @Override // java.security.interfaces.XECKey
+  public NamedParameterSpec getParams() {
+    return NamedParameterSpec.X25519;
+  }
 
-    @Override // java.security.interfaces.XECPrivateKey
-    public Optional<byte[]> getScalar() {
-        return Optional.empty();
-    }
+  @Override // java.security.interfaces.XECPrivateKey
+  public Optional<byte[]> getScalar() {
+    return Optional.empty();
+  }
 }

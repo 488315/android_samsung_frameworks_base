@@ -4,64 +4,64 @@ import org.xmlpull.v1.XmlPullParser;
 
 /* loaded from: classes.dex */
 public class OverrideValue {
-    public Boolean enabled;
-    public String packageName;
+  public Boolean enabled;
+  public String packageName;
 
-    public String getPackageName() {
-        return this.packageName;
-    }
+  public String getPackageName() {
+    return this.packageName;
+  }
 
-    public boolean hasPackageName() {
-        return this.packageName != null;
-    }
+  public boolean hasPackageName() {
+    return this.packageName != null;
+  }
 
-    public void setPackageName(String str) {
-        this.packageName = str;
-    }
+  public void setPackageName(String str) {
+    this.packageName = str;
+  }
 
-    public boolean getEnabled() {
-        Boolean bool = this.enabled;
-        if (bool == null) {
-            return false;
-        }
-        return bool.booleanValue();
+  public boolean getEnabled() {
+    Boolean bool = this.enabled;
+    if (bool == null) {
+      return false;
     }
+    return bool.booleanValue();
+  }
 
-    public boolean hasEnabled() {
-        return this.enabled != null;
-    }
+  public boolean hasEnabled() {
+    return this.enabled != null;
+  }
 
-    public void setEnabled(boolean z) {
-        this.enabled = Boolean.valueOf(z);
-    }
+  public void setEnabled(boolean z) {
+    this.enabled = Boolean.valueOf(z);
+  }
 
-    public static OverrideValue read(XmlPullParser xmlPullParser) {
-        OverrideValue overrideValue = new OverrideValue();
-        String attributeValue = xmlPullParser.getAttributeValue(null, "packageName");
-        if (attributeValue != null) {
-            overrideValue.setPackageName(attributeValue);
-        }
-        String attributeValue2 = xmlPullParser.getAttributeValue(null, "enabled");
-        if (attributeValue2 != null) {
-            overrideValue.setEnabled(Boolean.parseBoolean(attributeValue2));
-        }
-        XmlParser.skip(xmlPullParser);
-        return overrideValue;
+  public static OverrideValue read(XmlPullParser xmlPullParser) {
+    OverrideValue overrideValue = new OverrideValue();
+    String attributeValue = xmlPullParser.getAttributeValue(null, "packageName");
+    if (attributeValue != null) {
+      overrideValue.setPackageName(attributeValue);
     }
+    String attributeValue2 = xmlPullParser.getAttributeValue(null, "enabled");
+    if (attributeValue2 != null) {
+      overrideValue.setEnabled(Boolean.parseBoolean(attributeValue2));
+    }
+    XmlParser.skip(xmlPullParser);
+    return overrideValue;
+  }
 
-    public void write(XmlWriter xmlWriter, String str) {
-        xmlWriter.print("<" + str);
-        if (hasPackageName()) {
-            xmlWriter.print(" packageName=\"");
-            xmlWriter.print(getPackageName());
-            xmlWriter.print("\"");
-        }
-        if (hasEnabled()) {
-            xmlWriter.print(" enabled=\"");
-            xmlWriter.print(Boolean.toString(getEnabled()));
-            xmlWriter.print("\"");
-        }
-        xmlWriter.print(">\n");
-        xmlWriter.print("</" + str + ">\n");
+  public void write(XmlWriter xmlWriter, String str) {
+    xmlWriter.print("<" + str);
+    if (hasPackageName()) {
+      xmlWriter.print(" packageName=\"");
+      xmlWriter.print(getPackageName());
+      xmlWriter.print("\"");
     }
+    if (hasEnabled()) {
+      xmlWriter.print(" enabled=\"");
+      xmlWriter.print(Boolean.toString(getEnabled()));
+      xmlWriter.print("\"");
+    }
+    xmlWriter.print(">\n");
+    xmlWriter.print("</" + str + ">\n");
+  }
 }

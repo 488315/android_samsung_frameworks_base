@@ -23,168 +23,178 @@ import org.xmlpull.v1.XmlPullParserException;
 
 /* loaded from: classes4.dex */
 public final class SpellCheckerInfo implements Parcelable {
-    private final String mId;
-    private final int mLabel;
-    private final ResolveInfo mService;
-    private final String mSettingsActivityName;
-    private final ArrayList<SpellCheckerSubtype> mSubtypes;
-    private static final String TAG = SpellCheckerInfo.class.getSimpleName();
-    public static final Parcelable.Creator<SpellCheckerInfo> CREATOR = new Parcelable.Creator<SpellCheckerInfo>() { // from class: android.view.textservice.SpellCheckerInfo.1
+  private final String mId;
+  private final int mLabel;
+  private final ResolveInfo mService;
+  private final String mSettingsActivityName;
+  private final ArrayList<SpellCheckerSubtype> mSubtypes;
+  private static final String TAG = SpellCheckerInfo.class.getSimpleName();
+  public static final Parcelable.Creator<SpellCheckerInfo> CREATOR =
+      new Parcelable.Creator<
+          SpellCheckerInfo>() { // from class: android.view.textservice.SpellCheckerInfo.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public SpellCheckerInfo createFromParcel(Parcel source) {
-            return new SpellCheckerInfo(source);
+          return new SpellCheckerInfo(source);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public SpellCheckerInfo[] newArray(int size) {
-            return new SpellCheckerInfo[size];
+          return new SpellCheckerInfo[size];
         }
-    };
+      };
 
-    public SpellCheckerInfo(Context context, ResolveInfo service) throws XmlPullParserException, IOException {
-        int type;
-        int i;
-        Resources res;
-        this.mSubtypes = new ArrayList<>();
-        this.mService = service;
-        ServiceInfo si = service.serviceInfo;
-        this.mId = new ComponentName(si.packageName, si.name).flattenToShortString();
-        PackageManager pm = context.getPackageManager();
-        XmlResourceParser parser = null;
-        try {
-            try {
-                parser = si.loadXmlMetaData(pm, SpellCheckerSession.SERVICE_META_DATA);
-                if (parser == null) {
-                    throw new XmlPullParserException("No android.view.textservice.scs meta-data");
-                }
-                Resources res2 = pm.getResourcesForApplication(si.applicationInfo);
-                AttributeSet attrs = Xml.asAttributeSet(parser);
-                do {
-                    type = parser.next();
-                    i = 1;
-                    if (type == 1) {
-                        break;
-                    }
-                } while (type != 2);
-                String nodeName = parser.getName();
-                if (!"spell-checker".equals(nodeName)) {
-                    throw new XmlPullParserException("Meta-data does not start with spell-checker tag");
-                }
-                TypedArray sa = res2.obtainAttributes(attrs, C4337R.styleable.SpellChecker);
-                int label = sa.getResourceId(0, 0);
-                String settingsActivityComponent = sa.getString(1);
-                sa.recycle();
-                int depth = parser.getDepth();
-                while (true) {
-                    int type2 = parser.next();
-                    if ((type2 == 3 && parser.getDepth() <= depth) || type2 == i) {
-                        break;
-                    }
-                    if (type2 != 2) {
-                        res = res2;
-                    } else {
-                        String subtypeNodeName = parser.getName();
-                        if (!"subtype".equals(subtypeNodeName)) {
-                            throw new XmlPullParserException("Meta-data in spell-checker does not start with subtype tag");
-                        }
-                        TypedArray a = res2.obtainAttributes(attrs, C4337R.styleable.SpellChecker_Subtype);
-                        res = res2;
-                        SpellCheckerSubtype subtype = new SpellCheckerSubtype(a.getResourceId(0, 0), a.getString(1), a.getString(4), a.getString(2), a.getInt(3, 0));
-                        a.recycle();
-                        this.mSubtypes.add(subtype);
-                    }
-                    res2 = res;
-                    i = 1;
-                }
-                this.mLabel = label;
-                this.mSettingsActivityName = settingsActivityComponent;
-            } catch (Exception e) {
-                Slog.m115e(TAG, "Caught exception: " + e);
-                throw new XmlPullParserException("Unable to create context for: " + si.packageName);
+  public SpellCheckerInfo(Context context, ResolveInfo service)
+      throws XmlPullParserException, IOException {
+    int type;
+    int i;
+    Resources res;
+    this.mSubtypes = new ArrayList<>();
+    this.mService = service;
+    ServiceInfo si = service.serviceInfo;
+    this.mId = new ComponentName(si.packageName, si.name).flattenToShortString();
+    PackageManager pm = context.getPackageManager();
+    XmlResourceParser parser = null;
+    try {
+      try {
+        parser = si.loadXmlMetaData(pm, SpellCheckerSession.SERVICE_META_DATA);
+        if (parser == null) {
+          throw new XmlPullParserException("No android.view.textservice.scs meta-data");
+        }
+        Resources res2 = pm.getResourcesForApplication(si.applicationInfo);
+        AttributeSet attrs = Xml.asAttributeSet(parser);
+        do {
+          type = parser.next();
+          i = 1;
+          if (type == 1) {
+            break;
+          }
+        } while (type != 2);
+        String nodeName = parser.getName();
+        if (!"spell-checker".equals(nodeName)) {
+          throw new XmlPullParserException("Meta-data does not start with spell-checker tag");
+        }
+        TypedArray sa = res2.obtainAttributes(attrs, C4337R.styleable.SpellChecker);
+        int label = sa.getResourceId(0, 0);
+        String settingsActivityComponent = sa.getString(1);
+        sa.recycle();
+        int depth = parser.getDepth();
+        while (true) {
+          int type2 = parser.next();
+          if ((type2 == 3 && parser.getDepth() <= depth) || type2 == i) {
+            break;
+          }
+          if (type2 != 2) {
+            res = res2;
+          } else {
+            String subtypeNodeName = parser.getName();
+            if (!"subtype".equals(subtypeNodeName)) {
+              throw new XmlPullParserException(
+                  "Meta-data in spell-checker does not start with subtype tag");
             }
-        } finally {
-            if (parser != null) {
-                parser.close();
-            }
+            TypedArray a = res2.obtainAttributes(attrs, C4337R.styleable.SpellChecker_Subtype);
+            res = res2;
+            SpellCheckerSubtype subtype =
+                new SpellCheckerSubtype(
+                    a.getResourceId(0, 0),
+                    a.getString(1),
+                    a.getString(4),
+                    a.getString(2),
+                    a.getInt(3, 0));
+            a.recycle();
+            this.mSubtypes.add(subtype);
+          }
+          res2 = res;
+          i = 1;
         }
+        this.mLabel = label;
+        this.mSettingsActivityName = settingsActivityComponent;
+      } catch (Exception e) {
+        Slog.m115e(TAG, "Caught exception: " + e);
+        throw new XmlPullParserException("Unable to create context for: " + si.packageName);
+      }
+    } finally {
+      if (parser != null) {
+        parser.close();
+      }
     }
+  }
 
-    public SpellCheckerInfo(Parcel source) {
-        ArrayList<SpellCheckerSubtype> arrayList = new ArrayList<>();
-        this.mSubtypes = arrayList;
-        this.mLabel = source.readInt();
-        this.mId = source.readString();
-        this.mSettingsActivityName = source.readString();
-        this.mService = ResolveInfo.CREATOR.createFromParcel(source);
-        source.readTypedList(arrayList, SpellCheckerSubtype.CREATOR);
-    }
+  public SpellCheckerInfo(Parcel source) {
+    ArrayList<SpellCheckerSubtype> arrayList = new ArrayList<>();
+    this.mSubtypes = arrayList;
+    this.mLabel = source.readInt();
+    this.mId = source.readString();
+    this.mSettingsActivityName = source.readString();
+    this.mService = ResolveInfo.CREATOR.createFromParcel(source);
+    source.readTypedList(arrayList, SpellCheckerSubtype.CREATOR);
+  }
 
-    public String getId() {
-        return this.mId;
-    }
+  public String getId() {
+    return this.mId;
+  }
 
-    public ComponentName getComponent() {
-        return new ComponentName(this.mService.serviceInfo.packageName, this.mService.serviceInfo.name);
-    }
+  public ComponentName getComponent() {
+    return new ComponentName(this.mService.serviceInfo.packageName, this.mService.serviceInfo.name);
+  }
 
-    public String getPackageName() {
-        return this.mService.serviceInfo.packageName;
-    }
+  public String getPackageName() {
+    return this.mService.serviceInfo.packageName;
+  }
 
-    @Override // android.p009os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(this.mLabel);
-        dest.writeString(this.mId);
-        dest.writeString(this.mSettingsActivityName);
-        this.mService.writeToParcel(dest, flags);
-        dest.writeTypedList(this.mSubtypes);
-    }
+  @Override // android.p009os.Parcelable
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeInt(this.mLabel);
+    dest.writeString(this.mId);
+    dest.writeString(this.mSettingsActivityName);
+    this.mService.writeToParcel(dest, flags);
+    dest.writeTypedList(this.mSubtypes);
+  }
 
-    public CharSequence loadLabel(PackageManager pm) {
-        if (this.mLabel == 0 || pm == null) {
-            return "";
-        }
-        return pm.getText(getPackageName(), this.mLabel, this.mService.serviceInfo.applicationInfo);
+  public CharSequence loadLabel(PackageManager pm) {
+    if (this.mLabel == 0 || pm == null) {
+      return "";
     }
+    return pm.getText(getPackageName(), this.mLabel, this.mService.serviceInfo.applicationInfo);
+  }
 
-    public Drawable loadIcon(PackageManager pm) {
-        return this.mService.loadIcon(pm);
-    }
+  public Drawable loadIcon(PackageManager pm) {
+    return this.mService.loadIcon(pm);
+  }
 
-    public ServiceInfo getServiceInfo() {
-        return this.mService.serviceInfo;
-    }
+  public ServiceInfo getServiceInfo() {
+    return this.mService.serviceInfo;
+  }
 
-    public String getSettingsActivity() {
-        return this.mSettingsActivityName;
-    }
+  public String getSettingsActivity() {
+    return this.mSettingsActivityName;
+  }
 
-    public int getSubtypeCount() {
-        return this.mSubtypes.size();
-    }
+  public int getSubtypeCount() {
+    return this.mSubtypes.size();
+  }
 
-    public SpellCheckerSubtype getSubtypeAt(int index) {
-        return this.mSubtypes.get(index);
-    }
+  public SpellCheckerSubtype getSubtypeAt(int index) {
+    return this.mSubtypes.get(index);
+  }
 
-    @Override // android.p009os.Parcelable
-    public int describeContents() {
-        return 0;
-    }
+  @Override // android.p009os.Parcelable
+  public int describeContents() {
+    return 0;
+  }
 
-    public void dump(PrintWriter pw, String prefix) {
-        pw.println(prefix + "mId=" + this.mId);
-        pw.println(prefix + "mSettingsActivityName=" + this.mSettingsActivityName);
-        pw.println(prefix + "Service:");
-        this.mService.dump(new PrintWriterPrinter(pw), prefix + "  ");
-        int N = getSubtypeCount();
-        for (int i = 0; i < N; i++) {
-            SpellCheckerSubtype st = getSubtypeAt(i);
-            pw.println(prefix + "  Subtype #" + i + ":");
-            pw.println(prefix + "    locale=" + st.getLocale() + " languageTag=" + st.getLanguageTag());
-            pw.println(prefix + "    extraValue=" + st.getExtraValue());
-        }
+  public void dump(PrintWriter pw, String prefix) {
+    pw.println(prefix + "mId=" + this.mId);
+    pw.println(prefix + "mSettingsActivityName=" + this.mSettingsActivityName);
+    pw.println(prefix + "Service:");
+    this.mService.dump(new PrintWriterPrinter(pw), prefix + "  ");
+    int N = getSubtypeCount();
+    for (int i = 0; i < N; i++) {
+      SpellCheckerSubtype st = getSubtypeAt(i);
+      pw.println(prefix + "  Subtype #" + i + ":");
+      pw.println(prefix + "    locale=" + st.getLocale() + " languageTag=" + st.getLanguageTag());
+      pw.println(prefix + "    extraValue=" + st.getExtraValue());
     }
+  }
 }

@@ -7,7 +7,8 @@ import org.xml.sax.SAXException;
 
 /* loaded from: classes.dex */
 public interface ContentInsertHandler extends ContentHandler {
-    void insert(ContentResolver contentResolver, InputStream inputStream) throws IOException, SAXException;
+  void insert(ContentResolver contentResolver, InputStream inputStream)
+      throws IOException, SAXException;
 
-    void insert(ContentResolver contentResolver, String str) throws SAXException;
+  void insert(ContentResolver contentResolver, String str) throws SAXException;
 }

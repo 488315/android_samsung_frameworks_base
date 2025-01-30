@@ -12,95 +12,102 @@ import java.util.Arrays;
 
 /* loaded from: classes5.dex */
 public class KernelCpuSpeedReader {
-    private static final String TAG = "KernelCpuSpeedReader";
-    private final long[] mDeltaSpeedTimesMs;
-    private final long mJiffyMillis;
-    private final long[] mLastSpeedTimesMs;
-    private final int mNumSpeedSteps;
-    private final String mProcFile;
+  private static final String TAG = "KernelCpuSpeedReader";
+  private final long[] mDeltaSpeedTimesMs;
+  private final long mJiffyMillis;
+  private final long[] mLastSpeedTimesMs;
+  private final int mNumSpeedSteps;
+  private final String mProcFile;
 
-    public KernelCpuSpeedReader(int cpuNumber, int numSpeedSteps) {
-        this.mProcFile = String.format("/sys/devices/system/cpu/cpu%d/cpufreq/stats/time_in_state", Integer.valueOf(cpuNumber));
-        this.mNumSpeedSteps = numSpeedSteps;
-        this.mLastSpeedTimesMs = new long[numSpeedSteps];
-        this.mDeltaSpeedTimesMs = new long[numSpeedSteps];
-        long jiffyHz = Os.sysconf(OsConstants._SC_CLK_TCK);
-        this.mJiffyMillis = 1000 / jiffyHz;
-    }
+  public KernelCpuSpeedReader(int cpuNumber, int numSpeedSteps) {
+    this.mProcFile =
+        String.format(
+            "/sys/devices/system/cpu/cpu%d/cpufreq/stats/time_in_state",
+            Integer.valueOf(cpuNumber));
+    this.mNumSpeedSteps = numSpeedSteps;
+    this.mLastSpeedTimesMs = new long[numSpeedSteps];
+    this.mDeltaSpeedTimesMs = new long[numSpeedSteps];
+    long jiffyHz = Os.sysconf(OsConstants._SC_CLK_TCK);
+    this.mJiffyMillis = 1000 / jiffyHz;
+  }
 
-    public long[] readDelta() {
-        String line;
-        StrictMode.ThreadPolicy policy = StrictMode.allowThreadDiskReads();
+  public long[] readDelta() {
+    String line;
+    StrictMode.ThreadPolicy policy = StrictMode.allowThreadDiskReads();
+    try {
+      try {
+        BufferedReader reader = new BufferedReader(new FileReader(this.mProcFile));
         try {
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(this.mProcFile));
-                try {
-                    TextUtils.SimpleStringSplitter splitter = new TextUtils.SimpleStringSplitter(' ');
-                    for (int speedIndex = 0; speedIndex < this.mLastSpeedTimesMs.length && (line = reader.readLine()) != null; speedIndex++) {
-                        splitter.setString(line);
-                        splitter.next();
-                        long time = Long.parseLong(splitter.next()) * this.mJiffyMillis;
-                        long[] jArr = this.mLastSpeedTimesMs;
-                        long j = jArr[speedIndex];
-                        if (time < j) {
-                            this.mDeltaSpeedTimesMs[speedIndex] = time;
-                        } else {
-                            this.mDeltaSpeedTimesMs[speedIndex] = time - j;
-                        }
-                        jArr[speedIndex] = time;
-                    }
-                    reader.close();
-                } catch (Throwable th) {
-                    try {
-                        reader.close();
-                    } catch (Throwable th2) {
-                        th.addSuppressed(th2);
-                    }
-                    throw th;
-                }
-            } catch (IOException e) {
-                Slog.m115e(TAG, "Failed to read cpu-freq: " + e.getMessage());
-                Arrays.fill(this.mDeltaSpeedTimesMs, 0L);
+          TextUtils.SimpleStringSplitter splitter = new TextUtils.SimpleStringSplitter(' ');
+          for (int speedIndex = 0;
+              speedIndex < this.mLastSpeedTimesMs.length && (line = reader.readLine()) != null;
+              speedIndex++) {
+            splitter.setString(line);
+            splitter.next();
+            long time = Long.parseLong(splitter.next()) * this.mJiffyMillis;
+            long[] jArr = this.mLastSpeedTimesMs;
+            long j = jArr[speedIndex];
+            if (time < j) {
+              this.mDeltaSpeedTimesMs[speedIndex] = time;
+            } else {
+              this.mDeltaSpeedTimesMs[speedIndex] = time - j;
             }
-            StrictMode.setThreadPolicy(policy);
-            return this.mDeltaSpeedTimesMs;
-        } catch (Throwable th3) {
-            StrictMode.setThreadPolicy(policy);
-            throw th3;
+            jArr[speedIndex] = time;
+          }
+          reader.close();
+        } catch (Throwable th) {
+          try {
+            reader.close();
+          } catch (Throwable th2) {
+            th.addSuppressed(th2);
+          }
+          throw th;
         }
+      } catch (IOException e) {
+        Slog.m115e(TAG, "Failed to read cpu-freq: " + e.getMessage());
+        Arrays.fill(this.mDeltaSpeedTimesMs, 0L);
+      }
+      StrictMode.setThreadPolicy(policy);
+      return this.mDeltaSpeedTimesMs;
+    } catch (Throwable th3) {
+      StrictMode.setThreadPolicy(policy);
+      throw th3;
     }
+  }
 
-    public long[] readAbsolute() {
-        String line;
-        StrictMode.ThreadPolicy policy = StrictMode.allowThreadDiskReads();
-        long[] speedTimeMs = new long[this.mNumSpeedSteps];
+  public long[] readAbsolute() {
+    String line;
+    StrictMode.ThreadPolicy policy = StrictMode.allowThreadDiskReads();
+    long[] speedTimeMs = new long[this.mNumSpeedSteps];
+    try {
+      try {
+        BufferedReader reader = new BufferedReader(new FileReader(this.mProcFile));
         try {
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(this.mProcFile));
-                try {
-                    TextUtils.SimpleStringSplitter splitter = new TextUtils.SimpleStringSplitter(' ');
-                    for (int speedIndex = 0; speedIndex < this.mNumSpeedSteps && (line = reader.readLine()) != null; speedIndex++) {
-                        splitter.setString(line);
-                        splitter.next();
-                        long time = Long.parseLong(splitter.next()) * this.mJiffyMillis;
-                        speedTimeMs[speedIndex] = time;
-                    }
-                    reader.close();
-                } catch (Throwable th) {
-                    try {
-                        reader.close();
-                    } catch (Throwable th2) {
-                        th.addSuppressed(th2);
-                    }
-                    throw th;
-                }
-            } catch (IOException e) {
-                Slog.m115e(TAG, "Failed to read cpu-freq: " + e.getMessage());
-                Arrays.fill(speedTimeMs, 0L);
-            }
-            return speedTimeMs;
-        } finally {
-            StrictMode.setThreadPolicy(policy);
+          TextUtils.SimpleStringSplitter splitter = new TextUtils.SimpleStringSplitter(' ');
+          for (int speedIndex = 0;
+              speedIndex < this.mNumSpeedSteps && (line = reader.readLine()) != null;
+              speedIndex++) {
+            splitter.setString(line);
+            splitter.next();
+            long time = Long.parseLong(splitter.next()) * this.mJiffyMillis;
+            speedTimeMs[speedIndex] = time;
+          }
+          reader.close();
+        } catch (Throwable th) {
+          try {
+            reader.close();
+          } catch (Throwable th2) {
+            th.addSuppressed(th2);
+          }
+          throw th;
         }
+      } catch (IOException e) {
+        Slog.m115e(TAG, "Failed to read cpu-freq: " + e.getMessage());
+        Arrays.fill(speedTimeMs, 0L);
+      }
+      return speedTimeMs;
+    } finally {
+      StrictMode.setThreadPolicy(policy);
     }
+  }
 }

@@ -6,7 +6,7 @@ import android.media.effect.SingleFilterEffect;
 
 /* loaded from: classes2.dex */
 public class ContrastEffect extends SingleFilterEffect {
-    public ContrastEffect(EffectContext context, String name) {
-        super(context, name, ContrastFilter.class, "image", "image", new Object[0]);
-    }
+  public ContrastEffect(EffectContext context, String name) {
+    super(context, name, ContrastFilter.class, "image", "image", new Object[0]);
+  }
 }

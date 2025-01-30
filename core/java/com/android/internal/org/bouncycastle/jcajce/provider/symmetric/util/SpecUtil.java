@@ -5,22 +5,21 @@ import java.security.spec.AlgorithmParameterSpec;
 
 /* loaded from: classes5.dex */
 class SpecUtil {
-    SpecUtil() {
-    }
+  SpecUtil() {}
 
-    static AlgorithmParameterSpec extractSpec(AlgorithmParameters params, Class[] availableSpecs) {
-        try {
-            return params.getParameterSpec(AlgorithmParameterSpec.class);
-        } catch (Exception e) {
-            for (int i = 0; i != availableSpecs.length; i++) {
-                if (availableSpecs[i] != null) {
-                    try {
-                        return params.getParameterSpec(availableSpecs[i]);
-                    } catch (Exception e2) {
-                    }
-                }
-            }
-            return null;
+  static AlgorithmParameterSpec extractSpec(AlgorithmParameters params, Class[] availableSpecs) {
+    try {
+      return params.getParameterSpec(AlgorithmParameterSpec.class);
+    } catch (Exception e) {
+      for (int i = 0; i != availableSpecs.length; i++) {
+        if (availableSpecs[i] != null) {
+          try {
+            return params.getParameterSpec(availableSpecs[i]);
+          } catch (Exception e2) {
+          }
         }
+      }
+      return null;
     }
+  }
 }

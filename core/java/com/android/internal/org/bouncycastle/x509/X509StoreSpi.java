@@ -5,7 +5,7 @@ import java.util.Collection;
 
 /* loaded from: classes5.dex */
 public abstract class X509StoreSpi {
-    public abstract Collection engineGetMatches(Selector selector);
+  public abstract Collection engineGetMatches(Selector selector);
 
-    public abstract void engineInit(X509StoreParameters x509StoreParameters);
+  public abstract void engineInit(X509StoreParameters x509StoreParameters);
 }

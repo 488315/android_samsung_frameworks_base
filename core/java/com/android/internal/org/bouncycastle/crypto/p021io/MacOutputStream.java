@@ -6,25 +6,25 @@ import java.io.OutputStream;
 
 /* loaded from: classes5.dex */
 public class MacOutputStream extends OutputStream {
-    protected Mac mac;
+  protected Mac mac;
 
-    public MacOutputStream(Mac mac) {
-        this.mac = mac;
-    }
+  public MacOutputStream(Mac mac) {
+    this.mac = mac;
+  }
 
-    @Override // java.io.OutputStream
-    public void write(int b) throws IOException {
-        this.mac.update((byte) b);
-    }
+  @Override // java.io.OutputStream
+  public void write(int b) throws IOException {
+    this.mac.update((byte) b);
+  }
 
-    @Override // java.io.OutputStream
-    public void write(byte[] b, int off, int len) throws IOException {
-        this.mac.update(b, off, len);
-    }
+  @Override // java.io.OutputStream
+  public void write(byte[] b, int off, int len) throws IOException {
+    this.mac.update(b, off, len);
+  }
 
-    public byte[] getMac() {
-        byte[] res = new byte[this.mac.getMacSize()];
-        this.mac.doFinal(res, 0);
-        return res;
-    }
+  public byte[] getMac() {
+    byte[] res = new byte[this.mac.getMacSize()];
+    this.mac.doFinal(res, 0);
+    return res;
+  }
 }

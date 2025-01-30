@@ -7,41 +7,54 @@ import java.io.PrintWriter;
 
 /* loaded from: classes.dex */
 public final class AppBindRecord {
-    public final ProcessRecord attributedClient;
-    public final ProcessRecord client;
-    public final ArraySet connections = new ArraySet();
-    public final IntentBindRecord intent;
-    public final ServiceRecord service;
+  public final ProcessRecord attributedClient;
+  public final ProcessRecord client;
+  public final ArraySet connections = new ArraySet();
+  public final IntentBindRecord intent;
+  public final ServiceRecord service;
 
-    public void dumpInIntentBind(PrintWriter printWriter, String str) {
-        int size = this.connections.size();
-        if (size > 0) {
-            printWriter.println(str + "Per-process Connections:");
-            for (int i = 0; i < size; i++) {
-                printWriter.println(str + "  " + ((ConnectionRecord) this.connections.valueAt(i)));
-            }
-        }
+  public void dumpInIntentBind(PrintWriter printWriter, String str) {
+    int size = this.connections.size();
+    if (size > 0) {
+      printWriter.println(str + "Per-process Connections:");
+      for (int i = 0; i < size; i++) {
+        printWriter.println(str + "  " + ((ConnectionRecord) this.connections.valueAt(i)));
+      }
     }
+  }
 
-    public AppBindRecord(ServiceRecord serviceRecord, IntentBindRecord intentBindRecord, ProcessRecord processRecord, ProcessRecord processRecord2) {
-        this.service = serviceRecord;
-        this.intent = intentBindRecord;
-        this.client = processRecord;
-        this.attributedClient = processRecord2;
-    }
+  public AppBindRecord(
+      ServiceRecord serviceRecord,
+      IntentBindRecord intentBindRecord,
+      ProcessRecord processRecord,
+      ProcessRecord processRecord2) {
+    this.service = serviceRecord;
+    this.intent = intentBindRecord;
+    this.client = processRecord;
+    this.attributedClient = processRecord2;
+  }
 
-    public String toString() {
-        return "AppBindRecord{" + Integer.toHexString(System.identityHashCode(this)) + " " + this.service.shortInstanceName + XmlUtils.STRING_ARRAY_SEPARATOR + this.client.processName + "}";
-    }
+  public String toString() {
+    return "AppBindRecord{"
+        + Integer.toHexString(System.identityHashCode(this))
+        + " "
+        + this.service.shortInstanceName
+        + XmlUtils.STRING_ARRAY_SEPARATOR
+        + this.client.processName
+        + "}";
+  }
 
-    public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
-        long start = protoOutputStream.start(j);
-        protoOutputStream.write(1138166333441L, this.service.shortInstanceName);
-        protoOutputStream.write(1138166333442L, this.client.processName);
-        int size = this.connections.size();
-        for (int i = 0; i < size; i++) {
-            protoOutputStream.write(2237677961219L, Integer.toHexString(System.identityHashCode((ConnectionRecord) this.connections.valueAt(i))));
-        }
-        protoOutputStream.end(start);
+  public void dumpDebug(ProtoOutputStream protoOutputStream, long j) {
+    long start = protoOutputStream.start(j);
+    protoOutputStream.write(1138166333441L, this.service.shortInstanceName);
+    protoOutputStream.write(1138166333442L, this.client.processName);
+    int size = this.connections.size();
+    for (int i = 0; i < size; i++) {
+      protoOutputStream.write(
+          2237677961219L,
+          Integer.toHexString(
+              System.identityHashCode((ConnectionRecord) this.connections.valueAt(i))));
     }
+    protoOutputStream.end(start);
+  }
 }

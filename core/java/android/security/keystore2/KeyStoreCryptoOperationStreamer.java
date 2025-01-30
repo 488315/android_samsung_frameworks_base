@@ -4,11 +4,11 @@ import android.security.KeyStoreException;
 
 /* loaded from: classes3.dex */
 interface KeyStoreCryptoOperationStreamer {
-    byte[] doFinal(byte[] bArr, int i, int i2, byte[] bArr2) throws KeyStoreException;
+  byte[] doFinal(byte[] bArr, int i, int i2, byte[] bArr2) throws KeyStoreException;
 
-    long getConsumedInputSizeBytes();
+  long getConsumedInputSizeBytes();
 
-    long getProducedOutputSizeBytes();
+  long getProducedOutputSizeBytes();
 
-    byte[] update(byte[] bArr, int i, int i2) throws KeyStoreException;
+  byte[] update(byte[] bArr, int i, int i2) throws KeyStoreException;
 }

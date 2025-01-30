@@ -10,53 +10,61 @@ import java.util.ArrayList;
 
 /* loaded from: classes5.dex */
 public class SemRemoteAppDataExtractionManager {
-    private static final String TAG = "SemRemoteAppDataExtractionManager";
-    private SpenGestureManager mManager;
+  private static final String TAG = "SemRemoteAppDataExtractionManager";
+  private SpenGestureManager mManager;
 
-    public SemRemoteAppDataExtractionManager(Context context) {
-        this.mManager = null;
-        if (context == null) {
-            Log.m96e(TAG, "SemRemoteAppDataExtractionManager : Context is null! ");
-            throw new RuntimeException("Context should not be null!");
-        }
-        SpenGestureManager spenGestureManager = (SpenGestureManager) context.getSystemService(Context.SEM_SPEN_GESTURE_SERVICE);
-        this.mManager = spenGestureManager;
-        if (spenGestureManager == null) {
-            Log.m96e(TAG, "SemRemoteAppDataExtractionManager : Failed to connect to the service");
-            throw new RuntimeException("Failed to connect to the service. Feature is not supported");
-        }
+  public SemRemoteAppDataExtractionManager(Context context) {
+    this.mManager = null;
+    if (context == null) {
+      Log.m96e(TAG, "SemRemoteAppDataExtractionManager : Context is null! ");
+      throw new RuntimeException("Context should not be null!");
     }
+    SpenGestureManager spenGestureManager =
+        (SpenGestureManager) context.getSystemService(Context.SEM_SPEN_GESTURE_SERVICE);
+    this.mManager = spenGestureManager;
+    if (spenGestureManager == null) {
+      Log.m96e(TAG, "SemRemoteAppDataExtractionManager : Failed to connect to the service");
+      throw new RuntimeException("Failed to connect to the service. Feature is not supported");
+    }
+  }
 
-    public SemSmartClipDataRepository getSmartClipDataFromCurrentScreen() {
-        return getSmartClipDataByScreenRect(null, null, 1);
-    }
+  public SemSmartClipDataRepository getSmartClipDataFromCurrentScreen() {
+    return getSmartClipDataByScreenRect(null, null, 1);
+  }
 
-    public SemSmartClipDataRepository getSmartClipDataByScreenRect(Rect rect, IBinder skipWindowToken, int extractionMode) {
-        return this.mManager.getSmartClipDataByScreenRect(rect, skipWindowToken, extractionMode);
-    }
+  public SemSmartClipDataRepository getSmartClipDataByScreenRect(
+      Rect rect, IBinder skipWindowToken, int extractionMode) {
+    return this.mManager.getSmartClipDataByScreenRect(rect, skipWindowToken, extractionMode);
+  }
 
-    public Bundle getScrollableAreaInfo(Rect rect, IBinder skipWindowToken) {
-        if (rect == null) {
-            Log.m96e(TAG, "getScrollableAreaInfo : rect is null!");
-            return null;
-        }
-        return this.mManager.getScrollableAreaInfo(rect, skipWindowToken);
+  public Bundle getScrollableAreaInfo(Rect rect, IBinder skipWindowToken) {
+    if (rect == null) {
+      Log.m96e(TAG, "getScrollableAreaInfo : rect is null!");
+      return null;
     }
+    return this.mManager.getScrollableAreaInfo(rect, skipWindowToken);
+  }
 
-    public Bundle getScrollableViewInfo(Rect rect, int viewHash, IBinder skipWindowToken) {
-        if (rect == null) {
-            Log.m96e(TAG, "getScrollableViewInfo : rect is null!");
-            return null;
-        }
-        return this.mManager.getScrollableViewInfo(rect, viewHash, skipWindowToken);
+  public Bundle getScrollableViewInfo(Rect rect, int viewHash, IBinder skipWindowToken) {
+    if (rect == null) {
+      Log.m96e(TAG, "getScrollableViewInfo : rect is null!");
+      return null;
     }
+    return this.mManager.getScrollableViewInfo(rect, viewHash, skipWindowToken);
+  }
 
-    public boolean injectInputEvent(int targetX, int targetY, ArrayList<InputEvent> inputEvents, boolean waitUntilConsume, IBinder skipWindowToken) {
-        if (inputEvents == null || inputEvents.size() == 0) {
-            Log.m96e(TAG, "injectInputEvent : Empty input event");
-            return false;
-        }
-        this.mManager.injectInputEvent(targetX, targetY, inputEvents, waitUntilConsume, skipWindowToken);
-        return true;
+  public boolean injectInputEvent(
+      int targetX,
+      int targetY,
+      ArrayList<InputEvent> inputEvents,
+      boolean waitUntilConsume,
+      IBinder skipWindowToken) {
+    if (inputEvents == null || inputEvents.size() == 0) {
+      Log.m96e(TAG, "injectInputEvent : Empty input event");
+      return false;
     }
+    this.mManager.injectInputEvent(
+        targetX, targetY, inputEvents, waitUntilConsume, skipWindowToken);
+    return true;
+  }
 }

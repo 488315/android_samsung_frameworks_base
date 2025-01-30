@@ -6,25 +6,25 @@ import java.io.OutputStream;
 
 /* loaded from: classes5.dex */
 public class DigestOutputStream extends OutputStream {
-    protected Digest digest;
+  protected Digest digest;
 
-    public DigestOutputStream(Digest Digest) {
-        this.digest = Digest;
-    }
+  public DigestOutputStream(Digest Digest) {
+    this.digest = Digest;
+  }
 
-    @Override // java.io.OutputStream
-    public void write(int b) throws IOException {
-        this.digest.update((byte) b);
-    }
+  @Override // java.io.OutputStream
+  public void write(int b) throws IOException {
+    this.digest.update((byte) b);
+  }
 
-    @Override // java.io.OutputStream
-    public void write(byte[] b, int off, int len) throws IOException {
-        this.digest.update(b, off, len);
-    }
+  @Override // java.io.OutputStream
+  public void write(byte[] b, int off, int len) throws IOException {
+    this.digest.update(b, off, len);
+  }
 
-    public byte[] getDigest() {
-        byte[] res = new byte[this.digest.getDigestSize()];
-        this.digest.doFinal(res, 0);
-        return res;
-    }
+  public byte[] getDigest() {
+    byte[] res = new byte[this.digest.getDigestSize()];
+    this.digest.doFinal(res, 0);
+    return res;
+  }
 }

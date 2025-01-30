@@ -11,5 +11,4 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.SOURCE)
 /* renamed from: android.annotation.Px */
 /* loaded from: classes.dex */
-public @interface InterfaceC0085Px {
-}
+public @interface InterfaceC0085Px {}

@@ -7,39 +7,40 @@ import android.p009os.Parcelable;
 @SystemApi
 /* loaded from: classes2.dex */
 public final class MatchAllNetworkSpecifier extends NetworkSpecifier implements Parcelable {
-    public static final Parcelable.Creator<MatchAllNetworkSpecifier> CREATOR = new Parcelable.Creator<MatchAllNetworkSpecifier>() { // from class: android.net.MatchAllNetworkSpecifier.1
+  public static final Parcelable.Creator<MatchAllNetworkSpecifier> CREATOR =
+      new Parcelable.Creator<
+          MatchAllNetworkSpecifier>() { // from class: android.net.MatchAllNetworkSpecifier.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public MatchAllNetworkSpecifier createFromParcel(Parcel in) {
-            return new MatchAllNetworkSpecifier();
+          return new MatchAllNetworkSpecifier();
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public MatchAllNetworkSpecifier[] newArray(int size) {
-            return new MatchAllNetworkSpecifier[size];
+          return new MatchAllNetworkSpecifier[size];
         }
-    };
+      };
 
-    @Override // android.net.NetworkSpecifier
-    public boolean canBeSatisfiedBy(NetworkSpecifier other) {
-        throw new IllegalStateException("MatchAllNetworkSpecifier must not be used in NetworkRequests");
-    }
+  @Override // android.net.NetworkSpecifier
+  public boolean canBeSatisfiedBy(NetworkSpecifier other) {
+    throw new IllegalStateException("MatchAllNetworkSpecifier must not be used in NetworkRequests");
+  }
 
-    public boolean equals(Object o) {
-        return o instanceof MatchAllNetworkSpecifier;
-    }
+  public boolean equals(Object o) {
+    return o instanceof MatchAllNetworkSpecifier;
+  }
 
-    public int hashCode() {
-        return 0;
-    }
+  public int hashCode() {
+    return 0;
+  }
 
-    @Override // android.p009os.Parcelable
-    public int describeContents() {
-        return 0;
-    }
+  @Override // android.p009os.Parcelable
+  public int describeContents() {
+    return 0;
+  }
 
-    @Override // android.p009os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-    }
+  @Override // android.p009os.Parcelable
+  public void writeToParcel(Parcel dest, int flags) {}
 }

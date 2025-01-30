@@ -4,13 +4,13 @@ import javax.microedition.khronos.egl.EGLConfig;
 
 /* loaded from: classes5.dex */
 public class EGLConfigImpl extends EGLConfig {
-    private long mEGLConfig;
+  private long mEGLConfig;
 
-    EGLConfigImpl(long config) {
-        this.mEGLConfig = config;
-    }
+  EGLConfigImpl(long config) {
+    this.mEGLConfig = config;
+  }
 
-    long get() {
-        return this.mEGLConfig;
-    }
+  long get() {
+    return this.mEGLConfig;
+  }
 }

@@ -2,17 +2,16 @@ package android.graphics;
 
 /* loaded from: classes.dex */
 public final class Compatibility {
-    private static int sTargetSdkVersion = 0;
+  private static int sTargetSdkVersion = 0;
 
-    private Compatibility() {
-    }
+  private Compatibility() {}
 
-    public static void setTargetSdkVersion(int targetSdkVersion) {
-        sTargetSdkVersion = targetSdkVersion;
-        Canvas.setCompatibilityVersion(targetSdkVersion);
-    }
+  public static void setTargetSdkVersion(int targetSdkVersion) {
+    sTargetSdkVersion = targetSdkVersion;
+    Canvas.setCompatibilityVersion(targetSdkVersion);
+  }
 
-    public static int getTargetSdkVersion() {
-        return sTargetSdkVersion;
-    }
+  public static int getTargetSdkVersion() {
+    return sTargetSdkVersion;
+  }
 }

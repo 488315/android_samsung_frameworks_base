@@ -2,7 +2,7 @@ package com.android.internal.widget;
 
 /* loaded from: classes5.dex */
 public interface LockScreenWidgetInterface {
-    boolean providesClock();
+  boolean providesClock();
 
-    void setCallback(LockScreenWidgetCallback lockScreenWidgetCallback);
+  void setCallback(LockScreenWidgetCallback lockScreenWidgetCallback);
 }

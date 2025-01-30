@@ -15,163 +15,176 @@ import java.util.function.IntConsumer;
 
 /* loaded from: classes.dex */
 public class LifecycleOperationStorage implements OperationStorage {
-    public final int mUserId;
-    public final Object mOperationsLock = new Object();
-    public final SparseArray mOperations = new SparseArray();
-    public final Map mOpTokensByPackage = new HashMap();
+  public final int mUserId;
+  public final Object mOperationsLock = new Object();
+  public final SparseArray mOperations = new SparseArray();
+  public final Map mOpTokensByPackage = new HashMap();
 
-    public LifecycleOperationStorage(int i) {
-        this.mUserId = i;
-    }
+  public LifecycleOperationStorage(int i) {
+    this.mUserId = i;
+  }
 
-    @Override // com.android.server.backup.OperationStorage
-    public void registerOperation(int i, int i2, BackupRestoreTask backupRestoreTask, int i3) {
-        registerOperationForPackages(i, i2, Sets.newHashSet(), backupRestoreTask, i3);
-    }
+  @Override // com.android.server.backup.OperationStorage
+  public void registerOperation(int i, int i2, BackupRestoreTask backupRestoreTask, int i3) {
+    registerOperationForPackages(i, i2, Sets.newHashSet(), backupRestoreTask, i3);
+  }
 
-    @Override // com.android.server.backup.OperationStorage
-    public void registerOperationForPackages(int i, int i2, Set set, BackupRestoreTask backupRestoreTask, int i3) {
-        synchronized (this.mOperationsLock) {
-            this.mOperations.put(i, new Operation(i2, backupRestoreTask, i3));
-            Iterator it = set.iterator();
-            while (it.hasNext()) {
-                String str = (String) it.next();
-                Set set2 = (Set) this.mOpTokensByPackage.get(str);
-                if (set2 == null) {
-                    set2 = new HashSet();
-                }
-                set2.add(Integer.valueOf(i));
-                this.mOpTokensByPackage.put(str, set2);
-            }
+  @Override // com.android.server.backup.OperationStorage
+  public void registerOperationForPackages(
+      int i, int i2, Set set, BackupRestoreTask backupRestoreTask, int i3) {
+    synchronized (this.mOperationsLock) {
+      this.mOperations.put(i, new Operation(i2, backupRestoreTask, i3));
+      Iterator it = set.iterator();
+      while (it.hasNext()) {
+        String str = (String) it.next();
+        Set set2 = (Set) this.mOpTokensByPackage.get(str);
+        if (set2 == null) {
+          set2 = new HashSet();
         }
+        set2.add(Integer.valueOf(i));
+        this.mOpTokensByPackage.put(str, set2);
+      }
     }
+  }
 
-    @Override // com.android.server.backup.OperationStorage
-    public void removeOperation(int i) {
-        synchronized (this.mOperationsLock) {
-            this.mOperations.remove(i);
-            for (String str : this.mOpTokensByPackage.keySet()) {
-                Set set = (Set) this.mOpTokensByPackage.get(str);
-                if (set != null) {
-                    set.remove(Integer.valueOf(i));
-                    this.mOpTokensByPackage.put(str, set);
-                }
-            }
+  @Override // com.android.server.backup.OperationStorage
+  public void removeOperation(int i) {
+    synchronized (this.mOperationsLock) {
+      this.mOperations.remove(i);
+      for (String str : this.mOpTokensByPackage.keySet()) {
+        Set set = (Set) this.mOpTokensByPackage.get(str);
+        if (set != null) {
+          set.remove(Integer.valueOf(i));
+          this.mOpTokensByPackage.put(str, set);
         }
+      }
     }
+  }
 
-    public boolean isBackupOperationInProgress() {
-        synchronized (this.mOperationsLock) {
-            for (int i = 0; i < this.mOperations.size(); i++) {
-                Operation operation = (Operation) this.mOperations.valueAt(i);
-                if (operation.type == 2 && operation.state == 0) {
-                    return true;
-                }
-            }
-            return false;
+  public boolean isBackupOperationInProgress() {
+    synchronized (this.mOperationsLock) {
+      for (int i = 0; i < this.mOperations.size(); i++) {
+        Operation operation = (Operation) this.mOperations.valueAt(i);
+        if (operation.type == 2 && operation.state == 0) {
+          return true;
         }
+      }
+      return false;
     }
+  }
 
-    public Set operationTokensForPackage(String str) {
-        HashSet newHashSet;
-        synchronized (this.mOperationsLock) {
-            Set set = (Set) this.mOpTokensByPackage.get(str);
-            newHashSet = Sets.newHashSet();
-            if (set != null) {
-                newHashSet.addAll(set);
-            }
-        }
-        return newHashSet;
+  public Set operationTokensForPackage(String str) {
+    HashSet newHashSet;
+    synchronized (this.mOperationsLock) {
+      Set set = (Set) this.mOpTokensByPackage.get(str);
+      newHashSet = Sets.newHashSet();
+      if (set != null) {
+        newHashSet.addAll(set);
+      }
     }
+    return newHashSet;
+  }
 
-    public Set operationTokensForOpType(int i) {
-        HashSet newHashSet = Sets.newHashSet();
-        synchronized (this.mOperationsLock) {
-            for (int i2 = 0; i2 < this.mOperations.size(); i2++) {
-                Operation operation = (Operation) this.mOperations.valueAt(i2);
-                int keyAt = this.mOperations.keyAt(i2);
-                if (operation.type == i) {
-                    newHashSet.add(Integer.valueOf(keyAt));
-                }
-            }
+  public Set operationTokensForOpType(int i) {
+    HashSet newHashSet = Sets.newHashSet();
+    synchronized (this.mOperationsLock) {
+      for (int i2 = 0; i2 < this.mOperations.size(); i2++) {
+        Operation operation = (Operation) this.mOperations.valueAt(i2);
+        int keyAt = this.mOperations.keyAt(i2);
+        if (operation.type == i) {
+          newHashSet.add(Integer.valueOf(keyAt));
         }
-        return newHashSet;
+      }
     }
+    return newHashSet;
+  }
 
-    public boolean waitUntilOperationComplete(int i, IntConsumer intConsumer) {
-        Operation operation;
-        int i2;
-        synchronized (this.mOperationsLock) {
-            while (true) {
-                operation = (Operation) this.mOperations.get(i);
-                if (operation != null) {
-                    i2 = operation.state;
-                    if (i2 != 0) {
-                        break;
-                    }
-                    try {
-                        this.mOperationsLock.wait();
-                    } catch (InterruptedException e) {
-                        Slog.w("LifecycleOperationStorage", "Waiting on mOperationsLock: ", e);
-                    }
-                } else {
-                    i2 = 0;
-                    break;
-                }
-            }
-        }
-        removeOperation(i);
+  public boolean waitUntilOperationComplete(int i, IntConsumer intConsumer) {
+    Operation operation;
+    int i2;
+    synchronized (this.mOperationsLock) {
+      while (true) {
+        operation = (Operation) this.mOperations.get(i);
         if (operation != null) {
-            intConsumer.accept(operation.type);
+          i2 = operation.state;
+          if (i2 != 0) {
+            break;
+          }
+          try {
+            this.mOperationsLock.wait();
+          } catch (InterruptedException e) {
+            Slog.w("LifecycleOperationStorage", "Waiting on mOperationsLock: ", e);
+          }
+        } else {
+          i2 = 0;
+          break;
         }
-        return i2 == 1;
+      }
     }
+    removeOperation(i);
+    if (operation != null) {
+      intConsumer.accept(operation.type);
+    }
+    return i2 == 1;
+  }
 
-    public void onOperationComplete(int i, long j, Consumer consumer) {
-        Operation operation;
-        BackupRestoreTask backupRestoreTask;
-        synchronized (this.mOperationsLock) {
-            operation = (Operation) this.mOperations.get(i);
-            if (operation != null) {
-                int i2 = operation.state;
-                if (i2 == -1) {
-                    this.mOperations.remove(i);
-                } else if (i2 == 1) {
-                    Slog.w("LifecycleOperationStorage", "[UserID:" + this.mUserId + "] Received duplicate ack for token=" + Integer.toHexString(i));
-                    this.mOperations.remove(i);
-                } else if (i2 == 0) {
-                    operation.state = 1;
-                }
-                operation = null;
-            }
-            this.mOperationsLock.notifyAll();
+  public void onOperationComplete(int i, long j, Consumer consumer) {
+    Operation operation;
+    BackupRestoreTask backupRestoreTask;
+    synchronized (this.mOperationsLock) {
+      operation = (Operation) this.mOperations.get(i);
+      if (operation != null) {
+        int i2 = operation.state;
+        if (i2 == -1) {
+          this.mOperations.remove(i);
+        } else if (i2 == 1) {
+          Slog.w(
+              "LifecycleOperationStorage",
+              "[UserID:"
+                  + this.mUserId
+                  + "] Received duplicate ack for token="
+                  + Integer.toHexString(i));
+          this.mOperations.remove(i);
+        } else if (i2 == 0) {
+          operation.state = 1;
         }
-        if (operation == null || (backupRestoreTask = operation.callback) == null) {
-            return;
-        }
-        consumer.accept(backupRestoreTask);
+        operation = null;
+      }
+      this.mOperationsLock.notifyAll();
     }
+    if (operation == null || (backupRestoreTask = operation.callback) == null) {
+      return;
+    }
+    consumer.accept(backupRestoreTask);
+  }
 
-    public void cancelOperation(int i, boolean z, IntConsumer intConsumer) {
-        Operation operation;
-        BackupRestoreTask backupRestoreTask;
-        synchronized (this.mOperationsLock) {
-            operation = (Operation) this.mOperations.get(i);
-            int i2 = operation != null ? operation.state : -1;
-            if (i2 == 1) {
-                Slog.w("LifecycleOperationStorage", "[UserID:" + this.mUserId + "] Operation already got an ack.Should have been removed from mCurrentOperations.");
-                this.mOperations.delete(i);
-                operation = null;
-            } else if (i2 == 0) {
-                Slog.v("LifecycleOperationStorage", "[UserID:" + this.mUserId + "] Cancel: token=" + Integer.toHexString(i));
-                operation.state = -1;
-                intConsumer.accept(operation.type);
-            }
-            this.mOperationsLock.notifyAll();
-        }
-        if (operation == null || (backupRestoreTask = operation.callback) == null) {
-            return;
-        }
-        backupRestoreTask.handleCancel(z);
+  public void cancelOperation(int i, boolean z, IntConsumer intConsumer) {
+    Operation operation;
+    BackupRestoreTask backupRestoreTask;
+    synchronized (this.mOperationsLock) {
+      operation = (Operation) this.mOperations.get(i);
+      int i2 = operation != null ? operation.state : -1;
+      if (i2 == 1) {
+        Slog.w(
+            "LifecycleOperationStorage",
+            "[UserID:"
+                + this.mUserId
+                + "] Operation already got an ack.Should have been removed from"
+                + " mCurrentOperations.");
+        this.mOperations.delete(i);
+        operation = null;
+      } else if (i2 == 0) {
+        Slog.v(
+            "LifecycleOperationStorage",
+            "[UserID:" + this.mUserId + "] Cancel: token=" + Integer.toHexString(i));
+        operation.state = -1;
+        intConsumer.accept(operation.type);
+      }
+      this.mOperationsLock.notifyAll();
     }
+    if (operation == null || (backupRestoreTask = operation.callback) == null) {
+      return;
+    }
+    backupRestoreTask.handleCancel(z);
+  }
 }

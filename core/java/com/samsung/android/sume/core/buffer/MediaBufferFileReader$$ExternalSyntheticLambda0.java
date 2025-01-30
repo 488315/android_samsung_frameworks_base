@@ -4,9 +4,10 @@ import java.util.function.Function;
 
 /* compiled from: D8$$SyntheticClass */
 /* loaded from: classes4.dex */
-public final /* synthetic */ class MediaBufferFileReader$$ExternalSyntheticLambda0 implements Function {
-    @Override // java.util.function.Function
-    public final Object apply(Object obj) {
-        return Integer.valueOf((String) obj);
-    }
+public final /* synthetic */ class MediaBufferFileReader$$ExternalSyntheticLambda0
+    implements Function {
+  @Override // java.util.function.Function
+  public final Object apply(Object obj) {
+    return Integer.valueOf((String) obj);
+  }
 }

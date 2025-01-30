@@ -8,92 +8,92 @@ import com.android.internal.org.bouncycastle.asn1.ASN1TaggedObject;
 import com.android.internal.org.bouncycastle.asn1.DERBitString;
 import com.android.internal.org.bouncycastle.asn1.DERSequence;
 import com.android.internal.org.bouncycastle.asn1.x500.X500Name;
-import com.android.internal.org.bouncycastle.asn1.x509.TBSCertList;
 import java.util.Enumeration;
 
 /* loaded from: classes5.dex */
 public class CertificateList extends ASN1Object {
-    int hashCodeValue;
-    boolean isHashCodeSet = false;
-    DERBitString sig;
-    AlgorithmIdentifier sigAlgId;
-    TBSCertList tbsCertList;
+  int hashCodeValue;
+  boolean isHashCodeSet = false;
+  DERBitString sig;
+  AlgorithmIdentifier sigAlgId;
+  TBSCertList tbsCertList;
 
-    public static CertificateList getInstance(ASN1TaggedObject obj, boolean explicit) {
-        return getInstance(ASN1Sequence.getInstance(obj, explicit));
-    }
+  public static CertificateList getInstance(ASN1TaggedObject obj, boolean explicit) {
+    return getInstance(ASN1Sequence.getInstance(obj, explicit));
+  }
 
-    public static CertificateList getInstance(Object obj) {
-        if (obj instanceof CertificateList) {
-            return (CertificateList) obj;
-        }
-        if (obj != null) {
-            return new CertificateList(ASN1Sequence.getInstance(obj));
-        }
-        return null;
+  public static CertificateList getInstance(Object obj) {
+    if (obj instanceof CertificateList) {
+      return (CertificateList) obj;
     }
+    if (obj != null) {
+      return new CertificateList(ASN1Sequence.getInstance(obj));
+    }
+    return null;
+  }
 
-    public CertificateList(ASN1Sequence seq) {
-        if (seq.size() == 3) {
-            this.tbsCertList = TBSCertList.getInstance(seq.getObjectAt(0));
-            this.sigAlgId = AlgorithmIdentifier.getInstance(seq.getObjectAt(1));
-            this.sig = DERBitString.getInstance(seq.getObjectAt(2));
-            return;
-        }
-        throw new IllegalArgumentException("sequence wrong size for CertificateList");
+  public CertificateList(ASN1Sequence seq) {
+    if (seq.size() == 3) {
+      this.tbsCertList = TBSCertList.getInstance(seq.getObjectAt(0));
+      this.sigAlgId = AlgorithmIdentifier.getInstance(seq.getObjectAt(1));
+      this.sig = DERBitString.getInstance(seq.getObjectAt(2));
+      return;
     }
+    throw new IllegalArgumentException("sequence wrong size for CertificateList");
+  }
 
-    public TBSCertList getTBSCertList() {
-        return this.tbsCertList;
-    }
+  public TBSCertList getTBSCertList() {
+    return this.tbsCertList;
+  }
 
-    public TBSCertList.CRLEntry[] getRevokedCertificates() {
-        return this.tbsCertList.getRevokedCertificates();
-    }
+  public TBSCertList.CRLEntry[] getRevokedCertificates() {
+    return this.tbsCertList.getRevokedCertificates();
+  }
 
-    public Enumeration getRevokedCertificateEnumeration() {
-        return this.tbsCertList.getRevokedCertificateEnumeration();
-    }
+  public Enumeration getRevokedCertificateEnumeration() {
+    return this.tbsCertList.getRevokedCertificateEnumeration();
+  }
 
-    public AlgorithmIdentifier getSignatureAlgorithm() {
-        return this.sigAlgId;
-    }
+  public AlgorithmIdentifier getSignatureAlgorithm() {
+    return this.sigAlgId;
+  }
 
-    public DERBitString getSignature() {
-        return this.sig;
-    }
+  public DERBitString getSignature() {
+    return this.sig;
+  }
 
-    public int getVersionNumber() {
-        return this.tbsCertList.getVersionNumber();
-    }
+  public int getVersionNumber() {
+    return this.tbsCertList.getVersionNumber();
+  }
 
-    public X500Name getIssuer() {
-        return this.tbsCertList.getIssuer();
-    }
+  public X500Name getIssuer() {
+    return this.tbsCertList.getIssuer();
+  }
 
-    public Time getThisUpdate() {
-        return this.tbsCertList.getThisUpdate();
-    }
+  public Time getThisUpdate() {
+    return this.tbsCertList.getThisUpdate();
+  }
 
-    public Time getNextUpdate() {
-        return this.tbsCertList.getNextUpdate();
-    }
+  public Time getNextUpdate() {
+    return this.tbsCertList.getNextUpdate();
+  }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object, com.android.internal.org.bouncycastle.asn1.ASN1Encodable
-    public ASN1Primitive toASN1Primitive() {
-        ASN1EncodableVector v = new ASN1EncodableVector(3);
-        v.add(this.tbsCertList);
-        v.add(this.sigAlgId);
-        v.add(this.sig);
-        return new DERSequence(v);
-    }
+  @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object,
+            // com.android.internal.org.bouncycastle.asn1.ASN1Encodable
+  public ASN1Primitive toASN1Primitive() {
+    ASN1EncodableVector v = new ASN1EncodableVector(3);
+    v.add(this.tbsCertList);
+    v.add(this.sigAlgId);
+    v.add(this.sig);
+    return new DERSequence(v);
+  }
 
-    @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object
-    public int hashCode() {
-        if (!this.isHashCodeSet) {
-            this.hashCodeValue = super.hashCode();
-            this.isHashCodeSet = true;
-        }
-        return this.hashCodeValue;
+  @Override // com.android.internal.org.bouncycastle.asn1.ASN1Object
+  public int hashCode() {
+    if (!this.isHashCodeSet) {
+      this.hashCodeValue = super.hashCode();
+      this.isHashCodeSet = true;
     }
+    return this.hashCodeValue;
+  }
 }

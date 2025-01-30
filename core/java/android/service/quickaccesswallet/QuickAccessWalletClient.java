@@ -10,63 +10,70 @@ import java.util.concurrent.Executor;
 /* loaded from: classes3.dex */
 public interface QuickAccessWalletClient extends Closeable {
 
-    public interface OnWalletCardsRetrievedCallback {
-        void onWalletCardRetrievalError(GetWalletCardsError getWalletCardsError);
+  public interface OnWalletCardsRetrievedCallback {
+    void onWalletCardRetrievalError(GetWalletCardsError getWalletCardsError);
 
-        void onWalletCardsRetrieved(GetWalletCardsResponse getWalletCardsResponse);
-    }
+    void onWalletCardsRetrieved(GetWalletCardsResponse getWalletCardsResponse);
+  }
 
-    public interface WalletPendingIntentCallback {
-        void onWalletPendingIntentRetrieved(PendingIntent pendingIntent);
-    }
+  public interface WalletPendingIntentCallback {
+    void onWalletPendingIntentRetrieved(PendingIntent pendingIntent);
+  }
 
-    public interface WalletServiceEventListener {
-        void onWalletServiceEvent(WalletServiceEvent walletServiceEvent);
-    }
+  public interface WalletServiceEventListener {
+    void onWalletServiceEvent(WalletServiceEvent walletServiceEvent);
+  }
 
-    void addWalletServiceEventListener(WalletServiceEventListener walletServiceEventListener);
+  void addWalletServiceEventListener(WalletServiceEventListener walletServiceEventListener);
 
-    void addWalletServiceEventListener(Executor executor, WalletServiceEventListener walletServiceEventListener);
+  void addWalletServiceEventListener(
+      Executor executor, WalletServiceEventListener walletServiceEventListener);
 
-    Intent createWalletIntent();
+  Intent createWalletIntent();
 
-    Intent createWalletSettingsIntent();
+  Intent createWalletSettingsIntent();
 
-    void disconnect();
+  void disconnect();
 
-    Drawable getLogo();
+  Drawable getLogo();
 
-    CharSequence getServiceLabel();
+  CharSequence getServiceLabel();
 
-    CharSequence getShortcutLongLabel();
+  CharSequence getShortcutLongLabel();
 
-    CharSequence getShortcutShortLabel();
+  CharSequence getShortcutShortLabel();
 
-    Drawable getTileIcon();
+  Drawable getTileIcon();
 
-    void getWalletCards(GetWalletCardsRequest getWalletCardsRequest, OnWalletCardsRetrievedCallback onWalletCardsRetrievedCallback);
+  void getWalletCards(
+      GetWalletCardsRequest getWalletCardsRequest,
+      OnWalletCardsRetrievedCallback onWalletCardsRetrievedCallback);
 
-    void getWalletCards(Executor executor, GetWalletCardsRequest getWalletCardsRequest, OnWalletCardsRetrievedCallback onWalletCardsRetrievedCallback);
+  void getWalletCards(
+      Executor executor,
+      GetWalletCardsRequest getWalletCardsRequest,
+      OnWalletCardsRetrievedCallback onWalletCardsRetrievedCallback);
 
-    void getWalletPendingIntent(Executor executor, WalletPendingIntentCallback walletPendingIntentCallback);
+  void getWalletPendingIntent(
+      Executor executor, WalletPendingIntentCallback walletPendingIntentCallback);
 
-    boolean isWalletFeatureAvailable();
+  boolean isWalletFeatureAvailable();
 
-    boolean isWalletFeatureAvailableWhenDeviceLocked();
+  boolean isWalletFeatureAvailableWhenDeviceLocked();
 
-    boolean isWalletServiceAvailable();
+  boolean isWalletServiceAvailable();
 
-    void notifyWalletDismissed();
+  void notifyWalletDismissed();
 
-    void removeWalletServiceEventListener(WalletServiceEventListener walletServiceEventListener);
+  void removeWalletServiceEventListener(WalletServiceEventListener walletServiceEventListener);
 
-    void selectWalletCard(SelectWalletCardRequest selectWalletCardRequest);
+  void selectWalletCard(SelectWalletCardRequest selectWalletCardRequest);
 
-    static QuickAccessWalletClient create(Context context) {
-        return create(context, null);
-    }
+  static QuickAccessWalletClient create(Context context) {
+    return create(context, null);
+  }
 
-    static QuickAccessWalletClient create(Context context, Executor bgExecutor) {
-        return new QuickAccessWalletClientImpl(context, bgExecutor);
-    }
+  static QuickAccessWalletClient create(Context context, Executor bgExecutor) {
+    return new QuickAccessWalletClientImpl(context, bgExecutor);
+  }
 }

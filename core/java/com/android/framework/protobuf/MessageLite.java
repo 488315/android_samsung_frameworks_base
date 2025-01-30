@@ -7,58 +7,65 @@ import java.io.OutputStream;
 /* loaded from: classes4.dex */
 public interface MessageLite extends MessageLiteOrBuilder {
 
-    public interface Builder extends MessageLiteOrBuilder, Cloneable {
-        MessageLite build();
+  public interface Builder extends MessageLiteOrBuilder, Cloneable {
+    MessageLite build();
 
-        MessageLite buildPartial();
+    MessageLite buildPartial();
 
-        Builder clear();
+    Builder clear();
 
-        /* renamed from: clone */
-        Builder mo7494clone();
+    /* renamed from: clone */
+    Builder mo7494clone();
 
-        boolean mergeDelimitedFrom(InputStream inputStream) throws IOException;
+    boolean mergeDelimitedFrom(InputStream inputStream) throws IOException;
 
-        boolean mergeDelimitedFrom(InputStream inputStream, ExtensionRegistryLite extensionRegistryLite) throws IOException;
+    boolean mergeDelimitedFrom(InputStream inputStream, ExtensionRegistryLite extensionRegistryLite)
+        throws IOException;
 
-        Builder mergeFrom(ByteString byteString) throws InvalidProtocolBufferException;
+    Builder mergeFrom(ByteString byteString) throws InvalidProtocolBufferException;
 
-        Builder mergeFrom(ByteString byteString, ExtensionRegistryLite extensionRegistryLite) throws InvalidProtocolBufferException;
+    Builder mergeFrom(ByteString byteString, ExtensionRegistryLite extensionRegistryLite)
+        throws InvalidProtocolBufferException;
 
-        Builder mergeFrom(CodedInputStream codedInputStream) throws IOException;
+    Builder mergeFrom(CodedInputStream codedInputStream) throws IOException;
 
-        Builder mergeFrom(CodedInputStream codedInputStream, ExtensionRegistryLite extensionRegistryLite) throws IOException;
+    Builder mergeFrom(
+        CodedInputStream codedInputStream, ExtensionRegistryLite extensionRegistryLite)
+        throws IOException;
 
-        Builder mergeFrom(MessageLite messageLite);
+    Builder mergeFrom(MessageLite messageLite);
 
-        Builder mergeFrom(InputStream inputStream) throws IOException;
+    Builder mergeFrom(InputStream inputStream) throws IOException;
 
-        Builder mergeFrom(InputStream inputStream, ExtensionRegistryLite extensionRegistryLite) throws IOException;
+    Builder mergeFrom(InputStream inputStream, ExtensionRegistryLite extensionRegistryLite)
+        throws IOException;
 
-        Builder mergeFrom(byte[] bArr) throws InvalidProtocolBufferException;
+    Builder mergeFrom(byte[] bArr) throws InvalidProtocolBufferException;
 
-        Builder mergeFrom(byte[] bArr, int i, int i2) throws InvalidProtocolBufferException;
+    Builder mergeFrom(byte[] bArr, int i, int i2) throws InvalidProtocolBufferException;
 
-        Builder mergeFrom(byte[] bArr, int i, int i2, ExtensionRegistryLite extensionRegistryLite) throws InvalidProtocolBufferException;
+    Builder mergeFrom(byte[] bArr, int i, int i2, ExtensionRegistryLite extensionRegistryLite)
+        throws InvalidProtocolBufferException;
 
-        Builder mergeFrom(byte[] bArr, ExtensionRegistryLite extensionRegistryLite) throws InvalidProtocolBufferException;
-    }
+    Builder mergeFrom(byte[] bArr, ExtensionRegistryLite extensionRegistryLite)
+        throws InvalidProtocolBufferException;
+  }
 
-    Parser<? extends MessageLite> getParserForType();
+  Parser<? extends MessageLite> getParserForType();
 
-    int getSerializedSize();
+  int getSerializedSize();
 
-    Builder newBuilderForType();
+  Builder newBuilderForType();
 
-    Builder toBuilder();
+  Builder toBuilder();
 
-    byte[] toByteArray();
+  byte[] toByteArray();
 
-    ByteString toByteString();
+  ByteString toByteString();
 
-    void writeDelimitedTo(OutputStream outputStream) throws IOException;
+  void writeDelimitedTo(OutputStream outputStream) throws IOException;
 
-    void writeTo(CodedOutputStream codedOutputStream) throws IOException;
+  void writeTo(CodedOutputStream codedOutputStream) throws IOException;
 
-    void writeTo(OutputStream outputStream) throws IOException;
+  void writeTo(OutputStream outputStream) throws IOException;
 }

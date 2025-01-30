@@ -7,33 +7,34 @@ import android.util.Slog;
 
 /* loaded from: classes.dex */
 public abstract class BackupObserverUtils {
-    public static void sendBackupOnUpdate(IBackupObserver iBackupObserver, String str, BackupProgress backupProgress) {
-        if (iBackupObserver != null) {
-            try {
-                iBackupObserver.onUpdate(str, backupProgress);
-            } catch (RemoteException unused) {
-                Slog.w("BackupManagerService", "Backup observer went away: onUpdate");
-            }
-        }
+  public static void sendBackupOnUpdate(
+      IBackupObserver iBackupObserver, String str, BackupProgress backupProgress) {
+    if (iBackupObserver != null) {
+      try {
+        iBackupObserver.onUpdate(str, backupProgress);
+      } catch (RemoteException unused) {
+        Slog.w("BackupManagerService", "Backup observer went away: onUpdate");
+      }
     }
+  }
 
-    public static void sendBackupOnPackageResult(IBackupObserver iBackupObserver, String str, int i) {
-        if (iBackupObserver != null) {
-            try {
-                iBackupObserver.onResult(str, i);
-            } catch (RemoteException unused) {
-                Slog.w("BackupManagerService", "Backup observer went away: onResult");
-            }
-        }
+  public static void sendBackupOnPackageResult(IBackupObserver iBackupObserver, String str, int i) {
+    if (iBackupObserver != null) {
+      try {
+        iBackupObserver.onResult(str, i);
+      } catch (RemoteException unused) {
+        Slog.w("BackupManagerService", "Backup observer went away: onResult");
+      }
     }
+  }
 
-    public static void sendBackupFinished(IBackupObserver iBackupObserver, int i) {
-        if (iBackupObserver != null) {
-            try {
-                iBackupObserver.backupFinished(i);
-            } catch (RemoteException unused) {
-                Slog.w("BackupManagerService", "Backup observer went away: backupFinished");
-            }
-        }
+  public static void sendBackupFinished(IBackupObserver iBackupObserver, int i) {
+    if (iBackupObserver != null) {
+      try {
+        iBackupObserver.backupFinished(i);
+      } catch (RemoteException unused) {
+        Slog.w("BackupManagerService", "Backup observer went away: backupFinished");
+      }
     }
+  }
 }

@@ -5,13 +5,10 @@ import android.p009os.Handler;
 
 /* loaded from: classes4.dex */
 public class SslErrorHandler extends Handler {
-    @SystemApi
-    public SslErrorHandler() {
-    }
+  @SystemApi
+  public SslErrorHandler() {}
 
-    public void proceed() {
-    }
+  public void proceed() {}
 
-    public void cancel() {
-    }
+  public void cancel() {}
 }

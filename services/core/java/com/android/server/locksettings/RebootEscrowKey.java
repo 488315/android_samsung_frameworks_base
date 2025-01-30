@@ -9,31 +9,31 @@ import javax.crypto.spec.SecretKeySpec;
 
 /* loaded from: classes2.dex */
 public class RebootEscrowKey {
-    public final SecretKey mKey;
+  public final SecretKey mKey;
 
-    public RebootEscrowKey(SecretKey secretKey) {
-        this.mKey = secretKey;
-    }
+  public RebootEscrowKey(SecretKey secretKey) {
+    this.mKey = secretKey;
+  }
 
-    public static RebootEscrowKey fromKeyBytes(byte[] bArr) {
-        return new RebootEscrowKey(new SecretKeySpec(bArr, "AES"));
-    }
+  public static RebootEscrowKey fromKeyBytes(byte[] bArr) {
+    return new RebootEscrowKey(new SecretKeySpec(bArr, "AES"));
+  }
 
-    public static RebootEscrowKey generate() {
-        try {
-            KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-            keyGenerator.init(256, new SecureRandom());
-            return new RebootEscrowKey(keyGenerator.generateKey());
-        } catch (NoSuchAlgorithmException e) {
-            throw new IOException("Could not generate new secret key", e);
-        }
+  public static RebootEscrowKey generate() {
+    try {
+      KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+      keyGenerator.init(256, new SecureRandom());
+      return new RebootEscrowKey(keyGenerator.generateKey());
+    } catch (NoSuchAlgorithmException e) {
+      throw new IOException("Could not generate new secret key", e);
     }
+  }
 
-    public SecretKey getKey() {
-        return this.mKey;
-    }
+  public SecretKey getKey() {
+    return this.mKey;
+  }
 
-    public byte[] getKeyBytes() {
-        return this.mKey.getEncoded();
-    }
+  public byte[] getKeyBytes() {
+    return this.mKey.getEncoded();
+  }
 }

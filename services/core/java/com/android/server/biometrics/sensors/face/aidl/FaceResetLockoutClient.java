@@ -17,67 +17,91 @@ import java.util.function.Supplier;
 
 /* loaded from: classes.dex */
 public class FaceResetLockoutClient extends HalClientMonitor implements ErrorConsumer {
-    public final int mBiometricStrength;
-    public final HardwareAuthToken mHardwareAuthToken;
-    public final LockoutCache mLockoutCache;
-    public final LockoutResetDispatcher mLockoutResetDispatcher;
+  public final int mBiometricStrength;
+  public final HardwareAuthToken mHardwareAuthToken;
+  public final LockoutCache mLockoutCache;
+  public final LockoutResetDispatcher mLockoutResetDispatcher;
 
-    @Override // com.android.server.biometrics.sensors.BaseClientMonitor
-    public int getProtoEnum() {
-        return 12;
-    }
+  @Override // com.android.server.biometrics.sensors.BaseClientMonitor
+  public int getProtoEnum() {
+    return 12;
+  }
 
-    @Override // com.android.server.biometrics.sensors.BaseClientMonitor
-    public boolean interruptsPrecedingClients() {
-        return false;
-    }
+  @Override // com.android.server.biometrics.sensors.BaseClientMonitor
+  public boolean interruptsPrecedingClients() {
+    return false;
+  }
 
-    @Override // com.android.server.biometrics.sensors.HalClientMonitor
-    public void unableToStart() {
-    }
+  @Override // com.android.server.biometrics.sensors.HalClientMonitor
+  public void unableToStart() {}
 
-    public FaceResetLockoutClient(Context context, Supplier supplier, int i, String str, int i2, BiometricLogger biometricLogger, BiometricContext biometricContext, byte[] bArr, LockoutCache lockoutCache, LockoutResetDispatcher lockoutResetDispatcher, int i3) {
-        super(context, supplier, null, null, i, str, 0, i2, biometricLogger, biometricContext);
-        if (bArr != null) {
-            this.mHardwareAuthToken = HardwareAuthTokenUtils.toHardwareAuthToken(bArr);
-        } else {
-            this.mHardwareAuthToken = null;
-        }
-        this.mLockoutCache = lockoutCache;
-        this.mLockoutResetDispatcher = lockoutResetDispatcher;
-        this.mBiometricStrength = i3;
+  public FaceResetLockoutClient(
+      Context context,
+      Supplier supplier,
+      int i,
+      String str,
+      int i2,
+      BiometricLogger biometricLogger,
+      BiometricContext biometricContext,
+      byte[] bArr,
+      LockoutCache lockoutCache,
+      LockoutResetDispatcher lockoutResetDispatcher,
+      int i3) {
+    super(context, supplier, null, null, i, str, 0, i2, biometricLogger, biometricContext);
+    if (bArr != null) {
+      this.mHardwareAuthToken = HardwareAuthTokenUtils.toHardwareAuthToken(bArr);
+    } else {
+      this.mHardwareAuthToken = null;
     }
+    this.mLockoutCache = lockoutCache;
+    this.mLockoutResetDispatcher = lockoutResetDispatcher;
+    this.mBiometricStrength = i3;
+  }
 
-    @Override // com.android.server.biometrics.sensors.BaseClientMonitor
-    public void start(ClientMonitorCallback clientMonitorCallback) {
-        super.start(clientMonitorCallback);
-        startHalOperation();
-    }
+  @Override // com.android.server.biometrics.sensors.BaseClientMonitor
+  public void start(ClientMonitorCallback clientMonitorCallback) {
+    super.start(clientMonitorCallback);
+    startHalOperation();
+  }
 
-    @Override // com.android.server.biometrics.sensors.HalClientMonitor
-    public void startHalOperation() {
-        try {
-            ((AidlSession) getFreshDaemon()).resetLockout(this.mHardwareAuthToken);
-        } catch (RemoteException e) {
-            Slog.e("FaceResetLockoutClient", "Unable to reset lockout", e);
-            this.mCallback.onClientFinished(this, false);
-        }
+  @Override // com.android.server.biometrics.sensors.HalClientMonitor
+  public void startHalOperation() {
+    try {
+      ((AidlSession) getFreshDaemon()).resetLockout(this.mHardwareAuthToken);
+    } catch (RemoteException e) {
+      Slog.e("FaceResetLockoutClient", "Unable to reset lockout", e);
+      this.mCallback.onClientFinished(this, false);
     }
+  }
 
-    public void onLockoutCleared() {
-        resetLocalLockoutStateToNone(getSensorId(), getTargetUserId(), this.mLockoutCache, this.mLockoutResetDispatcher, getBiometricContext().getAuthSessionCoordinator(), this.mBiometricStrength, getRequestId());
-        this.mCallback.onClientFinished(this, true);
-    }
+  public void onLockoutCleared() {
+    resetLocalLockoutStateToNone(
+        getSensorId(),
+        getTargetUserId(),
+        this.mLockoutCache,
+        this.mLockoutResetDispatcher,
+        getBiometricContext().getAuthSessionCoordinator(),
+        this.mBiometricStrength,
+        getRequestId());
+    this.mCallback.onClientFinished(this, true);
+  }
 
-    public static void resetLocalLockoutStateToNone(int i, int i2, LockoutCache lockoutCache, LockoutResetDispatcher lockoutResetDispatcher, AuthSessionCoordinator authSessionCoordinator, int i3, long j) {
-        authSessionCoordinator.resetLockoutFor(i2, i3, j);
-        lockoutCache.setLockoutModeForUser(i2, 0);
-        lockoutResetDispatcher.notifyLockoutResetCallbacks(i);
-    }
+  public static void resetLocalLockoutStateToNone(
+      int i,
+      int i2,
+      LockoutCache lockoutCache,
+      LockoutResetDispatcher lockoutResetDispatcher,
+      AuthSessionCoordinator authSessionCoordinator,
+      int i3,
+      long j) {
+    authSessionCoordinator.resetLockoutFor(i2, i3, j);
+    lockoutCache.setLockoutModeForUser(i2, 0);
+    lockoutResetDispatcher.notifyLockoutResetCallbacks(i);
+  }
 
-    @Override // com.android.server.biometrics.sensors.ErrorConsumer
-    public void onError(int i, int i2) {
-        Slog.e("FaceResetLockoutClient", "Error during resetLockout: " + i);
-        this.mCallback.onClientFinished(this, false);
-    }
+  @Override // com.android.server.biometrics.sensors.ErrorConsumer
+  public void onError(int i, int i2) {
+    Slog.e("FaceResetLockoutClient", "Error during resetLockout: " + i);
+    this.mCallback.onClientFinished(this, false);
+  }
 }

@@ -8,32 +8,31 @@ import java.io.OutputStream;
 
 /* loaded from: classes5.dex */
 public class CMSAbsentContent implements CMSTypedData, CMSReadable {
-    private final ASN1ObjectIdentifier type;
+  private final ASN1ObjectIdentifier type;
 
-    public CMSAbsentContent() {
-        this(CMSObjectIdentifiers.data);
-    }
+  public CMSAbsentContent() {
+    this(CMSObjectIdentifiers.data);
+  }
 
-    public CMSAbsentContent(ASN1ObjectIdentifier type) {
-        this.type = type;
-    }
+  public CMSAbsentContent(ASN1ObjectIdentifier type) {
+    this.type = type;
+  }
 
-    @Override // com.android.internal.org.bouncycastle.cms.CMSReadable
-    public InputStream getInputStream() {
-        return null;
-    }
+  @Override // com.android.internal.org.bouncycastle.cms.CMSReadable
+  public InputStream getInputStream() {
+    return null;
+  }
 
-    @Override // com.android.internal.org.bouncycastle.cms.CMSProcessable
-    public void write(OutputStream zOut) throws IOException, CMSException {
-    }
+  @Override // com.android.internal.org.bouncycastle.cms.CMSProcessable
+  public void write(OutputStream zOut) throws IOException, CMSException {}
 
-    @Override // com.android.internal.org.bouncycastle.cms.CMSProcessable
-    public Object getContent() {
-        return null;
-    }
+  @Override // com.android.internal.org.bouncycastle.cms.CMSProcessable
+  public Object getContent() {
+    return null;
+  }
 
-    @Override // com.android.internal.org.bouncycastle.cms.CMSTypedData
-    public ASN1ObjectIdentifier getContentType() {
-        return this.type;
-    }
+  @Override // com.android.internal.org.bouncycastle.cms.CMSTypedData
+  public ASN1ObjectIdentifier getContentType() {
+    return this.type;
+  }
 }

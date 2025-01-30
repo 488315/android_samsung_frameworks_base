@@ -28,41 +28,55 @@ import javax.crypto.SecretKeyFactory;
 
 /* loaded from: classes5.dex */
 public interface JcaJceHelper {
-    AlgorithmParameterGenerator createAlgorithmParameterGenerator(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
+  AlgorithmParameterGenerator createAlgorithmParameterGenerator(String str)
+      throws NoSuchAlgorithmException, NoSuchProviderException;
 
-    AlgorithmParameters createAlgorithmParameters(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
+  AlgorithmParameters createAlgorithmParameters(String str)
+      throws NoSuchAlgorithmException, NoSuchProviderException;
 
-    CertPathBuilder createCertPathBuilder(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
+  CertPathBuilder createCertPathBuilder(String str)
+      throws NoSuchAlgorithmException, NoSuchProviderException;
 
-    CertPathValidator createCertPathValidator(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
+  CertPathValidator createCertPathValidator(String str)
+      throws NoSuchAlgorithmException, NoSuchProviderException;
 
-    CertStore createCertStore(String str, CertStoreParameters certStoreParameters) throws NoSuchAlgorithmException, InvalidAlgorithmParameterException, NoSuchProviderException;
+  CertStore createCertStore(String str, CertStoreParameters certStoreParameters)
+      throws NoSuchAlgorithmException, InvalidAlgorithmParameterException, NoSuchProviderException;
 
-    CertificateFactory createCertificateFactory(String str) throws NoSuchProviderException, CertificateException;
+  CertificateFactory createCertificateFactory(String str)
+      throws NoSuchProviderException, CertificateException;
 
-    Cipher createCipher(String str) throws NoSuchAlgorithmException, NoSuchPaddingException, NoSuchProviderException;
+  Cipher createCipher(String str)
+      throws NoSuchAlgorithmException, NoSuchPaddingException, NoSuchProviderException;
 
-    MessageDigest createDigest(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
+  MessageDigest createDigest(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
 
-    ExemptionMechanism createExemptionMechanism(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
+  ExemptionMechanism createExemptionMechanism(String str)
+      throws NoSuchAlgorithmException, NoSuchProviderException;
 
-    KeyAgreement createKeyAgreement(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
+  KeyAgreement createKeyAgreement(String str)
+      throws NoSuchAlgorithmException, NoSuchProviderException;
 
-    KeyFactory createKeyFactory(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
+  KeyFactory createKeyFactory(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
 
-    KeyGenerator createKeyGenerator(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
+  KeyGenerator createKeyGenerator(String str)
+      throws NoSuchAlgorithmException, NoSuchProviderException;
 
-    KeyPairGenerator createKeyPairGenerator(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
+  KeyPairGenerator createKeyPairGenerator(String str)
+      throws NoSuchAlgorithmException, NoSuchProviderException;
 
-    KeyStore createKeyStore(String str) throws KeyStoreException, NoSuchProviderException;
+  KeyStore createKeyStore(String str) throws KeyStoreException, NoSuchProviderException;
 
-    Mac createMac(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
+  Mac createMac(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
 
-    MessageDigest createMessageDigest(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
+  MessageDigest createMessageDigest(String str)
+      throws NoSuchAlgorithmException, NoSuchProviderException;
 
-    SecretKeyFactory createSecretKeyFactory(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
+  SecretKeyFactory createSecretKeyFactory(String str)
+      throws NoSuchAlgorithmException, NoSuchProviderException;
 
-    SecureRandom createSecureRandom(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
+  SecureRandom createSecureRandom(String str)
+      throws NoSuchAlgorithmException, NoSuchProviderException;
 
-    Signature createSignature(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
+  Signature createSignature(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
 }

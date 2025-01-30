@@ -8,6 +8,6 @@ import java.util.Collection;
 
 /* loaded from: classes5.dex */
 public interface PKIXCRLStore<T extends CRL> extends Store<T> {
-    @Override // com.android.internal.org.bouncycastle.util.Store
-    Collection<T> getMatches(Selector<T> selector) throws StoreException;
+  @Override // com.android.internal.org.bouncycastle.util.Store
+  Collection<T> getMatches(Selector<T> selector) throws StoreException;
 }

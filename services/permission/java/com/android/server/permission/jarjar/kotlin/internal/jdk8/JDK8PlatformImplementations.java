@@ -4,5 +4,4 @@ import com.android.server.permission.jarjar.kotlin.internal.jdk7.JDK7PlatformImp
 
 /* compiled from: JDK8PlatformImplementations.kt */
 /* loaded from: classes2.dex */
-public class JDK8PlatformImplementations extends JDK7PlatformImplementations {
-}
+public class JDK8PlatformImplementations extends JDK7PlatformImplementations {}

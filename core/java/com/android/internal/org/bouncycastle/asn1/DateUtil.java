@@ -9,52 +9,51 @@ import java.util.Map;
 
 /* loaded from: classes5.dex */
 class DateUtil {
-    private static Long ZERO = longValueOf(0);
-    private static final Map localeCache = new HashMap();
-    static Locale EN_Locale = forEN();
+  private static Long ZERO = longValueOf(0);
+  private static final Map localeCache = new HashMap();
+  static Locale EN_Locale = forEN();
 
-    DateUtil() {
-    }
+  DateUtil() {}
 
-    private static Locale forEN() {
-        if ("en".equalsIgnoreCase(Locale.getDefault().getLanguage())) {
-            return Locale.getDefault();
-        }
-        Locale[] locales = Locale.getAvailableLocales();
-        for (int i = 0; i != locales.length; i++) {
-            if ("en".equalsIgnoreCase(locales[i].getLanguage())) {
-                return locales[i];
-            }
-        }
-        return Locale.getDefault();
+  private static Locale forEN() {
+    if ("en".equalsIgnoreCase(Locale.getDefault().getLanguage())) {
+      return Locale.getDefault();
     }
+    Locale[] locales = Locale.getAvailableLocales();
+    for (int i = 0; i != locales.length; i++) {
+      if ("en".equalsIgnoreCase(locales[i].getLanguage())) {
+        return locales[i];
+      }
+    }
+    return Locale.getDefault();
+  }
 
-    static Date epochAdjust(Date date) throws ParseException {
-        Locale locale = Locale.getDefault();
-        if (locale == null) {
-            return date;
-        }
-        Map map = localeCache;
-        synchronized (map) {
-            Long adj = (Long) map.get(locale);
-            if (adj == null) {
-                SimpleDateFormat dateF = new SimpleDateFormat("yyyyMMddHHmmssz");
-                long v = dateF.parse("19700101000000GMT+00:00").getTime();
-                if (v == 0) {
-                    adj = ZERO;
-                } else {
-                    adj = longValueOf(v);
-                }
-                map.put(locale, adj);
-            }
-            if (adj == ZERO) {
-                return date;
-            }
-            return new Date(date.getTime() - adj.longValue());
-        }
+  static Date epochAdjust(Date date) throws ParseException {
+    Locale locale = Locale.getDefault();
+    if (locale == null) {
+      return date;
     }
+    Map map = localeCache;
+    synchronized (map) {
+      Long adj = (Long) map.get(locale);
+      if (adj == null) {
+        SimpleDateFormat dateF = new SimpleDateFormat("yyyyMMddHHmmssz");
+        long v = dateF.parse("19700101000000GMT+00:00").getTime();
+        if (v == 0) {
+          adj = ZERO;
+        } else {
+          adj = longValueOf(v);
+        }
+        map.put(locale, adj);
+      }
+      if (adj == ZERO) {
+        return date;
+      }
+      return new Date(date.getTime() - adj.longValue());
+    }
+  }
 
-    private static Long longValueOf(long v) {
-        return Long.valueOf(v);
-    }
+  private static Long longValueOf(long v) {
+    return Long.valueOf(v);
+  }
 }

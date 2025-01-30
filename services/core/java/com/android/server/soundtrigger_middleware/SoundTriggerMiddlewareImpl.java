@@ -8,52 +8,55 @@ import java.util.ArrayList;
 
 /* loaded from: classes3.dex */
 public class SoundTriggerMiddlewareImpl implements ISoundTriggerMiddlewareInternal {
-    public final SoundTriggerModule[] mModules;
+  public final SoundTriggerModule[] mModules;
 
-    public abstract class AudioSessionProvider {
-        public abstract AudioSession acquireSession();
+  public abstract class AudioSessionProvider {
+    public abstract AudioSession acquireSession();
 
-        public abstract void releaseSession(int i);
+    public abstract void releaseSession(int i);
 
-        public final class AudioSession {
-            public final int mDeviceHandle;
-            public final int mIoHandle;
-            public final int mSessionHandle;
+    public final class AudioSession {
+      public final int mDeviceHandle;
+      public final int mIoHandle;
+      public final int mSessionHandle;
 
-            public AudioSession(int i, int i2, int i3) {
-                this.mSessionHandle = i;
-                this.mIoHandle = i2;
-                this.mDeviceHandle = i3;
-            }
-        }
+      public AudioSession(int i, int i2, int i3) {
+        this.mSessionHandle = i;
+        this.mIoHandle = i2;
+        this.mDeviceHandle = i3;
+      }
     }
+  }
 
-    public SoundTriggerMiddlewareImpl(HalFactory[] halFactoryArr, AudioSessionProvider audioSessionProvider) {
-        ArrayList arrayList = new ArrayList(halFactoryArr.length);
-        for (HalFactory halFactory : halFactoryArr) {
-            try {
-                arrayList.add(new SoundTriggerModule(halFactory, audioSessionProvider));
-            } catch (Exception e) {
-                Log.e("SoundTriggerMiddlewareImpl", "Failed to add a SoundTriggerModule instance", e);
-            }
-        }
-        this.mModules = (SoundTriggerModule[]) arrayList.toArray(new SoundTriggerModule[0]);
+  public SoundTriggerMiddlewareImpl(
+      HalFactory[] halFactoryArr, AudioSessionProvider audioSessionProvider) {
+    ArrayList arrayList = new ArrayList(halFactoryArr.length);
+    for (HalFactory halFactory : halFactoryArr) {
+      try {
+        arrayList.add(new SoundTriggerModule(halFactory, audioSessionProvider));
+      } catch (Exception e) {
+        Log.e("SoundTriggerMiddlewareImpl", "Failed to add a SoundTriggerModule instance", e);
+      }
     }
+    this.mModules = (SoundTriggerModule[]) arrayList.toArray(new SoundTriggerModule[0]);
+  }
 
-    @Override // com.android.server.soundtrigger_middleware.ISoundTriggerMiddlewareInternal
-    public SoundTriggerModuleDescriptor[] listModules() {
-        SoundTriggerModuleDescriptor[] soundTriggerModuleDescriptorArr = new SoundTriggerModuleDescriptor[this.mModules.length];
-        for (int i = 0; i < this.mModules.length; i++) {
-            SoundTriggerModuleDescriptor soundTriggerModuleDescriptor = new SoundTriggerModuleDescriptor();
-            soundTriggerModuleDescriptor.handle = i;
-            soundTriggerModuleDescriptor.properties = this.mModules[i].getProperties();
-            soundTriggerModuleDescriptorArr[i] = soundTriggerModuleDescriptor;
-        }
-        return soundTriggerModuleDescriptorArr;
+  @Override // com.android.server.soundtrigger_middleware.ISoundTriggerMiddlewareInternal
+  public SoundTriggerModuleDescriptor[] listModules() {
+    SoundTriggerModuleDescriptor[] soundTriggerModuleDescriptorArr =
+        new SoundTriggerModuleDescriptor[this.mModules.length];
+    for (int i = 0; i < this.mModules.length; i++) {
+      SoundTriggerModuleDescriptor soundTriggerModuleDescriptor =
+          new SoundTriggerModuleDescriptor();
+      soundTriggerModuleDescriptor.handle = i;
+      soundTriggerModuleDescriptor.properties = this.mModules[i].getProperties();
+      soundTriggerModuleDescriptorArr[i] = soundTriggerModuleDescriptor;
     }
+    return soundTriggerModuleDescriptorArr;
+  }
 
-    @Override // com.android.server.soundtrigger_middleware.ISoundTriggerMiddlewareInternal
-    public ISoundTriggerModule attach(int i, ISoundTriggerCallback iSoundTriggerCallback, boolean z) {
-        return this.mModules[i].attach(iSoundTriggerCallback);
-    }
+  @Override // com.android.server.soundtrigger_middleware.ISoundTriggerMiddlewareInternal
+  public ISoundTriggerModule attach(int i, ISoundTriggerCallback iSoundTriggerCallback, boolean z) {
+    return this.mModules[i].attach(iSoundTriggerCallback);
+  }
 }

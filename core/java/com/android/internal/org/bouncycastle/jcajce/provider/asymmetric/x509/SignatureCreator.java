@@ -6,5 +6,5 @@ import java.security.Signature;
 
 /* loaded from: classes5.dex */
 interface SignatureCreator {
-    Signature createSignature(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
+  Signature createSignature(String str) throws NoSuchAlgorithmException, NoSuchProviderException;
 }

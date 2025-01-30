@@ -2,7 +2,7 @@ package android.speech;
 
 /* loaded from: classes3.dex */
 public interface RecognitionSupportCallback {
-    void onError(int i);
+  void onError(int i);
 
-    void onSupportResult(RecognitionSupport recognitionSupport);
+  void onSupportResult(RecognitionSupport recognitionSupport);
 }

@@ -13,93 +13,96 @@ import com.samsung.android.widget.SemTipPopup;
 
 /* loaded from: classes5.dex */
 public class SemTipPopupWrapper {
-    private final Context mContext;
-    private String mKey;
-    private SemTipPopup mPopup;
-    private SharedPreferences mPrefrerences;
-    private final int BIXBY_TOOLTIP_DISPLAY_LIMIT_COUNT = 5;
-    private SpannableString mTitle = null;
-    private SpannableString mContent = null;
+  private final Context mContext;
+  private String mKey;
+  private SemTipPopup mPopup;
+  private SharedPreferences mPrefrerences;
+  private final int BIXBY_TOOLTIP_DISPLAY_LIMIT_COUNT = 5;
+  private SpannableString mTitle = null;
+  private SpannableString mContent = null;
 
-    public SemTipPopupWrapper(Context context) {
-        this.mContext = context;
+  public SemTipPopupWrapper(Context context) {
+    this.mContext = context;
+  }
+
+  public void init(View view, String key) {
+    this.mPopup = new SemTipPopup(view);
+    this.mKey = key;
+    this.mPrefrerences = this.mContext.getSharedPreferences(key, 0);
+    this.mPopup.setBackgroundColor(Color.rgb(0, 140, 255));
+    this.mPopup.setOutsideTouchEnabled(false);
+  }
+
+  public void setTitle(String msg) {
+    SpannableString spannableString = new SpannableString(msg);
+    this.mTitle = spannableString;
+    spannableString.setSpan(new RelativeSizeSpan(1.25f), 0, msg.length(), 33);
+    this.mTitle.setSpan(new StyleSpan(1), 0, msg.length(), 33);
+  }
+
+  public void setContent(String msg) {
+    this.mContent = new SpannableString(msg);
+  }
+
+  public void show(int direction) {
+    SemTipPopup semTipPopup = this.mPopup;
+    if (semTipPopup == null) {
+      return;
     }
-
-    public void init(View view, String key) {
-        this.mPopup = new SemTipPopup(view);
-        this.mKey = key;
-        this.mPrefrerences = this.mContext.getSharedPreferences(key, 0);
-        this.mPopup.setBackgroundColor(Color.rgb(0, 140, 255));
-        this.mPopup.setOutsideTouchEnabled(false);
+    SpannableString spannableString = this.mTitle;
+    if (spannableString != null) {
+      semTipPopup.setMessage(TextUtils.concat(spannableString, "\n\n", this.mContent));
+    } else {
+      semTipPopup.setMessage(this.mContent);
     }
-
-    public void setTitle(String msg) {
-        SpannableString spannableString = new SpannableString(msg);
-        this.mTitle = spannableString;
-        spannableString.setSpan(new RelativeSizeSpan(1.25f), 0, msg.length(), 33);
-        this.mTitle.setSpan(new StyleSpan(1), 0, msg.length(), 33);
+    int count = this.mPrefrerences.getInt(Contract.Events.Projection.COUNT_ONLY, 1);
+    if (count >= 5) {
+      return;
     }
-
-    public void setContent(String msg) {
-        this.mContent = new SpannableString(msg);
+    if (count == 1) {
+      this.mPopup.setExpanded(true);
+    } else {
+      this.mPopup.setExpanded(false);
     }
-
-    public void show(int direction) {
-        SemTipPopup semTipPopup = this.mPopup;
-        if (semTipPopup == null) {
-            return;
-        }
-        SpannableString spannableString = this.mTitle;
-        if (spannableString != null) {
-            semTipPopup.setMessage(TextUtils.concat(spannableString, "\n\n", this.mContent));
-        } else {
-            semTipPopup.setMessage(this.mContent);
-        }
-        int count = this.mPrefrerences.getInt(Contract.Events.Projection.COUNT_ONLY, 1);
-        if (count >= 5) {
-            return;
-        }
-        if (count == 1) {
-            this.mPopup.setExpanded(true);
-        } else {
-            this.mPopup.setExpanded(false);
-        }
-        this.mPopup.show(direction);
-        this.mPopup.setOnStateChangeListener(new SemTipPopup.OnStateChangeListener() { // from class: com.samsung.android.globalactions.util.SemTipPopupWrapper$$ExternalSyntheticLambda0
-            @Override // com.samsung.android.widget.SemTipPopup.OnStateChangeListener
-            public final void onStateChanged(int i) {
-                SemTipPopupWrapper.this.lambda$show$0(i);
-            }
+    this.mPopup.show(direction);
+    this.mPopup.setOnStateChangeListener(
+        new SemTipPopup
+            .OnStateChangeListener() { // from class:
+                                       // com.samsung.android.globalactions.util.SemTipPopupWrapper$$ExternalSyntheticLambda0
+          @Override // com.samsung.android.widget.SemTipPopup.OnStateChangeListener
+          public final void onStateChanged(int i) {
+            SemTipPopupWrapper.this.lambda$show$0(i);
+          }
         });
-        addCount(count);
-    }
+    addCount(count);
+  }
 
-    /* JADX INFO: Access modifiers changed from: private */
-    public /* synthetic */ void lambda$show$0(int v) {
-        if (v == 2) {
-            hideTipPermanently();
-        }
+  /* JADX INFO: Access modifiers changed from: private */
+  public /* synthetic */ void lambda$show$0(int v) {
+    if (v == 2) {
+      hideTipPermanently();
     }
+  }
 
-    private void addCount(int count) {
-        SharedPreferences.Editor editor = this.mPrefrerences.edit();
-        editor.putInt(Contract.Events.Projection.COUNT_ONLY, count + 1);
-        editor.apply();
-    }
+  private void addCount(int count) {
+    SharedPreferences.Editor editor = this.mPrefrerences.edit();
+    editor.putInt(Contract.Events.Projection.COUNT_ONLY, count + 1);
+    editor.apply();
+  }
 
-    public void hideTipPermanently() {
-        SharedPreferences.Editor editor = this.mPrefrerences.edit();
-        editor.putInt(Contract.Events.Projection.COUNT_ONLY, 5);
-        editor.apply();
-    }
+  public void hideTipPermanently() {
+    SharedPreferences.Editor editor = this.mPrefrerences.edit();
+    editor.putInt(Contract.Events.Projection.COUNT_ONLY, 5);
+    editor.apply();
+  }
 
-    public void update() {
-        this.mPopup.update();
-    }
+  public void update() {
+    this.mPopup.update();
+  }
 
-    public void close() {
-        if (this.mPopup.isShowing()) {
-            this.mPopup.dismiss(false);
-        }
+  public void close() {
+    if (this.mPopup.isShowing()) {
+      this.mPopup.dismiss(false);
     }
+  }
 }

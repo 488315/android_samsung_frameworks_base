@@ -8,49 +8,51 @@ import java.security.NoSuchAlgorithmException;
 
 /* loaded from: classes2.dex */
 public class RemoteLockscreenValidationSessionStorage {
-    final SparseArray mSessionsByUserId = new SparseArray(0);
+  final SparseArray mSessionsByUserId = new SparseArray(0);
 
-    public LockscreenVerificationSession get(int i) {
-        LockscreenVerificationSession lockscreenVerificationSession;
-        synchronized (this.mSessionsByUserId) {
-            lockscreenVerificationSession = (LockscreenVerificationSession) this.mSessionsByUserId.get(i);
-        }
-        return lockscreenVerificationSession;
+  public LockscreenVerificationSession get(int i) {
+    LockscreenVerificationSession lockscreenVerificationSession;
+    synchronized (this.mSessionsByUserId) {
+      lockscreenVerificationSession = (LockscreenVerificationSession) this.mSessionsByUserId.get(i);
+    }
+    return lockscreenVerificationSession;
+  }
+
+  public LockscreenVerificationSession startSession(int i) {
+    LockscreenVerificationSession lockscreenVerificationSession;
+    synchronized (this.mSessionsByUserId) {
+      if (this.mSessionsByUserId.get(i) != null) {
+        this.mSessionsByUserId.delete(i);
+      }
+      try {
+        lockscreenVerificationSession =
+            new LockscreenVerificationSession(
+                SecureBox.genKeyPair(), SystemClock.elapsedRealtime());
+        this.mSessionsByUserId.put(i, lockscreenVerificationSession);
+      } catch (NoSuchAlgorithmException e) {
+        throw new RuntimeException(e);
+      }
+    }
+    return lockscreenVerificationSession;
+  }
+
+  public void finishSession(int i) {
+    synchronized (this.mSessionsByUserId) {
+      this.mSessionsByUserId.delete(i);
+    }
+  }
+
+  public class LockscreenVerificationSession {
+    public final long mElapsedStartTime;
+    public final KeyPair mKeyPair;
+
+    public LockscreenVerificationSession(KeyPair keyPair, long j) {
+      this.mKeyPair = keyPair;
+      this.mElapsedStartTime = j;
     }
 
-    public LockscreenVerificationSession startSession(int i) {
-        LockscreenVerificationSession lockscreenVerificationSession;
-        synchronized (this.mSessionsByUserId) {
-            if (this.mSessionsByUserId.get(i) != null) {
-                this.mSessionsByUserId.delete(i);
-            }
-            try {
-                lockscreenVerificationSession = new LockscreenVerificationSession(SecureBox.genKeyPair(), SystemClock.elapsedRealtime());
-                this.mSessionsByUserId.put(i, lockscreenVerificationSession);
-            } catch (NoSuchAlgorithmException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        return lockscreenVerificationSession;
+    public KeyPair getKeyPair() {
+      return this.mKeyPair;
     }
-
-    public void finishSession(int i) {
-        synchronized (this.mSessionsByUserId) {
-            this.mSessionsByUserId.delete(i);
-        }
-    }
-
-    public class LockscreenVerificationSession {
-        public final long mElapsedStartTime;
-        public final KeyPair mKeyPair;
-
-        public LockscreenVerificationSession(KeyPair keyPair, long j) {
-            this.mKeyPair = keyPair;
-            this.mElapsedStartTime = j;
-        }
-
-        public KeyPair getKeyPair() {
-            return this.mKeyPair;
-        }
-    }
+  }
 }

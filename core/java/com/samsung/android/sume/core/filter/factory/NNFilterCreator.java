@@ -22,47 +22,68 @@ import java.util.stream.Collectors;
 
 /* loaded from: classes4.dex */
 public class NNFilterCreator implements MediaFilterCreator {
-    @Override // com.samsung.android.sume.core.filter.factory.MediaFilterCreator
-    public MediaFilter newFilter(MediaFilterFactory factory, MFDescriptor descriptor, MediaFilter successor) {
-        MediaFilter filter;
-        final NNDescriptor desc = (NNDescriptor) descriptor;
-        List<MFDescriptor> nnfwDescriptors = (List) desc.getNNFWProfiles().stream().map(new Function() { // from class: com.samsung.android.sume.core.filter.factory.NNFilterCreator$$ExternalSyntheticLambda0
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return ((NNFWProfile) obj).flatten();
-            }
-        }).flatMap(new MediaFilterFactory$$ExternalSyntheticLambda3()).map(new Function() { // from class: com.samsung.android.sume.core.filter.factory.NNFilterCreator$$ExternalSyntheticLambda1
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return NNFilterCreator.lambda$newFilter$0(NNDescriptor.this, (NNFWProfile) obj);
-            }
-        }).collect(Collectors.toList());
-        Def.require(!nnfwDescriptors.isEmpty());
-        if (nnfwDescriptors.size() == 1) {
-            filter = new SyncFilter(factory.newFilter(nnfwDescriptors.get(0)));
-        } else {
-            filter = factory.newFilter(new ParallelDescriptor(ParallelFilter.Type.DNC, nnfwDescriptors));
-        }
-        ImgpDescriptor preImgpDescriptor = new ImgpDescriptor(ImgpType.ANY);
-        ImgpDescriptor postImgpDescriptor = new ImgpDescriptor(ImgpType.ANY);
-        preImgpDescriptor.setLatestPluginsOrder(true);
-        postImgpDescriptor.setLatestPluginsOrder(true);
-        MediaFilter filter2 = factory.newFilter(PluginDecorateFilter.class, desc, ImgpFilter.m369of(filter, factory.newFilter(preImgpDescriptor), factory.newFilter(postImgpDescriptor)));
-        ((MutableMediaFormat) Objects.requireNonNull(desc.getInputFormat())).set(desc.getOption().asInputOption());
-        ((MutableMediaFormat) Objects.requireNonNull(desc.getOutputFormat())).set(desc.getOption().asOutputOption());
-        preImgpDescriptor.setOption(desc.getOption());
-        postImgpDescriptor.setOption(desc.getOption());
-        preImgpDescriptor.setFormat(desc.getInputFormat());
-        if (desc.getTargetFormat() != null) {
-            postImgpDescriptor.setFormat(desc.getTargetFormat().deepCopy2());
-            postImgpDescriptor.setKeepFilterDatatype(true);
-        } else {
-            postImgpDescriptor.setFormat(desc.getOutputFormat());
-        }
-        return filter2;
+  @Override // com.samsung.android.sume.core.filter.factory.MediaFilterCreator
+  public MediaFilter newFilter(
+      MediaFilterFactory factory, MFDescriptor descriptor, MediaFilter successor) {
+    MediaFilter filter;
+    final NNDescriptor desc = (NNDescriptor) descriptor;
+    List<MFDescriptor> nnfwDescriptors =
+        (List)
+            desc.getNNFWProfiles().stream()
+                .map(
+                    new Function() { // from class:
+                                     // com.samsung.android.sume.core.filter.factory.NNFilterCreator$$ExternalSyntheticLambda0
+                      @Override // java.util.function.Function
+                      public final Object apply(Object obj) {
+                        return ((NNFWProfile) obj).flatten();
+                      }
+                    })
+                .flatMap(new MediaFilterFactory$$ExternalSyntheticLambda3())
+                .map(
+                    new Function() { // from class:
+                                     // com.samsung.android.sume.core.filter.factory.NNFilterCreator$$ExternalSyntheticLambda1
+                      @Override // java.util.function.Function
+                      public final Object apply(Object obj) {
+                        return NNFilterCreator.lambda$newFilter$0(
+                            NNDescriptor.this, (NNFWProfile) obj);
+                      }
+                    })
+                .collect(Collectors.toList());
+    Def.require(!nnfwDescriptors.isEmpty());
+    if (nnfwDescriptors.size() == 1) {
+      filter = new SyncFilter(factory.newFilter(nnfwDescriptors.get(0)));
+    } else {
+      filter = factory.newFilter(new ParallelDescriptor(ParallelFilter.Type.DNC, nnfwDescriptors));
     }
+    ImgpDescriptor preImgpDescriptor = new ImgpDescriptor(ImgpType.ANY);
+    ImgpDescriptor postImgpDescriptor = new ImgpDescriptor(ImgpType.ANY);
+    preImgpDescriptor.setLatestPluginsOrder(true);
+    postImgpDescriptor.setLatestPluginsOrder(true);
+    MediaFilter filter2 =
+        factory.newFilter(
+            PluginDecorateFilter.class,
+            desc,
+            ImgpFilter.m369of(
+                filter,
+                factory.newFilter(preImgpDescriptor),
+                factory.newFilter(postImgpDescriptor)));
+    ((MutableMediaFormat) Objects.requireNonNull(desc.getInputFormat()))
+        .set(desc.getOption().asInputOption());
+    ((MutableMediaFormat) Objects.requireNonNull(desc.getOutputFormat()))
+        .set(desc.getOption().asOutputOption());
+    preImgpDescriptor.setOption(desc.getOption());
+    postImgpDescriptor.setOption(desc.getOption());
+    preImgpDescriptor.setFormat(desc.getInputFormat());
+    if (desc.getTargetFormat() != null) {
+      postImgpDescriptor.setFormat(desc.getTargetFormat().deepCopy2());
+      postImgpDescriptor.setKeepFilterDatatype(true);
+    } else {
+      postImgpDescriptor.setFormat(desc.getOutputFormat());
+    }
+    return filter2;
+  }
 
-    static /* synthetic */ MFDescriptorHolder lambda$newFilter$0(NNDescriptor desc, NNFWProfile e) {
-        return new MFDescriptorHolder(new NNFWDescriptor(e.getFw(), e.getHw()), desc);
-    }
+  static /* synthetic */ MFDescriptorHolder lambda$newFilter$0(NNDescriptor desc, NNFWProfile e) {
+    return new MFDescriptorHolder(new NNFWDescriptor(e.getFw(), e.getHw()), desc);
+  }
 }

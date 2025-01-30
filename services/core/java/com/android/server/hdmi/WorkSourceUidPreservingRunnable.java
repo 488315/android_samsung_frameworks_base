@@ -4,20 +4,20 @@ import android.os.Binder;
 
 /* loaded from: classes2.dex */
 public class WorkSourceUidPreservingRunnable implements Runnable {
-    public Runnable mRunnable;
-    public int mUid = Binder.getCallingWorkSourceUid();
+  public Runnable mRunnable;
+  public int mUid = Binder.getCallingWorkSourceUid();
 
-    public WorkSourceUidPreservingRunnable(Runnable runnable) {
-        this.mRunnable = runnable;
-    }
+  public WorkSourceUidPreservingRunnable(Runnable runnable) {
+    this.mRunnable = runnable;
+  }
 
-    @Override // java.lang.Runnable
-    public void run() {
-        long callingWorkSourceUid = Binder.setCallingWorkSourceUid(this.mUid);
-        try {
-            this.mRunnable.run();
-        } finally {
-            Binder.restoreCallingWorkSource(callingWorkSourceUid);
-        }
+  @Override // java.lang.Runnable
+  public void run() {
+    long callingWorkSourceUid = Binder.setCallingWorkSourceUid(this.mUid);
+    try {
+      this.mRunnable.run();
+    } finally {
+      Binder.restoreCallingWorkSource(callingWorkSourceUid);
     }
+  }
 }

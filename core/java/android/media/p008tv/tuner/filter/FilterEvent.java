@@ -4,5 +4,4 @@ import android.annotation.SystemApi;
 
 @SystemApi
 /* loaded from: classes2.dex */
-public abstract class FilterEvent {
-}
+public abstract class FilterEvent {}

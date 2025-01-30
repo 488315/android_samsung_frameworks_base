@@ -8,15 +8,20 @@ import com.android.internal.util.function.QuadFunction;
 /* renamed from: com.android.server.appop.AppOpsService$CheckOpsDelegateDispatcher$$ExternalSyntheticLambda7 */
 /* loaded from: classes.dex */
 public final /* synthetic */ class C0700x34f2e5cc implements QuadFunction {
-    public final /* synthetic */ AppOpsService f$0;
+  public final /* synthetic */ AppOpsService f$0;
 
-    public /* synthetic */ C0700x34f2e5cc(AppOpsService appOpsService) {
-        this.f$0 = appOpsService;
-    }
+  public /* synthetic */ C0700x34f2e5cc(AppOpsService appOpsService) {
+    this.f$0 = appOpsService;
+  }
 
-    public final Object apply(Object obj, Object obj2, Object obj3, Object obj4) {
-        Void finishProxyOperationImpl;
-        finishProxyOperationImpl = this.f$0.finishProxyOperationImpl((IBinder) obj, ((Integer) obj2).intValue(), (AttributionSource) obj3, ((Boolean) obj4).booleanValue());
-        return finishProxyOperationImpl;
-    }
+  public final Object apply(Object obj, Object obj2, Object obj3, Object obj4) {
+    Void finishProxyOperationImpl;
+    finishProxyOperationImpl =
+        this.f$0.finishProxyOperationImpl(
+            (IBinder) obj,
+            ((Integer) obj2).intValue(),
+            (AttributionSource) obj3,
+            ((Boolean) obj4).booleanValue());
+    return finishProxyOperationImpl;
+  }
 }

@@ -6,7 +6,7 @@ import android.media.effect.SingleFilterEffect;
 
 /* loaded from: classes2.dex */
 public class BlackWhiteEffect extends SingleFilterEffect {
-    public BlackWhiteEffect(EffectContext context, String name) {
-        super(context, name, BlackWhiteFilter.class, "image", "image", new Object[0]);
-    }
+  public BlackWhiteEffect(EffectContext context, String name) {
+    super(context, name, BlackWhiteFilter.class, "image", "image", new Object[0]);
+  }
 }

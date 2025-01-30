@@ -5,28 +5,28 @@ import android.os.UserHandle;
 
 /* loaded from: classes3.dex */
 public interface CallerIdentityInjector {
-    public static final CallerIdentityInjector REAL = new Real();
+  public static final CallerIdentityInjector REAL = new Real();
 
-    long clearCallingIdentity();
+  long clearCallingIdentity();
 
-    int getCallingUserId();
+  int getCallingUserId();
 
-    void restoreCallingIdentity(long j);
+  void restoreCallingIdentity(long j);
 
-    public class Real implements CallerIdentityInjector {
-        @Override // com.android.server.timezonedetector.CallerIdentityInjector
-        public int getCallingUserId() {
-            return UserHandle.getCallingUserId();
-        }
-
-        @Override // com.android.server.timezonedetector.CallerIdentityInjector
-        public long clearCallingIdentity() {
-            return Binder.clearCallingIdentity();
-        }
-
-        @Override // com.android.server.timezonedetector.CallerIdentityInjector
-        public void restoreCallingIdentity(long j) {
-            Binder.restoreCallingIdentity(j);
-        }
+  public class Real implements CallerIdentityInjector {
+    @Override // com.android.server.timezonedetector.CallerIdentityInjector
+    public int getCallingUserId() {
+      return UserHandle.getCallingUserId();
     }
+
+    @Override // com.android.server.timezonedetector.CallerIdentityInjector
+    public long clearCallingIdentity() {
+      return Binder.clearCallingIdentity();
+    }
+
+    @Override // com.android.server.timezonedetector.CallerIdentityInjector
+    public void restoreCallingIdentity(long j) {
+      Binder.restoreCallingIdentity(j);
+    }
+  }
 }

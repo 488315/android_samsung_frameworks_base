@@ -6,7 +6,7 @@ import android.media.soundtrigger_middleware.SoundTriggerModuleDescriptor;
 
 /* loaded from: classes3.dex */
 public interface ISoundTriggerMiddlewareInternal {
-    ISoundTriggerModule attach(int i, ISoundTriggerCallback iSoundTriggerCallback, boolean z);
+  ISoundTriggerModule attach(int i, ISoundTriggerCallback iSoundTriggerCallback, boolean z);
 
-    SoundTriggerModuleDescriptor[] listModules();
+  SoundTriggerModuleDescriptor[] listModules();
 }

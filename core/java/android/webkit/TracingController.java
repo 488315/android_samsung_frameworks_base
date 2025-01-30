@@ -5,17 +5,16 @@ import java.util.concurrent.Executor;
 
 /* loaded from: classes4.dex */
 public abstract class TracingController {
-    public abstract boolean isTracing();
+  public abstract boolean isTracing();
 
-    public abstract void start(TracingConfig tracingConfig);
+  public abstract void start(TracingConfig tracingConfig);
 
-    public abstract boolean stop(OutputStream outputStream, Executor executor);
+  public abstract boolean stop(OutputStream outputStream, Executor executor);
 
-    @Deprecated
-    public TracingController() {
-    }
+  @Deprecated
+  public TracingController() {}
 
-    public static TracingController getInstance() {
-        return WebViewFactory.getProvider().getTracingController();
-    }
+  public static TracingController getInstance() {
+    return WebViewFactory.getProvider().getTracingController();
+  }
 }

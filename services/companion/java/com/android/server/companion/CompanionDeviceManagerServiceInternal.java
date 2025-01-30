@@ -6,19 +6,20 @@ import java.util.Collection;
 
 /* loaded from: classes.dex */
 public interface CompanionDeviceManagerServiceInternal {
-    void addSelfOwnedCallId(String str);
+  void addSelfOwnedCallId(String str);
 
-    void crossDeviceSync(int i, Collection collection);
+  void crossDeviceSync(int i, Collection collection);
 
-    void crossDeviceSync(AssociationInfo associationInfo, Collection collection);
+  void crossDeviceSync(AssociationInfo associationInfo, Collection collection);
 
-    void registerCallMetadataSyncCallback(CrossDeviceSyncControllerCallback crossDeviceSyncControllerCallback, int i);
+  void registerCallMetadataSyncCallback(
+      CrossDeviceSyncControllerCallback crossDeviceSyncControllerCallback, int i);
 
-    void removeInactiveSelfManagedAssociations();
+  void removeInactiveSelfManagedAssociations();
 
-    void removeSelfOwnedCallId(String str);
+  void removeSelfOwnedCallId(String str);
 
-    void sendCrossDeviceSyncMessage(int i, byte[] bArr);
+  void sendCrossDeviceSyncMessage(int i, byte[] bArr);
 
-    void sendCrossDeviceSyncMessageToAllDevices(int i, byte[] bArr);
+  void sendCrossDeviceSyncMessageToAllDevices(int i, byte[] bArr);
 }

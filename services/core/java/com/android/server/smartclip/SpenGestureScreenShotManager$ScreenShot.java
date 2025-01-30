@@ -5,5 +5,5 @@ import android.graphics.Bitmap;
 /* compiled from: SpenGestureManagerService.java */
 /* loaded from: classes3.dex */
 public interface SpenGestureScreenShotManager$ScreenShot {
-    Bitmap getScreenShot();
+  Bitmap getScreenShot();
 }

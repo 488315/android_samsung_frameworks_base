@@ -2,5 +2,4 @@ package com.android.server;
 
 /* compiled from: ResetReasonCode.java */
 /* loaded from: classes.dex */
-class ResetReasonPP extends CommonKernelResetReasonCode {
-}
+class ResetReasonPP extends CommonKernelResetReasonCode {}

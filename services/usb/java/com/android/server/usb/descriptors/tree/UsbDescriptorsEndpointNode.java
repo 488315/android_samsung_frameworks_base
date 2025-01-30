@@ -5,13 +5,13 @@ import com.android.server.usb.descriptors.report.ReportCanvas;
 
 /* loaded from: classes3.dex */
 public final class UsbDescriptorsEndpointNode extends UsbDescriptorsTreeNode {
-    public final UsbEndpointDescriptor mEndpointDescriptor;
+  public final UsbEndpointDescriptor mEndpointDescriptor;
 
-    public UsbDescriptorsEndpointNode(UsbEndpointDescriptor usbEndpointDescriptor) {
-        this.mEndpointDescriptor = usbEndpointDescriptor;
-    }
+  public UsbDescriptorsEndpointNode(UsbEndpointDescriptor usbEndpointDescriptor) {
+    this.mEndpointDescriptor = usbEndpointDescriptor;
+  }
 
-    public void report(ReportCanvas reportCanvas) {
-        this.mEndpointDescriptor.report(reportCanvas);
-    }
+  public void report(ReportCanvas reportCanvas) {
+    this.mEndpointDescriptor.report(reportCanvas);
+  }
 }

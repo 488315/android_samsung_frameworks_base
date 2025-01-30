@@ -6,13 +6,17 @@ import java.io.PrintWriter;
 
 /* loaded from: classes.dex */
 public interface RemoteAmbientDetectionService {
-    void dump(String str, PrintWriter printWriter);
+  void dump(String str, PrintWriter printWriter);
 
-    void queryServiceStatus(int[] iArr, String str, RemoteCallback remoteCallback);
+  void queryServiceStatus(int[] iArr, String str, RemoteCallback remoteCallback);
 
-    void startDetection(AmbientContextEventRequest ambientContextEventRequest, String str, RemoteCallback remoteCallback, RemoteCallback remoteCallback2);
+  void startDetection(
+      AmbientContextEventRequest ambientContextEventRequest,
+      String str,
+      RemoteCallback remoteCallback,
+      RemoteCallback remoteCallback2);
 
-    void stopDetection(String str);
+  void stopDetection(String str);
 
-    void unbind();
+  void unbind();
 }

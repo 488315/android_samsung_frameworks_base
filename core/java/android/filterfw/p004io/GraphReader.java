@@ -10,40 +10,40 @@ import java.io.StringWriter;
 
 /* loaded from: classes.dex */
 public abstract class GraphReader {
-    protected KeyValueMap mReferences = new KeyValueMap();
+  protected KeyValueMap mReferences = new KeyValueMap();
 
-    public abstract FilterGraph readGraphString(String str) throws GraphIOException;
+  public abstract FilterGraph readGraphString(String str) throws GraphIOException;
 
-    public abstract KeyValueMap readKeyValueAssignments(String str) throws GraphIOException;
+  public abstract KeyValueMap readKeyValueAssignments(String str) throws GraphIOException;
 
-    public FilterGraph readGraphResource(Context context, int resourceId) throws GraphIOException {
-        InputStream inputStream = context.getResources().openRawResource(resourceId);
-        InputStreamReader reader = new InputStreamReader(inputStream);
-        StringWriter writer = new StringWriter();
-        char[] buffer = new char[1024];
-        while (true) {
-            try {
-                int bytesRead = reader.read(buffer, 0, 1024);
-                if (bytesRead > 0) {
-                    writer.write(buffer, 0, bytesRead);
-                } else {
-                    return readGraphString(writer.toString());
-                }
-            } catch (IOException e) {
-                throw new RuntimeException("Could not read specified resource file!");
-            }
+  public FilterGraph readGraphResource(Context context, int resourceId) throws GraphIOException {
+    InputStream inputStream = context.getResources().openRawResource(resourceId);
+    InputStreamReader reader = new InputStreamReader(inputStream);
+    StringWriter writer = new StringWriter();
+    char[] buffer = new char[1024];
+    while (true) {
+      try {
+        int bytesRead = reader.read(buffer, 0, 1024);
+        if (bytesRead > 0) {
+          writer.write(buffer, 0, bytesRead);
+        } else {
+          return readGraphString(writer.toString());
         }
+      } catch (IOException e) {
+        throw new RuntimeException("Could not read specified resource file!");
+      }
     }
+  }
 
-    public void addReference(String name, Object object) {
-        this.mReferences.put(name, object);
-    }
+  public void addReference(String name, Object object) {
+    this.mReferences.put(name, object);
+  }
 
-    public void addReferencesByMap(KeyValueMap refs) {
-        this.mReferences.putAll(refs);
-    }
+  public void addReferencesByMap(KeyValueMap refs) {
+    this.mReferences.putAll(refs);
+  }
 
-    public void addReferencesByKeysAndValues(Object... references) {
-        this.mReferences.setKeyValues(references);
-    }
+  public void addReferencesByKeysAndValues(Object... references) {
+    this.mReferences.setKeyValues(references);
+  }
 }

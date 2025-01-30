@@ -5,55 +5,50 @@ import android.annotation.SystemApi;
 @SystemApi
 /* loaded from: classes2.dex */
 public interface ScanCallback {
-    void onAnalogSifStandardReported(int i);
+  void onAnalogSifStandardReported(int i);
 
-    void onAtsc3PlpInfosReported(Atsc3PlpInfo[] atsc3PlpInfoArr);
+  void onAtsc3PlpInfosReported(Atsc3PlpInfo[] atsc3PlpInfoArr);
 
-    void onDvbsStandardReported(int i);
+  void onDvbsStandardReported(int i);
 
-    void onDvbtStandardReported(int i);
+  void onDvbtStandardReported(int i);
 
-    @Deprecated
-    void onFrequenciesReported(int[] iArr);
+  @Deprecated
+  void onFrequenciesReported(int[] iArr);
 
-    void onGroupIdsReported(int[] iArr);
+  void onGroupIdsReported(int[] iArr);
 
-    void onHierarchyReported(int i);
+  void onHierarchyReported(int i);
 
-    void onInputStreamIdsReported(int[] iArr);
+  void onInputStreamIdsReported(int[] iArr);
 
-    void onLocked();
+  void onLocked();
 
-    void onPlpIdsReported(int[] iArr);
+  void onPlpIdsReported(int[] iArr);
 
-    void onProgress(int i);
+  void onProgress(int i);
 
-    void onScanStopped();
+  void onScanStopped();
 
-    void onSignalTypeReported(int i);
+  void onSignalTypeReported(int i);
 
-    void onSymbolRatesReported(int[] iArr);
+  void onSymbolRatesReported(int[] iArr);
 
-    default void onUnlocked() {
+  default void onUnlocked() {}
+
+  default void onFrequenciesLongReported(long[] frequencies) {
+    int[] intFrequencies = new int[frequencies.length];
+    for (int i = 0; i < frequencies.length; i++) {
+      intFrequencies[i] = (int) frequencies[i];
     }
+    onFrequenciesReported(intFrequencies);
+  }
 
-    default void onFrequenciesLongReported(long[] frequencies) {
-        int[] intFrequencies = new int[frequencies.length];
-        for (int i = 0; i < frequencies.length; i++) {
-            intFrequencies[i] = (int) frequencies[i];
-        }
-        onFrequenciesReported(intFrequencies);
-    }
+  default void onModulationReported(int modulation) {}
 
-    default void onModulationReported(int modulation) {
-    }
+  default void onPriorityReported(boolean isHighPriority) {}
 
-    default void onPriorityReported(boolean isHighPriority) {
-    }
+  default void onDvbcAnnexReported(int dvbcAnnex) {}
 
-    default void onDvbcAnnexReported(int dvbcAnnex) {
-    }
-
-    default void onDvbtCellIdsReported(int[] dvbtCellIds) {
-    }
+  default void onDvbtCellIdsReported(int[] dvbtCellIds) {}
 }

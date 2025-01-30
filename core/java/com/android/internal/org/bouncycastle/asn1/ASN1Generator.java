@@ -4,11 +4,11 @@ import java.io.OutputStream;
 
 /* loaded from: classes5.dex */
 public abstract class ASN1Generator {
-    protected OutputStream _out;
+  protected OutputStream _out;
 
-    public abstract OutputStream getRawOutputStream();
+  public abstract OutputStream getRawOutputStream();
 
-    public ASN1Generator(OutputStream out) {
-        this._out = out;
-    }
+  public ASN1Generator(OutputStream out) {
+    this._out = out;
+  }
 }

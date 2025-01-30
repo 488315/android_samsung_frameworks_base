@@ -7,60 +7,60 @@ import android.view.ViewParent;
 
 /* loaded from: classes5.dex */
 public class MessagingMessageState {
-    private MessagingGroup mGroup;
-    private final View mHostView;
-    private boolean mIsHidingAnimated;
-    private boolean mIsHistoric;
-    private Notification.MessagingStyle.Message mMessage;
+  private MessagingGroup mGroup;
+  private final View mHostView;
+  private boolean mIsHidingAnimated;
+  private boolean mIsHistoric;
+  private Notification.MessagingStyle.Message mMessage;
 
-    MessagingMessageState(View hostView) {
-        this.mHostView = hostView;
-    }
+  MessagingMessageState(View hostView) {
+    this.mHostView = hostView;
+  }
 
-    public void setMessage(Notification.MessagingStyle.Message message) {
-        this.mMessage = message;
-    }
+  public void setMessage(Notification.MessagingStyle.Message message) {
+    this.mMessage = message;
+  }
 
-    public Notification.MessagingStyle.Message getMessage() {
-        return this.mMessage;
-    }
+  public Notification.MessagingStyle.Message getMessage() {
+    return this.mMessage;
+  }
 
-    public void setGroup(MessagingGroup group) {
-        this.mGroup = group;
-    }
+  public void setGroup(MessagingGroup group) {
+    this.mGroup = group;
+  }
 
-    public MessagingGroup getGroup() {
-        return this.mGroup;
-    }
+  public MessagingGroup getGroup() {
+    return this.mGroup;
+  }
 
-    public void setIsHistoric(boolean isHistoric) {
-        this.mIsHistoric = isHistoric;
-    }
+  public void setIsHistoric(boolean isHistoric) {
+    this.mIsHistoric = isHistoric;
+  }
 
-    public void setIsHidingAnimated(boolean isHiding) {
-        ViewParent parent = this.mHostView.getParent();
-        this.mIsHidingAnimated = isHiding;
-        this.mHostView.invalidate();
-        if (parent instanceof ViewGroup) {
-            ((ViewGroup) parent).invalidate();
-        }
+  public void setIsHidingAnimated(boolean isHiding) {
+    ViewParent parent = this.mHostView.getParent();
+    this.mIsHidingAnimated = isHiding;
+    this.mHostView.invalidate();
+    if (parent instanceof ViewGroup) {
+      ((ViewGroup) parent).invalidate();
     }
+  }
 
-    public boolean isHidingAnimated() {
-        return this.mIsHidingAnimated;
-    }
+  public boolean isHidingAnimated() {
+    return this.mIsHidingAnimated;
+  }
 
-    public View getHostView() {
-        return this.mHostView;
-    }
+  public View getHostView() {
+    return this.mHostView;
+  }
 
-    public void recycle() {
-        this.mHostView.setAlpha(1.0f);
-        this.mHostView.setTranslationY(0.0f);
-        MessagingPropertyAnimator.recycle(this.mHostView);
-        this.mIsHidingAnimated = false;
-        this.mIsHistoric = false;
-        this.mGroup = null;
-        this.mMessage = null;
-    }
+  public void recycle() {
+    this.mHostView.setAlpha(1.0f);
+    this.mHostView.setTranslationY(0.0f);
+    MessagingPropertyAnimator.recycle(this.mHostView);
+    this.mIsHidingAnimated = false;
+    this.mIsHistoric = false;
+    this.mGroup = null;
+    this.mMessage = null;
+  }
 }

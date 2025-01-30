@@ -4,13 +4,13 @@ import java.util.function.Consumer;
 
 /* loaded from: classes3.dex */
 public interface TransportSelectorCallback {
-    void onCreated(DomainSelector domainSelector);
+  void onCreated(DomainSelector domainSelector);
 
-    void onSelectionTerminated(int i);
+  void onSelectionTerminated(int i);
 
-    void onWlanSelected(boolean z);
+  void onWlanSelected(boolean z);
 
-    WwanSelectorCallback onWwanSelected();
+  WwanSelectorCallback onWwanSelected();
 
-    void onWwanSelected(Consumer<WwanSelectorCallback> consumer);
+  void onWwanSelected(Consumer<WwanSelectorCallback> consumer);
 }

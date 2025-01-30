@@ -7,7 +7,11 @@ import javax.crypto.SecretKey;
 
 /* loaded from: classes3.dex */
 public class AndroidKeyStoreSecretKey extends AndroidKeyStoreKey implements SecretKey {
-    public AndroidKeyStoreSecretKey(KeyDescriptor descriptor, KeyMetadata metadata, String algorithm, KeyStoreSecurityLevel securityLevel) {
-        super(descriptor, metadata.key.nspace, metadata.authorizations, algorithm, securityLevel);
-    }
+  public AndroidKeyStoreSecretKey(
+      KeyDescriptor descriptor,
+      KeyMetadata metadata,
+      String algorithm,
+      KeyStoreSecurityLevel securityLevel) {
+    super(descriptor, metadata.key.nspace, metadata.authorizations, algorithm, securityLevel);
+  }
 }

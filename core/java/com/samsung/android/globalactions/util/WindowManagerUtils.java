@@ -9,33 +9,35 @@ import com.android.internal.C4337R;
 
 /* loaded from: classes5.dex */
 public class WindowManagerUtils {
-    static final int NAVIGATIONBAR_BOTTOM = 3;
-    static final int NAVIGATIONBAR_LEFT = 1;
-    static final int NAVIGATIONBAR_RIGHT = 2;
-    private static final String TAG = "WindowManagerUtils";
-    private Context mContext;
-    private LogWrapper mLogWrapper;
+  static final int NAVIGATIONBAR_BOTTOM = 3;
+  static final int NAVIGATIONBAR_LEFT = 1;
+  static final int NAVIGATIONBAR_RIGHT = 2;
+  private static final String TAG = "WindowManagerUtils";
+  private Context mContext;
+  private LogWrapper mLogWrapper;
 
-    public WindowManagerUtils(Context context, LogWrapper logWrapper) {
-        this.mContext = context;
-        this.mLogWrapper = logWrapper;
-    }
+  public WindowManagerUtils(Context context, LogWrapper logWrapper) {
+    this.mContext = context;
+    this.mLogWrapper = logWrapper;
+  }
 
-    private Insets getWindowInsets(Context context, int typeMask) {
-        WindowManager windowManager = (WindowManager) context.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
-        WindowMetrics metrics = windowManager.getCurrentWindowMetrics();
-        return metrics.getWindowInsets().getInsets(typeMask);
-    }
+  private Insets getWindowInsets(Context context, int typeMask) {
+    WindowManager windowManager =
+        (WindowManager) context.getApplicationContext().getSystemService(Context.WINDOW_SERVICE);
+    WindowMetrics metrics = windowManager.getCurrentWindowMetrics();
+    return metrics.getWindowInsets().getInsets(typeMask);
+  }
 
-    public int getNavBarPosition() {
-        int navigationBarHeight = this.mContext.getResources().getDimensionPixelSize(C4337R.dimen.navigation_bar_height);
-        Insets insets = getWindowInsets(this.mContext, WindowInsets.Type.navigationBars());
-        if (insets.left >= navigationBarHeight) {
-            return 1;
-        }
-        if (insets.right >= navigationBarHeight) {
-            return 2;
-        }
-        return 3;
+  public int getNavBarPosition() {
+    int navigationBarHeight =
+        this.mContext.getResources().getDimensionPixelSize(C4337R.dimen.navigation_bar_height);
+    Insets insets = getWindowInsets(this.mContext, WindowInsets.Type.navigationBars());
+    if (insets.left >= navigationBarHeight) {
+      return 1;
     }
+    if (insets.right >= navigationBarHeight) {
+      return 2;
+    }
+    return 3;
+  }
 }

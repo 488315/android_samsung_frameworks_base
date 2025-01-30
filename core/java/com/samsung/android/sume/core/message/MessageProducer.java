@@ -5,13 +5,13 @@ import java.util.Map;
 
 /* loaded from: classes4.dex */
 public interface MessageProducer {
-    Message newMessage(int i);
+  Message newMessage(int i);
 
-    Message newMessage(int i, Object obj);
+  Message newMessage(int i, Object obj);
 
-    Message newMessage(int i, String str, Object obj);
+  Message newMessage(int i, String str, Object obj);
 
-    Message newMessage(int i, Map<String, Object> map);
+  Message newMessage(int i, Map<String, Object> map);
 
-    Message newMessage(int i, Pair<String, Object>... pairArr);
+  Message newMessage(int i, Pair<String, Object>... pairArr);
 }

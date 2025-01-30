@@ -3,9 +3,9 @@ package com.android.framework.protobuf;
 @CheckReturnValue
 /* loaded from: classes4.dex */
 interface MessageInfo {
-    MessageLite getDefaultInstance();
+  MessageLite getDefaultInstance();
 
-    ProtoSyntax getSyntax();
+  ProtoSyntax getSyntax();
 
-    boolean isMessageSetWireFormat();
+  boolean isMessageSetWireFormat();
 }

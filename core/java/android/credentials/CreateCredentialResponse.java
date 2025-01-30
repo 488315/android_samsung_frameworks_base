@@ -9,46 +9,49 @@ import java.util.Objects;
 
 /* loaded from: classes.dex */
 public final class CreateCredentialResponse implements Parcelable {
-    public static final Parcelable.Creator<CreateCredentialResponse> CREATOR = new Parcelable.Creator<CreateCredentialResponse>() { // from class: android.credentials.CreateCredentialResponse.1
+  public static final Parcelable.Creator<CreateCredentialResponse> CREATOR =
+      new Parcelable.Creator<
+          CreateCredentialResponse>() { // from class:
+                                        // android.credentials.CreateCredentialResponse.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public CreateCredentialResponse[] newArray(int size) {
-            return new CreateCredentialResponse[size];
+          return new CreateCredentialResponse[size];
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public CreateCredentialResponse createFromParcel(Parcel in) {
-            return new CreateCredentialResponse(in);
+          return new CreateCredentialResponse(in);
         }
-    };
-    private final Bundle mData;
+      };
+  private final Bundle mData;
 
-    public Bundle getData() {
-        return this.mData;
-    }
+  public Bundle getData() {
+    return this.mData;
+  }
 
-    @Override // android.p009os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeBundle(this.mData);
-    }
+  @Override // android.p009os.Parcelable
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeBundle(this.mData);
+  }
 
-    @Override // android.p009os.Parcelable
-    public int describeContents() {
-        return 0;
-    }
+  @Override // android.p009os.Parcelable
+  public int describeContents() {
+    return 0;
+  }
 
-    public String toString() {
-        return "CreateCredentialResponse {data=" + this.mData + "}";
-    }
+  public String toString() {
+    return "CreateCredentialResponse {data=" + this.mData + "}";
+  }
 
-    public CreateCredentialResponse(Bundle data) {
-        this.mData = (Bundle) Objects.requireNonNull(data, "data must not be null");
-    }
+  public CreateCredentialResponse(Bundle data) {
+    this.mData = (Bundle) Objects.requireNonNull(data, "data must not be null");
+  }
 
-    private CreateCredentialResponse(Parcel in) {
-        Bundle data = in.readBundle();
-        this.mData = data;
-        AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) data);
-    }
+  private CreateCredentialResponse(Parcel in) {
+    Bundle data = in.readBundle();
+    this.mData = data;
+    AnnotationValidations.validate((Class<NonNull>) NonNull.class, (NonNull) null, (Object) data);
+  }
 }

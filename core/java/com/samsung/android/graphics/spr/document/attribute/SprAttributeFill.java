@@ -6,19 +6,19 @@ import java.io.IOException;
 
 /* loaded from: classes5.dex */
 public class SprAttributeFill extends SprAttributeColor {
-    public SprAttributeFill() {
-        super((byte) 32);
-    }
+  public SprAttributeFill() {
+    super((byte) 32);
+  }
 
-    public SprAttributeFill(byte type, int value) {
-        super((byte) 32, type, value);
-    }
+  public SprAttributeFill(byte type, int value) {
+    super((byte) 32, type, value);
+  }
 
-    public SprAttributeFill(byte type, SprGradientBase gradient) {
-        super((byte) 32, type, gradient);
-    }
+  public SprAttributeFill(byte type, SprGradientBase gradient) {
+    super((byte) 32, type, gradient);
+  }
 
-    public SprAttributeFill(SprInputStream in) throws IOException {
-        super((byte) 32, in);
-    }
+  public SprAttributeFill(SprInputStream in) throws IOException {
+    super((byte) 32, in);
+  }
 }

@@ -5,13 +5,13 @@ import java.util.concurrent.CompletableFuture;
 
 /* loaded from: classes.dex */
 public class FutureBackupCallback extends IBackupCallback.Stub {
-    public final CompletableFuture mFuture;
+  public final CompletableFuture mFuture;
 
-    public FutureBackupCallback(CompletableFuture completableFuture) {
-        this.mFuture = completableFuture;
-    }
+  public FutureBackupCallback(CompletableFuture completableFuture) {
+    this.mFuture = completableFuture;
+  }
 
-    public void operationComplete(long j) {
-        this.mFuture.complete(RemoteResult.m5of(j));
-    }
+  public void operationComplete(long j) {
+    this.mFuture.complete(RemoteResult.m5of(j));
+  }
 }

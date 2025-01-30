@@ -6,7 +6,7 @@ import java.util.Map;
 
 /* loaded from: classes4.dex */
 public class PluralsMessageFormatter {
-    public static String format(Resources resources, Map<String, Object> arguments, int messageId) {
-        return new MessageFormat(resources.getString(messageId)).format(arguments);
-    }
+  public static String format(Resources resources, Map<String, Object> arguments, int messageId) {
+    return new MessageFormat(resources.getString(messageId)).format(arguments);
+  }
 }

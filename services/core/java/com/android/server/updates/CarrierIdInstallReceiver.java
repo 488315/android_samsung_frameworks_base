@@ -8,12 +8,18 @@ import android.provider.Telephony;
 
 /* loaded from: classes3.dex */
 public class CarrierIdInstallReceiver extends ConfigUpdateInstallReceiver {
-    public CarrierIdInstallReceiver() {
-        super("/data/misc/carrierid", "carrier_list.pb", "metadata/", "version");
-    }
+  public CarrierIdInstallReceiver() {
+    super("/data/misc/carrierid", "carrier_list.pb", "metadata/", "version");
+  }
 
-    @Override // com.android.server.updates.ConfigUpdateInstallReceiver
-    public void postInstall(Context context, Intent intent) {
-        context.getContentResolver().update(Uri.withAppendedPath(Telephony.CarrierId.All.CONTENT_URI, "update_db"), new ContentValues(), null, null);
-    }
+  @Override // com.android.server.updates.ConfigUpdateInstallReceiver
+  public void postInstall(Context context, Intent intent) {
+    context
+        .getContentResolver()
+        .update(
+            Uri.withAppendedPath(Telephony.CarrierId.All.CONTENT_URI, "update_db"),
+            new ContentValues(),
+            null,
+            null);
+  }
 }

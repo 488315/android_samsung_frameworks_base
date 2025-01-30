@@ -3,31 +3,31 @@ package org.apache.http.params;
 @Deprecated
 /* loaded from: classes6.dex */
 public interface HttpParams {
-    HttpParams copy();
+  HttpParams copy();
 
-    boolean getBooleanParameter(String str, boolean z);
+  boolean getBooleanParameter(String str, boolean z);
 
-    double getDoubleParameter(String str, double d);
+  double getDoubleParameter(String str, double d);
 
-    int getIntParameter(String str, int i);
+  int getIntParameter(String str, int i);
 
-    long getLongParameter(String str, long j);
+  long getLongParameter(String str, long j);
 
-    Object getParameter(String str);
+  Object getParameter(String str);
 
-    boolean isParameterFalse(String str);
+  boolean isParameterFalse(String str);
 
-    boolean isParameterTrue(String str);
+  boolean isParameterTrue(String str);
 
-    boolean removeParameter(String str);
+  boolean removeParameter(String str);
 
-    HttpParams setBooleanParameter(String str, boolean z);
+  HttpParams setBooleanParameter(String str, boolean z);
 
-    HttpParams setDoubleParameter(String str, double d);
+  HttpParams setDoubleParameter(String str, double d);
 
-    HttpParams setIntParameter(String str, int i);
+  HttpParams setIntParameter(String str, int i);
 
-    HttpParams setLongParameter(String str, long j);
+  HttpParams setLongParameter(String str, long j);
 
-    HttpParams setParameter(String str, Object obj);
+  HttpParams setParameter(String str, Object obj);
 }

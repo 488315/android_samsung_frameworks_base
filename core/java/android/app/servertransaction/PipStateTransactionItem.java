@@ -8,58 +8,64 @@ import android.p009os.Parcelable;
 
 /* loaded from: classes.dex */
 public final class PipStateTransactionItem extends ActivityTransactionItem {
-    public static final Parcelable.Creator<PipStateTransactionItem> CREATOR = new Parcelable.Creator<PipStateTransactionItem>() { // from class: android.app.servertransaction.PipStateTransactionItem.1
+  public static final Parcelable.Creator<PipStateTransactionItem> CREATOR =
+      new Parcelable.Creator<
+          PipStateTransactionItem>() { // from class:
+                                       // android.app.servertransaction.PipStateTransactionItem.1
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public PipStateTransactionItem createFromParcel(Parcel in) {
-            return new PipStateTransactionItem(in);
+          return new PipStateTransactionItem(in);
         }
 
         /* JADX WARN: Can't rename method to resolve collision */
         @Override // android.os.Parcelable.Creator
         public PipStateTransactionItem[] newArray(int size) {
-            return new PipStateTransactionItem[size];
+          return new PipStateTransactionItem[size];
         }
-    };
-    private PictureInPictureUiState mPipState;
+      };
+  private PictureInPictureUiState mPipState;
 
-    @Override // android.app.servertransaction.ActivityTransactionItem
-    public void execute(ClientTransactionHandler client, ActivityThread.ActivityClientRecord r, PendingTransactionActions pendingActions) {
-        client.handlePictureInPictureStateChanged(r, this.mPipState);
-    }
+  @Override // android.app.servertransaction.ActivityTransactionItem
+  public void execute(
+      ClientTransactionHandler client,
+      ActivityThread.ActivityClientRecord r,
+      PendingTransactionActions pendingActions) {
+    client.handlePictureInPictureStateChanged(r, this.mPipState);
+  }
 
-    private PipStateTransactionItem() {
-    }
+  private PipStateTransactionItem() {}
 
-    public static PipStateTransactionItem obtain(PictureInPictureUiState pipState) {
-        PipStateTransactionItem instance = (PipStateTransactionItem) ObjectPool.obtain(PipStateTransactionItem.class);
-        if (instance == null) {
-            instance = new PipStateTransactionItem();
-        }
-        instance.mPipState = pipState;
-        return instance;
+  public static PipStateTransactionItem obtain(PictureInPictureUiState pipState) {
+    PipStateTransactionItem instance =
+        (PipStateTransactionItem) ObjectPool.obtain(PipStateTransactionItem.class);
+    if (instance == null) {
+      instance = new PipStateTransactionItem();
     }
+    instance.mPipState = pipState;
+    return instance;
+  }
 
-    @Override // android.app.servertransaction.ObjectPoolItem
-    public void recycle() {
-        this.mPipState = null;
-        ObjectPool.recycle(this);
-    }
+  @Override // android.app.servertransaction.ObjectPoolItem
+  public void recycle() {
+    this.mPipState = null;
+    ObjectPool.recycle(this);
+  }
 
-    @Override // android.p009os.Parcelable
-    public void writeToParcel(Parcel dest, int flags) {
-        this.mPipState.writeToParcel(dest, flags);
-    }
+  @Override // android.p009os.Parcelable
+  public void writeToParcel(Parcel dest, int flags) {
+    this.mPipState.writeToParcel(dest, flags);
+  }
 
-    private PipStateTransactionItem(Parcel in) {
-        this.mPipState = PictureInPictureUiState.CREATOR.createFromParcel(in);
-    }
+  private PipStateTransactionItem(Parcel in) {
+    this.mPipState = PictureInPictureUiState.CREATOR.createFromParcel(in);
+  }
 
-    public boolean equals(Object o) {
-        return this == o;
-    }
+  public boolean equals(Object o) {
+    return this == o;
+  }
 
-    public String toString() {
-        return "PipStateTransactionItem{}";
-    }
+  public String toString() {
+    return "PipStateTransactionItem{}";
+  }
 }

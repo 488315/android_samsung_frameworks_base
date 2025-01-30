@@ -2,11 +2,11 @@ package com.android.internal.org.bouncycastle.crypto;
 
 /* loaded from: classes5.dex */
 public interface AsymmetricBlockCipher {
-    int getInputBlockSize();
+  int getInputBlockSize();
 
-    int getOutputBlockSize();
+  int getOutputBlockSize();
 
-    void init(boolean z, CipherParameters cipherParameters);
+  void init(boolean z, CipherParameters cipherParameters);
 
-    byte[] processBlock(byte[] bArr, int i, int i2) throws InvalidCipherTextException;
+  byte[] processBlock(byte[] bArr, int i, int i2) throws InvalidCipherTextException;
 }

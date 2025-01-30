@@ -4,13 +4,13 @@ import javax.crypto.SecretKey;
 
 /* loaded from: classes2.dex */
 public interface RebootEscrowProviderInterface {
-    void clearRebootEscrowKey();
+  void clearRebootEscrowKey();
 
-    RebootEscrowKey getAndClearRebootEscrowKey(SecretKey secretKey);
+  RebootEscrowKey getAndClearRebootEscrowKey(SecretKey secretKey);
 
-    int getType();
+  int getType();
 
-    boolean hasRebootEscrowSupport();
+  boolean hasRebootEscrowSupport();
 
-    boolean storeRebootEscrowKey(RebootEscrowKey rebootEscrowKey, SecretKey secretKey);
+  boolean storeRebootEscrowKey(RebootEscrowKey rebootEscrowKey, SecretKey secretKey);
 }

@@ -24,42 +24,95 @@ import com.samsung.android.globalactions.util.WindowManagerUtils;
 
 /* loaded from: classes3.dex */
 public class SamsungGlobalActionsDialog extends SamsungGlobalActionsDialogBase {
-    public final Runnable mOnDismiss;
+  public final Runnable mOnDismiss;
 
-    public SamsungGlobalActionsDialog(Context context, WindowManagerPolicy.WindowManagerFuncs windowManagerFuncs, Runnable runnable) {
-        super(context, new DefaultResourceFactory());
-        this.mOnDismiss = runnable;
-        initDependencies(windowManagerFuncs);
-    }
+  public SamsungGlobalActionsDialog(
+      Context context,
+      WindowManagerPolicy.WindowManagerFuncs windowManagerFuncs,
+      Runnable runnable) {
+    super(context, new DefaultResourceFactory());
+    this.mOnDismiss = runnable;
+    initDependencies(windowManagerFuncs);
+  }
 
-    public final void initDependencies(WindowManagerPolicy.WindowManagerFuncs windowManagerFuncs) {
-        PolicyGlobalActionsManager policyGlobalActionsManager = new PolicyGlobalActionsManager(windowManagerFuncs);
-        DefaultUtilFactory defaultUtilFactory = new DefaultUtilFactory(((SamsungGlobalActionsDialogBase) this).mContext, policyGlobalActionsManager);
-        GlobalActionFeatures globalActionFeatures = new GlobalActionFeatures(((SamsungGlobalActionsDialogBase) this).mContext, (SettingsWrapper) defaultUtilFactory.get(SettingsWrapper.class));
-        LogWrapper logWrapper = (LogWrapper) defaultUtilFactory.get(LogWrapper.class);
-        ((SamsungGlobalActionsDialogBase) this).mLogWrapper = logWrapper;
-        logWrapper.setPackageTag("[Service]");
-        ((SamsungGlobalActionsDialogBase) this).mHandlerUtil = (HandlerUtil) defaultUtilFactory.get(HandlerUtil.class);
-        ((SamsungGlobalActionsDialogBase) this).mWindowManagerUtil = (WindowManagerUtils) defaultUtilFactory.get(WindowManagerUtils.class);
-        SamsungGlobalActionsAnalyticsImpl samsungGlobalActionsAnalyticsImpl = new SamsungGlobalActionsAnalyticsImpl();
-        ((SamsungGlobalActionsDialogBase) this).mConditionChecker = new SystemConditionChecker(defaultUtilFactory, globalActionFeatures, ((SamsungGlobalActionsDialogBase) this).mLogWrapper);
-        DefaultActionViewModelFactory defaultActionViewModelFactory = new DefaultActionViewModelFactory(defaultUtilFactory, ((SamsungGlobalActionsDialogBase) this).mResourceFactory, ((SamsungGlobalActionsDialogBase) this).mConditionChecker, samsungGlobalActionsAnalyticsImpl);
-        GlobalActionsFeatureFactory globalActionsFeatureFactory = new GlobalActionsFeatureFactory(((SamsungGlobalActionsDialogBase) this).mContext, this, defaultUtilFactory, defaultActionViewModelFactory, globalActionFeatures, ((SamsungGlobalActionsDialogBase) this).mConditionChecker);
-        ((SamsungGlobalActionsDialogBase) this).mFeatureFactory = globalActionsFeatureFactory;
-        defaultActionViewModelFactory.setFeatureFactory(globalActionsFeatureFactory);
-        ((SamsungGlobalActionsDialogBase) this).mPresenter = new SamsungGlobalActionsPresenter(this, ((SamsungGlobalActionsDialogBase) this).mFeatureFactory, defaultActionViewModelFactory, policyGlobalActionsManager, (BroadcastManager) defaultUtilFactory.get(BroadcastManager.class), (SystemController) defaultUtilFactory.get(SystemController.class), ((SamsungGlobalActionsDialogBase) this).mConditionChecker, ((SamsungGlobalActionsDialogBase) this).mLogWrapper, (ThemeChecker) defaultUtilFactory.get(ThemeChecker.class), (ContentObserverWrapper) defaultUtilFactory.get(ContentObserverWrapper.class), samsungGlobalActionsAnalyticsImpl);
-    }
+  public final void initDependencies(WindowManagerPolicy.WindowManagerFuncs windowManagerFuncs) {
+    PolicyGlobalActionsManager policyGlobalActionsManager =
+        new PolicyGlobalActionsManager(windowManagerFuncs);
+    DefaultUtilFactory defaultUtilFactory =
+        new DefaultUtilFactory(
+            ((SamsungGlobalActionsDialogBase) this).mContext, policyGlobalActionsManager);
+    GlobalActionFeatures globalActionFeatures =
+        new GlobalActionFeatures(
+            ((SamsungGlobalActionsDialogBase) this).mContext,
+            (SettingsWrapper) defaultUtilFactory.get(SettingsWrapper.class));
+    LogWrapper logWrapper = (LogWrapper) defaultUtilFactory.get(LogWrapper.class);
+    ((SamsungGlobalActionsDialogBase) this).mLogWrapper = logWrapper;
+    logWrapper.setPackageTag("[Service]");
+    ((SamsungGlobalActionsDialogBase) this).mHandlerUtil =
+        (HandlerUtil) defaultUtilFactory.get(HandlerUtil.class);
+    ((SamsungGlobalActionsDialogBase) this).mWindowManagerUtil =
+        (WindowManagerUtils) defaultUtilFactory.get(WindowManagerUtils.class);
+    SamsungGlobalActionsAnalyticsImpl samsungGlobalActionsAnalyticsImpl =
+        new SamsungGlobalActionsAnalyticsImpl();
+    ((SamsungGlobalActionsDialogBase) this).mConditionChecker =
+        new SystemConditionChecker(
+            defaultUtilFactory,
+            globalActionFeatures,
+            ((SamsungGlobalActionsDialogBase) this).mLogWrapper);
+    DefaultActionViewModelFactory defaultActionViewModelFactory =
+        new DefaultActionViewModelFactory(
+            defaultUtilFactory,
+            ((SamsungGlobalActionsDialogBase) this).mResourceFactory,
+            ((SamsungGlobalActionsDialogBase) this).mConditionChecker,
+            samsungGlobalActionsAnalyticsImpl);
+    GlobalActionsFeatureFactory globalActionsFeatureFactory =
+        new GlobalActionsFeatureFactory(
+            ((SamsungGlobalActionsDialogBase) this).mContext,
+            this,
+            defaultUtilFactory,
+            defaultActionViewModelFactory,
+            globalActionFeatures,
+            ((SamsungGlobalActionsDialogBase) this).mConditionChecker);
+    ((SamsungGlobalActionsDialogBase) this).mFeatureFactory = globalActionsFeatureFactory;
+    defaultActionViewModelFactory.setFeatureFactory(globalActionsFeatureFactory);
+    ((SamsungGlobalActionsDialogBase) this).mPresenter =
+        new SamsungGlobalActionsPresenter(
+            this,
+            ((SamsungGlobalActionsDialogBase) this).mFeatureFactory,
+            defaultActionViewModelFactory,
+            policyGlobalActionsManager,
+            (BroadcastManager) defaultUtilFactory.get(BroadcastManager.class),
+            (SystemController) defaultUtilFactory.get(SystemController.class),
+            ((SamsungGlobalActionsDialogBase) this).mConditionChecker,
+            ((SamsungGlobalActionsDialogBase) this).mLogWrapper,
+            (ThemeChecker) defaultUtilFactory.get(ThemeChecker.class),
+            (ContentObserverWrapper) defaultUtilFactory.get(ContentObserverWrapper.class),
+            samsungGlobalActionsAnalyticsImpl);
+  }
 
-    public void showDialog() {
-        ((SamsungGlobalActionsDialogBase) this).mContentViewFactory = new ContentViewFactory(((SamsungGlobalActionsDialogBase) this).mContext, this, ((SamsungGlobalActionsDialogBase) this).mFeatureFactory, ((SamsungGlobalActionsDialogBase) this).mConditionChecker, ((SamsungGlobalActionsDialogBase) this).mWindowManagerUtil, ((SamsungGlobalActionsDialogBase) this).mResourceFactory, ((SamsungGlobalActionsDialogBase) this).mLogWrapper, ((SamsungGlobalActionsDialogBase) this).mHandlerUtil, ((SamsungGlobalActionsDialogBase) this).mToastController, ((SamsungGlobalActionsDialogBase) this).mPresenter, ((SamsungGlobalActionsDialogBase) this).mFromSystemServer);
-        super.showDialog();
-    }
+  public void showDialog() {
+    ((SamsungGlobalActionsDialogBase) this).mContentViewFactory =
+        new ContentViewFactory(
+            ((SamsungGlobalActionsDialogBase) this).mContext,
+            this,
+            ((SamsungGlobalActionsDialogBase) this).mFeatureFactory,
+            ((SamsungGlobalActionsDialogBase) this).mConditionChecker,
+            ((SamsungGlobalActionsDialogBase) this).mWindowManagerUtil,
+            ((SamsungGlobalActionsDialogBase) this).mResourceFactory,
+            ((SamsungGlobalActionsDialogBase) this).mLogWrapper,
+            ((SamsungGlobalActionsDialogBase) this).mHandlerUtil,
+            ((SamsungGlobalActionsDialogBase) this).mToastController,
+            ((SamsungGlobalActionsDialogBase) this).mPresenter,
+            ((SamsungGlobalActionsDialogBase) this).mFromSystemServer);
+    super.showDialog();
+  }
 
-    public void dismiss() {
-        Runnable runnable;
-        if (((SamsungGlobalActionsDialogBase) this).mDialog != null && (runnable = this.mOnDismiss) != null) {
-            runnable.run();
-        }
-        super.dismiss();
+  public void dismiss() {
+    Runnable runnable;
+    if (((SamsungGlobalActionsDialogBase) this).mDialog != null
+        && (runnable = this.mOnDismiss) != null) {
+      runnable.run();
     }
+    super.dismiss();
+  }
 }

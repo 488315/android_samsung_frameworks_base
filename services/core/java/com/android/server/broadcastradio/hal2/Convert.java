@@ -39,393 +39,523 @@ import java.util.stream.Stream;
 
 /* loaded from: classes.dex */
 public abstract class Convert {
-    public static final Map metadataKeys;
+  public static final Map metadataKeys;
 
-    enum MetadataType {
-        INT,
-        STRING
+  enum MetadataType {
+    INT,
+    STRING
+  }
+
+  public static int halResultToTunerResult(int i) {
+    if (i == 0) {
+      return 0;
     }
+    if (i == 2) {
+      return 1;
+    }
+    if (i == 3) {
+      return 2;
+    }
+    if (i == 4) {
+      return 3;
+    }
+    if (i != 5) {
+      return i != 6 ? 7 : 5;
+    }
+    return 4;
+  }
 
-    public static int halResultToTunerResult(int i) {
-        if (i == 0) {
-            return 0;
-        }
-        if (i == 2) {
-            return 1;
-        }
-        if (i == 3) {
-            return 2;
-        }
-        if (i == 4) {
-            return 3;
-        }
-        if (i != 5) {
-            return i != 6 ? 7 : 5;
-        }
+  public static int identifierTypeToProgramType(int i) {
+    switch (i) {
+      case 1:
+      case 2:
+        return 2;
+      case 3:
         return 4;
-    }
-
-    public static int identifierTypeToProgramType(int i) {
-        switch (i) {
-            case 1:
-            case 2:
-                return 2;
-            case 3:
-                return 4;
-            case 4:
-            case 11:
-            default:
-                if (i < 1000 || i > 1999) {
-                    return 0;
-                }
-                return i;
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 14:
-                return 5;
-            case 9:
-            case 10:
-                return 6;
-            case 12:
-            case 13:
-                return 7;
+      case 4:
+      case 11:
+      default:
+        if (i < 1000 || i > 1999) {
+          return 0;
         }
+        return i;
+      case 5:
+      case 6:
+      case 7:
+      case 8:
+      case 14:
+        return 5;
+      case 9:
+      case 10:
+        return 6;
+      case 12:
+      case 13:
+        return 7;
     }
+  }
 
-    public static void throwOnError(String str, int i) {
-        String str2 = str + ": " + Result.toString(i);
-        switch (i) {
-            case 0:
-                return;
-            case 1:
-            case 2:
-            case 6:
-                throw new ParcelableException(new RuntimeException(str2));
-            case 3:
-                throw new IllegalArgumentException(str2);
-            case 4:
-                throw new IllegalStateException(str2);
-            case 5:
-                throw new UnsupportedOperationException(str2);
-            default:
-                throw new ParcelableException(new RuntimeException(str + ": unknown error (" + i + ")"));
+  public static void throwOnError(String str, int i) {
+    String str2 = str + ": " + Result.toString(i);
+    switch (i) {
+      case 0:
+        return;
+      case 1:
+      case 2:
+      case 6:
+        throw new ParcelableException(new RuntimeException(str2));
+      case 3:
+        throw new IllegalArgumentException(str2);
+      case 4:
+        throw new IllegalStateException(str2);
+      case 5:
+        throw new UnsupportedOperationException(str2);
+      default:
+        throw new ParcelableException(new RuntimeException(str + ": unknown error (" + i + ")"));
+    }
+  }
+
+  public static ArrayList vendorInfoToHal(Map map) {
+    if (map == null) {
+      return new ArrayList();
+    }
+    ArrayList arrayList = new ArrayList();
+    for (Map.Entry entry : map.entrySet()) {
+      VendorKeyValue vendorKeyValue = new VendorKeyValue();
+      vendorKeyValue.key = (String) entry.getKey();
+      String str = (String) entry.getValue();
+      vendorKeyValue.value = str;
+      if (vendorKeyValue.key == null || str == null) {
+        Slog.w("BcRadio2Srv.convert", "VendorKeyValue contains null pointers");
+      } else {
+        arrayList.add(vendorKeyValue);
+      }
+    }
+    return arrayList;
+  }
+
+  public static Map vendorInfoFromHal(List list) {
+    String str;
+    if (list == null) {
+      return Collections.emptyMap();
+    }
+    HashMap hashMap = new HashMap();
+    Iterator it = list.iterator();
+    while (it.hasNext()) {
+      VendorKeyValue vendorKeyValue = (VendorKeyValue) it.next();
+      String str2 = vendorKeyValue.key;
+      if (str2 == null || (str = vendorKeyValue.value) == null) {
+        Slog.w("BcRadio2Srv.convert", "VendorKeyValue contains null pointers");
+      } else {
+        hashMap.put(str2, str);
+      }
+    }
+    return hashMap;
+  }
+
+  public static int[] identifierTypesToProgramTypes(int[] iArr) {
+    HashSet hashSet = new HashSet();
+    for (int i : iArr) {
+      int identifierTypeToProgramType = identifierTypeToProgramType(i);
+      if (identifierTypeToProgramType != 0) {
+        hashSet.add(Integer.valueOf(identifierTypeToProgramType));
+        if (identifierTypeToProgramType == 2) {
+          hashSet.add(1);
         }
-    }
-
-    public static ArrayList vendorInfoToHal(Map map) {
-        if (map == null) {
-            return new ArrayList();
+        if (identifierTypeToProgramType == 4) {
+          hashSet.add(3);
         }
-        ArrayList arrayList = new ArrayList();
-        for (Map.Entry entry : map.entrySet()) {
-            VendorKeyValue vendorKeyValue = new VendorKeyValue();
-            vendorKeyValue.key = (String) entry.getKey();
-            String str = (String) entry.getValue();
-            vendorKeyValue.value = str;
-            if (vendorKeyValue.key == null || str == null) {
-                Slog.w("BcRadio2Srv.convert", "VendorKeyValue contains null pointers");
-            } else {
-                arrayList.add(vendorKeyValue);
-            }
-        }
-        return arrayList;
+      }
     }
+    return hashSet.stream().mapToInt(new AudioService$$ExternalSyntheticLambda0()).toArray();
+  }
 
-    public static Map vendorInfoFromHal(List list) {
-        String str;
-        if (list == null) {
-            return Collections.emptyMap();
-        }
-        HashMap hashMap = new HashMap();
-        Iterator it = list.iterator();
-        while (it.hasNext()) {
-            VendorKeyValue vendorKeyValue = (VendorKeyValue) it.next();
-            String str2 = vendorKeyValue.key;
-            if (str2 == null || (str = vendorKeyValue.value) == null) {
-                Slog.w("BcRadio2Srv.convert", "VendorKeyValue contains null pointers");
-            } else {
-                hashMap.put(str2, str);
-            }
-        }
-        return hashMap;
+  public static RadioManager.BandDescriptor[] amfmConfigToBands(AmFmRegionConfig amFmRegionConfig) {
+    if (amFmRegionConfig == null) {
+      return new RadioManager.BandDescriptor[0];
     }
-
-    public static int[] identifierTypesToProgramTypes(int[] iArr) {
-        HashSet hashSet = new HashSet();
-        for (int i : iArr) {
-            int identifierTypeToProgramType = identifierTypeToProgramType(i);
-            if (identifierTypeToProgramType != 0) {
-                hashSet.add(Integer.valueOf(identifierTypeToProgramType));
-                if (identifierTypeToProgramType == 2) {
-                    hashSet.add(1);
-                }
-                if (identifierTypeToProgramType == 4) {
-                    hashSet.add(3);
-                }
-            }
-        }
-        return hashSet.stream().mapToInt(new AudioService$$ExternalSyntheticLambda0()).toArray();
+    ArrayList arrayList = new ArrayList(amFmRegionConfig.ranges.size());
+    Iterator it = amFmRegionConfig.ranges.iterator();
+    while (it.hasNext()) {
+      AmFmBandRange amFmBandRange = (AmFmBandRange) it.next();
+      FrequencyBand band = Utils.getBand(amFmBandRange.lowerBound);
+      if (band == FrequencyBand.UNKNOWN) {
+        Slog.e(
+            "BcRadio2Srv.convert", "Unknown frequency band at " + amFmBandRange.lowerBound + "kHz");
+      } else if (band == FrequencyBand.FM) {
+        arrayList.add(
+            new RadioManager.FmBandDescriptor(
+                0,
+                1,
+                amFmBandRange.lowerBound,
+                amFmBandRange.upperBound,
+                amFmBandRange.spacing,
+                true,
+                true,
+                true,
+                true,
+                true));
+      } else {
+        arrayList.add(
+            new RadioManager.AmBandDescriptor(
+                0,
+                0,
+                amFmBandRange.lowerBound,
+                amFmBandRange.upperBound,
+                amFmBandRange.spacing,
+                true));
+      }
     }
+    return (RadioManager.BandDescriptor[])
+        arrayList.toArray(new RadioManager.BandDescriptor[arrayList.size()]);
+  }
 
-    public static RadioManager.BandDescriptor[] amfmConfigToBands(AmFmRegionConfig amFmRegionConfig) {
-        if (amFmRegionConfig == null) {
-            return new RadioManager.BandDescriptor[0];
-        }
-        ArrayList arrayList = new ArrayList(amFmRegionConfig.ranges.size());
-        Iterator it = amFmRegionConfig.ranges.iterator();
-        while (it.hasNext()) {
-            AmFmBandRange amFmBandRange = (AmFmBandRange) it.next();
-            FrequencyBand band = Utils.getBand(amFmBandRange.lowerBound);
-            if (band == FrequencyBand.UNKNOWN) {
-                Slog.e("BcRadio2Srv.convert", "Unknown frequency band at " + amFmBandRange.lowerBound + "kHz");
-            } else if (band == FrequencyBand.FM) {
-                arrayList.add(new RadioManager.FmBandDescriptor(0, 1, amFmBandRange.lowerBound, amFmBandRange.upperBound, amFmBandRange.spacing, true, true, true, true, true));
-            } else {
-                arrayList.add(new RadioManager.AmBandDescriptor(0, 0, amFmBandRange.lowerBound, amFmBandRange.upperBound, amFmBandRange.spacing, true));
-            }
-        }
-        return (RadioManager.BandDescriptor[]) arrayList.toArray(new RadioManager.BandDescriptor[arrayList.size()]);
+  public static Map dabConfigFromHal(List list) {
+    if (list == null) {
+      return null;
     }
+    return (Map)
+        list.stream()
+            .collect(
+                Collectors.toMap(
+                    new Function() { // from class:
+                                     // com.android.server.broadcastradio.hal2.Convert$$ExternalSyntheticLambda10
+                      @Override // java.util.function.Function
+                      public final Object apply(Object obj) {
+                        String str;
+                        str = ((DabTableEntry) obj).label;
+                        return str;
+                      }
+                    },
+                    new Function() { // from class:
+                                     // com.android.server.broadcastradio.hal2.Convert$$ExternalSyntheticLambda11
+                      @Override // java.util.function.Function
+                      public final Object apply(Object obj) {
+                        Integer lambda$dabConfigFromHal$1;
+                        lambda$dabConfigFromHal$1 =
+                            Convert.lambda$dabConfigFromHal$1((DabTableEntry) obj);
+                        return lambda$dabConfigFromHal$1;
+                      }
+                    }));
+  }
 
-    public static Map dabConfigFromHal(List list) {
-        if (list == null) {
-            return null;
-        }
-        return (Map) list.stream().collect(Collectors.toMap(new Function() { // from class: com.android.server.broadcastradio.hal2.Convert$$ExternalSyntheticLambda10
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                String str;
-                str = ((DabTableEntry) obj).label;
-                return str;
-            }
-        }, new Function() { // from class: com.android.server.broadcastradio.hal2.Convert$$ExternalSyntheticLambda11
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                Integer lambda$dabConfigFromHal$1;
-                lambda$dabConfigFromHal$1 = Convert.lambda$dabConfigFromHal$1((DabTableEntry) obj);
-                return lambda$dabConfigFromHal$1;
-            }
-        }));
+  public static /* synthetic */ Integer lambda$dabConfigFromHal$1(DabTableEntry dabTableEntry) {
+    return Integer.valueOf(dabTableEntry.frequency);
+  }
+
+  public static RadioManager.ModuleProperties propertiesFromHal(
+      int i, String str, Properties properties, AmFmRegionConfig amFmRegionConfig, List list) {
+    Objects.requireNonNull(str);
+    Objects.requireNonNull(properties);
+    int[] array =
+        properties.supportedIdentifierTypes.stream()
+            .mapToInt(new AudioService$$ExternalSyntheticLambda0())
+            .toArray();
+    return new RadioManager.ModuleProperties(
+        i,
+        str,
+        0,
+        properties.maker,
+        properties.product,
+        properties.version,
+        properties.serial,
+        1,
+        1,
+        false,
+        false,
+        amfmConfigToBands(amFmRegionConfig),
+        true,
+        identifierTypesToProgramTypes(array),
+        array,
+        dabConfigFromHal(list),
+        vendorInfoFromHal(properties.vendorInfo));
+  }
+
+  public static void programIdentifierToHal(
+      ProgramIdentifier programIdentifier, ProgramSelector.Identifier identifier) {
+    programIdentifier.type = identifier.getType();
+    programIdentifier.value = identifier.getValue();
+  }
+
+  public static ProgramIdentifier programIdentifierToHal(ProgramSelector.Identifier identifier) {
+    ProgramIdentifier programIdentifier = new ProgramIdentifier();
+    programIdentifierToHal(programIdentifier, identifier);
+    return programIdentifier;
+  }
+
+  public static ProgramSelector.Identifier programIdentifierFromHal(
+      ProgramIdentifier programIdentifier) {
+    if (programIdentifier.type == 0) {
+      return null;
     }
+    return new ProgramSelector.Identifier(programIdentifier.type, programIdentifier.value);
+  }
 
-    public static /* synthetic */ Integer lambda$dabConfigFromHal$1(DabTableEntry dabTableEntry) {
-        return Integer.valueOf(dabTableEntry.frequency);
-    }
-
-    public static RadioManager.ModuleProperties propertiesFromHal(int i, String str, Properties properties, AmFmRegionConfig amFmRegionConfig, List list) {
-        Objects.requireNonNull(str);
-        Objects.requireNonNull(properties);
-        int[] array = properties.supportedIdentifierTypes.stream().mapToInt(new AudioService$$ExternalSyntheticLambda0()).toArray();
-        return new RadioManager.ModuleProperties(i, str, 0, properties.maker, properties.product, properties.version, properties.serial, 1, 1, false, false, amfmConfigToBands(amFmRegionConfig), true, identifierTypesToProgramTypes(array), array, dabConfigFromHal(list), vendorInfoFromHal(properties.vendorInfo));
-    }
-
-    public static void programIdentifierToHal(ProgramIdentifier programIdentifier, ProgramSelector.Identifier identifier) {
-        programIdentifier.type = identifier.getType();
-        programIdentifier.value = identifier.getValue();
-    }
-
-    public static ProgramIdentifier programIdentifierToHal(ProgramSelector.Identifier identifier) {
-        ProgramIdentifier programIdentifier = new ProgramIdentifier();
-        programIdentifierToHal(programIdentifier, identifier);
-        return programIdentifier;
-    }
-
-    public static ProgramSelector.Identifier programIdentifierFromHal(ProgramIdentifier programIdentifier) {
-        if (programIdentifier.type == 0) {
-            return null;
-        }
-        return new ProgramSelector.Identifier(programIdentifier.type, programIdentifier.value);
-    }
-
-    public static android.hardware.broadcastradio.V2_0.ProgramSelector programSelectorToHal(ProgramSelector programSelector) {
-        android.hardware.broadcastradio.V2_0.ProgramSelector programSelector2 = new android.hardware.broadcastradio.V2_0.ProgramSelector();
-        programIdentifierToHal(programSelector2.primaryId, programSelector.getPrimaryId());
-        Stream map = Arrays.stream(programSelector.getSecondaryIds()).map(new Function() { // from class: com.android.server.broadcastradio.hal2.Convert$$ExternalSyntheticLambda2
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return Convert.programIdentifierToHal((ProgramSelector.Identifier) obj);
-            }
+  public static android.hardware.broadcastradio.V2_0.ProgramSelector programSelectorToHal(
+      ProgramSelector programSelector) {
+    android.hardware.broadcastradio.V2_0.ProgramSelector programSelector2 =
+        new android.hardware.broadcastradio.V2_0.ProgramSelector();
+    programIdentifierToHal(programSelector2.primaryId, programSelector.getPrimaryId());
+    Stream map =
+        Arrays.stream(programSelector.getSecondaryIds())
+            .map(
+                new Function() { // from class:
+                                 // com.android.server.broadcastradio.hal2.Convert$$ExternalSyntheticLambda2
+                  @Override // java.util.function.Function
+                  public final Object apply(Object obj) {
+                    return Convert.programIdentifierToHal((ProgramSelector.Identifier) obj);
+                  }
+                });
+    final ArrayList arrayList = programSelector2.secondaryIds;
+    Objects.requireNonNull(arrayList);
+    map.forEachOrdered(
+        new Consumer() { // from class:
+                         // com.android.server.broadcastradio.hal2.Convert$$ExternalSyntheticLambda3
+          @Override // java.util.function.Consumer
+          public final void accept(Object obj) {
+            arrayList.add((ProgramIdentifier) obj);
+          }
         });
-        final ArrayList arrayList = programSelector2.secondaryIds;
-        Objects.requireNonNull(arrayList);
-        map.forEachOrdered(new Consumer() { // from class: com.android.server.broadcastradio.hal2.Convert$$ExternalSyntheticLambda3
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                arrayList.add((ProgramIdentifier) obj);
-            }
-        });
-        return programSelector2;
-    }
+    return programSelector2;
+  }
 
-    public static boolean isEmpty(android.hardware.broadcastradio.V2_0.ProgramSelector programSelector) {
-        ProgramIdentifier programIdentifier = programSelector.primaryId;
-        return programIdentifier.type == 0 && programIdentifier.value == 0 && programSelector.secondaryIds.size() == 0;
-    }
+  public static boolean isEmpty(
+      android.hardware.broadcastradio.V2_0.ProgramSelector programSelector) {
+    ProgramIdentifier programIdentifier = programSelector.primaryId;
+    return programIdentifier.type == 0
+        && programIdentifier.value == 0
+        && programSelector.secondaryIds.size() == 0;
+  }
 
-    public static ProgramSelector programSelectorFromHal(android.hardware.broadcastradio.V2_0.ProgramSelector programSelector) {
-        if (isEmpty(programSelector)) {
-            return null;
-        }
-        ProgramSelector.Identifier[] identifierArr = (ProgramSelector.Identifier[]) programSelector.secondaryIds.stream().map(new Function() { // from class: com.android.server.broadcastradio.hal2.Convert$$ExternalSyntheticLambda4
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                return Convert.programIdentifierFromHal((ProgramIdentifier) obj);
-            }
-        }).map(new Function() { // from class: com.android.server.broadcastradio.hal2.Convert$$ExternalSyntheticLambda5
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                ProgramSelector.Identifier identifier = (ProgramSelector.Identifier) obj;
-                Objects.requireNonNull(identifier);
-                return identifier;
-            }
-        }).toArray(new IntFunction() { // from class: com.android.server.broadcastradio.hal2.Convert$$ExternalSyntheticLambda6
-            @Override // java.util.function.IntFunction
-            public final Object apply(int i) {
-                ProgramSelector.Identifier[] lambda$programSelectorFromHal$2;
-                lambda$programSelectorFromHal$2 = Convert.lambda$programSelectorFromHal$2(i);
-                return lambda$programSelectorFromHal$2;
-            }
-        });
-        int identifierTypeToProgramType = identifierTypeToProgramType(programSelector.primaryId.type);
-        ProgramSelector.Identifier programIdentifierFromHal = programIdentifierFromHal(programSelector.primaryId);
-        Objects.requireNonNull(programIdentifierFromHal);
-        return new ProgramSelector(identifierTypeToProgramType, programIdentifierFromHal, identifierArr, (long[]) null);
+  public static ProgramSelector programSelectorFromHal(
+      android.hardware.broadcastradio.V2_0.ProgramSelector programSelector) {
+    if (isEmpty(programSelector)) {
+      return null;
     }
+    ProgramSelector.Identifier[] identifierArr =
+        (ProgramSelector.Identifier[])
+            programSelector.secondaryIds.stream()
+                .map(
+                    new Function() { // from class:
+                                     // com.android.server.broadcastradio.hal2.Convert$$ExternalSyntheticLambda4
+                      @Override // java.util.function.Function
+                      public final Object apply(Object obj) {
+                        return Convert.programIdentifierFromHal((ProgramIdentifier) obj);
+                      }
+                    })
+                .map(
+                    new Function() { // from class:
+                                     // com.android.server.broadcastradio.hal2.Convert$$ExternalSyntheticLambda5
+                      @Override // java.util.function.Function
+                      public final Object apply(Object obj) {
+                        ProgramSelector.Identifier identifier = (ProgramSelector.Identifier) obj;
+                        Objects.requireNonNull(identifier);
+                        return identifier;
+                      }
+                    })
+                .toArray(
+                    new IntFunction() { // from class:
+                                        // com.android.server.broadcastradio.hal2.Convert$$ExternalSyntheticLambda6
+                      @Override // java.util.function.IntFunction
+                      public final Object apply(int i) {
+                        ProgramSelector.Identifier[] lambda$programSelectorFromHal$2;
+                        lambda$programSelectorFromHal$2 =
+                            Convert.lambda$programSelectorFromHal$2(i);
+                        return lambda$programSelectorFromHal$2;
+                      }
+                    });
+    int identifierTypeToProgramType = identifierTypeToProgramType(programSelector.primaryId.type);
+    ProgramSelector.Identifier programIdentifierFromHal =
+        programIdentifierFromHal(programSelector.primaryId);
+    Objects.requireNonNull(programIdentifierFromHal);
+    return new ProgramSelector(
+        identifierTypeToProgramType, programIdentifierFromHal, identifierArr, (long[]) null);
+  }
 
-    public static /* synthetic */ ProgramSelector.Identifier[] lambda$programSelectorFromHal$2(int i) {
-        return new ProgramSelector.Identifier[i];
+  public static /* synthetic */ ProgramSelector.Identifier[] lambda$programSelectorFromHal$2(
+      int i) {
+    return new ProgramSelector.Identifier[i];
+  }
+
+  public class MetadataDef {
+    public String key;
+    public MetadataType type;
+
+    public MetadataDef(MetadataType metadataType, String str) {
+      this.type = metadataType;
+      this.key = str;
     }
+  }
 
-    public class MetadataDef {
-        public String key;
-        public MetadataType type;
+  static {
+    HashMap hashMap = new HashMap();
+    metadataKeys = hashMap;
+    MetadataType metadataType = MetadataType.STRING;
+    hashMap.put(1, new MetadataDef(metadataType, "android.hardware.radio.metadata.RDS_PS"));
+    MetadataType metadataType2 = MetadataType.INT;
+    hashMap.put(2, new MetadataDef(metadataType2, "android.hardware.radio.metadata.RDS_PTY"));
+    hashMap.put(3, new MetadataDef(metadataType2, "android.hardware.radio.metadata.RBDS_PTY"));
+    hashMap.put(4, new MetadataDef(metadataType, "android.hardware.radio.metadata.RDS_RT"));
+    hashMap.put(5, new MetadataDef(metadataType, "android.hardware.radio.metadata.TITLE"));
+    hashMap.put(6, new MetadataDef(metadataType, "android.hardware.radio.metadata.ARTIST"));
+    hashMap.put(7, new MetadataDef(metadataType, "android.hardware.radio.metadata.ALBUM"));
+    hashMap.put(8, new MetadataDef(metadataType2, "android.hardware.radio.metadata.ICON"));
+    hashMap.put(9, new MetadataDef(metadataType2, "android.hardware.radio.metadata.ART"));
+    hashMap.put(10, new MetadataDef(metadataType, "android.hardware.radio.metadata.PROGRAM_NAME"));
+    hashMap.put(
+        11, new MetadataDef(metadataType, "android.hardware.radio.metadata.DAB_ENSEMBLE_NAME"));
+    hashMap.put(
+        12,
+        new MetadataDef(metadataType, "android.hardware.radio.metadata.DAB_ENSEMBLE_NAME_SHORT"));
+    hashMap.put(
+        13, new MetadataDef(metadataType, "android.hardware.radio.metadata.DAB_SERVICE_NAME"));
+    hashMap.put(
+        14,
+        new MetadataDef(metadataType, "android.hardware.radio.metadata.DAB_SERVICE_NAME_SHORT"));
+    hashMap.put(
+        15, new MetadataDef(metadataType, "android.hardware.radio.metadata.DAB_COMPONENT_NAME"));
+    hashMap.put(
+        16,
+        new MetadataDef(metadataType, "android.hardware.radio.metadata.DAB_COMPONENT_NAME_SHORT"));
+  }
 
-        public MetadataDef(MetadataType metadataType, String str) {
-            this.type = metadataType;
-            this.key = str;
-        }
+  public static RadioMetadata metadataFromHal(ArrayList arrayList) {
+    RadioMetadata.Builder builder = new RadioMetadata.Builder();
+    Iterator it = arrayList.iterator();
+    while (it.hasNext()) {
+      Metadata metadata = (Metadata) it.next();
+      MetadataDef metadataDef = (MetadataDef) metadataKeys.get(Integer.valueOf(metadata.key));
+      if (metadataDef == null) {
+        Slog.i(
+            "BcRadio2Srv.convert",
+            "Ignored unknown metadata entry: " + MetadataKey.toString(metadata.key));
+      } else if (metadataDef.type == MetadataType.STRING) {
+        builder.putString(metadataDef.key, metadata.stringValue);
+      } else {
+        builder.putInt(metadataDef.key, (int) metadata.intValue);
+      }
     }
+    return builder.build();
+  }
 
-    static {
-        HashMap hashMap = new HashMap();
-        metadataKeys = hashMap;
-        MetadataType metadataType = MetadataType.STRING;
-        hashMap.put(1, new MetadataDef(metadataType, "android.hardware.radio.metadata.RDS_PS"));
-        MetadataType metadataType2 = MetadataType.INT;
-        hashMap.put(2, new MetadataDef(metadataType2, "android.hardware.radio.metadata.RDS_PTY"));
-        hashMap.put(3, new MetadataDef(metadataType2, "android.hardware.radio.metadata.RBDS_PTY"));
-        hashMap.put(4, new MetadataDef(metadataType, "android.hardware.radio.metadata.RDS_RT"));
-        hashMap.put(5, new MetadataDef(metadataType, "android.hardware.radio.metadata.TITLE"));
-        hashMap.put(6, new MetadataDef(metadataType, "android.hardware.radio.metadata.ARTIST"));
-        hashMap.put(7, new MetadataDef(metadataType, "android.hardware.radio.metadata.ALBUM"));
-        hashMap.put(8, new MetadataDef(metadataType2, "android.hardware.radio.metadata.ICON"));
-        hashMap.put(9, new MetadataDef(metadataType2, "android.hardware.radio.metadata.ART"));
-        hashMap.put(10, new MetadataDef(metadataType, "android.hardware.radio.metadata.PROGRAM_NAME"));
-        hashMap.put(11, new MetadataDef(metadataType, "android.hardware.radio.metadata.DAB_ENSEMBLE_NAME"));
-        hashMap.put(12, new MetadataDef(metadataType, "android.hardware.radio.metadata.DAB_ENSEMBLE_NAME_SHORT"));
-        hashMap.put(13, new MetadataDef(metadataType, "android.hardware.radio.metadata.DAB_SERVICE_NAME"));
-        hashMap.put(14, new MetadataDef(metadataType, "android.hardware.radio.metadata.DAB_SERVICE_NAME_SHORT"));
-        hashMap.put(15, new MetadataDef(metadataType, "android.hardware.radio.metadata.DAB_COMPONENT_NAME"));
-        hashMap.put(16, new MetadataDef(metadataType, "android.hardware.radio.metadata.DAB_COMPONENT_NAME_SHORT"));
-    }
+  public static RadioManager.ProgramInfo programInfoFromHal(ProgramInfo programInfo) {
+    Collection collection =
+        (Collection)
+            programInfo.relatedContent.stream()
+                .map(
+                    new Function() { // from class:
+                                     // com.android.server.broadcastradio.hal2.Convert$$ExternalSyntheticLambda7
+                      @Override // java.util.function.Function
+                      public final Object apply(Object obj) {
+                        ProgramSelector.Identifier lambda$programInfoFromHal$3;
+                        lambda$programInfoFromHal$3 =
+                            Convert.lambda$programInfoFromHal$3((ProgramIdentifier) obj);
+                        return lambda$programInfoFromHal$3;
+                      }
+                    })
+                .collect(Collectors.toList());
+    ProgramSelector programSelectorFromHal = programSelectorFromHal(programInfo.selector);
+    Objects.requireNonNull(programSelectorFromHal);
+    return new RadioManager.ProgramInfo(
+        programSelectorFromHal,
+        programIdentifierFromHal(programInfo.logicallyTunedTo),
+        programIdentifierFromHal(programInfo.physicallyTunedTo),
+        collection,
+        programInfo.infoFlags,
+        programInfo.signalQuality,
+        metadataFromHal(programInfo.metadata),
+        vendorInfoFromHal(programInfo.vendorInfo));
+  }
 
-    public static RadioMetadata metadataFromHal(ArrayList arrayList) {
-        RadioMetadata.Builder builder = new RadioMetadata.Builder();
-        Iterator it = arrayList.iterator();
-        while (it.hasNext()) {
-            Metadata metadata = (Metadata) it.next();
-            MetadataDef metadataDef = (MetadataDef) metadataKeys.get(Integer.valueOf(metadata.key));
-            if (metadataDef == null) {
-                Slog.i("BcRadio2Srv.convert", "Ignored unknown metadata entry: " + MetadataKey.toString(metadata.key));
-            } else if (metadataDef.type == MetadataType.STRING) {
-                builder.putString(metadataDef.key, metadata.stringValue);
-            } else {
-                builder.putInt(metadataDef.key, (int) metadata.intValue);
-            }
-        }
-        return builder.build();
-    }
+  public static /* synthetic */ ProgramSelector.Identifier lambda$programInfoFromHal$3(
+      ProgramIdentifier programIdentifier) {
+    ProgramSelector.Identifier programIdentifierFromHal =
+        programIdentifierFromHal(programIdentifier);
+    Objects.requireNonNull(programIdentifierFromHal);
+    return programIdentifierFromHal;
+  }
 
-    public static RadioManager.ProgramInfo programInfoFromHal(ProgramInfo programInfo) {
-        Collection collection = (Collection) programInfo.relatedContent.stream().map(new Function() { // from class: com.android.server.broadcastradio.hal2.Convert$$ExternalSyntheticLambda7
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                ProgramSelector.Identifier lambda$programInfoFromHal$3;
-                lambda$programInfoFromHal$3 = Convert.lambda$programInfoFromHal$3((ProgramIdentifier) obj);
-                return lambda$programInfoFromHal$3;
-            }
-        }).collect(Collectors.toList());
-        ProgramSelector programSelectorFromHal = programSelectorFromHal(programInfo.selector);
-        Objects.requireNonNull(programSelectorFromHal);
-        return new RadioManager.ProgramInfo(programSelectorFromHal, programIdentifierFromHal(programInfo.logicallyTunedTo), programIdentifierFromHal(programInfo.physicallyTunedTo), collection, programInfo.infoFlags, programInfo.signalQuality, metadataFromHal(programInfo.metadata), vendorInfoFromHal(programInfo.vendorInfo));
+  public static ProgramFilter programFilterToHal(ProgramList.Filter filter) {
+    if (filter == null) {
+      filter = new ProgramList.Filter();
     }
+    final ProgramFilter programFilter = new ProgramFilter();
+    Stream stream = filter.getIdentifierTypes().stream();
+    ArrayList arrayList = programFilter.identifierTypes;
+    Objects.requireNonNull(arrayList);
+    stream.forEachOrdered(new Convert$$ExternalSyntheticLambda0(arrayList));
+    filter.getIdentifiers().stream()
+        .forEachOrdered(
+            new Consumer() { // from class:
+                             // com.android.server.broadcastradio.hal2.Convert$$ExternalSyntheticLambda1
+              @Override // java.util.function.Consumer
+              public final void accept(Object obj) {
+                Convert.lambda$programFilterToHal$4(
+                    ProgramFilter.this, (ProgramSelector.Identifier) obj);
+              }
+            });
+    programFilter.includeCategories = filter.areCategoriesIncluded();
+    programFilter.excludeModifications = filter.areModificationsExcluded();
+    return programFilter;
+  }
 
-    public static /* synthetic */ ProgramSelector.Identifier lambda$programInfoFromHal$3(ProgramIdentifier programIdentifier) {
-        ProgramSelector.Identifier programIdentifierFromHal = programIdentifierFromHal(programIdentifier);
-        Objects.requireNonNull(programIdentifierFromHal);
-        return programIdentifierFromHal;
-    }
+  public static /* synthetic */ void lambda$programFilterToHal$4(
+      ProgramFilter programFilter, ProgramSelector.Identifier identifier) {
+    programFilter.identifiers.add(programIdentifierToHal(identifier));
+  }
 
-    public static ProgramFilter programFilterToHal(ProgramList.Filter filter) {
-        if (filter == null) {
-            filter = new ProgramList.Filter();
-        }
-        final ProgramFilter programFilter = new ProgramFilter();
-        Stream stream = filter.getIdentifierTypes().stream();
-        ArrayList arrayList = programFilter.identifierTypes;
-        Objects.requireNonNull(arrayList);
-        stream.forEachOrdered(new Convert$$ExternalSyntheticLambda0(arrayList));
-        filter.getIdentifiers().stream().forEachOrdered(new Consumer() { // from class: com.android.server.broadcastradio.hal2.Convert$$ExternalSyntheticLambda1
-            @Override // java.util.function.Consumer
-            public final void accept(Object obj) {
-                Convert.lambda$programFilterToHal$4(ProgramFilter.this, (ProgramSelector.Identifier) obj);
-            }
-        });
-        programFilter.includeCategories = filter.areCategoriesIncluded();
-        programFilter.excludeModifications = filter.areModificationsExcluded();
-        return programFilter;
-    }
+  public static ProgramList.Chunk programListChunkFromHal(ProgramListChunk programListChunk) {
+    return new ProgramList.Chunk(
+        programListChunk.purge,
+        programListChunk.complete,
+        (Set)
+            programListChunk.modified.stream()
+                .map(
+                    new Function() { // from class:
+                                     // com.android.server.broadcastradio.hal2.Convert$$ExternalSyntheticLambda8
+                      @Override // java.util.function.Function
+                      public final Object apply(Object obj) {
+                        RadioManager.ProgramInfo programInfoFromHal;
+                        programInfoFromHal = Convert.programInfoFromHal((ProgramInfo) obj);
+                        return programInfoFromHal;
+                      }
+                    })
+                .collect(Collectors.toSet()),
+        (Set)
+            programListChunk.removed.stream()
+                .map(
+                    new Function() { // from class:
+                                     // com.android.server.broadcastradio.hal2.Convert$$ExternalSyntheticLambda9
+                      @Override // java.util.function.Function
+                      public final Object apply(Object obj) {
+                        ProgramSelector.Identifier lambda$programListChunkFromHal$6;
+                        lambda$programListChunkFromHal$6 =
+                            Convert.lambda$programListChunkFromHal$6((ProgramIdentifier) obj);
+                        return lambda$programListChunkFromHal$6;
+                      }
+                    })
+                .collect(Collectors.toSet()));
+  }
 
-    public static /* synthetic */ void lambda$programFilterToHal$4(ProgramFilter programFilter, ProgramSelector.Identifier identifier) {
-        programFilter.identifiers.add(programIdentifierToHal(identifier));
-    }
+  public static /* synthetic */ ProgramSelector.Identifier lambda$programListChunkFromHal$6(
+      ProgramIdentifier programIdentifier) {
+    ProgramSelector.Identifier programIdentifierFromHal =
+        programIdentifierFromHal(programIdentifier);
+    Objects.requireNonNull(programIdentifierFromHal);
+    return programIdentifierFromHal;
+  }
 
-    public static ProgramList.Chunk programListChunkFromHal(ProgramListChunk programListChunk) {
-        return new ProgramList.Chunk(programListChunk.purge, programListChunk.complete, (Set) programListChunk.modified.stream().map(new Function() { // from class: com.android.server.broadcastradio.hal2.Convert$$ExternalSyntheticLambda8
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                RadioManager.ProgramInfo programInfoFromHal;
-                programInfoFromHal = Convert.programInfoFromHal((ProgramInfo) obj);
-                return programInfoFromHal;
-            }
-        }).collect(Collectors.toSet()), (Set) programListChunk.removed.stream().map(new Function() { // from class: com.android.server.broadcastradio.hal2.Convert$$ExternalSyntheticLambda9
-            @Override // java.util.function.Function
-            public final Object apply(Object obj) {
-                ProgramSelector.Identifier lambda$programListChunkFromHal$6;
-                lambda$programListChunkFromHal$6 = Convert.lambda$programListChunkFromHal$6((ProgramIdentifier) obj);
-                return lambda$programListChunkFromHal$6;
-            }
-        }).collect(Collectors.toSet()));
-    }
+  public static Announcement announcementFromHal(
+      android.hardware.broadcastradio.V2_0.Announcement announcement) {
+    ProgramSelector programSelectorFromHal = programSelectorFromHal(announcement.selector);
+    Objects.requireNonNull(programSelectorFromHal);
+    return new Announcement(
+        programSelectorFromHal, announcement.type, vendorInfoFromHal(announcement.vendorInfo));
+  }
 
-    public static /* synthetic */ ProgramSelector.Identifier lambda$programListChunkFromHal$6(ProgramIdentifier programIdentifier) {
-        ProgramSelector.Identifier programIdentifierFromHal = programIdentifierFromHal(programIdentifier);
-        Objects.requireNonNull(programIdentifierFromHal);
-        return programIdentifierFromHal;
+  public static ArrayList listToArrayList(List list) {
+    if (list == null) {
+      return null;
     }
-
-    public static Announcement announcementFromHal(android.hardware.broadcastradio.V2_0.Announcement announcement) {
-        ProgramSelector programSelectorFromHal = programSelectorFromHal(announcement.selector);
-        Objects.requireNonNull(programSelectorFromHal);
-        return new Announcement(programSelectorFromHal, announcement.type, vendorInfoFromHal(announcement.vendorInfo));
-    }
-
-    public static ArrayList listToArrayList(List list) {
-        if (list == null) {
-            return null;
-        }
-        return list instanceof ArrayList ? (ArrayList) list : new ArrayList(list);
-    }
+    return list instanceof ArrayList ? (ArrayList) list : new ArrayList(list);
+  }
 }

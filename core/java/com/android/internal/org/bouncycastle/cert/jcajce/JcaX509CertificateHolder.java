@@ -7,7 +7,7 @@ import java.security.cert.X509Certificate;
 
 /* loaded from: classes5.dex */
 public class JcaX509CertificateHolder extends X509CertificateHolder {
-    public JcaX509CertificateHolder(X509Certificate cert) throws CertificateEncodingException {
-        super(Certificate.getInstance(cert.getEncoded()));
-    }
+  public JcaX509CertificateHolder(X509Certificate cert) throws CertificateEncodingException {
+    super(Certificate.getInstance(cert.getEncoded()));
+  }
 }

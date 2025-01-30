@@ -2,15 +2,15 @@ package android.p009os;
 
 /* loaded from: classes3.dex */
 class BadTypeParcelableException extends BadParcelableException {
-    BadTypeParcelableException(String msg) {
-        super(msg);
-    }
+  BadTypeParcelableException(String msg) {
+    super(msg);
+  }
 
-    BadTypeParcelableException(Exception cause) {
-        super(cause);
-    }
+  BadTypeParcelableException(Exception cause) {
+    super(cause);
+  }
 
-    BadTypeParcelableException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
+  BadTypeParcelableException(String msg, Throwable cause) {
+    super(msg, cause);
+  }
 }

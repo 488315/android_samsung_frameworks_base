@@ -9,9 +9,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.CLASS)
 /* loaded from: classes.dex */
 public @interface EnforcePermission {
-    String[] allOf() default {};
+  String[] allOf() default {};
 
-    String[] anyOf() default {};
+  String[] anyOf() default {};
 
-    String value() default "";
+  String value() default "";
 }

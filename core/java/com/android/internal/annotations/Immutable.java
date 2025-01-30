@@ -8,5 +8,4 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.CLASS)
 /* loaded from: classes4.dex */
-public @interface Immutable {
-}
+public @interface Immutable {}

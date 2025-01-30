@@ -9,29 +9,32 @@ import java.util.ArrayList;
 
 /* loaded from: classes3.dex */
 public abstract class InternalTransformation implements Transformation, Parcelable {
-    private static final String TAG = "InternalTransformation";
+  private static final String TAG = "InternalTransformation";
 
-    abstract void apply(ValueFinder valueFinder, RemoteViews remoteViews, int i) throws Exception;
+  abstract void apply(ValueFinder valueFinder, RemoteViews remoteViews, int i) throws Exception;
 
-    public static boolean batchApply(ValueFinder finder, RemoteViews template, ArrayList<Pair<Integer, InternalTransformation>> transformations) {
-        int size = transformations.size();
-        if (Helper.sDebug) {
-            Log.m94d(TAG, "getPresentation(): applying " + size + " transformations");
-        }
-        for (int i = 0; i < size; i++) {
-            Pair<Integer, InternalTransformation> pair = transformations.get(i);
-            int id = pair.first.intValue();
-            InternalTransformation transformation = pair.second;
-            if (Helper.sDebug) {
-                Log.m94d(TAG, "#" + i + ": " + transformation);
-            }
-            try {
-                transformation.apply(finder, template, id);
-            } catch (Exception e) {
-                Log.m96e(TAG, "Could not apply transformation " + transformation + ": " + e.getClass());
-                return false;
-            }
-        }
-        return true;
+  public static boolean batchApply(
+      ValueFinder finder,
+      RemoteViews template,
+      ArrayList<Pair<Integer, InternalTransformation>> transformations) {
+    int size = transformations.size();
+    if (Helper.sDebug) {
+      Log.m94d(TAG, "getPresentation(): applying " + size + " transformations");
     }
+    for (int i = 0; i < size; i++) {
+      Pair<Integer, InternalTransformation> pair = transformations.get(i);
+      int id = pair.first.intValue();
+      InternalTransformation transformation = pair.second;
+      if (Helper.sDebug) {
+        Log.m94d(TAG, "#" + i + ": " + transformation);
+      }
+      try {
+        transformation.apply(finder, template, id);
+      } catch (Exception e) {
+        Log.m96e(TAG, "Could not apply transformation " + transformation + ": " + e.getClass());
+        return false;
+      }
+    }
+    return true;
+  }
 }

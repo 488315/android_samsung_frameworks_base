@@ -6,22 +6,21 @@ import android.p009os.Parcelable;
 @SystemApi
 /* loaded from: classes.dex */
 public abstract class Authority implements Parcelable {
-    protected Authority() {
-    }
+  protected Authority() {}
 
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        return o != null && getClass() == o.getClass();
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
+    return o != null && getClass() == o.getClass();
+  }
 
-    public int hashCode() {
-        return 0;
-    }
+  public int hashCode() {
+    return 0;
+  }
 
-    @Override // android.p009os.Parcelable
-    public int describeContents() {
-        return 0;
-    }
+  @Override // android.p009os.Parcelable
+  public int describeContents() {
+    return 0;
+  }
 }

@@ -16,25 +16,51 @@ import vendor.samsung.hardware.biometrics.fingerprint.V3_0.ISehBiometricsFingerp
 
 /* loaded from: classes.dex */
 public class FingerprintInternalEnumerateClient extends InternalEnumerateClient {
-    public FingerprintInternalEnumerateClient(Context context, Supplier supplier, IBinder iBinder, int i, String str, List list, BiometricUtils biometricUtils, int i2, BiometricLogger biometricLogger, BiometricContext biometricContext) {
-        super(context, supplier, iBinder, i, str, list, biometricUtils, i2, biometricLogger, biometricContext);
-    }
+  public FingerprintInternalEnumerateClient(
+      Context context,
+      Supplier supplier,
+      IBinder iBinder,
+      int i,
+      String str,
+      List list,
+      BiometricUtils biometricUtils,
+      int i2,
+      BiometricLogger biometricLogger,
+      BiometricContext biometricContext) {
+    super(
+        context,
+        supplier,
+        iBinder,
+        i,
+        str,
+        list,
+        biometricUtils,
+        i2,
+        biometricLogger,
+        biometricContext);
+  }
 
-    @Override // com.android.server.biometrics.sensors.HalClientMonitor
-    public void startHalOperation() {
-        if (!canUseEnumerateOperation()) {
-            this.mCallback.onClientFinished(this, false);
-            return;
-        }
-        try {
-            ((IBiometricsFingerprint) getFreshDaemon()).enumerate();
-        } catch (RemoteException e) {
-            Slog.e("FingerprintInternalEnumerateClient", "Remote exception when requesting enumerate", e);
-            this.mCallback.onClientFinished(this, false);
-        }
+  @Override // com.android.server.biometrics.sensors.HalClientMonitor
+  public void startHalOperation() {
+    if (!canUseEnumerateOperation()) {
+      this.mCallback.onClientFinished(this, false);
+      return;
     }
+    try {
+      ((IBiometricsFingerprint) getFreshDaemon()).enumerate();
+    } catch (RemoteException e) {
+      Slog.e("FingerprintInternalEnumerateClient", "Remote exception when requesting enumerate", e);
+      this.mCallback.onClientFinished(this, false);
+    }
+  }
 
-    public final boolean canUseEnumerateOperation() {
-        return !(((IBiometricsFingerprint) getFreshDaemon()) instanceof ISehBiometricsFingerprint) || new SemFpBaseRequestClient.Builder(getContext(), getBiometricContext(), this.mLazyDaemon, getSensorId()).setCommand(11).build().startWithoutScheduler() >= 0;
-    }
+  public final boolean canUseEnumerateOperation() {
+    return !(((IBiometricsFingerprint) getFreshDaemon()) instanceof ISehBiometricsFingerprint)
+        || new SemFpBaseRequestClient.Builder(
+                    getContext(), getBiometricContext(), this.mLazyDaemon, getSensorId())
+                .setCommand(11)
+                .build()
+                .startWithoutScheduler()
+            >= 0;
+  }
 }

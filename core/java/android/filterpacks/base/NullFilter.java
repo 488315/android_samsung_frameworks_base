@@ -5,17 +5,17 @@ import android.filterfw.core.FilterContext;
 
 /* loaded from: classes.dex */
 public class NullFilter extends Filter {
-    public NullFilter(String name) {
-        super(name);
-    }
+  public NullFilter(String name) {
+    super(name);
+  }
 
-    @Override // android.filterfw.core.Filter
-    public void setupPorts() {
-        addInputPort("frame");
-    }
+  @Override // android.filterfw.core.Filter
+  public void setupPorts() {
+    addInputPort("frame");
+  }
 
-    @Override // android.filterfw.core.Filter
-    public void process(FilterContext context) {
-        pullInput("frame");
-    }
+  @Override // android.filterfw.core.Filter
+  public void process(FilterContext context) {
+    pullInput("frame");
+  }
 }

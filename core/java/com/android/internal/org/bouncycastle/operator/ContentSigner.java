@@ -5,9 +5,9 @@ import java.io.OutputStream;
 
 /* loaded from: classes5.dex */
 public interface ContentSigner {
-    AlgorithmIdentifier getAlgorithmIdentifier();
+  AlgorithmIdentifier getAlgorithmIdentifier();
 
-    OutputStream getOutputStream();
+  OutputStream getOutputStream();
 
-    byte[] getSignature();
+  byte[] getSignature();
 }

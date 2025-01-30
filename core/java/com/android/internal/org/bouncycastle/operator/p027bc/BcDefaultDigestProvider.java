@@ -16,53 +16,69 @@ import java.util.Map;
 
 /* loaded from: classes5.dex */
 public class BcDefaultDigestProvider implements BcDigestProvider {
-    private static final Map lookup = createTable();
-    public static final BcDigestProvider INSTANCE = new BcDefaultDigestProvider();
+  private static final Map lookup = createTable();
+  public static final BcDigestProvider INSTANCE = new BcDefaultDigestProvider();
 
-    private static Map createTable() {
-        Map table = new HashMap();
-        table.put(OIWObjectIdentifiers.idSHA1, new BcDigestProvider() { // from class: com.android.internal.org.bouncycastle.operator.bc.BcDefaultDigestProvider.1
-            @Override // com.android.internal.org.bouncycastle.operator.p027bc.BcDigestProvider
-            public ExtendedDigest get(AlgorithmIdentifier digestAlgorithmIdentifier) {
-                return new SHA1Digest();
-            }
+  private static Map createTable() {
+    Map table = new HashMap();
+    table.put(
+        OIWObjectIdentifiers.idSHA1,
+        new BcDigestProvider() { // from class:
+                                 // com.android.internal.org.bouncycastle.operator.bc.BcDefaultDigestProvider.1
+          @Override // com.android.internal.org.bouncycastle.operator.p027bc.BcDigestProvider
+          public ExtendedDigest get(AlgorithmIdentifier digestAlgorithmIdentifier) {
+            return new SHA1Digest();
+          }
         });
-        table.put(NISTObjectIdentifiers.id_sha224, new BcDigestProvider() { // from class: com.android.internal.org.bouncycastle.operator.bc.BcDefaultDigestProvider.2
-            @Override // com.android.internal.org.bouncycastle.operator.p027bc.BcDigestProvider
-            public ExtendedDigest get(AlgorithmIdentifier digestAlgorithmIdentifier) {
-                return new SHA224Digest();
-            }
+    table.put(
+        NISTObjectIdentifiers.id_sha224,
+        new BcDigestProvider() { // from class:
+                                 // com.android.internal.org.bouncycastle.operator.bc.BcDefaultDigestProvider.2
+          @Override // com.android.internal.org.bouncycastle.operator.p027bc.BcDigestProvider
+          public ExtendedDigest get(AlgorithmIdentifier digestAlgorithmIdentifier) {
+            return new SHA224Digest();
+          }
         });
-        table.put(NISTObjectIdentifiers.id_sha256, new BcDigestProvider() { // from class: com.android.internal.org.bouncycastle.operator.bc.BcDefaultDigestProvider.3
-            @Override // com.android.internal.org.bouncycastle.operator.p027bc.BcDigestProvider
-            public ExtendedDigest get(AlgorithmIdentifier digestAlgorithmIdentifier) {
-                return new SHA256Digest();
-            }
+    table.put(
+        NISTObjectIdentifiers.id_sha256,
+        new BcDigestProvider() { // from class:
+                                 // com.android.internal.org.bouncycastle.operator.bc.BcDefaultDigestProvider.3
+          @Override // com.android.internal.org.bouncycastle.operator.p027bc.BcDigestProvider
+          public ExtendedDigest get(AlgorithmIdentifier digestAlgorithmIdentifier) {
+            return new SHA256Digest();
+          }
         });
-        table.put(NISTObjectIdentifiers.id_sha384, new BcDigestProvider() { // from class: com.android.internal.org.bouncycastle.operator.bc.BcDefaultDigestProvider.4
-            @Override // com.android.internal.org.bouncycastle.operator.p027bc.BcDigestProvider
-            public ExtendedDigest get(AlgorithmIdentifier digestAlgorithmIdentifier) {
-                return new SHA384Digest();
-            }
+    table.put(
+        NISTObjectIdentifiers.id_sha384,
+        new BcDigestProvider() { // from class:
+                                 // com.android.internal.org.bouncycastle.operator.bc.BcDefaultDigestProvider.4
+          @Override // com.android.internal.org.bouncycastle.operator.p027bc.BcDigestProvider
+          public ExtendedDigest get(AlgorithmIdentifier digestAlgorithmIdentifier) {
+            return new SHA384Digest();
+          }
         });
-        table.put(NISTObjectIdentifiers.id_sha512, new BcDigestProvider() { // from class: com.android.internal.org.bouncycastle.operator.bc.BcDefaultDigestProvider.5
-            @Override // com.android.internal.org.bouncycastle.operator.p027bc.BcDigestProvider
-            public ExtendedDigest get(AlgorithmIdentifier digestAlgorithmIdentifier) {
-                return new SHA512Digest();
-            }
+    table.put(
+        NISTObjectIdentifiers.id_sha512,
+        new BcDigestProvider() { // from class:
+                                 // com.android.internal.org.bouncycastle.operator.bc.BcDefaultDigestProvider.5
+          @Override // com.android.internal.org.bouncycastle.operator.p027bc.BcDigestProvider
+          public ExtendedDigest get(AlgorithmIdentifier digestAlgorithmIdentifier) {
+            return new SHA512Digest();
+          }
         });
-        return Collections.unmodifiableMap(table);
-    }
+    return Collections.unmodifiableMap(table);
+  }
 
-    private BcDefaultDigestProvider() {
-    }
+  private BcDefaultDigestProvider() {}
 
-    @Override // com.android.internal.org.bouncycastle.operator.p027bc.BcDigestProvider
-    public ExtendedDigest get(AlgorithmIdentifier digestAlgorithmIdentifier) throws OperatorCreationException {
-        BcDigestProvider extProv = (BcDigestProvider) lookup.get(digestAlgorithmIdentifier.getAlgorithm());
-        if (extProv == null) {
-            throw new OperatorCreationException("cannot recognise digest");
-        }
-        return extProv.get(digestAlgorithmIdentifier);
+  @Override // com.android.internal.org.bouncycastle.operator.p027bc.BcDigestProvider
+  public ExtendedDigest get(AlgorithmIdentifier digestAlgorithmIdentifier)
+      throws OperatorCreationException {
+    BcDigestProvider extProv =
+        (BcDigestProvider) lookup.get(digestAlgorithmIdentifier.getAlgorithm());
+    if (extProv == null) {
+      throw new OperatorCreationException("cannot recognise digest");
     }
+    return extProv.get(digestAlgorithmIdentifier);
+  }
 }
