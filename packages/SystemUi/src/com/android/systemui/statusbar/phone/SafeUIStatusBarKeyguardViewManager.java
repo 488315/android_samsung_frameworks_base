@@ -39,9 +39,9 @@ import com.android.systemui.keyguard.data.repository.KeyguardBouncerRepositoryIm
 import com.android.systemui.keyguard.domain.interactor.AlternateBouncerInteractor;
 import com.android.systemui.keyguard.domain.interactor.PrimaryBouncerCallbackInteractor;
 import com.android.systemui.keyguard.domain.interactor.PrimaryBouncerInteractor;
-import com.android.systemui.keyguard.p009ui.binder.KeyguardBouncerViewBinder$bind$delegate$1;
-import com.android.systemui.keyguard.p009ui.viewmodel.KeyguardBouncerViewModel;
-import com.android.systemui.keyguard.p009ui.viewmodel.PrimaryBouncerToGoneTransitionViewModel;
+import com.android.systemui.keyguard.ui.binder.KeyguardBouncerViewBinder$bind$delegate$1;
+import com.android.systemui.keyguard.ui.viewmodel.KeyguardBouncerViewModel;
+import com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToGoneTransitionViewModel;
 import com.android.systemui.keyguard.shared.model.BouncerShowMessageModel;
 import com.android.systemui.navigationbar.NavigationModeController;
 import com.android.systemui.navigationbar.TaskbarDelegate;

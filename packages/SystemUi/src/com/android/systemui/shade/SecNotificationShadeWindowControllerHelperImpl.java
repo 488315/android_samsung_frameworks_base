@@ -34,7 +34,7 @@ import com.android.systemui.wallpaper.KeyguardWallpaper;
 import com.android.systemui.wallpaper.WallpaperUtils;
 import com.samsung.android.desktopsystemui.sharedlib.system.QuickStepContract;
 import com.samsung.android.feature.SemFloatingFeature;
-import com.samsung.android.knox.p045ex.peripheral.PeripheralConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 import dagger.Lazy;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;

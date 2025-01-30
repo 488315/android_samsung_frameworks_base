@@ -8,7 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.android.systemui.R;
-import com.android.systemui.p014qp.util.SubscreenUtil;
+import com.android.systemui.qp.util.SubscreenUtil;
 import com.samsung.android.globalactions.presentation.view.ResourceFactory;
 import com.samsung.android.globalactions.presentation.view.ResourceType;
 import com.samsung.android.globalactions.presentation.viewmodel.ActionInfo;

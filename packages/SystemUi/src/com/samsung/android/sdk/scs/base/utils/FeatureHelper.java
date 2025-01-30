@@ -1,6 +1,6 @@
 package com.samsung.android.sdk.scs.base.utils;
 
-import com.samsung.android.scs.p047ai.sdkcommon.feature.FeatureConfig;
+import com.samsung.android.scs.ai.sdkcommon.feature.FeatureConfig;
 import java.util.HashMap;
 import java.util.Iterator;
 import org.json.JSONObject;

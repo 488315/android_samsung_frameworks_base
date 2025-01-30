@@ -7,7 +7,7 @@ import com.android.internal.logging.UiEventLogger;
 import com.android.systemui.classifier.FalsingCollector;
 import com.android.systemui.dump.DumpManager;
 import com.android.systemui.flags.FeatureFlags;
-import com.android.systemui.media.controls.p010ui.KeyguardMediaController;
+import com.android.systemui.media.controls.ui.KeyguardMediaController;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.shade.ShadeController;

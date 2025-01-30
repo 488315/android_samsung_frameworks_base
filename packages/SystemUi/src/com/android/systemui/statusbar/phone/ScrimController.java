@@ -42,7 +42,7 @@ import com.android.systemui.keyguard.DisplayLifecycle;
 import com.android.systemui.keyguard.KeyguardFastBioUnlockController;
 import com.android.systemui.keyguard.KeyguardUnlockAnimationController;
 import com.android.systemui.keyguard.domain.interactor.KeyguardTransitionInteractor;
-import com.android.systemui.keyguard.p009ui.viewmodel.PrimaryBouncerToGoneTransitionViewModel;
+import com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToGoneTransitionViewModel;
 import com.android.systemui.scrim.ScrimView;
 import com.android.systemui.scrim.ScrimView$$ExternalSyntheticLambda4;
 import com.android.systemui.scrim.ScrimViewBase;

@@ -1,8 +1,8 @@
 package com.android.systemui.statusbar.notification.collection.coordinator;
 
 import android.util.Log;
-import com.android.p038wm.shell.bubbles.BubbleController;
-import com.android.p038wm.shell.bubbles.Bubbles;
+import com.android.wm.shell.bubbles.BubbleController;
+import com.android.wm.shell.bubbles.Bubbles;
 import com.android.systemui.Dependency;
 import com.android.systemui.NotiRune;
 import com.android.systemui.statusbar.LockscreenNotificationManager;

@@ -56,7 +56,7 @@ import androidx.slice.widget.RowView$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardFaceListenModel$$ExternalSyntheticOutline0;
 import com.android.keyguard.logging.AbstractC0866xb1ce8deb;
 import com.android.keyguard.punchhole.VIDirector$$ExternalSyntheticOutline0;
-import com.android.p038wm.shell.common.DisplayController;
+import com.android.wm.shell.common.DisplayController;
 import com.android.systemui.Dependency;
 import com.android.systemui.LsRune;
 import com.android.systemui.controls.management.ControlsListingControllerImpl$$ExternalSyntheticOutline0;

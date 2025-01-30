@@ -11,7 +11,7 @@ import com.android.systemui.Prefs;
 import com.android.systemui.demomode.DemoMode;
 import com.android.systemui.demomode.DemoModeController;
 import com.android.systemui.keyguard.KeyguardViewMediator;
-import com.android.systemui.p016qs.tiles.DndTile;
+import com.android.systemui.qs.tiles.DndTile;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.PluginDependencyProvider;
 import com.android.systemui.plugins.VolumeDialog;

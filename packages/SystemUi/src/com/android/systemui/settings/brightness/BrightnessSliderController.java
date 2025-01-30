@@ -20,7 +20,7 @@ import com.android.systemui.Dependency;
 import com.android.systemui.Gefingerpoken;
 import com.android.systemui.QpRune;
 import com.android.systemui.R;
-import com.android.systemui.p016qs.SecQSPanelResourcePicker;
+import com.android.systemui.qs.SecQSPanelResourcePicker;
 import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.settings.brightness.ToggleSlider;
 import com.android.systemui.statusbar.phone.SystemUIDialog;

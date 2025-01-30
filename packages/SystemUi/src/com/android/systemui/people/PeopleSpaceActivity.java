@@ -8,8 +8,8 @@ import androidx.activity.ComponentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import com.android.systemui.R;
 import com.android.systemui.compose.ComposeFacade;
-import com.android.systemui.people.p012ui.view.PeopleViewBinder;
-import com.android.systemui.people.p012ui.viewmodel.PeopleViewModel;
+import com.android.systemui.people.ui.view.PeopleViewBinder;
+import com.android.systemui.people.ui.viewmodel.PeopleViewModel;
 import kotlin.jvm.functions.Function1;
 
 /* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */

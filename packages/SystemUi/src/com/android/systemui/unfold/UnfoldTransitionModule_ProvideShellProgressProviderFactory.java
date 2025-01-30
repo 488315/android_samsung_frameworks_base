@@ -1,6 +1,6 @@
 package com.android.systemui.unfold;
 
-import com.android.p038wm.shell.unfold.ShellUnfoldProgressProvider;
+import com.android.wm.shell.unfold.ShellUnfoldProgressProvider;
 import com.android.systemui.unfold.config.ResourceUnfoldTransitionConfig;
 import com.android.systemui.unfold.config.UnfoldTransitionConfig;
 import java.util.Optional;

@@ -7,9 +7,9 @@ import com.android.keyguard.KeyguardCarrierPasswordViewController$$ExternalSynth
 import com.android.settingslib.SignalIcon$IconGroup;
 import com.android.systemui.statusbar.connectivity.WifiIcons;
 import com.android.systemui.statusbar.pipeline.carrier.CarrierInfraMediator;
-import com.android.systemui.statusbar.pipeline.wifi.p029ui.util.SamsungWifiIcons;
-import com.android.systemui.statusbar.pipeline.wifi.p029ui.util.WifiSignalIconResource;
-import com.android.systemui.statusbar.pipeline.wifi.p029ui.util.WifiSignalIconResourceKt;
+import com.android.systemui.statusbar.pipeline.wifi.ui.util.SamsungWifiIcons;
+import com.android.systemui.statusbar.pipeline.wifi.ui.util.WifiSignalIconResource;
+import com.android.systemui.statusbar.pipeline.wifi.ui.util.WifiSignalIconResourceKt;
 import com.android.systemui.statusbar.pipeline.wifi.shared.model.WifiNetworkModel;
 import java.util.Iterator;
 import java.util.List;

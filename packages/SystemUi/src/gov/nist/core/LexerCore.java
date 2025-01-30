@@ -2,7 +2,7 @@ package gov.nist.core;
 
 import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOutline0;
 import com.samsung.android.knox.custom.CustomDeviceManager;
-import com.samsung.android.knox.p045ex.peripheral.PeripheralConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 import gov.nist.javax.sip.Utils;
 import java.text.ParseException;
 import java.util.Hashtable;

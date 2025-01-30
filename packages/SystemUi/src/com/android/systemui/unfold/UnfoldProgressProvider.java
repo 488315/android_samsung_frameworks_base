@@ -1,6 +1,6 @@
 package com.android.systemui.unfold;
 
-import com.android.p038wm.shell.unfold.ShellUnfoldProgressProvider;
+import com.android.wm.shell.unfold.ShellUnfoldProgressProvider;
 import com.android.systemui.unfold.UnfoldTransitionProgressProvider;
 import java.util.concurrent.Executor;
 
@@ -13,7 +13,7 @@ public final class UnfoldProgressProvider implements ShellUnfoldProgressProvider
         this.unfoldProgressProvider = unfoldTransitionProgressProvider;
     }
 
-    @Override // com.android.p038wm.shell.unfold.ShellUnfoldProgressProvider
+    @Override // com.android.wm.shell.unfold.ShellUnfoldProgressProvider
     public final void addListener(final Executor executor, final ShellUnfoldProgressProvider.UnfoldListener unfoldListener) {
         this.unfoldProgressProvider.addCallback(new UnfoldTransitionProgressProvider.TransitionProgressListener() { // from class: com.android.systemui.unfold.UnfoldProgressProvider$addListener$1
             @Override // com.android.systemui.unfold.UnfoldTransitionProgressProvider.TransitionProgressListener

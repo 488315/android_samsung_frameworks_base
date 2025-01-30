@@ -27,10 +27,10 @@ import com.android.systemui.animation.Expandable;
 import com.android.systemui.animation.Expandable$Companion$fromView$1;
 import com.android.systemui.animation.LaunchAnimator;
 import com.android.systemui.animation.ViewDialogLaunchAnimatorController;
-import com.android.systemui.p016qs.PseudoGridView;
-import com.android.systemui.p016qs.QSUserSwitcherEvent;
-import com.android.systemui.p016qs.tiles.UserDetailView;
-import com.android.systemui.p016qs.user.UserSwitchDialogController;
+import com.android.systemui.qs.PseudoGridView;
+import com.android.systemui.qs.QSUserSwitcherEvent;
+import com.android.systemui.qs.tiles.UserDetailView;
+import com.android.systemui.qs.user.UserSwitchDialogController;
 import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.statusbar.StatusBarStateControllerImpl;
@@ -45,7 +45,7 @@ import com.android.systemui.statusbar.phone.UserAvatarView;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.user.data.source.UserRecord;
-import com.android.systemui.user.p035ui.dialog.DialogShowerImpl;
+import com.android.systemui.user.ui.dialog.DialogShowerImpl;
 import com.android.systemui.util.ViewController;
 
 /* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */

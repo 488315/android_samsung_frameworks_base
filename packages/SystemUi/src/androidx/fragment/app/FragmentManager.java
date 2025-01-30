@@ -47,7 +47,7 @@ import androidx.loader.app.LoaderManagerImpl;
 import androidx.savedstate.SavedStateRegistry;
 import androidx.savedstate.SavedStateRegistryOwner;
 import com.android.systemui.R;
-import com.samsung.android.knox.p045ex.peripheral.PeripheralConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;

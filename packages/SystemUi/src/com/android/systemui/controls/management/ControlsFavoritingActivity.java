@@ -33,7 +33,7 @@ import com.android.systemui.controls.controller.ControlsControllerKt$createLoadD
 import com.android.systemui.controls.controller.StructureInfo;
 import com.android.systemui.controls.management.ControlsListingController;
 import com.android.systemui.controls.management.ControlsModel;
-import com.android.systemui.controls.p005ui.ControlsActivity;
+import com.android.systemui.controls.ui.ControlsActivity;
 import com.android.systemui.flags.FeatureFlags;
 import com.android.systemui.flags.FeatureFlagsRelease;
 import com.android.systemui.flags.Flags;

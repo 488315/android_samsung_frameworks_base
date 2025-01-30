@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import com.android.systemui.keyguard.KeyguardEditModeControllerImpl;
-import com.samsung.android.knox.p045ex.knoxAI.KnoxAiManagerInternal;
+import com.samsung.android.knox.ex.knoxAI.KnoxAiManagerInternal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

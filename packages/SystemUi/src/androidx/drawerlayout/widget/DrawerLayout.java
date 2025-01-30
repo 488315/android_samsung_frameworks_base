@@ -31,7 +31,7 @@ import androidx.core.view.accessibility.AccessibilityViewCommand;
 import androidx.customview.view.AbsSavedState;
 import androidx.customview.widget.ViewDragHelper;
 import androidx.drawerlayout.R$styleable;
-import com.samsung.android.knox.p045ex.peripheral.PeripheralConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 import com.samsung.systemui.splugins.volume.VolumePanelValues;
 import java.util.ArrayList;
 import java.util.WeakHashMap;

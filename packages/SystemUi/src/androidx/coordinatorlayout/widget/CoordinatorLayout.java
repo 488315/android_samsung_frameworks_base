@@ -35,7 +35,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.customview.view.AbsSavedState;
 import com.android.systemui.R;
 import com.google.android.material.appbar.AppBarLayout;
-import com.samsung.android.knox.p045ex.peripheral.PeripheralConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Constructor;

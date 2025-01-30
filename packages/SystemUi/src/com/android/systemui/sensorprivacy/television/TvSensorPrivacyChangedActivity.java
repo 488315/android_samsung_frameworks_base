@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.systemui.R;
-import com.android.systemui.p032tv.TvBottomSheetActivity;
+import com.android.systemui.tv.TvBottomSheetActivity;
 import com.android.systemui.statusbar.policy.IndividualSensorPrivacyController;
 import com.android.systemui.statusbar.policy.IndividualSensorPrivacyControllerImpl;
 import com.android.systemui.util.settings.GlobalSettings;
@@ -36,7 +36,7 @@ public class TvSensorPrivacyChangedActivity extends TvBottomSheetActivity {
     }
 
     /* JADX WARN: Type inference failed for: r3v8, types: [com.android.systemui.sensorprivacy.television.TvSensorPrivacyChangedActivity$$ExternalSyntheticLambda0] */
-    @Override // com.android.systemui.p032tv.TvBottomSheetActivity, android.app.Activity
+    @Override // com.android.systemui.tv.TvBottomSheetActivity, android.app.Activity
     public final void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         getWindow().addSystemFlags(524288);

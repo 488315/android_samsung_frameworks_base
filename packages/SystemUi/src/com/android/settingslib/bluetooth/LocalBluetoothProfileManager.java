@@ -20,7 +20,7 @@ import com.android.settingslib.bluetooth.HearingAidInfo;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.policy.SBluetoothControllerImpl;
 import com.samsung.android.knox.net.vpn.KnoxVpnPolicyConstants;
-import com.samsung.android.knox.p045ex.peripheral.PeripheralConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 import com.samsung.android.settingslib.bluetooth.SemBluetoothCallback;
 import com.samsung.android.settingslib.bluetooth.SppProfile;
 import java.util.ArrayList;

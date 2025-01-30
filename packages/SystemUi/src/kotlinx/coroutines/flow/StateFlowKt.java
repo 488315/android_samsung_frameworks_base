@@ -1,6 +1,6 @@
 package kotlinx.coroutines.flow;
 
-import com.samsung.android.knox.p045ex.peripheral.PeripheralBarcodeConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralBarcodeConstants;
 import kotlinx.coroutines.flow.internal.NullSurrogateKt;
 import kotlinx.coroutines.internal.Symbol;
 

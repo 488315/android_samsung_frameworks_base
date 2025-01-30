@@ -4,7 +4,7 @@ import android.net.wifi.WifiManager;
 import com.android.systemui.statusbar.pipeline.shared.data.model.DataActivityModelKt;
 import com.android.systemui.statusbar.pipeline.wifi.shared.WifiInputLogger;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
-import com.samsung.android.knox.p045ex.peripheral.PeripheralBarcodeConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralBarcodeConstants;
 import java.util.concurrent.Executor;
 import kotlin.ResultKt;
 import kotlin.Unit;

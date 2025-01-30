@@ -7,26 +7,26 @@ import android.os.IBinder;
 import android.util.Log;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
-import com.android.p038wm.shell.common.HandlerExecutor;
-import com.android.p038wm.shell.common.ShellExecutor;
-import com.android.p038wm.shell.desktopmode.DesktopMode;
-import com.android.p038wm.shell.desktopmode.DesktopModeTaskRepository;
-import com.android.p038wm.shell.onehanded.OneHanded;
-import com.android.p038wm.shell.onehanded.OneHandedController;
-import com.android.p038wm.shell.onehanded.OneHandedController$$ExternalSyntheticLambda0;
-import com.android.p038wm.shell.onehanded.OneHandedController$OneHandedImpl$$ExternalSyntheticLambda0;
-import com.android.p038wm.shell.onehanded.OneHandedController$OneHandedImpl$$ExternalSyntheticLambda2;
-import com.android.p038wm.shell.onehanded.OneHandedTransitionCallback;
-import com.android.p038wm.shell.pip.Pip;
-import com.android.p038wm.shell.recents.RecentTasks;
-import com.android.p038wm.shell.recents.RecentTasksController;
-import com.android.p038wm.shell.splitscreen.EnterSplitGestureHandler;
-import com.android.p038wm.shell.splitscreen.SplitScreen;
-import com.android.p038wm.shell.splitscreen.SplitScreenController;
-import com.android.p038wm.shell.splitscreen.SplitScreenController$$ExternalSyntheticLambda3;
-import com.android.p038wm.shell.splitscreen.SplitScreenController$SplitScreenImpl$$ExternalSyntheticLambda0;
-import com.android.p038wm.shell.splitscreen.SplitScreenController$SplitScreenImpl$$ExternalSyntheticLambda3;
-import com.android.p038wm.shell.sysui.ShellInterface;
+import com.android.wm.shell.common.HandlerExecutor;
+import com.android.wm.shell.common.ShellExecutor;
+import com.android.wm.shell.desktopmode.DesktopMode;
+import com.android.wm.shell.desktopmode.DesktopModeTaskRepository;
+import com.android.wm.shell.onehanded.OneHanded;
+import com.android.wm.shell.onehanded.OneHandedController;
+import com.android.wm.shell.onehanded.OneHandedController$$ExternalSyntheticLambda0;
+import com.android.wm.shell.onehanded.OneHandedController$OneHandedImpl$$ExternalSyntheticLambda0;
+import com.android.wm.shell.onehanded.OneHandedController$OneHandedImpl$$ExternalSyntheticLambda2;
+import com.android.wm.shell.onehanded.OneHandedTransitionCallback;
+import com.android.wm.shell.pip.Pip;
+import com.android.wm.shell.recents.RecentTasks;
+import com.android.wm.shell.recents.RecentTasksController;
+import com.android.wm.shell.splitscreen.EnterSplitGestureHandler;
+import com.android.wm.shell.splitscreen.SplitScreen;
+import com.android.wm.shell.splitscreen.SplitScreenController;
+import com.android.wm.shell.splitscreen.SplitScreenController$$ExternalSyntheticLambda3;
+import com.android.wm.shell.splitscreen.SplitScreenController$SplitScreenImpl$$ExternalSyntheticLambda0;
+import com.android.wm.shell.splitscreen.SplitScreenController$SplitScreenImpl$$ExternalSyntheticLambda3;
+import com.android.wm.shell.sysui.ShellInterface;
 import com.android.systemui.CoreStartable;
 import com.android.systemui.Dependency;
 import com.android.systemui.keyguard.KeyguardUnlockAnimationController;
@@ -140,17 +140,17 @@ public final class WMShell implements CoreStartable, CommandQueue.Callbacks, Pro
         public C37569() {
         }
 
-        @Override // com.android.p038wm.shell.onehanded.OneHandedTransitionCallback
+        @Override // com.android.wm.shell.onehanded.OneHandedTransitionCallback
         public final void onStartFinished(Rect rect) {
             WMShell.this.mSysUiMainExecutor.execute(new WMShell$9$$ExternalSyntheticLambda0(this, 1));
         }
 
-        @Override // com.android.p038wm.shell.onehanded.OneHandedTransitionCallback
+        @Override // com.android.wm.shell.onehanded.OneHandedTransitionCallback
         public final void onStartTransition() {
             WMShell.this.mSysUiMainExecutor.execute(new WMShell$9$$ExternalSyntheticLambda0(this, 2));
         }
 
-        @Override // com.android.p038wm.shell.onehanded.OneHandedTransitionCallback
+        @Override // com.android.wm.shell.onehanded.OneHandedTransitionCallback
         public final void onStopFinished(Rect rect) {
             WMShell.this.mSysUiMainExecutor.execute(new WMShell$9$$ExternalSyntheticLambda0(this, 0));
         }
@@ -304,7 +304,7 @@ public final class WMShell implements CoreStartable, CommandQueue.Callbacks, Pro
                         this.val$listener = consumer2;
                     }
 
-                    @Override // com.android.p038wm.shell.recents.RecentsTransitionStateListener
+                    @Override // com.android.wm.shell.recents.RecentsTransitionStateListener
                     public final void onAnimationStateChanged(final boolean z) {
                         final Consumer consumer2 = this.val$listener;
                         this.val$executor.execute(new Runnable() { // from class: com.android.wm.shell.recents.RecentTasksController$RecentTasksImpl$1$$ExternalSyntheticLambda0

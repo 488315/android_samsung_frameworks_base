@@ -6,7 +6,7 @@ import android.util.MathUtils;
 import androidx.recyclerview.widget.GridLayoutManager$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
 import com.android.systemui.dump.DumpManager;
-import com.android.systemui.plugins.p013qs.InterfaceC1922QS;
+import com.android.systemui.plugins.qs.InterfaceC1922QS;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import kotlin.jvm.functions.Function0;
 import kotlin.text.StringsKt__IndentKt;

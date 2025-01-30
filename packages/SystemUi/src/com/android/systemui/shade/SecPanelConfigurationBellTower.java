@@ -6,7 +6,7 @@ import android.os.Debug;
 import android.os.Handler;
 import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import com.android.systemui.Dependency;
-import com.android.systemui.p016qs.SecQSPanelResourcePicker;
+import com.android.systemui.qs.SecQSPanelResourcePicker;
 import com.android.systemui.statusbar.phone.CentralSurfaces;
 import com.android.systemui.statusbar.phone.CentralSurfacesImpl;
 import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;

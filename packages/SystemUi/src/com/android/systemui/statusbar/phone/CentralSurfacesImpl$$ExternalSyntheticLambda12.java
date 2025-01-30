@@ -1,9 +1,9 @@
 package com.android.systemui.statusbar.phone;
 
 import android.view.IRemoteAnimationRunner;
-import com.android.systemui.p016qs.QSPanelHost$$ExternalSyntheticLambda5;
-import com.android.systemui.p016qs.SecQSPanelController;
-import com.android.systemui.p016qs.SecQSPanelControllerBase;
+import com.android.systemui.qs.QSPanelHost$$ExternalSyntheticLambda5;
+import com.android.systemui.qs.SecQSPanelController;
+import com.android.systemui.qs.SecQSPanelControllerBase;
 import com.android.systemui.statusbar.phone.CentralSurfacesImpl;
 
 /* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */

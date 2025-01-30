@@ -19,8 +19,8 @@ import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import com.android.systemui.Dependency;
 import com.android.systemui.Gefingerpoken;
 import com.android.systemui.R;
-import com.android.systemui.p016qs.SecDarkModeEasel;
-import com.android.systemui.p016qs.bar.BrightnessBar;
+import com.android.systemui.qs.SecDarkModeEasel;
+import com.android.systemui.qs.bar.BrightnessBar;
 import com.android.systemui.util.SettingsHelper;
 
 /* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */

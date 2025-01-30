@@ -9,7 +9,7 @@ import com.android.internal.widget.LockPatternUtils;
 import com.android.keyguard.KeyguardDisplayManager;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.mediator.ScreenOnCoordinator;
-import com.android.p038wm.shell.keyguard.KeyguardTransitions;
+import com.android.wm.shell.keyguard.KeyguardTransitions;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.classifier.FalsingCollector;
 import com.android.systemui.dreams.DreamOverlayStateController;

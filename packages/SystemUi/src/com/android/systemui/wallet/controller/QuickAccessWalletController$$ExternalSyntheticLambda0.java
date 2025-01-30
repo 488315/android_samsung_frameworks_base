@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.service.quickaccesswallet.QuickAccessWalletClient;
 import com.android.systemui.animation.ActivityLaunchAnimator;
 import com.android.systemui.plugins.ActivityStarter;
-import com.android.systemui.wallet.p037ui.WalletActivity;
+import com.android.systemui.wallet.ui.WalletActivity;
 
 /* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */
 /* loaded from: classes2.dex */

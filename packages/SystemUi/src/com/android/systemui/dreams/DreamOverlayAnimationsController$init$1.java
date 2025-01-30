@@ -7,7 +7,7 @@ import androidx.lifecycle.RepeatOnLifecycleKt;
 import com.android.systemui.R;
 import com.android.systemui.complication.ComplicationLayoutParams;
 import com.android.systemui.dreams.DreamOverlayAnimationsController;
-import com.android.systemui.keyguard.p009ui.viewmodel.C1749x4d7f0271;
+import com.android.systemui.keyguard.ui.viewmodel.C1749x4d7f0271;
 import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import java.util.function.Consumer;

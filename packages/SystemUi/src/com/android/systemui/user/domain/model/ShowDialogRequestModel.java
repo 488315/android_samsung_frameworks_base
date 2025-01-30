@@ -4,7 +4,7 @@ import android.os.UserHandle;
 import androidx.appcompat.app.AppCompatDelegateImpl$$ExternalSyntheticOutline0;
 import androidx.picker.model.viewdata.AppInfoViewData$$ExternalSyntheticOutline0;
 import com.android.systemui.animation.Expandable;
-import com.android.systemui.p016qs.user.UserSwitchDialogController;
+import com.android.systemui.qs.user.UserSwitchDialogController;
 import kotlin.jvm.functions.Function3;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;

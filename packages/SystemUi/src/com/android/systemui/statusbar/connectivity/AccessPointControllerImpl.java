@@ -16,7 +16,7 @@ import androidx.concurrent.futures.AbstractResolvableFuture$$ExternalSyntheticOu
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
 import com.android.systemui.R;
-import com.android.systemui.p016qs.tiles.WifiTile;
+import com.android.systemui.qs.tiles.WifiTile;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.statusbar.connectivity.AccessPointController;

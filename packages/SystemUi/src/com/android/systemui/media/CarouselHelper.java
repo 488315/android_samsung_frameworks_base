@@ -8,7 +8,7 @@ import com.android.systemui.R;
 import com.android.systemui.log.MediaLogger;
 import com.android.systemui.log.MediaLoggerImpl;
 import com.android.systemui.media.controls.pipeline.MediaDataManager;
-import com.android.systemui.p016qs.SecPageIndicator;
+import com.android.systemui.qs.SecPageIndicator;
 import com.android.systemui.util.SystemUIAnalytics;
 import java.util.ArrayList;
 import java.util.Collection;

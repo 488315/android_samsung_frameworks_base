@@ -3,9 +3,9 @@ package com.android.systemui.util;
 import android.content.Context;
 import android.os.Handler;
 import android.util.Log;
-import com.android.systemui.p016qs.QSTileHost;
-import com.android.systemui.plugins.p013qs.QSTile;
-import com.android.systemui.plugins.p013qs.SQSTile;
+import com.android.systemui.qs.QSTileHost;
+import com.android.systemui.plugins.qs.QSTile;
+import com.android.systemui.plugins.qs.SQSTile;
 import java.util.Collection;
 import java.util.Iterator;
 

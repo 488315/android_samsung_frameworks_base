@@ -23,7 +23,7 @@ import com.android.systemui.R;
 import com.android.systemui.battery.BatteryMeterView;
 import com.android.systemui.plugins.DarkIconDispatcher;
 import com.android.systemui.statusbar.phone.StatusBarIconController;
-import com.android.systemui.statusbar.phone.knox.p024ui.viewmodel.KnoxStatusBarViewControl;
+import com.android.systemui.statusbar.phone.knox.ui.viewmodel.KnoxStatusBarViewControl;
 import com.android.systemui.statusbar.phone.userswitcher.StatusBarUserSwitcherContainer;
 import com.android.systemui.statusbar.policy.NetspeedView;
 import java.util.ArrayList;
@@ -256,11 +256,11 @@ public class KeyguardStatusBarView extends RelativeLayout implements KnoxStatusB
         return super.onApplyWindowInsets(windowInsets);
     }
 
-    @Override // com.android.systemui.statusbar.phone.knox.p024ui.viewmodel.KnoxStatusBarViewControl
+    @Override // com.android.systemui.statusbar.phone.knox.ui.viewmodel.KnoxStatusBarViewControl
     public final void setHiddenByKnox(boolean z) {
     }
 
-    @Override // com.android.systemui.statusbar.phone.knox.p024ui.viewmodel.KnoxStatusBarViewControl
+    @Override // com.android.systemui.statusbar.phone.knox.ui.viewmodel.KnoxStatusBarViewControl
     public final View getStatusBarView() {
         return this;
     }

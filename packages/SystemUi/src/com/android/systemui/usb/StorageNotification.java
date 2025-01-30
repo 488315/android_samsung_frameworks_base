@@ -43,7 +43,7 @@ import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.samsung.android.emergencymode.SemEmergencyManager;
 import com.samsung.android.knox.SemPersonaManager;
 import com.samsung.android.knox.net.vpn.KnoxVpnPolicyConstants;
-import com.samsung.android.knox.p045ex.peripheral.PeripheralConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 import com.sec.ims.configuration.DATA;
 import java.util.Collections;
 import java.util.Iterator;

@@ -12,7 +12,7 @@ import com.samsung.android.knox.AccessController;
 import com.samsung.android.knox.ContextInfo;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import com.samsung.android.knox.dex.DexManager;
-import com.samsung.android.knox.p045ex.peripheral.PeripheralConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 import com.sec.ims.configuration.DATA;
 import java.lang.reflect.Method;
 

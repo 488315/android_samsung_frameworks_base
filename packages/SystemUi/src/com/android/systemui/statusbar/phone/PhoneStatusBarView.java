@@ -21,7 +21,7 @@ import com.android.systemui.log.SecPanelLogger;
 import com.android.systemui.log.SecPanelLoggerImpl;
 import com.android.systemui.plugins.DarkIconDispatcher;
 import com.android.systemui.shade.SecPanelBlockExpandingHelper;
-import com.android.systemui.statusbar.phone.knox.p024ui.viewmodel.KnoxStatusBarViewControl;
+import com.android.systemui.statusbar.phone.knox.ui.viewmodel.KnoxStatusBarViewControl;
 import com.android.systemui.statusbar.policy.NetspeedView;
 import com.android.systemui.util.leak.RotationUtils;
 import java.util.Objects;
@@ -145,7 +145,7 @@ public class PhoneStatusBarView extends FrameLayout implements KnoxStatusBarView
         return true;
     }
 
-    @Override // com.android.systemui.statusbar.phone.knox.p024ui.viewmodel.KnoxStatusBarViewControl
+    @Override // com.android.systemui.statusbar.phone.knox.ui.viewmodel.KnoxStatusBarViewControl
     public final void setHiddenByKnox(boolean z) {
         this.mHiddenByKnox = z;
     }
@@ -179,7 +179,7 @@ public class PhoneStatusBarView extends FrameLayout implements KnoxStatusBarView
         return true;
     }
 
-    @Override // com.android.systemui.statusbar.phone.knox.p024ui.viewmodel.KnoxStatusBarViewControl
+    @Override // com.android.systemui.statusbar.phone.knox.ui.viewmodel.KnoxStatusBarViewControl
     public final View getStatusBarView() {
         return this;
     }

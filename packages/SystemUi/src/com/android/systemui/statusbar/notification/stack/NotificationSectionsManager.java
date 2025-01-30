@@ -2,7 +2,7 @@ package com.android.systemui.statusbar.notification.stack;
 
 import android.util.SparseArray;
 import android.view.View;
-import com.android.systemui.media.controls.p010ui.KeyguardMediaController;
+import com.android.systemui.media.controls.ui.KeyguardMediaController;
 import com.android.systemui.statusbar.notification.NotificationSectionsFeatureManager;
 import com.android.systemui.statusbar.notification.SourceType;
 import com.android.systemui.statusbar.notification.SourceType$Companion$from$1;

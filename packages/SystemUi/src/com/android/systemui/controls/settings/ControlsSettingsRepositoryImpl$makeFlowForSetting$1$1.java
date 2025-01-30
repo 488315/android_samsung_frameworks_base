@@ -1,7 +1,7 @@
 package com.android.systemui.controls.settings;
 
 import android.content.pm.UserInfo;
-import com.android.systemui.p016qs.SettingObserver;
+import com.android.systemui.qs.SettingObserver;
 import com.android.systemui.util.settings.SecureSettings;
 import kotlin.ResultKt;
 import kotlin.Unit;
@@ -58,7 +58,7 @@ final class ControlsSettingsRepositoryImpl$makeFlowForSetting$1$1 extends Suspen
             final int i2 = this.$userInfo.id;
             final String str = this.$setting;
             final ?? r4 = new SettingObserver(str, secureSettings, i2) { // from class: com.android.systemui.controls.settings.ControlsSettingsRepositoryImpl$makeFlowForSetting$1$1$observer$1
-                @Override // com.android.systemui.p016qs.SettingObserver
+                @Override // com.android.systemui.qs.SettingObserver
                 public final void handleValueChanged(int i3, boolean z) {
                     ((ChannelCoroutine) producerScope).mo2872trySendJP2dKIU(Boolean.valueOf(i3 == 1));
                 }

@@ -3,7 +3,7 @@ package com.android.systemui.controls.management.model;
 import androidx.appcompat.app.AppCompatDelegateImpl$$ExternalSyntheticOutline0;
 import com.android.systemui.controls.controller.ControlInfo;
 import com.android.systemui.controls.management.model.MainModel;
-import com.android.systemui.controls.p005ui.ControlWithState;
+import com.android.systemui.controls.ui.ControlWithState;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 import kotlin.jvm.internal.Intrinsics;
 

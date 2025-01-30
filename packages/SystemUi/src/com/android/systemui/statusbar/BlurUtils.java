@@ -17,7 +17,7 @@ import com.android.systemui.dump.DumpManager;
 import java.io.PrintWriter;
 import kotlin.Unit;
 import kotlin.jvm.internal.DefaultConstructorMarker;
-import kotlin.p055io.CloseableKt;
+import kotlin.io.CloseableKt;
 
 /* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */
 /* loaded from: classes2.dex */

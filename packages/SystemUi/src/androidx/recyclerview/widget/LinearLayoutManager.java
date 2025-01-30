@@ -15,7 +15,7 @@ import android.view.animation.PathInterpolator;
 import androidx.recyclerview.widget.GapWorker;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
-import com.samsung.android.knox.p045ex.peripheral.PeripheralConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 import com.samsung.android.nexus.video.VideoPlayer;
 import java.util.List;
 

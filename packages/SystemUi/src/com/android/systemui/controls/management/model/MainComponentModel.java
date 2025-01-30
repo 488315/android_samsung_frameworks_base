@@ -3,7 +3,7 @@ package com.android.systemui.controls.management.model;
 import android.content.ComponentName;
 import androidx.appcompat.app.AppCompatDelegateImpl$$ExternalSyntheticOutline0;
 import com.android.systemui.controls.management.model.MainModel;
-import com.android.systemui.controls.p005ui.view.ControlsSpinner;
+import com.android.systemui.controls.ui.view.ControlsSpinner;
 import java.util.List;
 import kotlin.jvm.internal.Intrinsics;
 

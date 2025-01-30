@@ -8,7 +8,7 @@ import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.systemui.assist.AssistManager;
 import com.android.systemui.cover.CoverHost;
 import com.android.systemui.keyguard.WakefulnessLifecycle;
-import com.android.systemui.p016qs.QSHost;
+import com.android.systemui.qs.QSHost;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.searcle.SearcleManager;
 import com.android.systemui.settings.UserTracker;

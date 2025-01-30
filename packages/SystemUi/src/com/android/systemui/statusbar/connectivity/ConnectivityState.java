@@ -2,7 +2,7 @@ package com.android.systemui.statusbar.connectivity;
 
 import com.android.settingslib.SignalIcon$IconGroup;
 import com.android.systemui.bixby2.actionresult.ActionResults;
-import com.android.systemui.controls.p005ui.util.ControlExtension$Companion$$ExternalSyntheticOutline0;
+import com.android.systemui.controls.ui.util.ControlExtension$Companion$$ExternalSyntheticOutline0;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.android.systemui.R;
 import com.android.systemui.controls.controller.ControlsController;
-import com.android.systemui.controls.p005ui.ControlsActivity;
+import com.android.systemui.controls.ui.ControlsActivity;
 import com.android.systemui.controls.panels.AuthorizedPanelsRepository;
 import com.android.systemui.controls.panels.AuthorizedPanelsRepositoryImpl;
 import com.android.systemui.settings.UserTracker;

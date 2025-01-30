@@ -9,7 +9,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.android.systemui.BasicRune;
 import com.android.systemui.R;
 import com.android.systemui.controls.CustomControlInterface;
-import com.android.systemui.controls.p005ui.util.ControlsUtil;
+import com.android.systemui.controls.ui.util.ControlsUtil;
 import com.android.systemui.controls.util.ControlsRuneWrapper;
 import com.android.systemui.controls.util.ControlsRuneWrapperImpl;
 import kotlin.jvm.functions.Function2;

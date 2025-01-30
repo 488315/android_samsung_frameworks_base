@@ -21,7 +21,7 @@ import com.samsung.android.knox.net.billing.EnterpriseBillingPolicy;
 import com.samsung.android.knox.net.nap.NetworkAnalytics;
 import com.samsung.android.knox.net.vpn.GenericVpnPolicy;
 import com.samsung.android.knox.net.vpn.KnoxVpnContext;
-import com.samsung.android.knox.p046zt.networktrust.filter.NetworkFilterManager;
+import com.samsung.android.knox.zt.networktrust.filter.NetworkFilterManager;
 import com.samsung.android.knox.restriction.AdvancedRestrictionPolicy;
 import com.samsung.android.knox.threatdefense.ThreatDefensePolicy;
 import com.sec.ims.configuration.DATA;

@@ -80,7 +80,7 @@ import com.android.systemui.keyguard.KeyguardEditModeControllerImpl;
 import com.android.systemui.keyguard.ScreenLifecycle;
 import com.android.systemui.keyguard.WakefulnessLifecycle;
 import com.android.systemui.keyguard.domain.interactor.AlternateBouncerInteractor;
-import com.android.systemui.keyguard.p009ui.binder.KeyguardSecBottomAreaViewBinder$bind$1;
+import com.android.systemui.keyguard.ui.binder.KeyguardSecBottomAreaViewBinder$bind$1;
 import com.android.systemui.knox.CustomSdkMonitor;
 import com.android.systemui.knox.KnoxStateMonitor;
 import com.android.systemui.knox.KnoxStateMonitorImpl;

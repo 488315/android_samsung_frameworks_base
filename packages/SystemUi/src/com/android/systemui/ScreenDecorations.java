@@ -51,7 +51,7 @@ import com.android.systemui.decor.RoundedCornerResDelegate;
 import com.android.systemui.log.LogBuffer;
 import com.android.systemui.log.LogLevel;
 import com.android.systemui.log.ScreenDecorationsLogger;
-import com.android.systemui.p016qs.SettingObserver;
+import com.android.systemui.qs.SettingObserver;
 import com.android.systemui.settings.DisplayTracker;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;
@@ -1403,7 +1403,7 @@ public final class ScreenDecorations implements CoreStartable, TunerService.Tuna
             SettingObserver settingObserver2 = this.mColorInversionSetting;
             if (settingObserver2 == null) {
                 this.mColorInversionSetting = new SettingObserver(this.mSecureSettings, this.mHandler, "accessibility_display_inversion_enabled", ((UserTrackerImpl) this.mUserTracker).getUserId()) { // from class: com.android.systemui.ScreenDecorations.8
-                    @Override // com.android.systemui.p016qs.SettingObserver
+                    @Override // com.android.systemui.qs.SettingObserver
                     public final void handleValueChanged(int i7, boolean z3) {
                         ScreenDecorations screenDecorations = ScreenDecorations.this;
                         boolean z4 = ScreenDecorations.DEBUG_DISABLE_SCREEN_DECORATIONS;

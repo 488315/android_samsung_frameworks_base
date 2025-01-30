@@ -26,7 +26,7 @@ import com.android.systemui.controls.controller.ControlsControllerImpl$replaceFa
 import com.android.systemui.controls.controller.Favorites;
 import com.android.systemui.controls.controller.StructureInfo;
 import com.android.systemui.controls.management.ControlAdapter;
-import com.android.systemui.controls.p005ui.ControlsActivity;
+import com.android.systemui.controls.ui.ControlsActivity;
 import com.android.systemui.flags.FeatureFlags;
 import com.android.systemui.flags.FeatureFlagsRelease;
 import com.android.systemui.flags.Flags;

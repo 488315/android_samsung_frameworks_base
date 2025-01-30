@@ -29,7 +29,7 @@ import com.android.systemui.decor.RoundedCornerDecorProviderFactory;
 import com.android.systemui.decor.RoundedCornerResDelegate;
 import com.android.systemui.log.LogBuffer;
 import com.android.systemui.log.LogLevel;
-import com.android.systemui.p016qs.SettingObserver;
+import com.android.systemui.qs.SettingObserver;
 import com.android.systemui.settings.DisplayTracker;
 import com.android.systemui.settings.DisplayTrackerImpl;
 import com.android.systemui.settings.UserTrackerImpl;
@@ -256,7 +256,7 @@ public final /* synthetic */ class ScreenDecorations$$ExternalSyntheticLambda1 i
                                             super(settingsProxy, handler2, str, i);
                                         }
 
-                                        @Override // com.android.systemui.p016qs.SettingObserver
+                                        @Override // com.android.systemui.qs.SettingObserver
                                         public final void handleValueChanged(int i, boolean z) {
                                             ScreenDecorations screenDecorations5 = ScreenDecorations.this;
                                             boolean z2 = ScreenDecorations.DEBUG_DISABLE_SCREEN_DECORATIONS;

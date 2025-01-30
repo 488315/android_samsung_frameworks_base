@@ -13,7 +13,7 @@ import com.android.systemui.Dependency;
 import com.android.systemui.ScRune;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.keyguard.DisplayLifecycle;
-import com.android.systemui.p014qp.util.SubscreenUtil;
+import com.android.systemui.qp.util.SubscreenUtil;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.statusbar.phone.KeyguardDismissUtil;
 import com.android.systemui.statusbar.policy.IndividualSensorPrivacyController;

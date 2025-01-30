@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import androidx.appcompat.widget.Toolbar;
 import androidx.collection.ArraySet;
 import androidx.collection.ArraySet.ElementIterator;
-import com.samsung.android.sivs.p049ai.sdkcommon.asr.SpeechRecognitionConst;
+import com.samsung.android.sivs.ai.sdkcommon.asr.SpeechRecognitionConst;
 import java.lang.ref.WeakReference;
 import java.util.concurrent.Executor;
 

@@ -7,10 +7,10 @@ import android.graphics.Rect;
 import android.view.IWindowManager;
 import android.view.WindowManagerGlobal;
 import com.android.keyguard.KeyguardCarrierPasswordViewController$$ExternalSyntheticOutline0;
-import com.android.p038wm.shell.common.HandlerExecutor;
-import com.android.p038wm.shell.splitscreen.SplitScreen;
-import com.android.p038wm.shell.splitscreen.SplitScreenController;
-import com.android.p038wm.shell.splitscreen.SplitScreenController$SplitScreenImpl$$ExternalSyntheticLambda0;
+import com.android.wm.shell.common.HandlerExecutor;
+import com.android.wm.shell.splitscreen.SplitScreen;
+import com.android.wm.shell.splitscreen.SplitScreenController;
+import com.android.wm.shell.splitscreen.SplitScreenController$SplitScreenImpl$$ExternalSyntheticLambda0;
 import com.samsung.systemui.splugins.multistar.PluginMultiStarSystemProxy;
 
 /* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */

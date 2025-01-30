@@ -45,7 +45,7 @@ import com.android.systemui.keyguard.WakefulnessLifecycle;
 import com.android.systemui.keyguard.data.quickaffordance.KeyguardQuickAffordanceConfig;
 import com.android.systemui.keyguard.domain.interactor.KeyguardInteractor;
 import com.android.systemui.keyguard.domain.interactor.KeyguardQuickAffordanceInteractor;
-import com.android.systemui.keyguard.p009ui.binder.KeyguardSecBottomAreaViewBinder$bind$1;
+import com.android.systemui.keyguard.ui.binder.KeyguardSecBottomAreaViewBinder$bind$1;
 import com.android.systemui.keyguard.shared.model.CameraLaunchSourceModel;
 import com.android.systemui.keyguard.shared.quickaffordance.KeyguardQuickAffordancePosition;
 import com.android.systemui.plugins.ActivityStarter;

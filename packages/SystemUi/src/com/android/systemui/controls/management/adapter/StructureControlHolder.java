@@ -10,8 +10,8 @@ import com.android.systemui.R;
 import com.android.systemui.controls.management.model.AllControlsModel;
 import com.android.systemui.controls.management.model.ControlWrapper;
 import com.android.systemui.controls.management.model.StructureElementWrapper;
-import com.android.systemui.controls.p005ui.util.ControlsUtil;
-import com.android.systemui.controls.p005ui.util.LayoutUtil;
+import com.android.systemui.controls.ui.util.ControlsUtil;
+import com.android.systemui.controls.ui.util.LayoutUtil;
 import com.android.systemui.controls.util.ControlsRuneWrapper;
 
 /* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */

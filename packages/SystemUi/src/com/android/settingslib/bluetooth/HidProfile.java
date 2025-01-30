@@ -9,7 +9,7 @@ import android.content.Context;
 import android.util.Log;
 import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
-import com.samsung.android.knox.p045ex.peripheral.PeripheralConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 import java.util.Iterator;
 import java.util.List;
 

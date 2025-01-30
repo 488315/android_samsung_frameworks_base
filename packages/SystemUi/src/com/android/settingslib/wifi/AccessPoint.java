@@ -25,7 +25,7 @@ import com.android.internal.util.CollectionUtils;
 import com.android.settingslib.utils.ThreadUtils;
 import com.android.systemui.R;
 import com.samsung.android.knox.net.wifi.WifiPolicy;
-import com.samsung.android.knox.p045ex.peripheral.PeripheralBarcodeConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralBarcodeConstants;
 import com.samsung.android.nexus.video.VideoPlayer;
 import com.samsung.android.wifi.SemWifiManager;
 import com.sec.ims.settings.ImsProfile;

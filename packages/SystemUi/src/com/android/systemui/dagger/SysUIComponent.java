@@ -1,9 +1,9 @@
 package com.android.systemui.dagger;
 
 import android.R;
-import com.android.p038wm.shell.keyguard.KeyguardTransitions;
-import com.android.p038wm.shell.sysui.ShellInterface;
-import com.android.p038wm.shell.transition.ShellTransitions;
+import com.android.wm.shell.keyguard.KeyguardTransitions;
+import com.android.wm.shell.sysui.ShellInterface;
+import com.android.wm.shell.transition.ShellTransitions;
 import com.android.systemui.BootAnimationFinishedCacheImpl;
 import com.android.systemui.BootAnimationFinishedTrigger;
 import com.android.systemui.BootCompleteCacheImpl;

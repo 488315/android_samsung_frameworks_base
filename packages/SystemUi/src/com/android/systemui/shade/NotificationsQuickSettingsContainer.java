@@ -16,7 +16,7 @@ import com.android.systemui.QpRune;
 import com.android.systemui.R;
 import com.android.systemui.fragments.FragmentHostManager;
 import com.android.systemui.log.SecTouchLogHelper;
-import com.android.systemui.plugins.p013qs.InterfaceC1922QS;
+import com.android.systemui.plugins.qs.InterfaceC1922QS;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.statusbar.notification.AboveShelfObserver;
 import java.util.ArrayList;

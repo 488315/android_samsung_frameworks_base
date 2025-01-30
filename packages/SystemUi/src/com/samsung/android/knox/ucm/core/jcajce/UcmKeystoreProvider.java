@@ -1,7 +1,7 @@
 package com.samsung.android.knox.ucm.core.jcajce;
 
 import android.os.Bundle;
-import com.samsung.android.knox.p046zt.devicetrust.cert.CertProvisionProfile;
+import com.samsung.android.knox.zt.devicetrust.cert.CertProvisionProfile;
 import com.samsung.android.knox.ucm.core.UniversalCredentialUtil;
 import com.samsung.android.knox.ucm.plugin.agent.UcmAgentProviderImpl;
 import com.samsung.android.knox.ucm.plugin.service.KeyGenerator;

@@ -3,7 +3,7 @@ package androidx.constraintlayout.motion.widget;
 import android.content.Context;
 import android.support.v4.media.AbstractC0000x2c234b15;
 import android.view.View;
-import com.samsung.android.knox.p045ex.peripheral.PeripheralBarcodeConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralBarcodeConstants;
 
 /* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */
 /* loaded from: classes.dex */

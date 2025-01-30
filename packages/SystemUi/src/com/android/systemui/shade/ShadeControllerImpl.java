@@ -17,7 +17,7 @@ import com.android.systemui.keyguard.KeyguardFoldControllerImpl;
 import com.android.systemui.keyguard.animator.KeyguardTouchAnimator;
 import com.android.systemui.log.SecPanelLogger;
 import com.android.systemui.log.SecPanelLoggerImpl;
-import com.android.systemui.plugins.p013qs.InterfaceC1922QS;
+import com.android.systemui.plugins.qs.InterfaceC1922QS;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.NotificationPresenter;

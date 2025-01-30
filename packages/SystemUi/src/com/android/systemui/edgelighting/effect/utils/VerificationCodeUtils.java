@@ -4,16 +4,16 @@ import android.content.Context;
 import android.os.Debug;
 import android.text.TextUtils;
 import android.util.Slog;
-import com.android.systemui.edgelighting.effect.utils.p006vc.ChnVerificationCodeParser;
-import com.android.systemui.edgelighting.effect.utils.p006vc.IndVerificationCodeParser;
-import com.android.systemui.edgelighting.effect.utils.p006vc.KorVerificationCodeParser;
-import com.android.systemui.edgelighting.effect.utils.p006vc.MalVerificationCodeParser;
-import com.android.systemui.edgelighting.effect.utils.p006vc.MymVerificationCodeParser;
-import com.android.systemui.edgelighting.effect.utils.p006vc.NormalVerificationCodeParser;
-import com.android.systemui.edgelighting.effect.utils.p006vc.PhiVerificationCodeParser;
-import com.android.systemui.edgelighting.effect.utils.p006vc.SinVerificationCodeParser;
-import com.android.systemui.edgelighting.effect.utils.p006vc.ThlVerificationCodeParser;
-import com.android.systemui.edgelighting.effect.utils.p006vc.VnVerificationCodeParser;
+import com.android.systemui.edgelighting.effect.utils.vc.ChnVerificationCodeParser;
+import com.android.systemui.edgelighting.effect.utils.vc.IndVerificationCodeParser;
+import com.android.systemui.edgelighting.effect.utils.vc.KorVerificationCodeParser;
+import com.android.systemui.edgelighting.effect.utils.vc.MalVerificationCodeParser;
+import com.android.systemui.edgelighting.effect.utils.vc.MymVerificationCodeParser;
+import com.android.systemui.edgelighting.effect.utils.vc.NormalVerificationCodeParser;
+import com.android.systemui.edgelighting.effect.utils.vc.PhiVerificationCodeParser;
+import com.android.systemui.edgelighting.effect.utils.vc.SinVerificationCodeParser;
+import com.android.systemui.edgelighting.effect.utils.vc.ThlVerificationCodeParser;
+import com.android.systemui.edgelighting.effect.utils.vc.VnVerificationCodeParser;
 
 /* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */
 /* loaded from: classes.dex */

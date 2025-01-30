@@ -40,7 +40,7 @@ import com.android.systemui.R;
 import com.android.systemui.media.dialog.MediaOutputAdapter;
 import com.android.systemui.media.dialog.MediaOutputBaseAdapter;
 import com.android.systemui.shared.system.SysUiStatsLog;
-import com.samsung.android.knox.p045ex.knoxAI.KnoxAiManagerInternal;
+import com.samsung.android.knox.ex.knoxAI.KnoxAiManagerInternal;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

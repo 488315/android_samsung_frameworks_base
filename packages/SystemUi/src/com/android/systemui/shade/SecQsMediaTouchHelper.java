@@ -6,8 +6,8 @@ import com.android.keyguard.KeyguardCarrierPasswordViewController$$ExternalSynth
 import com.android.systemui.Dependency;
 import com.android.systemui.log.SecPanelLogger;
 import com.android.systemui.media.SecMediaHost;
-import com.android.systemui.p016qs.bar.QSMediaPlayerBar;
-import com.android.systemui.plugins.p013qs.InterfaceC1922QS;
+import com.android.systemui.qs.bar.QSMediaPlayerBar;
+import com.android.systemui.plugins.qs.InterfaceC1922QS;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;

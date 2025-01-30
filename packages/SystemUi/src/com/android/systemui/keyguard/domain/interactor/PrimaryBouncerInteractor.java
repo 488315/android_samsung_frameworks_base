@@ -29,7 +29,7 @@ import com.android.systemui.keyguard.data.repository.KeyguardBouncerRepository;
 import com.android.systemui.keyguard.data.repository.KeyguardBouncerRepositoryImpl;
 import com.android.systemui.keyguard.data.repository.TrustRepository;
 import com.android.systemui.keyguard.domain.interactor.PrimaryBouncerCallbackInteractor;
-import com.android.systemui.keyguard.p009ui.binder.KeyguardBouncerViewBinder$bind$delegate$1;
+import com.android.systemui.keyguard.ui.binder.KeyguardBouncerViewBinder$bind$delegate$1;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.shared.system.SysUiStatsLog;
 import com.android.systemui.statusbar.policy.KeyguardStateController;

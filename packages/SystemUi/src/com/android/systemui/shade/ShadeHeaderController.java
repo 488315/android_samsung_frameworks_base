@@ -43,9 +43,9 @@ import com.android.systemui.biometrics.SideFpsController$$ExternalSyntheticOutli
 import com.android.systemui.demomode.DemoMode;
 import com.android.systemui.demomode.DemoModeController;
 import com.android.systemui.dump.DumpManager;
-import com.android.systemui.p016qs.HeaderPrivacyIconsController;
-import com.android.systemui.p016qs.SecDarkModeEasel;
-import com.android.systemui.p016qs.SecQSPanelResourcePicker;
+import com.android.systemui.qs.HeaderPrivacyIconsController;
+import com.android.systemui.qs.SecDarkModeEasel;
+import com.android.systemui.qs.SecQSPanelResourcePicker;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.subscreen.SubRoom;
 import com.android.systemui.privacy.OngoingPrivacyChip;

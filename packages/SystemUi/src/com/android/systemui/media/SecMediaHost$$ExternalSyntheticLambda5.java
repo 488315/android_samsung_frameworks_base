@@ -8,8 +8,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.android.systemui.R;
 import com.android.systemui.log.MediaLoggerImpl;
 import com.android.systemui.media.SecMediaHost;
-import com.android.systemui.p016qs.SecPageIndicator;
-import com.android.systemui.p016qs.bar.BarController;
+import com.android.systemui.qs.SecPageIndicator;
+import com.android.systemui.qs.bar.BarController;
 import java.util.HashMap;
 import java.util.function.BiConsumer;
 

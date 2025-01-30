@@ -1,6 +1,6 @@
 package com.android.systemui.dump.nano;
 
-import com.android.systemui.p016qs.nano.QsTileState;
+import com.android.systemui.qs.nano.QsTileState;
 import com.google.protobuf.nano.CodedOutputByteBufferNano;
 import com.google.protobuf.nano.MessageNano;
 

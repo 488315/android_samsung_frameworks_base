@@ -9,7 +9,7 @@ import com.android.systemui.statusbar.pipeline.carrier.CarrierInfraMediator;
 import com.android.systemui.statusbar.pipeline.mobile.data.model.SubscriptionsOrder;
 import com.android.systemui.statusbar.pipeline.mobile.data.repository.MobileConnectionsRepository;
 import com.android.systemui.statusbar.pipeline.mobile.data.repository.UserSetupRepository;
-import com.android.systemui.statusbar.pipeline.mobile.p026ui.util.MobileSignalIconResource;
+import com.android.systemui.statusbar.pipeline.mobile.ui.util.MobileSignalIconResource;
 import com.android.systemui.statusbar.pipeline.mobile.util.MobileMappingsProxy;
 import com.android.systemui.statusbar.pipeline.shared.data.model.ConnectivitySlot;
 import com.android.systemui.statusbar.pipeline.shared.data.repository.ConnectivityRepository;

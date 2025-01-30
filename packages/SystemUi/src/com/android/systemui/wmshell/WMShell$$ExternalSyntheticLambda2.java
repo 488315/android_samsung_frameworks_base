@@ -1,11 +1,11 @@
 package com.android.systemui.wmshell;
 
-import com.android.p038wm.shell.desktopmode.DesktopMode;
-import com.android.p038wm.shell.onehanded.OneHanded;
-import com.android.p038wm.shell.pip.Pip;
-import com.android.p038wm.shell.recents.RecentTasks;
-import com.android.p038wm.shell.splitscreen.EnterSplitGestureHandler;
-import com.android.p038wm.shell.splitscreen.SplitScreen;
+import com.android.wm.shell.desktopmode.DesktopMode;
+import com.android.wm.shell.onehanded.OneHanded;
+import com.android.wm.shell.pip.Pip;
+import com.android.wm.shell.recents.RecentTasks;
+import com.android.wm.shell.splitscreen.EnterSplitGestureHandler;
+import com.android.wm.shell.splitscreen.SplitScreen;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.wmshell.WMShell.C374814;
 import java.util.function.Consumer;

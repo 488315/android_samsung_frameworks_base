@@ -23,7 +23,7 @@ import androidx.picker.model.AppInfo;
 import androidx.picker.model.viewdata.AppInfoViewData;
 import androidx.picker.model.viewdata.AppSideViewData;
 import androidx.picker.model.viewdata.ViewData;
-import androidx.picker.p000di.AppPickerContext;
+import androidx.picker.di.AppPickerContext;
 import androidx.picker.repository.AppDataRepository;
 import androidx.picker.widget.SeslAppPickerSelectLayout;
 import androidx.recyclerview.widget.RecyclerView;

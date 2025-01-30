@@ -27,7 +27,7 @@ import com.android.app.motiontool.TraceMetadata$$ExternalSyntheticOutline0;
 import com.android.systemui.Dependency;
 import com.android.systemui.QpRune;
 import com.android.systemui.R;
-import com.android.systemui.p016qs.SecQSPanelResourcePicker;
+import com.android.systemui.qs.SecQSPanelResourcePicker;
 import com.android.systemui.privacy.PrivacyDialog;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 import com.android.systemui.util.SettingsHelper;

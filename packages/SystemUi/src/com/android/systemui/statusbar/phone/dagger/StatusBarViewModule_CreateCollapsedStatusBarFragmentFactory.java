@@ -22,8 +22,8 @@ import com.android.systemui.statusbar.phone.fragment.CollapsedStatusBarFragmentL
 import com.android.systemui.statusbar.phone.fragment.dagger.StatusBarFragmentComponent;
 import com.android.systemui.statusbar.phone.ongoingcall.OngoingCallController;
 import com.android.systemui.statusbar.pipeline.carrier.CarrierInfraMediator;
-import com.android.systemui.statusbar.pipeline.shared.p028ui.binder.CollapsedStatusBarViewBinder;
-import com.android.systemui.statusbar.pipeline.shared.p028ui.viewmodel.CollapsedStatusBarViewModel;
+import com.android.systemui.statusbar.pipeline.shared.ui.binder.CollapsedStatusBarViewBinder;
+import com.android.systemui.statusbar.pipeline.shared.ui.viewmodel.CollapsedStatusBarViewModel;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.window.StatusBarWindowStateController;
 import com.android.systemui.util.CarrierConfigTracker;

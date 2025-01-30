@@ -33,7 +33,7 @@ import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.coverlauncher.utils.badge.NotificationListener$$ExternalSyntheticOutline0;
 import com.android.systemui.knox.KnoxStateMonitor;
 import com.android.systemui.knox.KnoxStateMonitorImpl;
-import com.android.systemui.p016qs.tiles.SRotationLockTile;
+import com.android.systemui.qs.tiles.SRotationLockTile;
 import com.android.systemui.plugins.subscreen.SubRoom;
 import com.android.systemui.privacy.PrivacyItem;
 import com.android.systemui.privacy.PrivacyItemController;

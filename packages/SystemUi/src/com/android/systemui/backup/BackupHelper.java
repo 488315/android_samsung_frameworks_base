@@ -30,10 +30,10 @@ import kotlin.Unit;
 import kotlin.collections.MapsKt__MapsJVMKt;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.DefaultConstructorMarker;
-import kotlin.p055io.CloseableKt;
-import kotlin.p055io.FileAlreadyExistsException;
-import kotlin.p055io.FileSystemException;
-import kotlin.p055io.NoSuchFileException;
+import kotlin.io.CloseableKt;
+import kotlin.io.FileAlreadyExistsException;
+import kotlin.io.FileSystemException;
+import kotlin.io.NoSuchFileException;
 
 /* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */
 /* loaded from: classes.dex */

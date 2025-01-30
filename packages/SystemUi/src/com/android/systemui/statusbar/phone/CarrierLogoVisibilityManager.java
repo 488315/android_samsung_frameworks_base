@@ -3,7 +3,7 @@ package com.android.systemui.statusbar.phone;
 import android.telephony.ServiceState;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
-import com.android.systemui.controls.p005ui.util.ControlExtension$Companion$$ExternalSyntheticOutline0;
+import com.android.systemui.controls.ui.util.ControlExtension$Companion$$ExternalSyntheticOutline0;
 import com.android.systemui.statusbar.pipeline.carrier.CarrierInfraMediator;
 import com.android.systemui.statusbar.pipeline.mobile.data.model.SimType;
 import com.android.systemui.statusbar.pipeline.mobile.util.SimCardInfoUtil;

@@ -1,7 +1,7 @@
 package com.android.systemui.statusbar.pipeline.airplane.data.repository;
 
 import android.os.Handler;
-import com.android.systemui.p016qs.SettingObserver;
+import com.android.systemui.qs.SettingObserver;
 import com.android.systemui.util.settings.GlobalSettings;
 import kotlin.ResultKt;
 import kotlin.Unit;
@@ -54,7 +54,7 @@ public final class AirplaneModeRepositoryImpl$isAirplaneMode$1 extends SuspendLa
             final GlobalSettings globalSettings = airplaneModeRepositoryImpl.globalSettings;
             final Handler handler = airplaneModeRepositoryImpl.bgHandler;
             final ?? r4 = new SettingObserver(globalSettings, handler) { // from class: com.android.systemui.statusbar.pipeline.airplane.data.repository.AirplaneModeRepositoryImpl$isAirplaneMode$1$observer$1
-                @Override // com.android.systemui.p016qs.SettingObserver
+                @Override // com.android.systemui.qs.SettingObserver
                 public final void handleValueChanged(int i2, boolean z) {
                     ((ChannelCoroutine) ProducerScope.this).mo2872trySendJP2dKIU(Boolean.valueOf(i2 == 1));
                 }

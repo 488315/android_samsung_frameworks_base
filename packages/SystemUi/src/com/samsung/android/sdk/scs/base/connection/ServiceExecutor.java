@@ -16,7 +16,7 @@ import androidx.core.graphics.PathParser$$ExternalSyntheticOutline0;
 import com.android.keyguard.logging.AbstractC0866xb1ce8deb;
 import com.android.systemui.AbstractC0950x8906c950;
 import com.samsung.android.emergencymode.SemEmergencyManager;
-import com.samsung.android.scs.p047ai.sdkcommon.feature.FeatureConfig;
+import com.samsung.android.scs.ai.sdkcommon.feature.FeatureConfig;
 import com.samsung.android.sdk.scs.base.feature.Feature;
 import com.samsung.android.sdk.scs.base.feature.FeatureStatusCache;
 import com.samsung.android.sdk.scs.base.tasks.TaskRunnable;

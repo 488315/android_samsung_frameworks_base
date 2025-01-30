@@ -10,7 +10,7 @@ import com.android.systemui.R;
 import com.android.systemui.biometrics.domain.interactor.CredentialStatus;
 import com.android.systemui.biometrics.domain.model.BiometricPromptRequest;
 import com.android.systemui.util.time.SystemClockImpl;
-import com.samsung.android.knox.p045ex.peripheral.PeripheralBarcodeConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralBarcodeConstants;
 import java.util.function.Supplier;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.ResultKt;

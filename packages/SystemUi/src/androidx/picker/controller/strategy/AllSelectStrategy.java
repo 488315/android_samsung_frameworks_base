@@ -8,7 +8,7 @@ import androidx.picker.model.AppData;
 import androidx.picker.model.viewdata.AllAppsViewData;
 import androidx.picker.model.viewdata.AppInfoViewData;
 import androidx.picker.model.viewdata.ViewData;
-import androidx.picker.p000di.AppPickerContext;
+import androidx.picker.di.AppPickerContext;
 import androidx.picker.repository.ViewDataRepository;
 import java.util.ArrayList;
 import java.util.Comparator;

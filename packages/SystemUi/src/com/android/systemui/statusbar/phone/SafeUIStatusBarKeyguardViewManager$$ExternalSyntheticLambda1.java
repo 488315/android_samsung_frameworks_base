@@ -2,9 +2,9 @@ package com.android.systemui.statusbar.phone;
 
 import android.view.ViewGroup;
 import com.android.keyguard.dagger.KeyguardBouncerComponent;
-import com.android.systemui.keyguard.p009ui.binder.KeyguardBouncerViewBinder;
-import com.android.systemui.keyguard.p009ui.viewmodel.KeyguardBouncerViewModel;
-import com.android.systemui.keyguard.p009ui.viewmodel.PrimaryBouncerToGoneTransitionViewModel;
+import com.android.systemui.keyguard.ui.binder.KeyguardBouncerViewBinder;
+import com.android.systemui.keyguard.ui.viewmodel.KeyguardBouncerViewModel;
+import com.android.systemui.keyguard.ui.viewmodel.PrimaryBouncerToGoneTransitionViewModel;
 import com.android.systemui.shade.NotificationShadeWindowControllerImpl;
 import com.android.systemui.shade.SecNotificationShadeWindowControllerHelperImpl;
 import com.android.systemui.statusbar.phone.SafeUIStatusBarKeyguardViewManager;

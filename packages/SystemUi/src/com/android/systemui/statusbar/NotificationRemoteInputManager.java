@@ -38,7 +38,7 @@ import com.android.app.animation.InterpolatorsAndroidX;
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.internal.statusbar.NotificationVisibility;
 import com.android.keyguard.logging.AbstractC0866xb1ce8deb;
-import com.android.p038wm.shell.animation.Interpolators;
+import com.android.wm.shell.animation.Interpolators;
 import com.android.systemui.Dependency;
 import com.android.systemui.Dumpable;
 import com.android.systemui.LsRune;

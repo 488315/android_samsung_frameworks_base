@@ -1,7 +1,7 @@
 package com.android.systemui.statusbar.phone;
 
 import android.os.Build;
-import com.android.p038wm.shell.bubbles.Bubble;
+import com.android.wm.shell.bubbles.Bubble;
 import com.android.systemui.log.DebugLogger;
 import com.android.systemui.notetask.NoteTaskController;
 import com.android.systemui.notetask.NoteTaskEventLogger;

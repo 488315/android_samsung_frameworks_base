@@ -7,7 +7,7 @@ import android.content.Context;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
-import com.android.p038wm.shell.animation.Interpolators;
+import com.android.wm.shell.animation.Interpolators;
 import com.android.systemui.Dependency;
 import com.android.systemui.ExpandHelper;
 import com.android.systemui.Gefingerpoken;

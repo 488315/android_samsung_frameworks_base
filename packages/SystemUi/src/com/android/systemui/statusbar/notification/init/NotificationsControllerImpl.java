@@ -8,7 +8,7 @@ import android.util.ArrayMap;
 import android.util.ArraySet;
 import android.util.Log;
 import androidx.constraintlayout.motion.widget.KeyAttributes$$ExternalSyntheticOutline0;
-import com.android.p038wm.shell.bubbles.Bubbles;
+import com.android.wm.shell.bubbles.Bubbles;
 import com.android.systemui.ForegroundServiceController;
 import com.android.systemui.ForegroundServiceNotificationListener;
 import com.android.systemui.dump.DumpManager;

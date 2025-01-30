@@ -12,7 +12,7 @@ import com.samsung.context.sdk.samsunganalytics.internal.sender.SimpleLog;
 import com.samsung.context.sdk.samsunganalytics.internal.util.Debug;
 import com.samsung.context.sdk.samsunganalytics.internal.util.Preferences;
 import com.samsung.context.sdk.samsunganalytics.internal.util.Utils;
-import com.sec.android.diagmonagent.p051sa.IDMAInterface;
+import com.sec.android.diagmonagent.sa.IDMAInterface;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Queue;

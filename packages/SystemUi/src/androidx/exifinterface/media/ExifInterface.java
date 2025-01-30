@@ -21,7 +21,7 @@ import com.samsung.android.knox.custom.CustomDeviceManager;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import com.samsung.android.knox.license.KnoxEnterpriseLicenseManager;
 import com.samsung.android.knox.net.vpn.VpnErrorValues;
-import com.samsung.android.knox.p045ex.peripheral.PeripheralBarcodeConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralBarcodeConstants;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;

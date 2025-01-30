@@ -21,7 +21,7 @@ import com.android.systemui.R;
 import com.android.systemui.basic.util.LogWrapper;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.dump.DumpManager;
-import com.android.systemui.p016qs.tiles.DndTile;
+import com.android.systemui.qs.tiles.DndTile;
 import com.android.systemui.volume.util.BroadcastReceiverManager;
 import com.android.systemui.volume.util.BroadcastReceiverType;
 import com.android.systemui.volume.util.DisplayManagerWrapper;

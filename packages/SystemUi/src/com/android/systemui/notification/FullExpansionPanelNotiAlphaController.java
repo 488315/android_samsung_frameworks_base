@@ -4,7 +4,7 @@ import android.view.animation.Interpolator;
 import android.view.animation.PathInterpolator;
 import com.android.systemui.keyguard.KeyguardEditModeController;
 import com.android.systemui.keyguard.animator.KeyguardTouchAnimator;
-import com.android.systemui.p016qs.TouchAnimator;
+import com.android.systemui.qs.TouchAnimator;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout;
 
 /* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */

@@ -33,14 +33,14 @@ import com.android.systemui.CoreStartable;
 import com.android.systemui.Dumpable;
 import com.android.systemui.R;
 import com.android.systemui.dump.DumpManager;
-import com.android.systemui.p016qs.QSHost;
-import com.android.systemui.p016qs.QsEventLogger;
-import com.android.systemui.p016qs.logging.QSLogger;
-import com.android.systemui.p016qs.pipeline.domain.interactor.PanelInteractor;
-import com.android.systemui.p016qs.tileimpl.QSTileImpl;
+import com.android.systemui.qs.QSHost;
+import com.android.systemui.qs.QsEventLogger;
+import com.android.systemui.qs.logging.QSLogger;
+import com.android.systemui.qs.pipeline.domain.interactor.PanelInteractor;
+import com.android.systemui.qs.tileimpl.QSTileImpl;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.FalsingManager;
-import com.android.systemui.plugins.p013qs.QSTile;
+import com.android.systemui.plugins.qs.QSTile;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.util.concurrency.DelayableExecutor;
@@ -321,22 +321,22 @@ public final class GarbageMonitor implements Dumpable {
             this.mPanelInteractor = panelInteractor;
         }
 
-        @Override // com.android.systemui.p016qs.tileimpl.QSTileImpl
+        @Override // com.android.systemui.qs.tileimpl.QSTileImpl
         public final Intent getLongClickIntent() {
             return new Intent();
         }
 
-        @Override // com.android.systemui.p016qs.tileimpl.QSTileImpl, com.android.systemui.plugins.p013qs.QSTile
+        @Override // com.android.systemui.qs.tileimpl.QSTileImpl, com.android.systemui.plugins.qs.QSTile
         public final int getMetricsCategory() {
             return 0;
         }
 
-        @Override // com.android.systemui.p016qs.tileimpl.QSTileImpl, com.android.systemui.plugins.p013qs.QSTile
+        @Override // com.android.systemui.qs.tileimpl.QSTileImpl, com.android.systemui.plugins.qs.QSTile
         public final CharSequence getTileLabel() {
             return this.mState.label;
         }
 
-        @Override // com.android.systemui.p016qs.tileimpl.QSTileImpl
+        @Override // com.android.systemui.qs.tileimpl.QSTileImpl
         public final void handleClick(View view) {
             if (this.dumpInProgress) {
                 return;
@@ -346,7 +346,7 @@ public final class GarbageMonitor implements Dumpable {
             new C35891("HeapDumpThread").start();
         }
 
-        @Override // com.android.systemui.p016qs.tileimpl.QSTileImpl
+        @Override // com.android.systemui.qs.tileimpl.QSTileImpl
         public final void handleSetListening(boolean z) {
             super.handleSetListening(z);
             GarbageMonitor garbageMonitor = this.f395gm;
@@ -368,7 +368,7 @@ public final class GarbageMonitor implements Dumpable {
             activityManager.clearWatchHeapLimit();
         }
 
-        @Override // com.android.systemui.p016qs.tileimpl.QSTileImpl
+        @Override // com.android.systemui.qs.tileimpl.QSTileImpl
         public final void handleUpdateState(QSTile.State state, Object obj) {
             int myPid = Process.myPid();
             GarbageMonitor garbageMonitor = this.f395gm;
@@ -391,7 +391,7 @@ public final class GarbageMonitor implements Dumpable {
             state.icon = memoryGraphIcon;
         }
 
-        @Override // com.android.systemui.p016qs.tileimpl.QSTileImpl
+        @Override // com.android.systemui.qs.tileimpl.QSTileImpl
         public final QSTile.State newTileState() {
             return new QSTile.State();
         }

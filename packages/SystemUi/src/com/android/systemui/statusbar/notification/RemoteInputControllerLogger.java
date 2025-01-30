@@ -3,7 +3,7 @@ package com.android.systemui.statusbar.notification;
 import com.android.systemui.log.LogBuffer;
 import com.android.systemui.log.LogLevel;
 import com.android.systemui.log.LogMessage;
-import com.samsung.android.knox.p045ex.peripheral.PeripheralConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.DefaultConstructorMarker;
 

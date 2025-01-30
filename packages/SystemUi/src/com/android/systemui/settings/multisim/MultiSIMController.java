@@ -48,7 +48,7 @@ import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.DeviceType;
 import com.android.systemui.util.SettingsHelper;
 import com.google.android.collect.Lists;
-import com.samsung.android.app.telephonyui.netsettings.p044ui.simcardmanager.service.SimCardManagerServiceProvider;
+import com.samsung.android.app.telephonyui.netsettings.ui.simcardmanager.service.SimCardManagerServiceProvider;
 import com.samsung.android.feature.SemCarrierFeature;
 import com.samsung.android.ims.SemImsManager;
 import com.samsung.android.ims.SemImsRegistrationListener;

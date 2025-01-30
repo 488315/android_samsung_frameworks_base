@@ -11,7 +11,7 @@ import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
 import com.android.internal.jank.InteractionJankMonitor;
-import com.android.p038wm.shell.animation.FlingAnimationUtils;
+import com.android.wm.shell.animation.FlingAnimationUtils;
 import com.android.systemui.statusbar.notification.row.ExpandableNotificationRow;
 import com.android.systemui.statusbar.notification.row.ExpandableView;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout;

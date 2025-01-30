@@ -2,7 +2,7 @@ package com.samsung.android.knox;
 
 import com.samsung.android.knox.ddar.DualDARClient;
 import com.samsung.android.knox.net.vpn.KnoxVpnPolicyConstants;
-import com.samsung.android.knox.p045ex.peripheral.PeripheralConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 import com.sec.ims.configuration.DATA;
 import java.util.ArrayList;
 import java.util.Collections;

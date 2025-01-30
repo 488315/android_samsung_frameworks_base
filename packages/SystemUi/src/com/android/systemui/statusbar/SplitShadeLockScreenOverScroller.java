@@ -12,7 +12,7 @@ import com.android.app.animation.Interpolators;
 import com.android.systemui.Dumpable;
 import com.android.systemui.R;
 import com.android.systemui.dump.DumpManager;
-import com.android.systemui.plugins.p013qs.InterfaceC1922QS;
+import com.android.systemui.plugins.qs.InterfaceC1922QS;
 import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController;
 import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
 import com.android.systemui.statusbar.phone.ScrimController;

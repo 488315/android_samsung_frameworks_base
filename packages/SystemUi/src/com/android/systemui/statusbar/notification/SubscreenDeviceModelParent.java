@@ -49,8 +49,8 @@ import com.android.keyguard.KeyguardKnoxGuardViewController$$ExternalSyntheticOu
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.keyguard.logging.AbstractC0866xb1ce8deb;
-import com.android.p038wm.shell.bubbles.BubbleController;
-import com.android.p038wm.shell.bubbles.Bubbles;
+import com.android.wm.shell.bubbles.BubbleController;
+import com.android.wm.shell.bubbles.Bubbles;
 import com.android.systemui.Dependency;
 import com.android.systemui.NotiRune;
 import com.android.systemui.R;

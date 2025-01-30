@@ -22,8 +22,8 @@ import android.view.animation.PathInterpolator;
 import androidx.dynamicanimation.animation.DynamicAnimation;
 import androidx.dynamicanimation.animation.FloatPropertyCompat;
 import com.android.app.animation.Interpolators;
-import com.android.p038wm.shell.animation.FlingAnimationUtils;
-import com.android.p038wm.shell.animation.PhysicsAnimator;
+import com.android.wm.shell.animation.FlingAnimationUtils;
+import com.android.wm.shell.animation.PhysicsAnimator;
 import com.android.systemui.flags.FeatureFlags;
 import com.android.systemui.flags.FeatureFlagsRelease;
 import com.android.systemui.flags.Flags;
@@ -635,9 +635,9 @@ public class SwipeHelper implements Gefingerpoken, Dumpable {
                 animatorProperties.mInterpolator = pathInterpolator;
                 pow = f4;
             } else if (abs2 >= f2) {
-                animatorProperties.mInterpolator = new FlingAnimationUtils.InterpolatorInterpolator(new FlingAnimationUtils.VelocityInterpolator(pow, abs2, abs, 0), pathInterpolator, com.android.p038wm.shell.animation.Interpolators.LINEAR_OUT_SLOW_IN);
+                animatorProperties.mInterpolator = new FlingAnimationUtils.InterpolatorInterpolator(new FlingAnimationUtils.VelocityInterpolator(pow, abs2, abs, 0), pathInterpolator, com.android.wm.shell.animation.Interpolators.LINEAR_OUT_SLOW_IN);
             } else {
-                animatorProperties.mInterpolator = com.android.p038wm.shell.animation.Interpolators.FAST_OUT_LINEAR_IN;
+                animatorProperties.mInterpolator = com.android.wm.shell.animation.Interpolators.FAST_OUT_LINEAR_IN;
             }
             animatorProperties.getClass();
             viewTranslationAnimator = viewTranslationAnimator;

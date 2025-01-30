@@ -1,9 +1,9 @@
 package com.android.systemui.dagger;
 
 import android.os.HandlerThread;
-import com.android.p038wm.shell.keyguard.KeyguardTransitions;
-import com.android.p038wm.shell.sysui.ShellInterface;
-import com.android.p038wm.shell.transition.ShellTransitions;
+import com.android.wm.shell.keyguard.KeyguardTransitions;
+import com.android.wm.shell.sysui.ShellInterface;
+import com.android.wm.shell.transition.ShellTransitions;
 import java.util.Optional;
 
 /* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */

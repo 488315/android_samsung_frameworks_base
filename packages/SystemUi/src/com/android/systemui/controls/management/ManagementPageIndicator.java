@@ -3,7 +3,7 @@ package com.android.systemui.controls.management;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import com.android.systemui.p016qs.PageIndicator;
+import com.android.systemui.qs.PageIndicator;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
@@ -32,7 +32,7 @@ public final class ManagementPageIndicator extends PageIndicator {
         }
     }
 
-    @Override // com.android.systemui.p016qs.PageIndicator
+    @Override // com.android.systemui.qs.PageIndicator
     public final void setLocation(float f) {
         if (getLayoutDirection() == 1) {
             super.setLocation((getChildCount() - 1) - f);

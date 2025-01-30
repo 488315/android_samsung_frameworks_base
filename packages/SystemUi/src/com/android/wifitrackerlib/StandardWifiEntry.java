@@ -24,7 +24,7 @@ import android.util.ArraySet;
 import android.util.Log;
 import com.android.systemui.R;
 import com.android.wifitrackerlib.WifiEntry;
-import com.samsung.android.knox.p045ex.knoxAI.KnoxAiManagerInternal;
+import com.samsung.android.knox.ex.knoxAI.KnoxAiManagerInternal;
 import com.samsung.android.wifi.SemWifiConfiguration;
 import com.samsung.android.wifi.SemWifiManager;
 import com.samsung.android.wifitrackerlib.SemWifiEntryFlags;

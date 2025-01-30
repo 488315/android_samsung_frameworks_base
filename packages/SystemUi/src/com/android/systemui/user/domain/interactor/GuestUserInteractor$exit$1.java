@@ -1,7 +1,7 @@
 package com.android.systemui.user.domain.interactor;
 
 import android.content.pm.UserInfo;
-import com.android.systemui.p016qs.QSUserSwitcherEvent;
+import com.android.systemui.qs.QSUserSwitcherEvent;
 import com.android.systemui.user.data.repository.UserRepository;
 import com.android.systemui.user.data.repository.UserRepositoryImpl;
 import kotlin.ResultKt;

@@ -1,6 +1,6 @@
 package com.android.systemui.statusbar.pipeline.icons.shared;
 
-import com.android.systemui.statusbar.pipeline.satellite.p027ui.DeviceBasedSatelliteBindableIcon;
+import com.android.systemui.statusbar.pipeline.satellite.ui.DeviceBasedSatelliteBindableIcon;
 import java.util.Collections;
 import java.util.List;
 

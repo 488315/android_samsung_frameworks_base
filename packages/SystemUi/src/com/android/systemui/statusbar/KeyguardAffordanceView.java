@@ -11,7 +11,7 @@ import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
-import com.android.p038wm.shell.animation.FlingAnimationUtils;
+import com.android.wm.shell.animation.FlingAnimationUtils;
 import com.android.systemui.widget.SystemUIImageView;
 import com.samsung.android.knox.lockscreen.EmergencyPhoneWidget;
 

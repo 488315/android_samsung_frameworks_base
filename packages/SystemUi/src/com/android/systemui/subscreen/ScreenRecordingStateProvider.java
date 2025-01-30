@@ -3,7 +3,7 @@ package com.android.systemui.subscreen;
 import android.content.Context;
 import com.android.systemui.log.SecPanelLogger;
 import com.android.systemui.log.SecPanelLoggerImpl;
-import com.android.systemui.plugins.p013qs.QSTile;
+import com.android.systemui.plugins.qs.QSTile;
 
 /* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */
 /* loaded from: classes2.dex */

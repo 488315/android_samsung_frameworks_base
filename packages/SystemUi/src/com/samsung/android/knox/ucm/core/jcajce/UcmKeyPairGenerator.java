@@ -6,7 +6,7 @@ import android.security.KeyPairGeneratorSpec;
 import android.security.keystore.KeyGenParameterSpec;
 import android.text.TextUtils;
 import androidx.constraintlayout.motion.widget.KeyAttributes$$ExternalSyntheticOutline0;
-import com.samsung.android.knox.p046zt.devicetrust.cert.CertProvisionProfile;
+import com.samsung.android.knox.zt.devicetrust.cert.CertProvisionProfile;
 import com.samsung.android.knox.ucm.core.UniversalCredentialUtil;
 import com.samsung.android.knox.ucm.plugin.agent.UcmAgentProviderImpl;
 import com.samsung.android.knox.ucm.plugin.agent.UcmAgentService;

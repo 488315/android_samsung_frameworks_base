@@ -15,7 +15,7 @@ import android.util.Log;
 import android.util.SparseArray;
 import androidx.mediarouter.media.MediaRouteProvider;
 import androidx.mediarouter.media.MediaRouter;
-import com.samsung.android.knox.p045ex.peripheral.PeripheralConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Iterator;

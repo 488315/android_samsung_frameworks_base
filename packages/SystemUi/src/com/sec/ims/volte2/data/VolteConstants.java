@@ -1,6 +1,6 @@
 package com.sec.ims.volte2.data;
 
-import com.samsung.android.knox.p045ex.peripheral.PeripheralBarcodeConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralBarcodeConstants;
 import java.util.HashMap;
 import java.util.Map;
 

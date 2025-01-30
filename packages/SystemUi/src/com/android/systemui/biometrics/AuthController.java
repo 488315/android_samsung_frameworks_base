@@ -51,7 +51,7 @@ import com.android.systemui.biometrics.AuthContainerView;
 import com.android.systemui.biometrics.BiometricDisplayListener;
 import com.android.systemui.biometrics.domain.interactor.LogContextInteractor;
 import com.android.systemui.biometrics.domain.interactor.LogContextInteractorImpl;
-import com.android.systemui.biometrics.p003ui.viewmodel.PromptViewModel;
+import com.android.systemui.biometrics.ui.viewmodel.PromptViewModel;
 import com.android.systemui.doze.DozeReceiver;
 import com.android.systemui.flags.FeatureFlags;
 import com.android.systemui.keyguard.WakefulnessLifecycle;

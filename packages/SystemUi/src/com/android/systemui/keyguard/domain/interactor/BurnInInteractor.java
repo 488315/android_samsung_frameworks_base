@@ -2,8 +2,8 @@ package com.android.systemui.keyguard.domain.interactor;
 
 import android.content.Context;
 import com.android.systemui.R;
-import com.android.systemui.common.p004ui.data.repository.ConfigurationRepository;
-import com.android.systemui.common.p004ui.data.repository.ConfigurationRepositoryImpl;
+import com.android.systemui.common.ui.data.repository.ConfigurationRepository;
+import com.android.systemui.common.ui.data.repository.ConfigurationRepositoryImpl;
 import com.android.systemui.doze.util.BurnInHelperKt;
 import com.android.systemui.doze.util.BurnInHelperWrapper;
 import com.android.systemui.util.time.SystemClock;

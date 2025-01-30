@@ -11,7 +11,7 @@ import android.view.InputEvent;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import com.android.internal.logging.UiEventLogger;
-import com.android.p038wm.shell.animation.FlingAnimationUtils;
+import com.android.wm.shell.animation.FlingAnimationUtils;
 import com.android.systemui.dreams.touch.BouncerSwipeTouchHandler;
 import com.android.systemui.dreams.touch.DreamOverlayTouchMonitor;
 import com.android.systemui.dreams.touch.DreamTouchHandler;

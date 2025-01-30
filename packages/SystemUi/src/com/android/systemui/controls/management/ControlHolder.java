@@ -12,8 +12,8 @@ import androidx.core.view.ViewCompat;
 import com.android.systemui.R;
 import com.android.systemui.controls.ControlInterface;
 import com.android.systemui.controls.management.ControlsModel;
-import com.android.systemui.controls.p005ui.CanUseIconPredicate;
-import com.android.systemui.controls.p005ui.RenderInfo;
+import com.android.systemui.controls.ui.CanUseIconPredicate;
+import com.android.systemui.controls.ui.RenderInfo;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
 

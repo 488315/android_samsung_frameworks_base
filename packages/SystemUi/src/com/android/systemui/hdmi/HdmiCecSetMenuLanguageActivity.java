@@ -7,7 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.android.internal.app.LocalePicker;
 import com.android.systemui.R;
-import com.android.systemui.p032tv.TvBottomSheetActivity;
+import com.android.systemui.tv.TvBottomSheetActivity;
 import com.android.systemui.util.settings.SecureSettingsImpl;
 import java.util.HashSet;
 import java.util.Locale;
@@ -41,7 +41,7 @@ public class HdmiCecSetMenuLanguageActivity extends TvBottomSheetActivity implem
         finish();
     }
 
-    @Override // com.android.systemui.p032tv.TvBottomSheetActivity, android.app.Activity
+    @Override // com.android.systemui.tv.TvBottomSheetActivity, android.app.Activity
     public final void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         getWindow().addPrivateFlags(524288);

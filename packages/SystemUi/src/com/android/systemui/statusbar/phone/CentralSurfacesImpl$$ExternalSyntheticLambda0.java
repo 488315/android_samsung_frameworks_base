@@ -1,6 +1,6 @@
 package com.android.systemui.statusbar.phone;
 
-import com.android.p038wm.shell.bubbles.Bubbles;
+import com.android.wm.shell.bubbles.Bubbles;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.shade.NotificationPanelViewController;
 import com.android.systemui.statusbar.StatusBarStateControllerImpl;

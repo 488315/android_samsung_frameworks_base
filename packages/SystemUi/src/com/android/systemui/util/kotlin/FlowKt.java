@@ -1,7 +1,7 @@
 package com.android.systemui.util.kotlin;
 
 import com.android.systemui.keyguard.domain.interactor.KeyguardTransitionInteractor$special$$inlined$filter$4;
-import com.android.systemui.p016qs.pipeline.domain.interactor.CurrentTilesInteractorImpl;
+import com.android.systemui.qs.pipeline.domain.interactor.CurrentTilesInteractorImpl;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function3;
 import kotlinx.coroutines.flow.Flow;

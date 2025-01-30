@@ -37,7 +37,7 @@ import com.samsung.android.desktopsystemui.sharedlib.system.QuickStepContract;
 import com.samsung.android.emergencymode.SemEmergencyManager;
 import com.samsung.android.feature.SemFloatingFeature;
 import com.samsung.android.knox.custom.CustomDeviceManager;
-import com.samsung.android.knox.p045ex.peripheral.PeripheralConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralConstants;
 import com.samsung.android.settingslib.bluetooth.BluetoothRestoredDevice;
 import com.samsung.android.settingslib.bluetooth.ManufacturerData;
 import com.samsung.android.settingslib.bluetooth.SppProfile;

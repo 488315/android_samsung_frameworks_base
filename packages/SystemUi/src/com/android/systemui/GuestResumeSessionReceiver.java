@@ -10,7 +10,7 @@ import android.content.pm.UserInfo;
 import android.os.Bundle;
 import android.os.UserHandle;
 import com.android.internal.logging.UiEventLogger;
-import com.android.systemui.p016qs.QSUserSwitcherEvent;
+import com.android.systemui.qs.QSUserSwitcherEvent;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.statusbar.phone.SystemUIDialog;

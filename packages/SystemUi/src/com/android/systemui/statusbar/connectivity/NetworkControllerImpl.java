@@ -53,7 +53,7 @@ import com.android.systemui.keyboard.KeyboardUI$$ExternalSyntheticOutline0;
 import com.android.systemui.log.LogBuffer;
 import com.android.systemui.log.LogLevel;
 import com.android.systemui.log.LogMessage;
-import com.android.systemui.p016qs.tiles.dialog.InternetDialogFactory;
+import com.android.systemui.qs.tiles.dialog.InternetDialogFactory;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.statusbar.pipeline.StatusBarPipelineFlags;

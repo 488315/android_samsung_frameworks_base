@@ -11,10 +11,10 @@ import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import com.samsung.android.sdk.scs.base.tasks.OnCompleteListener;
 import com.samsung.android.sdk.scs.base.tasks.Task;
-import com.samsung.android.sdk.scs.p048ai.language.AppInfo;
-import com.samsung.android.sdk.scs.p048ai.language.ErrorClassifier$ErrorCode;
-import com.samsung.android.sdk.scs.p048ai.language.ResultErrorException;
-import com.samsung.android.sdk.scs.p048ai.language.SmartReplyer;
+import com.samsung.android.sdk.scs.ai.language.AppInfo;
+import com.samsung.android.sdk.scs.ai.language.ErrorClassifier$ErrorCode;
+import com.samsung.android.sdk.scs.ai.language.ResultErrorException;
+import com.samsung.android.sdk.scs.ai.language.SmartReplyer;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.HashMap;
@@ -182,7 +182,7 @@ public final class CloudPromptProcessor implements BasePromptProcessor {
             @Override // com.samsung.android.sdk.scs.base.tasks.OnCompleteListener
             public final void onComplete(Task task) {
                 String access$getErrorMessage;
-                com.samsung.android.sdk.scs.p048ai.language.Result result;
+                com.samsung.android.sdk.scs.ai.language.Result result;
                 boolean isSuccessful = task.isSuccessful();
                 PromptCallback promptCallback = subscreenDeviceModelB5$mSrResponseCallback$1;
                 CloudPromptProcessor cloudPromptProcessor = CloudPromptProcessor.this;
@@ -207,7 +207,7 @@ public final class CloudPromptProcessor implements BasePromptProcessor {
                     List list = (List) task.getResult();
                     Unit unit = null;
                     int i = 0;
-                    String str3 = (list == null || (result = (com.samsung.android.sdk.scs.p048ai.language.Result) list.get(0)) == null) ? null : result.content;
+                    String str3 = (list == null || (result = (com.samsung.android.sdk.scs.ai.language.Result) list.get(0)) == null) ? null : result.content;
                     if (str3 != null) {
                         List access$parseOutput = CloudPromptProcessor.access$parseOutput(cloudPromptProcessor, str3);
                         StringBuilder sb = new StringBuilder("");

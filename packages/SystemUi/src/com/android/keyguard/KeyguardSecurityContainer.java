@@ -64,7 +64,7 @@ import com.android.systemui.statusbar.policy.BaseUserSwitcherAdapter;
 import com.android.systemui.statusbar.policy.UserSwitcherController;
 import com.android.systemui.user.data.source.UserRecord;
 import com.android.systemui.user.domain.interactor.UserInteractor;
-import com.android.systemui.user.legacyhelper.p034ui.LegacyUserUiHelper;
+import com.android.systemui.user.legacyhelper.ui.LegacyUserUiHelper;
 import com.android.systemui.util.settings.GlobalSettings;
 import com.sec.ims.volte2.data.VolteConstants;
 import java.util.ArrayList;

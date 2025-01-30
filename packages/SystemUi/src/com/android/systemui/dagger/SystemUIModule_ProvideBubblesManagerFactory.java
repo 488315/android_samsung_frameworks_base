@@ -4,7 +4,7 @@ import android.app.INotificationManager;
 import android.content.Context;
 import android.service.dreams.IDreamManager;
 import com.android.internal.statusbar.IStatusBarService;
-import com.android.p038wm.shell.bubbles.Bubbles;
+import com.android.wm.shell.bubbles.Bubbles;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.flags.FeatureFlags;
 import com.android.systemui.model.SysUiState;

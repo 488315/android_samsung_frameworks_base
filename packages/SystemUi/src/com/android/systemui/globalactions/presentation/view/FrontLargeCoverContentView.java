@@ -23,7 +23,7 @@ import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.globalactions.presentation.view.CoverViewAnimatorFSM;
 import com.android.systemui.globalactions.util.SystemUIConditions;
-import com.android.systemui.p014qp.util.SubscreenUtil;
+import com.android.systemui.qp.util.SubscreenUtil;
 import com.samsung.android.globalactions.presentation.SamsungGlobalActionsPresenter;
 import com.samsung.android.globalactions.presentation.features.FeatureFactory;
 import com.samsung.android.globalactions.presentation.strategies.ViewInflateStrategy;

@@ -3,7 +3,7 @@ package com.android.systemui.dump;
 import android.content.Context;
 import android.icu.text.SimpleDateFormat;
 import android.util.Log;
-import com.android.systemui.util.p036io.Files;
+import com.android.systemui.util.io.Files;
 import com.android.systemui.util.time.SystemClock;
 import com.android.systemui.util.time.SystemClockImpl;
 import java.io.BufferedWriter;
@@ -18,7 +18,7 @@ import java.nio.file.StandardOpenOption;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.attribute.FileTime;
 import kotlin.Unit;
-import kotlin.p055io.CloseableKt;
+import kotlin.io.CloseableKt;
 
 /* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */
 /* loaded from: classes.dex */

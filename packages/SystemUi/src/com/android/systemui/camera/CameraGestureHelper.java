@@ -20,7 +20,7 @@ import com.android.systemui.LsRune;
 import com.android.systemui.keyguard.DisplayLifecycle;
 import com.android.systemui.keyguard.domain.interactor.KeyguardInteractor;
 import com.android.systemui.keyguard.shared.model.CameraLaunchSourceModel;
-import com.android.systemui.p014qp.util.SubscreenUtil;
+import com.android.systemui.qp.util.SubscreenUtil;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;

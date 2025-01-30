@@ -4,7 +4,7 @@ import android.content.Context;
 import com.android.systemui.BasicRune;
 import com.android.systemui.Dependency;
 import com.android.systemui.basic.util.LogWrapper;
-import com.android.systemui.p014qp.SubscreenQsPanelController;
+import com.android.systemui.qp.SubscreenQsPanelController;
 import com.android.systemui.popup.util.DisplayManagerWrapper;
 import com.android.systemui.popup.util.KeyguardUpdateMonitorWrapper;
 import com.android.systemui.popup.util.PopupUIUtil;

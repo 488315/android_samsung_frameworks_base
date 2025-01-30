@@ -21,7 +21,7 @@ import com.android.keyguard.KeyguardSecUpdateMonitorImpl$$ExternalSyntheticOutli
 import com.android.systemui.Dumpable;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.dump.DumpManager;
-import com.android.systemui.p016qs.SettingObserver;
+import com.android.systemui.qs.SettingObserver;
 import com.android.systemui.plugins.subscreen.SubRoom;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;
@@ -164,7 +164,7 @@ public final class ZenModeControllerImpl implements ZenModeController, Dumpable 
         this.mUserTracker = userTracker;
         UserTrackerImpl userTrackerImpl = (UserTrackerImpl) userTracker;
         ?? r10 = new SettingObserver(globalSettings, handler, "zen_mode", userTrackerImpl.getUserId()) { // from class: com.android.systemui.statusbar.policy.ZenModeControllerImpl.2
-            @Override // com.android.systemui.p016qs.SettingObserver
+            @Override // com.android.systemui.qs.SettingObserver
             public final void handleValueChanged(final int i, boolean z) {
                 ZenModeConfig.ZenRule zenRule;
                 ArrayMap arrayMap;
@@ -205,7 +205,7 @@ public final class ZenModeControllerImpl implements ZenModeController, Dumpable 
         };
         this.mModeSetting = r10;
         ?? r12 = new SettingObserver(globalSettings, handler, "zen_mode_config_etag", userTrackerImpl.getUserId()) { // from class: com.android.systemui.statusbar.policy.ZenModeControllerImpl.3
-            @Override // com.android.systemui.p016qs.SettingObserver
+            @Override // com.android.systemui.qs.SettingObserver
             public final void handleValueChanged(int i, boolean z) {
                 try {
                     Trace.beginSection("updateZenModeConfig");

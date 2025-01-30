@@ -1,9 +1,9 @@
 package com.android.systemui.wmshell;
 
-import com.android.p038wm.shell.common.HandlerExecutor;
-import com.android.p038wm.shell.pip.Pip;
-import com.android.p038wm.shell.splitscreen.EnterSplitGestureHandler;
-import com.android.p038wm.shell.splitscreen.EnterSplitGestureHandler$$ExternalSyntheticLambda1;
+import com.android.wm.shell.common.HandlerExecutor;
+import com.android.wm.shell.pip.Pip;
+import com.android.wm.shell.splitscreen.EnterSplitGestureHandler;
+import com.android.wm.shell.splitscreen.EnterSplitGestureHandler$$ExternalSyntheticLambda1;
 import com.android.systemui.model.SysUiState;
 
 /* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */

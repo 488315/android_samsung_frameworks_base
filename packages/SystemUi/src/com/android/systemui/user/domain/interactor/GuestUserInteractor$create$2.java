@@ -2,7 +2,7 @@ package com.android.systemui.user.domain.interactor;
 
 import android.widget.Toast;
 import com.android.systemui.R;
-import com.android.systemui.p016qs.QSUserSwitcherEvent;
+import com.android.systemui.qs.QSUserSwitcherEvent;
 import com.android.systemui.user.domain.model.ShowDialogRequestModel;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import kotlin.ResultKt;

@@ -3,12 +3,12 @@ package com.android.systemui.statusbar.phone;
 import com.android.systemui.BasicRune;
 import com.android.systemui.R;
 import com.android.systemui.battery.BatteryMeterViewController;
-import com.android.systemui.statusbar.connectivity.p020ui.MobileContextProvider;
+import com.android.systemui.statusbar.connectivity.ui.MobileContextProvider;
 import com.android.systemui.statusbar.phone.StatusBarIconController;
 import com.android.systemui.statusbar.pipeline.StatusBarPipelineFlags;
-import com.android.systemui.statusbar.pipeline.mobile.p026ui.MobileUiAdapter;
-import com.android.systemui.statusbar.pipeline.shared.p028ui.BTTetherUiAdapter;
-import com.android.systemui.statusbar.pipeline.wifi.p029ui.WifiUiAdapter;
+import com.android.systemui.statusbar.pipeline.mobile.ui.MobileUiAdapter;
+import com.android.systemui.statusbar.pipeline.shared.ui.BTTetherUiAdapter;
+import com.android.systemui.statusbar.pipeline.wifi.ui.WifiUiAdapter;
 import com.android.systemui.statusbar.policy.NetspeedViewController;
 import com.android.systemui.util.ViewController;
 

@@ -26,7 +26,7 @@ import com.android.systemui.statusbar.pipeline.carrier.CarrierInfraMediator;
 import com.android.systemui.statusbar.pipeline.icons.shared.BindableIconsRegistry;
 import com.android.systemui.statusbar.pipeline.icons.shared.BindableIconsRegistryImpl;
 import com.android.systemui.statusbar.pipeline.mobile.data.model.SubscriptionsOrder;
-import com.android.systemui.statusbar.pipeline.satellite.p027ui.DeviceBasedSatelliteBindableIcon;
+import com.android.systemui.statusbar.pipeline.satellite.ui.DeviceBasedSatelliteBindableIcon;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.tuner.TunerService;
 import com.sec.ims.IMSParameter;

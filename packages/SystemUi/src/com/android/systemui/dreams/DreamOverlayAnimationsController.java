@@ -4,7 +4,7 @@ import android.animation.Animator;
 import android.view.View;
 import androidx.constraintlayout.core.widgets.ConstraintWidget$$ExternalSyntheticOutline0;
 import com.android.systemui.complication.ComplicationHostViewController;
-import com.android.systemui.keyguard.p009ui.viewmodel.DreamingToLockscreenTransitionViewModel;
+import com.android.systemui.keyguard.ui.viewmodel.DreamingToLockscreenTransitionViewModel;
 import com.android.systemui.statusbar.BlurUtils;
 import com.android.systemui.statusbar.CrossFadeHelper;
 import com.android.systemui.statusbar.policy.ConfigurationController;

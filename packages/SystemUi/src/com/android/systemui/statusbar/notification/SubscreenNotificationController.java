@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView$$ExternalSyntheticOutline0;
 import com.android.keyguard.AbstractC0689x6838b71d;
 import com.android.keyguard.KeyguardCarrierViewController$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUpdateMonitor;
-import com.android.p038wm.shell.bubbles.Bubbles;
+import com.android.wm.shell.bubbles.Bubbles;
 import com.android.systemui.Dependency;
 import com.android.systemui.ForegroundServiceController;
 import com.android.systemui.NotiRune;

@@ -10,7 +10,7 @@ import android.view.RemoteAnimationAdapter;
 import android.view.View;
 import android.window.RemoteTransition;
 import androidx.lifecycle.LifecycleOwner;
-import com.android.p038wm.shell.transition.Transitions;
+import com.android.wm.shell.transition.Transitions;
 import com.android.systemui.Dumpable;
 import com.android.systemui.shared.system.RemoteAnimationRunnerCompat;
 import com.samsung.android.knox.custom.IKnoxCustomManager;

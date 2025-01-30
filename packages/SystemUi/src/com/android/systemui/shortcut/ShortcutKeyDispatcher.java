@@ -4,7 +4,7 @@ import android.content.Context;
 import android.os.RemoteException;
 import android.view.IWindowManager;
 import android.view.WindowManagerGlobal;
-import com.android.p038wm.shell.splitscreen.SplitScreenController;
+import com.android.wm.shell.splitscreen.SplitScreenController;
 import com.android.systemui.CoreStartable;
 import com.android.systemui.shortcut.ShortcutKeyServiceProxy;
 import java.util.Optional;

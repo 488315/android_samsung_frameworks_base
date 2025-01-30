@@ -13,7 +13,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import androidx.constraintlayout.core.widgets.analyzer.DependencyGraph$$ExternalSyntheticOutline0;
 import com.android.systemui.R;
-import com.android.systemui.common.p004ui.view.SeekBarWithIconButtonsView;
+import com.android.systemui.common.ui.view.SeekBarWithIconButtonsView;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 import com.android.systemui.util.concurrency.DelayableExecutor;
 import com.android.systemui.util.concurrency.ExecutorImpl;

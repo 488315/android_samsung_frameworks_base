@@ -60,7 +60,7 @@ import com.android.systemui.statusbar.notification.stack.NotificationChildrenCon
 import com.android.systemui.statusbar.policy.SmartReplyView;
 import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.SettingsHelper;
-import com.samsung.android.knox.p045ex.peripheral.PeripheralBarcodeConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralBarcodeConstants;
 import com.samsung.android.rune.CoreRune;
 import java.util.List;
 import java.util.function.Consumer;

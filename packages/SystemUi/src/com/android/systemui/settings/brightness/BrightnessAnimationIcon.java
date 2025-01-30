@@ -9,7 +9,7 @@ import com.airbnb.lottie.model.KeyPath;
 import com.airbnb.lottie.value.LottieValueCallback;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
-import com.android.systemui.p014qp.util.AnimationUtils;
+import com.android.systemui.qp.util.AnimationUtils;
 import com.android.systemui.util.DeviceState;
 import com.android.systemui.util.SettingsHelper;
 

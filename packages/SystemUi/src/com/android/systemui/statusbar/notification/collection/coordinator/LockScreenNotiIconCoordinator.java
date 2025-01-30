@@ -1,8 +1,8 @@
 package com.android.systemui.statusbar.notification.collection.coordinator;
 
 import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
-import com.android.p038wm.shell.bubbles.BubbleController;
-import com.android.p038wm.shell.bubbles.Bubbles;
+import com.android.wm.shell.bubbles.BubbleController;
+import com.android.wm.shell.bubbles.Bubbles;
 import com.android.systemui.Dependency;
 import com.android.systemui.NotiRune;
 import com.android.systemui.facewidget.plugin.FaceWidgetContainerWrapper;

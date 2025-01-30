@@ -49,7 +49,7 @@ import androidx.core.animation.ValueAnimator;
 import com.android.app.animation.InterpolatorsAndroidX;
 import com.android.internal.logging.UiEventLogger;
 import com.android.internal.util.ContrastColorUtil;
-import com.android.p038wm.shell.animation.Interpolators;
+import com.android.wm.shell.animation.Interpolators;
 import com.android.systemui.Dependency;
 import com.android.systemui.R;
 import com.android.systemui.statusbar.RemoteInputController;

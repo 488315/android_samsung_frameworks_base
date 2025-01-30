@@ -15,7 +15,7 @@ import com.android.systemui.BootAnimationFinishedCacheImpl;
 import com.android.systemui.Dependency;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.log.SecPanelLogger;
-import com.android.systemui.p016qs.QSTileHost;
+import com.android.systemui.qs.QSTileHost;
 import com.android.systemui.shade.SecPanelPolicy;
 import com.android.systemui.statusbar.CommandQueue;
 import com.android.systemui.statusbar.LockscreenShadeTransitionController;

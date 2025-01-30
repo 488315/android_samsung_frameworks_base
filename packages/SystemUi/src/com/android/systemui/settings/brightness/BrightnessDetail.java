@@ -31,10 +31,10 @@ import com.android.systemui.QpRune;
 import com.android.systemui.R;
 import com.android.systemui.knox.KnoxStateMonitor;
 import com.android.systemui.knox.KnoxStateMonitorImpl;
-import com.android.systemui.p016qs.SecQSPanelController;
-import com.android.systemui.p016qs.SecQSSwitchPreference;
+import com.android.systemui.qs.SecQSPanelController;
+import com.android.systemui.qs.SecQSSwitchPreference;
 import com.android.systemui.plugins.ActivityStarter;
-import com.android.systemui.plugins.p013qs.DetailAdapter;
+import com.android.systemui.plugins.qs.DetailAdapter;
 import com.android.systemui.settings.brightness.BrightnessController;
 import com.android.systemui.util.DeviceType;
 import com.android.systemui.util.SystemUIAnalytics;
@@ -182,7 +182,7 @@ public final class BrightnessDetail extends FrameLayout {
         public C23841() {
         }
 
-        @Override // com.android.systemui.plugins.p013qs.DetailAdapter
+        @Override // com.android.systemui.plugins.qs.DetailAdapter
         public final View createDetailView(final Context context, View view, ViewGroup viewGroup) {
             final BrightnessDetail brightnessDetail = BrightnessDetail.this;
             View inflate = LayoutInflater.from(brightnessDetail.mContext).inflate(R.layout.sec_brightness_detail, viewGroup, false);
@@ -363,22 +363,22 @@ public final class BrightnessDetail extends FrameLayout {
             return inflate;
         }
 
-        @Override // com.android.systemui.plugins.p013qs.DetailAdapter
+        @Override // com.android.systemui.plugins.qs.DetailAdapter
         public final int getMetricsCategory() {
             return VolteConstants.ErrorCode.UT_RETRY_TO_CDMA_DIAL;
         }
 
-        @Override // com.android.systemui.plugins.p013qs.DetailAdapter
+        @Override // com.android.systemui.plugins.qs.DetailAdapter
         public final Intent getSettingsIntent() {
             return new Intent("android.settings.DISPLAY_SETTINGS");
         }
 
-        @Override // com.android.systemui.plugins.p013qs.DetailAdapter
+        @Override // com.android.systemui.plugins.qs.DetailAdapter
         public final CharSequence getTitle() {
             return BrightnessDetail.this.mContext.getResources().getString(R.string.sec_brightness_detail_title);
         }
 
-        @Override // com.android.systemui.plugins.p013qs.DetailAdapter
+        @Override // com.android.systemui.plugins.qs.DetailAdapter
         public final Boolean getToggleState() {
             return null;
         }
@@ -399,7 +399,7 @@ public final class BrightnessDetail extends FrameLayout {
             }
         }
 
-        @Override // com.android.systemui.plugins.p013qs.DetailAdapter
+        @Override // com.android.systemui.plugins.qs.DetailAdapter
         public final void setToggleState(boolean z) {
         }
     }

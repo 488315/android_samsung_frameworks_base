@@ -1,9 +1,9 @@
 package com.android.systemui.statusbar.phone;
 
-import com.android.p038wm.shell.bubbles.BubbleController;
-import com.android.p038wm.shell.bubbles.BubbleController$BubblesImpl$$ExternalSyntheticLambda2;
-import com.android.p038wm.shell.bubbles.BubbleEntry;
-import com.android.p038wm.shell.common.HandlerExecutor;
+import com.android.wm.shell.bubbles.BubbleController;
+import com.android.wm.shell.bubbles.BubbleController$BubblesImpl$$ExternalSyntheticLambda2;
+import com.android.wm.shell.bubbles.BubbleEntry;
+import com.android.wm.shell.common.HandlerExecutor;
 import com.android.systemui.shade.ShadeControllerImpl;
 import com.android.systemui.statusbar.notification.collection.NotificationEntry;
 import com.android.systemui.wmshell.BubblesManager;

@@ -20,7 +20,7 @@ import com.android.app.animation.Interpolators;
 import com.android.internal.logging.InstanceId;
 import com.android.internal.widget.CachingIconView;
 import com.android.systemui.R;
-import com.android.systemui.common.p004ui.binder.TintedIconViewBinder;
+import com.android.systemui.common.ui.binder.TintedIconViewBinder;
 import com.android.systemui.common.shared.model.ContentDescription;
 import com.android.systemui.common.shared.model.TintedIcon;
 import com.android.systemui.dump.DumpManager;

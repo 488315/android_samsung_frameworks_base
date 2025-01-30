@@ -22,7 +22,7 @@ import com.android.systemui.statusbar.notification.row.ExpandableNotificationRow
 import com.android.systemui.statusbar.notification.stack.NotificationChildrenContainer;
 import com.android.systemui.util.SettingsHelper;
 import com.android.systemui.util.SystemUIAnalytics;
-import com.sec.ims.p053im.ImIntent;
+import com.sec.ims.im.ImIntent;
 import java.util.ArrayList;
 import java.util.List;
 

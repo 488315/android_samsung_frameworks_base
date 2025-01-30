@@ -22,7 +22,7 @@ import com.android.systemui.controls.controller.ControlsControllerImpl;
 import com.android.systemui.controls.controller.Favorites;
 import com.android.systemui.controls.controller.StructureInfo;
 import com.android.systemui.controls.management.ControlsListingController;
-import com.android.systemui.controls.p005ui.RenderInfo;
+import com.android.systemui.controls.ui.RenderInfo;
 import com.android.systemui.controls.panels.AuthorizedPanelsRepositoryImpl;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;

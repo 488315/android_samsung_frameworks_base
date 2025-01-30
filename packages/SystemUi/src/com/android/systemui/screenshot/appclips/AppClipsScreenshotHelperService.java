@@ -8,9 +8,9 @@ import android.util.Log;
 import android.view.SurfaceControl;
 import android.view.ViewRootImpl;
 import android.window.ScreenCapture;
-import com.android.p038wm.shell.bubbles.BubbleController;
-import com.android.p038wm.shell.bubbles.Bubbles;
-import com.android.p038wm.shell.common.HandlerExecutor;
+import com.android.wm.shell.bubbles.BubbleController;
+import com.android.wm.shell.bubbles.Bubbles;
+import com.android.wm.shell.common.HandlerExecutor;
 import com.android.systemui.screenshot.appclips.IAppClipsScreenshotHelperService;
 import java.util.Optional;
 

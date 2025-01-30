@@ -8,7 +8,7 @@ import com.android.systemui.statusbar.pipeline.shared.data.repository.Connectivi
 import com.android.systemui.statusbar.pipeline.shared.data.repository.ConnectivityRepositoryImpl;
 import com.android.systemui.statusbar.pipeline.shared.data.repository.ImsRegStateUtil;
 import com.android.systemui.statusbar.pipeline.wifi.data.repository.WifiRepository;
-import com.android.systemui.statusbar.pipeline.wifi.p029ui.util.WifiSignalIconResource;
+import com.android.systemui.statusbar.pipeline.wifi.ui.util.WifiSignalIconResource;
 import com.samsung.android.knox.custom.IKnoxCustomManager;
 import com.samsung.android.nexus.video.VideoPlayer;
 import java.util.Set;

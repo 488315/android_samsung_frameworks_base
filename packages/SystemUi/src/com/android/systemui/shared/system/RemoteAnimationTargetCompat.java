@@ -4,7 +4,7 @@ import android.util.ArrayMap;
 import android.view.RemoteAnimationTarget;
 import android.view.SurfaceControl;
 import android.window.TransitionInfo;
-import com.android.p038wm.shell.util.TransitionUtil;
+import com.android.wm.shell.util.TransitionUtil;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 

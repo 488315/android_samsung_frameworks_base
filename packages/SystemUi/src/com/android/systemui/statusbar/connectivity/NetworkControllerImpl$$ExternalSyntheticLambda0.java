@@ -2,9 +2,9 @@ package com.android.systemui.statusbar.connectivity;
 
 import android.os.UserHandle;
 import android.util.Log;
-import com.android.systemui.p016qs.tiles.dialog.InternetDialog;
-import com.android.systemui.p016qs.tiles.dialog.InternetDialogFactory;
-import com.android.systemui.p016qs.tiles.dialog.InternetDialogFactoryKt;
+import com.android.systemui.qs.tiles.dialog.InternetDialog;
+import com.android.systemui.qs.tiles.dialog.InternetDialogFactory;
+import com.android.systemui.qs.tiles.dialog.InternetDialogFactoryKt;
 import com.android.systemui.settings.UserTrackerImpl;
 
 /* compiled from: qb/89794335 06599c810852d30e4467fa5f916efb8291776d5f5b22da1b00b853844284f76c */

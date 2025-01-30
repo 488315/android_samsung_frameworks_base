@@ -48,7 +48,7 @@ import com.android.systemui.statusbar.phone.CentralSurfaces;
 import com.android.systemui.statusbar.phone.CentralSurfacesImpl;
 import com.android.systemui.util.SettingsHelper;
 import com.samsung.android.knox.accounts.Account;
-import com.samsung.android.sivs.p049ai.sdkcommon.asr.SpeechRecognitionConst;
+import com.samsung.android.sivs.ai.sdkcommon.asr.SpeechRecognitionConst;
 import com.sec.ims.presence.ServiceTuple;
 import java.util.ArrayList;
 import java.util.Collections;

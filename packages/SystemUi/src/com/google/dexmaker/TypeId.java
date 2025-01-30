@@ -1,7 +1,7 @@
 package com.google.dexmaker;
 
-import com.google.dexmaker.p043dx.rop.cst.CstType;
-import com.google.dexmaker.p043dx.rop.type.Type;
+import com.google.dexmaker.dx.rop.cst.CstType;
+import com.google.dexmaker.dx.rop.type.Type;
 import java.util.HashMap;
 import java.util.Map;
 

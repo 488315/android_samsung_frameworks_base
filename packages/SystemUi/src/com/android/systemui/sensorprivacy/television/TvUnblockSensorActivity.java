@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.systemui.R;
-import com.android.systemui.p032tv.TvBottomSheetActivity;
+import com.android.systemui.tv.TvBottomSheetActivity;
 import com.android.systemui.statusbar.policy.IndividualSensorPrivacyController;
 import com.android.systemui.statusbar.policy.IndividualSensorPrivacyControllerImpl;
 
@@ -41,7 +41,7 @@ public class TvUnblockSensorActivity extends TvBottomSheetActivity {
     }
 
     /* JADX WARN: Type inference failed for: r3v7, types: [com.android.systemui.sensorprivacy.television.TvUnblockSensorActivity$$ExternalSyntheticLambda1] */
-    @Override // com.android.systemui.p032tv.TvBottomSheetActivity, android.app.Activity
+    @Override // com.android.systemui.tv.TvBottomSheetActivity, android.app.Activity
     public final void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         getWindow().addSystemFlags(524288);

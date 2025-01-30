@@ -17,7 +17,7 @@ import androidx.core.os.LocaleListCompatWrapper$$ExternalSyntheticOutline0;
 import com.android.systemui.SystemUIAppComponentFactoryBase;
 import com.android.systemui.keyguard.data.repository.KeyguardQuickAffordanceRepository;
 import com.android.systemui.keyguard.domain.interactor.KeyguardQuickAffordanceInteractor;
-import com.android.systemui.keyguard.p009ui.preview.KeyguardRemotePreviewManager;
+import com.android.systemui.keyguard.ui.preview.KeyguardRemotePreviewManager;
 import com.android.systemui.keyguard.shared.model.KeyguardPickerFlag;
 import com.android.systemui.keyguard.shared.model.KeyguardQuickAffordancePickerRepresentation;
 import com.android.systemui.keyguard.shared.model.KeyguardSlotPickerRepresentation;

@@ -1,8 +1,8 @@
 package com.samsung.android.sdk.scs.base.feature;
 
-import com.samsung.android.sivs.p049ai.sdkcommon.asr.SpeechRecognitionConst;
-import com.samsung.android.sivs.p049ai.sdkcommon.language.LlmServiceConst;
-import com.samsung.android.sivs.p049ai.sdkcommon.translation.TranslationConst;
+import com.samsung.android.sivs.ai.sdkcommon.asr.SpeechRecognitionConst;
+import com.samsung.android.sivs.ai.sdkcommon.language.LlmServiceConst;
+import com.samsung.android.sivs.ai.sdkcommon.translation.TranslationConst;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;

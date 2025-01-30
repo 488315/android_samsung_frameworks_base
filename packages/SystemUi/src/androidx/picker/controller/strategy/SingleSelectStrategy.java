@@ -6,7 +6,7 @@ import androidx.picker.controller.strategy.task.SingleSelectableTask;
 import androidx.picker.controller.strategy.task.SortAppInfoViewDataTask;
 import androidx.picker.model.AppData;
 import androidx.picker.model.viewdata.ViewData;
-import androidx.picker.p000di.AppPickerContext;
+import androidx.picker.di.AppPickerContext;
 import androidx.picker.repository.ViewDataRepository;
 import java.util.Comparator;
 import java.util.List;

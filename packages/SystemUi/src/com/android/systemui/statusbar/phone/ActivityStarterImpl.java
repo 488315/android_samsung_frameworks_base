@@ -34,7 +34,7 @@ import com.android.systemui.keyguard.KeyguardUnlockInfo;
 import com.android.systemui.keyguard.KeyguardViewMediator;
 import com.android.systemui.keyguard.KeyguardViewMediatorHelperImpl;
 import com.android.systemui.keyguard.WakefulnessLifecycle;
-import com.android.systemui.p014qp.util.SubscreenUtil;
+import com.android.systemui.qp.util.SubscreenUtil;
 import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;

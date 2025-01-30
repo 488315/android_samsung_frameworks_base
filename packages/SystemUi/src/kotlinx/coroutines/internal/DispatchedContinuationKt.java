@@ -1,6 +1,6 @@
 package kotlinx.coroutines.internal;
 
-import com.samsung.android.knox.p045ex.peripheral.PeripheralBarcodeConstants;
+import com.samsung.android.knox.ex.peripheral.PeripheralBarcodeConstants;
 import java.util.concurrent.CancellationException;
 import kotlin.Result;
 import kotlin.Unit;

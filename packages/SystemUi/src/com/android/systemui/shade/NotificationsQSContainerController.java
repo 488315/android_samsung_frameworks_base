@@ -15,9 +15,9 @@ import com.android.systemui.R;
 import com.android.systemui.fragments.FragmentHostManager;
 import com.android.systemui.fragments.FragmentService;
 import com.android.systemui.navigationbar.NavigationModeController;
-import com.android.systemui.p016qs.SecQSPanelResourcePicker;
-import com.android.systemui.plugins.p013qs.InterfaceC1922QS;
-import com.android.systemui.plugins.p013qs.QSContainerController;
+import com.android.systemui.qs.SecQSPanelResourcePicker;
+import com.android.systemui.plugins.qs.InterfaceC1922QS;
+import com.android.systemui.plugins.qs.QSContainerController;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.recents.OverviewProxyService;
 import com.android.systemui.shade.ShadeHeaderController.CustomizerAnimationListener;
@@ -179,7 +179,7 @@ public final class NotificationsQSContainerController extends ViewController imp
         }
     }
 
-    @Override // com.android.systemui.plugins.p013qs.QSContainerController
+    @Override // com.android.systemui.plugins.qs.QSContainerController
     public final void setCustomizerAnimating(boolean z) {
         if (this.isQSCustomizerAnimating != z) {
             this.isQSCustomizerAnimating = z;
@@ -187,7 +187,7 @@ public final class NotificationsQSContainerController extends ViewController imp
         }
     }
 
-    @Override // com.android.systemui.plugins.p013qs.QSContainerController
+    @Override // com.android.systemui.plugins.qs.QSContainerController
     public final void setCustomizerShowing(boolean z) {
         QSContainerController.DefaultImpls.setCustomizerShowing(this, z);
     }
@@ -317,7 +317,7 @@ public final class NotificationsQSContainerController extends ViewController imp
         mutablePropertyReference0Impl2.set(Integer.valueOf(dimensionPixelSize2));
     }
 
-    @Override // com.android.systemui.plugins.p013qs.QSContainerController
+    @Override // com.android.systemui.plugins.qs.QSContainerController
     public final void setCustomizerShowing(boolean z, long j) {
         if (z != this.isQSCustomizing) {
             this.isQSCustomizing = z;
@@ -326,7 +326,7 @@ public final class NotificationsQSContainerController extends ViewController imp
         }
     }
 
-    @Override // com.android.systemui.plugins.p013qs.QSContainerController
+    @Override // com.android.systemui.plugins.qs.QSContainerController
     public final void setDetailShowing(boolean z) {
     }
 }
