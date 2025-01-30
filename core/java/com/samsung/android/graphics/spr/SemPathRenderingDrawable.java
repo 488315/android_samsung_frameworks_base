@@ -125,7 +125,7 @@ public class SemPathRenderingDrawable extends Drawable implements Animatable {
     }
     mCanApplyTheme = md;
     try {
-      Class clasz = Class.forName("com.android.internal.R$styleable");
+      Class clasz = Class.forName("com.android.internal.R.styleable");
       Field field = clasz.getDeclaredField("BitmapDrawable");
       mStyleableBitmapDrawable = (int[]) field.get(null);
       Field field2 = clasz.getDeclaredField("BitmapDrawable_src");
