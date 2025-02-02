@@ -15,7 +15,7 @@ import com.android.internal.annotations.VisibleForTesting;
 import com.samsung.android.biometrics.app.setting.DisplayStateManager;
 import com.samsung.android.biometrics.app.setting.R;
 import com.samsung.android.biometrics.app.setting.Utils;
-import com.samsung.android.biometrics.app.setting.fingerprint.p000vi.VisualEffectContainer;
+import com.samsung.android.biometrics.app.setting.fingerprint.vi.VisualEffectContainer;
 import java.util.function.IntSupplier;
 
 /* loaded from: classes.dex */

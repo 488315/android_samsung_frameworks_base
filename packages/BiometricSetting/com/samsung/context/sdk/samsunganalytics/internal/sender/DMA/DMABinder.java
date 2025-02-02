@@ -7,7 +7,7 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import com.samsung.context.sdk.samsunganalytics.internal.Callback;
 import com.samsung.context.sdk.samsunganalytics.internal.util.Debug;
-import com.sec.android.diagmonagent.p001sa.IDMAInterface;
+import com.sec.android.diagmonagent.sa.IDMAInterface;
 
 /* loaded from: classes.dex */
 public final class DMABinder {

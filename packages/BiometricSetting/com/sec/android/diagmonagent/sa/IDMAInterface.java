@@ -1,4 +1,4 @@
-package com.sec.android.diagmonagent.p001sa;
+package com.sec.android.diagmonagent.sa;
 
 import android.os.Binder;
 import android.os.IBinder;
@@ -23,7 +23,7 @@ public interface IDMAInterface extends IInterface {
                 return this.mRemote;
             }
 
-            @Override // com.sec.android.diagmonagent.p001sa.IDMAInterface
+            @Override // com.sec.android.diagmonagent.sa.IDMAInterface
             public final String checkToken() throws RemoteException {
                 Parcel obtain = Parcel.obtain();
                 Parcel obtain2 = Parcel.obtain();
@@ -38,7 +38,7 @@ public interface IDMAInterface extends IInterface {
                 }
             }
 
-            @Override // com.sec.android.diagmonagent.p001sa.IDMAInterface
+            @Override // com.sec.android.diagmonagent.sa.IDMAInterface
             public final int sendCommon(String str, String str2, String str3) throws RemoteException {
                 Parcel obtain = Parcel.obtain();
                 Parcel obtain2 = Parcel.obtain();
@@ -57,7 +57,7 @@ public interface IDMAInterface extends IInterface {
                 }
             }
 
-            @Override // com.sec.android.diagmonagent.p001sa.IDMAInterface
+            @Override // com.sec.android.diagmonagent.sa.IDMAInterface
             public final int sendLog(String str, String str2, long j, String str3) throws RemoteException {
                 Parcel obtain = Parcel.obtain();
                 Parcel obtain2 = Parcel.obtain();

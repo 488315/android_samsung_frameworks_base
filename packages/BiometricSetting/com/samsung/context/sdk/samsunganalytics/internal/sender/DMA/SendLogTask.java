@@ -4,7 +4,7 @@ import com.samsung.context.sdk.samsunganalytics.Configuration;
 import com.samsung.context.sdk.samsunganalytics.internal.executor.AsyncTaskClient;
 import com.samsung.context.sdk.samsunganalytics.internal.sender.SimpleLog;
 import com.samsung.context.sdk.samsunganalytics.internal.util.Debug;
-import com.sec.android.diagmonagent.p001sa.IDMAInterface;
+import com.sec.android.diagmonagent.sa.IDMAInterface;
 
 /* loaded from: classes.dex */
 public final class SendLogTask implements AsyncTaskClient {

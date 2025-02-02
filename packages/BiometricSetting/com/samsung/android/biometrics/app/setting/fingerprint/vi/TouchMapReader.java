@@ -1,4 +1,4 @@
-package com.samsung.android.biometrics.app.setting.fingerprint.p000vi;
+package com.samsung.android.biometrics.app.setting.fingerprint.vi;
 
 import android.content.Context;
 import android.util.Log;

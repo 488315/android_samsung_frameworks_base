@@ -1,4 +1,4 @@
-package com.samsung.android.biometrics.app.setting.fingerprint.p000vi;
+package com.samsung.android.biometrics.app.setting.fingerprint.vi;
 
 /* compiled from: R8$$SyntheticClass */
 /* loaded from: classes.dex */
