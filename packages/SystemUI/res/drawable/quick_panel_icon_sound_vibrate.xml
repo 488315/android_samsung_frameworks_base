@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list android:oneshot="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_vibrate_000" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_vibrate_001" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_vibrate_002" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_vibrate_003" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_vibrate_004" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_vibrate_005" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_vibrate_006" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_vibrate_007" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_vibrate_008" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_vibrate_009" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_vibrate_010" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_vibrate_011" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_vibrate_012" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_vibrate_013" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_vibrate_014" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_sound_vibrate_015" />
+</animation-list>

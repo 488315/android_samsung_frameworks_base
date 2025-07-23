@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <ImageView android:layout_width="@dimen/settingslib_expressive_zero_state_background_size" android:layout_height="@dimen/settingslib_expressive_zero_state_background_size" android:src="@drawable/settingslib_expressive_zerostate_background" />
+        <ImageView android:layout_gravity="center" android:id="@android:id/icon" android:layout_width="@dimen/settingslib_expressive_space_large3" android:layout_height="@dimen/settingslib_expressive_space_large3" />
+    </FrameLayout>
+    <TextView android:textAppearance="?android:textAppearanceMedium" android:gravity="center" android:id="@android:id/title" android:layout_width="@dimen/settingslib_expressive_zero_state_title_width" android:layout_height="wrap_content" android:layout_marginTop="@dimen/settingslib_expressive_space_small4" />
+    <TextView android:textAppearance="?android:textAppearanceSmall" android:textColor="?android:textColorSecondary" android:gravity="center" android:id="@android:id/summary" android:layout_width="@dimen/settingslib_expressive_zero_state_title_width" android:layout_height="wrap_content" android:layout_marginTop="@dimen/settingslib_expressive_space_small4" />
+</LinearLayout>

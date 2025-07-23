@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <stroke android:width="@dimen/accessibility_magnification_thumbnail_container_stroke_width" android:color="@color/accessibility_magnification_thumbnail_container_stroke_color" />
+            <corners android:radius="8.0dip" />
+            <solid android:color="@color/accessibility_magnification_thumbnail_container_background_color" />
+        </shape>
+    </item>
+</layer-list>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.qp.SubroomQuickSettingsBaseView android:id="@id/subscreen_quick_settings_baseview" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:id="@id/subscreen_quick_settings" android:visibility="visible" layout="@layout/subscreen_quick_settings" />
+    <include android:id="@id/subroom_brightness_settings" android:visibility="gone" layout="@layout/subscreen_brightness_settings" />
+    <RelativeLayout android:id="@id/subroom_back_button" android:padding="@dimen/subscreen_back_button_margin" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <ImageView android:id="@id/back_image_view" android:layout_width="@dimen/subscreen_back_button_width" android:layout_height="@dimen/subscreen_back_button_height" android:src="@drawable/subroom_back_button" android:contentDescription="@string/accessibility_back" style="@style/SubscreenBackButtonImage" />
+    </RelativeLayout>
+</com.android.systemui.qp.SubroomQuickSettingsBaseView>

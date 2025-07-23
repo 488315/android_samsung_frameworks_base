@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="keyguard_bottom_area_emergency_button_area_min_height_tablet">28.0dip</dimen>
+    <dimen name="kg_message_area_width_tablet">320.0dip</dimen>
+    <dimen name="kg_password_eca_margin_bottom_tablet">4.0dip</dimen>
+    <dimen name="kg_pattern_eca_margin_bottom_tablet">0.0dip</dimen>
+    <dimen name="kg_pattern_lock_pattern_view_height_tablet">168.0dip</dimen>
+    <dimen name="kg_pattern_lock_pattern_view_margin_bottom_tablet">0.0dip</dimen>
+    <dimen name="kg_pattern_lock_pattern_view_width_tablet">168.0dip</dimen>
+    <dimen name="kg_pattern_message_area_margin_bottom_tablet">6.0dip</dimen>
+    <dimen name="kg_pin_container_margin_bottom_tablet">12.0dip</dimen>
+    <dimen name="kg_pin_eca_margin_bottom_tablet">0.0dip</dimen>
+    <dimen name="kg_pin_klondike_font_size_tablet">5.0dip</dimen>
+    <dimen name="kg_pin_num_pad_font_size_tablet">18.0dip</dimen>
+    <dimen name="kg_prev_message_area_margin_bottom">4.0dip</dimen>
+    <dimen name="kg_security_input_box_margin_top_tablet">8.0dip</dimen>
+    <dimen name="kg_security_input_box_width_tablet">312.0dip</dimen>
+    <dimen name="kg_security_password_input_box_margin_bottom_tablet">8.0dip</dimen>
+    <dimen name="kg_security_view_side_margin_tablet">24.0dip</dimen>
+    <item type="dimen" name="tablet_num_pad_key_size_ratio">0.075</item>
+</resources>

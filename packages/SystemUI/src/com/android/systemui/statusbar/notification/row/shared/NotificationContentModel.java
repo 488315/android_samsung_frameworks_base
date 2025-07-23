@@ -1,0 +1,46 @@
+package com.android.systemui.statusbar.notification.row.shared;
+
+import com.android.systemui.statusbar.notification.row.ui.viewmodel.SingleLineViewModel;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class NotificationContentModel {
+    public final HeadsUpStatusBarModel headsUpStatusBarModel;
+    public final SingleLineViewModel publicSingleLineViewModel;
+    public final SingleLineViewModel singleLineViewModel;
+
+    public NotificationContentModel(HeadsUpStatusBarModel headsUpStatusBarModel, SingleLineViewModel singleLineViewModel, SingleLineViewModel singleLineViewModel2) {
+        this.headsUpStatusBarModel = headsUpStatusBarModel;
+        this.singleLineViewModel = singleLineViewModel;
+        this.publicSingleLineViewModel = singleLineViewModel2;
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof NotificationContentModel)) {
+            return false;
+        }
+        NotificationContentModel notificationContentModel = (NotificationContentModel) obj;
+        return Intrinsics.areEqual(this.headsUpStatusBarModel, notificationContentModel.headsUpStatusBarModel) && Intrinsics.areEqual(this.singleLineViewModel, notificationContentModel.singleLineViewModel) && Intrinsics.areEqual(this.publicSingleLineViewModel, notificationContentModel.publicSingleLineViewModel);
+    }
+
+    public final int hashCode() {
+        int hashCode = this.headsUpStatusBarModel.hashCode() * 31;
+        SingleLineViewModel singleLineViewModel = this.singleLineViewModel;
+        int hashCode2 = (hashCode + (singleLineViewModel == null ? 0 : singleLineViewModel.hashCode())) * 31;
+        SingleLineViewModel singleLineViewModel2 = this.publicSingleLineViewModel;
+        return hashCode2 + (singleLineViewModel2 != null ? singleLineViewModel2.hashCode() : 0);
+    }
+
+    public final String toString() {
+        return "NotificationContentModel(headsUpStatusBarModel=" + this.headsUpStatusBarModel + ", singleLineViewModel=" + this.singleLineViewModel + ", publicSingleLineViewModel=" + this.publicSingleLineViewModel + ")";
+    }
+
+    public /* synthetic */ NotificationContentModel(HeadsUpStatusBarModel headsUpStatusBarModel, SingleLineViewModel singleLineViewModel, SingleLineViewModel singleLineViewModel2, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        this(headsUpStatusBarModel, (i & 2) != 0 ? null : singleLineViewModel, (i & 4) != 0 ? null : singleLineViewModel2);
+    }
+}

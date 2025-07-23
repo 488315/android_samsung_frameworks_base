@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge android:layout_gravity="end|center" android:layout_width="wrap_content" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:id="@id/rounded_container" style="@style/StatusBar.EventChip">
+        <androidx.compose.ui.platform.ComposeView android:id="@id/compose_view" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginHorizontal="@dimen/ongoing_appops_chip_content_horizontal_margin" />
+    </LinearLayout>
+</merge>

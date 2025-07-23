@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:color="?android:colorControlHighlight"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/flex_panel_floating_icon_background" />
+        </shape>
+    </item>
+    <item android:drawable="@drawable/fab_close" android:left="@dimen/flex_panel_floating_icon_background_margin_collapse" android:top="@dimen/flex_panel_floating_icon_background_margin_collapse" android:right="@dimen/flex_panel_floating_icon_background_margin_collapse" android:bottom="@dimen/flex_panel_floating_icon_background_margin_collapse" />
+</ripple>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/header_layout" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="@dimen/clear_cover_subscreen_noti_list_layout_margin" android:layout_marginEnd="@dimen/clear_cover_subscreen_noti_list_layout_margin"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <ImageView android:id="@id/subscreen_header_icon" android:layout_width="@dimen/clear_cover_subscreen_noti_icon_size" android:layout_height="@dimen/clear_cover_subscreen_noti_icon_size" />
+        <TextView android:textSize="12.0dip" android:textColor="@color/subscreen_notification_text_color" android:ellipsize="end" android:id="@id/subscreen_header_app_name" android:layout_width="0.0dip" android:layout_height="wrap_content" android:maxLines="1" android:layout_weight="1.0" android:fontFamily="roboto-medium" android:layout_marginStart="@dimen/clear_cover_subscreen_noti_detail_header_app_name_start_margin" />
+        <ImageView android:layout_gravity="center_vertical" android:id="@id/two_phone_icon" android:visibility="visible" android:layout_width="10.0dip" android:layout_height="@dimen/clear_cover_subscreen_noti_secure_icon_size" android:tint="@color/subscreen_notification_two_phone_icon_tint_color" android:layout_marginStart="@dimen/clear_cover_subscreen_noti_icon_between_margin" />
+        <ImageView android:layout_gravity="center_vertical" android:id="@id/secure_icon" android:visibility="gone" android:layout_width="@dimen/clear_cover_subscreen_noti_secure_icon_size" android:layout_height="@dimen/clear_cover_subscreen_noti_secure_icon_size" android:layout_marginStart="@dimen/clear_cover_subscreen_noti_icon_between_margin" />
+    </LinearLayout>
+</LinearLayout>

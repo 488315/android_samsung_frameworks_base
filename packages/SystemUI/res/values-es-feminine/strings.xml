@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="guest_wipe_session_title">¡Bienvenida de nuevo, invitada!</string>
+    <string name="wifitrackerlib_hotspot_network_summary_new">{DEVICE_TYPE,select, PHONE{{NETWORK_NAME} desde tu teléfono}TABLET{{NETWORK_NAME} desde tu teléfono}COMPUTER{{NETWORK_NAME} desde tu teléfono}WATCH{{NETWORK_NAME} desde tu reloj}VEHICLE{{NETWORK_NAME} desde tu reloj}other{{NETWORK_NAME} desde tu reloj}}</string>
+</resources>

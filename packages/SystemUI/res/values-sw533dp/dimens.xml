@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="kg_message_area_width_tablet">420.0dip</dimen>
+    <dimen name="kg_security_input_box_width_tablet">312.0dip</dimen>
+</resources>

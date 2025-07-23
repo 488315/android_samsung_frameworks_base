@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/qs_customize_top_summary_buttons" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:gravity="center_vertical" android:id="@id/qs_customize_top_summary_buttons_button_area" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/qs_edit_buttons_top_margin" android:minHeight="@dimen/qs_edit_buttons_height">
+        <FrameLayout android:layout_gravity="start" android:id="@id/left_button" style="@style/SecCustomizeButtonStyle">
+            <TextView android:id="@id/button_text" android:text="@string/quick_settings_reset" style="@style/SecCustomizeLeftButtonTextStyle" />
+            <LinearLayout android:layout_gravity="center_vertical" android:id="@id/button_icon_text_container" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="@dimen/qs_setting_edit_left_button_start_padding" android:layout_marginEnd="@dimen/qs_setting_edit_button_side_padding">
+                <ImageView android:id="@id/button_setting_icon" android:layout_width="@dimen/qs_setting_edit_button_setting_icon_size" android:layout_height="@dimen/qs_setting_edit_button_setting_icon_size" android:src="@drawable/tw_ic_ab_setting_mtrl" android:tint="@color/qs_edit_tile_available_label_color" android:layout_marginEnd="3.0dip" />
+                <TextView android:id="@id/button_text_with_icon" android:text="@string/qs_customizer_settings" style="@style/SecCustomizeLeftButtonTextWithIconStyle" />
+            </LinearLayout>
+        </FrameLayout>
+        <FrameLayout android:layout_gravity="end" android:id="@id/right_button" style="@style/SecCustomizeButtonStyle">
+            <TextView android:id="@id/button_text" android:text="@string/sec_quick_settings_done" style="@style/SecCustomizeButtonTextStyle" />
+        </FrameLayout>
+    </FrameLayout>
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/qs_edit_summary_container" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginVertical="@dimen/qs_edit_available_active_between_margin">
+        <TextView android:ellipsize="marquee" android:id="@id/qs_edit_summary" android:text="@string/qp_edit_button_summary" style="@style/SecCustomizeSummaryStyle" />
+        <TextView android:id="@id/qs_edit_more_summary" android:visibility="gone" android:text="@plurals/sec_qs_add_minimum" style="@style/SecCustomizeSummaryStyle" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@id/colored_bg_solid">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/qs_tile_container_bg" />
+            <corners android:radius="@dimen/panel_bar_corner_radius" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <stroke android:width="@dimen/panel_bar_corner_stroke_width" android:color="@color/qs_tile_container_bg_border_color" />
+            <corners android:radius="@dimen/panel_bar_corner_radius" />
+        </shape>
+    </item>
+</ripple>

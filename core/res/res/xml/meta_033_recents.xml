@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="2.4">
+    <AppMetaData Name="RecentsSettingMgr" PackageNameSuffix="recents" TargetApi="28" TargetPackageName="com.sec.android.app.launcher" VersionCode="1" VersionName="">
+        <Property Comment="More_option_Background_color" DefaultValue="#fffcfcfc" DestAttribName="recents_popup_bg_color" UID="33-6-1" ValueRef="1-9-1" ValueType="BgColor" />
+        <Property Comment="More_option_Background_stroke_color" DefaultValue="#ffcccccc" DestAttribName="recents_popup_stroke_color" UID="33-6-2" ValueRef="1-C" ValueType="BgColor" />
+        <Property Comment="More_option_Text_color" DefaultValue="#ff000000" DestAttribName="recents_popup_text_color" UID="33-6-3" ValueRef="1-9-6" ValueType="TextColor" />
+        <Property Comment="Task_Lock_Drz_Button_Color" DefaultValue="#ff0381fe" DestAttribName="recents_dedicated_lock_icon_color" UID="33-6-4" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Task_Menu_Background_Color" DefaultValue="#fffafafa" DestAttribName="recents_task_menu_background_color" DestQualifiers="\@" Name="Task_Menu_Background_Color_inRecents" UID="33-7-1" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Task_Menu_Title_Text_Color" DefaultValue="#ff252525" DestAttribName="recents_task_menu_title_text_color" DestQualifiers="\@" Name="Task_Menu_Title_Text_Color_inRecents" UID="33-7-2" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Task_Menu_Text_Colorr" DefaultValue="#ff252525" DestAttribName="recents_task_menu_text_color" DestQualifiers="\@" Name="Task_Menu_Text_Color_inRecents" UID="33-7-3" ValueRef="1-9-3" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

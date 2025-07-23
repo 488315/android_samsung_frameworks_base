@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.chip.SeslExpandableContainer android:id="@id/container" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.google.android.material.chip.SeslChipGroup android:id="@id/chip" android:paddingTop="@dimen/chip_group_top_padding" android:paddingBottom="@dimen/chip_group_bottom_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:animateLayoutChanges="true" android:paddingStart="@dimen/chip_group_start_padding" android:paddingEnd="@dimen/chip_group_end_padding" app:chipSpacing="@dimen/chip_spacing_horizontal" app:chipSpacingVertical="@dimen/chip_spacing_vertical" />
+    </com.google.android.material.chip.SeslExpandableContainer>
+</FrameLayout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.aibrief.ui.BriefNowBarView android:orientation="horizontal" android:id="@id/ai_brief_now_bar_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layoutDirection="locale"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:layout_gravity="center" android:id="@id/ai_brief_now_bar_icon_parent_container" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layoutDirection="locale" android:layout_marginStart="@dimen/ai_brief_now_bar_image_container_start_margin">
+        <com.airbnb.lottie.LottieAnimationView android:layout_gravity="center" android:id="@id/ai_brief_now_bar_four_star_image" android:layout_width="24.0dip" android:layout_height="24.0dip" android:scaleType="centerCrop" android:importantForAccessibility="no" app:lottie_rawRes="@raw/now_brief_four_star" />
+        <FrameLayout android:layout_gravity="center" android:id="@id/ai_brief_now_bar_icon_container" android:layout_width="@dimen/ai_brief_now_bar_image_size" android:layout_height="@dimen/ai_brief_now_bar_image_size">
+            <ImageView android:id="@id/ai_brief_now_bar_image" android:background="@drawable/brief_icon_background" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="fitXY" android:importantForAccessibility="no" android:clipToOutline="true" />
+        </FrameLayout>
+    </FrameLayout>
+    <LinearLayout android:layout_gravity="center_vertical" android:orientation="vertical" android:id="@id/ai_brief_text_container" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingEnd="@dimen/ai_brief_now_bar_text_container_end_padding" android:layout_marginStart="@dimen/ai_brief_now_bar_text_container_start_margin">
+        <TextView android:textSize="@dimen/ai_brief_main_text_size" android:textColor="@color/brief_now_bar_text_color" android:id="@id/ai_brief_main_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/ai_brief_nowbar_title" android:fontFamily="sec" android:textFontWeight="600" />
+        <TextView android:textSize="@dimen/ai_brief_sub_text_size" android:textColor="@color/brief_now_bar_sub_text_color" android:ellipsize="end" android:id="@id/ai_brief_sub_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" android:fontFamily="sec" android:textFontWeight="400" />
+    </LinearLayout>
+</com.android.systemui.aibrief.ui.BriefNowBarView>

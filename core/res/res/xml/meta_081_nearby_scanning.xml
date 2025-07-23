@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="EasySetup" TargetApi="28" TargetPackageName="com.samsung.android.easysetup" UID="EasySetup" VersionCode="1" VersionName="1.0.0">
+        <Include RefName="SESL" />
+        <Property Comment="ActionBar Background color" DefaultValue="#fff2f2f2" DestAttribName="nb_scan_common_bg_color" UID="81-1-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Extended ActionBar Background color" DefaultValue="#fff2f2f2" DestAttribName="nb_scan_extended_common_bg_color" UID="81-1-1-1" ValueRef="1-1-1-1" ValueType="BgColor" />
+        <Property Comment="Action bar back icon tint color" DefaultValue="#ff252525" DestAttribName="nb_scan_action_bar_back_icon_tint_color" UID="81-1-2" ValueRef="1-11-3" ValueType="Color" />
+        <Property Comment="Action bar back Icon Image" DefaultValue="" DestAttribName="nearby_scan_action_bar_home_as_up_indicator" ImageSize="24x24" UID="81-1-3" ValueRef="1-11-4" ValueType="Image" />
+        <Property Comment="Text Color Of Action Bar" DefaultValue="#ff252525" DestAttribName="nb_scan_action_bar_text_color" UID="81-1-4" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Text Color Of Extended Action Bar" DefaultValue="#ff252525" DestAttribName="nb_scan_extended_action_bar_text_color" UID="81-1-1-2" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Text Color Of Extended Action Bar" DefaultValue="#ff252525" DestAttribName="nb_scan_extended_action_bar_sub_text_color" UID="81-1-1-3" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Master ON background color" DefaultValue="#bd4297ff" DestAttribName="nb_scan_controller_master_switch_on_bg_color" UID="81-2-1" ValueRef="1-40-1" ValueType="BgColor" />
+        <Property Comment="Master OFF background color" DefaultValue="#fffafafa" DestAttribName="nb_scan_controller_master_switch_off_bg_color" UID="81-2-2" ValueRef="1-40-2" ValueType="BgColor" />
+        <Property Comment="Master ON text color" DefaultValue="#fffafafa" DestAttribName="nb_scan_controller_master_switch_on_text_color" UID="81-2-3" ValueRef="1-40-3" ValueType="TextColor" />
+        <Property Comment="Master OFF text color" DefaultValue="#ff252525" DestAttribName="nb_scan_controller_master_switch_off_text_color" UID="81-2-4" ValueRef="1-40-4" ValueType="TextColor" />
+        <Property Comment="Nearby device scanning description text color" DefaultValue="#ff505050" DestAttribName="nb_scan_description_text_color" UID="81-3-3" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="About nearby scanning main text color" DefaultValue="#ff252525" DestAttribName="nb_scan_about_scanning_button_main_text_color" UID="81-3-4" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="About nearby scanning badge color " DefaultValue="#ffef8e5e" DestAttribName="nb_scan_about_scanning_button_badge_icon_color" UID="81-3-5" ValueRef="1-33-1" ValueType="Color" />
+        <Property Comment="About nearby scanning badge image " DefaultValue="" DestAttribName="nb_scan_about_scanning_button_badge_icon_image" UID="81-3-6" ValueRef="1-33-2" ValueType="BgImage" />
+        <Property Comment="About nearby scanning badge text color" DefaultValue="#ff252525" DestAttribName="nb_scan_about_scanning_button_badge_text_color" UID="81-3-7" ValueRef="1-33-3" ValueType="TextColor" />
+        <Property Comment="About nearby scanning - Central subtext color " DefaultValue="#ff909090" DestAttribName="nb_scan_about_scanning_subtext_color" UID="81-4-1" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="About nearby scanning - Update button text color " DefaultValue="#fffafafa" DestAttribName="nb_scan_about_scanning_update_button_text_color" UID="81-4-2" ValueRef="1-E" ValueType="TextColor" />
+        <Property Comment="About nearby scanning - Open Source button background color " DefaultValue="#ffebebeb" DestAttribName="nb_scan_about_scanning_open_source_license_button_bg_color" UID="81-4-3" ValueRef="1-7-1-D" ValueType="BgColor" />
+        <Property Comment="About nearby scanning - - Open Source button text color " DefaultValue="#ff252525" DestAttribName="nb_scan_about_scanning_open_source_license_button_text_color" UID="81-4-4" ValueRef="1-7-2-D" ValueType="TextColor" />
+        <Property Comment="About nearby scanning - Main text color (App name) " DefaultValue="#ff252525" DestAttribName="nb_scan_about_scanning_main_text_color" UID="81-4-5" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="About nearby scanning - Update button background color " DefaultValue="#ff008cff" DestAttribName="nb_scan_about_scanning_update_button_bg_color" UID="81-4-6" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="About nearby scanning - info icon tint color " DefaultValue="#ff008cff" DestAttribName="nb_scan_about_scanning_info_icon_tint_color" UID="81-4-7" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="About nearby scanning - About page BG color " DefaultValue="#fffafafa" DestAttribName="nb_scan_open_about_page_bg_color" UID="81-4-8" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="open source license - Text Color Of Action Bar" DefaultValue="#ff252525" DestAttribName="nb_scan_open_source_license_action_bar_text_color" UID="81-5-1" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="open source license - Action bar back icon tint color" DefaultValue="#ff252525" DestAttribName="nb_scan_open_source_license_action_bar_back_icon_tint_color" UID="81-5-2" ValueRef="1-11-3" ValueType="Color" />
+        <Property Comment="open source license - Action bar back Icon Image" DefaultValue="" DestAttribName="nearby_scan_open_source_license_action_bar_home_as_up_indicator" UID="81-5-3" ValueRef="1-11-4" ValueType="Image" />
+        <Property Comment="open source license - ActionBar Background color" DefaultValue="#fff2f2f2" DestAttribName="nb_scan_open_source_license_common_bg_color" UID="81-5-4" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="open source license - web main text color" DefaultValue="#ff252525" DestAttribName="nb_scan_open_source_license_web_main_text_color" UID="81-5-5" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="open source license web view background color" DefaultValue="#fffafafa" DestAttribName="nb_scan_open_source_license_web_bg_color" UID="81-5-6" ValueRef="1-18-1" ValueType="BgColor" />
+    </AppMetaData>
+</ThemeMetaData>

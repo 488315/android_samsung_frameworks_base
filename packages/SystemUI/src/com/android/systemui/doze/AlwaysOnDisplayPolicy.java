@@ -1,0 +1,81 @@
+package com.android.systemui.doze;
+
+import android.R;
+import android.content.Context;
+import android.content.res.Resources;
+import android.database.ContentObserver;
+import android.net.Uri;
+import android.os.Handler;
+import android.provider.Settings;
+import android.util.KeyValueListParser;
+import android.util.Log;
+import com.android.systemui.util.DelayableMarqueeTextView;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public class AlwaysOnDisplayPolicy {
+    public int defaultDozeBrightness;
+    public int dimBrightness;
+    public float dimBrightnessFloat;
+    public int[] dimmingScrimArray;
+    public final Context mContext;
+    public final KeyValueListParser mParser;
+    public long proxScreenOffDelayMs;
+    public int[] screenBrightnessArray;
+    public long wallpaperFadeOutDuration;
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class SettingsObserver extends ContentObserver {
+        public final Uri ALWAYS_ON_DISPLAY_CONSTANTS_URI;
+
+        public SettingsObserver(Handler handler) {
+            super(handler);
+            this.ALWAYS_ON_DISPLAY_CONSTANTS_URI = Settings.Global.getUriFor("always_on_display_constants");
+        }
+
+        @Override // android.database.ContentObserver
+        public final void onChange(boolean z, Uri uri) {
+            update(uri);
+        }
+
+        public final void update(Uri uri) {
+            if (uri == null || this.ALWAYS_ON_DISPLAY_CONSTANTS_URI.equals(uri)) {
+                Resources resources = AlwaysOnDisplayPolicy.this.mContext.getResources();
+                try {
+                    AlwaysOnDisplayPolicy.this.mParser.setString(Settings.Global.getString(AlwaysOnDisplayPolicy.this.mContext.getContentResolver(), "always_on_display_constants"));
+                } catch (IllegalArgumentException unused) {
+                    Log.e("AlwaysOnDisplayPolicy", "Bad AOD constants");
+                }
+                AlwaysOnDisplayPolicy alwaysOnDisplayPolicy = AlwaysOnDisplayPolicy.this;
+                alwaysOnDisplayPolicy.proxScreenOffDelayMs = alwaysOnDisplayPolicy.mParser.getLong("prox_screen_off_delay", 10000L);
+                AlwaysOnDisplayPolicy alwaysOnDisplayPolicy2 = AlwaysOnDisplayPolicy.this;
+                alwaysOnDisplayPolicy2.mParser.getLong("prox_cooldown_trigger", DelayableMarqueeTextView.DEFAULT_MARQUEE_DELAY);
+                alwaysOnDisplayPolicy2.getClass();
+                AlwaysOnDisplayPolicy alwaysOnDisplayPolicy3 = AlwaysOnDisplayPolicy.this;
+                alwaysOnDisplayPolicy3.mParser.getLong("prox_cooldown_period", 5000L);
+                alwaysOnDisplayPolicy3.getClass();
+                AlwaysOnDisplayPolicy alwaysOnDisplayPolicy4 = AlwaysOnDisplayPolicy.this;
+                alwaysOnDisplayPolicy4.wallpaperFadeOutDuration = alwaysOnDisplayPolicy4.mParser.getLong("wallpaper_fade_out_duration", 400L);
+                AlwaysOnDisplayPolicy alwaysOnDisplayPolicy5 = AlwaysOnDisplayPolicy.this;
+                alwaysOnDisplayPolicy5.mParser.getLong("wallpaper_visibility_timeout", 60000L);
+                alwaysOnDisplayPolicy5.getClass();
+                AlwaysOnDisplayPolicy.this.defaultDozeBrightness = resources.getInteger(R.integer.device_idle_light_idle_maintenance_min_budget_ms);
+                AlwaysOnDisplayPolicy.this.dimBrightness = resources.getInteger(R.integer.device_idle_light_idle_maintenance_max_budget_ms);
+                AlwaysOnDisplayPolicy.this.dimBrightnessFloat = resources.getFloat(R.dimen.date_picker_day_selector_radius);
+                AlwaysOnDisplayPolicy alwaysOnDisplayPolicy6 = AlwaysOnDisplayPolicy.this;
+                alwaysOnDisplayPolicy6.screenBrightnessArray = alwaysOnDisplayPolicy6.mParser.getIntArray("screen_brightness_array", resources.getIntArray(com.android.systemui.R.array.config_doze_brightness_sensor_to_brightness));
+                AlwaysOnDisplayPolicy alwaysOnDisplayPolicy7 = AlwaysOnDisplayPolicy.this;
+                alwaysOnDisplayPolicy7.dimmingScrimArray = alwaysOnDisplayPolicy7.mParser.getIntArray("dimming_scrim_array", resources.getIntArray(com.android.systemui.R.array.config_doze_brightness_sensor_to_scrim_opacity));
+            }
+        }
+    }
+
+    public AlwaysOnDisplayPolicy(Context context) {
+        Context applicationContext = context.getApplicationContext();
+        this.mContext = applicationContext;
+        this.mParser = new KeyValueListParser(',');
+        SettingsObserver settingsObserver = new SettingsObserver(applicationContext.getMainThreadHandler());
+        AlwaysOnDisplayPolicy.this.mContext.getContentResolver().registerContentObserver(settingsObserver.ALWAYS_ON_DISPLAY_CONSTANTS_URI, false, settingsObserver, -1);
+        settingsObserver.update(null);
+    }
+}

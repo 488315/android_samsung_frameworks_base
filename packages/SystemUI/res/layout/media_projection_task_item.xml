@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:clickable="true" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/task_icon" android:layout_width="24.0dip" android:layout_height="24.0dip" android:layout_margin="8.0dip" android:importantForAccessibility="no" />
+    <com.android.systemui.mediaprojection.appselector.view.MediaProjectionTaskView android:id="@id/task_thumbnail" android:focusable="false" android:clickable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+</LinearLayout>

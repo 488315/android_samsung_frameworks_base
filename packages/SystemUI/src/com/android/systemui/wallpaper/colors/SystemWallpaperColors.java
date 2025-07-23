@@ -1,0 +1,36 @@
+package com.android.systemui.wallpaper.colors;
+
+import android.app.SemWallpaperColors;
+import android.app.WallpaperManager;
+import android.util.Log;
+import android.util.SparseArray;
+import androidx.appcompat.widget.ListPopupWindow$$ExternalSyntheticOutline0;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class SystemWallpaperColors {
+    public final SparseArray mSystemWallpaperColors = new SparseArray();
+    public final WallpaperManager mWallpaperManager;
+
+    public SystemWallpaperColors(WallpaperManager wallpaperManager) {
+        this.mWallpaperManager = wallpaperManager;
+    }
+
+    public final SemWallpaperColors getColor(int i) {
+        ListPopupWindow$$ExternalSyntheticOutline0.m(i, "getColor: which = ", "SystemWallpaperColors");
+        if ((i & 1) == 0) {
+            return null;
+        }
+        if ((i & 60) == 0) {
+            i |= 4;
+        }
+        SemWallpaperColors semWallpaperColors = (SemWallpaperColors) this.mSystemWallpaperColors.get(i);
+        if (semWallpaperColors != null) {
+            return semWallpaperColors;
+        }
+        SemWallpaperColors semGetWallpaperColors = this.mWallpaperManager.semGetWallpaperColors(i);
+        this.mSystemWallpaperColors.put(i, semGetWallpaperColors);
+        Log.i("SystemWallpaperColors", "getColor : put color for which " + i + ", color = " + semGetWallpaperColors);
+        return semGetWallpaperColors;
+    }
+}

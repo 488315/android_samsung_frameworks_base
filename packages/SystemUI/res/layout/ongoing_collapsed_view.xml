@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/ongoing_activity_collapsed_view" android:tag="ongoingCollapsed" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="@dimen/ongoing_activity_collapsed_view_min_height"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="horizontal" android:id="@id/ongoing_activity_collapsed_custom_content" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginEnd="@dimen/ongoing_activity_expanded_view_content_end_margin">
+            <com.android.internal.widget.NotificationRowIconView android:id="@id/ongoing_activity_collapsed_icon" android:tag="ongoingCollapsedPrimaryIcon" android:background="@drawable/ongoing_card_icon_bg" android:padding="@dimen/ongoing_activity_expanded_view_icon_inner_padding" android:visibility="gone" android:layout_width="@dimen/oa_expanded_view_first_icon_size" android:layout_height="@dimen/oa_expanded_view_first_icon_size" android:layout_margin="@dimen/oa_expanded_view_first_icon_margin" />
+            <LinearLayout android:layout_gravity="center_vertical" android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" android:layout_marginVertical="@dimen/oa_expanded_view_content_vertical_margin">
+                <LinearLayout android:orientation="horizontal" android:id="@id/ongoing_activity_collapsed_primary_container" android:tag="collapsedPrimaryContainer" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <NotificationTopLineView android:theme="@android:style/Theme.Material.Settings.BaseDialog" android:gravity="center_vertical" android:id="@android:id/remote_input_tag" android:clipChildren="false" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+                        <TextView android:textSize="14.0sp" android:textColor="@color/ongoing_activity_card_item_main_text_color" android:ellipsize="end" android:id="@android:id/title" android:tag="collapsedPrimary" android:fadingEdge="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:fontFamily="sec" android:textAlignment="viewStart" android:textFontWeight="600" />
+                        <include layout="@android:layout/screen_progress" />
+                    </NotificationTopLineView>
+                </LinearLayout>
+                <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/ongoing_activity_collapsed_secondary_container" android:tag="collapsedSecondaryContainer" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="2.0dip">
+                    <ImageView android:id="@id/ongoing_activity_secondary_info_icon" android:tag="collapsedSecondaryIcon" android:visibility="gone" android:layout_width="@dimen/oa_common_view_info_chip_size" android:layout_height="@dimen/oa_common_view_info_chip_size" android:layout_marginEnd="@dimen/oa_common_view_mini_icon_end_margin" />
+                    <com.android.internal.widget.ImageFloatingTextView android:textSize="13.0sp" android:textColor="@color/ongoing_activity_card_item_sub_text_color" android:ellipsize="end" android:id="@id/ongoing_activity_collapsed_secondary_text" android:tag="collapsedSecondary" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="2" android:includeFontPadding="false" android:lineSpacingExtra="@android:dimen/text_size_medium_material" android:fontFamily="sec" android:textFontWeight="400" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:gravity="center" android:layout_gravity="center_vertical" android:orientation="horizontal" android:id="@id/ongoing_activity_collapsed_icon_buttons_end" android:tag="iconButton" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="1.0dip" />
+            <FrameLayout android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="-1.0dip">
+                <include android:gravity="center_vertical" android:layout_gravity="center_vertical" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" layout="@android:layout/preference_category_material" />
+                <TextView android:textSize="15.0dip" android:gravity="center" android:layout_gravity="center_vertical" android:id="@android:id/index" android:visibility="gone" android:layout_width="@android:dimen/timepicker_left_side_width" android:layout_height="wrap_content" android:singleLine="true" android:includeFontPadding="false" />
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.internal.widget.CallLayout android:theme="@style/Theme.DeviceDefault.Notification" android:id="@id/status_bar_latest_event_content" android:tag="call" android:clipChildren="false" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/notification_template_conversation_icon_container" />
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content"
+      xmlns:android="http://schemas.android.com/apk/res/android">
+        <LinearLayout android:orientation="vertical" android:id="@id/notification_main_column" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="@dimen/conversation_expand_button_height" android:layout_weight="1.0" android:layout_marginStart="@dimen/conversation_content_start">
+            <include android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/notification_content_margin" layout="@layout/notification_template_conversation_header" />
+            <include layout="@layout/notification_template_text" />
+        </LinearLayout>
+        <FrameLayout android:layout_gravity="end|center|top" android:layout_width="wrap_content" android:layout_height="fill_parent" android:minWidth="@dimen/notification_content_margin_end">
+            <include android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/notification_content_margin" android:layout_marginStart="@dimen/notification_expand_button_margin_start" android:layout_marginEnd="@dimen/notification_expand_button_margin_end" layout="@layout/notification_expand_button" />
+        </FrameLayout>
+    </LinearLayout>
+</com.android.internal.widget.CallLayout>

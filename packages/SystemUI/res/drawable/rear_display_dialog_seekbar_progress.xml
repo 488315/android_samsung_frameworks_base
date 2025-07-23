@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list android:autoMirrored="true"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <item android:id="@id/rear_display_dialog_progress_solid">
+        <shape>
+            <size android:height="@dimen/rear_display_dialog_slider_height" />
+            <solid android:color="?android:colorAccent" />
+            <corners android:radius="@dimen/rear_display_dialog_slider_corner_radius" />
+        </shape>
+    </item>
+    <item android:gravity="center|right" android:id="@id/rear_display_dialog_seekbar_progress_icon" android:height="@dimen/rounded_slider_icon_size" android:width="@dimen/rounded_slider_icon_size" android:right="@dimen/rear_display_dialog_slider_icon_inset">
+        <com.android.systemui.util.AlphaTintDrawableWrapper android:tint="?android:^attr-private/colorAccentPrimaryVariant" android:drawable="@drawable/ic_rear_display_slider" />
+    </item>
+</layer-list>

@@ -1,0 +1,56 @@
+package android.app.time;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+import java.util.Objects;
+
+/* loaded from: classes.dex */
+public final class TelephonyTimeZoneAlgorithmStatus implements Parcelable {
+    public static final Parcelable.Creator<TelephonyTimeZoneAlgorithmStatus> CREATOR = new Parcelable.Creator<TelephonyTimeZoneAlgorithmStatus>() { // from class: android.app.time.TelephonyTimeZoneAlgorithmStatus.1
+        /* JADX WARN: Can't rename method to resolve collision */
+        @Override // android.os.Parcelable.Creator
+        public TelephonyTimeZoneAlgorithmStatus createFromParcel(Parcel parcel) {
+            return new TelephonyTimeZoneAlgorithmStatus(parcel.readInt());
+        }
+
+        /* JADX WARN: Can't rename method to resolve collision */
+        @Override // android.os.Parcelable.Creator
+        public TelephonyTimeZoneAlgorithmStatus[] newArray(int i) {
+            return new TelephonyTimeZoneAlgorithmStatus[i];
+        }
+    };
+    private final int mAlgorithmStatus;
+
+    @Override // android.os.Parcelable
+    public int describeContents() {
+        return 0;
+    }
+
+    public TelephonyTimeZoneAlgorithmStatus(int i) {
+        this.mAlgorithmStatus = DetectorStatusTypes.requireValidDetectionAlgorithmStatus(i);
+    }
+
+    public int getAlgorithmStatus() {
+        return this.mAlgorithmStatus;
+    }
+
+    public String toString() {
+        return "TelephonyTimeZoneAlgorithmStatus{mAlgorithmStatus=" + DetectorStatusTypes.detectionAlgorithmStatusToString(this.mAlgorithmStatus) + '}';
+    }
+
+    @Override // android.os.Parcelable
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(this.mAlgorithmStatus);
+    }
+
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        return obj != null && getClass() == obj.getClass() && this.mAlgorithmStatus == ((TelephonyTimeZoneAlgorithmStatus) obj).mAlgorithmStatus;
+    }
+
+    public int hashCode() {
+        return Objects.hash(Integer.valueOf(this.mAlgorithmStatus));
+    }
+}

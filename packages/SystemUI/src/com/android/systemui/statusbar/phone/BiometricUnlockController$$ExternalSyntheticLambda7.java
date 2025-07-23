@@ -1,0 +1,30 @@
+package com.android.systemui.statusbar.phone;
+
+import com.android.internal.logging.UiEventLogger;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final /* synthetic */ class BiometricUnlockController$$ExternalSyntheticLambda7 implements Runnable {
+    public final /* synthetic */ int $r8$classId;
+    public final /* synthetic */ BiometricUnlockController f$0;
+
+    public /* synthetic */ BiometricUnlockController$$ExternalSyntheticLambda7(BiometricUnlockController biometricUnlockController, int i) {
+        this.$r8$classId = i;
+        this.f$0 = biometricUnlockController;
+    }
+
+    @Override // java.lang.Runnable
+    public final void run() {
+        int i = this.$r8$classId;
+        BiometricUnlockController biometricUnlockController = this.f$0;
+        switch (i) {
+            case 0:
+                biometricUnlockController.mKeyguardViewMediator.userActivity();
+                break;
+            default:
+                UiEventLogger uiEventLogger = BiometricUnlockController.UI_EVENT_LOGGER;
+                biometricUnlockController.updateBackgroundAuthToastForBiometrics();
+                break;
+        }
+    }
+}

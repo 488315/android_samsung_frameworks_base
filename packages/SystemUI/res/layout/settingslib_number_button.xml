@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="?android:listPreferredItemPaddingStart" android:paddingEnd="?android:listPreferredItemPaddingEnd" android:paddingVertical="@dimen/settingslib_expressive_space_extrasmall4"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:id="@id/settingslib_number_button" android:background="@drawable/settingslib_number_button_background" android:layout_width="wrap_content" android:layout_height="wrap_content" android:filterTouchesWhenObscured="true" android:paddingHorizontal="@dimen/settingslib_expressive_space_small4" android:paddingVertical="@dimen/settingslib_expressive_space_small1">
+        <TextView android:id="@id/settingslib_number_count" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/SettingsLibNumberButtonStyle.Number" />
+        <TextView android:id="@id/settingslib_number_title" android:layout_width="wrap_content" android:layout_height="wrap_content" style="@style/SettingsLibNumberButtonStyle.Title" />
+    </LinearLayout>
+</LinearLayout>

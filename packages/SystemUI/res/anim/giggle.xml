@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set android:interpolator="@anim/interpolator_33_1_68_1" android:shareInterpolator="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <alpha android:duration="200" android:fromAlpha="0.0" android:toAlpha="1.0" />
+    <rotate android:duration="@dimen/kg_giggle_animation_duration_1" android:fromDegrees="0.0" android:toDegrees="-2.0" android:pivotX="@dimen/kg_giggle_animation_rotation_pivotX" android:pivotY="@dimen/kg_giggle_animation_rotation_pivotY" android:fillAfter="true" />
+    <translate android:duration="@dimen/kg_giggle_animation_duration_1" android:fromXDelta="0.0" android:toXDelta="-8.0" />
+    <rotate android:duration="@dimen/kg_giggle_animation_duration_2" android:fromDegrees="-2.0" android:toDegrees="4.0" android:pivotX="@dimen/kg_giggle_animation_rotation_pivotX" android:pivotY="@dimen/kg_giggle_animation_rotation_pivotY" android:fillAfter="true" android:startOffset="@dimen/kg_giggle_animation_start_offset_2" />
+    <translate android:duration="@dimen/kg_giggle_animation_duration_2" android:startOffset="@dimen/kg_giggle_animation_start_offset_2" android:fromXDelta="-8.0" android:toXDelta="16.0" />
+    <rotate android:duration="@dimen/kg_giggle_animation_duration_3" android:fromDegrees="2.0" android:toDegrees="-4.0" android:pivotX="@dimen/kg_giggle_animation_rotation_pivotX" android:pivotY="@dimen/kg_giggle_animation_rotation_pivotY" android:fillAfter="true" android:startOffset="@dimen/kg_giggle_animation_start_offset_3" />
+    <translate android:duration="@dimen/kg_giggle_animation_duration_3" android:startOffset="@dimen/kg_giggle_animation_start_offset_3" android:fromXDelta="8.0" android:toXDelta="-16.0" />
+    <rotate android:duration="@dimen/kg_giggle_animation_duration_4" android:fromDegrees="-2.0" android:toDegrees="4.0" android:pivotX="@dimen/kg_giggle_animation_rotation_pivotX" android:pivotY="@dimen/kg_giggle_animation_rotation_pivotY" android:fillAfter="true" android:startOffset="@dimen/kg_giggle_animation_start_offset_4" />
+    <translate android:duration="@dimen/kg_giggle_animation_duration_4" android:startOffset="@dimen/kg_giggle_animation_start_offset_4" android:fromXDelta="-8.0" android:toXDelta="16.0" />
+    <rotate android:duration="@dimen/kg_giggle_animation_duration_5" android:fromDegrees="2.0" android:toDegrees="-4.0" android:pivotX="@dimen/kg_giggle_animation_rotation_pivotX" android:pivotY="@dimen/kg_giggle_animation_rotation_pivotY" android:fillAfter="true" android:startOffset="@dimen/kg_giggle_animation_start_offset_5" />
+    <translate android:duration="@dimen/kg_giggle_animation_duration_5" android:startOffset="@dimen/kg_giggle_animation_start_offset_5" android:fromXDelta="8.0" android:toXDelta="-16.0" />
+    <rotate android:duration="@dimen/kg_giggle_animation_duration_6" android:fromDegrees="-2.0" android:toDegrees="3.0" android:pivotX="@dimen/kg_giggle_animation_rotation_pivotX" android:pivotY="@dimen/kg_giggle_animation_rotation_pivotY" android:fillAfter="true" android:startOffset="@dimen/kg_giggle_animation_start_offset_6" />
+    <translate android:duration="@dimen/kg_giggle_animation_duration_6" android:startOffset="@dimen/kg_giggle_animation_start_offset_6" android:fromXDelta="-8.0" android:toXDelta="12.0" />
+    <rotate android:duration="@dimen/kg_giggle_animation_duration_7" android:fromDegrees="1.0" android:toDegrees="-2.0" android:pivotX="@dimen/kg_giggle_animation_rotation_pivotX" android:pivotY="@dimen/kg_giggle_animation_rotation_pivotY" android:fillAfter="true" android:startOffset="@dimen/kg_giggle_animation_start_offset_7" />
+    <translate android:duration="@dimen/kg_giggle_animation_duration_7" android:startOffset="@dimen/kg_giggle_animation_start_offset_7" android:fromXDelta="4.0" android:toXDelta="-8.0" />
+    <rotate android:duration="@dimen/kg_giggle_animation_duration_8" android:fromDegrees="-1.0" android:toDegrees="1.0" android:pivotX="@dimen/kg_giggle_animation_rotation_pivotX" android:pivotY="@dimen/kg_giggle_animation_rotation_pivotY" android:fillAfter="true" android:startOffset="@dimen/kg_giggle_animation_start_offset_8" />
+    <translate android:duration="@dimen/kg_giggle_animation_duration_8" android:startOffset="@dimen/kg_giggle_animation_start_offset_8" android:fromXDelta="-4.0" android:toXDelta="4.0" />
+</set>

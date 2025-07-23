@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-selector
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@id/up" android:drawable="@drawable/arrow_enabled_up" app:state_expansion_button_expanded="true" />
+    <item android:id="@id/down" android:drawable="@drawable/arrow_enabled_down" />
+    <transition android:drawable="@drawable/up_down_transition" android:toId="@id/down" android:fromId="@id/up" />
+    <transition android:drawable="@drawable/down_up_transition" android:toId="@id/up" android:fromId="@id/down" />
+</animated-selector>

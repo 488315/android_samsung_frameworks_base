@@ -1,0 +1,210 @@
+package com.android.systemui.bixby2.controller.mediacontrol;
+
+import android.content.Context;
+import android.media.session.MediaController;
+import android.media.session.MediaSession;
+import android.media.session.MediaSessionManager;
+import android.media.session.PlaybackState;
+import android.util.Log;
+import android.view.KeyEvent;
+import com.android.systemui.bixby2.CommandActionResponse;
+import com.android.systemui.bixby2.actionresult.ActionResults;
+import com.android.systemui.bixby2.util.AudioManagerWrapper;
+import com.android.systemui.bixby2.util.MediaModeInfoBixby;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+import kotlin.jvm.functions.Function1;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes.dex */
+public abstract class MediaCommandType {
+    public static final int $stable = 0;
+    private static final String AUDIO_MIRRORING_PACKAGE_NAME = "com.samsung.android.audiomirroring";
+    public static final Companion Companion = new Companion(null);
+    public static final String TAG = "MediaCommand";
+    public static Context context;
+    public static MediaController mediaController;
+    public static MediaModeInfoBixby mediaInfo;
+    public static MediaSessionManager mediaSessionManager;
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class Companion {
+        public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
+            this();
+        }
+
+        /* JADX INFO: Access modifiers changed from: private */
+        public static final boolean isMediaControlActive$lambda$0(MediaController mediaController) {
+            PlaybackState playbackState;
+            if (mediaController == null || (playbackState = mediaController.getPlaybackState()) == null) {
+                return false;
+            }
+            return playbackState.isActive();
+        }
+
+        public final MediaCommandType create(Context context, int i, MediaModeInfoBixby mediaModeInfoBixby, AudioManagerWrapper audioManagerWrapper, MediaSessionManager mediaSessionManager) {
+            setContext(context);
+            setMediaInfo(mediaModeInfoBixby);
+            setMediaSessionManager(mediaSessionManager);
+            if (audioManagerWrapper.isInCall()) {
+                return new InCallCaseController();
+            }
+            MediaController activeSession = getActiveSession();
+            if (activeSession == null) {
+                return new PlayLastSongController(i);
+            }
+            setMediaController(activeSession);
+            switch (i) {
+                case 0:
+                    return new PlayController();
+                case 1:
+                case 2:
+                    return new StopController();
+                case 3:
+                    return new ReplayController();
+                case 4:
+                    return new SkipController();
+                case 5:
+                    return new PreviousController();
+                case 6:
+                    return new FastForwardController();
+                case 7:
+                    return new RewindController();
+                case 8:
+                    return new MoveFromCurrentPositionController();
+                case 9:
+                    return new SeekToController();
+                default:
+                    return new InvalidActionController();
+            }
+        }
+
+        public final MediaController getActiveSession() {
+            List<MediaController> activeSessions = getMediaSessionManager().getActiveSessions(null);
+            if (activeSessions.isEmpty()) {
+                return null;
+            }
+            return (!MediaCommandType.AUDIO_MIRRORING_PACKAGE_NAME.equals(activeSessions.get(0).getPackageName()) || activeSessions.size() < 2) ? activeSessions.get(0) : activeSessions.get(1);
+        }
+
+        public final Context getContext() {
+            Context context = MediaCommandType.context;
+            if (context != null) {
+                return context;
+            }
+            return null;
+        }
+
+        public final MediaController getMediaController() {
+            MediaController mediaController = MediaCommandType.mediaController;
+            if (mediaController != null) {
+                return mediaController;
+            }
+            return null;
+        }
+
+        public final MediaModeInfoBixby getMediaInfo() {
+            MediaModeInfoBixby mediaModeInfoBixby = MediaCommandType.mediaInfo;
+            if (mediaModeInfoBixby != null) {
+                return mediaModeInfoBixby;
+            }
+            return null;
+        }
+
+        public final MediaSessionManager getMediaSessionManager() {
+            MediaSessionManager mediaSessionManager = MediaCommandType.mediaSessionManager;
+            if (mediaSessionManager != null) {
+                return mediaSessionManager;
+            }
+            return null;
+        }
+
+        public final boolean isMediaControlActive(boolean z) {
+            if (z) {
+                return true;
+            }
+            Stream<MediaController> stream = getMediaSessionManager().getActiveSessions(null).stream();
+            final MediaCommandType$Companion$$ExternalSyntheticLambda0 mediaCommandType$Companion$$ExternalSyntheticLambda0 = new MediaCommandType$Companion$$ExternalSyntheticLambda0();
+            return stream.anyMatch(new Predicate() { // from class: com.android.systemui.bixby2.controller.mediacontrol.MediaCommandType$sam$java_util_function_Predicate$0
+                @Override // java.util.function.Predicate
+                public final /* synthetic */ boolean test(Object obj) {
+                    return ((Boolean) Function1.this.mo779invoke(obj)).booleanValue();
+                }
+            });
+        }
+
+        public final void setContext(Context context) {
+            MediaCommandType.context = context;
+        }
+
+        public final void setMediaController(MediaController mediaController) {
+            MediaCommandType.mediaController = mediaController;
+        }
+
+        public final void setMediaInfo(MediaModeInfoBixby mediaModeInfoBixby) {
+            MediaCommandType.mediaInfo = mediaModeInfoBixby;
+        }
+
+        public final void setMediaSessionManager(MediaSessionManager mediaSessionManager) {
+            MediaCommandType.mediaSessionManager = mediaSessionManager;
+        }
+
+        private Companion() {
+        }
+    }
+
+    private final boolean isPausedState(int i) {
+        return i == 1 || i == 2;
+    }
+
+    private final boolean isValidState() {
+        Companion companion = Companion;
+        PlaybackState playbackState = companion.getMediaController().getPlaybackState();
+        return playbackState != null && isPausedState(playbackState.getState()) && Intrinsics.areEqual(companion.getMediaController().getPackageName(), companion.getMediaInfo().focusedApp);
+    }
+
+    public abstract CommandActionResponse action();
+
+    public boolean isMusicAvailable() {
+        Companion companion = Companion;
+        List<MediaSession.QueueItem> queue = companion.getMediaController().getQueue();
+        return ((queue == null || queue.isEmpty()) && companion.getMediaController().getMetadata() == null) ? false : true;
+    }
+
+    public boolean isPlayingOrFocused() {
+        Companion companion = Companion;
+        return companion.isMediaControlActive(companion.getMediaInfo().isMediaActive) || isValidState();
+    }
+
+    public boolean isValidAction(long j) {
+        Companion companion = Companion;
+        PlaybackState playbackState = companion.getMediaController().getPlaybackState();
+        if (playbackState != null && (j & playbackState.getActions()) != 0) {
+            return true;
+        }
+        Log.e(TAG, companion.getMediaController().getPackageName() + " do not support action!");
+        return false;
+    }
+
+    public CommandActionResponse seekTo(long j) {
+        if (!isValidAction(256L)) {
+            return new CommandActionResponse(2, ActionResults.RESULT_NO_SUPPORT_FEATURE);
+        }
+        MediaController.TransportControls transportControls = Companion.getMediaController().getTransportControls();
+        if (j < 0) {
+            j = 0;
+        }
+        transportControls.seekTo(j);
+        return new CommandActionResponse(1, "success");
+    }
+
+    public void sendMediaKeyEvent(int i) {
+        Companion companion = Companion;
+        companion.getMediaController().getPackageName();
+        companion.getMediaController().dispatchMediaButtonEvent(new KeyEvent(0, i));
+        companion.getMediaController().dispatchMediaButtonEvent(new KeyEvent(1, i));
+    }
+}

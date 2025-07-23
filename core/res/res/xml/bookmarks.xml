@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bookmarks
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <bookmark androidprv:keycode="KEYCODE_B" androidprv:modifierState="META" role="android.app.role.BROWSER" />
+    <bookmark androidprv:keycode="KEYCODE_C" androidprv:modifierState="META" category="android.intent.category.APP_CONTACTS" />
+    <bookmark androidprv:keycode="KEYCODE_E" androidprv:modifierState="META" category="android.intent.category.APP_EMAIL" />
+    <bookmark androidprv:keycode="KEYCODE_K" androidprv:modifierState="META" category="android.intent.category.APP_CALENDAR" />
+    <bookmark androidprv:keycode="KEYCODE_M" androidprv:modifierState="META" category="android.intent.category.APP_MAPS" />
+    <bookmark androidprv:keycode="KEYCODE_P" androidprv:modifierState="META" category="android.intent.category.APP_MUSIC" />
+    <bookmark androidprv:keycode="KEYCODE_S" androidprv:modifierState="META" role="android.app.role.SMS" />
+</bookmarks>

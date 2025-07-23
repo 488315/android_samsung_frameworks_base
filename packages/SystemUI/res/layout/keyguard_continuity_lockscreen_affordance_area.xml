@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.keyguard.KeyguardContinuityLockscreenAffordanceArea android:orientation="vertical" android:id="@id/keyguard_indication_continuity_vi_view" android:visibility="gone" android:layout_width="@dimen/kg_continuity_view_width" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:sysui="http://schemas.android.com/apk/res-auto">
+    <com.android.systemui.widget.SystemUITextView android:gravity="center_horizontal" android:id="@id/keyguard_indication_continuity_vi_text_view" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/kg_continuity_lockscreen_affordance_text" android:maxLines="1" sysui:originBackground="hint_text_ripple_drawable" sysui:originColor="origin_keyguard_message_area_text_color" sysui:wallpaperArea="bottom" sysui:whitebgBackground="hint_text_ripple_whitebg_drawable" sysui:whitebgColor="whitebg_keyguard_text_color" style="@style/keyguard_hint_text_style" />
+    <com.airbnb.lottie.LottieAnimationView android:layout_gravity="center_horizontal" android:id="@id/keyguard_indication_continuity_vi_animation_view" android:layout_width="wrap_content" android:layout_height="wrap_content" sysui:lottie_autoPlay="false" sysui:lottie_loop="false" />
+</com.android.keyguard.KeyguardContinuityLockscreenAffordanceArea>

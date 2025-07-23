@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_gravity="center_horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginVertical="@dimen/subscreen_noti_clear_button_vertical_margin"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:layout_gravity="center_horizontal" android:id="@id/subcreen_item_clear_all_layout" android:background="@drawable/subscreen_notification_button_background" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxWidth="450.0dip" android:maxHeight="@dimen/subscreen_noti_button_height" android:minWidth="@dimen/subscreen_noti_button_width" android:minHeight="@dimen/subscreen_noti_button_height">
+        <TextView android:textSize="@dimen/subscreen_noti_button_text_size" android:textStyle="bold" android:textColor="@color/subscreen_notification_text_color" android:gravity="center" android:layout_gravity="center" android:id="@id/subcreen_item_clear_all" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/clear_all_notifications_text" android:fontFamily="sec-roboto-light" android:layout_marginHorizontal="24.0dip" />
+    </FrameLayout>
+</FrameLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:filterTouchesWhenObscured="true" style="?sudItemContainerStyle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:orientation="horizontal" android:id="@id/sud_items_expandable_switch_content" android:duplicateParentState="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:baselineAligned="false">
+        <FrameLayout android:id="@id/sud_items_icon_container" android:layout_height="wrap_content" android:layout_centerVertical="true" style="?sudItemIconContainerStyle">
+            <ImageView android:id="@id/sud_items_icon" android:layout_height="wrap_content" style="?sudItemIconStyle" />
+        </FrameLayout>
+        <com.google.android.setupdesign.view.RichTextView android:gravity="start" android:id="@id/sud_items_title" android:duplicateParentState="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_centerVertical="true" android:textAlignment="viewStart" android:layout_toStartOf="@id/sud_items_switch" android:layout_toEndOf="@id/sud_items_icon_container" android:labelFor="@id/sud_items_switch" style="?sudItemTitleStyle" />
+        <androidx.appcompat.widget.SwitchCompat android:layout_gravity="end|center" android:id="@id/sud_items_switch" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerVertical="true" android:paddingEnd="0.0dip" android:layout_alignParentEnd="true" style="@style/SudExpressiveSwitchBarStyle" />
+    </RelativeLayout>
+    <com.google.android.setupdesign.view.RichTextView android:textColor="?android:textColorPrimary" android:gravity="start" android:id="@id/sud_items_summary" android:visibility="gone" android:duplicateParentState="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="12.0dip" android:layout_marginBottom="0.0dip" android:layout_weight="1.0" android:textAlignment="viewStart" style="?sudItemSummaryStyle" />
+    <com.google.android.setupdesign.view.RichTextView android:textColor="?colorPrimary" android:gravity="start" android:id="@id/sud_items_more_info" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="16.0dip" android:layout_marginBottom="0.0dip" android:text="@string/sud_more_info" android:layout_weight="1.0" android:textAlignment="viewStart" style="?sudItemSummaryStyle" />
+</LinearLayout>

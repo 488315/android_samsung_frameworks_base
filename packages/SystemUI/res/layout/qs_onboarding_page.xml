@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.qs.QSOnboardingPageView android:gravity="top" android:layout_gravity="center|top" android:id="@id/qs_onboarding_page" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:id="@id/first_page" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/qs_onboarding_first_page_top_margin">
+        <RelativeLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <com.airbnb.lottie.LottieAnimationView android:id="@id/first_page_animation_view" android:layout_width="116.0dip" android:layout_height="228.0dip" android:scaleType="centerCrop" app:lottie_fileName="qp_help_separate.json" app:lottie_loop="true" />
+        </RelativeLayout>
+        <RelativeLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textAppearance="@style/TextAppearance.QS.OnboardingDescription" android:id="@id/first_page_description" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="25.0dip" android:text="@string/qs_onboarding_separate_description" android:textAlignment="viewStart" />
+        </RelativeLayout>
+        <RelativeLayout android:gravity="center" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textAppearance="@style/TextAppearance.QS.OnboardingDescription" android:id="@id/next_page_link_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/qs_onboarding_together_description" android:textAlignment="viewStart" />
+        </RelativeLayout>
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@id/second_page" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="46.0dip">
+        <FrameLayout android:layout_gravity="center_horizontal" android:orientation="horizontal" android:id="@id/button_parent" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <FrameLayout android:layout_gravity="start" android:id="@id/separate_button" android:background="@drawable/qs_onboarding_background" android:clickable="true" android:layout_width="138.0dip" android:layout_height="250.0dip">
+                <LinearLayout android:layout_gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <com.airbnb.lottie.LottieAnimationView android:layout_gravity="center" android:id="@id/separate_animation_view" android:layout_width="92.0dip" android:layout_height="182.0dip" android:scaleType="centerCrop" app:lottie_fileName="qp_help_separate.json" app:lottie_loop="true" />
+                    <TextView android:textSize="17.0sp" android:textColor="@color/qs_onboarding_text_color" android:ellipsize="marquee" android:layout_gravity="center" android:id="@id/separate_button_textview" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="9.0dip" android:text="@string/qs_edit_separate" android:scrollHorizontally="true" android:singleLine="true" android:fontFamily="sec" android:textAlignment="center" android:textFontWeight="600" />
+                </LinearLayout>
+                <FrameLayout android:id="@id/separate_stroke_background" android:background="@drawable/qs_onboarding_stroke_bg" android:layout_width="138.0dip" android:layout_height="250.0dip" />
+            </FrameLayout>
+            <FrameLayout android:layout_gravity="end" android:id="@id/together_button" android:background="@drawable/qs_onboarding_background" android:clickable="true" android:layout_width="138.0dip" android:layout_height="250.0dip">
+                <LinearLayout android:layout_gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <com.airbnb.lottie.LottieAnimationView android:layout_gravity="center" android:id="@id/together_animation_view" android:layout_width="92.0dip" android:layout_height="182.0dip" android:scaleType="centerCrop" app:lottie_fileName="qp_help_together.json" app:lottie_loop="true" />
+                    <TextView android:textSize="17.0sp" android:textColor="@color/qs_onboarding_text_color" android:ellipsize="marquee" android:id="@id/together_button_textview" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="9.0dip" android:text="@string/qs_edit_together" android:scrollHorizontally="true" android:singleLine="true" android:fontFamily="sec" android:textAlignment="center" android:textFontWeight="600" />
+                </LinearLayout>
+                <FrameLayout android:id="@id/together_stroke_background" android:background="@drawable/qs_onboarding_stroke_bg" android:layout_width="138.0dip" android:layout_height="250.0dip" />
+            </FrameLayout>
+        </FrameLayout>
+        <TextView android:textAppearance="@style/TextAppearance.QS.OnboardingDescription" android:id="@id/second_page_description" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="25.0dip" android:text="@string/qs_onboarding_separate_description" android:textAlignment="viewStart" />
+    </LinearLayout>
+</com.android.systemui.qs.QSOnboardingPageView>

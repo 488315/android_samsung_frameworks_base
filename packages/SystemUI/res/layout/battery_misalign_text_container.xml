@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:id="@id/misalign_text_title" android:text="@string/wireless_misalign_text_title" style="@style/MisalignTitleTextStyle" />
+    <TextView android:id="@id/misalign_text_content" android:text="@string/wireless_misalign_text_content" android:layout_below="@id/misalign_text_title" style="@style/MisalignContentTextStyle" />
+</RelativeLayout>

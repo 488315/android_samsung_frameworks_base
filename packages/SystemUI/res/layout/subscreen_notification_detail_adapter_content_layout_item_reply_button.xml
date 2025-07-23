@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_gravity="center_horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:layout_gravity="center_horizontal" android:orientation="horizontal" android:id="@id/subcreen_item_clear_all_layout" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginHorizontal="32.0dip">
+        <TextView android:textSize="@dimen/subscreen_noti_button_text_size" android:textStyle="bold" android:textColor="@color/subscreen_notification_text_color" android:gravity="center" android:id="@id/cancel" android:background="@drawable/subscreen_notification_button_background" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="216.0dip" android:minHeight="76.0dip" android:text="@string/cancel" android:fontFamily="sec-roboto-light" android:textAlignment="center" />
+        <TextView android:textSize="@dimen/subscreen_noti_button_text_size" android:textStyle="bold" android:textColor="@color/subscreen_notification_text_color" android:gravity="center" android:id="@id/send" android:background="@drawable/subscreen_notification_button_background" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="216.0dip" android:minHeight="76.0dip" android:text="@string/accessibility_send_smart_reply" android:fontFamily="sec-roboto-light" android:textAlignment="center" android:layout_marginStart="16.0dip" />
+    </LinearLayout>
+</FrameLayout>

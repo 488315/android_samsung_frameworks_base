@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.3">
+    <AppMetaData Name="Wi-Fi Calling Settings" TargetApi="30" TargetPackageName="com.sec.unifiedwfc" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="Master On background color" DefaultValue="#bf4297ff" DestAttribName="main_switch_on_background_color" UID="137-1-1" ValueRef="1-40-1" ValueType="BgColor" />
+        <Property Comment="Master Off background color" DefaultValue="#fffafafa" DestAttribName="main_switch_off_background_color" UID="137-1-2" ValueRef="1-40-2" ValueType="BgColor" />
+        <Property Comment="Master On text color" DefaultValue="#fffafafa" DestAttribName="main_switch_on_text_color" UID="137-1-3" ValueRef="1-40-3" ValueType="BgColor" />
+        <Property Comment="Master Off text color" DefaultValue="#ff252525" DestAttribName="main_switch_off_text_color" UID="137-1-4" ValueRef="1-40-4" ValueType="BgColor" />
+        <Property Comment="Actionbar background color" DefaultValue="#fff2f2f2" DestAttribName="actionbar_background_light" UID="137-2-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Appbar: Extended title text color" DefaultValue="#668f8f8f" DestAttribName="font_regular_color" UID="137-2-2" ValueRef="1-1-3-1" ValueType="TextColor" />
+        <Property Comment="Main text title color" DefaultValue="#ff252525" DestAttribName="font_regular_color_17,roboto_regular_edit_text_color,call_setting_dialog_text,tty_dialog_text_color" UID="137-3-1" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Sub text color" DefaultValue="#ff979797" DestAttribName="wfc_sub_txt" UID="137-3-2" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Description text color" DefaultValue="#ff313131" DestAttribName="roboto_regular_description_text_color,font_regular_color_13,font_regular_color_15,list_secondary_text_color" DestQualifiers="" UID="137-3-3" ValueRef="1-3-3-D" ValueType="TextColor" />
+        <Property Comment="Common List Divider" DefaultValue="#ffe6e6e6" DestAttribName="button_and_radio_divider_color,tw_preference_switch_divider_color_light" POption="AlwaysOverriden" UID="137-4-3" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="Content area: Background color" DefaultValue="#fffafafa" DestAttribName="preference_background_color,contents_background_border" UID="137-4-1" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Thumb: Common Switch Thumb On Bg Color" DefaultValue="#fffafafa" DestAttribName="bottom_bar_on_bg_color" UID="137-7-1-1" ValueRef="1-5-1-1" ValueType="BgColor" />
+        <Property Comment="Thumb: Common Switch Thumb On Stroke Color" DefaultValue="#ff0074d4" DestAttribName="switch_thumb_on_stroke" UID="137-7-1-1-1" ValueRef="1-5-1-1-1" ValueType="BgColor" />
+        <Property Comment="Track: Common Switch Track On Bg Color" DefaultValue="#ff4297ff" DestAttribName="switch_track_on_background" UID="137-7-1-2" ValueRef="1-5-1-2" ValueType="BgColor" />
+        <Property Comment="Thumb: Common Switch Thumb Off Bg Color" DefaultValue="#fffafafa" DestAttribName="bottom_bar_off_bg_color" UID="137-7-1-2-1" ValueRef="1-5-2-1" ValueType="BgColor" />
+        <Property Comment="Track: Common Switch Thumb Off Stroke Color" DefaultValue="#ffa1a1a1" DestAttribName="switch_thumb_off_stroke" UID="137-7-2-1" ValueRef="1-5-2-1-1" ValueType="BgColor" />
+        <Property Comment="Thumb: Common Switch Thumb Disabled On Bg Color" DefaultValue="#fffafafa" DestAttribName="switch_thumb_on_disabled_background" UID="137-7-2-2" ValueRef="1-5-3-1" ValueType="BgColor" />
+        <Property Comment="Thumb: Common Switch Thumb Disabled On Stroke Color" DefaultValue="#ffcbcbcb" DestAttribName="switch_thumb_checked_disabled_stroke" UID="137-7-3-1" ValueRef="1-5-3-1-1" ValueType="BgColor" />
+        <Property Comment="Track: Common Switch Track Disabled On Bg Color" DefaultValue="#668f8f8f" DestAttribName="switch_track_on_disbled_background" UID="137-7-3-2" ValueRef="1-5-3-2" ValueType="BgColor" />
+        <Property Comment="Track: Common Switch Thumb Disabled Off Bg Color" DefaultValue="#fffafafa" DestAttribName="switch_thumb_off_disabled_background" UID="137-7-7-1" ValueRef="1-5-7-1" ValueType="BgColor" />
+        <Property Comment="Track: Common Switch Thumb Disabled Off Stroke Color" DefaultValue="#ffcbcbcb" DestAttribName="switch_thumb_unchecked_disabled_stroke" UID="137-7-7-1-1" ValueRef="1-5-7-1-1" ValueType="BgColor" />
+    </AppMetaData>
+</ThemeMetaData>

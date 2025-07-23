@@ -1,0 +1,17 @@
+package com.android.systemui.util.kotlin;
+
+import dagger.Lazy;
+import java.util.Optional;
+import kotlin.reflect.KProperty;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class DaggerKt {
+    public static final <T> T getValue(Lazy lazy, Object obj, KProperty kProperty) {
+        return (T) lazy.get();
+    }
+
+    public static final <T> T getValue(Optional<T> optional, Object obj, KProperty kProperty) {
+        return optional.orElse(null);
+    }
+}

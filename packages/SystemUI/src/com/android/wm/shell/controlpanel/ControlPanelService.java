@@ -1,0 +1,56 @@
+package com.android.wm.shell.controlpanel;
+
+import android.app.Service;
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.os.Binder;
+import android.os.IBinder;
+import android.util.Log;
+import com.android.keyguard.ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0;
+import com.samsung.android.rune.CoreRune;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public class ControlPanelService extends Service {
+    public boolean mIsNightMode;
+    public final int mType = -1;
+    public final ControlPanelServiceBinder mBinder = new ControlPanelServiceBinder(this);
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public class ControlPanelServiceBinder extends Binder {
+        public ControlPanelServiceBinder(ControlPanelService controlPanelService) {
+        }
+    }
+
+    @Override // android.app.Service
+    public final IBinder onBind(Intent intent) {
+        return this.mBinder;
+    }
+
+    @Override // android.app.Service, android.content.ComponentCallbacks
+    public final void onConfigurationChanged(Configuration configuration) {
+        super.onConfigurationChanged(configuration);
+        boolean isNightModeActive = configuration.isNightModeActive();
+        if (this.mType != 2) {
+            this.mIsNightMode = isNightModeActive;
+        } else {
+            if (this.mIsNightMode == isNightModeActive) {
+                throw null;
+            }
+            throw null;
+        }
+    }
+
+    @Override // android.app.Service
+    public final void onCreate() {
+        super.onCreate();
+        boolean z = CoreRune.MW_SPLIT_FLEX_PANEL_MODE_SA_LOGGING;
+        Log.d("ControlPanelService", "Floating icon is not available");
+    }
+
+    @Override // android.app.Service
+    public final int onStartCommand(Intent intent, int i, int i2) {
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i2, "startId : ", "ControlPanelService");
+        return 1;
+    }
+}

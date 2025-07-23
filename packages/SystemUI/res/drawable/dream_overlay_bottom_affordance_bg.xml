@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <size android:height="@dimen/dream_overlay_bottom_affordance_width" android:width="@dimen/dream_overlay_bottom_affordance_height" />
+    <corners android:radius="@dimen/dream_overlay_bottom_affordance_radius" />
+</shape>

@@ -1,0 +1,44 @@
+package com.android.systemui.controls.management.model;
+
+import androidx.compose.animation.graphics.vector.PropertyValuesHolder2D$$ExternalSyntheticOutline0;
+import defpackage.MoveResult$$ExternalSyntheticOutline0;
+import kotlin.jvm.internal.Intrinsics;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final class ControlInfoForStructure {
+    public final String controlId;
+    public final boolean favorite;
+    public final CharSequence structureName;
+
+    public ControlInfoForStructure(CharSequence charSequence, String str, boolean z) {
+        this.structureName = charSequence;
+        this.controlId = str;
+        this.favorite = z;
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof ControlInfoForStructure)) {
+            return false;
+        }
+        ControlInfoForStructure controlInfoForStructure = (ControlInfoForStructure) obj;
+        return Intrinsics.areEqual(this.structureName, controlInfoForStructure.structureName) && Intrinsics.areEqual(this.controlId, controlInfoForStructure.controlId) && this.favorite == controlInfoForStructure.favorite;
+    }
+
+    public final int hashCode() {
+        return Boolean.hashCode(this.favorite) + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.structureName.hashCode() * 31, 31, this.controlId);
+    }
+
+    public final String toString() {
+        CharSequence charSequence = this.structureName;
+        StringBuilder sb = new StringBuilder("ControlInfoForStructure(structureName=");
+        sb.append((Object) charSequence);
+        sb.append(", controlId=");
+        sb.append(this.controlId);
+        sb.append(", favorite=");
+        return MoveResult$$ExternalSyntheticOutline0.m(sb, this.favorite, ")");
+    }
+}

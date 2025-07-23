@@ -1,0 +1,126 @@
+package com.android.systemui.statusbar.notification.data.repository;
+
+import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
+import androidx.compose.animation.graphics.vector.PropertyValuesHolder2D$$ExternalSyntheticOutline0;
+import com.android.systemui.statusbar.notification.shared.ActiveNotificationGroupModel;
+import com.android.systemui.statusbar.notification.shared.ActiveNotificationModel;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import kotlin.collections.EmptyList;
+import kotlin.collections.MapsKt__MapsKt;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class ActiveNotificationsStore {
+    public final Map groups;
+    public final Map individuals;
+    public final Map rankingsMap;
+    public final List renderList;
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class Builder {
+        public final Map groups = new LinkedHashMap();
+        public final Map individuals = new LinkedHashMap();
+        public final List renderList = new ArrayList();
+        public Map rankingsMap = MapsKt__MapsKt.emptyMap();
+    }
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public abstract class Key {
+
+        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+        public final class Group extends Key {
+            public final String key;
+
+            public Group(String str) {
+                super(null);
+                this.key = str;
+            }
+
+            public final boolean equals(Object obj) {
+                if (this == obj) {
+                    return true;
+                }
+                return (obj instanceof Group) && Intrinsics.areEqual(this.key, ((Group) obj).key);
+            }
+
+            public final int hashCode() {
+                return this.key.hashCode();
+            }
+
+            public final String toString() {
+                return TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder("Group(key="), this.key, ")");
+            }
+        }
+
+        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+        public final class Individual extends Key {
+            public final String key;
+
+            public Individual(String str) {
+                super(null);
+                this.key = str;
+            }
+
+            public final boolean equals(Object obj) {
+                if (this == obj) {
+                    return true;
+                }
+                return (obj instanceof Individual) && Intrinsics.areEqual(this.key, ((Individual) obj).key);
+            }
+
+            public final int hashCode() {
+                return this.key.hashCode();
+            }
+
+            public final String toString() {
+                return TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder("Individual(key="), this.key, ")");
+            }
+        }
+
+        public /* synthetic */ Key(DefaultConstructorMarker defaultConstructorMarker) {
+            this();
+        }
+
+        private Key() {
+        }
+    }
+
+    public ActiveNotificationsStore() {
+        this(null, null, null, null, 15, null);
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof ActiveNotificationsStore)) {
+            return false;
+        }
+        ActiveNotificationsStore activeNotificationsStore = (ActiveNotificationsStore) obj;
+        return Intrinsics.areEqual(this.groups, activeNotificationsStore.groups) && Intrinsics.areEqual(this.individuals, activeNotificationsStore.individuals) && Intrinsics.areEqual(this.renderList, activeNotificationsStore.renderList) && Intrinsics.areEqual(this.rankingsMap, activeNotificationsStore.rankingsMap);
+    }
+
+    public final int hashCode() {
+        return this.rankingsMap.hashCode() + PropertyValuesHolder2D$$ExternalSyntheticOutline0.m(this.renderList, (this.individuals.hashCode() + (this.groups.hashCode() * 31)) * 31, 31);
+    }
+
+    public final String toString() {
+        return "ActiveNotificationsStore(groups=" + this.groups + ", individuals=" + this.individuals + ", renderList=" + this.renderList + ", rankingsMap=" + this.rankingsMap + ")";
+    }
+
+    public ActiveNotificationsStore(Map<String, ActiveNotificationGroupModel> map, Map<String, ActiveNotificationModel> map2, List<? extends Key> list, Map<String, Integer> map3) {
+        this.groups = map;
+        this.individuals = map2;
+        this.renderList = list;
+        this.rankingsMap = map3;
+    }
+
+    public ActiveNotificationsStore(Map map, Map map2, List list, Map map3, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        this((i & 1) != 0 ? MapsKt__MapsKt.emptyMap() : map, (i & 2) != 0 ? MapsKt__MapsKt.emptyMap() : map2, (i & 4) != 0 ? EmptyList.INSTANCE : list, (i & 8) != 0 ? MapsKt__MapsKt.emptyMap() : map3);
+    }
+}

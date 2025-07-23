@@ -1,0 +1,26 @@
+package com.android.wm.shell.desktopmode.common;
+
+import com.android.wm.shell.desktopmode.common.ToggleTaskSizeInteraction;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public abstract /* synthetic */ class ToggleTaskSizeUtilsKt$WhenMappings {
+    public static final /* synthetic */ int[] $EnumSwitchMapping$0;
+
+    static {
+        int[] iArr = new int[ToggleTaskSizeInteraction.AmbiguousSource.values().length];
+        try {
+            iArr[ToggleTaskSizeInteraction.AmbiguousSource.HEADER_BUTTON.ordinal()] = 1;
+        } catch (NoSuchFieldError unused) {
+        }
+        try {
+            iArr[ToggleTaskSizeInteraction.AmbiguousSource.MAXIMIZE_MENU.ordinal()] = 2;
+        } catch (NoSuchFieldError unused2) {
+        }
+        try {
+            iArr[ToggleTaskSizeInteraction.AmbiguousSource.DOUBLE_TAP.ordinal()] = 3;
+        } catch (NoSuchFieldError unused3) {
+        }
+        $EnumSwitchMapping$0 = iArr;
+    }
+}

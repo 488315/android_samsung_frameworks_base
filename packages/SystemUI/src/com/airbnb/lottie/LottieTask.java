@@ -1,0 +1,139 @@
+package com.airbnb.lottie;
+
+import android.os.Handler;
+import android.os.Looper;
+import com.airbnb.lottie.utils.Logger;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes.dex */
+public class LottieTask {
+    public static final Executor EXECUTOR = Executors.newCachedThreadPool();
+    public final Set failureListeners;
+    public final Handler handler;
+    public volatile LottieResult result;
+    public final Set successListeners;
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public class LottieFutureTask extends FutureTask {
+        public LottieFutureTask(Callable<LottieResult> callable) {
+            super(callable);
+        }
+
+        @Override // java.util.concurrent.FutureTask
+        public final void done() {
+            if (isCancelled()) {
+                return;
+            }
+            try {
+                LottieTask lottieTask = LottieTask.this;
+                LottieResult lottieResult = (LottieResult) get();
+                Executor executor = LottieTask.EXECUTOR;
+                lottieTask.setResult(lottieResult);
+            } catch (InterruptedException | ExecutionException e) {
+                LottieTask lottieTask2 = LottieTask.this;
+                LottieResult lottieResult2 = new LottieResult(e);
+                Executor executor2 = LottieTask.EXECUTOR;
+                lottieTask2.setResult(lottieResult2);
+            }
+        }
+    }
+
+    public LottieTask(Callable<LottieResult> callable) {
+        this(callable, false);
+    }
+
+    public final synchronized void addFailureListener(LottieListener lottieListener) {
+        Throwable th;
+        try {
+            LottieResult lottieResult = this.result;
+            if (lottieResult != null && (th = lottieResult.exception) != null) {
+                lottieListener.onResult(th);
+            }
+            this.failureListeners.add(lottieListener);
+        } catch (Throwable th2) {
+            throw th2;
+        }
+    }
+
+    public final synchronized void addListener(LottieListener lottieListener) {
+        Object obj;
+        try {
+            LottieResult lottieResult = this.result;
+            if (lottieResult != null && (obj = lottieResult.value) != null) {
+                lottieListener.onResult(obj);
+            }
+            this.successListeners.add(lottieListener);
+        } catch (Throwable th) {
+            throw th;
+        }
+    }
+
+    public final void setResult(LottieResult lottieResult) {
+        if (this.result != null) {
+            throw new IllegalStateException("A task may only be set once.");
+        }
+        this.result = lottieResult;
+        this.handler.post(new Runnable() { // from class: com.airbnb.lottie.LottieTask$$ExternalSyntheticLambda0
+            @Override // java.lang.Runnable
+            public final void run() {
+                LottieTask lottieTask = LottieTask.this;
+                LottieResult lottieResult2 = lottieTask.result;
+                if (lottieResult2 == null) {
+                    return;
+                }
+                Object obj = lottieResult2.value;
+                int i = 0;
+                if (obj != null) {
+                    synchronized (lottieTask) {
+                        ArrayList arrayList = new ArrayList(lottieTask.successListeners);
+                        int size = arrayList.size();
+                        while (i < size) {
+                            Object obj2 = arrayList.get(i);
+                            i++;
+                            ((LottieListener) obj2).onResult(obj);
+                        }
+                    }
+                    return;
+                }
+                Throwable th = lottieResult2.exception;
+                synchronized (lottieTask) {
+                    ArrayList arrayList2 = new ArrayList(lottieTask.failureListeners);
+                    if (arrayList2.isEmpty()) {
+                        Logger.warning("Lottie encountered an error but no failure listener was added:", th);
+                        return;
+                    }
+                    int size2 = arrayList2.size();
+                    while (i < size2) {
+                        Object obj3 = arrayList2.get(i);
+                        i++;
+                        ((LottieListener) obj3).onResult(th);
+                    }
+                }
+            }
+        });
+    }
+
+    public LottieTask(Callable<LottieResult> callable, boolean z) {
+        this.successListeners = new LinkedHashSet(1);
+        this.failureListeners = new LinkedHashSet(1);
+        this.handler = new Handler(Looper.getMainLooper());
+        this.result = null;
+        if (!z) {
+            EXECUTOR.execute(new LottieFutureTask(callable));
+            return;
+        }
+        try {
+            setResult(callable.call());
+        } catch (Throwable th) {
+            setResult(new LottieResult(th));
+        }
+    }
+}

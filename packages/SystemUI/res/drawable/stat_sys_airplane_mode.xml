@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset android:drawable="@android:drawable/ic_zen_mode_icon_tv"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

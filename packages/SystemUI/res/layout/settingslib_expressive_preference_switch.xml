@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.materialswitch.MaterialSwitch android:theme="@style/Theme.Material3.DynamicColors.DayNight" android:id="@id/switchWidget" android:filterTouchesWhenObscured="false" style="@style/SettingslibSwitchStyle.Expressive"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

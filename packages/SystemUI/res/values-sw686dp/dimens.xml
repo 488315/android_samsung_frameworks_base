@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="qqs_panel_width_tablet">490.0dip</dimen>
+    <dimen name="qs_edit_available_active_between_margin_tablet">30.0dip</dimen>
+    <dimen name="qs_edit_tablet_height">721.0dip</dimen>
+    <dimen name="qs_edit_tile_icon_frame_size">52.0dip</dimen>
+    <dimen name="qs_edit_tile_label_height">50.0dip</dimen>
+    <dimen name="qs_guide_dialog_tablet_panel_width">408.0dip</dimen>
+    <dimen name="qs_pop_over_blur_detail_height">640.0dip</dimen>
+    <item type="dimen" name="qs_pop_over_detail_extended_container_top_margin">0.07</item>
+    <item type="dimen" name="sec_qs_buttons_container_margin_top_ratio">0.045</item>
+    <dimen name="sec_qs_side_padding">23.0dip</dimen>
+    <dimen name="tile_expanded_width_tablet">72.0dip</dimen>
+</resources>

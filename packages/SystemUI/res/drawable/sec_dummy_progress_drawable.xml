@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:gravity="bottom" android:id="@android:id/background" android:height="@dimen/sec_media_seek_bar_internal_height" android:bottom="@dimen/sec_media_seek_bar_bottom_padding">
+        <shape android:shape="rectangle">
+            <corners android:radius="5.0dip" />
+        </shape>
+    </item>
+    <item android:gravity="bottom" android:id="@android:id/secondaryProgress" android:height="@dimen/sec_media_seek_bar_internal_height" android:bottom="@dimen/sec_media_seek_bar_bottom_padding">
+        <clip>
+            <shape android:shape="oval">
+                <corners android:radius="5.0dip" />
+            </shape>
+        </clip>
+    </item>
+    <item android:gravity="bottom" android:id="@android:id/progress" android:height="@dimen/sec_media_seek_bar_internal_height" android:bottom="@dimen/sec_media_seek_bar_bottom_padding">
+        <clip>
+            <shape android:shape="rectangle">
+                <corners android:radius="5.0dip" />
+            </shape>
+        </clip>
+    </item>
+    <item android:gravity="bottom" android:height="@dimen/sec_media_seek_bar_height" android:bottom="@dimen/sec_media_seek_bar_border_bottom_padding">
+        <shape android:shape="rectangle" android:useLevel="false">
+            <solid android:color="@color/transparent" />
+            <stroke android:width="@dimen/sec_media_progress_bar_border" android:color="#4c000000" />
+            <corners android:radius="5.0dip" />
+            <size android:layout_width="fill_parent" android:layout_height="@dimen/sec_media_seek_bar_height" />
+        </shape>
+    </item>
+</layer-list>

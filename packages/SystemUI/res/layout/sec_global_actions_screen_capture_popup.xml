@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_gravity="bottom|center" android:id="@id/sec_global_actions_screen_capture_popup" android:background="@drawable/sec_global_actions_screen_capture_background" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:maxWidth="450.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_gravity="end|center|top" android:id="@id/sec_global_actions_icon" android:layout_width="48.0dip" android:layout_height="48.0dip" android:layout_marginTop="6.0dip" android:src="@drawable/help_ic_close" android:layout_marginEnd="7.0dip" />
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <TextView android:textSize="19.0sp" android:textColor="#fffafafa" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="24.0dip" android:text="@string/globalactions_screen_capture_popup_title" android:layout_marginStart="24.0dip" android:layout_marginEnd="48.0dip" />
+        <TextView android:textSize="15.0sp" android:textColor="#fffafafa" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="8.0dip" android:layout_marginBottom="20.0dip" android:text="@string/globalactions_screen_capture_popup_description" android:layout_marginStart="24.0dip" android:layout_marginEnd="24.0dip" />
+    </LinearLayout>
+</FrameLayout>

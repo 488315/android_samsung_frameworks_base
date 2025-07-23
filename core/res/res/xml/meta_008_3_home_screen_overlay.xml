@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Launcher" PackageNameSuffix="launcher" TargetApi="19" TargetPackageName="com.sec.android.app.launcher" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="AddItem name color - Dialog Main text color" DefaultValue="#ff252525" DestAttribName="add_item_dialog_body_text_color" DestQualifiers="" UID="8-14-4" ValueRef="1-9-6" ValueType="Color" />
+        <Property Comment="AddItem size color - Dialog Sub text color" DefaultValue="#ff909090" DestAttribName="add_item_dialog_body_size_text_color" DestQualifiers="" UID="8-14-2" ValueRef="1-9-7" ValueType="Color" />
+        <Property Comment="AddItem button color - Dialog button text color" DefaultValue="#ff010101" DestAttribName="add_item_dialog_button_text_color" DestQualifiers="" UID="8-14-3" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Activity BG color" DefaultValue="#fffcfcfc" DestAttribName="about_page_bg_color" DestQualifiers="" UID="8-15-1" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="info icon tint color" DefaultValue="#ff454545" DestAttribName="about_page_app_info_icon_color" DestQualifiers="" UID="8-15-2" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="App name text color - Title text color" DefaultValue="#ff252525" DestAttribName="app_name_text_color" DestQualifiers="" UID="8-15-3" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="App version text color - Sub title text color" DefaultValue="#ff909090" DestAttribName="app_version_text_color" DestQualifiers="" UID="8-15-4" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="Update button bg color" DefaultValue="#ff0074d4" DestAttribName="about_page_retry_update_btn_bg_color" DestQualifiers="" UID="8-15-5" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Update button text color" DefaultValue="#fffafafa" DestAttribName="about_page_retry_update_btn_text_color" DestQualifiers="" UID="8-15-6" ValueRef="1-E" ValueType="Color" />
+        <Property Comment="Open source button bg color - Button bg color" DefaultValue="#0f000000" DestAttribName="about_page_open_source_license_btn_color" DestQualifiers="" UID="8-15-7" ValueRef="1-7-1-D" ValueType="Color" />
+        <Property Comment="Open source button text color - Button text color" DefaultValue="#ff252525" DestAttribName="about_page_open_source_license_text_color" DestQualifiers="" UID="8-15-8" ValueRef="1-7-2-D" ValueType="Color" />
+        <Property Comment="Workspace Tab Unselected Text Color" DefaultValue="#e6fafafa" DestAttribName="workspace_tab_unselect_text_color" DestQualifiers="" UID="8-16-1" ValueRef="1-12-3" ValueType="Color" />
+        <Property Comment="Workspace Tab Selected Text Color" DefaultValue="#ff0072de" DestAttribName="workspace_tab_select_text_color" DestQualifiers="" UID="8-16-2" ValueRef="1-12-4" ValueType="Color" />
+        <Property Comment="Workspace Tab Selected Dot Line Color" DefaultValue="#ff0072de" DestAttribName="workspace_tab_selected_line_color" DestQualifiers="" UID="8-16-3" ValueRef="1-12-5" ValueType="Color" />
+        <Property Comment="Search Bar Backgroung Color" DefaultValue="#33fcfcfc" DestAttribName="apps_search_bar_background_color" DestQualifiers="" UID="8-18-1" ValueRef="1-59-1" ValueType="Color" />
+        <Property Comment="Search Bar Hint Text Color" DefaultValue="#e6fafafa" DestAttribName="apps_search_titlebar_color" DestQualifiers="" UID="8-18-2" ValueRef="1-59-4" ValueType="Color" />
+        <Property Comment="More Button Color" DefaultValue="#e6fafafa" DestAttribName="apps_search_more_button_color" DestQualifiers="" UID="8-18-3" ValueRef="1-59-6-1" ValueType="Color" />
+        <Property Comment="Apps Picker Background color" DefaultValue="#fff2f2f2" DestAttribName="apps_picker_container_background_color" DestQualifiers="" UID="8-19-1" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="Apps Picker Back Icon Tint Color" DefaultValue="#ff252525" DestAttribName="apps_picker_back_icon_tint_color" DestQualifiers="" UID="8-19-2" ValueRef="1-11-3" ValueType="Color" />
+        <Property Comment="Apps Picker Back Icon Image" DefaultValue="" DestAttribName="apps_picker_back_icon_image" DestQualifiers="" ImageSize="24x24" UID="8-19-3" ValueRef="1-11-4" ValueType="Image" />
+        <Property Comment="Apps Picker Title Text Color" DefaultValue="#ff252525" DestAttribName="apps_picker_app_bar_text_color" DestQualifiers="" UID="8-19-4" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Apps Picker Search Bar Background Color" DefaultValue="#0d000000" DestAttribName="apps_picker_search_bar_background_color" DestQualifiers="" UID="8-19-5" ValueRef="1-59-1" ValueType="Color" />
+        <Property Comment="Apps Picker Search Bar Hint Text Color" DefaultValue="#ff7a7a7a" DestAttribName="apps_picker_search_bar_hint_text_color" DestQualifiers="" UID="8-19-6" ValueRef="1-59-4" ValueType="Color" />
+        <Property Comment="Apps Picker Subheader Text Color" DefaultValue="#ff909090" DestAttribName="apps_picker_sub_header_text_color" DestQualifiers="" UID="8-19-7" ValueRef="1-19-2" ValueType="Color" />
+        <Property Comment="Apps Picker Header Title Text Color" DefaultValue="#66252525" DestAttribName="apps_picker_search_result_header_color" DestQualifiers="" UID="8-19-8" ValueRef="1-19-2" ValueType="Color" />
+        <Property Comment="Apps Picker Divider Color" DefaultValue="#66252525" DestAttribName="apps_picker_search_result_divider_color" DestQualifiers="" UID="8-19-9" ValueRef="1-19-2" ValueType="Color" />
+        <Property Comment="Apps Picker Status Bar Icon Color" DefaultValue="false" DestAttribName="use_light_status_navi_bar" DestQualifiers="" UID="8-19-10" ValueRef="1-51-1" ValueType="Bool" />
+        <Property Comment="Apps Picker Indicator Background Color" DefaultValue="#fff2f2f2" DestAttribName="apps_picker_indicator_background_color" DestQualifiers="" UID="8-19-11" ValueRef="1-51" ValueType="Color" />
+        <Property Comment="Apps Picker Done Button text color" DefaultValue="#ff0072de" DestAttribName="apps_picker_done_button_color" DestQualifiers="" UID="8-19-12" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Apps Picker Contents Area Background Color" DefaultValue="#ccfcfcfc" DestAttribName="apps_picker_selected_scrollview_bg_color" DestQualifiers="" UID="8-19-13" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="Apps Picker Contents Area Background Image" DefaultValue="" DestAttribName="apps_picker_selected_scrollview_bg_image" DestQualifiers="" UID="8-19-14" ValueRef="1-18-2" ValueType="Image" />
+        <Property Comment="Apps Picker Hidden App Icon Text Color" DefaultValue="#ff252525" DestAttribName="apps_picker_hidden_app_icon_text_color" DestQualifiers="" UID="8-19-15" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="Apps Picker Done Button text color dim" DefaultValue="#660072de" DestAttribName="apps_picker_done_button_color_dim" DestQualifiers="" Opacity="40" UID="8-19-16" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Apps Picker Navigation background color" DefaultValue="#fff2f2f2" DestAttribName="apps_picker_navi_bar_bg_color" DestQualifiers="" UID="8-19-17" ValueRef="1-69-1" ValueType="Color" />
+        <Property Comment="Navigation Icon Image Black Color" DefaultValue="true" DestAttribName="navi_bar_icon_black_color" DestQualifiers="" UID="8-19-18" ValueRef="1-69-2" ValueType="Bool" />
+        <Property Comment="Check selected color" DestAttribName="check_selected_color" UID="8-19-19" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Background Color" DefaultValue="#fffcfcfc" DestAttribName="widget_full_sheet_background_color" DestQualifiers="" UID="8-20-1" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="Background Image" DefaultValue="" DestAttribName="widget_sheet_background_image" DestQualifiers="" UID="8-20-2" ValueRef="1-18-2" ValueType="Image" />
+        <Property Comment="App Title Text Color" DefaultValue="#ff010101" DestAttribName="widget_bottom_sheet_title_color" DestQualifiers="" UID="8-20-3" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Number Text Color" DefaultValue="#ff8c8c8c" DestAttribName="widget_bottom_sheet_count_color" DestQualifiers="" UID="8-20-4" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="Widget Title Text Color" DefaultValue="#ff252525" DestAttribName="widget_item_title_text_color" DestQualifiers="" UID="8-20-5" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Widget Size Text Color" DefaultValue="#ff252525" DestAttribName="widget_item_dims_text_color" DestQualifiers="" Opacity="50" UID="8-20-6" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Expandable Icon Tint Color" DefaultValue="#ff808080" DestAttribName="widget_sheet_expand_button_color" DestQualifiers="" UID="8-20-7" ValueRef="1-16-1" ValueType="Color" />
+        <Property Comment="Divider Color" DefaultValue="#ffe6e6e6" DestAttribName="widget_list_divider_color" DestQualifiers="" UID="8-20-8" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="Handle Tint Color" DefaultValue="#ff505050" DestAttribName="widget_bottom_sheet_collapse_handle_color" DestQualifiers="" UID="8-20-9" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="Search Bar Background Color" DefaultValue="#66fcfcfc" DestAttribName="widget_search_bar_background_color" DestQualifiers="" UID="8-20-10" ValueRef="1-59-1" ValueType="Color" />
+        <Property Comment="Search Bar Text Color" DefaultValue="#fffafafa" DestAttribName="widget_search_bar_text_color" DestQualifiers="" UID="8-20-11" ValueRef="1-59-4" ValueType="Color" />
+        <Property Comment="Search Bar Icon Tint Color" DefaultValue="#fffafafa" DestAttribName="widget_search_bar_icon_color" DestQualifiers="" UID="8-20-12" ValueRef="1-59-8" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

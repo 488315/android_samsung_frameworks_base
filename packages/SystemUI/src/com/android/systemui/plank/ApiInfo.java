@@ -1,0 +1,34 @@
+package com.android.systemui.plank;
+
+import kotlin.jvm.internal.Intrinsics;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final class ApiInfo {
+    public final String name;
+    public final long timestamp;
+
+    public ApiInfo(String str, long j) {
+        this.name = str;
+        this.timestamp = j;
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof ApiInfo)) {
+            return false;
+        }
+        ApiInfo apiInfo = (ApiInfo) obj;
+        return Intrinsics.areEqual(this.name, apiInfo.name) && this.timestamp == apiInfo.timestamp;
+    }
+
+    public final int hashCode() {
+        return Long.hashCode(this.timestamp) + (this.name.hashCode() * 31);
+    }
+
+    public final String toString() {
+        return "ApiInfo(name=" + this.name + ", timestamp=" + this.timestamp + ")";
+    }
+}

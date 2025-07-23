@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/entity_header" style="@style/SettingsLibEntityHeader"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:id="@id/entity_header_content" style="@style/SettingsLibEntityHeaderContent">
+        <ImageView android:id="@id/entity_header_icon" style="@style/SettingsLibEntityHeaderIcon" />
+        <TextView android:id="@id/entity_header_title" style="@style/SettingsLibEntityHeaderTitle" />
+        <TextView android:id="@id/install_type" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2.0dip" style="@style/TextAppearance.EntityHeaderSummary" />
+        <TextView android:id="@id/entity_header_summary" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="2.0dip" android:singleLine="false" android:textAlignment="center" style="@style/TextAppearance.EntityHeaderSummary" />
+        <TextView android:id="@id/entity_header_second_summary" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="4" android:singleLine="false" style="@style/TextAppearance.EntityHeaderSummary" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerVertical="true" android:layout_alignParentEnd="true">
+        <ImageButton android:id="@android:id/button1" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="0.0dip" android:src="@null" android:tint="?android:colorAccent" android:minWidth="24.0dip" android:layout_weight="1.0" style="?android:actionOverflowButtonStyle" />
+        <ImageButton android:id="@android:id/button2" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="0.0dip" android:src="@null" android:tint="?android:colorAccent" android:minWidth="24.0dip" android:layout_weight="1.0" style="?android:actionOverflowButtonStyle" />
+    </LinearLayout>
+</RelativeLayout>

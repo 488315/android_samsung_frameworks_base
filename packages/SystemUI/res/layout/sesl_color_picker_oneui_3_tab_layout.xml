@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.google.android.material.tabs.TabLayout android:id="@id/sesl_color_picker_tab_layout" android:layout_width="fill_parent" android:layout_height="@dimen/sesl_color_picker_tab_layout_height">
+        <com.google.android.material.tabs.TabItem android:tag="@string/sesl_color_picker_swatches_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sesl_color_picker_swatches_text" />
+        <com.google.android.material.tabs.TabItem android:tag="@string/sesl_color_picker_spectrum_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sesl_color_picker_spectrum_text" />
+    </com.google.android.material.tabs.TabLayout>
+</FrameLayout>

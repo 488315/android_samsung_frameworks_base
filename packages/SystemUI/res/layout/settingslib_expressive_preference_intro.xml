@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/entity_header" android:layout_width="fill_parent" android:layout_height="wrap_content" style="@style/SettingsLibEntityHeader"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:id="@id/entity_header_content" style="@style/SettingsLibEntityHeaderContent">
+        <ImageView android:id="@android:id/icon" style="@style/SettingsLibEntityHeaderIcon" />
+        <TextView android:id="@android:id/title" style="@style/SettingsLibEntityHeaderTitle" />
+        <com.android.settingslib.widget.CollapsableTextView android:gravity="center" android:id="@id/collapsable_summary" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minLines="1" app:isCollapsable="true" />
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,188 @@
+package com.android.systemui.user.domain.model;
+
+import android.os.UserHandle;
+import androidx.compose.animation.TransitionData$$ExternalSyntheticOutline0;
+import com.android.systemui.animation.Expandable;
+import com.android.systemui.qs.user.UserSwitchDialogController$DialogShower;
+import defpackage.MoveResult$$ExternalSyntheticOutline0;
+import defpackage.ReorderTile$$ExternalSyntheticOutline0;
+import kotlin.jvm.functions.Function3;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public abstract class ShowDialogRequestModel {
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class ShowAddUserDialog extends ShowDialogRequestModel {
+        public final UserSwitchDialogController$DialogShower dialogShower;
+        public final boolean isKeyguardShowing;
+        public final boolean showEphemeralMessage;
+        public final UserHandle userHandle;
+
+        public ShowAddUserDialog(UserHandle userHandle, boolean z, boolean z2, UserSwitchDialogController$DialogShower userSwitchDialogController$DialogShower) {
+            super(userSwitchDialogController$DialogShower, null, 2, 0 == true ? 1 : 0);
+            this.userHandle = userHandle;
+            this.isKeyguardShowing = z;
+            this.showEphemeralMessage = z2;
+            this.dialogShower = userSwitchDialogController$DialogShower;
+        }
+
+        public final boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (!(obj instanceof ShowAddUserDialog)) {
+                return false;
+            }
+            ShowAddUserDialog showAddUserDialog = (ShowAddUserDialog) obj;
+            return Intrinsics.areEqual(this.userHandle, showAddUserDialog.userHandle) && this.isKeyguardShowing == showAddUserDialog.isKeyguardShowing && this.showEphemeralMessage == showAddUserDialog.showEphemeralMessage && Intrinsics.areEqual(this.dialogShower, showAddUserDialog.dialogShower);
+        }
+
+        public final int hashCode() {
+            int m = TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(this.userHandle.hashCode() * 31, 31, this.isKeyguardShowing), 31, this.showEphemeralMessage);
+            UserSwitchDialogController$DialogShower userSwitchDialogController$DialogShower = this.dialogShower;
+            return m + (userSwitchDialogController$DialogShower == null ? 0 : userSwitchDialogController$DialogShower.hashCode());
+        }
+
+        public final String toString() {
+            return "ShowAddUserDialog(userHandle=" + this.userHandle + ", isKeyguardShowing=" + this.isKeyguardShowing + ", showEphemeralMessage=" + this.showEphemeralMessage + ", dialogShower=" + this.dialogShower + ")";
+        }
+    }
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class ShowExitGuestDialog extends ShowDialogRequestModel {
+        public final UserSwitchDialogController$DialogShower dialogShower;
+        public final int guestUserId;
+        public final boolean isGuestEphemeral;
+        public final boolean isKeyguardShowing;
+        public final Function3 onExitGuestUser;
+        public final int targetUserId;
+
+        public ShowExitGuestDialog(int i, int i2, boolean z, boolean z2, Function3 function3, UserSwitchDialogController$DialogShower userSwitchDialogController$DialogShower) {
+            super(userSwitchDialogController$DialogShower, null, 2, 0 == true ? 1 : 0);
+            this.guestUserId = i;
+            this.targetUserId = i2;
+            this.isGuestEphemeral = z;
+            this.isKeyguardShowing = z2;
+            this.onExitGuestUser = function3;
+            this.dialogShower = userSwitchDialogController$DialogShower;
+        }
+
+        public final boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (!(obj instanceof ShowExitGuestDialog)) {
+                return false;
+            }
+            ShowExitGuestDialog showExitGuestDialog = (ShowExitGuestDialog) obj;
+            return this.guestUserId == showExitGuestDialog.guestUserId && this.targetUserId == showExitGuestDialog.targetUserId && this.isGuestEphemeral == showExitGuestDialog.isGuestEphemeral && this.isKeyguardShowing == showExitGuestDialog.isKeyguardShowing && Intrinsics.areEqual(this.onExitGuestUser, showExitGuestDialog.onExitGuestUser) && Intrinsics.areEqual(this.dialogShower, showExitGuestDialog.dialogShower);
+        }
+
+        public final int hashCode() {
+            int hashCode = (this.onExitGuestUser.hashCode() + TransitionData$$ExternalSyntheticOutline0.m(TransitionData$$ExternalSyntheticOutline0.m(ReorderTile$$ExternalSyntheticOutline0.m(this.targetUserId, Integer.hashCode(this.guestUserId) * 31, 31), 31, this.isGuestEphemeral), 31, this.isKeyguardShowing)) * 31;
+            UserSwitchDialogController$DialogShower userSwitchDialogController$DialogShower = this.dialogShower;
+            return hashCode + (userSwitchDialogController$DialogShower == null ? 0 : userSwitchDialogController$DialogShower.hashCode());
+        }
+
+        public final String toString() {
+            return "ShowExitGuestDialog(guestUserId=" + this.guestUserId + ", targetUserId=" + this.targetUserId + ", isGuestEphemeral=" + this.isGuestEphemeral + ", isKeyguardShowing=" + this.isKeyguardShowing + ", onExitGuestUser=" + this.onExitGuestUser + ", dialogShower=" + this.dialogShower + ")";
+        }
+    }
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class ShowUserCreationDialog extends ShowDialogRequestModel {
+        public final boolean isGuest;
+
+        public ShowUserCreationDialog(boolean z) {
+            super(null, 0 == true ? 1 : 0, 3, 0 == true ? 1 : 0);
+            this.isGuest = z;
+        }
+
+        public final boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            return (obj instanceof ShowUserCreationDialog) && this.isGuest == ((ShowUserCreationDialog) obj).isGuest;
+        }
+
+        public final int hashCode() {
+            return Boolean.hashCode(this.isGuest);
+        }
+
+        public final String toString() {
+            return MoveResult$$ExternalSyntheticOutline0.m(new StringBuilder("ShowUserCreationDialog(isGuest="), this.isGuest, ")");
+        }
+    }
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class ShowUserSwitcherDialog extends ShowDialogRequestModel {
+        public final Expandable expandable;
+
+        public ShowUserSwitcherDialog(Expandable expandable) {
+            super(null, 0 == true ? 1 : 0, 3, 0 == true ? 1 : 0);
+            this.expandable = expandable;
+        }
+
+        public final boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            return (obj instanceof ShowUserSwitcherDialog) && Intrinsics.areEqual(this.expandable, ((ShowUserSwitcherDialog) obj).expandable);
+        }
+
+        public final int hashCode() {
+            Expandable expandable = this.expandable;
+            if (expandable == null) {
+                return 0;
+            }
+            return expandable.hashCode();
+        }
+
+        public final String toString() {
+            return "ShowUserSwitcherDialog(expandable=" + this.expandable + ")";
+        }
+    }
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class ShowUserSwitcherFullscreenDialog extends ShowDialogRequestModel {
+        public final Expandable expandable;
+
+        public ShowUserSwitcherFullscreenDialog(Expandable expandable) {
+            super(null, 0 == true ? 1 : 0, 3, 0 == true ? 1 : 0);
+            this.expandable = expandable;
+        }
+
+        public final boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            return (obj instanceof ShowUserSwitcherFullscreenDialog) && Intrinsics.areEqual(this.expandable, ((ShowUserSwitcherFullscreenDialog) obj).expandable);
+        }
+
+        public final int hashCode() {
+            Expandable expandable = this.expandable;
+            if (expandable == null) {
+                return 0;
+            }
+            return expandable.hashCode();
+        }
+
+        public final String toString() {
+            return "ShowUserSwitcherFullscreenDialog(expandable=" + this.expandable + ")";
+        }
+    }
+
+    public /* synthetic */ ShowDialogRequestModel(UserSwitchDialogController$DialogShower userSwitchDialogController$DialogShower, Expandable expandable, DefaultConstructorMarker defaultConstructorMarker) {
+        this(userSwitchDialogController$DialogShower, expandable);
+    }
+
+    private ShowDialogRequestModel(UserSwitchDialogController$DialogShower userSwitchDialogController$DialogShower, Expandable expandable) {
+    }
+
+    public /* synthetic */ ShowDialogRequestModel(UserSwitchDialogController$DialogShower userSwitchDialogController$DialogShower, Expandable expandable, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        this((i & 1) != 0 ? null : userSwitchDialogController$DialogShower, (i & 2) != 0 ? null : expandable, null);
+    }
+}

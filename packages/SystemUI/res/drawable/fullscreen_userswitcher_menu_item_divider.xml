@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <size android:height="@dimen/bouncer_user_switcher_popup_items_divider_height" />
+    <solid android:color="@color/user_switcher_fullscreen_bg" />
+</shape>

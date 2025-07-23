@@ -1,0 +1,44 @@
+package com.android.internal.hidden_from_bootclasspath.android.companion;
+
+/* loaded from: classes5.dex */
+public final class FeatureFlagsImpl implements FeatureFlags {
+    @Override // com.android.internal.hidden_from_bootclasspath.android.companion.FeatureFlags
+    public boolean associationDeviceIcon() {
+        return false;
+    }
+
+    @Override // com.android.internal.hidden_from_bootclasspath.android.companion.FeatureFlags
+    public boolean associationFailureCode() {
+        return true;
+    }
+
+    @Override // com.android.internal.hidden_from_bootclasspath.android.companion.FeatureFlags
+    public boolean associationTag() {
+        return true;
+    }
+
+    @Override // com.android.internal.hidden_from_bootclasspath.android.companion.FeatureFlags
+    public boolean devicePresence() {
+        return true;
+    }
+
+    @Override // com.android.internal.hidden_from_bootclasspath.android.companion.FeatureFlags
+    public boolean newAssociationBuilder() {
+        return true;
+    }
+
+    @Override // com.android.internal.hidden_from_bootclasspath.android.companion.FeatureFlags
+    public boolean ongoingPermSync() {
+        return false;
+    }
+
+    @Override // com.android.internal.hidden_from_bootclasspath.android.companion.FeatureFlags
+    public boolean permSyncUserConsent() {
+        return true;
+    }
+
+    @Override // com.android.internal.hidden_from_bootclasspath.android.companion.FeatureFlags
+    public boolean unpairAssociatedDevice() {
+        return true;
+    }
+}

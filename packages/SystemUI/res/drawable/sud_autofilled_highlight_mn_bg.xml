@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/sud_autofilled_highlight_bg_color" />
+    <corners android:radius="@dimen/sud_edit_text_corner_radius" />
+</shape>

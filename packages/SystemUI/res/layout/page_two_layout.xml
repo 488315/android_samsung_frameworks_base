@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:layout_gravity="center_vertical" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:weightSum="3.0">
+        <include android:id="@id/subroom_airplane_settings" android:layout_weight="1.0" layout="@layout/subscreen_airplane_settings" />
+        <include android:id="@id/subroom_flashlight_settings" android:layout_weight="1.0" android:layout_marginStart="@dimen/subscreen_viewpager_icon_margin" layout="@layout/subscreen_flashlight_settings" />
+        <include android:id="@id/subroom_brightness_button_settings" android:layout_weight="1.0" android:layout_marginStart="@dimen/subscreen_viewpager_icon_margin" layout="@layout/subscreen_brightness_button_settings" />
+    </LinearLayout>
+</LinearLayout>

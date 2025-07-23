@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/setting_layout" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <include layout="@layout/qs_setting_edit_actionbar" />
+    </LinearLayout>
+    <ScrollView android:scrollbars="none" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:layout_gravity="center_horizontal" android:orientation="vertical" android:id="@id/main_content" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:orientation="vertical" android:id="@id/separate_panel" android:focusable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="14.0dip" />
+            <LinearLayout android:orientation="vertical" android:id="@id/edit_tile_type_container" android:background="@drawable/qs_setting_edit_button_ripple" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="14.0dip">
+                <LinearLayout android:orientation="vertical" android:id="@id/top_tile_edit_button_container" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_margin="20.0dip" style="@style/RecoilSmallAnimator">
+                    <TextView android:textSize="15.0sp" android:textColor="@color/qs_edit_content_text_color" android:id="@id/qs_edit_top_settings_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/qs_edit_top_settings" android:fontFamily="sec" android:textFontWeight="400" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:id="@id/open_quick_settings" android:background="@drawable/qs_setting_edit_button_ripple" android:focusable="true" android:visibility="gone" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="14.0dip">
+                <include layout="@layout/qs_setting_edit_content_button" />
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:id="@id/popup_container" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="14.0dip" />
+            <LinearLayout android:orientation="vertical" android:id="@id/isolated_buttons" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <LinearLayout android:orientation="vertical" android:id="@id/multi_sim" android:background="@drawable/qs_setting_edit_button_ripple" android:focusable="true" android:visibility="gone" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="14.0dip">
+                    <include layout="@layout/qs_setting_edit_content_button" />
+                </LinearLayout>
+                <LinearLayout android:orientation="vertical" android:id="@id/smart_view" android:background="@drawable/qs_setting_edit_button_ripple" android:focusable="true" android:visibility="gone" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="14.0dip">
+                    <include layout="@layout/qs_setting_edit_content_button" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:id="@id/contact_us" android:background="@drawable/qs_setting_edit_button_ripple" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="14.0dip">
+                <include layout="@layout/qs_setting_edit_content_button" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

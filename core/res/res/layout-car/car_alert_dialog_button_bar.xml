@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:scrollbarAlwaysDrawVerticalTrack="true" android:id="@id/buttonPanel" android:layout_width="fill_parent" android:layout_height="wrap_content" android:fillViewport="true" android:scrollIndicators="bottom|top" style="?buttonBarStyle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.internal.widget.ButtonBarLayout android:gravity="center|left" android:orientation="horizontal" android:paddingTop="@dimen/button_bar_layout_top_padding" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layoutDirection="locale" android:paddingStart="@dimen/button_bar_layout_start_padding" android:paddingEnd="@dimen/button_bar_layout_end_padding">
+        <Button android:id="@id/button3" android:background="@drawable/car_dialog_button_background" android:layout_width="wrap_content" android:layout_height="@dimen/button_layout_height" android:layout_marginRight="@dimen/button_end_margin" android:minWidth="@dimen/car_touch_target_size" android:paddingStart="@dimen/car_padding_2" android:paddingEnd="@dimen/car_padding_2" style="@style/CarDialogButtonText" />
+        <Button android:id="@id/button2" android:background="@drawable/car_dialog_button_background" android:layout_width="wrap_content" android:layout_height="@dimen/button_layout_height" android:layout_marginRight="@dimen/button_end_margin" android:minWidth="@dimen/car_touch_target_size" android:paddingStart="@dimen/car_padding_2" android:paddingEnd="@dimen/car_padding_2" style="@style/CarDialogButtonText" />
+        <Button android:id="@id/button1" android:background="@drawable/car_dialog_button_background" android:layout_width="wrap_content" android:layout_height="@dimen/button_layout_height" android:minWidth="@dimen/car_touch_target_size" android:paddingStart="@dimen/car_padding_2" android:paddingEnd="@dimen/car_padding_2" style="@style/CarDialogButtonText" />
+        <Space android:id="@id/spacer" android:visibility="invisible" android:layout_width="0.0dip" android:layout_height="0.0dip" />
+    </com.android.internal.widget.ButtonBarLayout>
+</ScrollView>

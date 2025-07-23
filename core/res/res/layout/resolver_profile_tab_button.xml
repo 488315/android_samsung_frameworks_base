@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button android:textAppearance="@style/TextAppearance.DeviceDefault.DialogWindowTitle" android:textSize="@dimen/resolver_tab_text_size" android:textColor="@color/resolver_profile_tab_text" android:background="@drawable/inset_resolver_profile_tab_bg" android:layout_width="0.0dip" android:layout_height="48.0dip" android:layout_weight="1.0" android:layout_marginHorizontal="@dimen/resolver_profile_tab_margin" style="?borderlessButtonStyle"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

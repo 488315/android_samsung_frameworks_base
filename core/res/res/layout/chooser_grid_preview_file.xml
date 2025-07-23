@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/content_preview_file_area" android:background="?colorBackground" android:paddingBottom="@dimen/chooser_view_spacing" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_gravity="center" android:orientation="horizontal" android:id="@id/content_preview_file_layout" android:paddingLeft="@dimen/chooser_edge_margin_normal" android:paddingRight="@dimen/chooser_edge_margin_normal" android:layout_width="@dimen/chooser_preview_width" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/chooser_view_spacing">
+        <view android:gravity="center" android:layout_gravity="center_vertical" android:id="@id/content_preview_file_thumbnail" android:layout_width="75.0dip" android:layout_height="75.0dip" android:layout_marginRight="16.0dip" android:scaleType="centerCrop" android:adjustViewBounds="true" class="com.android.internal.app.ChooserActivity$RoundedRectImageView" />
+        <ImageView android:gravity="center" android:layout_gravity="center_vertical" android:id="@id/content_preview_file_icon" android:visibility="gone" android:layout_width="36.0dip" android:layout_height="36.0dip" android:layout_marginRight="16.0dip" android:scaleType="fitCenter" android:adjustViewBounds="true" />
+        <TextView android:ellipsize="middle" android:gravity="start|center|top" android:layout_gravity="center_vertical" android:id="@id/content_preview_filename" android:paddingRight="24.0dip" android:layout_width="0.0dip" android:layout_height="wrap_content" android:singleLine="true" android:layout_weight="1.0" />
+    </LinearLayout>
+    <include android:layout_gravity="center" android:id="@id/chooser_action_row" android:layout_width="@dimen/chooser_preview_width" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/chooser_view_spacing" layout="@layout/chooser_action_row" />
+</LinearLayout>

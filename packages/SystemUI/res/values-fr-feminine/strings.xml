@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="bluetooth_pairing_will_share_phonebook">"L'association vous permet d'accéder à vos contacts et à l'historique des appels lorsque vous êtes connectée."</string>
+    <string name="guest_wipe_session_title">Heureux de vous revoir, Invitée</string>
+    <string name="zen_alarms_introduction">Vous ne serez pas dérangée par des sons ou des vibrations, hormis ceux des alarmes. Vous entendrez encore les sons que vous choisirez de jouer, comme la musique, les vidéos et les jeux.</string>
+    <string name="zen_priority_introduction">Vous ne serez pas dérangée par des sons ou des vibrations, hormis ceux des alarmes, des rappels, des événements et des appelants de votre choix. Vous entendrez encore les sons que vous choisirez de jouer, notamment la musique, les vidéos et les jeux.</string>
+</resources>

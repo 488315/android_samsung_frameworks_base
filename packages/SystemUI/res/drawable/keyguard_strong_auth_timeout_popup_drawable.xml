@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <stroke android:width="@dimen/kg_strong_auth_timeout_popup_stroke_width" android:color="@color/kg_strong_auth_timeout_popup_stroke_color" />
+            <solid android:color="@color/kg_strong_auth_timeout_popup_background_color" />
+            <corners android:radius="@dimen/kg_strong_auth_timeout_popup_radius" />
+        </shape>
+    </item>
+</layer-list>

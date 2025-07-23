@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Battery widget" TargetApi="19" TargetPackageName="com.android.settings.intelligence" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="Inside BG" DefaultValue="#fff3f3f3" DestAttribName="sec_color_battery_widget_list_layout_inner_background_color_white, sec_color_battery_widget_list_layout_inner_background_color_black" UID="215-1-1" ValueRef="8-13-1" ValueType="BgColor" />
+        <Property Comment="Title text color" DefaultValue="#fffafafa" DestAttribName="sec_color_battery_widget_list_text_color" UID="215-2-1" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Thumb disabled color" DefaultValue="#ff0381fe" DestAttribName="sec_bayyery_widget_settings_primary_color" UID="215-2-2" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="Bar background color" DefaultValue="#66cacaca" DestAttribName="sesl_progress_control_color_background" Opacity="40" UID="215-2-3" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="Selected shape BG" DefaultValue="#80000000" DestAttribName="sec_widget_glance_settings_bg_shape_selected_color" UID="215-2-4-1" ValueRef="8-13-2-1" ValueType="TintColor" />
+        <Property Comment="Unselected shape BG" DefaultValue="#ffdedee1" DestAttribName="sec_widget_glance_settings_bg_shape_color" UID="215-2-4-2" ValueRef="8-13-2-2" ValueType="TintColor" />
+        <Property Comment="Selected shape check" DefaultValue="#fffcfcff" DestAttribName="sec_widget_glance_settings_bg_shape_check_color" UID="215-2-4-3" ValueRef="8-13-2-3" ValueType="TintColor" />
+        <Property Comment="Description text color" DefaultValue="#ff252528" DestAttribName="sec_battery_widget_setting_text_color" UID="215-3-4" ValueRef="1-3-3-D" ValueType="TextColor" />
+    </AppMetaData>
+</ThemeMetaData>

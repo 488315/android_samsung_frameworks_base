@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Keypad plugin Icecone" TargetApi="19" TargetPackageName="com.samsung.android.icecone" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="Plugin BG color" DefaultValue="#fff4f4f4" DestAttribName="rp_content_bg_color_open_theme" UID="78-13-5" ValueRef="75-13-5" ValueType="Color" />
+        <Property Comment="Content Message Title color" DefaultValue="#e6252525" DestAttribName="rp_content_message_title_color_open_theme" UID="78-13-11" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Content Message Subtitle color" DefaultValue="#ff252525" DestAttribName="rp_content_message_subtitle_color_open_theme" UID="78-13-12" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Content Message Sub-subtitle color" DefaultValue="#ff008cff" DestAttribName="rp_content_message_sub_subtitle_color_open_theme" UID="78-13-13" ValueRef="1-53-1" ValueType="Color" />
+        <Property Comment="Contained button text color" DefaultValue="#ff252525" DestAttribName="rp_content_contained_button_text_color_open_theme" UID="78-13-14" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="Contained button bg color" DefaultValue="#0f000000" DestAttribName="rp_content_contained_button_bg_color_open_theme" UID="78-13-15" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="Category selected icon color" DefaultValue="#ff4297ff" DestAttribName="rp_category_selected_color_open_theme" UID="78-14-1" ValueRef="75-4-3" ValueType="Color" />
+        <Property Comment="Category normal icon color" DefaultValue="#ff404040" DestAttribName="rp_category_normal_color_open_theme" UID="78-14-2" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Category divider line color" DefaultValue="#668f8f8f" DestAttribName="rp_category_divider_color_default_open_theme" UID="78-14-3" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="About page Subtext color" DefaultValue="#ff979797" DestAttribName="settings_about_page_subtext_color_open_theme" UID="78-19-1" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="Update button text color" DefaultValue="#fffafafa" DestAttribName="settings_update_button_text_color_open_theme" UID="78-19-2" ValueRef="1-8-3" ValueType="Color" />
+        <Property Comment="About page Button bg color" DefaultValue="#ffebebeb" DestAttribName="settings_about_page_button_background_color_open_theme" UID="78-19-3" ValueRef="1-7-1-D" ValueType="Color" />
+        <Property Comment="About page Button text color" DefaultValue="#ff252525" DestAttribName="settings_about_page_button_text_color_open_theme" UID="78-19-4" ValueRef="1-7-2-D" ValueType="Color" />
+        <Property Comment="Tips title" DefaultValue="#ff252525" DestAttribName="settings_tips_title_color_open_theme" UID="78-19-5" ValueRef="1-48-4" ValueType="Color" />
+        <Property Comment="Tips description" DefaultValue="#ff7a7a7a" DestAttribName="settings_tips_description_color_open_theme" UID="78-19-6" ValueRef="1-48-4" ValueType="Color" />
+        <Property Comment="Tips link" DefaultValue="#ff008cff" DestAttribName="settings_tips_link_color_open_theme" UID="78-19-7" ValueRef="1-48-5" ValueType="Color" />
+        <Property Comment="Description: Tips background color" DefaultValue="#26252525" DestAttribName="settings_tips_background_color_open_theme" UID="78-19-8" ValueRef="1-48-2" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

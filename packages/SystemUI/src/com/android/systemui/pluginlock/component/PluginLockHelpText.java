@@ -1,0 +1,47 @@
+package com.android.systemui.pluginlock.component;
+
+import android.content.Context;
+import android.util.Log;
+import com.android.systemui.pluginlock.PluginLockInstanceState;
+import com.android.systemui.pluginlock.model.DynamicLockData;
+import com.android.systemui.util.SettingsHelper;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public class PluginLockHelpText extends AbstractPluginLockItem {
+    private static final String TAG = "PluginLockHelpText";
+
+    public PluginLockHelpText(Context context, PluginLockInstanceState pluginLockInstanceState, SettingsHelper settingsHelper) {
+        super(context, pluginLockInstanceState, settingsHelper);
+    }
+
+    @Override // com.android.systemui.pluginlock.component.AbstractPluginLockItem
+    public void apply(DynamicLockData dynamicLockData, DynamicLockData dynamicLockData2) {
+        Log.d(TAG, "apply()");
+    }
+
+    @Override // com.android.systemui.pluginlock.component.AbstractPluginLockItem
+    public void reset(boolean z) {
+        Log.d(TAG, "reset()");
+    }
+
+    @Override // com.android.systemui.pluginlock.component.AbstractPluginLockItem
+    public /* bridge */ /* synthetic */ void setInstanceState(int i, PluginLockInstanceState pluginLockInstanceState) {
+        super.setInstanceState(i, pluginLockInstanceState);
+    }
+
+    @Override // com.android.systemui.pluginlock.component.AbstractPluginLockItem
+    public void update(DynamicLockData dynamicLockData, DynamicLockData dynamicLockData2) {
+        Log.d(TAG, "update()");
+        apply(dynamicLockData, dynamicLockData2);
+    }
+
+    @Override // com.android.systemui.pluginlock.component.AbstractPluginLockItem
+    public /* bridge */ /* synthetic */ void setInstanceState(PluginLockInstanceState pluginLockInstanceState) {
+        super.setInstanceState(pluginLockInstanceState);
+    }
+
+    @Override // com.android.systemui.pluginlock.component.AbstractPluginLockItem
+    public void recover() {
+    }
+}

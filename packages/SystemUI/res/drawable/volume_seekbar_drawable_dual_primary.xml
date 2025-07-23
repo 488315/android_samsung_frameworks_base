@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <size android:height="36.0dip" />
+            <corners android:radius="18.0dip" />
+            <solid android:color="@color/volume_seekbar_progress_color" />
+            <stroke android:width="0.75dip" android:color="#ffcccccc" />
+        </shape>
+    </item>
+</layer-list>

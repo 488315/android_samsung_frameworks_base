@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector android:height="20.0dip" android:width="300.0dip" android:viewportWidth="300.0" android:viewportHeight="16.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:name="root" android:translateX="150.0" android:translateY="8.0">
+        <path android:name="track_ahead" android:pathData="M -147,0.0 L 147,0.0" android:strokeColor="?colorControlActivated" android:strokeWidth="2.0" android:trimPathStart="0.0" android:trimPathEnd="1.0" android:trimPathOffset="0.0" android:strokeLineCap="round" android:strokeLineJoin="round" android:strokeAlpha="0.5" />
+        <path android:name="progress" android:pathData="M -147,0.0 L 147,0.0" android:strokeColor="?colorControlActivated" android:strokeWidth="6.0" android:trimPathStart="0.0" android:trimPathEnd="0.0" android:trimPathOffset="0.0" android:strokeLineCap="round" android:strokeLineJoin="round" />
+        <path android:name="track_behind" android:pathData="M -147,0.0 L 147,0.0" android:strokeColor="?colorControlActivated" android:strokeWidth="2.0" android:trimPathStart="0.0" android:trimPathEnd="0.0" android:trimPathOffset="0.0" android:strokeLineCap="round" android:strokeLineJoin="round" android:strokeAlpha="0.5" />
+    </group>
+</vector>

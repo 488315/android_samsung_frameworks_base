@@ -1,0 +1,67 @@
+package gov.nist.javax.sip.address;
+
+import gov.nist.core.HostPort;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes4.dex */
+public class Authority extends NetObject {
+    private static final long serialVersionUID = -3570349777347017894L;
+    protected HostPort hostPort;
+    protected UserInfo userInfo;
+
+    @Override // gov.nist.core.GenericObject
+    public final Object clone() {
+        Authority authority = (Authority) super.clone();
+        HostPort hostPort = this.hostPort;
+        if (hostPort != null) {
+            authority.hostPort = (HostPort) hostPort.clone();
+        }
+        UserInfo userInfo = this.userInfo;
+        if (userInfo != null) {
+            authority.userInfo = (UserInfo) userInfo.clone();
+        }
+        return authority;
+    }
+
+    @Override // gov.nist.core.GenericObject
+    public final String encode() {
+        StringBuffer stringBuffer = new StringBuffer();
+        encode(stringBuffer);
+        return stringBuffer.toString();
+    }
+
+    @Override // gov.nist.javax.sip.address.NetObject, gov.nist.core.GenericObject
+    public final boolean equals(Object obj) {
+        UserInfo userInfo;
+        if (obj == null || obj.getClass() != getClass()) {
+            return false;
+        }
+        Authority authority = (Authority) obj;
+        if (!this.hostPort.equals(authority.hostPort)) {
+            return false;
+        }
+        UserInfo userInfo2 = this.userInfo;
+        return userInfo2 == null || (userInfo = authority.userInfo) == null || userInfo2.equals(userInfo);
+    }
+
+    public final int hashCode() {
+        HostPort hostPort = this.hostPort;
+        if (hostPort != null) {
+            return hostPort.encode().hashCode();
+        }
+        throw new UnsupportedOperationException("Null hostPort cannot compute hashcode");
+    }
+
+    @Override // gov.nist.core.GenericObject
+    public final StringBuffer encode(StringBuffer stringBuffer) {
+        UserInfo userInfo = this.userInfo;
+        if (userInfo == null) {
+            this.hostPort.encode(stringBuffer);
+            return stringBuffer;
+        }
+        userInfo.encode(stringBuffer);
+        stringBuffer.append("@");
+        this.hostPort.encode(stringBuffer);
+        return stringBuffer;
+    }
+}

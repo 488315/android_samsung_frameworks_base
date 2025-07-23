@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="starting_window_app_reveal_anim_delay">50</integer>
+    <integer name="starting_window_app_reveal_anim_duration">200</integer>
+    <integer name="starting_window_app_reveal_icon_fade_out_duration">50</integer>
+    <integer name="starting_window_exit_animation_type">1</integer>
+</resources>

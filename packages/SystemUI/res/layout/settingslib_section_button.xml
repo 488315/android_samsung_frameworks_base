@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:filterTouchesWhenObscured="true" android:paddingStart="?android:listPreferredItemPaddingStart" android:paddingEnd="?android:listPreferredItemPaddingEnd" android:paddingVertical="@dimen/settingslib_expressive_space_extrasmall4"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.google.android.material.button.MaterialButton android:id="@id/settingslib_section_button" style="@style/SettingsLibSectionButtonStyle.Expressive" />
+</LinearLayout>

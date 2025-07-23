@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector android:height="@dimen/freeform_container_folder_icon_size" android:width="@dimen/freeform_container_folder_icon_size" android:viewportWidth="@dimen/freeform_container_folder_icon_viewport_size" android:viewportHeight="@dimen/freeform_container_folder_icon_viewport_size"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:translateX="4.74925" android:translateY="4.750625">
+        <path android:fillColor="@color/freeform_container_folder_close_icon_color" android:pathData="@string/freeform_container_folder_close_icon_path" />
+    </group>
+</vector>

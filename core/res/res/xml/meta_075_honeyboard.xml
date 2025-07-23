@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Keypad" TargetApi="19" TargetPackageName="com.samsung.android.honeyboard" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="Keyboard Background" DefaultValue="#ffd5d8de" DestAttribName="keyboard_background_color_open_theme" POption="FixedOpacity;AlwaysOverriden" UID="75-1-1" ValueType="Color" />
+        <Property Comment="Keyboard navigation bar background color" DefaultValue="#ffd5d8de" DestAttribName="navigation_bar_background_color_open_theme" UID="75-1-4" ValueRef="75-1-1" ValueType="Color" />
+        <Property Comment="Open theme installed (Boolean)" DefaultValue="true" DestAttribName="open_theme_installed" POption="AlwaysOverriden" UID="75-1-5" ValueRef="" ValueType="Bool" />
+        <Property Comment="Number key background color" DefaultValue="#fffafafa" DestAttribName="number_key_background_color_open_theme" UID="75-2-1" ValueRef="75-2-2" ValueType="Color" />
+        <Property Comment="Normal key background color" DefaultValue="#fffafafa" DestAttribName="normal_key_background_color_open_theme" UID="75-2-2" ValueRef="" ValueType="Color" />
+        <Property Comment="Function key background color" DefaultValue="#ffc2c2c2" DestAttribName="function_key_background_color_open_theme" UID="75-2-3" ValueRef="" ValueType="Color" />
+        <Property Comment="Key pressed background color" DefaultValue="#ffb5b5b5" DestAttribName="key_pressed_background_color_open_theme" UID="75-2-4" ValueRef="" ValueType="Color" />
+        <Property Comment="Normal key background image" DefaultValue="textinput_qwerty_btn" DestAttribName="normal_key_background_image_open_theme" DestQualifiers="sw360dp-xxxhdpi" POption="NinePatch" TintImage="textinput_qwerty_btn" UID="75-2-5" ValueType="BgImage" />
+        <Property Comment="Function key background image" DefaultValue="textinput_qwerty_btn" DestAttribName="function_key_background_image_open_theme" DestQualifiers="sw360dp-xxxhdpi" POption="NinePatch" TintImage="textinput_qwerty_btn" UID="75-2-6" ValueType="BgImage" />
+        <Property Comment="Key pressed background image" DefaultValue="textinput_qwerty_btn_pressed" DestAttribName="key_pressed_background_image_open_theme" DestQualifiers="sw360dp-xxxhdpi" POption="NinePatch" TintImage="textinput_qwerty_btn" UID="75-2-7" ValueType="BgImage" />
+        <Property Comment="Number key background image" DefaultValue="textinput_qwerty_btn" DestAttribName="number_key_background_image_open_theme" DestQualifiers="sw360dp-xxxhdpi" POption="NinePatch" TintImage="textinput_qwerty_btn" UID="75-2-8" ValueRef="75-2-5" ValueType="BgImage" />
+        <Property Comment="Main text color" DefaultValue="#ff252525" DestAttribName="main_text_color_open_theme" POption="AlwaysOverriden" UID="75-3-2" ValueType="Color" />
+        <Property Comment="Secondary icon color" DefaultValue="#80252525" DestAttribName="secondary_icon_color_open_theme" Opacity="50" POption="AlwaysOverriden" UID="75-3-4" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Text activated color" DefaultValue="#ff252525" DestAttribName="text_activated_color_open_theme" UID="75-3-7" ValueRef="75-4-3" ValueType="Color" />
+        <Property Comment="Secondary text color" DefaultValue="#ff252525" DestAttribName="secondary_text_color_open_theme" Opacity="50" UID="75-3-8" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Main text disabled color" DefaultValue="#33252525" DestAttribName="main_text_disabled_color_open_theme" Opacity="40" UID="75-3-9" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Main icon normal color" DefaultValue="#ff404040" DestAttribName="main_icon_normal_color_open_theme" UID="75-4-1" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Shift icon normal color" DefaultValue="#ff404040" DestAttribName="shift_icon_normal_color_open_theme" POption="AlwaysOverriden" UID="75-4-2" ValueRef="75-4-1" ValueType="Color" />
+        <Property Comment="Shift icon shifted on color" DefaultValue="#ff007bff" DestAttribName="shift_icon_shifted_on_color_open_theme" POption="AlwaysOverriden" UID="75-4-3" ValueType="Color" />
+        <Property Comment="Main icon pressed color" DefaultValue="#ff404040" DestAttribName="main_icon_pressed_color_open_theme" UID="75-4-4" ValueRef="75-4-1" ValueType="Color" />
+        <Property Comment="Main icon disabled color" DefaultValue="#ff007bff" DestAttribName="main_icon_disabled_color_open_theme" Opacity="50" UID="75-4-5" ValueRef="75-4-1" ValueType="Color" />
+        <Property Comment="Preview bubble background color" DefaultValue="#fffcfcfc" DestAttribName="preview_bubble_background_color_open_theme" UID="75-5-1" ValueRef="" ValueType="Color" />
+        <Property Comment="Preview bubble text color" DefaultValue="#ff383838" DestAttribName="preview_bubble_text_color_open_theme" POption="AlwaysOverriden" UID="75-5-3" ValueType="Color" />
+        <Property Comment="Alternative bubble focused background color" DefaultValue="#ff007bff" DestAttribName="alternative_bubble_focused_background_color_open_theme" UID="75-5-5" ValueRef="" ValueType="Color" />
+        <Property Comment="Alternative bubble normal text color" DefaultValue="#ff383838" DestAttribName="alternative_bubble_normal_text_color_open_theme" UID="75-5-6" ValueRef="75-5-3" ValueType="Color" />
+        <Property Comment="Alternative bubble focused text color" DefaultValue="#fffafafa" DestAttribName="alternative_bubble_focused_text_color_open_theme" UID="75-5-7" ValueType="Color" />
+        <Property Comment="Alternative bubble normal icon color" DefaultValue="#ff383838" DestAttribName="alternative_bubble_normal_icon_color_open_theme" UID="75-5-8" ValueRef="75-5-3" ValueType="Color" />
+        <Property Comment="Alternative bubble focused icon color" DefaultValue="#ff007bff" DestAttribName="alternative_bubble_focused_icon_color_open_theme" UID="75-5-9" ValueRef="75-5-7" ValueType="Color" />
+        <Property Comment="Alternative bubble disabled text color" DefaultValue="#33383838" DestAttribName="alternative_bubble_disabled_text_color_open_theme" Opacity="40" UID="75-5-10" ValueRef="75-5-3" ValueType="Color" />
+        <Property Comment="Alternative bubble disabled icon color" DefaultValue="#33383838" DestAttribName="alternative_bubble_disabled_icon_color_open_theme" Opacity="40" UID="75-5-11" ValueRef="75-5-3" ValueType="Color" />
+        <Property Comment="Preview bubble background image" DefaultValue="textinput_qwerty_preview_popup" DestAttribName="preview_bubble_background_image_open_theme" DestQualifiers="sw360dp-xxxhdpi" POption="NinePatch" TintImage="textinput_qwerty_btn" UID="75-5-12" ValueType="BgImage" />
+        <Property Comment="Alternative bubble focused background image" DefaultValue="textinput_qwerty_preview_popup" DestAttribName="alternative_bubble_focused_background_image_open_theme" DestQualifiers="sw360dp-xxxhdpi" POption="NinePatch" TintImage="textinput_qwerty_btn" UID="75-5-13" ValueRef="" ValueType="BgImage" />
+        <Property Comment="Toolbar BG color" DefaultValue="#ffe8e8e8" DestAttribName="toolbar_background_color_open_theme" UID="75-11-1" ValueRef="75-1-1" ValueType="Color" />
+        <Property Comment="Toolbar normal icon tint color" DefaultValue="#ff252525" DestAttribName="toolbar_normal_icon_color_open_theme" UID="75-11-2" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Toolbar icon BG color" DefaultValue="#ffeaeaea" DestAttribName="toolbar_icon_bg_color_open_theme" Opacity="70" UID="75-11-3" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Sticker new badge dot color" DefaultValue="#fff56a0d" DestAttribName="toolbar_badge_color" UID="75-11-5" ValueRef="1-33-4" ValueType="Color" />
+        <Property Comment="Toolbar expand close icon color" DefaultValue="#ff808080" DestAttribName="toolbar_close_button" UID="75-11-6" ValueRef="75-11-2" ValueType="Color" />
+        <Property Comment="Toolbar expand close icon BG color" DefaultValue="#ccfafafa" DestAttribName="toolbar_expand_close_icon_background_color_open_theme" Opacity="70" UID="75-11-7" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Toolbar expand selected page indicator" DefaultValue="#ff252525" DestAttribName="toolbar_expand_indicator_on_color_open_theme" UID="75-11-8" ValueRef="75-11-2" ValueType="Color" />
+        <Property Comment="Toolbar expand unselected page indicator" DefaultValue="#ff252525" DestAttribName="toolbar_expand_indicator_off_color_open_theme" Opacity="50" UID="75-11-9" ValueRef="75-11-2" ValueType="Color" />
+        <Property Comment="Toolbar expand BG color" DefaultValue="#ffe8e8e8" DestAttribName="toolbar_expand_background_color_open_theme" UID="75-11-10" ValueRef="75-11-1" ValueType="Color" />
+        <Property Comment="Prediction BG color" DefaultValue="#ffe8e8e8" DestAttribName="prediction_background_color_open_theme" UID="75-12-1" ValueRef="75-11-1" ValueType="Color" />
+        <Property Comment="Prediction normal text color" DefaultValue="#ff252525" DestAttribName="prediction_normal_text_color_open_theme" UID="75-12-2" ValueRef="75-11-2" ValueType="Color" />
+        <Property Comment="Prediction recommendation text color" DefaultValue="#ff007bff" DestAttribName="prediction_recommendation_color_open_theme" UID="75-12-3" ValueRef="75-4-3" ValueType="Color" />
+        <Property Comment="Prediction back icon tint color" DefaultValue="#ff252525" DestAttribName="prediction_back_icon_color_open_theme" UID="75-12-4" ValueRef="75-11-2" ValueType="Color" />
+        <Property Comment="Button alert text color" DefaultValue="#ffdb332a" DestAttribName="button_alert_text_color" UID="75-12-5" ValueRef="1-9-16" ValueType="Color" />
+        <Property Comment="Expression Bar BG color" DefaultValue="#fff6f6f6" DestAttribName="rp_expression_bar_bg_color_open_theme" UID="75-13-1" ValueRef="75-11-1" ValueType="Color" />
+        <Property Comment="Expression content BG color" DefaultValue="#fffafafa" DestAttribName="rp_content_bg_color_open_theme" UID="75-13-2" ValueRef="75-1-1" ValueType="Color" />
+        <Property Comment="Expression Bar keyboard back button color" DefaultValue="#ff686868" DestAttribName="rp_expression_bar_keyboard_back_button_color_open_theme" Opacity="70" UID="75-13-3" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Expression Bar icon bg color" DefaultValue="#ffeaeaea" DestAttribName="rp_expression_bar_icon_bg_color_open_theme" Opacity="70" UID="75-13-4" ValueRef="75-11-3" ValueType="Color" />
+        <Property Comment="Expression Bar icon bg pressed color" DefaultValue="#ffbcdcff" DestAttribName="rp_expression_bar_icon_pressed_color_open_theme" Opacity="70" UID="75-13-5" ValueRef="75-4-3" ValueType="Color" />
+        <Property Comment="Expression bar add icon color" DefaultValue="#ffff8585" DestAttribName="rp_expression_bar_add_icon_color_open_theme" UID="75-13-6" ValueRef="75-13-8" ValueType="Color" />
+        <Property Comment="Expression content button BG color" DefaultValue="#fff5f5f5" DestAttribName="rp_expression_bar_content_button_bg_color_open_theme" UID="75-13-7" ValueRef="75-13-1" ValueType="Color" />
+        <Property Comment="Category selected icon color" DefaultValue="#ff4297ff" DestAttribName="rp_category_selected_color_open_theme" UID="75-13-8" ValueRef="75-4-3" ValueType="Color" />
+        <Property Comment="Category normal icon color" DefaultValue="#ff404040" DestAttribName="rp_category_normal_color_open_theme" UID="75-13-9" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Category divider line color" DefaultValue="#668f8f8f" DestAttribName="rp_category_divider_color_default_open_theme" Opacity="15" UID="75-13-10" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="FAB button BG color" DefaultValue="#e6fcfcfc" DestAttribName="rp_fab_button_bg_color_open_theme" UID="75-13-11" ValueRef="75-11-1" ValueType="Color" />
+        <Property Comment="FAB button icon color" DefaultValue="#ff252525" DestAttribName="rp_fab_button_icon_color_open_theme" UID="75-13-12" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Content Message Title color" DefaultValue="#e6252525" DestAttribName="rp_content_message_title_color_open_theme" UID="75-14-1" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Content Message Subtitle color" DefaultValue="#ff252525" DestAttribName="rp_content_message_subtitle_color_open_theme" Opacity="80" UID="75-14-2" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Content Message Sub-subtitle color" DefaultValue="#ff008cff" DestAttribName="rp_content_message_sub_subtitle_color_open_theme" UID="75-14-3" ValueRef="75-12-3" ValueType="Color" />
+        <Property Comment="Contained button text color" DefaultValue="#ff252525" DestAttribName="rp_content_contained_button_text_color_open_theme" UID="75-14-5" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Contained button bg color" DefaultValue="#0f000000" DestAttribName="rp_content_contained_button_bg_color_open_theme" Opacity="15" UID="75-14-6" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Keyboard mode icon selected tint color" DefaultValue="#ff3f8cea" DestAttribName="keyboard_mode_icon_selected_color_open_theme" UID="75-16-1" ValueRef="75-3-7" ValueType="Color" />
+        <Property Comment="Keyboard mode icon normal tint color" DefaultValue="#ff6b6b6b" DestAttribName="keyboard_mode_icon_normal_color_open_theme" UID="75-16-2" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Keyboard mode text selected tint color" DefaultValue="#ff3f8cea" DestAttribName="keyboard_mode_text_selected_color_open_theme" UID="75-16-3" ValueRef="75-16-1" ValueType="Color" />
+        <Property Comment="Keyboard mode text normal tint color" DefaultValue="#ff464646" DestAttribName="keyboard_mode_text_normal_color_open_theme" UID="75-16-4" ValueRef="75-16-2" ValueType="Color" />
+        <Property Comment="Text edit sub panel BG color" DefaultValue="#ffe4e4e4" DestAttribName="text_edit_sub_panel_background_color_open_theme" UID="75-17-1" ValueRef="75-11-1" ValueType="Color" />
+        <Property Comment="Text edit main panel BG color" DefaultValue="#fffafafa" DestAttribName="text_edit_main_panel_background_color_open_theme" UID="75-17-2" ValueRef="75-13-2" ValueType="Color" />
+        <Property Comment="Text edit panel text color" DefaultValue="#ff252525" DestAttribName="text_edit_text_color_open_theme" UID="75-17-3" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Text edit select all icon tint color" DefaultValue="#ff252525" DestAttribName="text_edit_select_all_icon_color_open_theme" UID="75-17-4" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Text edit cursor control arrow icon tint color" DefaultValue="#ff595959" DestAttribName="text_edit_cursor_control_arrow_icon_color_open_theme" UID="75-17-5" ValueRef="75-17-3" ValueType="Color" />
+        <Property Comment="Text edit cursor control arrow ON icon tint color" DefaultValue="#ff4297ff" DestAttribName="text_edit_cursor_control_arrow_on_icon_color_open_theme" UID="75-17-6" ValueRef="75-4-2" ValueType="Color" />
+        <Property Comment="Text edit raised btn BG tint color" DefaultValue="#0f000000" DestAttribName="text_edit_raised_button_background_color_open_theme" Opacity="45" UID="75-17-7" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Text edit mode raised btn text color" DefaultValue="#ff252525" DestAttribName="text_edit_raised_button_text_color_open_theme" UID="75-17-8" ValueRef="75-17-3" ValueType="Color" />
+        <Property Comment="Text edit selected raised btn BG tint color" DefaultValue="#ff4297ff" DestAttribName="text_edit_selected_raised_button_background_color_open_theme" Opacity="45" UID="75-17-9" ValueRef="75-17-6" ValueType="Color" />
+        <Property Comment="Text edit mode selected raised btn text color" DefaultValue="#fffafafa" DestAttribName="text_edit_selected_raised_button_text_color_open_theme" UID="75-17-10" ValueRef="75-4-2" ValueType="Color" />
+        <Property Comment="Cursor control icon tint color" DefaultValue="#ff252525" DestAttribName="cursor_control_icon_color_open_theme" UID="75-18-1" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Cursor control text color" DefaultValue="#ff252525" DestAttribName="cursor_control_text_color_open_theme" UID="75-18-2" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="About page Subtext color" DefaultValue="#ff979797" DestAttribName="settings_about_page_subtext_color_open_theme" UID="75-19-1" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="Update button text color" DefaultValue="#fffafafa" DestAttribName="settings_update_button_text_color_open_theme" UID="75-19-2" ValueRef="1-E" ValueType="Color" />
+        <Property Comment="About page Button bg color" DefaultValue="#ffebebeb" DestAttribName="settings_about_page_button_background_color_open_theme" UID="75-19-3" ValueRef="1-7-1-D" ValueType="Color" />
+        <Property Comment="About page Button text color" DefaultValue="#ff252525" DestAttribName="settings_about_page_button_text_color_open_theme" UID="75-19-4" ValueRef="1-7-2-D" ValueType="Color" />
+        <Property Comment="Tips title" DefaultValue="#ff252525" DestAttribName="settings_tips_title_color_open_theme" UID="75-19-5" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Tips link" DefaultValue="#ff008cff" DestAttribName="settings_tips_link_color_open_theme" UID="75-19-7" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Description: Tips background color" DefaultValue="#26252525" DestAttribName="settings_tips_background_color_open_theme" UID="75-19-8" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="About page update button bg color" DefaultValue="#ff0381fe" DestAttribName="settings_about_page_update_button_bg_color" UID="75-19-9" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="About page bg color" DefaultValue="#fffcfcfc" DestAttribName="settings_about_page_bg_color" UID="75-19-10" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="About page title text color" DefaultValue="#ff010101" DestAttribName="settings_about_page_title_text_color" UID="75-19-11" ValueRef="1-1-3-1" ValueType="Color" />
+        <Property Comment="List icon tint color" DefaultValue="#ff56c0e5" DestAttribName="settings_list_icon_color_open_theme" UID="75-19-13" ValueRef="1-D" ValueType="Color" />
+        <Property Comment="Thumb disabled color" DefaultValue="#ff9c9c9c" DestAttribName="settings_thumb_disabled_color_open_theme" UID="75-19-14" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="Thumb normal color" DefaultValue="#ff0381fe" DestAttribName="settings_thumb_normal_color_open_theme" UID="75-19-15" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Bar background color" DefaultValue="#4d979797" DestAttribName="settings_bar_background_color_open_theme" Opacity="40" UID="75-19-16" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="Selected stroke color" DefaultValue="#ff008cff" DestAttribName="settings_selected_stroke_color_open_theme" UID="75-19-17" ValueRef="1-D" ValueType="Color" />
+        <Property Comment="Checkbox On color" DefaultValue="#ff0381fe" DestAttribName="settings_checkbox_on_color_open_theme" UID="75-19-18" ValueRef="1-D" ValueType="Color" />
+        <Property Comment="Label activated text" DefaultValue="#ff0072de" DestAttribName="settings_label_activated_text_open_theme" UID="75-19-19" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Touch and hold custom time" DefaultValue="#ff008cff" DestAttribName="settings_touch_and_hold_custom_time_open_theme" UID="75-19-20" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Onehanded mode Background Color" DefaultValue="#ffc2c2c2" DestAttribName="onehanded_mode_background_color_open_theme" UID="75-21-1" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Onehanded mode Icon normal Color" DefaultValue="#ff404040" DestAttribName="onehanded_mode_icon_color_open_theme" UID="75-21-2" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Onehanded mode Icon pressed Color" DefaultValue="#ff404040" DestAttribName="onehanded_mode_icon_pressed_color_open_theme" UID="75-21-3" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Translation languages text Color" DefaultValue="#ff252525" DestAttribName="translation_languages_text_color_open_theme" UID="75-22-1" ValueRef="75-11-2" ValueType="Color" />
+        <Property Comment="Translation languages icon Color" DefaultValue="#ff252525" DestAttribName="translation_languages_icon_color_open_theme" UID="75-22-2" ValueRef="75-11-2" ValueType="Color" />
+        <Property Comment="Translation BG tint Color" DefaultValue="#ffe8e8e8" DestAttribName="translation_languages_background_color_open_theme" UID="75-22-3" ValueRef="75-11-1" ValueType="Color" />
+        <Property Comment="Floating keyboard BG boarder" DefaultValue="#ffe8e8e8" DestAttribName="floating_keyboard_border_open_theme" UID="75-24-2" ValueRef="75-11-1" ValueType="Color" />
+        <Property Comment="Floating keyboard handler color" DefaultValue="#ffe8e8e8" DestAttribName="floating_keyboard_handler_cue_open_theme" UID="75-24-3" ValueType="Color" />
+        <Property Comment="Keyboard background image" DefaultValue="textinput_popup_01_pressed" DestAttribName="keyboard_background_image_open_theme" DestQualifiers="sw360dp-xxxhdpi" POption="NinePatch" TintImage="textinput_popup_01_pressed" UID="75-30-1" ValueRef="" ValueType="BgImage" />
+        <Property Comment="Preview bubble 8 flick background image" DefaultValue="textinput_qwerty_preview_popup" DestAttribName="preview_bubble_8_way_background_image_open_theme" DestQualifiers="sw360dp-xxxhdpi" POption="NinePatch" TintImage="textinput_qwerty_btn" UID="158-5-1" ValueRef="75-5-12" ValueType="BgImage" />
+        <Property Comment="Preview bubble 8 flick top only background image" DefaultValue="textinput_qwerty_preview_popup" DestAttribName="preview_bubble_8_way_top_only_background_image_open_theme" DestQualifiers="sw360dp-xxxhdpi" POption="NinePatch" TintImage="textinput_qwerty_btn" UID="158-5-2" ValueRef="75-5-12" ValueType="BgImage" />
+        <Property Comment="Kaomoji line color" DefaultValue="#ffe8e8e8" DestAttribName="kaomoji_line_color_open_theme" Opacity="45" UID="158-15-2" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Symbol half text color" DefaultValue="#ff6b6b6b" DestAttribName="symbol_half_text_color_open_theme" Opacity="70" UID="158-21-4" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="BG color" DefaultValue="#ffd5d8de" DestAttribName="setting_mushroom_bg_color_open_theme" UID="158-22-1" ValueRef="75-13-5" ValueType="Color" />
+        <Property Comment="Content Message Title color" DefaultValue="#ff252525" DestAttribName="setting_mushroom_content_message_title_color_open_theme" UID="158-22-2" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Description text color" DefaultValue="#ff252525" DestAttribName="setting_flick_description_text_color_open_theme" UID="158-22-3" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Sub text color" DefaultValue="#ff9c9c9c" DestAttribName="setting_flick_sub_text_color_open_theme" UID="158-22-4" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="Grammarly primary color" DefaultValue="#ff02bb8f" DestAttribName="revision_mode_item_label_text_color_open_theme" UID="75-25-1" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Grammarly bubble stoke line color" DefaultValue="#ffdadada" DestAttribName="revision_mode_item_label_stroke_color_open_theme" Opacity="45" UID="75-25-2" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Grammarly bg color" DefaultValue="#ffeeeeee" DestAttribName="revision_mode_background_color_open_theme" UID="75-25-3" ValueRef="75-11-1" ValueType="Color" />
+        <Property Comment="Grammarly card bg color" DefaultValue="#fffcfcfc" DestAttribName="revision_mode_viewpager_card_background_color_open_theme" UID="75-25-4" ValueRef="75-13-2" ValueType="Color" />
+        <Property Comment="Grammarly sub text color" DefaultValue="#ff6d6d6d" DestAttribName="revision_mode_description_text_color_open_theme" Opacity="80" UID="75-25-5" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Grammarly text color" DefaultValue="#ff4c4c4c" DestAttribName="revision_mode_ignore_text_color_open_theme" UID="75-25-6" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Grammarly description text color" DefaultValue="#ff252525" DestAttribName="revision_mode_pp_description_text_color_open_theme" UID="75-25-7" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Grammarly description text hyperlink color" DefaultValue="#ff2f67c4" DestAttribName="revision_mode_pp_link_text_color_open_theme" UID="75-25-8" ValueRef="75-25-1" ValueType="Color" />
+        <Property Comment="Grammarly button text color" DefaultValue="#ff252525" DestAttribName="revision_mode_button_text_color_open_theme" UID="75-25-9" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Grammarly button bg color" DefaultValue="#0d000000" DestAttribName="revision_mode_button_background_tint_color_open_theme" Opacity="45" UID="75-25-10" ValueRef="75-3-2" ValueType="Color" />
+        <Property Comment="Grammarly text highlight bg color" DefaultValue="#1202bb8f" DestAttribName="revision_mode_upgrade_count_circle_solid_color_open_theme" Opacity="45" UID="75-25-11" ValueRef="75-25-1" ValueType="Color" />
+        <Property Comment="Grammarly text highlight color" DefaultValue="#ff02bb8f" DestAttribName="revision_mode_upgrade_count_text_color_open_theme" UID="75-25-12" ValueRef="75-25-1" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

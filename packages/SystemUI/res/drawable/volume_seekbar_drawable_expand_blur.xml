@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background" android:left="@dimen/volume_seekbar_stroke_width_expand" android:top="@dimen/volume_seekbar_stroke_width_expand" android:right="@dimen/volume_seekbar_stroke_width_expand" android:bottom="@dimen/volume_seekbar_stroke_width_expand">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/volume_seekbar_radius" />
+            <solid android:color="@color/volume_seekbar_background_color_expand_blur" />
+        </shape>
+    </item>
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <size android:height="@dimen/volume_seekbar_width" />
+            <corners android:radius="@dimen/volume_seekbar_radius" />
+            <stroke android:width="@dimen/volume_seekbar_stroke_width_expand" android:color="@color/volume_seekbar_background_stroke_color_expand_blur" />
+        </shape>
+    </item>
+    <item android:id="@android:id/progress" android:left="@dimen/volume_seekbar_stroke_width_expand_progress" android:top="@dimen/volume_seekbar_stroke_width_expand_progress" android:right="@dimen/volume_seekbar_stroke_width_expand_progress" android:bottom="@dimen/volume_seekbar_stroke_width_expand_progress">
+        <clip>
+            <layer-list>
+                <item>
+                    <shape android:shape="rectangle">
+                        <corners android:radius="@dimen/volume_seekbar_radius" />
+                        <solid android:color="@color/volume_seekbar_expand_progress_color_blur" />
+                        <stroke android:width="0.100000024dip" android:color="@color/volume_seekbar_background_stroke_color_expand_blur" />
+                    </shape>
+                </item>
+            </layer-list>
+        </clip>
+    </item>
+</layer-list>

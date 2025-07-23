@@ -1,0 +1,136 @@
+package com.android.systemui.volume.middleware;
+
+import androidx.compose.runtime.external.kotlinx.collections.immutable.internal.ListImplementation$$ExternalSyntheticOutline0;
+import com.android.systemui.basic.util.LogWrapper;
+import com.android.systemui.volume.VolumeDependency;
+import com.android.systemui.volume.VolumeDependencyBase;
+import com.android.systemui.volume.util.HandlerWrapper;
+import com.google.gson.Gson;
+import com.samsung.systemui.splugins.volume.VolumeMiddleware;
+import com.samsung.systemui.splugins.volume.VolumePanelAction;
+import com.samsung.systemui.splugins.volume.VolumePanelRow;
+import com.samsung.systemui.splugins.volume.VolumePanelState;
+import java.util.ArrayList;
+import java.util.List;
+import kotlin.Result;
+import kotlin.Unit;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class JSonLogger implements VolumeMiddleware {
+    public final HandlerWrapper handler;
+    public final LogWrapper log;
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class Companion {
+        public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
+            this();
+        }
+
+        private Companion() {
+        }
+    }
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public abstract /* synthetic */ class WhenMappings {
+        public static final /* synthetic */ int[] $EnumSwitchMapping$0;
+
+        static {
+            int[] iArr = new int[VolumePanelState.StateType.values().length];
+            try {
+                iArr[VolumePanelState.StateType.STATE_UPDATE.ordinal()] = 1;
+            } catch (NoSuchFieldError unused) {
+            }
+            try {
+                iArr[VolumePanelState.StateType.STATE_UPDATE_PROGRESS_BAR.ordinal()] = 2;
+            } catch (NoSuchFieldError unused2) {
+            }
+            $EnumSwitchMapping$0 = iArr;
+        }
+    }
+
+    static {
+        new Companion(null);
+    }
+
+    public JSonLogger(VolumeDependencyBase volumeDependencyBase) {
+        VolumeDependency volumeDependency = (VolumeDependency) volumeDependencyBase;
+        this.handler = (HandlerWrapper) volumeDependency.get(HandlerWrapper.class);
+        this.log = (LogWrapper) volumeDependency.get(LogWrapper.class);
+    }
+
+    @Override // com.samsung.systemui.splugins.volume.VolumeMiddleware
+    public final Object apply(Object obj) {
+        final VolumePanelAction volumePanelAction = (VolumePanelAction) obj;
+        if (volumePanelAction.isFromOutside()) {
+            this.handler.postInBgThread(new Runnable() { // from class: com.android.systemui.volume.middleware.JSonLogger$apply$1
+                @Override // java.lang.Runnable
+                public final void run() {
+                    try {
+                        this.log.p(new Gson().toJson(VolumePanelAction.this));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+        }
+        return volumePanelAction;
+    }
+
+    @Override // com.samsung.systemui.splugins.volume.VolumeMiddleware
+    public final void applyState(Object obj) {
+        Object failure;
+        VolumePanelState volumePanelState = (VolumePanelState) obj;
+        int i = WhenMappings.$EnumSwitchMapping$0[volumePanelState.getStateType().ordinal()];
+        LogWrapper logWrapper = this.log;
+        int i2 = 0;
+        if (i != 1) {
+            if (i != 2) {
+                return;
+            }
+            List<VolumePanelRow> volumeRowList = volumePanelState.getVolumeRowList();
+            ArrayList arrayList = new ArrayList();
+            for (Object obj2 : volumeRowList) {
+                if (((VolumePanelRow) obj2).getStreamType() == volumePanelState.getStream()) {
+                    arrayList.add(obj2);
+                }
+            }
+            int size = arrayList.size();
+            while (i2 < size) {
+                Object obj3 = arrayList.get(i2);
+                i2++;
+                VolumePanelRow volumePanelRow = (VolumePanelRow) obj3;
+                logWrapper.d("JSonLogger", ListImplementation$$ExternalSyntheticOutline0.m(volumePanelRow.getStreamType(), volumePanelRow.getRealLevel(), "updateVolumeProgress ", " : "));
+            }
+            return;
+        }
+        try {
+            int i3 = Result.$r8$clinit;
+            Gson gson = new Gson();
+            List<VolumePanelRow> volumeRowList2 = volumePanelState.getVolumeRowList();
+            ArrayList arrayList2 = new ArrayList();
+            for (Object obj4 : volumeRowList2) {
+                if (((VolumePanelRow) obj4).getStreamType() == volumePanelState.getActiveStream()) {
+                    arrayList2.add(obj4);
+                }
+            }
+            int size2 = arrayList2.size();
+            while (i2 < size2) {
+                Object obj5 = arrayList2.get(i2);
+                i2++;
+                VolumePanelRow volumePanelRow2 = (VolumePanelRow) obj5;
+                logWrapper.d("JSonLogger", "applyVolumeRow " + volumePanelRow2.getStreamType() + ": " + gson.toJson(volumePanelRow2));
+            }
+            failure = Unit.INSTANCE;
+        } catch (Throwable th) {
+            int i4 = Result.$r8$clinit;
+            failure = new Result.Failure(th);
+        }
+        Throwable m3422exceptionOrNullimpl = Result.m3422exceptionOrNullimpl(failure);
+        if (m3422exceptionOrNullimpl != null) {
+            m3422exceptionOrNullimpl.printStackTrace();
+        }
+        Result.m3421boximpl(failure);
+    }
+}

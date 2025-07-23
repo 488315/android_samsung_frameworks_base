@@ -1,0 +1,43 @@
+package com.android.systemui.volume.panel.ui.viewmodel;
+
+import com.android.systemui.volume.panel.shared.model.VolumePanelUiComponent;
+import defpackage.MoveResult$$ExternalSyntheticOutline0;
+import kotlin.jvm.internal.Intrinsics;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class ComponentState {
+    public final VolumePanelUiComponent component;
+    public final boolean isVisible;
+    public final String key;
+
+    public ComponentState(String str, VolumePanelUiComponent volumePanelUiComponent, boolean z) {
+        this.key = str;
+        this.component = volumePanelUiComponent;
+        this.isVisible = z;
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof ComponentState)) {
+            return false;
+        }
+        ComponentState componentState = (ComponentState) obj;
+        return Intrinsics.areEqual(this.key, componentState.key) && Intrinsics.areEqual(this.component, componentState.component) && this.isVisible == componentState.isVisible;
+    }
+
+    public final int hashCode() {
+        return Boolean.hashCode(this.isVisible) + ((this.component.hashCode() + (this.key.hashCode() * 31)) * 31);
+    }
+
+    public final String toString() {
+        StringBuilder sb = new StringBuilder("ComponentState(key=");
+        sb.append(this.key);
+        sb.append(", component=");
+        sb.append(this.component);
+        sb.append(", isVisible=");
+        return MoveResult$$ExternalSyntheticOutline0.m(sb, this.isVisible, ")");
+    }
+}

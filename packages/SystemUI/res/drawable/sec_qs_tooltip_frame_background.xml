@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:left="@dimen/sec_qs_tooltip_frame_offset_left_right" android:top="@dimen/sec_qs_tooltip_frame_offset_top_bottom" android:right="@dimen/sec_qs_tooltip_frame_offset_left_right" android:bottom="@dimen/sec_qs_tooltip_frame_offset_top_bottom">
+        <shape android:shape="rectangle">
+            <padding android:left="@dimen/sec_qs_tooltip_frame_padding_left_right" android:top="@dimen/sec_qs_tooltip_frame_padding_top_bottom" android:right="@dimen/sec_qs_tooltip_frame_padding_left_right" android:bottom="@dimen/sec_qs_tooltip_frame_padding_top_bottom" />
+            <corners android:radius="@dimen/sec_qs_tooltip_frame_radius" />
+            <solid android:color="@color/sec_tooltip_frame_background_color" />
+        </shape>
+    </item>
+</layer-list>

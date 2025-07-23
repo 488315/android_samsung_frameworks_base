@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:orientation="vertical" android:id="@id/root_layout" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.android.systemui.dextouchpad.touchpad.TouchpadViewPager android:id="@id/guide_view_pager" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="@dimen/touchpad_small_popup_content_scrollview_side_margin" android:layout_marginEnd="@dimen/touchpad_small_popup_content_scrollview_side_margin" />
+        <com.android.systemui.dextouchpad.view.ViewPagerIndicator android:gravity="center" android:layout_gravity="bottom" android:id="@id/guide_view_pager_indicator" android:layout_width="fill_parent" android:layout_height="@dimen/touchpad_small_popup_indicator_height" app:defaultDrawable="@drawable/touchpad_small_popup_indicator_deactivation" app:indicatorGap="@dimen/touchpad_small_popup_indicator_space" app:selectedDrawable="@drawable/touchpad_small_popup_indicator_activation" />
+        <androidx.appcompat.widget.AppCompatButton android:textSize="18.0sp" android:textStyle="bold" android:gravity="center" android:layout_gravity="bottom" android:id="@id/btnClosed" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textAllCaps="false" />
+    </LinearLayout>
+</FrameLayout>

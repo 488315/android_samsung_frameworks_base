@@ -1,0 +1,36 @@
+package io.reactivex;
+
+import io.reactivex.exceptions.Exceptions;
+import io.reactivex.functions.Action;
+import io.reactivex.internal.functions.ObjectHelper;
+import io.reactivex.internal.observers.CallbackCompletableObserver;
+import io.reactivex.internal.operators.completable.CompletableTimer;
+import io.reactivex.plugins.RxJavaPlugins;
+import java.util.concurrent.TimeUnit;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes4.dex */
+public abstract class Completable {
+    public static CompletableTimer timer(long j, Scheduler scheduler) {
+        TimeUnit timeUnit = TimeUnit.MILLISECONDS;
+        ObjectHelper.requireNonNull(timeUnit, "unit is null");
+        return new CompletableTimer(j, timeUnit, scheduler);
+    }
+
+    public final void subscribe(Action action) {
+        int i = ObjectHelper.$r8$clinit;
+        try {
+            subscribeActual(new CallbackCompletableObserver(action));
+        } catch (NullPointerException e) {
+            throw e;
+        } catch (Throwable th) {
+            Exceptions.throwIfFatal(th);
+            RxJavaPlugins.onError(th);
+            NullPointerException nullPointerException = new NullPointerException("Actually not, but can't pass out an exception otherwise...");
+            nullPointerException.initCause(th);
+            throw nullPointerException;
+        }
+    }
+
+    public abstract void subscribeActual(CallbackCompletableObserver callbackCompletableObserver);
+}

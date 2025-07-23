@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <size android:height="@dimen/volume_dialog_ringer_drawer_button_size" android:width="@dimen/volume_dialog_ringer_drawer_button_size" />
+    <solid android:color="@android:color/side_fps_button_color" />
+    <corners android:radius="@dimen/volume_dialog_background_square_corner_radius" />
+</shape>

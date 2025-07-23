@@ -1,0 +1,73 @@
+package com.android.systemui.media;
+
+import android.view.View;
+import androidx.viewpager.widget.ViewPager;
+import com.android.systemui.R;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.IntSupplier;
+import java.util.function.Supplier;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final class ViewPagerHelper {
+    public static final /* synthetic */ int $r8$clinit = 0;
+    public final BiFunction getNumberOfPlayersFunction;
+    public final IntSupplier isRTLSupplier;
+    public final Supplier mediaFramesSupplier;
+    public final Function mediaPlayerDataFunction;
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class Companion {
+        public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
+            this();
+        }
+
+        private Companion() {
+        }
+    }
+
+    static {
+        new Companion(null);
+    }
+
+    public ViewPagerHelper(BiFunction<Boolean, MediaType, Integer> biFunction, IntSupplier intSupplier, Supplier<ConcurrentHashMap<MediaType, View>> supplier, Function<MediaType, SecMediaPlayerData> function) {
+        this.getNumberOfPlayersFunction = biFunction;
+        this.isRTLSupplier = intSupplier;
+        this.mediaFramesSupplier = supplier;
+        this.mediaPlayerDataFunction = function;
+    }
+
+    public final int getCurrentPage(MediaType mediaType) {
+        ViewPager viewPager = getViewPager(mediaType);
+        if (viewPager != null) {
+            return this.isRTLSupplier.getAsInt() == 1 ? (getPlayersCount(mediaType) - 1) - viewPager.getCurrentItem() : viewPager.getCurrentItem();
+        }
+        return 0;
+    }
+
+    public final int getPlayersCount(MediaType mediaType) {
+        return ((Number) this.getNumberOfPlayersFunction.apply(Boolean.FALSE, mediaType)).intValue();
+    }
+
+    public final ViewPager getViewPager(MediaType mediaType) {
+        View view;
+        ConcurrentHashMap concurrentHashMap = (ConcurrentHashMap) this.mediaFramesSupplier.get();
+        if (concurrentHashMap.isEmpty() || (view = (View) concurrentHashMap.get(mediaType)) == null) {
+            return null;
+        }
+        return (ViewPager) view.findViewById(R.id.sec_media_carousel_view_pager);
+    }
+
+    public final void setCurrentPage(int i, boolean z, MediaType mediaType) {
+        if (this.isRTLSupplier.getAsInt() == 1) {
+            i = (getPlayersCount(mediaType) - 1) - i;
+        }
+        ViewPager viewPager = getViewPager(mediaType);
+        if (viewPager != null) {
+            viewPager.setCurrentItem(i, z);
+        }
+    }
+}

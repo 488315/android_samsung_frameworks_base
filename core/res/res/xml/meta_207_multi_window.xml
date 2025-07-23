@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData>
+    <AppMetaData Name="Multi window" TargetApi="31" TargetPackageName="android" VersionCode="1" VersionName="">
+        <Property Comment="Multi-window handler color" DefaultValue="#ff0381fe" DestAttribName="sem_overlay_handler_color_system" UID="207-1-1" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Option button's icon color" DefaultValue="#ff0074d4" DestAttribName="sem_caption_icon_color_system" UID="207-3-1" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Opacity seekbar's progress color" DefaultValue="#ff0381fe" DestAttribName="sem_decor_caption_progress_activated_color_system" UID="207-4-2" ValueRef="1-20-2" ValueType="Color" />
+        <Property Comment="Opacity seekbar's progress background color" DefaultValue="#66cacaca" DestAttribName="sem_decor_caption_progress_normal_color_system" Opacity="30" UID="207-4-3" ValueRef="1-20-1" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

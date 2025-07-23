@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rotate android:fromDegrees="-45.0" android:toDegrees="-45.0" android:pivotX="50.0%" android:pivotY="50.0%"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <shape android:shape="rectangle">
+        <solid android:color="@color/btn_material_filled_background_color_watch" />
+        <corners android:radius="200.0dip" />
+        <size android:height="54.0dip" android:width="63.0dip" />
+    </shape>
+</rotate>

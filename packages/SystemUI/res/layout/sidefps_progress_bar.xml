@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:gravity="center|left|top" android:background="@android:color/transparent" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ProgressBar android:id="@id/side_fps_progress_bar" android:layout_width="0.0dip" android:layout_height="@dimen/sfps_progress_bar_thickness" android:max="100" android:indeterminateOnly="false" android:progressDrawable="@drawable/progress_bar" android:min="0" />
+</RelativeLayout>

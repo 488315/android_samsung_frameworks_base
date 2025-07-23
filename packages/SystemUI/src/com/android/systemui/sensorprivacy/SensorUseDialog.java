@@ -1,0 +1,31 @@
+package com.android.systemui.sensorprivacy;
+
+import android.content.Context;
+import android.content.DialogInterface;
+import android.text.Html;
+import android.view.LayoutInflater;
+import android.view.Window;
+import com.android.systemui.R;
+import com.android.systemui.statusbar.phone.SystemUIDialog;
+import com.samsung.android.knox.net.nap.NetworkAnalyticsConstants;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final class SensorUseDialog extends SystemUIDialog {
+    public SensorUseDialog(Context context, int i, DialogInterface.OnClickListener onClickListener, DialogInterface.OnDismissListener onDismissListener) {
+        super(context, R.style.Theme_SystemUI_Dialog_Alert);
+        Window window = getWindow();
+        window.getClass();
+        window.addFlags(NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME);
+        Window window2 = getWindow();
+        window2.getClass();
+        window2.addSystemFlags(NetworkAnalyticsConstants.DataPoints.FLAG_INTERFACE_NAME);
+        LayoutInflater.from(context);
+        setTitle(i != 1 ? i != 2 ? i != Integer.MAX_VALUE ? 0 : R.string.sec_sensor_privacy_start_use_camera_and_microphone_dialog_title : R.string.sec_sensor_privacy_start_use_camera_dialog_title : R.string.sec_sensor_privacy_start_use_microphone_dialog_title);
+        setMessage(Html.fromHtml(context.getString(i != 1 ? i != 2 ? i != Integer.MAX_VALUE ? 0 : R.string.sec_sensor_privacy_start_use_camera_and_microphone_dialog_content : R.string.sec_sensor_privacy_start_use_camera_dialog_content : R.string.sec_sensor_privacy_start_use_microphone_dialog_content), 0));
+        setButton(-1, context.getString(R.string.qs_sensor_privacy_dialog_turn_on), onClickListener);
+        setButton(-2, context.getString(R.string.qs_sensor_privacy_dialog_cancel), onClickListener);
+        setOnDismissListener(onDismissListener);
+        setCancelable(false);
+    }
+}

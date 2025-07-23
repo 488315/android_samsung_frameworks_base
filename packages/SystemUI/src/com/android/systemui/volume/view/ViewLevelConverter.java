@@ -1,0 +1,27 @@
+package com.android.systemui.volume.view;
+
+import com.samsung.systemui.splugins.volume.VolumePanelRow;
+import com.samsung.systemui.splugins.volume.VolumePanelValues;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class ViewLevelConverter {
+    static {
+        new ViewLevelConverter();
+    }
+
+    private ViewLevelConverter() {
+    }
+
+    public static final int viewMaxLevel(VolumePanelRow volumePanelRow) {
+        return VolumePanelValues.isSmartView(volumePanelRow.getStreamType()) ? volumePanelRow.getLevelMax() : volumePanelRow.getLevelMax() * 100;
+    }
+
+    public static final int viewMinLevel(VolumePanelRow volumePanelRow) {
+        return VolumePanelValues.isSmartView(volumePanelRow.getStreamType()) ? volumePanelRow.getLevelMin() : volumePanelRow.getLevelMin() * 100;
+    }
+
+    public static final int viewRealLevel(VolumePanelRow volumePanelRow) {
+        return (VolumePanelValues.isMediaStream(volumePanelRow.getStreamType()) || VolumePanelValues.isSmartView(volumePanelRow.getStreamType())) ? volumePanelRow.getRealLevel() : volumePanelRow.getRealLevel() * 100;
+    }
+}

@@ -1,0 +1,40 @@
+package com.android.systemui.user.ui.viewmodel;
+
+import defpackage.ReorderTile$$ExternalSyntheticOutline0;
+import kotlin.jvm.functions.Function0;
+import kotlin.jvm.internal.Intrinsics;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class UserActionViewModel {
+    public final int iconResourceId;
+    public final Function0 onClicked;
+    public final int textResourceId;
+    public final long viewKey;
+
+    public UserActionViewModel(long j, int i, int i2, Function0 function0) {
+        this.viewKey = j;
+        this.iconResourceId = i;
+        this.textResourceId = i2;
+        this.onClicked = function0;
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof UserActionViewModel)) {
+            return false;
+        }
+        UserActionViewModel userActionViewModel = (UserActionViewModel) obj;
+        return this.viewKey == userActionViewModel.viewKey && this.iconResourceId == userActionViewModel.iconResourceId && this.textResourceId == userActionViewModel.textResourceId && Intrinsics.areEqual(this.onClicked, userActionViewModel.onClicked);
+    }
+
+    public final int hashCode() {
+        return this.onClicked.hashCode() + ReorderTile$$ExternalSyntheticOutline0.m(this.textResourceId, ReorderTile$$ExternalSyntheticOutline0.m(this.iconResourceId, Long.hashCode(this.viewKey) * 31, 31), 31);
+    }
+
+    public final String toString() {
+        return "UserActionViewModel(viewKey=" + this.viewKey + ", iconResourceId=" + this.iconResourceId + ", textResourceId=" + this.textResourceId + ", onClicked=" + this.onClicked + ")";
+    }
+}

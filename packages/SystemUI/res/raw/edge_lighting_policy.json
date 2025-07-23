@@ -1,0 +1,214 @@
+{
+  "policy_version": 1,
+  "policy_type": 12,
+  "edge_lighting_policy": [
+    {
+      "item": "com.samsung.android.messaging",
+      "category": 1,
+      "range": 7
+    },
+    {
+      "item": "com.sds.mysinglesquare",
+      "category": 1,
+      "range": 7
+    },
+    {
+      "item": "com.samsung.android.calendar",
+      "category": 1
+    },
+    {
+      "item": "com.kakao.talk",
+      "category": 1,
+      "range": 7
+    },
+    {
+      "item": "com.samsung.android.app.notes",
+      "category": 1,
+      "range": 7
+    },
+    {
+      "item": "com.samsung.android.dialer",
+      "category": 1,
+      "range": 7
+    },
+    {
+      "item": "com.samsung.android.incallui",
+      "category": 1,
+      "range": 7
+    },
+    {
+      "item": "com.sec.android.app.clockpackage",
+      "category": 1,
+      "range": 7
+    },
+    {
+      "item": "com.samsung.android.contacts",
+      "category": 1,
+      "range": 7
+    },
+    {
+      "item": "com.facebook.orca",
+      "category": 1,
+      "range": 7
+    },
+    {
+      "item": "com.samsung.android.app.music.chn",
+      "category": 1,
+      "range": 7
+    },
+    {
+      "item": "com.sec.android.app.music",
+      "category": 1,
+      "range": 7
+    },
+    {
+      "item": "com.samsung.android.spay",
+      "category": 1,
+      "range": 7
+    },
+    {
+      "item": "com.samsung.android.app.reminder",
+      "category": 1,
+      "range": 7
+    },
+    {
+      "item": "com.google.android.googlequicksearchbox",
+      "category": 1,
+      "range": 7
+    },
+    {
+      "item": "com.skt.prod.dialer",
+      "category": 1,
+      "range": 7
+    },
+    {
+      "item": "com.samsung.android.edgelightingtestapp",
+      "category": 1,
+      "range": 7
+    },
+    {
+      "item": "com.orange.phone",
+      "category": 2,
+      "range": 7
+    }
+  ],
+  "edge_lighting_priority": [
+    {
+      "item": "com.samsung.android.messaging",
+      "default_on": true,
+      "color": 6339327
+    },
+    {
+      "item": "com.verizon.messaging.vzmsgs",
+      "default_on": true,
+      "color": 15888924
+    },
+    {
+      "item": "com.kakao.talk",
+      "default_on": true,
+      "color": 16441600
+    },
+    {
+      "item": "jp.naver.line.android",
+      "default_on": false,
+      "color": 47884
+    },
+    {
+      "item": "com.sds.mysinglesquare",
+      "default_on": true,
+      "color": 5144029
+    },
+    {
+      "item": "com.samsung.knox.message",
+      "default_on": true,
+      "color": 5144029
+    },
+    {
+      "item": "com.whatsapp",
+      "default_on": false,
+      "color": 47884
+    },
+    {
+      "item": "com.google.android.talk",
+      "color": 1029989
+    },
+    {
+      "item": "com.sgiggle.production",
+      "default_on": true,
+      "color": 15888924
+    },
+    {
+      "item": "com.nimbuzz",
+      "default_on": true,
+      "color": 15888924
+    },
+    {
+      "item": "kik.android",
+      "color": 47884
+    },
+    {
+      "item": "com.bsb.hike",
+      "default_on": true,
+      "color": 47871
+    },
+    {
+      "item": "com.viber.voip",
+      "default_on": true,
+      "color": 8786175
+    },
+    {
+      "item": "com.tencent.mm",
+      "color": 47884
+    },
+    {
+      "item": "org.telegram.messenger",
+      "default_on": false,
+      "color": 47871
+    },
+    {
+      "item": "com.skype.raider",
+      "color": 47871
+    },
+    {
+      "item": "com.facebook.orca"
+    },
+    {
+      "item": "com.zing.zalo"
+    },
+    {
+      "item": "com.google.android.apps.tachyon"
+    },
+    {
+      "item": "com.snapchat.android"
+    },
+    {
+      "item": "com.discord"
+    },
+    {
+      "item": "com.skt.prod.dialer"
+    },
+    {
+      "item": "Uxpp.UC",
+      "color": 7377128
+    }
+  ], "edge_lighting_whitelist": [
+    {
+      "item": "com.whatsapp"
+    },
+    {
+      "item": "com.tencent.mm"
+    },
+    {
+      "item": "org.telegram.messenger"
+    },
+    {
+      "item": "jp.naver.line.android"
+    },
+    {
+      "item": "com.skype.raider"
+    },
+    {
+      "item": "com.tencent.mobileqq"
+    }
+]
+}

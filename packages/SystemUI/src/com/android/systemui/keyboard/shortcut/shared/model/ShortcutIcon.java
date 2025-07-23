@@ -1,0 +1,38 @@
+package com.android.systemui.keyboard.shortcut.shared.model;
+
+import defpackage.ReorderTile$$ExternalSyntheticOutline0;
+import kotlin.jvm.internal.Intrinsics;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final class ShortcutIcon {
+    public final String packageName;
+    public final int resourceId;
+
+    public ShortcutIcon(String str, int i) {
+        this.packageName = str;
+        this.resourceId = i;
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof ShortcutIcon)) {
+            return false;
+        }
+        ShortcutIcon shortcutIcon = (ShortcutIcon) obj;
+        return Intrinsics.areEqual(this.packageName, shortcutIcon.packageName) && this.resourceId == shortcutIcon.resourceId;
+    }
+
+    public final int hashCode() {
+        return Integer.hashCode(this.resourceId) + (this.packageName.hashCode() * 31);
+    }
+
+    public final String toString() {
+        StringBuilder sb = new StringBuilder("ShortcutIcon(packageName=");
+        sb.append(this.packageName);
+        sb.append(", resourceId=");
+        return ReorderTile$$ExternalSyntheticOutline0.m(this.resourceId, ")", sb);
+    }
+}

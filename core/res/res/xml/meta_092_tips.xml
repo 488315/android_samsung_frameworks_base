@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Tips" TargetApi="29" TargetPackageName="com.samsung.android.app.tips" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="Title text color" DefaultValue="#ff252525" DestAttribName="toolbar_text_color" UID="92-1-1" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="App background color" DefaultValue="#fff2f2f2" DestAttribName="app_background_color" UID="92-1-2" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="ActionBar icon color" DefaultValue="#ff454545" DestAttribName="actionbar_icon_color" UID="92-1-4" ValueRef="1-11-1" ValueType="Color" />
+        <Property Comment="Top Banner Title text color" DefaultValue="#ff252525" DestAttribName="main_card_title_color" UID="92-2-1" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Top Banner Sub text color" DefaultValue="#ff909090" DestAttribName="main_card_desc_color" UID="92-2-2" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Top Banner Background color" DefaultValue="#fffcfcfc" DestAttribName="main_card_background_color" UID="92-2-3" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Category Text color" DefaultValue="#ff252525" DestAttribName="main_category_item_title_color" UID="92-3-1" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Category Divider color" DefaultValue="#ffe6e6e6" DestAttribName="list_divider_background" UID="92-3-3" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="Detail Title text color" DefaultValue="#ff252525" DestAttribName="detail_view_title_color" UID="92-4-1" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Detail Description text color" DefaultValue="#ff505050" DestAttribName="detail_view_desc_color" UID="92-4-2" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Detail Disclaimer text color" DefaultValue="#ff8f8f8f" DestAttribName="detail_view_disclaimer_color" UID="92-4-3" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Detail Button text color" DefaultValue="#ff252525" DestAttribName="detail_try_it_button_text_color" UID="92-5-1-1" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="Detail Button bg color" DefaultValue="#0f000000" DestAttribName="detail_try_it_button_color" UID="92-5-2-1" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="Detail Page number color" DefaultValue="#ff909090" DestAttribName="detail_pagemark_text_color" UID="92-6-1" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Detail Page Page Arrow tint color" DefaultValue="#ff909090" DestAttribName="detail_pagemark_arrow_color" UID="92-6-2" ValueRef="24-B" ValueType="TintColor" />
+        <Property Comment="Dashboard time text color" DefaultValue="#ff909090" DestAttribName="dash_board_time_color" UID="92-7-1" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Dashboard Title text color" DefaultValue="#ff4a4a4a" DestAttribName="dash_board_title_color" UID="92-7-2" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Dashboard Description text color" DefaultValue="#ff555454" DestAttribName="dash_board_desc_color" UID="92-7-3" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Dashboard Dot color" DefaultValue="#fff65367" DestAttribName="dash_board_unread_bullet" UID="92-7-4" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Dashboard Dot image" DefaultValue="" DestAttribName="ic_unread_bullet" UID="92-7-4-1" ValueRef="1-33-2" ValueType="Image" />
+        <Property Comment="Dashboard Trash icon color" DefaultValue="#ff252525" DestAttribName="trash_icon_color" UID="92-7-7" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Dashboard Delete text color" DefaultValue="#ff454545" DestAttribName="dash_board_menu_color" UID="92-7-8" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Dashboard Item Divider" DefaultValue="#1a252525" DestAttribName="dash_board_list_divider" UID="92-7-9" ValueRef="1-2" ValueType="BgColor" />
+        <Property Comment="Search Result header text color" DefaultValue="#ff838383" DestAttribName="search_textview_result_header" UID="92-8-3" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Search Cancel Icon color" DefaultValue="#ff252525" DestAttribName="search_search_item_remove_color" Opacity="50" UID="92-8-4" ValueRef="1-59-3" ValueType="TintColor" />
+        <Property Comment="Search Clear all text color" DefaultValue="#ff0072de" DestAttribName="search_clear_all_color" UID="92-8-5" ValueRef="26-B" ValueType="TextColor" />
+        <Property Comment="Search Group Header text color" DefaultValue="#ff909090" DestAttribName="search_textview_group_header_color" UID="92-8-7" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Search Intent Based item title color" DefaultValue="#ff252525" DestAttribName="search_intent_title" UID="92-8-8" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Search Intent Based item Highlight color" DefaultValue="#ff0072de" DestAttribName="search_textview_highlight_color" UID="92-8-9" ValueRef="1-59-9" ValueType="TextColor" />
+        <Property Comment="Smart tutor Description text color" DefaultValue="#ff505050" DestAttribName="smart_tutor_desc_color" UID="92-9-1" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Smart tutor link text color" DefaultValue="#ff0072de" DestAttribName="smart_tutor_view_permission_details_color" UID="92-9-2" ValueRef="1-48-5" ValueType="TextColor" />
+        <Property Comment="Smart tutor button background color" DefaultValue="#ff227aff" DestAttribName="smart_tutor_download_btn_color" UID="92-9-3" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Smart tutor button text color" DefaultValue="#fffafafa" DestAttribName="smart_tutor_view_download_button_text_color" UID="92-9-4" ValueRef="1-E" ValueType="TextColor" />
+        <Property Comment="Smart tutor Dialog text color" DefaultValue="#ff505050" DestAttribName="smart_tutor_dialog_text_color" UID="92-9-5" ValueRef="1-3-3" ValueType="TextColor" />
+        <Property Comment="Smart tutor Dialog text button color" DefaultValue="#ff227aff" DestAttribName="smart_tutor_dialog_text_btn_color" UID="92-9-6" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="Smart tutor Dialog bg color" DefaultValue="#fffcfcfc" DestAttribName="smart_tutor_dialog_bg_color" UID="92-9-7" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Smart tutor Dialog text color while installing" DefaultValue="#ff505050" DestAttribName="smart_tutor_desc_color_while_installing" UID="92-9-10" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Rail Drawer Icon color" DefaultValue="#ff252525" DestAttribName="mainpage_drawer_top_menu_color" UID="92-10-1" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="Rail Drawer Divider color" DefaultValue="#ff979797" DestAttribName="mainpage_drawer_dot_color" UID="92-10-2" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="Rail Drawer Background color" DefaultValue="#ffeaeaea" DestAttribName="mainpage_drawer_background_color" UID="92-10-3" ValueRef="1-7-1-D" ValueType="BgColor" />
+        <Property Comment="Rail Drawer Settings Icon color" DefaultValue="#ff929292" DestAttribName="mainpage_drawer_top_menu_settings_color" UID="92-10-4" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="Icon image theme (Dark/Light)" DefaultValue="true" DestAttribName="theme_icon_color_light" UID="92-10-6" ValueRef="1-69-2" ValueType="Bool" />
+        <Property Comment="Rail Drawer item title text color" DefaultValue="#ff252525" DestAttribName="mainpage_drawer_item_title" UID="92-10-7" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Rail Intro title text color" DefaultValue="#ff252525" DestAttribName="intro_text_header_color" UID="92-10-8" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Rail Intro description text color" DefaultValue="#ff8d8b8b" DestAttribName="intro_text_desc_color" UID="92-10-9" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="About page info icon tint color" DefaultValue="#ff454545" DestAttribName="about_page_app_info_color" UID="92-11-1" ValueRef="1-1-3" ValueType="TintColor" />
+        <Property Comment="About page main text color" DefaultValue="#ff252525" DestAttribName="about_page_app_name_color" UID="92-11-2" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="About page sub text color" DefaultValue="#ff909090" DestAttribName="about_page_text_color" UID="92-11-3" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="About page button bg color" DefaultValue="#ffebebeb" DestAttribName="about_page_button_color" UID="92-11-4" ValueRef="1-7-1" ValueType="TintColor" />
+        <Property Comment="About page button text color" DefaultValue="#ff252525" DestAttribName="about_page_button_text_color_open_sources" UID="92-11-5" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="About page bg color" DefaultValue="#fffcfcfc" DestAttribName="aboutpage_background_color" UID="92-11-6" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="About page update button bg color" DefaultValue="#fffc8d1f" DestAttribName="about_page_update_button_color" UID="92-11-7" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="About page update button text color" DefaultValue="#fffafafa" DestAttribName="about_page_button_text_color" UID="92-11-8" ValueRef="1-E" ValueType="TextColor" />
+        <Property Comment="Search No result text color" DefaultValue="#ad252525" DestAttribName="dash_board_no_item_text" UID="92-12-1" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Tips Settings Badge tint color" DefaultValue="#fff65367" DestAttribName="settings_update_badge_color" UID="92-12-2" ValueRef="1-33-1" ValueType="Color" />
+        <Property Comment="Tips Settings Badge Image" DefaultValue="" DestAttribName="ic_update_available_in_settings" UID="92-12-3" ValueRef="1-33-2" ValueType="Image" />
+        <Property Comment="Tips Settings Badge Image" DefaultValue="#fffafafa" DestAttribName="settings_update_badge_text_color" UID="92-12-4" ValueRef="1-33-3" ValueType="TextColor" />
+        <Property Comment="Tips Settings Text color" DefaultValue="#ff252525" DestAttribName="settings_preference_text_color" UID="92-12-5" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Tips Open Source licenses text color" DefaultValue="#ff252525" DestAttribName="open_source_text_color" UID="92-13-1" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Tips Open Source licenses bg color" DefaultValue="#fffcfcfc" DestAttribName="open_source_bg_color" UID="92-13-2" ValueRef="1-18-1" ValueType="BgColor" />
+    </AppMetaData>
+</ThemeMetaData>

@@ -1,0 +1,44 @@
+package com.android.systemui.statusbar.pipeline.dagger;
+
+import android.content.Context;
+import android.net.wifi.WifiManager;
+import com.android.systemui.statusbar.pipeline.wifi.data.repository.RealWifiRepository;
+import com.android.systemui.statusbar.pipeline.wifi.data.repository.prod.DisabledWifiRepository;
+import com.android.systemui.statusbar.pipeline.wifi.data.repository.prod.WifiRepositoryImpl;
+import com.samsung.android.wifi.SemWifiManager;
+import dagger.internal.Provider;
+import java.util.concurrent.Executor;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class StatusBarPipelineModule_Companion_ProvideRealWifiRepositoryFactory implements Provider {
+    public final Provider disabledWifiRepositoryProvider;
+    public final Provider wifiManagerProvider;
+    public final Provider wifiRepositoryImplFactoryProvider;
+
+    public StatusBarPipelineModule_Companion_ProvideRealWifiRepositoryFactory(Provider provider, Provider provider2, Provider provider3) {
+        this.wifiManagerProvider = provider;
+        this.disabledWifiRepositoryProvider = provider2;
+        this.wifiRepositoryImplFactoryProvider = provider3;
+    }
+
+    /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Type inference failed for: r1v0, types: [com.android.systemui.statusbar.pipeline.wifi.data.repository.prod.WifiRepositoryImpl] */
+    public static RealWifiRepository provideRealWifiRepository(WifiManager wifiManager, DisabledWifiRepository disabledWifiRepository, WifiRepositoryImpl.Factory factory) {
+        StatusBarPipelineModule.Companion.getClass();
+        if (wifiManager != null) {
+            factory.getClass();
+            Context context = factory.applicationContext;
+            Executor executor = factory.mainExecutor;
+            SemWifiManager semWifiManager = factory.semWifiManager;
+            disabledWifiRepository = new WifiRepositoryImpl(context, factory.userRepository, factory.scope, executor, factory.bgDispatcher, factory.wifiPickerTrackerFactory, wifiManager, factory.inputLogger, factory.tableLogger, semWifiManager, factory.broadcastDispatcher);
+        }
+        disabledWifiRepository.getClass();
+        return disabledWifiRepository;
+    }
+
+    @Override // javax.inject.Provider
+    public final Object get() {
+        return provideRealWifiRepository((WifiManager) this.wifiManagerProvider.get(), (DisabledWifiRepository) this.disabledWifiRepositoryProvider.get(), (WifiRepositoryImpl.Factory) this.wifiRepositoryImplFactoryProvider.get());
+    }
+}

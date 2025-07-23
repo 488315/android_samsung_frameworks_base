@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/tap_layout" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_gravity="center" android:id="@id/tap_standby" android:layout_width="@dimen/circle_cue_size" android:layout_height="@dimen/circle_cue_size" android:src="@drawable/circle_stand_by" />
+    <ImageView android:layout_gravity="center" android:id="@id/tap_progress" android:layout_width="@dimen/circle_cue_size" android:layout_height="@dimen/circle_cue_size" android:src="@drawable/circle_hold" />
+    <ImageView android:layout_gravity="center" android:id="@id/tap_only" android:layout_width="@dimen/circle_cue_size" android:layout_height="@dimen/circle_cue_size" android:src="@drawable/circle_hold" />
+    <ImageView android:layout_gravity="center" android:id="@id/tap_ignore" android:layout_width="@dimen/circle_cue_size" android:layout_height="@dimen/circle_cue_size" android:src="@drawable/circle_ignore_tap" />
+    <ImageView android:layout_gravity="center" android:id="@id/tap_point" android:visibility="gone" android:layout_width="@dimen/drag_action_point_size" android:layout_height="@dimen/drag_action_point_size" android:src="@drawable/circle_point" />
+</FrameLayout>

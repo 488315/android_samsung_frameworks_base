@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.preference.SwitchPreference android:title="@string/record_trace" android:key="@string/pref_key_tracing_on" android:summary="@string/record_trace_summary" />
+    <androidx.preference.SwitchPreference android:title="@string/record_stack_samples" android:key="@string/pref_key_stack_sampling_on" android:summary="@string/record_stack_samples_summary" />
+    <androidx.preference.SwitchPreference android:title="@string/record_heap_dump" android:key="@string/pref_key_heap_dump_on" android:summary="@string/record_heap_dump_summary_disabled" />
+    <androidx.preference.PreferenceCategory android:title="@string/pref_category_trace_settings">
+        <androidx.preference.SwitchPreference android:title="@string/winscope_tracing" android:key="@string/pref_key_winscope" android:summary="@string/winscope_tracing_summary" android:defaultValue="false" />
+        <androidx.preference.SwitchPreference android:title="@string/trace_debuggable_applications" android:key="@string/pref_key_apps" android:defaultValue="true" />
+        <androidx.preference.MultiSelectListPreference android:title="@string/categories" android:key="@string/pref_key_tags" style="@style/MultiSelectDialogStyle" />
+        <Preference android:persistent="false" android:title="@string/restore_default_categories" android:key="restore_default_tags" />
+        <androidx.preference.ListPreference android:entries="@array/buffer_size_names" android:title="@string/buffer_size" android:key="@string/pref_key_buffer_size" android:defaultValue="@string/default_buffer_size" android:entryValues="@array/buffer_size_values" />
+        <androidx.preference.SwitchPreference android:title="@string/long_traces" android:key="@string/pref_key_long_traces" android:summary="@string/long_traces_summary" android:defaultValue="false" />
+        <androidx.preference.ListPreference android:entries="@array/long_trace_size_names" android:title="@string/max_long_trace_size" android:key="@string/pref_key_max_long_trace_size" android:dependency="@string/pref_key_long_traces" android:defaultValue="@string/default_long_trace_size" android:entryValues="@array/long_trace_size_values" />
+        <androidx.preference.ListPreference android:entries="@array/long_trace_duration_names" android:title="@string/max_long_trace_duration" android:key="@string/pref_key_max_long_trace_duration" android:dependency="@string/pref_key_long_traces" android:defaultValue="@string/default_long_trace_duration" android:entryValues="@array/long_trace_duration_values" />
+    </androidx.preference.PreferenceCategory>
+    <androidx.preference.PreferenceCategory android:title="@string/pref_category_heap_dump_settings">
+        <androidx.preference.MultiSelectListPreference android:title="@string/heap_dump_processes" android:key="@string/pref_key_heap_dump_processes" android:summary="@string/heap_dump_processes_summary" style="@style/MultiSelectDialogStyle" />
+        <Preference android:persistent="false" android:title="@string/clear_heap_dump_processes" android:key="clear_heap_dump_processes" />
+        <androidx.preference.SwitchPreference android:title="@string/continuous_heap_dump" android:key="@string/pref_key_continuous_heap_dump" android:summary="@string/continuous_heap_dump_summary" android:defaultValue="false" />
+        <androidx.preference.ListPreference android:entries="@array/continuous_heap_dump_interval_names" android:title="@string/continuous_heap_dump_interval" android:key="@string/pref_key_continuous_heap_dump_interval" android:dependency="@string/pref_key_continuous_heap_dump" android:defaultValue="@string/default_continuous_heap_dump_interval" android:entryValues="@array/continuous_heap_dump_interval_values" />
+    </androidx.preference.PreferenceCategory>
+    <androidx.preference.PreferenceCategory android:title="@string/pref_category_saved_files">
+        <Preference android:persistent="false" android:title="@string/link_to_traces" android:key="trace_link_button" />
+        <Preference android:persistent="false" android:title="@string/clear_saved_files" android:key="clear_saved_files" android:summary="@string/clear_saved_files_summary" />
+    </androidx.preference.PreferenceCategory>
+    <androidx.preference.PreferenceCategory android:title="@string/pref_category_misc" android:orderingFromXml="true">
+        <androidx.preference.SwitchPreference android:title="@string/stop_on_bugreport" android:key="@string/pref_key_stop_on_bugreport" android:summary="@string/stop_on_bugreport_summary" />
+        <androidx.preference.SwitchPreference android:title="@string/attach_to_bug_report" android:key="@string/pref_key_attach_to_bugreport" android:summary="@string/attach_to_bug_report_summary" android:defaultValue="true" />
+        <androidx.preference.SwitchPreference android:title="@string/show_stack_sampling_quick_settings_tile" android:key="@string/pref_key_stack_sampling_quick_setting" android:defaultValue="false" />
+        <androidx.preference.SwitchPreference android:title="@string/show_quick_settings_tile" android:key="@string/pref_key_tracing_quick_setting" android:defaultValue="false" />
+    </androidx.preference.PreferenceCategory>
+</androidx.preference.PreferenceScreen>

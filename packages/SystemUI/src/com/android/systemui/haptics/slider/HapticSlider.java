@@ -1,0 +1,15 @@
+package com.android.systemui.haptics.slider;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public interface HapticSlider {
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class SeekBar implements HapticSlider {
+        public final android.widget.SeekBar seekBar;
+
+        public SeekBar(android.widget.SeekBar seekBar) {
+            this.seekBar = seekBar;
+        }
+    }
+}

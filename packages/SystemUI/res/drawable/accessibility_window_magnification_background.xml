@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/magnifier_corner_radius" />
+            <stroke android:width="@dimen/magnifier_border_width" android:color="@color/magnification_border_color" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/magnifier_outer_corner_radius" />
+            <stroke android:width="@dimen/magnifier_stroke_width" android:color="@color/magnification_border_color" />
+        </shape>
+    </item>
+</layer-list>

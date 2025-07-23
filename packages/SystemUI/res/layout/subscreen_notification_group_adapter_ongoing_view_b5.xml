@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/group_adapter_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/subscreen_noti_list_top_margin_b5" android:elevation="4.0dip" android:layout_marginHorizontal="@dimen/subscreen_noti_list_horizontal_margin_b5"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:layout_gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <FrameLayout android:id="@id/ongoing_remote_views" android:background="@drawable/ongoing_acitivity_gradient_background" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="@dimen/subscreen_noti_list_item_height_b5" />
+    </LinearLayout>
+</LinearLayout>

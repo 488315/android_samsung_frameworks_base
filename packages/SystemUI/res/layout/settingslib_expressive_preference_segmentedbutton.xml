@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="?android:listPreferredItemPaddingStart" android:paddingEnd="?android:listPreferredItemPaddingEnd"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.button.MaterialButtonToggleGroup android:id="@id/button_group" android:layout_width="fill_parent" android:layout_height="wrap_content" app:checkedButton="@id/button_1" app:selectionRequired="true" app:singleSelection="true" style="@style/Widget.Material3Expressive.MaterialButtonGroup.Connected">
+        <com.google.android.material.button.MaterialButton android:id="@id/button_1" android:layout_weight="1.0" app:iconGravity="textStart" app:iconPadding="0.0dip" style="@style/SettingsLibButtonStyle.Expressive.Tonal.Large" />
+        <com.google.android.material.button.MaterialButton android:id="@id/button_2" android:layout_weight="1.0" app:iconGravity="textStart" app:iconPadding="0.0dip" style="@style/SettingsLibButtonStyle.Expressive.Tonal.Large" />
+        <com.google.android.material.button.MaterialButton android:id="@id/button_3" android:layout_weight="1.0" app:iconGravity="textStart" app:iconPadding="0.0dip" style="@style/SettingsLibButtonStyle.Expressive.Tonal.Large" />
+        <com.google.android.material.button.MaterialButton android:id="@id/button_4" android:layout_weight="1.0" app:iconGravity="textStart" app:iconPadding="0.0dip" style="@style/SettingsLibButtonStyle.Expressive.Tonal.Large" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/button_group_text" android:paddingTop="@dimen/settingslib_expressive_space_extrasmall4" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textAppearance="@style/TextAppearance.SettingsLib.TitleSmall.Emphasized" android:textColor="@color/settingslib_materialColorOnSurface" android:gravity="center" android:id="@id/button_1_text" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" />
+        <TextView android:textAppearance="@style/TextAppearance.SettingsLib.TitleSmall.Emphasized" android:textColor="@color/settingslib_materialColorOnSurface" android:gravity="center" android:id="@id/button_2_text" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" />
+        <TextView android:textAppearance="@style/TextAppearance.SettingsLib.TitleSmall.Emphasized" android:textColor="@color/settingslib_materialColorOnSurface" android:gravity="center" android:id="@id/button_3_text" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" />
+        <TextView android:textAppearance="@style/TextAppearance.SettingsLib.TitleSmall.Emphasized" android:textColor="@color/settingslib_materialColorOnSurface" android:gravity="center" android:id="@id/button_4_text" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" />
+    </LinearLayout>
+</LinearLayout>

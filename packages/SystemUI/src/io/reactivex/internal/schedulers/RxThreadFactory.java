@@ -1,0 +1,49 @@
+package io.reactivex.internal.schedulers;
+
+import androidx.compose.animation.core.TransitionKt$$ExternalSyntheticOutline0;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.atomic.AtomicLong;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes4.dex */
+public final class RxThreadFactory extends AtomicLong implements ThreadFactory {
+    private static final long serialVersionUID = -7789753024099756196L;
+    final boolean nonBlocking;
+    final String prefix;
+    final int priority;
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class RxCustomThread extends Thread {
+        public RxCustomThread(Runnable runnable, String str) {
+            super(runnable, str);
+        }
+    }
+
+    public RxThreadFactory(String str) {
+        this(str, 5, false);
+    }
+
+    @Override // java.util.concurrent.ThreadFactory
+    public final Thread newThread(Runnable runnable) {
+        String str = this.prefix + '-' + incrementAndGet();
+        Thread rxCustomThread = this.nonBlocking ? new RxCustomThread(runnable, str) : new Thread(runnable, str);
+        rxCustomThread.setPriority(this.priority);
+        rxCustomThread.setDaemon(true);
+        return rxCustomThread;
+    }
+
+    @Override // java.util.concurrent.atomic.AtomicLong
+    public final String toString() {
+        return TransitionKt$$ExternalSyntheticOutline0.m(new StringBuilder("RxThreadFactory["), this.prefix, "]");
+    }
+
+    public RxThreadFactory(String str, int i) {
+        this(str, i, false);
+    }
+
+    public RxThreadFactory(String str, int i, boolean z) {
+        this.prefix = str;
+        this.priority = i;
+        this.nonBlocking = z;
+    }
+}

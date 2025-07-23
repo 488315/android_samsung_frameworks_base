@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:paddingLeft="@dimen/screen_pinning_request_padding_dialog" android:paddingRight="@dimen/screen_pinning_request_padding_dialog" android:layout_width="360.0dip" android:layout_height="312.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="12.0dip">
+                <TextView android:textSize="14.0sp" android:id="@id/pinning_desc_optional" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/lock_to_app_recent_and_back_softkey" android:lineSpacingExtra="4.0sp" android:fontFamily="sec" android:textFontWeight="400" style="?android:textAppearance" />
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="24.0dip" android:layout_marginBottom="24.0dip">
+                <FrameLayout android:layout_gravity="center_horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content">
+                    <ImageView android:layout_gravity="center" android:id="@id/device_image" android:layout_width="wrap_content" android:layout_height="fill_parent" android:src="@drawable/pinapp_bg" android:scaleType="centerInside" />
+                    <FrameLayout android:layout_gravity="center" android:layout_width="312.0dip" android:layout_height="74.0dip">
+                        <ImageView android:layout_gravity="left" android:id="@id/left_gesture" android:layout_width="55.0dip" android:layout_height="55.0dip" android:layout_marginLeft="68.0dip" android:layout_marginTop="5.0dip" android:src="@drawable/pin_windows_img_gesture" android:scaleType="center" />
+                        <ImageView android:layout_gravity="left" android:id="@id/left_key" android:layout_width="15.0dip" android:layout_height="15.0dip" android:layout_marginLeft="88.0dip" android:layout_marginTop="24.0dip" android:src="@drawable/pin_windows_ic_recent" android:scaleType="center" />
+                        <ImageView android:layout_gravity="right" android:id="@id/right_gesture" android:layout_width="55.0dip" android:layout_height="55.0dip" android:layout_marginTop="5.0dip" android:layout_marginRight="68.0dip" android:src="@drawable/pin_windows_img_gesture" android:scaleType="center" />
+                        <ImageView android:layout_gravity="right" android:id="@id/right_key" android:layout_width="15.0dip" android:layout_height="15.0dip" android:layout_marginTop="24.0dip" android:layout_marginRight="88.0dip" android:src="@drawable/pin_windows_ic_back" android:scaleType="center" />
+                    </FrameLayout>
+                </FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

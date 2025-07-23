@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="cover_ui_bottom_margin">121.0dip</dimen>
+    <dimen name="knox_app_icon_height">66.0dip</dimen>
+    <dimen name="knox_app_icon_width">66.0dip</dimen>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/user_switcher_root" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <ScrollView android:layout_width="fill_parent" android:layout_height="0.0dip" android:fillViewport="true" android:layout_weight="1.0">
+        <com.android.systemui.user.UserSwitcherRootView android:id="@id/user_switcher_grid_container" android:paddingTop="40.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingHorizontal="60.0dip">
+            <androidx.constraintlayout.helper.widget.Flow android:id="@id/flow" android:layout_width="0.0dip" android:layout_height="wrap_content" app:flow_horizontalBias="0.5" app:flow_horizontalGap="@dimen/user_switcher_fullscreen_horizontal_gap" app:flow_horizontalStyle="packed" app:flow_verticalAlign="center" app:flow_verticalGap="44.0dip" app:flow_wrapMode="chain2" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent" />
+        </com.android.systemui.user.UserSwitcherRootView>
+    </ScrollView>
+    <LinearLayout android:gravity="end|center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="96.0dip" android:paddingEnd="48.0dip">
+        <TextView android:textSize="@dimen/user_switcher_fullscreen_button_text_size" android:textColor="?android:^attr-private/colorAccentPrimary" android:gravity="center" android:layout_gravity="center" android:id="@id/cancel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="48.0dip" android:text="@string/cancel" android:paddingHorizontal="@dimen/user_switcher_fullscreen_button_padding" />
+        <Space android:layout_width="24.0dip" android:layout_height="0.0dip" />
+        <TextView android:textSize="@dimen/user_switcher_fullscreen_button_text_size" android:textColor="?android:^attr-private/colorAccentPrimary" android:gravity="center" android:layout_gravity="center" android:id="@id/add" android:background="@drawable/user_switcher_fullscreen_button_bg" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minHeight="48.0dip" android:text="@string/add" android:paddingHorizontal="@dimen/user_switcher_fullscreen_button_padding" />
+    </LinearLayout>
+</LinearLayout>

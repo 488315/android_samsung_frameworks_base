@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.8">
+    <AppMetaData Name="Volume Popup" TargetApi="31" TargetPackageName="com.android.systemui" VersionCode="1" VersionName="">
+        <Property Comment="Volume popup: Volume icon Color" DefaultValue="#ff252525" DestAttribName="volume_icon_color" UID="213-1-1" ValueType="Color" />
+        <Property Comment="Volume popup: Volume detail icon Color" DefaultValue="#ff101013" DestAttribName="volume_detail_icon_color" UID="213-1-2" ValueType="Color" />
+        <Property Comment="Volume popup: Bar progress color_Single" DefaultValue="#e6ffffff" DestAttribName="volume_seekbar_progress_color_blur" UID="213-1-3" ValueType="Color" />
+        <Property Comment="Volume popup: Bar background color_Single" DefaultValue="#4dc9c9cc" DestAttribName="volume_seekbar_background_color_blur" UID="213-1-4" ValueType="BgColor" />
+        <Property Comment="Volume popup: Bar progress color_Expanded" DefaultValue="#ffffffff" DestAttribName="volume_seekbar_expand_progress_color_blur" UID="213-1-5" ValueType="Color" />
+        <Property Comment="Volume popup: Bar background color_Expanded" DefaultValue="#14000000" DestAttribName="volume_seekbar_background_color_expand_blur" UID="213-1-6" ValueType="BgColor" />
+        <Property Comment="Volume popup: Bar progress color_Single (No blur)" DefaultValue="#ffffffff" DestAttribName="volume_seekbar_progress_color" UID="213-1-7" ValueType="Color" />
+        <Property Comment="Volume popup: Bar background color_Single (No blur)" DefaultValue="#99c9c9cc" DestAttribName="volume_seekbar_background_color" UID="213-1-8" ValueType="BgColor" />
+        <Property Comment="Volume popup: Bar progress color_Expanded (No blur)" DefaultValue="#ffffffff" DestAttribName="volume_seekbar_expand_progress_color" UID="213-1-9" ValueType="Color" />
+        <Property Comment="Volume popup: Bar background color_Expanded (No blur)" DefaultValue="#33000000" DestAttribName="volume_seekbar_background_color_expand" UID="213-1-10" ValueType="BgColor" />
+        <Property Comment="Volume popup: Volume icon Color" DefaultValue="#d9252525" DestAttribName="volume_icon_caption_color" UID="213-1-11" ValueType="Color" />
+        <Property Comment="Volume popup: Volume icon Color" DefaultValue="#d9252525" DestAttribName="volume_icon_setting_color" UID="213-1-12" ValueType="Color" />
+        <Property Comment="Volume popup: Volume Text Color" DefaultValue="#ff010102" DestAttribName="volume_panel_title_color" UID="213-1-13" ValueType="Color" />
+        <Property Comment="Volume popup: Volume panel expand background Color" DefaultValue="#0d000000" DestAttribName="volume_expand_panel_bg_color_blur" UID="213-1-14" ValueType="BgColor" />
+        <Property Comment="Volume popup: Volume panel expand background Color (No blur)" DefaultValue="#f2ededef" DestAttribName="volume_expand_panel_bg_color" UID="213-1-15" ValueType="BgColor" />
+    </AppMetaData>
+</ThemeMetaData>

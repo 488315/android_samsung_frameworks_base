@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <SwitchPreference android:title="@string/sem_chooser_multiselect_location_setting" android:key="location" android:defaultValue="true" />
+    <SwitchPreference android:title="@string/sem_chooser_multiselect_transcoding_setting_title" android:key="transcode" android:defaultValue="false" />
+    <PreferenceCategory android:title="@string/sem_chooser_multiselect_quickshare_title_setting" android:key="QSCategory" />
+    <SwitchPreference android:title="@string/sem_chooser_multiselect_quickshare_option_include_original" android:key="QSIncludeOriginal" android:defaultValue="false" />
+</PreferenceScreen>

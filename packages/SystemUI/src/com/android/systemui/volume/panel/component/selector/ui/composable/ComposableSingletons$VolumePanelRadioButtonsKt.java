@@ -1,0 +1,36 @@
+package com.android.systemui.volume.panel.component.selector.ui.composable;
+
+import androidx.compose.runtime.Composer;
+import androidx.compose.runtime.ComposerImpl;
+import androidx.compose.runtime.ComposerKt;
+import androidx.compose.runtime.internal.ComposableLambdaImpl;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function3;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class ComposableSingletons$VolumePanelRadioButtonsKt {
+    public static final ComposableSingletons$VolumePanelRadioButtonsKt INSTANCE = new ComposableSingletons$VolumePanelRadioButtonsKt();
+
+    /* renamed from: lambda-1, reason: not valid java name */
+    public static final ComposableLambdaImpl f118lambda1 = new ComposableLambdaImpl(1445654965, false, new Function3() { // from class: com.android.systemui.volume.panel.component.selector.ui.composable.ComposableSingletons$VolumePanelRadioButtonsKt$lambda-1$1
+        @Override // kotlin.jvm.functions.Function3
+        public final Object invoke(Object obj, Object obj2, Object obj3) {
+            Composer composer = (Composer) obj2;
+            if ((((Number) obj3).intValue() & 17) == 16) {
+                ComposerImpl composerImpl = (ComposerImpl) composer;
+                if (composerImpl.getSkipping()) {
+                    composerImpl.skipToGroupEnd();
+                    return Unit.INSTANCE;
+                }
+            }
+            if (ComposerKt.isTraceInProgress()) {
+                ComposerKt.traceEventStart("com.android.systemui.volume.panel.component.selector.ui.composable.ComposableSingletons$VolumePanelRadioButtonsKt.lambda-1.<anonymous> (VolumePanelRadioButtons.kt:346)");
+            }
+            if (ComposerKt.isTraceInProgress()) {
+                ComposerKt.traceEventEnd();
+            }
+            return Unit.INSTANCE;
+        }
+    });
+}

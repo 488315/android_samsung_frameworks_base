@@ -1,0 +1,43 @@
+package com.android.keyguard;
+
+import android.R;
+import android.animation.ValueAnimator;
+import android.content.Context;
+import android.graphics.Rect;
+import android.util.AttributeSet;
+import android.view.View;
+import android.widget.LinearLayout;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes.dex */
+public class PinShapeNonHintingView extends LinearLayout {
+    public final Rect mFirstChildVisibleRect;
+    public final ValueAnimator mValueAnimator;
+
+    public PinShapeNonHintingView(Context context, AttributeSet attributeSet) {
+        super(context, attributeSet);
+        getContext().getColor(R.color.search_url_text_normal);
+        this.mValueAnimator = ValueAnimator.ofFloat(1.0f, 0.0f);
+        this.mFirstChildVisibleRect = new Rect();
+        new PinShapeAdapter(context);
+    }
+
+    @Override // android.widget.LinearLayout, android.view.ViewGroup, android.view.View
+    public final void onLayout(boolean z, int i, int i2, int i3, int i4) {
+        super.onLayout(z, i, i2, i3, i4);
+        if (getChildCount() > 2) {
+            boolean z2 = false;
+            View childAt = getChildAt(0);
+            boolean localVisibleRect = childAt.getLocalVisibleRect(this.mFirstChildVisibleRect);
+            Rect rect = this.mFirstChildVisibleRect;
+            if (rect.right - rect.left < childAt.getWidth() && childAt.getScaleX() == 1.0f) {
+                z2 = true;
+            }
+            if (!localVisibleRect || z2) {
+                setGravity(8388629);
+                return;
+            }
+        }
+        setGravity(17);
+    }
+}

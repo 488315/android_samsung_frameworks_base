@@ -1,0 +1,50 @@
+package com.android.systemui.controls.ui;
+
+import android.content.ComponentName;
+import android.graphics.drawable.Drawable;
+import com.android.systemui.controls.controller.ControlInfo$$ExternalSyntheticOutline0;
+import defpackage.ReorderTile$$ExternalSyntheticOutline0;
+import kotlin.jvm.internal.Intrinsics;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final class SelectionItem {
+    public final CharSequence appName;
+    public final ComponentName componentName;
+    public final Drawable icon;
+    public final ComponentName panelComponentName;
+    public final CharSequence structure;
+    public final int uid;
+
+    public SelectionItem(CharSequence charSequence, CharSequence charSequence2, Drawable drawable, ComponentName componentName, int i, ComponentName componentName2) {
+        this.appName = charSequence;
+        this.structure = charSequence2;
+        this.icon = drawable;
+        this.componentName = componentName;
+        this.uid = i;
+        this.panelComponentName = componentName2;
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof SelectionItem)) {
+            return false;
+        }
+        SelectionItem selectionItem = (SelectionItem) obj;
+        return Intrinsics.areEqual(this.appName, selectionItem.appName) && Intrinsics.areEqual(this.structure, selectionItem.structure) && Intrinsics.areEqual(this.icon, selectionItem.icon) && Intrinsics.areEqual(this.componentName, selectionItem.componentName) && this.uid == selectionItem.uid && Intrinsics.areEqual(this.panelComponentName, selectionItem.panelComponentName);
+    }
+
+    public final int hashCode() {
+        int m = ReorderTile$$ExternalSyntheticOutline0.m(this.uid, (this.componentName.hashCode() + ((this.icon.hashCode() + ControlInfo$$ExternalSyntheticOutline0.m(this.appName.hashCode() * 31, 31, this.structure)) * 31)) * 31, 31);
+        ComponentName componentName = this.panelComponentName;
+        return m + (componentName == null ? 0 : componentName.hashCode());
+    }
+
+    public final String toString() {
+        CharSequence charSequence = this.appName;
+        CharSequence charSequence2 = this.structure;
+        return "SelectionItem(appName=" + ((Object) charSequence) + ", structure=" + ((Object) charSequence2) + ", icon=" + this.icon + ", componentName=" + this.componentName + ", uid=" + this.uid + ", panelComponentName=" + this.panelComponentName + ")";
+    }
+}

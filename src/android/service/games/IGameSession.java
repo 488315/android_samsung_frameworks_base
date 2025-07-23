@@ -1,0 +1,163 @@
+package android.service.games;
+
+import android.os.Binder;
+import android.os.IBinder;
+import android.os.IInterface;
+import android.os.Parcel;
+import android.os.RemoteException;
+
+/* loaded from: classes3.dex */
+public interface IGameSession extends IInterface {
+    public static final String DESCRIPTOR = "android.service.games.IGameSession";
+
+    public static class Default implements IGameSession {
+        @Override // android.os.IInterface
+        public IBinder asBinder() {
+            return null;
+        }
+
+        @Override // android.service.games.IGameSession
+        public void onDestroyed() throws RemoteException {
+        }
+
+        @Override // android.service.games.IGameSession
+        public void onTaskFocusChanged(boolean z) throws RemoteException {
+        }
+
+        @Override // android.service.games.IGameSession
+        public void onTransientSystemBarVisibilityFromRevealGestureChanged(boolean z) throws RemoteException {
+        }
+    }
+
+    void onDestroyed() throws RemoteException;
+
+    void onTaskFocusChanged(boolean z) throws RemoteException;
+
+    void onTransientSystemBarVisibilityFromRevealGestureChanged(boolean z) throws RemoteException;
+
+    public static abstract class Stub extends Binder implements IGameSession {
+        static final int TRANSACTION_onDestroyed = 1;
+        static final int TRANSACTION_onTaskFocusChanged = 3;
+        static final int TRANSACTION_onTransientSystemBarVisibilityFromRevealGestureChanged = 2;
+
+        @Override // android.os.IInterface
+        public IBinder asBinder() {
+            return this;
+        }
+
+        @Override // android.os.Binder
+        public int getMaxTransactionId() {
+            return 2;
+        }
+
+        public Stub() {
+            attachInterface(this, IGameSession.DESCRIPTOR);
+        }
+
+        public static IGameSession asInterface(IBinder iBinder) {
+            if (iBinder == null) {
+                return null;
+            }
+            IInterface queryLocalInterface = iBinder.queryLocalInterface(IGameSession.DESCRIPTOR);
+            if (queryLocalInterface != null && (queryLocalInterface instanceof IGameSession)) {
+                return (IGameSession) queryLocalInterface;
+            }
+            return new Proxy(iBinder);
+        }
+
+        public static String getDefaultTransactionName(int i) {
+            if (i == 1) {
+                return "onDestroyed";
+            }
+            if (i == 2) {
+                return "onTransientSystemBarVisibilityFromRevealGestureChanged";
+            }
+            if (i != 3) {
+                return null;
+            }
+            return "onTaskFocusChanged";
+        }
+
+        @Override // android.os.Binder
+        public String getTransactionName(int i) {
+            return getDefaultTransactionName(i);
+        }
+
+        @Override // android.os.Binder
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+            if (i >= 1 && i <= 16777215) {
+                parcel.enforceInterface(IGameSession.DESCRIPTOR);
+            }
+            if (i == 1598968902) {
+                parcel2.writeString(IGameSession.DESCRIPTOR);
+                return true;
+            }
+            if (i == 1) {
+                onDestroyed();
+            } else if (i == 2) {
+                boolean readBoolean = parcel.readBoolean();
+                parcel.enforceNoDataAvail();
+                onTransientSystemBarVisibilityFromRevealGestureChanged(readBoolean);
+            } else if (i == 3) {
+                boolean readBoolean2 = parcel.readBoolean();
+                parcel.enforceNoDataAvail();
+                onTaskFocusChanged(readBoolean2);
+            } else {
+                return super.onTransact(i, parcel, parcel2, i2);
+            }
+            return true;
+        }
+
+        private static class Proxy implements IGameSession {
+            private IBinder mRemote;
+
+            Proxy(IBinder iBinder) {
+                this.mRemote = iBinder;
+            }
+
+            @Override // android.os.IInterface
+            public IBinder asBinder() {
+                return this.mRemote;
+            }
+
+            public String getInterfaceDescriptor() {
+                return IGameSession.DESCRIPTOR;
+            }
+
+            @Override // android.service.games.IGameSession
+            public void onDestroyed() throws RemoteException {
+                Parcel obtain = Parcel.obtain(asBinder());
+                try {
+                    obtain.writeInterfaceToken(IGameSession.DESCRIPTOR);
+                    this.mRemote.transact(1, obtain, null, 1);
+                } finally {
+                    obtain.recycle();
+                }
+            }
+
+            @Override // android.service.games.IGameSession
+            public void onTransientSystemBarVisibilityFromRevealGestureChanged(boolean z) throws RemoteException {
+                Parcel obtain = Parcel.obtain(asBinder());
+                try {
+                    obtain.writeInterfaceToken(IGameSession.DESCRIPTOR);
+                    obtain.writeBoolean(z);
+                    this.mRemote.transact(2, obtain, null, 1);
+                } finally {
+                    obtain.recycle();
+                }
+            }
+
+            @Override // android.service.games.IGameSession
+            public void onTaskFocusChanged(boolean z) throws RemoteException {
+                Parcel obtain = Parcel.obtain(asBinder());
+                try {
+                    obtain.writeInterfaceToken(IGameSession.DESCRIPTOR);
+                    obtain.writeBoolean(z);
+                    this.mRemote.transact(3, obtain, null, 1);
+                } finally {
+                    obtain.recycle();
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="zen_alarms_introduction">Non verrai disturbata da suoni e vibrazioni, ad eccezione delle sveglie. Potrai comunque sentire qualunque cosa decidi di riprodurre, inclusi video, musica e giochi.</string>
+    <string name="zen_priority_introduction">Non verrai disturbata da suoni e vibrazioni, ad eccezione di sveglie, promemoria, eventi, chiamate da contatti da te specificati ed elementi che hai scelto di continuare a riprodurre, inclusi video, musica e giochi.</string>
+</resources>

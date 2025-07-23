@@ -1,0 +1,289 @@
+package com.samsung.android.infoextraction;
+
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.graphics.Rect;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
+import android.util.Log;
+import com.samsung.android.feature.SemFloatingFeature;
+import java.util.ArrayList;
+import java.util.List;
+
+/* loaded from: classes6.dex */
+public class SemInfoExtractionManager {
+    private static final String EXTRACTED_INFO_DATA = "SemExtractedInfo";
+    private static final String EXTRACTION_DATA_TYPE = "data_type";
+    private static final String EXTRACTION_REQ_DATA = "req_data";
+    private static final String EXTRACTION_REQ_TIME = "req_time";
+    private static final int MSG_EXTRACTION_CALCEL = 7073;
+    private static final int MSG_EXTRACTION_END = 7072;
+    private static final int MSG_EXTRACTION_START = 7071;
+    private static final int STRING_DATA_TYPE = 1;
+    private static final int STROKE_DATA_TYPE = 3;
+    private static String TAG = "semInfoextration";
+    private static final int URI_DATA_TYPE = 2;
+    private Context mContext;
+    private IBinder mInfoExtractionService;
+    private long mRequestNumber = -1;
+    private ServiceConnection mConnection = null;
+    public InfoExtractionListener mInfoExtractionListener = null;
+    public OnExtractionCompletedListener mOnExtractionCompletedListener = null;
+
+    public enum ExtractedInfoType {
+        UNKNOWN,
+        DATE_TIME,
+        EMAIL,
+        EVENT,
+        HOTKEYWORD,
+        ORIGINAL,
+        PLACE,
+        TELNUM,
+        URL
+    }
+
+    public interface InfoExtractionListener {
+        void onCompleted(int i, List<SemExtractedInfo> list);
+    }
+
+    public interface OnExtractionCompletedListener {
+        void onExtractionCompleted(long j, List<SemExtractedInfo> list);
+    }
+
+    private static class UIBundleKey {
+        private static final String CONTENTS = "contents";
+        private static final String DISMISS = "dismiss";
+        private static final String POSITION = "position";
+
+        private UIBundleKey() {
+        }
+    }
+
+    public SemInfoExtractionManager(Context context) throws IllegalStateException {
+        this.mContext = null;
+        Log.d(TAG, "SemInfoExtractionManager setting...");
+        if (context == null) {
+            Log.d(TAG, "Could not get the SemInfoExtraction service. -> context is NULL");
+            throw new IllegalStateException("Could not get the SemInfoExtraction service. -> context is NULL");
+        }
+        this.mContext = context;
+        if (isPenFeatureModel(context)) {
+            Log.d(TAG, "SemInfoExtractionManager call by : " + this.mContext.getPackageName());
+            return;
+        }
+        Log.d(TAG, "SemInfoExtraction only use for Pen Feature models.");
+        throw new IllegalStateException("SemInfoExtraction only use for Pen Feature models.");
+    }
+
+    private boolean isPenFeatureModel(Context context) {
+        int i = SemFloatingFeature.getInstance().getInt("SEC_FLOATING_FEATURE_FRAMEWORK_CONFIG_SPEN_VERSION", 0);
+        if (i > 0) {
+            return true;
+        }
+        Log.d(TAG, "isPenFeatureModel : Pen is not supported, uspLevel=" + i);
+        return false;
+    }
+
+    public void setInfoExtractionListener(InfoExtractionListener infoExtractionListener) throws IllegalArgumentException {
+        if (infoExtractionListener == null) {
+            Log.d(TAG, "infoExtractionListener is null");
+            throw new IllegalArgumentException("infoExtractionListener is null");
+        }
+        this.mInfoExtractionListener = infoExtractionListener;
+    }
+
+    public void setOnExtractionCompletedListener(OnExtractionCompletedListener onExtractionCompletedListener) throws IllegalArgumentException {
+        if (onExtractionCompletedListener == null) {
+            Log.d(TAG, "onExtractionCompletedListener is null");
+            throw new IllegalArgumentException("onExtractionCompletedListener is null");
+        }
+        this.mOnExtractionCompletedListener = onExtractionCompletedListener;
+    }
+
+    public long extract(String str) throws IllegalArgumentException, IllegalStateException {
+        if (str == null) {
+            return -1L;
+        }
+        setRequestNumber();
+        startExtraction(1, str);
+        return this.mRequestNumber;
+    }
+
+    public long extract(Uri uri) throws IllegalArgumentException, IllegalStateException {
+        if (uri == null) {
+            return -1L;
+        }
+        setRequestNumber();
+        startExtraction(2, uri);
+        return this.mRequestNumber;
+    }
+
+    public long extract(SemStrokeData semStrokeData) throws IllegalArgumentException, IllegalStateException {
+        if (semStrokeData == null) {
+            return -1L;
+        }
+        setRequestNumber();
+        startExtraction(3, semStrokeData);
+        return this.mRequestNumber;
+    }
+
+    public long extract(ArrayList<SemStrokeData> arrayList) throws IllegalArgumentException, IllegalStateException {
+        if (arrayList == null) {
+            return -1L;
+        }
+        setRequestNumber();
+        startExtraction(3, arrayList);
+        return this.mRequestNumber;
+    }
+
+    private void setRequestNumber() {
+        this.mRequestNumber = System.currentTimeMillis();
+    }
+
+    public void showLinkPreview(String str, Rect rect) throws IllegalArgumentException {
+        if (str == null) {
+            throw new IllegalStateException("urlStr is null");
+        }
+        Log.d(TAG, "infoExtractionListener is null");
+        try {
+            Log.d(TAG, "showLinkPreview");
+            Intent intent = new Intent();
+            intent.setPackage("com.samsung.android.service.airviewdictionary");
+            intent.setAction("com.samsung.android.service.hermes.HermesTickerService");
+            intent.putExtra("contents", str);
+            intent.putExtra("position", rect);
+            intent.putExtra("dismiss", false);
+            this.mContext.startService(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void hideLinkPreview() throws IllegalStateException {
+        try {
+            Log.d(TAG, "hideLinkPreview");
+            Intent intent = new Intent();
+            intent.setPackage("com.samsung.android.service.airviewdictionary");
+            intent.setAction("com.samsung.android.service.hermes.HermesTickerService");
+            intent.putExtra("dismiss", true);
+            this.mContext.startService(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void training(String str) throws IllegalStateException, IllegalArgumentException {
+        Log.d(TAG, "training doesn't support in this version");
+    }
+
+    public void addResultRule(int i, String str) throws IllegalStateException, IllegalArgumentException {
+        Log.d(TAG, "addResultRule doesn't support in this version");
+    }
+
+    private boolean bindInfoExtractionService() {
+        if (this.mContext == null) {
+            Log.d(TAG, "mContext is NULL -> can't try to bind with InfoExtractionService! ");
+            return false;
+        }
+        Intent action = new Intent().setAction("com.samsung.android.service.hermes.InfoExtractionService");
+        action.setPackage("com.samsung.android.service.airviewdictionary");
+        boolean bindService = this.mContext.bindService(action, this.mConnection, 1);
+        if (!bindService) {
+            Log.d(TAG, "Failed to bind with InfoExtractionService service!");
+        }
+        return bindService;
+    }
+
+    private void startExtraction(final int i, final Object obj) {
+        if (this.mConnection == null) {
+            Log.d(TAG, "mConnection is NULL");
+            this.mConnection = new ServiceConnection() { // from class: com.samsung.android.infoextraction.SemInfoExtractionManager.1
+                @Override // android.content.ServiceConnection
+                public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+                    SemInfoExtractionManager.this.mInfoExtractionService = iBinder;
+                    SemInfoExtractionManager.this.requestInfoExtraction(iBinder, i, obj);
+                }
+
+                @Override // android.content.ServiceConnection
+                public void onServiceDisconnected(ComponentName componentName) {
+                    SemInfoExtractionManager.this.mInfoExtractionService = null;
+                }
+            };
+            Log.d(TAG, "start : Binding to InfoExtractionService...");
+            bindInfoExtractionService();
+            return;
+        }
+        Log.d(TAG, "mConnection is not NULL");
+        if (this.mInfoExtractionService == null) {
+            Log.d(TAG, "mInfoExtractionService == null");
+            bindInfoExtractionService();
+        } else {
+            Log.d(TAG, "mInfoExtractionService != null");
+            requestInfoExtraction(this.mInfoExtractionService, i, obj);
+        }
+    }
+
+    /* JADX INFO: Access modifiers changed from: private */
+    public void requestInfoExtraction(IBinder iBinder, int i, Object obj) {
+        Log.d(TAG, "requestInfoExtraction data type = " + i);
+        Bundle bundle = new Bundle();
+        bundle.putLong(EXTRACTION_REQ_TIME, this.mRequestNumber);
+        bundle.putInt(EXTRACTION_DATA_TYPE, i);
+        if (i == 1) {
+            bundle.putString(EXTRACTION_REQ_DATA, (String) obj);
+        } else if (i == 2) {
+            bundle.putString(EXTRACTION_REQ_DATA, obj.toString());
+        } else if (i == 3) {
+            bundle.putParcelableArrayList(EXTRACTION_REQ_DATA, (ArrayList) obj);
+        } else {
+            Log.d(TAG, "can't make data type = " + i);
+        }
+        Message obtain = Message.obtain((Handler) null, MSG_EXTRACTION_START);
+        obtain.setData(bundle);
+        obtain.replyTo = new Messenger(new IncomingHandler());
+        try {
+            if (iBinder != null) {
+                new Messenger(iBinder).send(obtain);
+                Log.d(TAG, "request Extraction : success");
+            } else {
+                Log.d(TAG, "request Extraction : InfoExtractionService is null!");
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
+    }
+
+    class IncomingHandler extends Handler {
+        IncomingHandler() {
+        }
+
+        @Override // android.os.Handler
+        public void handleMessage(Message message) {
+            Log.d(SemInfoExtractionManager.TAG, "received Extraction data : success");
+            long j = message.getData().getLong(SemInfoExtractionManager.EXTRACTION_REQ_TIME);
+            new ArrayList();
+            ArrayList parcelableArrayList = message.getData().getParcelableArrayList(SemInfoExtractionManager.EXTRACTED_INFO_DATA);
+            if (SemInfoExtractionManager.this.mOnExtractionCompletedListener != null) {
+                Log.d(SemInfoExtractionManager.TAG, "sent to mOnExtractionCompletedListener ReqTime : " + j + " extracted size : " + parcelableArrayList.size());
+                SemInfoExtractionManager.this.mOnExtractionCompletedListener.onExtractionCompleted(j, parcelableArrayList);
+                SemInfoExtractionManager.this.mRequestNumber = -1L;
+                return;
+            }
+            Log.d(SemInfoExtractionManager.TAG, "mInfoExtractionResultListener is NULL");
+            if (SemInfoExtractionManager.this.mInfoExtractionListener != null) {
+                Log.d(SemInfoExtractionManager.TAG, "sent to InfoExtractionListener ReqTime : " + j + " extracted size : " + parcelableArrayList.size());
+                SemInfoExtractionManager.this.mInfoExtractionListener.onCompleted((int) j, parcelableArrayList);
+            } else {
+                Log.d(SemInfoExtractionManager.TAG, "mInfoExtractionListener is NULL");
+            }
+            SemInfoExtractionManager.this.mRequestNumber = -1L;
+        }
+    }
+}

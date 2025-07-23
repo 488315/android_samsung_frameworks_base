@@ -1,0 +1,51 @@
+package com.android.systemui.common.shared.model;
+
+import androidx.compose.animation.FlingCalculator$FlingInfo$$ExternalSyntheticOutline0;
+import defpackage.MoveResult$$ExternalSyntheticOutline0;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes.dex */
+public final class NotificationContainerBounds {
+    public final float bottom;
+    public final boolean isAnimated;
+    public final float top;
+
+    public NotificationContainerBounds() {
+        this(0.0f, 0.0f, false, 7, null);
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof NotificationContainerBounds)) {
+            return false;
+        }
+        NotificationContainerBounds notificationContainerBounds = (NotificationContainerBounds) obj;
+        return Float.compare(this.top, notificationContainerBounds.top) == 0 && Float.compare(this.bottom, notificationContainerBounds.bottom) == 0 && this.isAnimated == notificationContainerBounds.isAnimated;
+    }
+
+    public final int hashCode() {
+        return Boolean.hashCode(this.isAnimated) + FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.bottom, Float.hashCode(this.top) * 31, 31);
+    }
+
+    public final String toString() {
+        StringBuilder sb = new StringBuilder("NotificationContainerBounds(top=");
+        sb.append(this.top);
+        sb.append(", bottom=");
+        sb.append(this.bottom);
+        sb.append(", isAnimated=");
+        return MoveResult$$ExternalSyntheticOutline0.m(sb, this.isAnimated, ")");
+    }
+
+    public NotificationContainerBounds(float f, float f2, boolean z) {
+        this.top = f;
+        this.bottom = f2;
+        this.isAnimated = z;
+    }
+
+    public /* synthetic */ NotificationContainerBounds(float f, float f2, boolean z, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        this((i & 1) != 0 ? 0.0f : f, (i & 2) != 0 ? 0.0f : f2, (i & 4) != 0 ? false : z);
+    }
+}

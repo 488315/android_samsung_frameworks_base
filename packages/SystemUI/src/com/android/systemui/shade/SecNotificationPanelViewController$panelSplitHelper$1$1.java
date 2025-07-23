@@ -1,0 +1,18 @@
+package com.android.systemui.shade;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class SecNotificationPanelViewController$panelSplitHelper$1$1 implements Runnable {
+    public final /* synthetic */ SecNotificationPanelViewController this$0;
+
+    public SecNotificationPanelViewController$panelSplitHelper$1$1(SecNotificationPanelViewController secNotificationPanelViewController) {
+        this.this$0 = secNotificationPanelViewController;
+    }
+
+    @Override // java.lang.Runnable
+    public final void run() {
+        SecNotificationPanelViewController secNotificationPanelViewController = this.this$0;
+        int i = SecNotificationPanelViewController.$r8$clinit;
+        secNotificationPanelViewController.onPanelSplitIntercepted();
+    }
+}

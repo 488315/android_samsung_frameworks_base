@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.graphics.drawable.SemRecoilDrawable android:semRecoilColor="@color/sem_resolver_selector_color"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@id/mask">
+        <android.graphics.drawable.SemShapeDrawable android:shape="rectangle">
+            <corners android:radius="12.0dip" />
+            <solid android:color="?colorButtonNormal" />
+        </android.graphics.drawable.SemShapeDrawable>
+    </item>
+</android.graphics.drawable.SemRecoilDrawable>

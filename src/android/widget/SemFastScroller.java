@@ -1,0 +1,1374 @@
+package android.widget;
+
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.animation.ValueAnimator;
+import android.content.Context;
+import android.content.res.ColorStateList;
+import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.os.SystemClock;
+import android.text.TextUtils;
+import android.util.IntProperty;
+import android.util.Log;
+import android.util.MathUtils;
+import android.util.Property;
+import android.util.TypedValue;
+import android.view.MotionEvent;
+import android.view.PointerIcon;
+import android.view.View;
+import android.view.ViewConfiguration;
+import android.view.ViewGroup;
+import android.view.ViewGroupOverlay;
+import android.view.animation.PathInterpolator;
+import android.widget.ImageView;
+import com.android.internal.R;
+import com.samsung.android.wallpaperbackup.GenerateXML;
+
+/* loaded from: classes5.dex */
+class SemFastScroller {
+    private static final int DURATION_CROSS_FADE = 0;
+    private static final int DURATION_FADE_IN = 167;
+    private static final int DURATION_FADE_OUT = 167;
+    private static final int DURATION_RESIZE = 100;
+    public static final int EFFECT_STATE_CLOSE = 0;
+    public static final int EFFECT_STATE_OPEN = 1;
+    private static final long FADE_TIMEOUT = 2500;
+    private static final int FASTSCROLL_VIBRATE_INDEX = 26;
+    private static final int MIN_PAGES = 1;
+    private static final int OVERLAY_ABOVE_THUMB = 2;
+    private static final int OVERLAY_AT_THUMB = 1;
+    private static final int OVERLAY_FLOATING = 0;
+    private static final int PREVIEW_LEFT = 0;
+    private static final int PREVIEW_RIGHT = 1;
+    private static final int STATE_DRAGGING = 2;
+    private static final int STATE_NONE = 0;
+    private static final int STATE_VISIBLE = 1;
+    private static final String TAG = "SemFastScroller";
+    private static final int THUMB_POSITION_INSIDE = 1;
+    private static final int THUMB_POSITION_MIDPOINT = 0;
+    private int mAdditionalBottomPadding;
+    private float mAdditionalTouchArea;
+    private boolean mAlwaysShow;
+    private Context mContext;
+    private AnimatorSet mDecorAnimation;
+    private boolean mEnabled;
+    private int mHeaderCount;
+    private float mInitialTouchY;
+    private boolean mLayoutFromRight;
+    private final AbsListView mList;
+    private Adapter mListAdapter;
+    private boolean mLongList;
+    private boolean mMatchDragPosition;
+    private int mOldChildCount;
+    private int mOldItemCount;
+    private final ViewGroupOverlay mOverlay;
+    private int mOverlayPosition;
+    private AnimatorSet mPreviewAnimation;
+    private final View mPreviewImage;
+    private int mPreviewMarginEnd;
+    private int mPreviewMinHeight;
+    private int mPreviewMinWidth;
+    private int mPreviewPadding;
+    private final TextView mPrimaryText;
+    private int mScaledTouchSlop;
+    private int mScrollBarStyle;
+    private boolean mScrollCompleted;
+    private final TextView mSecondaryText;
+    private SectionIndexer mSectionIndexer;
+    private Object[] mSections;
+    private boolean mShowingPreview;
+    private boolean mShowingPrimary;
+    private int mState;
+    private int mTextAppearance;
+    private ColorStateList mTextColor;
+    private float mTextSize;
+    private Drawable mThumbDrawable;
+    private final ImageView mThumbImage;
+    private int mThumbMarginEnd;
+    private int mThumbMinHeight;
+    private int mThumbMinWidth;
+    private float mThumbOffset;
+    private int mThumbPosition;
+    private float mThumbRange;
+    private SemFastScrollThumbAnimator mThumbWidthAnimator;
+    private Drawable mTrackDrawable;
+    private final ImageView mTrackImage;
+    private int mTrackPadding;
+    private boolean mUpdatingLayout;
+    private int mWidth;
+    private static final long TAP_TIMEOUT = ViewConfiguration.getTapTimeout();
+    private static Property<View, Integer> LEFT = new IntProperty<View>("left") { // from class: android.widget.SemFastScroller.3
+        @Override // android.util.IntProperty
+        public void setValue(View view, int i) {
+            view.setLeft(i);
+        }
+
+        @Override // android.util.Property
+        public Integer get(View view) {
+            return Integer.valueOf(view.getLeft());
+        }
+    };
+    private static Property<View, Integer> TOP = new IntProperty<View>(GenerateXML.TOP) { // from class: android.widget.SemFastScroller.4
+        @Override // android.util.IntProperty
+        public void setValue(View view, int i) {
+            view.setTop(i);
+        }
+
+        @Override // android.util.Property
+        public Integer get(View view) {
+            return Integer.valueOf(view.getTop());
+        }
+    };
+    private static Property<View, Integer> RIGHT = new IntProperty<View>("right") { // from class: android.widget.SemFastScroller.5
+        @Override // android.util.IntProperty
+        public void setValue(View view, int i) {
+            view.setRight(i);
+        }
+
+        @Override // android.util.Property
+        public Integer get(View view) {
+            return Integer.valueOf(view.getRight());
+        }
+    };
+    private static Property<View, Integer> BOTTOM = new IntProperty<View>(GenerateXML.BOTTOM) { // from class: android.widget.SemFastScroller.6
+        @Override // android.util.IntProperty
+        public void setValue(View view, int i) {
+            view.setBottom(i);
+        }
+
+        @Override // android.util.Property
+        public Integer get(View view) {
+            return Integer.valueOf(view.getBottom());
+        }
+    };
+    private final Rect mTempBounds = new Rect();
+    private final Rect mTempMargins = new Rect();
+    private final Rect mContainerRect = new Rect();
+    private final int[] mPreviewResId = new int[2];
+    private int mCurrentSection = -1;
+    private int mScrollbarPosition = -1;
+    private long mPendingDrag = -1;
+    private int mColorPrimary = -1;
+    private float mScrollY = 0.0f;
+    private int mEffectState = 0;
+    private float mOldThumbPosition = -1.0f;
+    private int mScrollBarBottomPadding = 0;
+    private int mScrollBarTopPadding = 0;
+    private final Runnable mDeferHide = new Runnable() { // from class: android.widget.SemFastScroller.1
+        @Override // java.lang.Runnable
+        public void run() {
+            SemFastScroller.this.setState(0);
+        }
+    };
+    private final Animator.AnimatorListener mSwitchPrimaryListener = new AnimatorListenerAdapter() { // from class: android.widget.SemFastScroller.2
+        @Override // android.animation.AnimatorListenerAdapter, android.animation.Animator.AnimatorListener
+        public void onAnimationEnd(Animator animator) {
+            SemFastScroller.this.mShowingPrimary = !r0.mShowingPrimary;
+        }
+    };
+    private int mListScrollRange = -1;
+    private int mListScrollExtent = -1;
+
+    public SemFastScroller(AbsListView absListView, int i) {
+        this.mAdditionalTouchArea = 0.0f;
+        this.mList = absListView;
+        this.mOldItemCount = absListView.getCount();
+        this.mOldChildCount = absListView.getChildCount();
+        Context context = absListView.getContext();
+        this.mContext = context;
+        this.mScaledTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
+        this.mScrollBarStyle = absListView.getScrollBarStyle();
+        this.mScrollCompleted = true;
+        this.mState = 1;
+        this.mMatchDragPosition = this.mContext.getApplicationInfo().targetSdkVersion >= 11;
+        ImageView imageView = new ImageView(this.mContext);
+        this.mTrackImage = imageView;
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        ImageView imageView2 = new ImageView(this.mContext);
+        this.mThumbImage = imageView2;
+        imageView2.setScaleType(ImageView.ScaleType.FIT_XY);
+        View view = new View(this.mContext);
+        this.mPreviewImage = view;
+        view.setAlpha(0.0f);
+        TextView createPreviewTextView = createPreviewTextView(this.mContext);
+        this.mPrimaryText = createPreviewTextView;
+        TextView createPreviewTextView2 = createPreviewTextView(this.mContext);
+        this.mSecondaryText = createPreviewTextView2;
+        setStyle(i);
+        ViewGroupOverlay overlay = absListView.getOverlay();
+        this.mOverlay = overlay;
+        overlay.add(imageView);
+        overlay.add(imageView2);
+        overlay.add(view);
+        overlay.add(createPreviewTextView);
+        overlay.add(createPreviewTextView2);
+        this.mPreviewMarginEnd = this.mContext.getResources().getDimensionPixelOffset(R.dimen.fastscroll_preview_margin_end);
+        this.mThumbMarginEnd = this.mContext.getResources().getDimensionPixelOffset(R.dimen.fastscroll_thumb_margin_end);
+        this.mAdditionalTouchArea = this.mContext.getResources().getDimension(R.dimen.tw_fluid_scroller_additional_touch_area);
+        this.mTrackPadding = this.mContext.getResources().getDimensionPixelOffset(R.dimen.sem_fast_scroller_track_padding);
+        this.mAdditionalBottomPadding = this.mContext.getResources().getDimensionPixelOffset(R.dimen.sem_fast_scroller_additional_bottom_padding);
+        int i2 = this.mPreviewPadding;
+        createPreviewTextView.setPadding(i2, 0, i2, 0);
+        int i3 = this.mPreviewPadding;
+        createPreviewTextView2.setPadding(i3, 0, i3, 0);
+        getSectionsFromIndexer();
+        updateLongList(this.mOldChildCount, this.mOldItemCount);
+        setScrollbarPosition(absListView.getVerticalScrollbarPosition());
+        postAutoHide();
+    }
+
+    private void updateAppearance() {
+        TypedValue typedValue = new TypedValue();
+        this.mContext.getTheme().resolveAttribute(16843827, typedValue, true);
+        this.mColorPrimary = this.mContext.getResources().getColor(typedValue.resourceId, null);
+        this.mTrackImage.lambda$setImageURIAsync$0(this.mTrackDrawable);
+        Drawable drawable = this.mTrackDrawable;
+        int max = drawable != null ? Math.max(0, drawable.getIntrinsicWidth()) : 0;
+        this.mThumbImage.lambda$setImageURIAsync$0(this.mThumbDrawable);
+        this.mThumbImage.setMinimumWidth(this.mThumbMinWidth);
+        this.mThumbImage.setMinimumHeight(this.mThumbMinHeight);
+        Drawable drawable2 = this.mThumbDrawable;
+        if (drawable2 != null) {
+            max = Math.max(max, drawable2.getIntrinsicWidth());
+        }
+        this.mWidth = Math.max(max, this.mThumbMinWidth);
+        this.mPreviewImage.setMinimumWidth(this.mPreviewMinWidth);
+        this.mPreviewImage.setMinimumHeight(this.mPreviewMinHeight);
+        int i = this.mTextAppearance;
+        if (i != 0) {
+            this.mPrimaryText.setTextAppearance(this.mContext, i);
+            this.mSecondaryText.setTextAppearance(this.mContext, this.mTextAppearance);
+        }
+        ColorStateList colorStateList = this.mTextColor;
+        if (colorStateList != null) {
+            this.mPrimaryText.setTextColor(colorStateList);
+            this.mSecondaryText.setTextColor(this.mTextColor);
+        }
+        float f = this.mTextSize;
+        if (f > 0.0f) {
+            this.mPrimaryText.setTextSize(0, f);
+            this.mSecondaryText.setTextSize(0, this.mTextSize);
+        }
+        int max2 = Math.max(0, this.mPreviewMinHeight);
+        this.mPrimaryText.setMinimumWidth(this.mPreviewMinWidth);
+        this.mPrimaryText.setMinimumHeight(max2);
+        this.mPrimaryText.setIncludeFontPadding(false);
+        this.mSecondaryText.setMinimumWidth(this.mPreviewMinWidth);
+        this.mSecondaryText.setMinimumHeight(max2);
+        this.mSecondaryText.setIncludeFontPadding(false);
+        refreshDrawablePressedState();
+    }
+
+    public void setStyle(int i) {
+        TypedArray obtainStyledAttributes = this.mContext.obtainStyledAttributes(null, R.styleable.FastScroll, 16843767, i);
+        int indexCount = obtainStyledAttributes.getIndexCount();
+        for (int i2 = 0; i2 < indexCount; i2++) {
+            int index = obtainStyledAttributes.getIndex(i2);
+            switch (index) {
+                case 0:
+                    this.mTextAppearance = obtainStyledAttributes.getResourceId(index, 0);
+                    break;
+                case 1:
+                    this.mTextSize = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    break;
+                case 2:
+                    this.mTextColor = obtainStyledAttributes.getColorStateList(index);
+                    break;
+                case 3:
+                    this.mPreviewPadding = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    break;
+                case 4:
+                    this.mPreviewMinWidth = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    break;
+                case 5:
+                    this.mPreviewMinHeight = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    break;
+                case 6:
+                    this.mThumbPosition = obtainStyledAttributes.getInt(index, 0);
+                    break;
+                case 7:
+                    this.mPreviewResId[0] = obtainStyledAttributes.getResourceId(index, 0);
+                    break;
+                case 8:
+                    this.mPreviewResId[1] = obtainStyledAttributes.getResourceId(index, 0);
+                    break;
+                case 9:
+                    this.mOverlayPosition = obtainStyledAttributes.getInt(index, 0);
+                    break;
+                case 10:
+                    this.mThumbDrawable = obtainStyledAttributes.getDrawable(index);
+                    break;
+                case 11:
+                    this.mThumbMinHeight = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    break;
+                case 12:
+                    this.mThumbMinWidth = obtainStyledAttributes.getDimensionPixelSize(index, 0);
+                    break;
+                case 13:
+                    this.mTrackDrawable = obtainStyledAttributes.getDrawable(index);
+                    break;
+            }
+        }
+        obtainStyledAttributes.recycle();
+        if (this.mThumbDrawable instanceof LayerDrawable) {
+            this.mThumbWidthAnimator = new SemFastScrollThumbAnimator(this.mContext, (LayerDrawable) this.mThumbDrawable);
+        } else {
+            this.mThumbWidthAnimator = null;
+        }
+        updateAppearance();
+    }
+
+    public void remove() {
+        this.mOverlay.remove(this.mTrackImage);
+        this.mOverlay.remove(this.mThumbImage);
+        this.mOverlay.remove(this.mPreviewImage);
+        this.mOverlay.remove(this.mPrimaryText);
+        this.mOverlay.remove(this.mSecondaryText);
+        SemFastScrollThumbAnimator semFastScrollThumbAnimator = this.mThumbWidthAnimator;
+        if (semFastScrollThumbAnimator != null) {
+            semFastScrollThumbAnimator.dispose();
+        }
+    }
+
+    public void setEnabled(boolean z) {
+        Log.d(TAG, "setEnabled() enabled = " + z);
+        if (this.mEnabled != z) {
+            this.mEnabled = z;
+            onStateDependencyChanged(true);
+        }
+    }
+
+    public boolean isEnabled() {
+        if (this.mEnabled) {
+            return this.mLongList || this.mAlwaysShow;
+        }
+        return false;
+    }
+
+    public void setAlwaysShow(boolean z) {
+        if (this.mAlwaysShow != z) {
+            this.mAlwaysShow = z;
+            onStateDependencyChanged(false);
+        }
+    }
+
+    public boolean isAlwaysShowEnabled() {
+        return this.mAlwaysShow;
+    }
+
+    private void onStateDependencyChanged(boolean z) {
+        if (isEnabled()) {
+            if (isAlwaysShowEnabled()) {
+                setState(1);
+            } else if (this.mState == 1) {
+                postAutoHide();
+            } else if (z) {
+                setState(1);
+                postAutoHide();
+            }
+        } else {
+            stop();
+        }
+        this.mList.resolvePadding();
+    }
+
+    public void setScrollBarStyle(int i) {
+        if (this.mScrollBarStyle != i) {
+            this.mScrollBarStyle = i;
+            resetScrollDatas();
+            updateLayout();
+        }
+    }
+
+    public void stop() {
+        setState(0);
+    }
+
+    /* JADX WARN: Type inference failed for: r0v0 */
+    /* JADX WARN: Type inference failed for: r0v1, types: [boolean] */
+    /* JADX WARN: Type inference failed for: r0v5 */
+    public void setScrollbarPosition(int i) {
+        if (i == 0) {
+            i = this.mList.isLayoutRtl() ? 1 : 2;
+        }
+        if (this.mScrollbarPosition != i) {
+            this.mScrollbarPosition = i;
+            ?? r0 = i == 1 ? 0 : 1;
+            this.mLayoutFromRight = r0;
+            this.mPreviewImage.setBackgroundResource(this.mPreviewResId[r0]);
+            this.mPreviewImage.getBackground().setTintMode(PorterDuff.Mode.MULTIPLY);
+            this.mPreviewImage.getBackground().setTint(this.mColorPrimary);
+            resetScrollDatas();
+            updateLayout();
+        }
+    }
+
+    public int getWidth() {
+        return this.mWidth;
+    }
+
+    int getEffectState() {
+        return this.mEffectState;
+    }
+
+    float getScrollY() {
+        return this.mScrollY;
+    }
+
+    public void onSizeChanged(int i, int i2, int i3, int i4) {
+        resetScrollDatas();
+        updateLayout();
+    }
+
+    public void onItemCountChanged(int i, int i2) {
+        if (this.mOldItemCount == i2 && this.mOldChildCount == i) {
+            return;
+        }
+        this.mOldItemCount = i2;
+        this.mOldChildCount = i;
+        if (i2 - i > 0 && this.mState != 2) {
+            setThumbPos(getPosFromItemCount(this.mList.getFirstVisiblePosition(), i, i2));
+        }
+        updateLongList(i, i2);
+    }
+
+    private void updateLongList(int i, int i2) {
+        boolean z = i > 0 && (this.mList.canScrollList(1) || this.mList.canScrollList(-1));
+        if (this.mLongList != z) {
+            this.mLongList = z;
+            onStateDependencyChanged(true);
+        }
+    }
+
+    private TextView createPreviewTextView(Context context) {
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(-2, -2);
+        TextView textView = new TextView(context);
+        textView.setLayoutParams(layoutParams);
+        textView.setSingleLine(true);
+        textView.setEllipsize(TextUtils.TruncateAt.MIDDLE);
+        textView.setGravity(17);
+        textView.setAlpha(0.0f);
+        textView.setLayoutDirection(this.mList.getLayoutDirection());
+        return textView;
+    }
+
+    public void updateLayout() {
+        int i;
+        AbsListView absListView = this.mList;
+        int computeVerticalScrollRange = absListView.computeVerticalScrollRange();
+        int computeVerticalScrollExtent = absListView.computeVerticalScrollExtent();
+        int i2 = this.mListScrollRange;
+        if ((i2 <= 0 || computeVerticalScrollRange != i2 || (i = this.mListScrollExtent) <= 0 || computeVerticalScrollExtent != i || this.mContainerRect.width() <= 0) && !this.mUpdatingLayout) {
+            this.mUpdatingLayout = true;
+            this.mListScrollRange = computeVerticalScrollRange;
+            this.mListScrollExtent = computeVerticalScrollExtent;
+            updateContainerRect();
+            layoutThumb();
+            layoutTrack();
+            updateOffsetAndRange();
+            this.mUpdatingLayout = false;
+            Rect rect = this.mTempBounds;
+            measurePreview(this.mPrimaryText, rect);
+            applyLayout(this.mPrimaryText, rect);
+            measurePreview(this.mSecondaryText, rect);
+            applyLayout(this.mSecondaryText, rect);
+            rect.left -= this.mPreviewImage.getPaddingLeft();
+            rect.top -= this.mPreviewImage.getPaddingTop();
+            rect.right += this.mPreviewImage.getPaddingRight();
+            rect.bottom += this.mPreviewImage.getPaddingBottom();
+            applyLayout(this.mPreviewImage, rect);
+        }
+    }
+
+    private void applyLayout(View view, Rect rect) {
+        view.layout(rect.left, rect.top, rect.right, rect.bottom);
+        view.setPivotX(this.mLayoutFromRight ? rect.right - rect.left : 0.0f);
+    }
+
+    private void measurePreview(View view, Rect rect) {
+        Rect rect2 = this.mTempMargins;
+        rect2.left = this.mPreviewImage.getPaddingLeft();
+        rect2.top = this.mPreviewImage.getPaddingTop();
+        rect2.right = this.mPreviewImage.getPaddingRight();
+        rect2.bottom = this.mPreviewImage.getPaddingBottom();
+        if (this.mOverlayPosition == 0) {
+            measureFloating(view, rect2, rect);
+        } else {
+            measureViewToSide(view, this.mThumbImage, rect2, rect);
+        }
+    }
+
+    private void measureViewToSide(View view, View view2, Rect rect, Rect rect2) {
+        int i;
+        int i2;
+        int right;
+        int i3;
+        int i4;
+        if (this.mLayoutFromRight) {
+            if (view2 == null) {
+                i4 = this.mThumbMarginEnd;
+            } else {
+                i4 = this.mPreviewMarginEnd;
+            }
+            i2 = i4;
+            i = 0;
+        } else {
+            if (view2 == null) {
+                i = this.mThumbMarginEnd;
+            } else {
+                i = this.mPreviewMarginEnd;
+            }
+            i2 = 0;
+        }
+        Rect rect3 = this.mContainerRect;
+        int width = rect3.width();
+        if (view2 != null) {
+            if (this.mLayoutFromRight) {
+                width = view2.getLeft();
+            } else {
+                width -= view2.getRight();
+            }
+        }
+        int max = Math.max(0, rect3.height());
+        int max2 = Math.max(0, (width - i) - i2);
+        view.measure(View.MeasureSpec.makeMeasureSpec(max2, Integer.MIN_VALUE), View.MeasureSpec.makeSafeMeasureSpec(max, 0));
+        int min = Math.min(max2, view.getMeasuredWidth());
+        if (this.mLayoutFromRight) {
+            i3 = (view2 == null ? rect3.right : view2.getLeft()) - i2;
+            right = i3 - min;
+        } else {
+            right = (view2 == null ? rect3.left : view2.getRight()) + i;
+            i3 = right + min;
+        }
+        rect2.set(right, 0, i3, view.getMeasuredHeight());
+    }
+
+    private void measureFloating(View view, Rect rect, Rect rect2) {
+        int i;
+        int i2;
+        int i3;
+        if (rect == null) {
+            i3 = 0;
+            i = 0;
+            i2 = 0;
+        } else {
+            i = rect.left;
+            i2 = rect.top;
+            i3 = rect.right;
+        }
+        Rect rect3 = this.mContainerRect;
+        int width = rect3.width();
+        view.measure(View.MeasureSpec.makeMeasureSpec(Math.max(0, (width - i) - i3), Integer.MIN_VALUE), View.MeasureSpec.makeSafeMeasureSpec(Math.max(0, rect3.height()), 0));
+        int height = rect3.height();
+        int measuredWidth = view.getMeasuredWidth();
+        int i4 = (height / 10) + i2 + rect3.top;
+        int measuredHeight = view.getMeasuredHeight() + i4;
+        int i5 = ((width - measuredWidth) / 2) + rect3.left;
+        rect2.set(i5, i4, measuredWidth + i5, measuredHeight);
+    }
+
+    private void updateContainerRect() {
+        AbsListView absListView = this.mList;
+        absListView.resolvePadding();
+        Rect rect = this.mContainerRect;
+        rect.left = 0;
+        rect.top = this.mScrollBarTopPadding;
+        rect.right = absListView.getWidth();
+        rect.bottom = absListView.getHeight() - this.mScrollBarBottomPadding;
+        int i = this.mScrollBarStyle;
+        if (i == 16777216 || i == 0) {
+            rect.left += absListView.getPaddingLeft();
+            rect.top += absListView.getPaddingTop();
+            rect.right -= absListView.getPaddingRight();
+            rect.bottom -= absListView.getPaddingBottom();
+            if (i == 16777216) {
+                int width = getWidth();
+                if (this.mScrollbarPosition == 2) {
+                    rect.right += width;
+                } else {
+                    rect.left -= width;
+                }
+            }
+        }
+    }
+
+    private void resetScrollDatas() {
+        this.mListScrollRange = -1;
+        this.mListScrollExtent = -1;
+    }
+
+    private int getThumbLength(int i, int i2, int i3, int i4) {
+        int round = Math.round((i * i3) / i4);
+        return round < i2 ? i2 : round;
+    }
+
+    private void layoutThumb() {
+        AbsListView absListView = this.mList;
+        Rect rect = this.mTempBounds;
+        if (this.mLayoutFromRight) {
+            rect.right = this.mContainerRect.width();
+            rect.left = rect.right - this.mContext.getResources().getDimensionPixelOffset(R.dimen.sem_fast_scroller_thumb_width);
+        } else {
+            rect.right = this.mContext.getResources().getDimensionPixelOffset(R.dimen.sem_fast_scroller_thumb_width);
+            rect.left = 0;
+        }
+        rect.top = 0;
+        rect.bottom = getThumbLength(absListView.getHeight(), this.mContext.getResources().getDimensionPixelOffset(R.dimen.sem_fast_scroller_thumb_min_height), this.mListScrollExtent, this.mListScrollRange);
+        applyLayout(this.mThumbImage, rect);
+    }
+
+    private void layoutTrack() {
+        int i;
+        int i2;
+        ImageView imageView = this.mTrackImage;
+        ImageView imageView2 = this.mThumbImage;
+        Rect rect = this.mContainerRect;
+        imageView.measure(View.MeasureSpec.makeMeasureSpec(Math.max(0, rect.width()), Integer.MIN_VALUE), View.MeasureSpec.makeSafeMeasureSpec(Math.max(0, rect.height()), 0));
+        if (this.mThumbPosition == 1) {
+            i2 = rect.top + this.mTrackPadding;
+            i = (rect.bottom - this.mTrackPadding) - this.mAdditionalBottomPadding;
+        } else {
+            int height = imageView2.getHeight() / 2;
+            int i3 = rect.top + height + this.mTrackPadding;
+            i = ((rect.bottom - height) - this.mTrackPadding) - this.mAdditionalBottomPadding;
+            i2 = i3;
+        }
+        int measuredWidth = imageView.getMeasuredWidth();
+        int left = imageView2.getLeft() + ((imageView2.getWidth() - measuredWidth) / 2);
+        imageView.layout(left, i2, measuredWidth + left, i);
+    }
+
+    private void updateOffsetAndRange() {
+        float top;
+        float bottom;
+        ImageView imageView = this.mTrackImage;
+        ImageView imageView2 = this.mThumbImage;
+        if (this.mThumbPosition == 1) {
+            float height = imageView2.getHeight() / 2.0f;
+            top = imageView.getTop() + height;
+            bottom = imageView.getBottom() - height;
+        } else {
+            top = imageView.getTop();
+            bottom = imageView.getBottom();
+        }
+        this.mThumbOffset = top;
+        this.mThumbRange = bottom - top;
+    }
+
+    /* JADX INFO: Access modifiers changed from: private */
+    public void setState(int i) {
+        this.mList.removeCallbacks(this.mDeferHide);
+        if (this.mAlwaysShow && i == 0) {
+            i = 1;
+        }
+        if (i == this.mState) {
+            return;
+        }
+        if (i == 0) {
+            transitionToHidden();
+        } else if (i == 1) {
+            transitionToVisible();
+        } else if (i == 2) {
+            transitionPreviewLayout(this.mCurrentSection);
+        }
+        SemFastScrollThumbAnimator semFastScrollThumbAnimator = this.mThumbWidthAnimator;
+        if (semFastScrollThumbAnimator != null) {
+            semFastScrollThumbAnimator.setDragging(i == 2);
+        }
+        this.mState = i;
+        refreshDrawablePressedState();
+    }
+
+    private void refreshDrawablePressedState() {
+        boolean z = this.mState == 2;
+        this.mThumbImage.setPressed(z);
+        this.mTrackImage.setPressed(z);
+    }
+
+    private void transitionToHidden() {
+        int i;
+        Log.d(TAG, "transitionToHidden() mState = " + this.mState);
+        if (this.mState != 2) {
+            this.mList.semSetupGoToTop(0);
+        } else {
+            this.mList.semAutoHide(1);
+        }
+        this.mShowingPreview = false;
+        this.mCurrentSection = -1;
+        AnimatorSet animatorSet = this.mDecorAnimation;
+        if (animatorSet != null) {
+            animatorSet.cancel();
+            i = 167;
+        } else {
+            i = 0;
+        }
+        Animator duration = groupAnimatorOfFloat(View.ALPHA, 0.0f, this.mThumbImage, this.mTrackImage, this.mPreviewImage, this.mPrimaryText, this.mSecondaryText).setDuration(i);
+        AnimatorSet animatorSet2 = new AnimatorSet();
+        this.mDecorAnimation = animatorSet2;
+        animatorSet2.playTogether(duration);
+        this.mDecorAnimation.setInterpolator(new PathInterpolator(0.33f, 0.0f, 0.3f, 1.0f));
+        this.mDecorAnimation.start();
+    }
+
+    private void transitionToVisible() {
+        Log.d(TAG, "transitionToVisible()");
+        AnimatorSet animatorSet = this.mDecorAnimation;
+        if (animatorSet != null) {
+            animatorSet.cancel();
+        }
+        this.mList.semSetupGoToTop(1);
+        Animator duration = groupAnimatorOfFloat(View.ALPHA, 1.0f, this.mThumbImage, this.mTrackImage).setDuration(167L);
+        Animator duration2 = groupAnimatorOfFloat(View.ALPHA, 0.0f, this.mPreviewImage, this.mPrimaryText, this.mSecondaryText).setDuration(167L);
+        AnimatorSet animatorSet2 = new AnimatorSet();
+        this.mDecorAnimation = animatorSet2;
+        animatorSet2.playTogether(duration, duration2);
+        this.mDecorAnimation.setInterpolator(new PathInterpolator(0.33f, 0.0f, 0.3f, 1.0f));
+        this.mShowingPreview = false;
+        this.mDecorAnimation.start();
+    }
+
+    private void transitionToDragging() {
+        Log.d(TAG, "transitionToDragging()");
+        AnimatorSet animatorSet = this.mDecorAnimation;
+        if (animatorSet != null) {
+            animatorSet.cancel();
+        }
+        Animator duration = groupAnimatorOfFloat(View.ALPHA, 1.0f, this.mThumbImage, this.mTrackImage, this.mPreviewImage).setDuration(167L);
+        AnimatorSet animatorSet2 = new AnimatorSet();
+        this.mDecorAnimation = animatorSet2;
+        animatorSet2.playTogether(duration);
+        this.mDecorAnimation.setInterpolator(new PathInterpolator(0.33f, 0.0f, 0.3f, 1.0f));
+        this.mDecorAnimation.start();
+        this.mShowingPreview = true;
+    }
+
+    private void postAutoHide() {
+        this.mList.removeCallbacks(this.mDeferHide);
+        this.mList.postDelayed(this.mDeferHide, FADE_TIMEOUT);
+    }
+
+    public void onScroll(int i, int i2, int i3) {
+        if (!isEnabled()) {
+            setState(0);
+            return;
+        }
+        if ((this.mList.canScrollList(1) || this.mList.canScrollList(-1)) && this.mState != 2) {
+            float f = this.mOldThumbPosition;
+            if (f != -1.0f) {
+                setThumbPos(f);
+                this.mOldThumbPosition = -1.0f;
+            } else {
+                setThumbPos(getPosFromItemCount(i, i2, i3));
+            }
+        }
+        this.mScrollCompleted = true;
+        if (this.mState != 2) {
+            setState(1);
+            postAutoHide();
+        }
+    }
+
+    private void getSectionsFromIndexer() {
+        this.mSectionIndexer = null;
+        ListAdapter adapter = this.mList.getAdapter();
+        if (adapter instanceof HeaderViewListAdapter) {
+            HeaderViewListAdapter headerViewListAdapter = (HeaderViewListAdapter) adapter;
+            this.mHeaderCount = headerViewListAdapter.getHeadersCount();
+            adapter = headerViewListAdapter.getWrappedAdapter();
+        }
+        if (adapter instanceof ExpandableListConnector) {
+            ExpandableListAdapter adapter2 = ((ExpandableListConnector) adapter).getAdapter();
+            if (adapter2 instanceof SectionIndexer) {
+                SectionIndexer sectionIndexer = (SectionIndexer) adapter2;
+                this.mSectionIndexer = sectionIndexer;
+                this.mListAdapter = adapter;
+                this.mSections = sectionIndexer.getSections();
+                return;
+            }
+            return;
+        }
+        if (adapter instanceof SectionIndexer) {
+            this.mListAdapter = adapter;
+            SectionIndexer sectionIndexer2 = (SectionIndexer) adapter;
+            this.mSectionIndexer = sectionIndexer2;
+            this.mSections = sectionIndexer2.getSections();
+            return;
+        }
+        this.mListAdapter = adapter;
+        this.mSections = null;
+    }
+
+    public void onSectionsChanged() {
+        this.mListAdapter = null;
+    }
+
+    /* JADX WARN: Removed duplicated region for block: B:26:0x0061  */
+    /* JADX WARN: Removed duplicated region for block: B:32:0x0087  */
+    /* JADX WARN: Removed duplicated region for block: B:48:0x0098  */
+    /* JADX WARN: Removed duplicated region for block: B:53:0x0065  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+        To view partially-correct code enable 'Show inconsistent code' option in preferences
+    */
+    private void scrollTo(float r13) {
+        /*
+            Method dump skipped, instructions count: 291
+            To view this dump change 'Code comments level' option to 'DEBUG'
+        */
+        throw new UnsupportedOperationException("Method not decompiled: android.widget.SemFastScroller.scrollTo(float):void");
+    }
+
+    private boolean transitionPreviewLayout(int i) {
+        TextView textView;
+        TextView textView2;
+        Object obj;
+        Object[] objArr = this.mSections;
+        String obj2 = (objArr == null || i < 0 || i >= objArr.length || (obj = objArr[i]) == null) ? null : obj.toString();
+        Rect rect = this.mTempBounds;
+        View view = this.mPreviewImage;
+        if (this.mShowingPrimary) {
+            textView = this.mPrimaryText;
+            textView2 = this.mSecondaryText;
+        } else {
+            textView = this.mSecondaryText;
+            textView2 = this.mPrimaryText;
+        }
+        textView2.lambda$setTextAsync$0(obj2);
+        measurePreview(textView2, rect);
+        applyLayout(textView2, rect);
+        int i2 = this.mState;
+        if (i2 == 1) {
+            textView.lambda$setTextAsync$0("");
+        } else if (i2 == 2 && textView2.getText() == textView.getText()) {
+            return !TextUtils.isEmpty(obj2);
+        }
+        AnimatorSet animatorSet = this.mPreviewAnimation;
+        if (animatorSet != null) {
+            animatorSet.cancel();
+        }
+        Animator duration = animateAlpha(textView2, 1.0f).setDuration(0L);
+        Animator duration2 = animateAlpha(textView, 0.0f).setDuration(0L);
+        duration2.addListener(this.mSwitchPrimaryListener);
+        rect.left -= view.getPaddingLeft();
+        rect.top -= view.getPaddingTop();
+        rect.right += view.getPaddingRight();
+        rect.bottom += view.getPaddingBottom();
+        Animator animateBounds = animateBounds(view, rect);
+        animateBounds.setDuration(100L);
+        AnimatorSet animatorSet2 = new AnimatorSet();
+        this.mPreviewAnimation = animatorSet2;
+        AnimatorSet.Builder with = animatorSet2.play(duration2).with(duration);
+        with.with(animateBounds);
+        int width = (view.getWidth() - view.getPaddingLeft()) - view.getPaddingRight();
+        int width2 = textView2.getWidth();
+        if (width2 > width) {
+            textView2.setScaleX(width / width2);
+            with.with(animateScaleX(textView2, 1.0f).setDuration(100L));
+        } else {
+            textView2.setScaleX(1.0f);
+        }
+        int width3 = textView.getWidth();
+        if (width3 > width2) {
+            with.with(animateScaleX(textView, width2 / width3).setDuration(100L));
+        }
+        this.mPreviewAnimation.setInterpolator(new PathInterpolator(0.33f, 0.0f, 0.3f, 1.0f));
+        this.mPreviewAnimation.start();
+        return !TextUtils.isEmpty(obj2);
+    }
+
+    /* JADX WARN: Code restructure failed: missing block: B:8:0x0011, code lost:
+    
+        if (r6 < 0.0f) goto L4;
+     */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+        To view partially-correct code enable 'Show inconsistent code' option in preferences
+    */
+    private void setThumbPos(float r6) {
+        /*
+            r5 = this;
+            android.graphics.Rect r0 = r5.mContainerRect
+            int r1 = r0.top
+            int r0 = r0.bottom
+            r2 = 1065353216(0x3f800000, float:1.0)
+            int r3 = (r6 > r2 ? 1 : (r6 == r2 ? 0 : -1))
+            if (r3 <= 0) goto Le
+        Lc:
+            r6 = r2
+            goto L14
+        Le:
+            r2 = 0
+            int r3 = (r6 > r2 ? 1 : (r6 == r2 ? 0 : -1))
+            if (r3 >= 0) goto L14
+            goto Lc
+        L14:
+            float r2 = r5.mThumbRange
+            float r6 = r6 * r2
+            float r2 = r5.mThumbOffset
+            float r6 = r6 + r2
+            android.widget.ImageView r2 = r5.mThumbImage
+            int r3 = r2.getHeight()
+            float r3 = (float) r3
+            r4 = 1073741824(0x40000000, float:2.0)
+            float r3 = r3 / r4
+            float r3 = r6 - r3
+            r2.setTranslationY(r3)
+            android.view.View r2 = r5.mPreviewImage
+            int r3 = r2.getHeight()
+            float r3 = (float) r3
+            float r3 = r3 / r4
+            float r1 = (float) r1
+            float r1 = r1 + r3
+            float r0 = (float) r0
+            float r0 = r0 - r3
+            float r6 = android.util.MathUtils.constrain(r6, r1, r0)
+            float r6 = r6 - r3
+            r2.setTranslationY(r6)
+            android.widget.TextView r0 = r5.mPrimaryText
+            r0.setTranslationY(r6)
+            android.widget.TextView r5 = r5.mSecondaryText
+            r5.setTranslationY(r6)
+            return
+        */
+        throw new UnsupportedOperationException("Method not decompiled: android.widget.SemFastScroller.setThumbPos(float):void");
+    }
+
+    private float getPosFromMotionEvent(float f) {
+        float f2 = this.mThumbRange;
+        if (f2 <= 0.0f) {
+            return 0.0f;
+        }
+        return MathUtils.constrain((f - this.mThumbOffset) / f2, 0.0f, 1.0f);
+    }
+
+    private float getPosFromItemCount(int i, int i2, int i3) {
+        float numColumns;
+        int height;
+        int height2;
+        int top;
+        Object[] objArr;
+        int i4;
+        SectionIndexer sectionIndexer = this.mSectionIndexer;
+        if (sectionIndexer == null || this.mListAdapter == null) {
+            getSectionsFromIndexer();
+        }
+        if (i2 == 0 || i3 == 0) {
+            return 0.0f;
+        }
+        View childAt = this.mList.getChildAt(0);
+        float paddingTop = (childAt == null || childAt.getHeight() == 0) ? 0.0f : (this.mList.getPaddingTop() - childAt.getTop()) / childAt.getHeight();
+        if (sectionIndexer != null && (objArr = this.mSections) != null && objArr.length > 0 && this.mMatchDragPosition) {
+            int i5 = this.mHeaderCount;
+            i -= i5;
+            if (i < 0) {
+                return 0.0f;
+            }
+            i3 -= i5;
+            int sectionForPosition = sectionIndexer.getSectionForPosition(i);
+            int positionForSection = sectionIndexer.getPositionForSection(sectionForPosition);
+            int length = this.mSections.length;
+            if (sectionForPosition < length - 1) {
+                int i6 = sectionForPosition + 1;
+                i4 = (i6 < length ? sectionIndexer.getPositionForSection(i6) : i3 - 1) - positionForSection;
+            } else {
+                i4 = i3 - positionForSection;
+            }
+            numColumns = (sectionForPosition + (i4 != 0 ? ((i + paddingTop) - positionForSection) / i4 : 0.0f)) / length;
+        } else {
+            if (i2 == i3) {
+                return 0.0f;
+            }
+            numColumns = (i + (paddingTop * (this.mList instanceof GridView ? ((GridView) r0).getNumColumns() : 1))) / i3;
+        }
+        if (i <= 0 || i + i2 != i3) {
+            return numColumns;
+        }
+        View childAt2 = this.mList.getChildAt(i2 - 1);
+        int paddingBottom = this.mList.getPaddingBottom();
+        if (this.mList.getClipToPadding()) {
+            height = childAt2.getHeight();
+            height2 = this.mList.getHeight() - paddingBottom;
+            top = childAt2.getTop();
+        } else {
+            height = childAt2.getHeight() + paddingBottom;
+            height2 = this.mList.getHeight();
+            top = childAt2.getTop();
+        }
+        int i7 = height2 - top;
+        return (i7 <= 0 || height <= 0) ? numColumns : numColumns + ((1.0f - numColumns) * (i7 / height));
+    }
+
+    private void cancelFling() {
+        MotionEvent obtain = MotionEvent.obtain(0L, 0L, 3, 0.0f, 0.0f, 0);
+        this.mList.onTouchEvent(obtain);
+        obtain.recycle();
+    }
+
+    private void cancelPendingDrag() {
+        this.mPendingDrag = -1L;
+    }
+
+    private void startPendingDrag() {
+        this.mPendingDrag = SystemClock.uptimeMillis() + TAP_TIMEOUT;
+    }
+
+    private void beginDrag() {
+        Log.d(TAG, "beginDrag() !!!");
+        this.mPendingDrag = -1L;
+        if (this.mListAdapter == null) {
+            getSectionsFromIndexer();
+        }
+        this.mList.requestDisallowInterceptTouchEvent(true);
+        this.mList.reportScrollStateChange(1);
+        cancelFling();
+        setState(2);
+    }
+
+    /* JADX WARN: Code restructure failed: missing block: B:11:0x0017, code lost:
+    
+        if (r0 != 3) goto L29;
+     */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+        To view partially-correct code enable 'Show inconsistent code' option in preferences
+    */
+    public boolean onInterceptTouchEvent(android.view.MotionEvent r8) {
+        /*
+            r7 = this;
+            boolean r0 = r7.isEnabled()
+            r1 = 0
+            if (r0 != 0) goto L8
+            return r1
+        L8:
+            int r0 = r8.getActionMasked()
+            java.lang.String r2 = "SemFastScroller"
+            r3 = 1
+            if (r0 == 0) goto L59
+            if (r0 == r3) goto L55
+            r3 = 2
+            if (r0 == r3) goto L1b
+            r8 = 3
+            if (r0 == r8) goto L55
+            goto L99
+        L1b:
+            float r0 = r8.getX()
+            float r3 = r8.getY()
+            boolean r0 = r7.isPointInside(r0, r3)
+            if (r0 != 0) goto L2d
+            r7.cancelPendingDrag()
+            goto L99
+        L2d:
+            long r3 = r7.mPendingDrag
+            r5 = 0
+            int r0 = (r3 > r5 ? 1 : (r3 == r5 ? 0 : -1))
+            if (r0 < 0) goto L99
+            long r5 = android.os.SystemClock.uptimeMillis()
+            int r0 = (r3 > r5 ? 1 : (r3 == r5 ? 0 : -1))
+            if (r0 > 0) goto L99
+            r7.beginDrag()
+            float r0 = r7.mInitialTouchY
+            float r0 = r7.getPosFromMotionEvent(r0)
+            r7.mOldThumbPosition = r0
+            r7.scrollTo(r0)
+            java.lang.String r0 = "onInterceptTouchEvent() ACTION_MOVE pendingdrag open()"
+            android.util.Log.d(r2, r0)
+            boolean r7 = r7.onTouchEvent(r8)
+            return r7
+        L55:
+            r7.cancelPendingDrag()
+            goto L99
+        L59:
+            java.lang.StringBuilder r0 = new java.lang.StringBuilder
+            java.lang.String r4 = "onInterceptTouchEvent() ACTION_DOWN ev.getY() = "
+            r0.<init>(r4)
+            float r4 = r8.getY()
+            r0.append(r4)
+            java.lang.String r0 = r0.toString()
+            android.util.Log.d(r2, r0)
+            float r0 = r8.getX()
+            float r2 = r8.getY()
+            boolean r0 = r7.isPointInside(r0, r2)
+            if (r0 == 0) goto L99
+            android.widget.AbsListView r0 = r7.mList
+            r2 = 26
+            int r2 = android.view.HapticFeedbackConstants.semGetVibrationIndex(r2)
+            r0.performHapticFeedback(r2)
+            android.widget.AbsListView r0 = r7.mList
+            boolean r0 = r0.isInScrollingContainer()
+            if (r0 != 0) goto L90
+            return r3
+        L90:
+            float r8 = r8.getY()
+            r7.mInitialTouchY = r8
+            r7.startPendingDrag()
+        L99:
+            return r1
+        */
+        throw new UnsupportedOperationException("Method not decompiled: android.widget.SemFastScroller.onInterceptTouchEvent(android.view.MotionEvent):boolean");
+    }
+
+    public boolean onInterceptHoverEvent(MotionEvent motionEvent) {
+        if (!isEnabled()) {
+            return false;
+        }
+        int actionMasked = motionEvent.getActionMasked();
+        if ((actionMasked == 9 || actionMasked == 7) && this.mState == 0 && isPointInside(motionEvent.getX(), motionEvent.getY())) {
+            setState(1);
+            postAutoHide();
+        }
+        return false;
+    }
+
+    public PointerIcon onResolvePointerIcon(MotionEvent motionEvent, int i) {
+        if (this.mState == 2 || isPointInside(motionEvent.getX(), motionEvent.getY())) {
+            return PointerIcon.getSystemIcon(this.mList.getContext(), 1000);
+        }
+        return null;
+    }
+
+    public boolean onTouchEvent(MotionEvent motionEvent) {
+        Rect rect = this.mContainerRect;
+        int i = rect.top;
+        int i2 = rect.bottom;
+        ImageView imageView = this.mTrackImage;
+        float top = imageView.getTop();
+        float bottom = imageView.getBottom();
+        this.mScrollY = motionEvent.getY();
+        if (!isEnabled()) {
+            return false;
+        }
+        int actionMasked = motionEvent.getActionMasked();
+        if (actionMasked != 0) {
+            if (actionMasked == 1) {
+                if (this.mPendingDrag >= 0) {
+                    beginDrag();
+                    float posFromMotionEvent = getPosFromMotionEvent(motionEvent.getY());
+                    this.mOldThumbPosition = posFromMotionEvent;
+                    setThumbPos(posFromMotionEvent);
+                    scrollTo(posFromMotionEvent);
+                    this.mEffectState = 1;
+                    Log.d(TAG, "onTouchEvent() ACTION_UP.. open() called with posY " + motionEvent.getY());
+                }
+                if (this.mState == 2) {
+                    this.mList.requestDisallowInterceptTouchEvent(false);
+                    this.mList.reportScrollStateChange(0);
+                    setState(1);
+                    postAutoHide();
+                    this.mEffectState = 0;
+                    this.mScrollY = 0.0f;
+                    return true;
+                }
+            } else if (actionMasked == 2) {
+                Log.d(TAG, "onTouchEvent() ACTION_MOVE.. mState= " + this.mState + ", mInitialTouchY=" + this.mInitialTouchY);
+                if (this.mPendingDrag >= 0 && Math.abs(motionEvent.getY() - this.mInitialTouchY) > this.mScaledTouchSlop) {
+                    beginDrag();
+                    float f = this.mScrollY;
+                    float f2 = i;
+                    if (f > f2 && f < i2) {
+                        Log.d(TAG, "onTouchEvent() ACTION_MOVE 1 mScrollY=" + this.mScrollY + ", min=" + top + ", max=" + bottom);
+                        float f3 = this.mScrollY;
+                        float f4 = f2 + top;
+                        if (f3 < f4) {
+                            this.mScrollY = f4;
+                        } else if (f3 > bottom) {
+                            this.mScrollY = bottom;
+                        }
+                        this.mEffectState = 1;
+                    }
+                }
+                if (this.mState == 2) {
+                    float posFromMotionEvent2 = getPosFromMotionEvent(motionEvent.getY());
+                    this.mOldThumbPosition = posFromMotionEvent2;
+                    setThumbPos(posFromMotionEvent2);
+                    if (this.mScrollCompleted) {
+                        scrollTo(posFromMotionEvent2);
+                    }
+                    float f5 = this.mScrollY;
+                    float f6 = i;
+                    if (f5 > f6 && f5 < i2) {
+                        Log.d(TAG, "onTouchEvent() ACTION_MOVE 2 mScrollY=" + this.mScrollY + ", min=" + top + ", max=" + bottom);
+                        float f7 = this.mScrollY;
+                        float f8 = f6 + top;
+                        if (f7 < f8) {
+                            this.mScrollY = f8;
+                        } else if (f7 > bottom) {
+                            this.mScrollY = bottom;
+                        }
+                        this.mEffectState = 1;
+                    }
+                    return true;
+                }
+            } else if (actionMasked == 3) {
+                cancelPendingDrag();
+                if (this.mState == 2) {
+                    setState(0);
+                }
+                this.mEffectState = 0;
+                this.mScrollY = 0.0f;
+            }
+        } else if (isPointInside(motionEvent.getX(), motionEvent.getY()) && !this.mList.isInScrollingContainer()) {
+            beginDrag();
+            this.mEffectState = 1;
+            Log.d(TAG, "onTouchEvent() ACTION_DOWN.. open() called with posY " + motionEvent.getY());
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isPointInside(float f, float f2) {
+        return isPointInsideX(f) && isPointInsideY(f2) && this.mState != 0;
+    }
+
+    private boolean isPointInsideX(float f) {
+        return this.mLayoutFromRight ? f >= ((float) this.mThumbImage.getLeft()) - this.mAdditionalTouchArea : f <= ((float) this.mThumbImage.getRight()) + this.mAdditionalTouchArea;
+    }
+
+    private boolean isPointInsideY(float f) {
+        float translationY = this.mThumbImage.getTranslationY();
+        return f >= ((float) this.mThumbImage.getTop()) + translationY && f <= ((float) this.mThumbImage.getBottom()) + translationY;
+    }
+
+    private static Animator groupAnimatorOfFloat(Property<View, Float> property, float f, View... viewArr) {
+        AnimatorSet animatorSet = new AnimatorSet();
+        AnimatorSet.Builder builder = null;
+        for (int length = viewArr.length - 1; length >= 0; length--) {
+            ObjectAnimator ofFloat = ObjectAnimator.ofFloat(viewArr[length], property, f);
+            if (builder == null) {
+                builder = animatorSet.play(ofFloat);
+            } else {
+                builder.with(ofFloat);
+            }
+        }
+        return animatorSet;
+    }
+
+    private static Animator animateScaleX(View view, float f) {
+        return ObjectAnimator.ofFloat(view, View.SCALE_X, f);
+    }
+
+    private static Animator animateAlpha(View view, float f) {
+        return ObjectAnimator.ofFloat(view, View.ALPHA, f);
+    }
+
+    private static Animator animateBounds(View view, Rect rect) {
+        return ObjectAnimator.ofPropertyValuesHolder(view, PropertyValuesHolder.ofInt(LEFT, rect.left), PropertyValuesHolder.ofInt(TOP, rect.top), PropertyValuesHolder.ofInt(RIGHT, rect.right), PropertyValuesHolder.ofInt(BOTTOM, rect.bottom));
+    }
+
+    private int getColorWithAlpha(int i, float f) {
+        return Color.argb(Math.round(Color.alpha(i) * f), Color.red(i), Color.green(i), Color.blue(i));
+    }
+
+    public void semSetScrollBarBottomPadding(int i) {
+        this.mScrollBarBottomPadding = i;
+        resetScrollDatas();
+        updateLayout();
+    }
+
+    public void semSetScrollBarTopPadding(int i) {
+        this.mScrollBarTopPadding = i;
+        resetScrollDatas();
+        updateLayout();
+    }
+
+    public void semSetUseOpenThemeResources(boolean z) {
+        updateAppearance();
+    }
+
+    private static class SemFastScrollThumbAnimator {
+        private static final float DEFAULT_SCROLL_BAR_VALUE = 0.0f;
+        private static final float FAST_SCROLL_BAR_VALUE = 1.0f;
+        private final int mActivatedColor;
+        private SemFastScrollerBgDrawable mBgDrawable;
+        private final ValueAnimator mColorAnimator;
+        private final int mDefaultColor;
+        private boolean mIsDragging = false;
+        private final float mMaxWidthPx;
+        private final float mMinWidthPx;
+        private final ValueAnimator mWidthAnimator;
+
+        SemFastScrollThumbAnimator(Context context, LayerDrawable layerDrawable) {
+            this.mBgDrawable = (SemFastScrollerBgDrawable) layerDrawable.findDrawableByLayerId(R.id.thumb_bg);
+            float dimension = context.getResources().getDimension(R.dimen.sem_fast_scroller_thumb_min_width);
+            this.mMinWidthPx = dimension;
+            this.mMaxWidthPx = context.getResources().getDimension(R.dimen.sem_fast_scroller_thumb_max_width);
+            int primaryColor = getPrimaryColor(context);
+            int alphaComponent = setAlphaComponent(context.getResources().getColor(isLightTheme(context) ? R.color.tw_scrollbar_handle_tint_color_mtrl_light : R.color.tw_scrollbar_handle_tint_color_mtrl_dark), 255);
+            this.mDefaultColor = alphaComponent;
+            int alphaComponent2 = setAlphaComponent(primaryColor, 153);
+            this.mActivatedColor = alphaComponent2;
+            this.mBgDrawable.setValue(dimension);
+            this.mBgDrawable.setArgb(alphaComponent);
+            this.mBgDrawable.invalidateSelf();
+            ValueAnimator ofFloat = ValueAnimator.ofFloat(0.0f, 1.0f);
+            this.mWidthAnimator = ofFloat;
+            ofFloat.setDuration(350L);
+            ofFloat.setInterpolator(new PathInterpolator(0.22f, 0.25f, 0.0f, 1.0f));
+            ofFloat.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.SemFastScroller.SemFastScrollThumbAnimator.1
+                @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    SemFastScrollThumbAnimator.this.mBgDrawable.setValue(SemFastScrollThumbAnimator.this.mMinWidthPx + ((SemFastScrollThumbAnimator.this.mMaxWidthPx - SemFastScrollThumbAnimator.this.mMinWidthPx) * ((Float) valueAnimator.getAnimatedValue()).floatValue()));
+                    SemFastScrollThumbAnimator.this.mBgDrawable.invalidateSelf();
+                }
+            });
+            ValueAnimator ofArgb = ValueAnimator.ofArgb(alphaComponent, alphaComponent2);
+            this.mColorAnimator = ofArgb;
+            ofArgb.setDuration(350L);
+            ofArgb.setInterpolator(new PathInterpolator(0.0f, 0.0f, 1.0f, 1.0f));
+            ofArgb.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() { // from class: android.widget.SemFastScroller.SemFastScrollThumbAnimator.2
+                @Override // android.animation.ValueAnimator.AnimatorUpdateListener
+                public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                    SemFastScrollThumbAnimator.this.mBgDrawable.setArgb(((Integer) valueAnimator.getAnimatedValue()).intValue());
+                    SemFastScrollThumbAnimator.this.mBgDrawable.invalidateSelf();
+                }
+            });
+        }
+
+        public void setDragging(boolean z) {
+            if (this.mIsDragging != z) {
+                this.mIsDragging = z;
+                if (z) {
+                    this.mWidthAnimator.setFloatValues(0.0f, 1.0f);
+                    this.mColorAnimator.setIntValues(this.mDefaultColor, this.mActivatedColor);
+                } else {
+                    this.mWidthAnimator.setFloatValues(1.0f, 0.0f);
+                    this.mColorAnimator.setIntValues(this.mActivatedColor, this.mDefaultColor);
+                }
+                this.mWidthAnimator.start();
+                this.mColorAnimator.start();
+            }
+        }
+
+        public void dispose() {
+            this.mWidthAnimator.removeAllUpdateListeners();
+            this.mWidthAnimator.cancel();
+            this.mColorAnimator.removeAllUpdateListeners();
+            this.mColorAnimator.cancel();
+        }
+
+        private int setAlphaComponent(int i, int i2) {
+            if (i2 < 0 || i2 > 255) {
+                throw new IllegalArgumentException("alpha must be between 0 and 255.");
+            }
+            return (16777215 & i) | (i2 << 24);
+        }
+
+        private int getPrimaryColor(Context context) {
+            TypedValue typedValue = new TypedValue();
+            context.getTheme().resolveAttribute(16843827, typedValue, true);
+            return context.getResources().getColor(typedValue.resourceId, null);
+        }
+
+        private boolean isLightTheme(Context context) {
+            TypedValue typedValue = new TypedValue();
+            return context.getTheme().resolveAttribute(16844176, typedValue, true) && typedValue.data != 0;
+        }
+    }
+}

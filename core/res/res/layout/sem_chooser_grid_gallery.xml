@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/sem_chooser_frame_root" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.android.internal.widget.RecyclerView android:orientation="horizontal" android:id="@id/sem_chooser_multi_recyclerview" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+        <LinearLayout android:gravity="center" android:orientation="horizontal" android:id="@id/sem_chooser_toast_container" android:background="@drawable/sem_chooser_private_toast_bg" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="@dimen/sem_chooser_private_share_toast_height" android:layout_marginTop="@dimen/sem_chooser_private_share_toast_margin" android:layout_marginBottom="@dimen/sem_chooser_private_share_toast_margin" android:layout_alignBottom="@id/sem_chooser_multi_recyclerview">
+            <ImageView android:padding="@dimen/sem_chooser_private_share_toast_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/sem_chooser_private_share_icon" />
+            <TextView android:textSize="@dimen/sem_chooser_private_share_text_size" android:textColor="#ffffffff" android:gravity="center" android:id="@id/sem_chooser_private_share_textview" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sem_chooser_private_share_toast_msg" android:fontFamily="roboto-medium" android:paddingEnd="@dimen/sem_chooser_private_share_toast_padding_end" />
+        </LinearLayout>
+    </RelativeLayout>
+    <com.android.IntentResolver.widget.ResolverDrawerLayout android:id="@id/contentPanel" android:layout_width="fill_parent" android:layout_height="fill_parent" android:maxWidth="@dimen/resolver_max_width" app:maxCollapsedHeight="@dimen/sem_chooser_horizontal_max_collapsed_height" app:maxCollapsedHeightSmall="@dimen/sem_chooser_max_collapsed_height_small">
+        <RelativeLayout android:id="@id/chooser_header" android:background="@drawable/sem_resolver_background_material" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="22.0dip" app:layout_alwaysShow="true">
+            <ImageView android:id="@id/drag" android:layout_width="15.0dip" android:layout_height="2.0dip" android:layout_marginTop="9.0dip" android:layout_marginBottom="9.0dip" android:src="@drawable/sem_chooser_drag_handle" android:tint="@color/sem_resolver_handle_color" android:layout_alignParentTop="true" android:layout_centerHorizontal="true" />
+            <TextView android:textAppearance="?windowTitleStyle" android:textSize="@dimen/sem_resolver_pagemode_titlepanel_text_size" android:textStyle="bold" android:textColor="@color/sem_resolver_title_text_color" android:gravity="start|bottom|center" android:layout_gravity="bottom" android:id="@id/title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@id/drag" android:textAllCaps="@bool/sem_resolver_title_panel_default_text_all_caps" android:fontFamily="sec-roboto-light" android:paddingStart="?dialogPreferredPadding" android:paddingEnd="?dialogPreferredPadding" android:layout_toStartOf="@id/sem_title_content_text" android:layout_alignParentStart="true" />
+        </RelativeLayout>
+        <FrameLayout android:id="@id/content_preview_container" android:background="@color/sem_resolver_bg_color" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        <TabHost android:id="@id/profile_tabhost" android:background="@color/sem_resolver_bg_color" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_centerHorizontal="true" android:importantForAccessibility="no">
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <TabWidget android:id="@id/tabs" android:background="@color/sem_resolver_bg_color" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentBottom="true" />
+                <View android:id="@id/resolver_tab_divider" android:background="?colorBackground" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="1.0dip" android:foreground="?dividerVertical" />
+                <include layout="@layout/sem_chooser_title_multi_select" />
+                <FrameLayout android:id="@id/tabcontent" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <com.android.intentresolver.ResolverViewPager android:id="@id/profile_pager" android:layout_width="fill_parent" android:layout_height="wrap_content" android:overScrollMode="always" />
+                </FrameLayout>
+            </LinearLayout>
+        </TabHost>
+    </com.android.IntentResolver.widget.ResolverDrawerLayout>
+</FrameLayout>

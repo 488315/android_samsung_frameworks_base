@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector android:height="24.0dip" android:width="24.0dip" android:viewportWidth="24.0" android:viewportHeight="24.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:name="_R_G">
+        <group android:name="_R_G_L_1_G_N_1_T_0" android:scaleX="0.1" android:scaleY="0.1" android:translateX="12.0" android:translateY="12.0">
+            <group android:name="_R_G_L_1_G">
+                <path android:name="_R_G_L_1_G_D_0_P_0" android:fillColor="#ffffffff" android:pathData=" M66.67 -27.59 C66.67,-27.59 66.67,-66.67 66.67,-66.67 C66.67,-66.67 27.59,-66.67 27.59,-66.67 C27.59,-66.67 0,-94.25 0,-94.25 C0,-94.25 -27.58,-66.67 -27.58,-66.67 C-27.58,-66.67 -66.66,-66.67 -66.66,-66.67 C-66.66,-66.67 -66.66,-27.59 -66.66,-27.59 C-66.66,-27.59 -94.25,0 -94.25,0 C-94.25,0 -66.66,27.58 -66.66,27.58 C-66.66,27.58 -66.66,66.66 -66.66,66.66 C-66.66,66.66 -27.58,66.66 -27.58,66.66 C-27.58,66.66 0,94.25 0,94.25 C0,94.25 27.59,66.66 27.59,66.66 C27.59,66.66 66.67,66.66 66.67,66.66 C66.67,66.66 66.67,27.58 66.67,27.58 C66.67,27.58 94.25,0 94.25,0 C94.25,0 66.67,-27.59 66.67,-27.59c  M50 20.66 C50,20.66 50,50 50,50 C50,50 20.67,50 20.67,50 C20.67,50 0,70.66 0,70.66 C0,70.66 -20.66,50 -20.66,50 C-20.66,50 -50,50 -50,50 C-50,50 -50,20.66 -50,20.66 C-50,20.66 -70.66,0 -70.66,0 C-70.66,0 -50,-20.67 -50,-20.67 C-50,-20.67 -50,-50 -50,-50 C-50,-50 -20.66,-50 -20.66,-50 C-20.66,-50 0,-70.67 0,-70.67 C0,-70.67 20.67,-50 20.67,-50 C20.67,-50 50,-50 50,-50 C50,-50 50,-20.67 50,-20.67 C50,-20.67 70.67,0 70.67,0 C70.67,0 50,20.66 50,20.66c " android:fillAlpha="1.0" android:fillType="nonZero" />
+            </group>
+        </group>
+        <group android:name="_R_G_L_0_G" android:scaleX="0.1" android:scaleY="0.1" android:translateX="12.0" android:translateY="12.0">
+            <path android:name="_R_G_L_0_G_D_0_P_0" android:fillColor="#ffffffff" android:pathData=" M0 -32.5 C17.95,-32.5 32.5,-17.95 32.5,0 C32.5,17.95 17.95,32.5 0,32.5 C-17.95,32.5 -32.5,17.95 -32.5,0 C-32.5,-17.95 -17.95,-32.5 0,-32.5c " android:fillAlpha="1.0" android:fillType="nonZero" />
+            <path android:name="_R_G_L_0_G_D_1_P_0" android:pathData=" M0 -32.5 C17.95,-32.5 32.5,-17.95 32.5,0 C32.5,17.95 17.95,32.5 0,32.5 C-17.95,32.5 -32.5,17.95 -32.5,0 C-32.5,-17.95 -17.95,-32.5 0,-32.5c " android:strokeColor="#ffffffff" android:strokeWidth="17.0" android:strokeLineCap="round" android:strokeLineJoin="round" android:strokeAlpha="1.0" />
+        </group>
+    </group>
+    <group android:name="time_group" />
+</vector>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <stroke android:width="@dimen/kg_biometric_fingerprint_guide_popup_stroke_width" android:color="@color/keyguard_biometric_fingerprint_guide_popup_stroke_color" />
+            <solid android:color="@color/keyguard_biometric_fingerprint_guide_popup_background_color" />
+            <corners android:radius="@dimen/kg_biometric_fingerprint_guide_popup_radius" />
+            <padding android:left="@dimen/kg_biometric_fingerprint_guide_popup_padding_start_end" android:top="@dimen/kg_biometric_fingerprint_guide_popup_padding_top_bottom" android:right="@dimen/kg_biometric_fingerprint_guide_popup_padding_start_end" android:bottom="@dimen/kg_biometric_fingerprint_guide_popup_padding_top_bottom" />
+        </shape>
+    </item>
+</layer-list>

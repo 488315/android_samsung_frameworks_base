@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<scale android:scaleWidth="100%" android:scaleGravity="center"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <vector android:height="32.0dip" android:width="69.0dip" android:autoMirrored="true" android:viewportWidth="69.0" android:viewportHeight="34.0">
+        <path android:fillColor="@color/tw_progress_color_thumb" android:pathData="M17,17m-17,0a17,17 0,1 1,34 0a17,17 0,1 1,-34 0" android:strokeColor="#00000000" android:strokeWidth="1.0" android:fillType="evenOdd" />
+    </vector>
+</scale>

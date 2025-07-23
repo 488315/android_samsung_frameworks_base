@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="mmiError">"정의되지 않은 부가서비스입니다.
+고객 서비스 센터로 전화해주십시요."</string>
+</resources>

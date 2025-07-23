@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector android:height="14.0dip" android:width="24.0dip" android:viewportWidth="24.0" android:viewportHeight="14.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:pathData="@string/battery_unified_frame_path_string" android:strokeColor="#ff000000" android:strokeWidth="1.5" />
+    <path android:fillColor="#ff000000" android:pathData="M0,4C0,3.448 0.448,3 1,3H1.5V11H1C0.448,11 0,10.552 0,10V4Z" />
+</vector>

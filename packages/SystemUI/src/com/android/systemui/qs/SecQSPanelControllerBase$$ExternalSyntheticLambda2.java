@@ -1,0 +1,31 @@
+package com.android.systemui.qs;
+
+import com.android.systemui.qs.bar.BarItemImpl;
+import java.util.function.Consumer;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final /* synthetic */ class SecQSPanelControllerBase$$ExternalSyntheticLambda2 implements Consumer {
+    public final /* synthetic */ int $r8$classId;
+    public final /* synthetic */ SecQSPanelControllerBase f$0;
+
+    public /* synthetic */ SecQSPanelControllerBase$$ExternalSyntheticLambda2(SecQSPanelControllerBase secQSPanelControllerBase, int i) {
+        this.$r8$classId = i;
+        this.f$0 = secQSPanelControllerBase;
+    }
+
+    @Override // java.util.function.Consumer
+    public final void accept(Object obj) {
+        int i = this.$r8$classId;
+        SecQSPanelControllerBase secQSPanelControllerBase = this.f$0;
+        BarItemImpl barItemImpl = (BarItemImpl) obj;
+        switch (i) {
+            case 0:
+                SecQSPanelControllerBase.m2882$r8$lambda$DEp4lo7MDBmfDD2MwoTLB3AMIw(secQSPanelControllerBase, barItemImpl);
+                break;
+            default:
+                SecQSPanelControllerBase.$r8$lambda$1i4lGWbt4JPhc9SgoAITwPQZoew(secQSPanelControllerBase, barItemImpl);
+                break;
+        }
+    }
+}

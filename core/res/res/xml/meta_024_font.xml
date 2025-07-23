@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData AppendTo="Common" IsFrameworkResource="true" Name="Common" PackageNameSuffix="common" TargetApi="19" TargetPackageName="android" VersionCode="1" VersionName="">
+        <Property Comment="Font: Main text color" DefaultValue="#ff252525" DestAttribName="tw_primary_text_color_light,tw_primary_text_color_dark" POption="Mandatory" UID="24-A" ValueType="TextColor" />
+        <Property Comment="Font: Sub text color" DefaultValue="#ff979797" DestAttribName="tw_secondary_text_color_light,tw_secondary_text_color_dark" POption="Mandatory" UID="24-B" ValueType="TextColor" />
+        <Property Comment="Font: Guide text color" DefaultValue="#99252525" DestAttribName="" Opacity="60" UID="24-D" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Font: Point text color (=primay dark color)" DefaultValue="#ff0074d4" DestAttribName="sem_color_primary_dark_light,sem_color_primary_dark" POption="Mandatory" UID="24-E" ValueType="TextColor" />
+        <Property Comment="Font: Input text color" DefaultValue="#ff252525" DestAttribName="" UID="24-F" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Font: Error text color" DefaultValue="#ffdd2c00" DestAttribName="" POption="Mandatory" UID="24-G" ValueType="TextColor" />
+        <Property Comment="Font: Accept text color" DefaultValue="#ff00d300" DestAttribName="" POption="Mandatory" UID="24-H" ValueType="TextColor" />
+    </AppMetaData>
+    <AppMetaData BuildType="Font" Name="Font" TargetApi="19" TargetPackageName="com.samsung.font" VersionCode="1" VersionName="">
+        <Property Comment="System font style" DefaultValue="Roboto-Regular.ttf" DestAttribName="system" UID="24-1" ValueType="FontStyle" />
+        <Property Comment="Clock font style" DefaultValue="SamsungNeoNum-3T.ttf" DestAttribName="clock" UID="24-2" ValueType="FontStyle" />
+        <Property Comment="Numeric font style" DefaultValue="SamsungSansNum-3Lv.ttf" DestAttribName="numeric" UID="24-3" ValueType="FontStyle" />
+    </AppMetaData>
+</ThemeMetaData>

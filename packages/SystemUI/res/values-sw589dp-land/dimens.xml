@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="volume_panel_expand_height">290.0dip</dimen>
+    <dimen name="volume_panel_expand_height_with_msg">315.0dip</dimen>
+    <dimen name="volume_panel_expand_msg_area_top_margin">268.0dip</dimen>
+    <dimen name="volume_panel_expand_row_container_margin_top">58.0dip</dimen>
+    <dimen name="volume_panel_expand_row_container_top_margin">52.0dip</dimen>
+</resources>

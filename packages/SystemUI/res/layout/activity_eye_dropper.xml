@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/screenshotView" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <androidx.picker.eyeDropper.SeslMagnifyingView android:layout_gravity="center" android:id="@id/magnifierView" android:visibility="gone" android:layout_width="160.0dip" android:layout_height="160.0dip" android:layout_marginBottom="@dimen/sesl_eyedropper_y_animation_offset" />
+    <View android:layout_gravity="center" android:id="@id/pointerView" android:background="@drawable/sesl_eyedropper_pointer" android:visibility="gone" android:layout_width="6.0dip" android:layout_height="6.0dip" android:layout_marginBottom="@dimen/sesl_eyedropper_y_animation_offset" />
+</FrameLayout>

@@ -1,0 +1,82 @@
+package com.android.systemui.mdm;
+
+import android.content.Context;
+import android.util.Log;
+import android.widget.FrameLayout;
+import com.android.keyguard.KeyguardSecSimPinViewController$$ExternalSyntheticOutline0;
+import com.android.systemui.statusbar.phone.CentralSurfacesImpl;
+import com.android.systemui.statusbar.policy.KeyguardStateController;
+import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
+import com.samsung.android.knox.lockscreen.LockscreenOverlay;
+import com.samsung.android.knox.lockscreen.LockscreenOverlayView;
+import dagger.Lazy;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public class MdmOverlayContainer {
+    public final Context mContext;
+    public LockscreenOverlay mLockscreenOverlay;
+    public LockscreenOverlayView mMdmOverlayView;
+    public int mPreviousState;
+    public CentralSurfacesImpl mStatusBar;
+    public final Lazy mStatusBarStateControllerLazy;
+    public FrameLayout mView;
+
+    public MdmOverlayContainer(Context context, Lazy lazy) {
+        this.mContext = context;
+        this.mStatusBarStateControllerLazy = lazy;
+    }
+
+    public final void updateMdmPolicy() {
+        CentralSurfacesImpl centralSurfacesImpl = this.mStatusBar;
+        if (centralSurfacesImpl.mStatusBarStateController.getState() == 1) {
+            KeyguardStateController keyguardStateController = centralSurfacesImpl.mKeyguardStateController;
+            if (((KeyguardStateControllerImpl) keyguardStateController).mShowing && !centralSurfacesImpl.mDozing && !((KeyguardStateControllerImpl) keyguardStateController).mOccluded) {
+                try {
+                    if (this.mLockscreenOverlay == null) {
+                        this.mLockscreenOverlay = LockscreenOverlay.getInstance(this.mContext);
+                    }
+                    if (!this.mLockscreenOverlay.isConfigured()) {
+                        FrameLayout frameLayout = this.mView;
+                        if (frameLayout != null) {
+                            LockscreenOverlayView lockscreenOverlayView = this.mMdmOverlayView;
+                            if (lockscreenOverlayView != null) {
+                                frameLayout.removeView(lockscreenOverlayView);
+                                this.mMdmOverlayView = null;
+                            }
+                            this.mView.setVisibility(8);
+                            return;
+                        }
+                        return;
+                    }
+                    if (this.mView == null) {
+                        Log.d("MdmOverlayContainer", "mMDMOverlayContainer is null");
+                        return;
+                    }
+                    if (this.mMdmOverlayView == null) {
+                        LockscreenOverlayView lockscreenOverlayView2 = new LockscreenOverlayView(this.mContext);
+                        this.mMdmOverlayView = lockscreenOverlayView2;
+                        this.mView.addView(lockscreenOverlayView2, -1, -1);
+                    } else {
+                        Log.d("MdmOverlayContainer", "mMdmOverlayView is not null!!");
+                        this.mMdmOverlayView.setVisibility(0);
+                    }
+                    this.mView.setVisibility(0);
+                    return;
+                } catch (Exception e) {
+                    KeyguardSecSimPinViewController$$ExternalSyntheticOutline0.m("Lockscren Overlay creation fails: ", e, "MdmOverlayContainer");
+                    return;
+                }
+            }
+        }
+        FrameLayout frameLayout2 = this.mView;
+        if (frameLayout2 != null) {
+            LockscreenOverlayView lockscreenOverlayView3 = this.mMdmOverlayView;
+            if (lockscreenOverlayView3 != null) {
+                frameLayout2.removeView(lockscreenOverlayView3);
+                this.mMdmOverlayView = null;
+            }
+            this.mView.setVisibility(8);
+        }
+    }
+}

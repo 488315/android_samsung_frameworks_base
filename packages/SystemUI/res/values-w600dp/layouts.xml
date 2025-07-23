@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="layout" name="sud_glif_expressive_blank_template_content_layout">@layout/sud_glif_expressive_blank_template_content_wide</item>
+    <item type="layout" name="sud_glif_expressive_list_template_content_layout">@layout/sud_glif_expressive_list_template_content_wide</item>
+    <item type="layout" name="sud_glif_expressive_preference_template_content_layout">@layout/sud_glif_expressive_preference_template_content_wide</item>
+    <item type="layout" name="sud_glif_expressive_recycler_template_content_layout">@layout/sud_glif_expressive_recycler_template_content_wide</item>
+    <item type="layout" name="sud_glif_expressive_template_content_layout">@layout/sud_glif_expressive_template_content_wide</item>
+</resources>

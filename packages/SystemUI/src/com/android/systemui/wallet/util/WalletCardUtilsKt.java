@@ -1,0 +1,33 @@
+package com.android.systemui.wallet.util;
+
+import android.service.quickaccesswallet.WalletCard;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public abstract class WalletCardUtilsKt {
+    public static final List getPaymentCards(List list) {
+        List list2 = list;
+        if ((list2 instanceof Collection) && list2.isEmpty()) {
+            return list;
+        }
+        Iterator it = list2.iterator();
+        while (true) {
+            if (!it.hasNext()) {
+                break;
+            }
+            if (((WalletCard) it.next()).getCardType() != 0) {
+                list = new ArrayList();
+                for (Object obj : list2) {
+                    if (((WalletCard) obj).getCardType() == 1) {
+                        list.add(obj);
+                    }
+                }
+            }
+        }
+        return list;
+    }
+}

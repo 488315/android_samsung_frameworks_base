@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="round_scrollbar_width">6.0dip</dimen>
+    <dimen name="screen_percentage_0416">9.359985dip</dimen>
+    <dimen name="screen_percentage_05">11.25dip</dimen>
+    <dimen name="screen_percentage_052">11.699982dip</dimen>
+    <dimen name="screen_percentage_10">22.5dip</dimen>
+    <dimen name="screen_percentage_12">27.0dip</dimen>
+    <dimen name="screen_percentage_15">33.75dip</dimen>
+    <dimen name="screen_percentage_3646">82.45999dip</dimen>
+</resources>

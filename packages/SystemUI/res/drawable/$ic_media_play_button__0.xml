@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set android:ordering="together"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt">
+    <objectAnimator android:interpolator="@drawable/$$ic_media_play_button__0__0" android:duration="333" android:startOffset="0" android:valueFrom="M-4.69 -16.69 C-4.69,-16.69 20.25,-1.25 20.31,0.25 C20.38,1.75 -4.88,16.89 -4.88,16.89 C-6.94,18.25 -8.56,19.4 -9.75,19.58 C-10.94,19.75 -12.19,18.94 -12.12,16.14 C-12.09,14.76 -12.12,15.92 -12.12,14.26 C-12.12,14.26 -11.94,-16.44 -11.94,-16.44 C-11.94,-18.09 -12.09,-19.69 -10.44,-19.69 C-10.44,-19.69 -9.5,-19.56 -9.5,-19.56 C-8.62,-19.12 -6.19,-17.44 -4.69,-16.69c " android:valueTo="M-5.06 -18 C-5.06,-18 -5.06,-1.24 -5.06,-1.24 C-5.06,-1.24 -5.06,17.7 -5.06,17.7 C-5.06,19.36 -6.41,20.7 -8.06,20.7 C-8.06,20.7 -16,20.7 -16,20.7 C-17.66,20.7 -19,19.36 -19,17.7 C-19,17.7 -19,-18 -19,-18 C-19,-19.66 -17.66,-21 -16,-21 C-16,-21 -8.06,-21 -8.06,-21 C-6.41,-21 -5.06,-19.66 -5.06,-18c " android:valueType="pathType" android:propertyName="pathData" />
+</set>

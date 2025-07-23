@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/sud_system_surface_bright_dark" />
+    <corners android:radius="@dimen/sud_card_view_container_default_radius" />
+</shape>

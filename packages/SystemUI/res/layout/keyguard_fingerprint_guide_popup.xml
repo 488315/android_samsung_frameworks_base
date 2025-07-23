@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.keyguard.biometrics.KeyguardFingerprintGuidePopup android:layout_gravity="center|left|top" android:id="@id/keyguard_fingerprint_guide_popup" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.systemui.widget.SystemUITextView android:textSize="@dimen/kg_biometric_view_text_font_size" android:textColor="@color/keyguard_biometric_fingerprint_guide_popup_text_color" android:gravity="center" android:id="@id/keyguard_guide_text" android:background="@drawable/keyguard_fingerprint_popup_drawable" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+</com.android.keyguard.biometrics.KeyguardFingerprintGuidePopup>

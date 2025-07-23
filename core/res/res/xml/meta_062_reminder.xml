@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Reminder" TargetApi="26" TargetPackageName="com.samsung.android.app.reminder" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="primary_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_primary_color" UID="62-A" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="primary_dark_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_primary_dark_color" UID="62-B" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="common_component_color" DefaultValue="#00000000" DestAttribName="opentheme_common_component_color" UID="62-C" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="color_control_activated" DefaultValue="#ff6762d1" DestAttribName="opentheme_color_control_activated" UID="62-D" ValueRef="1-D" ValueType="Color" />
+        <Property Comment="status_bar_background_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_status_bar_background_color" UID="62-S-1" ValueRef="1-51" ValueType="Color" />
+        <Property Comment="_status_bar_icon_color" DefaultValue="true" DestAttribName="opentheme_status_bar_icon_color" UID="62-S-2" ValueRef="1-51-1" ValueType="Bool" />
+        <Property Comment="edit_mode_status_bar_background_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_edit_mode_status_bar_background_color" UID="62-S-3" ValueRef="1-51" ValueType="Color" />
+        <Property Comment="background_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_actionbar_bg_color" UID="62-1-1" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="extended_action_bar_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_extended_action_bar_bg_color" UID="62-1-1-1" ValueRef="1-1-1-1" ValueType="Color" />
+        <Property Comment="title_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_title_text_color" UID="62-1-3" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="extended_action_bar_title_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_extended_action_bar_title_text_color" UID="62-1-3-1" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="button_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_button_text_color" UID="62-1-4" ValueRef="1-11-1" ValueType="Color" />
+        <Property Comment="extended_button_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_extended_button_color" UID="62-1-5" ValueRef="1-11-1" ValueType="Color" />
+        <Property Comment="back_icon_tint_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_back_icon_tint_color" UID="62-1-6" ValueRef="62-1-4" ValueType="Color" />
+        <Property Comment="back_icon_image" DefaultValue="" DestAttribName="opentheme_back_icon_image" DestQualifiers="xxxhdpi" UID="62-1-7" ValueRef="1-11-4" ValueType="Image" />
+        <Property Comment="dynamic title button background color" DefaultValue="#ff736cf8" DestAttribName="opentheme_dynamic_title_button_background_color" UID="62-1-16-1" ValueRef="1-7-1-D" ValueType="Color" />
+        <Property Comment="dynamic title button text color" DefaultValue="#ff736cf8" DestAttribName="opentheme_dynamic_title_button_text_color" UID="62-1-16-2" ValueRef="1-7-2-D" ValueType="Color" />
+        <Property Comment="text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_text_color" UID="62-1-10" ValueRef="1-49-6" ValueType="Color" />
+        <Property Comment="on_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_on_color" UID="62-1-11" ValueRef="1-49-7" ValueType="Color" />
+        <Property Comment="on_image" DefaultValue="" DestAttribName="opentheme_on_image" DestQualifiers="" ImageSize="32X32" UID="62-1-12" ValueRef="1-49-7-1" ValueType="BgImage" />
+        <Property Comment="off_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_off_color" UID="62-1-13" ValueRef="1-49-8" ValueType="Color" />
+        <Property Comment="off_image" DefaultValue="" DestAttribName="opentheme_off_image" DestQualifiers="" ImageSize="32X32" UID="62-1-14" ValueRef="1-49-8-1" ValueType="BgImage" />
+        <Property Comment="light_navigation_bar_flag" DefaultValue="true" DestAttribName="opentheme_light_navigation_bar_flag" UID="62-1-15" ValueRef="1-69-2" ValueType="Bool" />
+        <Property Comment="divider_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_divider_color" UID="62-2-1" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="fab background color" DefaultValue="#fffafafa" DestAttribName="opentheme_quick_add_fab_background_color" UID="62-2-2" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="fab icon tint color" DefaultValue="#fffafafa" DestAttribName="opentheme_quick_add_fab_icon_tint_color" UID="62-2-4" ValueRef="1-8-3" ValueType="TintColor" />
+        <Property Comment="quick add background stroke color" DefaultValue="#ffebebeb" DestAttribName="opentheme_quick_add_background_stroke_color" UID="62-2-5" ValueRef="1-59-4" ValueType="Color" />
+        <Property Comment="quick add highlight color" DefaultValue="#ff0381fe" DestAttribName="opentheme_quick_add_highlight_color" UID="62-2-6" ValueRef="1-A" ValueType="TextColor" />
+        <Property Comment="quick add done button color" DefaultValue="#ffd4d4d4" DestAttribName="opentheme_quick_add_done_button_color" UID="62-2-7" ValueRef="1-22-4" ValueType="Color" />
+        <Property Comment="quick add hint text color" DefaultValue="#ffa9a9a9" DestAttribName="opentheme_quick_add_hint_text_color" UID="62-2-8" ValueRef="1-59-4" ValueType="TextColor" />
+        <Property Comment="quick add check icon color" DefaultValue="#fffafafa" DestAttribName="opentheme_quick_add_check_icon_color" UID="62-2-9" ValueRef="1-E" ValueType="Color" />
+        <Property Comment="main_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_main_text_color" UID="62-3-1" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="list_back_icon_tint_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_list_back_icon_tint_color" UID="62-3-1-1" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="sub_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_sub_text_color" UID="62-3-2" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="list_chunk_bg_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_list_chunk_bg_color" UID="62-3-2-1" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="list_card_bg_image" DefaultValue="" DestAttribName="opentheme_list_card_bg_image" DestQualifiers="" UID="62-3-2-2" ValueRef="1-18-2" ValueType="BgImage" />
+        <Property Comment="sub_header_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_sub_header_text_color" UID="62-3-3" ValueRef="1-19-2" ValueType="Color" />
+        <Property Comment="sub_header_background_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_sub_header_background_color" UID="62-3-4" ValueRef="1-19-1" ValueType="Color" />
+        <Property Comment="repeat_icon_tint_color" DefaultValue="#ff454545" DestAttribName="opentheme_repeat_icon_tint_color" UID="62-3-9" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="web_link_text_color" DefaultValue="#ff454545" DestAttribName="opentheme_web_link_text_color" UID="62-3-10" ValueRef="1-3-4" ValueType="Color" />
+        <Property Comment="todo_unchecked_icon_tint_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_todo_unchecked_icon_tint_color" UID="62-3-12" ValueRef="1-3-3" ValueType="Color" />
+        <Property Comment="todo_checked_icon_tint_color" DefaultValue="#ffa7a6a6" DestAttribName="opentheme_todo_checked_icon_tint_color" Opacity="60" UID="62-3-12-1" ValueRef="1-3-3" ValueType="Color" />
+        <Property Comment="group icon bg color" DefaultValue="#0f000000" DestAttribName="opentheme_group_icon_bg_color" UID="62-3-13" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="group icon text color" DefaultValue="#ff252525" DestAttribName="opentheme_group_icon_tint_color,opentheme_group_crown_icon_tint_color" UID="62-3-14" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="list overdue reminder text color" DefaultValue="#ff252525" DestAttribName="opentheme_list_overdue_reminder_text_color" UID="62-3-15" ValueRef="1-23-8" ValueType="Color" />
+        <Property Comment="selected list background color" DefaultValue="#ff252525" DestAttribName="opentheme_selected_list_bg_color" UID="62-3-16" ValueRef="1-13-4" ValueType="Color" />
+        <Property Comment="tip_card_background_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_tip_card_background_color" UID="62-4-1" ValueRef="1-48-2" ValueType="Color" />
+        <Property Comment="tip_card_close_icon_tint_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_tip_card_close_icon_tint_color" UID="62-4-2" ValueRef="1-48-4" ValueType="Color" />
+        <Property Comment="tip_text_button_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_tip_text_button_color" UID="62-4-3" ValueRef="1-48-4" ValueType="Color" />
+        <Property Comment="tip_action_button_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_tip_action_button_color" UID="62-4-4" ValueRef="1-48-5" ValueType="Color" />
+        <Property Comment="search background color" DefaultValue="#ff736cf8" DestAttribName="opentheme_search_background_color" Opacity="55" UID="62-5-1" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="search sub header text color" DefaultValue="#ff736cf8" DestAttribName="opentheme_search_sub_header_text_color" UID="62-5-2" ValueRef="1-19-2" ValueType="Color" />
+        <Property Comment="search clear icon tint color" DefaultValue="#ff736cf8" DestAttribName="opentheme_search_clear_all_text_color" UID="62-5-3" ValueRef="1-16-1" ValueType="Color" />
+        <Property Comment="search suggestion chip background color" DefaultValue="#0ffafafa" DestAttribName="opentheme_search_suggestion_chip_background" UID="62-5-4" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="search suggestion chip stroke color" DefaultValue="#66252525" DestAttribName="opentheme_search_suggestion_chip_stroke_color" UID="62-5-5" ValueRef="1-40-3" ValueType="Color" />
+        <Property Comment="history_icon_tint_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_history_icon_tint_color" UID="62-5-6" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="search suggestion text color" DefaultValue="#ff636363" DestAttribName="opentheme_search_suggestion_text_color" UID="62-5-7" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="search_button_bg_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_search_button_bg_color" UID="62-5-9" ValueRef="1-7-1-D" ValueType="Color" />
+        <Property Comment="search_button_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_search_button_text_color" UID="62-5-10" ValueRef="1-7-2-D" ValueType="Color" />
+        <Property Comment="location_picker_list_footer_text_color" DefaultValue="#ff505050" DestAttribName="opentheme_location_picker_list_footer_text_color" UID="62-5-11" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="search_suggestion_date_text_color" DefaultValue="#ff979797" DestAttribName="opentheme_search_suggestion_date_text_color" UID="62-5-12" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="search recent history delete icon color" DefaultValue="#ff4d4d4d" DestAttribName="opentheme_search_recent_cancel_icon_tint_color" UID="62-5-13" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="search recent history text color" DefaultValue="#ff4d4d4d" DestAttribName="opentheme_search_recent_text_color" UID="62-5-14" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="search recent chip background color" DefaultValue="#0d252525" DestAttribName="opentheme_search_recent_chip_background" UID="62-5-15" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="search_selected_condition_button_bg_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_search_selected_condition_button_bg_color" UID="62-6-1" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="search_selected_condition_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_search_selected_condition_text_color" UID="62-6-2" ValueRef="1-E" ValueType="Color" />
+        <Property Comment="search_unselected_condition_button_bg_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_search_unselected_condition_button_bg_color" UID="62-6-3" ValueRef="1-7-1-D" ValueType="Color" />
+        <Property Comment="search_unselected_condition_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_search_unselected_condition_text_color" UID="62-6-4" ValueRef="1-7-2-D" ValueType="Color" />
+        <Property Comment="bottom_tab_icon_tint_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_bottom_tab_icon_tint_color" UID="62-7-1" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="bottom_tab_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_bottom_tab_text_color" UID="62-7-2" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="bottom_tab_navigation_background_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_bottom_tab_navigation_background_color" UID="62-7-3" ValueRef="1-14-1" ValueType="Color" />
+        <Property Comment="bottom_tab_navigation_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_bottom_tab_navigation_text_color" UID="62-7-4" ValueRef="1-14-2" ValueType="Color" />
+        <Property Comment="edit_view_main_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_edit_view_main_text_color" UID="62-8-1" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="edit_background_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_edit_background_color" UID="62-8-1-1" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="edit_view_list_background_image" DefaultValue="" DestAttribName="opentheme_edit_view_list_background_image" DestQualifiers="" UID="62-8-1-2" ValueRef="1-18-2" ValueType="BgImage" />
+        <Property Comment="edit_text_hint_color" DefaultValue="#ff736cf8" DestAttribName="openTheme_edit_text_hint_color" UID="62-8-1-3" ValueRef="24-D" ValueType="Color" />
+        <Property Comment="edit_text_todo_hint_color" DefaultValue="#ff736cf8" DestAttribName="openTheme_edit_text_todo_hint_color" UID="62-8-1-4" ValueRef="24-D" ValueType="Color" />
+        <Property Comment="edit_view_divider" DefaultValue="" DestAttribName="opentheme_edit_view_divider" UID="62-8-2" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="image_round_stroke_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_image_round_stroke_color" UID="62-8-3" ValueRef="1-7-1" ValueType="Color" />
+        <Property Comment="Dialog Description text color" DefaultValue="#ff505050" DestAttribName="common_dialog_single_choice_description_text_color" UID="62-8-4" ValueRef="1-9-9" ValueType="TextColor" />
+        <Property Comment="Dialog Main text color" DefaultValue="#ff252525" DestAttribName="common_dialog_main_text_color" UID="62-8-7" ValueRef="1-9-6" ValueType="TextColor" />
+        <Property Comment="bottom_bar_background_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_edit_bottom_bar_bg_color" UID="62-8-9" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="bottom_bar_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_edit_bottom_bar_text_color" UID="62-8-10" ValueRef="1-12-4" ValueType="Color" />
+        <Property Comment="edit_text_cursor_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_edit_text_cursor_color" UID="62-8-11" ValueRef="62-A" ValueType="Color" />
+        <Property Comment="2d_icon_tint_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_2d_icon_tint_color" UID="62-8-12" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="edit_view_condition_button_text_color" DefaultValue="#ff3b3b3b" DestAttribName="opentheme_edit_view_condition_button_text_color" UID="62-8-19" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="edit_view_list_divider_color" DefaultValue="#ffe6e6e6" DestAttribName="opentheme_edit_view_list_divider_color" UID="62-8-20" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="edit_view_color_icon_tint_color" DefaultValue="#ff908b8b" DestAttribName="opentheme_edit_view_color_icon_tint_color,opentheme_detail_view_favorite_icon_tint_unselected_color" UID="62-8-21" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="detail_view_favorite_icon_tint_selected_color" DefaultValue="#fff5b800" DestAttribName="opentheme_detail_view_favorite_icon_tint_selected_color" UID="62-8-21-1" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="detail_view_favorite_icon_tint_unselected_color_disable" DefaultValue="#ff908b8b" DestAttribName="opentheme_detail_view_favorite_icon_tint_unselected_color_disable" Opacity="40" UID="62-8-21-2" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="detail_view_favorite_icon_tint_selected_color_disable" DefaultValue="#fff5b800" DestAttribName="opentheme_detail_view_favorite_icon_tint_selected_color_disable" Opacity="40" UID="62-8-21-3" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="button_text_color_functional_normal" DefaultValue="#ff010101" DestAttribName="opentheme_button_text_color_functional_normal" UID="62-8-22" ValueRef="1-9-15" ValueType="Color" />
+        <Property Comment="button_text_color_functional_delete" DefaultValue="#ffdb332a" DestAttribName="opentheme_button_text_color_functional_delete" UID="62-8-23" ValueRef="1-9-16" ValueType="Color" />
+        <Property Comment="edit_drop_down_list_background_color" DefaultValue="#fffcfcfc" DestAttribName="opentheme_edit_drop_down_list_background_color" UID="62-8-24" ValueRef="1-10-1" ValueType="Color" />
+        <Property Comment="drop down list background image" DefaultValue="" DestAttribName="add_view_condition_popup_bg,duration_popup_view_background" DestQualifiers="" UID="62-8-24-1" ValueRef="1-10-1-1" ValueType="BgImage" />
+        <Property Comment="Drop down list background stroke color" DefaultValue="#ffcccccc" DestAttribName="opentheme_edit_drop_down_stroke_color" UID="62-8-24-2" ValueRef="1-10-2" ValueType="Color" />
+        <Property Comment="Selected mark icon image" DefaultValue="" DestAttribName="tw_dropdown_ic_check,common_dropdown_ic_check" DestQualifiers="sw360dp-xxxhdpi" UID="62-8-24-3" ValueRef="1-10-10" ValueType="BgImage" />
+        <Property Comment="edit_drop_down_main_text_color" DefaultValue="#ff000000" DestAttribName="opentheme_edit_drop_down_main_text_color" UID="62-8-25" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="edit_drop_down_sub_text_color" DefaultValue="#ff696969" DestAttribName="opentheme_edit_drop_down_sub_text_color" UID="62-8-26" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="add_description_text_color" DefaultValue="#ff505050" DestAttribName="opentheme_edit_description_text_color" UID="62-8-28" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="add_selected_preset_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_edit_selected_preset_text_color" UID="62-8-29" ValueRef="62-B" ValueType="Color" />
+        <Property Comment="add_unselected_preset_text_color" DefaultValue="#ff252525" DestAttribName="opentheme_edit_unselected_preset_text_color" Opacity="60" UID="62-8-30" ValueRef="1-10-3" ValueType="Color" />
+        <Property Comment="add_time_allday_btn_selected_color" DefaultValue="#ff252525" DestAttribName="opentheme_add_time_allday_btn_selected_color" UID="62-8-31" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="add_time_allday_btn_unselected_color" DefaultValue="#ff8c8c8c" DestAttribName="opentheme_add_time_allday_btn_unselected_color" UID="62-8-31-1" ValueRef="24-D" ValueType="Color" />
+        <Property Comment="edit_card_date_time_button_background_color" DefaultValue="#26000000" DestAttribName="opentheme_edit_card_date_time_button_background_color" UID="62-8-32" ValueRef="24-D" ValueType="Color" />
+        <Property Comment="edit_card_date_time_button_divider_color" DefaultValue="#19000000" DestAttribName="opentheme_edit_card_date_time_button_divider_color" UID="62-8-33" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="edit calendar location icon color" DefaultValue="#ff252525" DestAttribName="opentheme_edit_view_calendar_icon_tint_color" UID="62-8-37" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="edit preset shrink text color" DefaultValue="#ff252525" DestAttribName="opentheme_edit_preset_recommend_text_color" UID="62-8-38" ValueRef="1-19-3" ValueType="Color" />
+        <Property Comment="edit expandable icon tint color" DefaultValue="#ff252525" DestAttribName="opentheme_edit_expandable_icon_tint_color" UID="62-8-39" ValueRef="1-16-1" ValueType="Color" />
+        <Property Comment="subheader text and divider color" DefaultValue="#ff252525" DestAttribName="opentheme_car_list_subheader_text_color" UID="62-8-40" ValueRef="1-19-3" ValueType="Color" />
+        <Property Comment="condition text color" DefaultValue="#ff252525" DestAttribName="opentheme_car_list_condition_text_color" UID="62-8-41" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="Unselected repeat text and stroke color" DefaultValue="#ff676767" DestAttribName="opentheme_edit_unselected_repeat_text_color, opentheme_edit_unselected_repeat_stroke_color" UID="62-8-42" ValueRef="24-D" ValueType="Color" />
+        <Property Comment="Modified date text color" DefaultValue="#ff676767" DestAttribName="opentheme_last_modified_date_text_color" UID="62-8-43" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="location_search_bg_gradient_start" DefaultValue="#fff2f2f2" DestAttribName="opentheme_location_search_bg_gradient_start" UID="62-9-1-1" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="location_search_bg_gradient_end" DefaultValue="#f2f2f2f2" DestAttribName="opentheme_location_search_bg_gradient_end" UID="62-9-1-1-1" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="map_input_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_map_input_text_color" UID="62-9-1-2" ValueRef="1-59-3" ValueType="Color" />
+        <Property Comment="map_search_view_background_color" DefaultValue="#0c000000" DestAttribName="opentheme_map_search_view_background" UID="62-9-1-3" ValueRef="1-59-1" ValueType="Color" />
+        <Property Comment="radio_button_on_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_radio_button_on_color,opentheme_location_search_radio_button_on_off_color" UID="62-9-2" ValueRef="1-12-4" ValueType="Color" />
+        <Property Comment="radio_button_on_image" DefaultValue="" DestAttribName="opentheme_radio_button_on_image" DestQualifiers="" UID="62-9-2-1" ValueRef="1-4-1-1" ValueType="BgImage" />
+        <Property Comment="radio_button_off_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_radio_button_off_color" UID="62-9-3" ValueRef="1-12-4" ValueType="Color" />
+        <Property Comment="radio_button_off_image" DefaultValue="" DestAttribName="opentheme_radio_button_off_image" DestQualifiers="" UID="62-9-3-1" ValueRef="1-4-2-1" ValueType="BgImage" />
+        <Property Comment="location_marker_icon_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_location_marker_icon_color" UID="62-9-4" ValueRef="1-1-5" ValueType="Color" />
+        <Property Comment="location_marker_circle_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_location_marker_circle_color" UID="62-9-4-1" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="location_search_keyword_address_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_keyword_address_text_color" UID="62-9-11" ValueRef="1-1-5" ValueType="Color" />
+        <Property Comment="location popup background color" DefaultValue="#fffafafa" DestAttribName="opentheme_location_seek_bar_background_color" UID="62-9-12" ValueRef="1-10-1" ValueType="Color" />
+        <Property Comment="location popup background image" DestAttribName="location_seek_bar_background" UID="62-9-12-1" ValueRef="1-10-1-1" ValueType="BgImage" />
+        <Property Comment="location popup stroke color" DefaultValue="#ffdbdbdb" DestAttribName="opentheme_location_seek_bar_background_border_color" UID="62-9-12-2" ValueRef="1-10-2" ValueType="Color" />
+        <Property Comment="location radius popup text color" DefaultValue="#ff252525" DestAttribName="opentheme_location_seek_bar_radius_info_text_color" UID="62-9-13" ValueRef="1-10-3" ValueType="Color" />
+        <Property Comment="location selected location button text color" DefaultValue="#ff252525" DestAttribName="opentheme_location_transition_button_selected_text_color" UID="62-9-14" ValueRef="1-10-3" ValueType="Color" />
+        <Property Comment="location unselected location button text color" DefaultValue="#ff737373" DestAttribName="opentheme_location_transition_button_unselected_text_color" UID="62-9-15" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="location selected unselected divider color" DefaultValue="#ff717171" DestAttribName="opentheme_location_transition_button_divider_color" UID="62-9-16" ValueRef="1-2-1" ValueType="Color" />
+        <Property Comment="location current fab background color" DefaultValue="#fffafafa" DestAttribName="floating_current_location_button_background_color" UID="62-9-17" ValueRef="1-10-1" ValueType="Color" />
+        <Property Comment="location current fab stroke color" DefaultValue="#ffd9d9d9" DestAttribName="floating_current_location_button_stroke_color" UID="62-9-17-1" ValueRef="1-10-2" ValueType="Color" />
+        <Property Comment="location current fab image tint color" DefaultValue="#ff252525" DestAttribName="floating_current_location_button_tint_color" UID="62-9-18" ValueRef="1-10-3" ValueType="Color" />
+        <Property Comment="datepicker_background_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_datepicker_background_color" UID="62-10-1" ValueRef="1-41-1" ValueType="Color" />
+        <Property Comment="datepicker_title_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_datepicker_title_color" UID="62-10-2" ValueRef="1-41-3" ValueType="Color" />
+        <Property Comment="datepicker_dayofweek_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_datepicker_dayofweek_text_color" UID="62-10-3" ValueRef="1-41-4" ValueType="Color" />
+        <Property Comment="datepicker_day_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_datepicker_day_text_color" UID="62-10-4" ValueRef="1-41-5" ValueType="Color" />
+        <Property Comment="datepicker_arrow_icon_tint_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_datepicker_arrow_icon_tint_color" UID="62-10-5" ValueRef="1-41-8" ValueType="Color" />
+        <Property Comment="datepicker_sunday_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_datepicker_sunday_text_color" UID="62-10-6" ValueRef="1-41-11" ValueType="Color" />
+        <Property Comment="datepicker_sunday_date_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_datepicker_sunday_date_text_color" UID="62-10-7" ValueRef="1-41-11-1" ValueType="Color" />
+        <Property Comment="datepicker_time_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_datepicker_time_text_color" UID="62-10-8" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="datepicker_action_button_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_datepicker_action_button_color" UID="62-10-9" ValueRef="1-9-15" ValueType="Color" />
+        <Property Comment="sound_icon_tint_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_icon_tint_color" UID="62-12-1" ValueRef="1-22-5" ValueType="Color" />
+        <Property Comment="sound_bar_progress_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_bar_progress_color" UID="62-12-2" ValueRef="1-20-2" ValueType="Color" />
+        <Property Comment="sound_bar_background_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_bar_background_color" UID="62-12-3" ValueRef="1-20-1" ValueType="Color" />
+        <Property Comment="reminder_about_page_version_info_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_version_info_text_color" UID="62-13-1" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="reminder_about_page_version_info_sub_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_version_info_sub_text_color" UID="62-13-2" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="reminder_about_page_update_button_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_update_button_text_color" UID="62-13-3" ValueRef="1-E" ValueType="Color" />
+        <Property Comment="reminder_about_page_update_button_background" DefaultValue="" DestAttribName="opentheme_update_button_background_color" UID="62-13-4" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="reminder_about_page_button_background_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_about_page_button_background_color" UID="62-13-5" ValueRef="1-7-1-D" ValueType="Color" />
+        <Property Comment="reminder_about_page_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_about_page_button_text_color" UID="62-13-6" ValueRef="1-7-2-D" ValueType="Color" />
+        <Property Comment="reminder_about_page_background_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_about_page_background_color" UID="62-13-7" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="reminder_about_page_info_icon_tint_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_about_page_info_icon_tint_color" UID="62-13-8" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="create_new_item_button_background_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_create_new_item_button_background_color" UID="62-14-1" ValueRef="1-53-3" ValueType="Color" />
+        <Property Comment="create_new_item_button_icon_tint_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_create_new_item_button_icon_tint_color" UID="62-14-2" ValueRef="1-53-4" ValueType="Color" />
+        <Property Comment="create_new_item_button_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_create_new_item_button_text_color" UID="62-14-3" ValueRef="1-53-5" ValueType="Color" />
+        <Property Comment="no_item_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_no_item_text_color" UID="62-14-4" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="no_item_sub_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_no_item_sub_text_color" UID="62-14-5" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="notification_background_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_notification_background_color" UID="62-15-1" ValueRef="4-4-1" ValueType="Color" />
+        <Property Comment="notification_header_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_notification_header_color" UID="62-15-2" ValueRef="4-22-20" ValueType="Color" />
+        <Property Comment="notification_title_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_notification_title_text_color" UID="62-15-3" ValueRef="4-22-1" ValueType="Color" />
+        <Property Comment="notification_body_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_notification_body_text_color" UID="62-15-4" ValueRef="4-22-2" ValueType="Color" />
+        <Property Comment="notification_action_button_text_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_notification_action_button_text_color" UID="62-15-5" ValueRef="4-22-11" ValueType="Color" />
+        <Property Comment="notification_action_button_divider_color" DefaultValue="#ff736cf8" DestAttribName="opentheme_notification_action_button_divider_color" UID="62-15-6" ValueRef="4-22-12" ValueType="Color" />
+        <Property Comment="reminder_round_corner" DefaultValue="#fff2f2f2" DestAttribName="opentheme_list_background_color" UID="62-16-1" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="rounded corners stroke color" DefaultValue="#00d6d6d6" DestAttribName="opentheme_rounded_corners_stroke_color,reminder_rounded_corners_stroke_color" Opacity="0" POption="AlwaysOverriden" UID="62-16-2" ValueType="Color" />
+        <Property Comment="Repeate sub header color" DefaultValue="#ff252525" DestAttribName="opentheme_repeat_repeat_on_title_color" UID="62-17-1" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Unselected text color" DefaultValue="#ff252525" DestAttribName="opentheme_weekly_button_text_color_default" UID="62-17-2" ValueRef="16-3-2" ValueType="TextColor" />
+        <Property Comment="Unselected Sunday text color" DefaultValue="#ccb1181d" DestAttribName="opentheme_weekly_button_text_color_sunday" UID="62-17-2-1" ValueRef="16-3-1" ValueType="TextColor" />
+        <Property Comment="Repeate sub text color" DefaultValue="#ff909090" DestAttribName="opentheme_repeat_duration_title_text_color" UID="62-17-3" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Repeate selected text color" DefaultValue="#ff736cf8" DestAttribName="opentheme_repeat_selected_text_color" UID="62-17-4" ValueRef="1-1-5" ValueType="TextColor" />
+        <Property Comment="Repeate description text color" DefaultValue="#ff505050" DestAttribName="opentheme_repeat_description_text_color" UID="62-17-5" ValueRef="1-3-3-D" ValueType="TextColor" />
+        <Property Comment="Alert type divider color" DefaultValue="#ffbfbfbf" DestAttribName="notification_type_dash_line_color" UID="62-18-1" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="Main ON background color - based color_control_activated" DefaultValue="#cc6762d1" DestAttribName="opentheme_preset_master_on_background_color,opentheme_preset_main_on_background_color" UID="62-18-2-1" ValueRef="1-40-1" ValueType="BgColor" />
+        <Property Comment="Main OFF background color" DefaultValue="#fffafafa" DestAttribName="opentheme_preset_master_off_background_color,opentheme_preset_main_off_background_color" UID="62-18-2-2" ValueRef="1-40-2" ValueType="BgColor" />
+        <Property Comment="Main ON text color" DefaultValue="#fffafafa" DestAttribName="opentheme_preset_master_on_text_color,opentheme_preset_main_on_text_color" UID="62-18-2-3" ValueRef="1-40-3" ValueType="TextColor" />
+        <Property Comment="Main OFF text color" DefaultValue="#ff252525" DestAttribName="opentheme_preset_master_off_text_color,opentheme_preset_main_off_text_color" UID="62-18-2-4" ValueRef="1-40-4" ValueType="TextColor" />
+        <Property Comment="preset reoder icon tint color" DefaultValue="#ff747474" DestAttribName="opentheme_preset_custom_page_icon_reorder" UID="62-18-3" ValueRef="1-16-2" ValueType="TintColor" />
+        <Property Comment="Add Icon tint color" DefaultValue="#ff00b149" DestAttribName="opentheme_preset_add_icon_color" UID="62-18-4-1" ValueRef="1-17-1" ValueType="TintColor" />
+        <Property Comment="Add Icon image" DefaultValue="" DestAttribName="tw_list_icon_add_mtrl" DestQualifiers="sw360dp-xxxhdpi" ImageSize="32X32" UID="62-18-4-2" ValueRef="1-17-2" ValueType="BgImage" />
+        <Property Comment="Badge background tint color" DefaultValue="#fff56a0d" DestAttribName="opentheme_badge_background_tint_color" UID="62-18-5-1" ValueRef="1-33-1" ValueType="TintColor" />
+        <Property Comment="Badge background image" DefaultValue="" DestAttribName="common_badge_background" ImageSize="32X32" UID="62-18-5-2" ValueRef="1-33-2" ValueType="BgImage" />
+        <Property Comment="badge text color" DefaultValue="#fffafafa" DestAttribName="opentheme_badge_text_color" UID="62-18-5-3" ValueRef="1-33-3" ValueType="TextColor" />
+        <Property Comment="widget settings selected text color on spinner" DefaultValue="#ff5b55d2" DestAttribName="opentheme_widget_settings_sorting_spinner_selected_text_color" UID="62-19-1" ValueRef="62-B" ValueType="TextColor" />
+        <Property Comment="widget settings text color on spinner" DefaultValue="#ff000000" DestAttribName="opentheme_widget_settings_sorting_spinner_text_color" UID="62-19-2" ValueRef="1-10-3" ValueType="TextColor" />
+        <Property Comment="widget settings spinner background color" DefaultValue="#fffcfcfc" DestAttribName="opentheme_widget_settings_sorting_spinner_background_color" UID="62-19-3-1" ValueRef="1-10-1" ValueType="BgColor" />
+        <Property Comment="widget settings spinner background image" DefaultValue="" DestAttribName="opentheme_widget_sort_spinner_background" DestQualifiers="" UID="62-19-3-2" ValueRef="1-10-1-1" ValueType="BgImage" />
+        <Property Comment="widget settings spinner background stroke color" DefaultValue="#ff736cf8" DestAttribName="opentheme_widget_settings_sorting_spinner_background_stroke_color" UID="62-19-3-3" ValueRef="1-10-2" ValueType="Color" />
+        <Property Comment="main text color" DefaultValue="#ff252525" DestAttribName="opentheme_widget_settings_main_text_color" UID="62-19-5" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="title text color" DefaultValue="#ff909090" DestAttribName="opentheme_widget_settings_sub_header_text_color" UID="62-19-6" ValueRef="1-19-2" ValueType="TextColor" />
+        <Property Comment="divider color" DefaultValue="#ffe6e6e6" DestAttribName="opentheme_widget_settings_divider_color" UID="62-19-7" ValueRef="1-2" ValueType="BgColor" />
+        <Property Comment="percent text color" DefaultValue="#ff252525" DestAttribName="opentheme_widget_settings_percent_text_color" UID="62-19-8" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="thumb normal color" DefaultValue="#ff736cf8" DestAttribName="opentheme_widget_settings_thumb_color" UID="62-19-9" ValueRef="1-A" ValueType="TintColor" />
+        <Property Comment="thumb disable color" DefaultValue="#ff545454" DestAttribName="opentheme_widget_settings_thumb_dim_color" UID="62-19-10" ValueRef="24-B" ValueType="TintColor" />
+        <Property Comment="bar background color" DefaultValue="#ff00b149" DestAttribName="opentheme_widget_settings_seek_bar_background_color" Opacity="40" UID="62-19-11" ValueRef="24-B" ValueType="BgColor" />
+        <Property Comment="widget sub text color" DefaultValue="#ff736cf8" DestAttribName="opentheme_widget_settings_sub_text_color" UID="62-19-12" ValueRef="1-1-5" ValueType="TextColor" />
+        <Property Comment="list icon tint color" DefaultValue="#ff797979" DestAttribName="opentheme_drawer_list_icon_tint_color" UID="62-20-1" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="drawer unselected text color" DefaultValue="#ff252525" DestAttribName="opentheme_drawer_unselected_text_color" UID="62-20-2-1" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="drawer selected background color" DefaultValue="#0d000000" DestAttribName="opentheme_drawer_selected_background_color" UID="62-20-2-2" ValueRef="1-13-4" ValueType="BgColor" />
+        <Property Comment="drawer sub text color" DefaultValue="#ff909090" DestAttribName="opentheme_drawer_count_text_color" UID="62-20-3" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="drawer subheader divider" DefaultValue="#ff979797" DestAttribName="opentheme_drawer_divider_color" UID="62-20-4" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="drawer list open/shrink icon tint color" DefaultValue="#51736cf8" DestAttribName="opentheme_drawer_list_open_icon_tint_color" UID="62-20-5" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="drawer list icon tint color" DefaultValue="#ff797979" DestAttribName="opentheme_drawer_list_group_type_icon_tint_color,opentheme_drawer_list_setting_icon_tint" UID="62-20-6" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="drawer management button background color" DefaultValue="#0f000000" DestAttribName="opentheme_drawer_management_button_background_color" UID="62-20-7-1" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="drawer management button text color" DefaultValue="#ff252525" DestAttribName="opentheme_drawer_management_button_text_color" UID="62-20-7-2" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="drawer background color" DefaultValue="#fffcfcfc" DestAttribName="opentheme_drawer_background_color" UID="62-20-8" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="drawer background color for tablet" DefaultValue="#ffeaeaea" DestAttribName="opentheme_drawer_background_tablet_color" UID="62-20-8-1" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="drawer background image" DefaultValue="" DestAttribName="opentheme_drawer_background_image" UID="62-20-9" ValueRef="1-18-2" ValueType="BgImage" />
+        <Property Comment="Color Button BG tint color" DefaultValue="#ff736cf8" DestAttribName="opentheme_raised_color_button_background_tint_colors" UID="62-21-1" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Color Button text color" DefaultValue="#ff736cf8" DestAttribName="opentheme_raised_color_button_text_color" UID="62-21-2" ValueRef="1-E" ValueType="Color" />
+        <Property Comment="Button BG tint color" DefaultValue="#ff736cf8" DestAttribName="opentheme_raised_button_background_tint_color" UID="62-21-3" ValueRef="1-7-1-D" ValueType="Color" />
+        <Property Comment="Button text color" DefaultValue="#ff736cf8" DestAttribName="opentheme_raised_button_text_color" UID="62-21-4" ValueRef="1-7-2-D" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

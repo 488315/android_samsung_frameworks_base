@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="@dimen/sec_media_player_album_round" />
+    <stroke android:width="0.5dip" android:color="@color/sec_media_player_album_stroke_light_color" />
+</shape>

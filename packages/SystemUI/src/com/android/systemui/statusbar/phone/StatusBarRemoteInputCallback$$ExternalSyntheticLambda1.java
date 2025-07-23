@@ -1,0 +1,88 @@
+package com.android.systemui.statusbar.phone;
+
+import android.view.View;
+import android.view.ViewParent;
+import com.android.systemui.flags.RefactorFlagUtils;
+import com.android.systemui.scene.shared.flag.SceneContainerFlag;
+import com.android.systemui.statusbar.notification.collection.render.GroupExpansionManagerImpl;
+import com.android.systemui.statusbar.notification.row.ExpandableNotificationRow;
+import com.android.systemui.statusbar.notification.shared.NotificationBundleUi;
+import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayout;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final /* synthetic */ class StatusBarRemoteInputCallback$$ExternalSyntheticLambda1 implements Runnable {
+    public final /* synthetic */ int $r8$classId;
+    public final /* synthetic */ Object f$0;
+
+    public /* synthetic */ StatusBarRemoteInputCallback$$ExternalSyntheticLambda1(Object obj, int i) {
+        this.$r8$classId = i;
+        this.f$0 = obj;
+    }
+
+    @Override // java.lang.Runnable
+    public final void run() {
+        int i = this.$r8$classId;
+        Object obj = this.f$0;
+        switch (i) {
+            case 0:
+                ((View) obj).callOnClick();
+                break;
+            default:
+                final StatusBarRemoteInputCallback statusBarRemoteInputCallback = (StatusBarRemoteInputCallback) obj;
+                View view = statusBarRemoteInputCallback.mPendingWorkRemoteInputView;
+                if (view != null) {
+                    ViewParent parent = view.getParent();
+                    while (!(parent instanceof ExpandableNotificationRow)) {
+                        if (parent == null) {
+                            break;
+                        } else {
+                            parent = parent.getParent();
+                        }
+                    }
+                    final ExpandableNotificationRow expandableNotificationRow = (ExpandableNotificationRow) parent;
+                    ViewParent parent2 = expandableNotificationRow.getParent();
+                    if (parent2 instanceof NotificationStackScrollLayout) {
+                        final NotificationStackScrollLayout notificationStackScrollLayout = (NotificationStackScrollLayout) parent2;
+                        expandableNotificationRow.setUserExpanded(true, true);
+                        if (expandableNotificationRow.isChildInGroup()) {
+                            int i2 = NotificationBundleUi.$r8$clinit;
+                            ((GroupExpansionManagerImpl) expandableNotificationRow.mGroupExpansionManager).setGroupExpanded(expandableNotificationRow.getEntryLegacy(), true);
+                        }
+                        expandableNotificationRow.notifyHeightChanged(false);
+                        expandableNotificationRow.post(new Runnable() { // from class: com.android.systemui.statusbar.phone.StatusBarRemoteInputCallback$$ExternalSyntheticLambda3
+                            @Override // java.lang.Runnable
+                            public final void run() {
+                                final StatusBarRemoteInputCallback statusBarRemoteInputCallback2 = StatusBarRemoteInputCallback.this;
+                                final NotificationStackScrollLayout notificationStackScrollLayout2 = notificationStackScrollLayout;
+                                ExpandableNotificationRow expandableNotificationRow2 = expandableNotificationRow;
+                                statusBarRemoteInputCallback2.getClass();
+                                Runnable runnable = new Runnable() { // from class: com.android.systemui.statusbar.phone.StatusBarRemoteInputCallback$$ExternalSyntheticLambda4
+                                    @Override // java.lang.Runnable
+                                    public final void run() {
+                                        StatusBarRemoteInputCallback statusBarRemoteInputCallback3 = StatusBarRemoteInputCallback.this;
+                                        NotificationStackScrollLayout notificationStackScrollLayout3 = notificationStackScrollLayout2;
+                                        statusBarRemoteInputCallback3.mPendingWorkRemoteInputView.callOnClick();
+                                        statusBarRemoteInputCallback3.mPendingWorkRemoteInputView = null;
+                                        notificationStackScrollLayout3.getClass();
+                                        int i3 = SceneContainerFlag.$r8$clinit;
+                                        RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
+                                        notificationStackScrollLayout3.mFinishScrollingCallback = null;
+                                    }
+                                };
+                                if (!notificationStackScrollLayout2.scrollTo(expandableNotificationRow2)) {
+                                    runnable.run();
+                                    return;
+                                }
+                                int i3 = SceneContainerFlag.$r8$clinit;
+                                RefactorFlagUtils refactorFlagUtils = RefactorFlagUtils.INSTANCE;
+                                notificationStackScrollLayout2.mFinishScrollingCallback = runnable;
+                            }
+                        });
+                        break;
+                    }
+                }
+                break;
+        }
+    }
+}

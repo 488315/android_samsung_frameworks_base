@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="true" android:state_enabled="false">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/car_button_radius" />
+            <solid android:color="@color/car_grey_300" />
+            <stroke android:width="8.0dip" android:color="#ff0059b3" />
+        </shape>
+    </item>
+    <item android:state_focused="true" android:state_pressed="true" android:state_ux_restricted="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/car_button_radius" />
+            <solid android:color="@color/car_grey_300" />
+            <stroke android:width="4.0dip" android:color="#ff0059b3" />
+        </shape>
+    </item>
+    <item android:state_focused="true" android:state_ux_restricted="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/car_button_radius" />
+            <solid android:color="@color/car_grey_300" />
+            <stroke android:width="8.0dip" android:color="#ff0059b3" />
+        </shape>
+    </item>
+    <item android:state_focused="true" android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/car_button_radius" />
+            <solid android:color="?colorButtonNormal" />
+            <stroke android:width="4.0dip" android:color="#ff0059b3" />
+        </shape>
+    </item>
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/car_button_radius" />
+            <solid android:color="?colorButtonNormal" />
+            <stroke android:width="8.0dip" android:color="#ff0059b3" />
+        </shape>
+    </item>
+    <item android:state_enabled="false">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/car_button_radius" />
+            <solid android:color="@color/car_grey_300" />
+        </shape>
+    </item>
+    <item android:state_ux_restricted="true">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/car_button_radius" />
+            <solid android:color="@color/car_grey_300" />
+        </shape>
+    </item>
+    <item>
+        <ripple android:color="?colorControlHighlight">
+            <item>
+                <shape android:shape="rectangle">
+                    <corners android:radius="@dimen/car_button_radius" />
+                    <solid android:color="?colorButtonNormal" />
+                </shape>
+            </item>
+        </ripple>
+    </item>
+</selector>

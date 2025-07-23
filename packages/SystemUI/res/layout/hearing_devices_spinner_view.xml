@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="fill_parent" android:layout_height="@dimen/bluetooth_dialog_device_height" android:paddingStart="@dimen/hearing_devices_preset_spinner_padding" android:paddingEnd="@dimen/hearing_devices_preset_spinner_padding"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textAppearance="@style/TextAppearance.Dialog.Body" android:ellipsize="end" android:layout_gravity="center_vertical" android:id="@id/hearing_devices_spinner_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:maxLines="1" android:textDirection="locale" />
+</LinearLayout>

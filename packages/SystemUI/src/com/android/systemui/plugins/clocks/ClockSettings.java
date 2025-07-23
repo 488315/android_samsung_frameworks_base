@@ -1,0 +1,146 @@
+package com.android.systemui.plugins.clocks;
+
+import kotlin.jvm.functions.Function1;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final class ClockSettings {
+    private final ClockAxisStyle axes;
+    private final String clockId;
+    private JSONObject metadata;
+    private final Integer seedColor;
+    public static final Companion Companion = new Companion(null);
+    public static final int $stable = 8;
+    private static final String KEY_CLOCK_ID = "clockId";
+    private static final String KEY_SEED_COLOR = "seedColor";
+    private static final String KEY_METADATA = "metadata";
+    private static final String KEY_AXIS_LIST = "axes";
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class Companion {
+        public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
+            this();
+        }
+
+        public final ClockSettings fromJson(JSONObject jSONObject) {
+            Function1 function1 = null;
+            byte b = 0;
+            String string = !jSONObject.isNull(ClockSettings.KEY_CLOCK_ID) ? jSONObject.getString(ClockSettings.KEY_CLOCK_ID) : null;
+            Integer valueOf = !jSONObject.isNull(ClockSettings.KEY_SEED_COLOR) ? Integer.valueOf(jSONObject.getInt(ClockSettings.KEY_SEED_COLOR)) : null;
+            JSONArray optJSONArray = jSONObject.optJSONArray(ClockSettings.KEY_AXIS_LIST);
+            ClockAxisStyle fromJson = optJSONArray != null ? ClockAxisStyle.Companion.fromJson(optJSONArray) : null;
+            if (fromJson == null) {
+                fromJson = new ClockAxisStyle(function1, 1, b == true ? 1 : 0);
+            }
+            ClockSettings clockSettings = new ClockSettings(string, valueOf, fromJson);
+            JSONObject optJSONObject = jSONObject.optJSONObject(ClockSettings.KEY_METADATA);
+            if (optJSONObject == null) {
+                optJSONObject = new JSONObject();
+            }
+            clockSettings.setMetadata(optJSONObject);
+            return clockSettings;
+        }
+
+        public final JSONObject toJson(ClockSettings clockSettings) {
+            JSONObject jSONObject = new JSONObject();
+            jSONObject.put(ClockSettings.KEY_CLOCK_ID, clockSettings.getClockId());
+            jSONObject.put(ClockSettings.KEY_SEED_COLOR, clockSettings.getSeedColor());
+            jSONObject.put(ClockSettings.KEY_METADATA, clockSettings.getMetadata());
+            jSONObject.put(ClockSettings.KEY_AXIS_LIST, ClockAxisStyle.Companion.toJson(clockSettings.getAxes()));
+            return jSONObject;
+        }
+
+        private Companion() {
+        }
+    }
+
+    public ClockSettings() {
+        this(null, null, null, 7, null);
+    }
+
+    public static /* synthetic */ ClockSettings copy$default(ClockSettings clockSettings, String str, Integer num, ClockAxisStyle clockAxisStyle, int i, Object obj) {
+        if ((i & 1) != 0) {
+            str = clockSettings.clockId;
+        }
+        if ((i & 2) != 0) {
+            num = clockSettings.seedColor;
+        }
+        if ((i & 4) != 0) {
+            clockAxisStyle = clockSettings.axes;
+        }
+        return clockSettings.copy(str, num, clockAxisStyle);
+    }
+
+    public final String component1() {
+        return this.clockId;
+    }
+
+    public final Integer component2() {
+        return this.seedColor;
+    }
+
+    public final ClockAxisStyle component3() {
+        return this.axes;
+    }
+
+    public final ClockSettings copy(String str, Integer num, ClockAxisStyle clockAxisStyle) {
+        return new ClockSettings(str, num, clockAxisStyle);
+    }
+
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof ClockSettings)) {
+            return false;
+        }
+        ClockSettings clockSettings = (ClockSettings) obj;
+        return Intrinsics.areEqual(this.clockId, clockSettings.clockId) && Intrinsics.areEqual(this.seedColor, clockSettings.seedColor) && Intrinsics.areEqual(this.axes, clockSettings.axes);
+    }
+
+    public final ClockAxisStyle getAxes() {
+        return this.axes;
+    }
+
+    public final String getClockId() {
+        return this.clockId;
+    }
+
+    public final JSONObject getMetadata() {
+        return this.metadata;
+    }
+
+    public final Integer getSeedColor() {
+        return this.seedColor;
+    }
+
+    public int hashCode() {
+        String str = this.clockId;
+        int hashCode = (str == null ? 0 : str.hashCode()) * 31;
+        Integer num = this.seedColor;
+        return this.axes.hashCode() + ((hashCode + (num != null ? num.hashCode() : 0)) * 31);
+    }
+
+    public final void setMetadata(JSONObject jSONObject) {
+        this.metadata = jSONObject;
+    }
+
+    public String toString() {
+        return "ClockSettings(clockId=" + this.clockId + ", seedColor=" + this.seedColor + ", axes=" + this.axes + ")";
+    }
+
+    public ClockSettings(String str, Integer num, ClockAxisStyle clockAxisStyle) {
+        this.clockId = str;
+        this.seedColor = num;
+        this.axes = clockAxisStyle;
+        this.metadata = new JSONObject();
+    }
+
+    public /* synthetic */ ClockSettings(String str, Integer num, ClockAxisStyle clockAxisStyle, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        this((i & 1) != 0 ? null : str, (i & 2) != 0 ? null : num, (i & 4) != 0 ? new ClockAxisStyle(null, 1, 0 == true ? 1 : 0) : clockAxisStyle);
+    }
+}

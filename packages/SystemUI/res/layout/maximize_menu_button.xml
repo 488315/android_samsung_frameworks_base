@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <ViewStub android:id="@id/stub_progress_bar_container" android:layout="@layout/desktop_header_maximize_menu_button_progress_indicator_layout" android:inflatedId="@id/inflatedProgressBarContainer" android:layout_width="44.0dip" android:layout_height="40.0dip" android:importantForAccessibility="noHideDescendants" />
+    <ImageButton android:id="@id/maximize_window" android:layout_width="44.0dip" android:layout_height="40.0dip" android:src="@drawable/decor_desktop_mode_maximize_button_dark" android:scaleType="fitCenter" android:contentDescription="@string/maximize_button_text" android:paddingHorizontal="10.0dip" android:paddingVertical="8.0dip" />
+</merge>

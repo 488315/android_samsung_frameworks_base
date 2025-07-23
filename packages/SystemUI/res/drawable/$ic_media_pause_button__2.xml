@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set android:ordering="together"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt">
+    <objectAnimator android:interpolator="@drawable/$$ic_media_pause_button__2__0" android:duration="56" android:startOffset="0" android:valueFrom="15.485" android:valueTo="12.321" android:valueType="floatType" android:propertyName="translateX" />
+    <objectAnimator android:interpolator="@drawable/$$ic_media_pause_button__2__1" android:duration="278" android:startOffset="56" android:valueFrom="12.321" android:valueTo="7.576" android:valueType="floatType" android:propertyName="translateX" />
+</set>

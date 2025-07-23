@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView android:textSize="13.0dip" android:textStyle="bold" android:textColor="@color/ksh_key_view_item_color" android:gravity="center" android:background="@drawable/samsung_ksh_key_view_background" android:padding="@dimen/ksh_key_view_padding" android:layout_width="wrap_content" android:layout_height="@dimen/ksh_key_view_size" android:minWidth="@dimen/ksh_key_view_size" android:singleLine="true" android:textAllCaps="true" android:fontFamily="sec-600" android:layout_marginStart="@dimen/ksh_key_view_margin_start"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

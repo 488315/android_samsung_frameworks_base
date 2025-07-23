@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector android:enterFadeDuration="@integer/expansion_button_fade_anim_duration" android:exitFadeDuration="@integer/expansion_button_fade_anim_duration"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@id/floating" android:height="@dimen/expansion_button_size" android:width="@dimen/expansion_button_size" android:drawable="@drawable/sesl_ic_expansion_button_floated" app:state_expansion_button_floated="true" />
+    <item android:id="@id/flat" android:drawable="@android:color/transparent" />
+</selector>

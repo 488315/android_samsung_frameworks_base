@@ -1,0 +1,106 @@
+package com.android.systemui.wallpaper;
+
+import android.app.WallpaperManager;
+import android.content.Context;
+import android.net.Uri;
+import android.text.TextUtils;
+import android.util.Log;
+import com.android.keyguard.ClockEventController$$ExternalSyntheticOutline0;
+import com.android.systemui.pluginlock.PluginWallpaperManager;
+import com.android.systemui.util.SettingsHelper;
+import com.android.systemui.util.SystemUIAnalytics;
+import com.android.systemui.wallpaper.utils.WhichChecker;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public class WallpaperAnalytics {
+    public final Context mContext;
+    public final PluginWallpaperManager mPluginWallpaperManager;
+    private SettingsHelper mSettingsHelper;
+    public final WallpaperManager mWallpaperManager;
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    enum StatusField {
+        TYPE,
+        FROM
+    }
+
+    public WallpaperAnalytics(Context context, PluginWallpaperManager pluginWallpaperManager, SettingsHelper settingsHelper) {
+        this.mContext = context;
+        this.mWallpaperManager = WallpaperManager.getInstance(context);
+        this.mPluginWallpaperManager = pluginWallpaperManager;
+        this.mSettingsHelper = settingsHelper;
+    }
+
+    public static String getStatusId(int i, StatusField statusField) {
+        if ((i & 60) == 0) {
+            ClockEventController$$ExternalSyntheticOutline0.m(i, "getStatusId: mode is missing. which=", "WallpaperAnalytics");
+        }
+        int ordinal = statusField.ordinal();
+        String str = ordinal != 0 ? ordinal != 1 ? null : WhichChecker.isFlagEnabled(i, 2) ? SystemUIAnalytics.STID_LOCK_WALLPAPER_FROM : SystemUIAnalytics.STID_HOME_WALLPAPER_FROM : WhichChecker.isFlagEnabled(i, 2) ? SystemUIAnalytics.STID_LOCK_WALLPAPER_TYPE : SystemUIAnalytics.STID_HOME_WALLPAPER_TYPE;
+        return (str == null || !WhichChecker.isFlagEnabled(i, 16)) ? str : str.concat(SystemUIAnalytics.STID_WALLPAPER_POST_FIX_FOR_SUB);
+    }
+
+    public final boolean isSggApplied(int i) {
+        Uri semGetUri;
+        int lastIndexOf;
+        if (this.mWallpaperManager.semGetWallpaperType(i) != 1000 || (semGetUri = this.mWallpaperManager.semGetUri(i)) == null) {
+            return false;
+        }
+        String uri = semGetUri.toString();
+        if (TextUtils.isEmpty(uri) || (lastIndexOf = uri.lastIndexOf("/")) < 0) {
+            return false;
+        }
+        String substring = uri.substring(lastIndexOf + 1);
+        return !TextUtils.isEmpty(substring) && substring.contains("sgg");
+    }
+
+    public final void setWallpaperStatus(String str, String str2) {
+        if (TextUtils.isEmpty(str)) {
+            return;
+        }
+        Log.i("WallpaperAnalytics", "setWallpaperStatus: " + str + " = " + str2);
+        this.mContext.getSharedPreferences(SystemUIAnalytics.WALLPAPER_PREF_NAME, 0).edit().putString(str, str2).apply();
+    }
+
+    /* JADX WARN: Code restructure failed: missing block: B:63:0x0166, code lost:
+    
+        if (r2 != false) goto L122;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:72:0x01a1, code lost:
+    
+        if (r0 != 3) goto L92;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:79:0x01b6, code lost:
+    
+        if ("layered".equals(r5) != false) goto L87;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:80:0x01cd, code lost:
+    
+        r8 = r5;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:86:0x01ca, code lost:
+    
+        if ("layered".equals(r5) != false) goto L87;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:88:0x01d7, code lost:
+    
+        if (android.text.TextUtils.isEmpty(r8) == false) goto L122;
+     */
+    /* JADX WARN: Removed duplicated region for block: B:67:0x0186  */
+    /* JADX WARN: Removed duplicated region for block: B:70:0x019d  */
+    /* JADX WARN: Removed duplicated region for block: B:81:0x01b9  */
+    /* JADX WARN: Removed duplicated region for block: B:89:0x018d  */
+    /* JADX WARN: Removed duplicated region for block: B:92:0x00d4  */
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+        To view partially-correct code enable 'Show inconsistent code' option in preferences
+    */
+    public final void updateWallpaperStatus(int r13) {
+        /*
+            Method dump skipped, instructions count: 483
+            To view this dump change 'Code comments level' option to 'DEBUG'
+        */
+        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.wallpaper.WallpaperAnalytics.updateWallpaperStatus(int):void");
+    }
+}

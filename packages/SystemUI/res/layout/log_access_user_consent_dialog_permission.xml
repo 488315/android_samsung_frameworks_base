@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:clipToPadding="false" android:layout_width="380.0dip" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:paddingLeft="24.0dip" android:paddingTop="24.0dip" android:paddingRight="24.0dip" android:paddingBottom="24.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <ImageView android:gravity="center" android:id="@id/log_access_image_view" android:layout_width="32.0dip" android:layout_height="32.0dip" android:layout_marginBottom="16.0dip" android:src="@drawable/ic_doc_document" />
+            <TextView android:textAppearance="@style/AllowLogAccess" android:textColor="?android:textColorPrimary" android:gravity="center" android:id="@id/log_access_dialog_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="32.0dip" android:text="@string/log_access_confirmation_title" />
+            <TextView android:textAppearance="@style/PrimaryAllowLogAccess" android:textColor="?android:textColorPrimary" android:gravity="center" android:id="@id/log_access_dialog_body" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginBottom="40.0dip" android:text="@string/log_access_confirmation_body" />
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout android:orientation="vertical" android:paddingLeft="24.0dip" android:paddingTop="24.0dip" android:paddingRight="24.0dip" android:paddingBottom="24.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <Button android:textAppearance="@style/PermissionGrantButtonTextAppearance" android:gravity="center" android:id="@id/log_access_dialog_allow_button" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="5.0dip" android:text="@string/log_access_confirmation_allow" android:clipToOutline="true" style="?permissionGrantButtonTopStyle" />
+        <Button android:textAppearance="@style/PermissionGrantButtonTextAppearance" android:gravity="center" android:id="@id/log_access_dialog_deny_button" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/log_access_confirmation_deny" android:clipToOutline="true" style="?permissionGrantButtonBottomStyle" />
+    </LinearLayout>
+</LinearLayout>

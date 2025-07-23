@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.internal.widget.RecyclerView android:id="@id/resolver_list" android:background="?colorBackground" android:scrollbars="none" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent" android:nestedScrollingEnabled="true" android:elevation="1.0dip" android:layoutManager="com.android.internal.app.ChooserGridLayoutManager" />
+    <include layout="@layout/resolver_empty_states" />
+</RelativeLayout>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:gravity="center" android:height="@dimen/dnd_drop_freeform_height" android:width="@dimen/dnd_drop_freeform_width" android:drawable="@drawable/mw_dropguide_img_popupview_sh" />
+</layer-list>

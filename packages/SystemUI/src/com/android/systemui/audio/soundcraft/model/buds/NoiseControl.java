@@ -1,0 +1,47 @@
+package com.android.systemui.audio.soundcraft.model.buds;
+
+import com.google.gson.annotations.SerializedName;
+import kotlin.jvm.internal.Intrinsics;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes.dex */
+public final class NoiseControl {
+
+    @SerializedName("name")
+    private final String name;
+
+    @SerializedName("state")
+    private boolean state;
+
+    public NoiseControl(String str, boolean z) {
+        this.name = str;
+        this.state = z;
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof NoiseControl)) {
+            return false;
+        }
+        NoiseControl noiseControl = (NoiseControl) obj;
+        return Intrinsics.areEqual(this.name, noiseControl.name) && this.state == noiseControl.state;
+    }
+
+    public final String getName() {
+        return this.name;
+    }
+
+    public final boolean getState() {
+        return this.state;
+    }
+
+    public final int hashCode() {
+        return Boolean.hashCode(this.state) + (this.name.hashCode() * 31);
+    }
+
+    public final String toString() {
+        return "NoiseControl(name=" + this.name + ", state=" + this.state + ")";
+    }
+}

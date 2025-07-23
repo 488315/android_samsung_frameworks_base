@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="vertical" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layoutDirection="locale" android:paddingStart="@dimen/sem_chooser_top_panel_padding_start" android:paddingEnd="@dimen/sem_chooser_top_panel_padding_end" app:layout_alwaysShow="true"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:layout_gravity="center" android:orientation="vertical" android:id="@id/content_preview_image_area" android:paddingTop="4.0dip" android:paddingBottom="@dimen/sem_chooser_preview_common_padding_bottom" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <include layout="@layout/sem_chooser_grid_preview_icon" />
+        <LinearLayout android:gravity="center" android:layout_gravity="center" android:paddingBottom="9.0dip" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <view android:layout_gravity="center_horizontal" android:id="@id/sem_preview_content_icon" android:layout_width="@dimen/sem_chooser_preview_icon_size" android:layout_height="@dimen/sem_chooser_preview_icon_size" android:scaleType="centerCrop" class="com.android.internal.app.ChooserActivity$RoundedRectImageView" />
+        </LinearLayout>
+        <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layoutDirection="locale">
+            <TextView android:textSize="@dimen/sem_chooser_preview_main_text_size" android:textColor="@color/sem_resolver_item_text_color" android:ellipsize="middle" android:gravity="center" android:layout_gravity="center" android:id="@id/text1" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" android:fontFamily="sec-roboto-light" />
+            <TextView android:textSize="@dimen/sem_chooser_preview_sub_text_size" android:textColor="@color/sem_resolver_top_panel_text_color" android:ellipsize="end" android:gravity="center" android:layout_gravity="center" android:id="@id/text2" android:layout_width="fill_parent" android:layout_height="wrap_content" android:maxLines="1" android:fontFamily="sec-roboto-light" />
+        </LinearLayout>
+    </LinearLayout>
+    <CheckBox android:layout_gravity="center" android:id="@id/exif_check_box" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="9.0dip" android:layout_marginBottom="@dimen/sem_chooser_preview_checkbox_margin_bottom" />
+    <include android:layout_gravity="center" android:id="@id/chooser_action_row" android:visibility="gone" layout="@layout/sem_chooser_chip_button_layout" />
+</LinearLayout>

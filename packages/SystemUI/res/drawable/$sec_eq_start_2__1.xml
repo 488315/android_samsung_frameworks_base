@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set android:ordering="together"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt">
+    <set android:ordering="sequentially">
+        <objectAnimator android:interpolator="@android:anim/linear_interpolator" android:duration="583" android:valueFrom="M -0.005 -0.17 C -0.005 -0.17 -0.005 0.17 -0.005 0.17 " android:valueTo="M -0.005 -5.5 C -0.005 -5.5 -0.005 5.5 -0.005 5.5 " android:valueType="pathType" android:propertyName="pathData" />
+        <objectAnimator android:interpolator="@drawable/$$sec_eq_start_2__1__0" android:duration="383" android:valueFrom="M -0.005 -5.5 C -0.005 -5.5 -0.005 5.5 -0.005 5.5 " android:valueTo="M -0.001 -1.1 C -0.001 -1.1 -0.001 1.1 -0.001 1.1 " android:valueType="pathType" android:propertyName="pathData" />
+        <objectAnimator android:duration="133" android:valueFrom="M -0.001 -1.1 C -0.001 -1.1 -0.001 1.1 -0.001 1.1 " android:valueTo="M -0.001 -1.1 C -0.001 -1.1 -0.001 1.1 -0.001 1.1 " android:valueType="pathType" android:propertyName="pathData" />
+        <objectAnimator android:interpolator="@drawable/$$sec_eq_start_2__1__1" android:duration="216" android:valueFrom="M -0.001 -1.1 C -0.001 -1.1 -0.001 1.1 -0.001 1.1 " android:valueTo="M -0.005 -2.184 C -0.005 -2.184 -0.005 2.184 -0.005 2.184 " android:valueType="pathType" android:propertyName="pathData" />
+    </set>
+</set>

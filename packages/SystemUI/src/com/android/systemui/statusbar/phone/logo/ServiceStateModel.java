@@ -1,0 +1,32 @@
+package com.android.systemui.statusbar.phone.logo;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class ServiceStateModel {
+    public final boolean connected;
+    public final boolean roaming;
+
+    public ServiceStateModel(boolean z, boolean z2) {
+        this.connected = z;
+        this.roaming = z2;
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof ServiceStateModel)) {
+            return false;
+        }
+        ServiceStateModel serviceStateModel = (ServiceStateModel) obj;
+        return this.connected == serviceStateModel.connected && this.roaming == serviceStateModel.roaming;
+    }
+
+    public final int hashCode() {
+        return Boolean.hashCode(this.roaming) + (Boolean.hashCode(this.connected) * 31);
+    }
+
+    public final String toString() {
+        return "ServiceStateModel(connected=" + this.connected + ", roaming=" + this.roaming + ")";
+    }
+}

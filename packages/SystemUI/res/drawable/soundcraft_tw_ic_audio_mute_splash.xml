@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <size android:height="1.25dip" android:width="21.599976dip" />
+    <solid android:color="@color/qs_tile_icon_on_dim_tint_color" />
+    <corners android:radius="1.25dip" />
+</shape>

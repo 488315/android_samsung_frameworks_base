@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/ambient_header" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="@dimen/bluetooth_dialog_layout_margin" android:layout_marginEnd="@dimen/bluetooth_dialog_layout_margin">
+        <ImageView android:id="@id/ambient_volume_icon" android:background="@drawable/hearing_device_ambient_icon_background" android:padding="12.0dip" android:layout_width="48.0dip" android:layout_height="48.0dip" android:src="@drawable/ic_ambient_volume" android:tint="@android:color/ripple_material_light" android:contentDescription="@string/hearing_devices_ambient_unmute" />
+        <TextView android:textAppearance="@style/TextAppearance.Dialog.Title" android:textSize="16.0sp" android:gravity="center_vertical" android:id="@id/ambient_title" android:layout_width="0.0dip" android:layout_height="wrap_content" android:text="@string/hearing_devices_ambient_label" android:layout_weight="1.0" android:fontFamily="@android:string/emailTypeWork" android:textDirection="locale" android:paddingStart="10.0dip" />
+        <ImageView android:id="@id/ambient_expand_icon" android:background="@drawable/hearing_device_ambient_expand_icon_background" android:padding="10.0dip" android:layout_width="48.0dip" android:layout_height="48.0dip" android:src="@drawable/ic_hearing_device_expand" android:tint="@android:color/ripple_material_light" android:contentDescription="@string/hearing_devices_ambient_expand_controls" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@id/ambient_control_container" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+</LinearLayout>

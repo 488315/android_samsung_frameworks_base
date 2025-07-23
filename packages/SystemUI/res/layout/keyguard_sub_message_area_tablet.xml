@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.keyguard.BouncerKeyguardMessageArea android:gravity="center" android:id="@id/keyguard_sub_help_text" android:focusable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" sysui:originColor="origin_keyguard_sub_message_area_text_color" sysui:wallpaperColorIgnorable="true" sysui:whitebgColor="whitebg_keyguard_sub_message_area_text_color" style="@style/keyguard_sub_help_text_style_tablet"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:sysui="http://schemas.android.com/apk/res-auto" />

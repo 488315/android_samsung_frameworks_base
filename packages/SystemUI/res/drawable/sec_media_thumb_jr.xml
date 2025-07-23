@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:top="@dimen/sec_media_thumb_top_padding">
+        <shape android:shape="oval" android:useLevel="false">
+            <solid android:color="@color/sec_cover_media_player_seekbar_thumb_background_color" />
+            <stroke android:width="@dimen/sec_media_progress_bar_border" android:color="@color/sec_cover_media_player_seekbar_thumb_border_color" />
+            <size android:height="@dimen/sec_media_progress_thumb_size" android:width="@dimen/sec_media_progress_thumb_size" />
+        </shape>
+    </item>
+</layer-list>

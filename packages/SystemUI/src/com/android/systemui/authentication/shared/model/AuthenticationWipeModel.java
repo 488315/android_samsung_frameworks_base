@@ -1,0 +1,122 @@
+package com.android.systemui.authentication.shared.model;
+
+import com.android.systemui.R;
+import defpackage.ReorderTile$$ExternalSyntheticOutline0;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes.dex */
+public final class AuthenticationWipeModel {
+    public final int failedAttempts;
+    public final int remainingAttempts;
+    public final WipeTarget wipeTarget;
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public abstract class WipeTarget {
+        public final int messageIdForAlmostWipe;
+        public final int messageIdForWipe;
+
+        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+        public final class ManagedProfile extends WipeTarget {
+            public static final ManagedProfile INSTANCE = new ManagedProfile();
+
+            private ManagedProfile() {
+                super(R.string.kg_failed_attempts_almost_at_erase_profile, R.string.kg_failed_attempts_now_erasing_profile, null);
+            }
+
+            public final boolean equals(Object obj) {
+                return this == obj || (obj instanceof ManagedProfile);
+            }
+
+            public final int hashCode() {
+                return -1539762587;
+            }
+
+            public final String toString() {
+                return "ManagedProfile";
+            }
+        }
+
+        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+        public final class User extends WipeTarget {
+            public static final User INSTANCE = new User();
+
+            private User() {
+                super(R.string.kg_failed_attempts_almost_at_erase_user, R.string.kg_failed_attempts_now_erasing_user, null);
+            }
+
+            public final boolean equals(Object obj) {
+                return this == obj || (obj instanceof User);
+            }
+
+            public final int hashCode() {
+                return -1642015002;
+            }
+
+            public final String toString() {
+                return "User";
+            }
+        }
+
+        /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+        public final class WholeDevice extends WipeTarget {
+            public static final WholeDevice INSTANCE = new WholeDevice();
+
+            private WholeDevice() {
+                super(R.string.kg_failed_attempts_almost_at_wipe, R.string.kg_failed_attempts_now_wiping, null);
+            }
+
+            public final boolean equals(Object obj) {
+                return this == obj || (obj instanceof WholeDevice);
+            }
+
+            public final int hashCode() {
+                return 744290162;
+            }
+
+            public final String toString() {
+                return "WholeDevice";
+            }
+        }
+
+        public /* synthetic */ WipeTarget(int i, int i2, DefaultConstructorMarker defaultConstructorMarker) {
+            this(i, i2);
+        }
+
+        private WipeTarget(int i, int i2) {
+            this.messageIdForAlmostWipe = i;
+            this.messageIdForWipe = i2;
+        }
+    }
+
+    public AuthenticationWipeModel(WipeTarget wipeTarget, int i, int i2) {
+        this.wipeTarget = wipeTarget;
+        this.failedAttempts = i;
+        this.remainingAttempts = i2;
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof AuthenticationWipeModel)) {
+            return false;
+        }
+        AuthenticationWipeModel authenticationWipeModel = (AuthenticationWipeModel) obj;
+        return Intrinsics.areEqual(this.wipeTarget, authenticationWipeModel.wipeTarget) && this.failedAttempts == authenticationWipeModel.failedAttempts && this.remainingAttempts == authenticationWipeModel.remainingAttempts;
+    }
+
+    public final int hashCode() {
+        return Integer.hashCode(this.remainingAttempts) + ReorderTile$$ExternalSyntheticOutline0.m(this.failedAttempts, this.wipeTarget.hashCode() * 31, 31);
+    }
+
+    public final String toString() {
+        StringBuilder sb = new StringBuilder("AuthenticationWipeModel(wipeTarget=");
+        sb.append(this.wipeTarget);
+        sb.append(", failedAttempts=");
+        sb.append(this.failedAttempts);
+        sb.append(", remainingAttempts=");
+        return ReorderTile$$ExternalSyntheticOutline0.m(this.remainingAttempts, ")", sb);
+    }
+}

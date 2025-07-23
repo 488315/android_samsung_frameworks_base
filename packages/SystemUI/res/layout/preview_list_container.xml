@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:background="@drawable/freeform_container_preview_bg" android:paddingTop="@dimen/freeform_container_item_preview_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxWidth="@dimen/freeform_container_preview_window_maxWidth" android:elevation="@dimen/freeform_container_preview_elevation" android:clipToOutline="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.internal.widget.RecyclerView android:scrollbarThumbHorizontal="@drawable/freeform_container_folder_scrollbar_thumb" android:scrollbarTrackHorizontal="@drawable/freeform_container_folder_scrollbar_track" android:id="@id/previewRecycler" android:scrollbars="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingHorizontal="@dimen/freeform_container_item_preview_padding_half" />
+</RelativeLayout>

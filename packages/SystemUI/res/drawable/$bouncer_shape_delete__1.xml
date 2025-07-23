@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set android:ordering="together"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt">
+    <objectAnimator android:interpolator="@drawable/$$bouncer_shape_delete__1__0" android:duration="150" android:startOffset="0" android:valueFrom="M-13.54 -17.54 C-8.57,-17.54 -4.54,-13.51 -4.54,-8.54 C-4.54,-3.57 -8.57,0.46 -13.54,0.46 C-18.51,0.46 -22.54,-3.57 -22.54,-8.54 C-22.54,-13.51 -18.51,-17.54 -13.54,-17.54c " android:valueTo="M-13.54 -11.54 C-11.88,-11.54 -10.54,-10.2 -10.54,-8.54 C-10.54,-6.88 -11.88,-5.54 -13.54,-5.54 C-15.2,-5.54 -16.54,-6.88 -16.54,-8.54 C-16.54,-10.2 -15.2,-11.54 -13.54,-11.54c " android:valueType="pathType" android:propertyName="pathData" />
+    <objectAnimator android:interpolator="@drawable/$$bouncer_shape_delete__1__1" android:duration="200" android:startOffset="150" android:valueFrom="M-13.54 -11.54 C-11.88,-11.54 -10.54,-10.2 -10.54,-8.54 C-10.54,-6.88 -11.88,-5.54 -13.54,-5.54 C-15.2,-5.54 -16.54,-6.88 -16.54,-8.54 C-16.54,-10.2 -15.2,-11.54 -13.54,-11.54c " android:valueTo="M-13.54 -13.54 C-10.78,-13.54 -8.54,-11.3 -8.54,-8.54 C-8.54,-5.78 -10.78,-3.54 -13.54,-3.54 C-16.3,-3.54 -18.54,-5.78 -18.54,-8.54 C-18.54,-11.3 -16.3,-13.54 -13.54,-13.54c " android:valueType="pathType" android:propertyName="pathData" />
+</set>

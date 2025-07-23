@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="DAAgent" TargetApi="24" TargetPackageName="com.samsung.android.da.daagent" UID="DAAgent" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="installed whitelist application list background color" DefaultValue="#fffafafa" DestAttribName="list_container_color" UID="60-2-1" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="installed whitelist application list background image" DefaultValue="" DestAttribName="image_rounded" UID="60-2-2" ValueRef="1-18-2" ValueType="BgImage" />
+        <Property Comment="Contact Filter sub text color" DefaultValue="#ff8c8c8c" DestAttribName="list_sub_text_color" UID="60-2-3" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Contact Filter head text color" DefaultValue="#ff252525" DestAttribName="list_text_color" UID="60-2-4" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="" DefaultValue="#ffd4d4d4" DestAttribName="divider_vertical_color" UID="60-2-5" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="Master ON background color" DefaultValue="#ff008cff" DestAttribName="contact_filter_list_container_color_on" UID="60-3-1" ValueRef="1-40-1" ValueType="BgColor" />
+        <Property Comment="Text color-on" DefaultValue="#ff0072de" DestAttribName="on_off_text_on_color" UID="60-3-2" ValueRef="1-40-3" ValueType="TextColor" />
+        <Property Comment="Master Off background color" DefaultValue="#fffafafa" DestAttribName="contact_filter_list_container_color_off" UID="60-3-3" ValueRef="1-40-2" ValueType="BgColor" />
+        <Property Comment="Text color-off" DefaultValue="#ff252525" DestAttribName="contact_filter_list_color_text_off" UID="60-3-4" ValueRef="1-40-4" ValueType="TextColor" />
+        <Property Comment="Contact button background color" DefaultValue="#ffd8d8d8" DestAttribName="edit_button_shape_color" UID="60-4-1" ValueRef="1-7-1-D" ValueType="BgColor" />
+        <Property Comment="Select contacts button text color" DefaultValue="#ff252525" DestAttribName="edit_contact_button_text_color" UID="60-4-2" ValueRef="1-7-2-D" ValueType="TextColor" />
+        <Property Comment="Update button text color" DefaultValue="#fffafafa" DestAttribName="about_page_update_text_color" UID="60-5-2" ValueRef="1-E" ValueType="TextColor" />
+        <Property Comment="Update button background color" DefaultValue="#ff0381fe" DestAttribName="button_round_shape_color" UID="60-5-3" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="About Page Description Color" DefaultValue="#ff8c8c8c" DestAttribName="about_page_app_description_text_color" UID="60-5-4" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="About page app name text color" DefaultValue="#ff252525" DestAttribName="about_page_app_name_text_color" UID="60-5-7" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Action Bar Background Color" DefaultValue="#fff6f6f6" DestAttribName="background_light_theme" UID="60-5-8" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Navigaion bar background color" DefaultValue="#fff6f6f6" DestAttribName="status_bar_color" UID="60-5-11" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Photo ID checkbox Bg Color" DefaultValue="#d90381fe" DestAttribName="open_theme_photoId_checkbox_bg_color" UID="60-5-12" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="SubHeader Text Color" DefaultValue="#ff858585" DestAttribName="subheader_color" UID="60-5-13" ValueRef="1-19-2" ValueType="TextColor" />
+        <Property Comment="Description Text Color" DefaultValue="#ff505050" DestAttribName="description_color" UID="60-5-14" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Bottom Bar Text Color" DefaultValue="#ff4297ff" DestAttribName="bottom_bar_text_color" UID="60-5-15" ValueRef="1-12-4" ValueType="TextColor" />
+        <Property Comment="Scroll Bar Background Color" DefaultValue="#ffe5e5e5" DestAttribName="sem_index_container_background" UID="60-5-16" ValueRef="1-50-7" ValueType="BgColor" />
+        <Property Comment="PhotoId Checkbox Alphabet Color" DefaultValue="#ff929292" DestAttribName="open_theme_thumbnail_alphabet_color" UID="60-5-17" ValueRef="1-32-6" ValueType="TextColor" />
+        <Property Comment="PhotoId Checkbox Stroke Color" DefaultValue="#ff929292" DestAttribName="open_theme_thumbnail_stroke_color" UID="60-5-18" ValueRef="1-32-5" ValueType="TextColor" />
+        <Property Comment="Action Show Button Background Color" DefaultValue="#47ffffff" DestAttribName="show_button_shape_solid_color" UID="60-5-19" ValueRef="1-11-1" ValueType="BgColor" />
+        <Property Comment="Navigation Bar Button Background Color" DefaultValue="true" DestAttribName="sem_window_light_navigation_bar" UID="60-5-20" ValueRef="1-69-2" ValueType="Bool" />
+        <Property Comment="Status Bar Button Background Color" DefaultValue="true" DestAttribName="sem_window_light_status_bar" UID="60-5-21" ValueRef="1-51-1" ValueType="Bool" />
+        <Property Comment="App Info Button Color in About Dual Messenger" DefaultValue="#ff454545" DestAttribName="app_info_button_color" UID="60-5-22" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Action Bar Title Text Color" DefaultValue="#ff252525" DestAttribName="title_text_color" UID="60-5-23" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="About Page Background Color" DefaultValue="#fffcfcfc" DestAttribName="about_page_color_light" UID="60-5-24" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="About page multi-pane window bg Color" DefaultValue="#ff171717" DestAttribName="multi_pane_window" UID="60-5-25" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="About Page background image" DefaultValue="" DestAttribName="about_page_multi_pane_window" UID="60-5-26" ValueRef="1-18-2" ValueType="BgImage" />
+    </AppMetaData>
+</ThemeMetaData>

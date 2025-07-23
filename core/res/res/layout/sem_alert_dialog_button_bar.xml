@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:scrollbarAlwaysDrawVerticalTrack="true" android:id="@id/buttonPanel" android:layout_width="fill_parent" android:layout_height="wrap_content" android:fillViewport="true" android:scrollIndicators="bottom|top" android:defaultFocusHighlightEnabled="false"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.internal.widget.ButtonBarLayout android:orientation="horizontal" android:id="@id/sem_buttonBarLayout" android:paddingBottom="@dimen/sem_dialog_button_bar_padding_bottom" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layoutDirection="locale" android:paddingStart="@dimen/sem_dialog_button_bar_padding_horizontal" android:paddingEnd="@dimen/sem_dialog_button_bar_padding_horizontal" style="?buttonBarStyle">
+        <Button android:id="@id/button3" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0" style="?buttonBarNeutralButtonStyle" />
+        <View android:layout_gravity="center_vertical" android:id="@id/sem_divider2" android:tag="isDivider" android:background="?^attr-private/semDialogDividerColor" android:visibility="gone" android:layout_width="1.0dip" android:layout_height="16.0dip" />
+        <Button android:id="@id/button2" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0" style="?buttonBarNegativeButtonStyle" />
+        <View android:layout_gravity="center_vertical" android:id="@id/sem_divider1" android:tag="isDivider" android:background="?^attr-private/semDialogDividerColor" android:visibility="gone" android:layout_width="1.0dip" android:layout_height="16.0dip" />
+        <Button android:id="@id/button1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0" style="?buttonBarPositiveButtonStyle" />
+    </com.android.internal.widget.ButtonBarLayout>
+</ScrollView>

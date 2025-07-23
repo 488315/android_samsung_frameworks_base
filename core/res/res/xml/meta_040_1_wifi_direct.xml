@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="2.8">
+    <AppMetaData AppendTo="Settings" Name="Wi-Fi Direct" TargetApi="19" TargetPackageName="com.android.settings" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="Description text color" DefaultValue="#ff505050" DestAttribName="sec_wifi_p2p_description_text_color" DestQualifiers="" UID="40_1-1-1" ValueRef="1-3-3" ValueType="TintColor" />
+        <Property Comment="noitem text color" DefaultValue="#44252525" DestAttribName="sec_wifi_p2p_preference_noitem_color" DestQualifiers="" UID="40_1-1-2" ValueRef="1-53-1" ValueType="TintColor" />
+        <Property Comment="subheader text color" DefaultValue="#ff858585" DestAttribName="sec_wifi_p2p_subheader_text_color" DestQualifiers="" UID="40_1-1-3" ValueRef="1-19-2" ValueType="TintColor" />
+        <Property Comment="progressbar circle" DefaultValue="#00000000" DestAttribName="sec_wifi_p2p_progressbar_color1,sec_wifi_p2p_progressbar_color2" DestQualifiers="" UID="40_1-3-1" ValueRef="1-55-1" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

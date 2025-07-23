@@ -1,0 +1,15 @@
+package com.android.systemui.navigationbar.gestural;
+
+import android.view.animation.Interpolator;
+import com.android.app.animation.Interpolators;
+import com.android.systemui.navigationbar.gestural.NavigationHandle;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final /* synthetic */ class NavigationHandle$$ExternalSyntheticLambda0 implements Interpolator {
+    @Override // android.animation.TimeInterpolator
+    public final float getInterpolation(float f) {
+        NavigationHandle.AnonymousClass1 anonymousClass1 = NavigationHandle.PULSE_ANIMATION_PROGRESS;
+        return f <= 0.9f ? Interpolators.clampToProgress(Interpolators.LEGACY, f, 0.0f, 0.9f) : 1.0f - Interpolators.clampToProgress(Interpolators.LINEAR, f, 0.9f, 1.0f);
+    }
+}

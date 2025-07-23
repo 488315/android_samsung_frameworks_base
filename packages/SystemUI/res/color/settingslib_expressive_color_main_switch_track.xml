@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="false" android:state_checked="false" android:color="@color/settingslib_materialColorSurfaceContainerHighest" android:alpha="?android:disabledAlpha" />
+    <item android:state_enabled="false" android:state_checked="true" android:color="@color/settingslib_materialColorPrimary" android:alpha="?android:disabledAlpha" />
+    <item android:state_checked="true" android:color="@color/settingslib_materialColorPrimary" />
+    <item android:state_checked="false" android:color="@color/settingslib_materialColorSurfaceContainerHighest" android:state_hovered="true" />
+    <item android:state_focused="true" android:state_checked="false" android:color="@color/settingslib_materialColorSurfaceContainerHighest" />
+    <item android:state_checked="false" android:state_pressed="true" android:color="@color/settingslib_materialColorSurfaceContainerHighest" />
+    <item android:state_checked="false" android:color="@color/settingslib_materialColorSurfaceContainerHighest" />
+</selector>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListView android:scrollbarStyle="outsideOverlay" android:id="@id/resolver_list" android:background="?colorBackground" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:divider="@null" android:dividerHeight="0.0dip" android:headerDividersEnabled="false" android:footerDividersEnabled="false" android:nestedScrollingEnabled="true" android:elevation="@dimen/resolver_elevation"
+      xmlns:android="http://schemas.android.com/apk/res/android" />
+    <include layout="@layout/resolver_empty_states" />
+</RelativeLayout>

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView android:textSize="14.0sp" android:textColor="@android:color/safe_mode_text" android:gravity="center_vertical" android:layout_width="fill_parent" android:layout_height="@android:dimen/tooltip_y_offset_touch" android:layout_marginStart="@android:dimen/text_size_menu_material" android:layout_marginEnd="@android:dimen/text_size_menu_material"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android" />

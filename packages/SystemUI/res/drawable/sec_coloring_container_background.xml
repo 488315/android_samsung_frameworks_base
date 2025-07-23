@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.graphics.drawable.SeslRecoilDrawable app:seslRecoilColor="@color/sec_qs_tiles_ripple_background"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@id/colored_bg_solid">
+        <androidx.appcompat.util.SeslShapeDrawable android:shape="rectangle">
+            <solid android:color="@color/qs_tile_coloring_container_bg" />
+            <corners android:radius="@dimen/panel_bar_corner_radius" />
+        </androidx.appcompat.util.SeslShapeDrawable>
+    </item>
+    <item>
+        <androidx.appcompat.util.SeslShapeDrawable android:shape="rectangle">
+            <stroke android:width="@dimen/panel_bar_corner_stroke_width" android:color="@color/qs_tile_container_bg_border_color" />
+            <corners android:radius="@dimen/panel_bar_corner_radius" />
+        </androidx.appcompat.util.SeslShapeDrawable>
+    </item>
+    <item android:id="@android:id/mask">
+        <androidx.appcompat.util.SeslShapeDrawable android:shape="rectangle">
+            <corners android:radius="@dimen/panel_bar_corner_radius" />
+            <solid android:color="@android:color/white" />
+        </androidx.appcompat.util.SeslShapeDrawable>
+    </item>
+</androidx.appcompat.graphics.drawable.SeslRecoilDrawable>

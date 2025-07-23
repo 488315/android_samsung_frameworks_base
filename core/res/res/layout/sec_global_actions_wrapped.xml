@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:gravity="center" android:layout_gravity="center" android:id="@id/sec_global_actions_item_list" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" android:layout_marginHorizontal="@dimen/sec_global_actions_list_view_margin_horizontal" />
+    <FrameLayout android:gravity="center" android:layout_gravity="center" android:id="@id/sec_global_actions_item_list_land" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="5.0dip" />
+    <LinearLayout android:layout_gravity="bottom|center" android:orientation="vertical" android:id="@id/sec_global_actions_bottom" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginVertical="@dimen/sec_global_actions_bottom_view_margin_bottom" />
+    <FrameLayout android:layout_gravity="center_horizontal" android:id="@id/sec_global_actions_confirmation" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+</FrameLayout>

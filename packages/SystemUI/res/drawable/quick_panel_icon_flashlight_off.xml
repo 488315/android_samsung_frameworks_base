@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list android:oneshot="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_000" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_001" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_002" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_003" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_004" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_005" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_006" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_007" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_008" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_009" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_010" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_011" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_012" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_013" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_014" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_015" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_016" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_017" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_018" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_019" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_020" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_021" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_022" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_023" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_024" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_025" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_026" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_027" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_028" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_029" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_flashlight_off_030" />
+</animation-list>

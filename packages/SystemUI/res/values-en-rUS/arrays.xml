@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="battery_labels">
+        <item>0%</item>
+        <item>50%</item>
+        <item>100%</item>
+    </string-array>
+    <string-array name="subscreen_quick_reply_list">
+        <item>Yes</item>
+        <item>Yes, please</item>
+        <item>OK</item>
+        <item>No</item>
+        <item>No thanks</item>
+        <item>Nope</item>
+        <item>Thanks</item>
+        <item>Much appreciated</item>
+        <item>On my way</item>
+        <item>"What's up?"</item>
+        <item>Later</item>
+        <item>Nice</item>
+        <item>I agree</item>
+        <item>Great!</item>
+        <item>What?</item>
+        <item>OMG!</item>
+    </string-array>
+</resources>

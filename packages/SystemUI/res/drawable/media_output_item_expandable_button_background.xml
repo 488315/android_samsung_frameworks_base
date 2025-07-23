@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="@dimen/media_output_item_expand_icon_height" />
+    <size android:height="@dimen/media_output_item_expand_icon_height" android:width="@dimen/media_output_item_expand_icon_width" />
+    <solid android:color="@color/media_dialog_on_surface" />
+</shape>

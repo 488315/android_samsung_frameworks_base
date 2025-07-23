@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="qs_pop_over_blur_detail_height">670.0dip</dimen>
+    <item type="dimen" name="qs_pop_over_detail_extended_container_top_margin">0.0697</item>
+</resources>

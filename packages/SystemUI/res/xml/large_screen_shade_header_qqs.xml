@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ConstraintSet android:id="@id/large_screen_header_constraint_qqs"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <Constraint android:id="@id/clock">
+        <Layout android:layout_width="wrap_content" android:layout_height="0.0dip" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toEndOf="@id/begin_guide" app:layout_constraintTop_toTopOf="parent" />
+        <PropertySet android:visibility="gone" android:alpha="1.0" />
+    </Constraint>
+    <Constraint android:id="@id/date">
+        <Layout android:layout_width="wrap_content" android:layout_height="0.0dip" android:layout_marginStart="8.0dip" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toEndOf="@id/clock" app:layout_constraintTop_toTopOf="parent" />
+        <PropertySet android:visibility="gone" android:alpha="1.0" />
+    </Constraint>
+    <Constraint android:id="@id/carrier_group">
+        <Layout android:layout_gravity="end|center" android:layout_width="0.0dip" android:layout_height="0.0dip" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toStartOf="@id/statusIcons" app:layout_constraintStart_toEndOf="@id/date" app:layout_constraintTop_toTopOf="parent" app:layout_constraintWidth_default="wrap" app:layout_constraintWidth_min="48.0dip" />
+        <PropertySet android:alpha="1.0" />
+    </Constraint>
+    <Constraint android:id="@id/statusIcons">
+        <Layout android:layout_width="wrap_content" android:layout_height="@dimen/large_screen_shade_header_min_height" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toStartOf="@id/batteryRemainingIcon" app:layout_constraintStart_toEndOf="@id/carrier_group" app:layout_constraintTop_toTopOf="parent" />
+        <PropertySet android:alpha="1.0" />
+    </Constraint>
+    <Constraint android:id="@id/batteryRemainingIcon">
+        <Layout android:layout_width="wrap_content" android:layout_height="0.0dip" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toStartOf="@id/privacy_container" app:layout_constraintHeight_min="@dimen/large_screen_shade_header_min_height" app:layout_constraintTop_toTopOf="parent" />
+        <PropertySet android:alpha="1.0" />
+    </Constraint>
+    <Constraint android:id="@id/privacy_container">
+        <Layout android:layout_width="wrap_content" android:layout_height="@dimen/large_screen_shade_header_min_height" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toStartOf="@id/end_guide" app:layout_constraintTop_toTopOf="parent" />
+    </Constraint>
+</ConstraintSet>

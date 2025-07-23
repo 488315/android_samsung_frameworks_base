@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set android:ordering="together"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt">
+    <objectAnimator android:interpolator="@drawable/$$qs_battery_saver_icon_on__8__0" android:duration="250" android:startOffset="0" android:valueFrom="28" android:valueTo="28" android:valueType="floatType" android:propertyName="rotation" />
+    <objectAnimator android:interpolator="@drawable/$$qs_battery_saver_icon_on__8__1" android:duration="600" android:startOffset="250" android:valueFrom="28" android:valueTo="153" android:valueType="floatType" android:propertyName="rotation" />
+</set>

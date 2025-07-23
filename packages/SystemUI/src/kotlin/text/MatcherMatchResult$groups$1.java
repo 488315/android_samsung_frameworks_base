@@ -1,0 +1,58 @@
+package kotlin.text;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.regex.Matcher;
+import kotlin.collections.AbstractCollection;
+import kotlin.collections.CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1;
+import kotlin.jvm.functions.Function1;
+import kotlin.ranges.IntRange;
+import kotlin.ranges.RangesKt___RangesKt;
+import kotlin.sequences.TransformingSequence;
+import kotlin.sequences.TransformingSequence$iterator$1;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes4.dex */
+public final class MatcherMatchResult$groups$1 extends AbstractCollection implements Collection {
+    public final /* synthetic */ MatcherMatchResult this$0;
+
+    public MatcherMatchResult$groups$1(MatcherMatchResult matcherMatchResult) {
+        this.this$0 = matcherMatchResult;
+    }
+
+    @Override // kotlin.collections.AbstractCollection, java.util.Collection, java.util.List
+    public final /* bridge */ boolean contains(Object obj) {
+        if (obj == null ? true : obj instanceof MatchGroup) {
+            return super.contains((MatchGroup) obj);
+        }
+        return false;
+    }
+
+    @Override // kotlin.collections.AbstractCollection
+    public final int getSize() {
+        return this.this$0.matcher.groupCount() + 1;
+    }
+
+    @Override // kotlin.collections.AbstractCollection, java.util.Collection
+    public final boolean isEmpty() {
+        return false;
+    }
+
+    @Override // java.util.Collection, java.lang.Iterable
+    public final Iterator iterator() {
+        return new TransformingSequence$iterator$1(new TransformingSequence(new CollectionsKt___CollectionsKt$asSequence$$inlined$Sequence$1(new IntRange(0, size() - 1)), new Function1() { // from class: kotlin.text.MatcherMatchResult$groups$1$$ExternalSyntheticLambda0
+            @Override // kotlin.jvm.functions.Function1
+            /* renamed from: invoke */
+            public final Object mo779invoke(Object obj) {
+                int intValue = ((Integer) obj).intValue();
+                MatcherMatchResult$groups$1 matcherMatchResult$groups$1 = MatcherMatchResult$groups$1.this;
+                Matcher matcher = matcherMatchResult$groups$1.this$0.matcher;
+                IntRange until = RangesKt___RangesKt.until(matcher.start(intValue), matcher.end(intValue));
+                if (until.first >= 0) {
+                    return new MatchGroup(matcherMatchResult$groups$1.this$0.matcher.group(intValue), until);
+                }
+                return null;
+            }
+        }));
+    }
+}

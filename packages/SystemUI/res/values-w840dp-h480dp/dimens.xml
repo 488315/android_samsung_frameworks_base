@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="sud_glif_expressive_button_margin_end">44.0dip</dimen>
+    <dimen name="sud_glif_expressive_button_margin_start">32.0dip</dimen>
+    <dimen name="sud_glif_expressive_content_padding_top">80.0dip</dimen>
+    <dimen name="sud_glif_expressive_footer_bar_padding_end">44.0dip</dimen>
+    <dimen name="sud_glif_expressive_footer_bar_padding_start">32.0dip</dimen>
+    <dimen name="sud_glif_expressive_header_title_line_height">52.0sp</dimen>
+    <dimen name="sud_glif_expressive_header_title_size">45.0sp</dimen>
+    <dimen name="sud_glif_expressive_land_middle_horizontal_spacing">72.0dip</dimen>
+    <dimen name="sud_glif_expressive_margin_end">48.0dip</dimen>
+    <dimen name="sud_glif_expressive_margin_start">48.0dip</dimen>
+</resources>

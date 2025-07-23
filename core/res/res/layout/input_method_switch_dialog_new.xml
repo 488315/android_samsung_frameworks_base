@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/container" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="0.0dip" android:layout_weight="1.0">
+        <com.android.internal.widget.MaxHeightFrameLayout android:layout_width="320.0dip" android:layout_height="fill_parent" android:maxHeight="373.0dip" android:layout_weight="1.0">
+            <com.android.internal.widget.RecyclerView android:id="@id/list" android:paddingTop="8.0dip" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layoutManager="com.android.internal.widget.LinearLayoutManager" />
+        </com.android.internal.widget.MaxHeightFrameLayout>
+    </LinearLayout>
+    <LinearLayout android:orientation="horizontal" android:id="@id/button_bar" android:paddingTop="8.0dip" android:paddingBottom="16.0dip" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingHorizontal="16.0dip" style="?buttonBarStyle">
+        <Space android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" android:importantForAccessibility="no" />
+        <Button android:textAppearance="?textAppearance" android:layout_gravity="end" android:id="@id/button1" android:background="@drawable/input_method_switch_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/input_method_switcher_settings_button" android:contentDescription="@string/input_method_language_settings" android:fontFamily="google-sans-text" style="?buttonBarButtonStyle" />
+    </LinearLayout>
+</LinearLayout>

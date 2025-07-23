@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_gravity="bottom|center" android:id="@id/scroll_wheel_bg" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="20.0dip" android:layout_marginBottom="20.0dip" android:layoutDirection="ltr" android:layout_marginStart="7.0dip" android:layout_marginEnd="7.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.wm.shell.controlpanel.widget.CustomWheelView android:layout_gravity="bottom|center" android:id="@id/custom_wheel_view" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layoutDirection="ltr" custom:dashGap="8.0dip" custom:dashLength="1.0dip" custom:dashThickness="@dimen/scroll_wheel_dashthickness" custom:splitOrientation="vertical"
+      xmlns:android="http://schemas.android.com/apk/res/android" xmlns:custom="http://schemas.android.com/apk/res-auto" />
+</RelativeLayout>

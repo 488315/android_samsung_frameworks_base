@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@id/background">
+        <androidx.appcompat.util.SeslShapeDrawable>
+            <stroke android:width="@dimen/control_card_stroke_width_for_add_dialog" android:color="@color/control_card_stroke_color_for_add_dialog" />
+            <solid android:color="@color/control_favorite_default_background" />
+            <corners android:radius="@dimen/sec_control_corner_radius" />
+        </androidx.appcompat.util.SeslShapeDrawable>
+    </item>
+</layer-list>

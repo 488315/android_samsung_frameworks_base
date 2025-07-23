@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textSize="@dimen/clear_cover_subscreen_noti_content_text_size" android:textStyle="bold" android:textColor="@color/subscreen_notification_text_color" android:id="@id/detail_sender_text" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:fontFamily="roboto-regular" />
+        <TextView android:textSize="@dimen/clear_cover_subscreen_noti_content_text_size" android:textColor="@color/subscreen_notification_content_text_color" android:id="@id/detail_content_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:fontFamily="roboto-regular" />
+        <ImageView android:id="@id/detail_content_image" android:layout_width="fill_parent" android:layout_height="180.0dip" android:layout_marginBottom="10.0dip" />
+        <DateTimeView android:textSize="12.0dip" android:textColor="#ff999999" android:id="@id/detail_clock" android:layout_width="fill_parent" android:layout_height="wrap_content" android:fontFamily="roboto-regular" />
+    </LinearLayout>
+</LinearLayout>

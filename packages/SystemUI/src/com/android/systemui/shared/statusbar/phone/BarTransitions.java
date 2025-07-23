@@ -1,0 +1,226 @@
+package com.android.systemui.shared.statusbar.phone;
+
+import android.R;
+import android.content.Context;
+import android.content.res.TypedArray;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.os.SystemClock;
+import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
+import android.util.Log;
+import android.view.View;
+import android.view.animation.LinearInterpolator;
+import com.android.app.animation.Interpolators;
+import com.android.systemui.navigationbar.BasicRuneWrapper;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public class BarTransitions {
+    public BarBackgroundDrawable mBarBackground;
+    public int mMode;
+    public final String mTag;
+    public final View mView;
+
+    public BarTransitions(View view, int i) {
+        this.mTag = "BarTransitions.".concat(view.getClass().getSimpleName());
+        this.mView = view;
+        BarBackgroundDrawable barBackgroundDrawable = new BarBackgroundDrawable(view.getContext(), i);
+        this.mBarBackground = barBackgroundDrawable;
+        view.setBackground(barBackgroundDrawable);
+    }
+
+    public static String modeToString(int i) {
+        if (i == 4) {
+            return "MODE_OPAQUE";
+        }
+        if (i == 1) {
+            return "MODE_SEMI_TRANSPARENT";
+        }
+        if (i == 2) {
+            return "MODE_TRANSLUCENT";
+        }
+        if (i == 3) {
+            return "MODE_LIGHTS_OUT";
+        }
+        if (i == 0) {
+            return "MODE_TRANSPARENT";
+        }
+        if (i == 5) {
+            return "MODE_WARNING";
+        }
+        if (i == 6) {
+            return "MODE_LIGHTS_OUT_TRANSPARENT";
+        }
+        boolean z = BasicRuneWrapper.NAVBAR_ENABLED;
+        if (z && i == 7) {
+            return "MODE_LIGHT_SEMI_TRANSPARENT";
+        }
+        if (z && i == 8) {
+            return "MODE_ACTIVITY_EMBEDED";
+        }
+        throw new IllegalArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Unknown mode "));
+    }
+
+    public final void applyModeBackground(int i, boolean z) {
+        BarBackgroundDrawable barBackgroundDrawable = this.mBarBackground;
+        if (barBackgroundDrawable.mMode == i) {
+            return;
+        }
+        barBackgroundDrawable.mMode = i;
+        barBackgroundDrawable.mAnimating = z;
+        if (z) {
+            long elapsedRealtime = SystemClock.elapsedRealtime();
+            barBackgroundDrawable.mStartTime = elapsedRealtime;
+            barBackgroundDrawable.mEndTime = elapsedRealtime + 200;
+            barBackgroundDrawable.mGradientAlphaStart = barBackgroundDrawable.mGradientAlpha;
+            barBackgroundDrawable.mColorStart = barBackgroundDrawable.mColor;
+        }
+        barBackgroundDrawable.invalidateSelf();
+    }
+
+    public void onTransition(int i, int i2, boolean z) {
+        applyModeBackground(i2, z);
+    }
+
+    public final void transitionTo(int i, boolean z) {
+        int i2 = this.mMode;
+        if (i2 == i) {
+            return;
+        }
+        this.mMode = i;
+        if (BasicRuneWrapper.NAVBAR_ENABLED) {
+            Log.d(this.mTag, modeToString(i2) + " -> " + modeToString(i) + " animate=" + z);
+        }
+        onTransition(i2, this.mMode, z);
+    }
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public class BarBackgroundDrawable extends Drawable {
+        public boolean mAnimating;
+        public int mColor;
+        public int mColorStart;
+        public long mEndTime;
+        public Rect mFrame;
+        public final Drawable mGradient;
+        public int mGradientAlpha;
+        public int mGradientAlphaStart;
+        public int mLightSemiTransparent;
+        public int mOpaque;
+        public final int mSemiTransparent;
+        public long mStartTime;
+        public PorterDuffColorFilter mTintFilter;
+        public boolean mUseFrame;
+        public final int mWarning;
+        public int mMode = -1;
+        public float mOverrideAlpha = 1.0f;
+        public final Paint mPaint = new Paint();
+
+        public BarBackgroundDrawable(Context context, int i) {
+            context.getResources();
+            this.mOpaque = -16777216;
+            this.mSemiTransparent = context.getColor(17171625);
+            TypedArray obtainStyledAttributes = context.obtainStyledAttributes(new int[]{R.attr.colorError});
+            int color = obtainStyledAttributes.getColor(0, 0);
+            obtainStyledAttributes.recycle();
+            this.mWarning = color;
+            this.mGradient = context.getDrawable(i);
+        }
+
+        @Override // android.graphics.drawable.Drawable
+        public void draw(Canvas canvas) {
+            boolean z;
+            int i = this.mMode;
+            int i2 = i == 5 ? this.mWarning : i == 2 ? this.mSemiTransparent : i == 1 ? this.mSemiTransparent : (i == 0 || i == 6 || ((z = BasicRuneWrapper.NAVBAR_ENABLED) && i == 8)) ? 0 : (z && i == 7) ? this.mLightSemiTransparent : this.mOpaque;
+            if (this.mAnimating) {
+                if (SystemClock.elapsedRealtime() >= this.mEndTime) {
+                    this.mAnimating = false;
+                    this.mColor = i2;
+                    this.mGradientAlpha = 0;
+                } else {
+                    long j = this.mStartTime;
+                    float max = Math.max(0.0f, Math.min(((LinearInterpolator) Interpolators.LINEAR).getInterpolation((r3 - j) / (r5 - j)), 1.0f));
+                    float f = 1.0f - max;
+                    this.mGradientAlpha = (int) ((this.mGradientAlphaStart * f) + (0 * max));
+                    this.mColor = Color.argb((int) ((Color.alpha(this.mColorStart) * f) + (Color.alpha(i2) * max)), (int) ((Color.red(this.mColorStart) * f) + (Color.red(i2) * max)), (int) ((Color.green(this.mColorStart) * f) + (Color.green(i2) * max)), (int) ((Color.blue(this.mColorStart) * f) + (max * Color.blue(i2))));
+                }
+            } else {
+                this.mColor = i2;
+                this.mGradientAlpha = 0;
+            }
+            int i3 = this.mGradientAlpha;
+            if (i3 > 0) {
+                this.mGradient.setAlpha(i3);
+                this.mGradient.draw(canvas);
+            }
+            if (Color.alpha(this.mColor) > 0) {
+                this.mPaint.setColor(this.mColor);
+                PorterDuffColorFilter porterDuffColorFilter = this.mTintFilter;
+                if (porterDuffColorFilter != null) {
+                    this.mPaint.setColorFilter(porterDuffColorFilter);
+                }
+                this.mPaint.setAlpha((int) (Color.alpha(this.mColor) * this.mOverrideAlpha));
+                Rect rect = this.mFrame;
+                if (rect == null) {
+                    canvas.drawPaint(this.mPaint);
+                } else if (!BasicRuneWrapper.NAVBAR_ENABLED || this.mUseFrame) {
+                    canvas.drawRect(rect, this.mPaint);
+                } else {
+                    canvas.drawPaint(this.mPaint);
+                }
+            }
+            if (this.mAnimating) {
+                invalidateSelf();
+            }
+        }
+
+        @Override // android.graphics.drawable.Drawable
+        public final int getOpacity() {
+            return -3;
+        }
+
+        @Override // android.graphics.drawable.Drawable
+        public final void onBoundsChange(Rect rect) {
+            super.onBoundsChange(rect);
+            this.mGradient.setBounds(rect);
+        }
+
+        @Override // android.graphics.drawable.Drawable
+        public final void setTint(int i) {
+            PorterDuffColorFilter porterDuffColorFilter = this.mTintFilter;
+            PorterDuff.Mode mode = porterDuffColorFilter == null ? PorterDuff.Mode.SRC_IN : porterDuffColorFilter.getMode();
+            PorterDuffColorFilter porterDuffColorFilter2 = this.mTintFilter;
+            if (porterDuffColorFilter2 == null || porterDuffColorFilter2.getColor() != i) {
+                this.mTintFilter = new PorterDuffColorFilter(i, mode);
+            }
+            invalidateSelf();
+        }
+
+        @Override // android.graphics.drawable.Drawable
+        public final void setTintMode(PorterDuff.Mode mode) {
+            PorterDuffColorFilter porterDuffColorFilter = this.mTintFilter;
+            int color = porterDuffColorFilter == null ? 0 : porterDuffColorFilter.getColor();
+            PorterDuffColorFilter porterDuffColorFilter2 = this.mTintFilter;
+            if (porterDuffColorFilter2 == null || porterDuffColorFilter2.getMode() != mode) {
+                this.mTintFilter = new PorterDuffColorFilter(color, mode);
+            }
+            invalidateSelf();
+        }
+
+        @Override // android.graphics.drawable.Drawable
+        public final void setAlpha(int i) {
+        }
+
+        @Override // android.graphics.drawable.Drawable
+        public final void setColorFilter(ColorFilter colorFilter) {
+        }
+
+        public void updateOpaqueColor(int i) {
+        }
+    }
+}

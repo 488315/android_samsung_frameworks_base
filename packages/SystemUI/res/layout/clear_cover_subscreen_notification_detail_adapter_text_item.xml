@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="@dimen/clear_cover_subscreen_noti_list_layout_margin" android:layout_marginEnd="@dimen/clear_cover_subscreen_noti_list_layout_margin"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:orientation="vertical" android:id="@id/detail_layout" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="horizontal" android:id="@id/detail_header_layout" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <ImageView android:id="@id/subscreen_header_icon" android:layout_width="@dimen/clear_cover_subscreen_noti_icon_size" android:layout_height="@dimen/clear_cover_subscreen_noti_icon_size" />
+            <TextView android:textSize="12.0dip" android:textColor="@color/subscreen_notification_text_color" android:ellipsize="end" android:id="@id/subscreen_header_app_name" android:layout_width="0.0dip" android:layout_height="wrap_content" android:maxLines="1" android:layout_weight="1.0" android:fontFamily="roboto-medium" android:layout_marginStart="@dimen/clear_cover_subscreen_noti_detail_header_app_name_start_margin" />
+            <ImageView android:layout_gravity="center_vertical" android:id="@id/two_phone_icon" android:visibility="gone" android:layout_width="10.0dip" android:layout_height="@dimen/clear_cover_subscreen_noti_secure_icon_size" android:tint="@color/subscreen_notification_two_phone_icon_tint_color" android:layout_marginStart="@dimen/clear_cover_subscreen_noti_icon_between_margin" />
+            <ImageView android:layout_gravity="center_vertical" android:id="@id/secure_icon" android:visibility="gone" android:layout_width="@dimen/clear_cover_subscreen_noti_secure_icon_size" android:layout_height="@dimen/clear_cover_subscreen_noti_secure_icon_size" android:layout_marginStart="@dimen/clear_cover_subscreen_noti_icon_between_margin" android:layout_marginEnd="@dimen/clear_cover_subscreen_noti_list_item_layout_margin" />
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/clear_cover_subscreen_noti_list_layout_item_between_margin">
+                <TextView android:textSize="@dimen/clear_cover_subscreen_noti_title_text_size" android:textColor="@color/subscreen_notification_text_color" android:gravity="center" android:id="@id/name_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:fontFamily="roboto-regular" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="15.0dip" android:layout_marginBottom="16.0dip">
+                <TextView android:textSize="@dimen/clear_cover_subscreen_noti_title_text_size" android:textColor="@color/subscreen_notification_text_color" android:gravity="center" android:id="@id/app_open_button" android:background="@drawable/clear_cover_subscreen_notification_button_background" android:layout_width="fill_parent" android:layout_height="32.0dip" android:text="@string/subscreen_detail_adapter_open_app_button_text" android:fontFamily="roboto-medium" />
+                <TextView android:textSize="@dimen/clear_cover_subscreen_noti_title_text_size" android:textColor="@color/subscreen_notification_text_color" android:gravity="center" android:id="@id/clear_button" android:background="@drawable/clear_cover_subscreen_notification_button_background" android:layout_width="fill_parent" android:layout_height="32.0dip" android:layout_marginTop="15.0dip" android:text="@string/clear_all_text" android:fontFamily="roboto-medium" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

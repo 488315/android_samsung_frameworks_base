@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector android:height="20.0dip" android:width="20.0dip" android:viewportWidth="20.0" android:viewportHeight="20.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="@color/ongoing_activity_expand_button_color" android:pathData="M13.969,7.8913L10.3543,11.5353C10.3172,11.5724 10.2741,11.5802 10.2448,11.5802C10.2146,11.5802 10.1732,11.5724 10.1361,11.5353L6.5058,7.8904C6.2531,7.6368 5.8443,7.6368 5.5907,7.8887C5.3371,8.1405 5.3363,8.5502 5.589,8.8038L9.2184,12.4479C9.4927,12.723 9.8558,12.8739 10.2448,12.8739L10.2456,12.8739C10.6338,12.8731 10.9986,12.7221 11.272,12.4453L14.8867,8.8029C15.1386,8.5494 15.1369,8.1388 14.8842,7.8878C14.6306,7.636 14.2209,7.6377 13.969,7.8913" android:strokeColor="#00000000" android:strokeWidth="1.0" android:fillType="nonZero" />
+</vector>

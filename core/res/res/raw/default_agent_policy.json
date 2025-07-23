@@ -1,0 +1,9 @@
+{
+    "policy_version": "20250408",
+    "cross_app_agent_list": [
+        {
+            "packageName" : "",
+            "sha256" : ""
+        }
+    ]
+}

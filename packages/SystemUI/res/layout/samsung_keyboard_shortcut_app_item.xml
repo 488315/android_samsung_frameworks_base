@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_gravity="start|center" android:orientation="horizontal" android:focusable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/ksh_app_item_padding_start" android:paddingEnd="@dimen/ksh_app_item_padding_end"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/keyboard_shortcuts_icon" android:visibility="gone" android:layout_width="@dimen/ksh_app_item_img_size" android:layout_height="@dimen/ksh_app_item_img_size" android:layout_centerVertical="true" android:layout_marginEnd="@dimen/ksh_app_item_img_margin_end" android:layout_alignParentStart="true" />
+    <TextView android:textAppearance="?android:textAppearance" android:textSize="17.0sp" android:id="@id/keyboard_shortcuts_keyword" android:paddingTop="14.0dip" android:paddingBottom="14.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_centerVertical="true" android:layout_toStartOf="@id/keyboard_shortcuts_item_container" android:layout_toEndOf="@id/keyboard_shortcuts_icon" />
+    <LinearLayout android:textSize="14.0sp" android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/keyboard_shortcuts_item_container" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerVertical="true" android:layout_marginStart="2.0dip" android:layout_alignParentEnd="true" />
+</RelativeLayout>

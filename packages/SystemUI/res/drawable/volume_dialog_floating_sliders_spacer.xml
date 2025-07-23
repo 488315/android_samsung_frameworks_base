@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <size android:height="@dimen/volume_dialog_floating_sliders_spacing" android:width="@dimen/volume_dialog_floating_sliders_spacing" />
+    <solid android:color="@color/transparent" />
+</shape>

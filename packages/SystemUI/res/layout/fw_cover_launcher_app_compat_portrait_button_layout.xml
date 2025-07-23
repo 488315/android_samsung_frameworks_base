@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@id/floating_button" android:layout_width="fill_parent" android:layout_height="fill_parent" android:contentDescription="@string/fw_cover_launcher_app_compat_portrait_button"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_gravity="center" android:id="@id/icon_area" android:background="@drawable/fab_cover_launcher_app_compat_portrait" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="@dimen/fw_cover_launcher_app_compat_floating_icon_left_margin" android:elevation="@dimen/fw_cover_launcher_app_compat_floating_icon_elevation" />
+</LinearLayout>

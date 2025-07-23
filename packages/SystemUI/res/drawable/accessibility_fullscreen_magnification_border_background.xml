@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="@null" />
+    <stroke android:width="@dimen/magnifier_border_width_fullscreen_with_offset" android:color="@color/magnification_border_color" />
+</shape>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginEnd="@dimen/basic_interaction_side_margin"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.systemui.controls.ui.view.ControlsSpinner android:id="@id/controls_spinner" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+</LinearLayout>

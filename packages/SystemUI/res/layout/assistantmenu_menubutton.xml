@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@id/grid_button" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <View android:id="@id/button_focus" android:background="@drawable/ripple_effect" android:layout_width="@dimen/grid_menu_icon_size" android:layout_height="@dimen/grid_menu_icon_size" android:layout_centerHorizontal="true" android:layout_centerVertical="true" />
+    <ImageButton android:id="@id/menubutton" android:visibility="invisible" android:clickable="false" android:layout_width="@dimen/grid_menu_layout_size" android:layout_height="@dimen/grid_menu_layout_size" android:layout_centerHorizontal="true" android:layout_centerVertical="true" android:importantForAccessibility="no" />
+    <ImageButton android:id="@id/drag_selected_border" android:visibility="invisible" android:clickable="false" android:layout_width="@dimen/grid_menu_layout_size" android:layout_height="@dimen/grid_menu_layout_size" android:layout_centerHorizontal="true" android:layout_centerVertical="true" />
+    <ImageView android:id="@id/menubutton_icon" android:layout_width="@dimen/grid_menu_icon_size" android:layout_height="@dimen/grid_menu_icon_size" android:layout_centerHorizontal="true" android:layout_centerVertical="true" android:backgroundTint="@color/panel_menu_icon_color_expand" />
+</RelativeLayout>

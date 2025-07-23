@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.internal.widget.ResolverDrawerLayout android:id="@id/contentPanel" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginBottom="@dimen/resolver_button_bar_spacing" android:maxWidth="360.0dip" android:maxCollapsedHeight="450.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:id="@id/sem_resolver_header" android:background="@drawable/bottomsheet_background" android:paddingTop="@dimen/resolver_small_margin" android:paddingBottom="@dimen/resolver_title_padding_bottom" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/resolver_edge_margin" android:paddingEnd="@dimen/resolver_edge_margin" android:layout_alwaysShow="true">
+        <TextView android:textAppearance="?textAppearanceButton" android:textColor="?colorAccent" android:gravity="center_vertical" android:id="@id/profile_button" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="48.0dip" android:singleLine="true" android:layout_alignParentTop="true" android:layout_marginEnd="8.0dip" android:layout_alignParentEnd="true" style="?borderlessButtonStyle" />
+        <TextView android:textSize="16.0sp" android:textColor="?textColorPrimary" android:gravity="start|center" android:id="@id/title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_below="@id/profile_button" android:fontFamily="@string/config_headlineFontFamilyMedium" android:layout_alignParentStart="true" />
+    </RelativeLayout>
+    <FrameLayout android:id="@id/stub" android:background="?colorBackground" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    <TabHost android:id="@id/profile_tabhost" android:background="?colorBackground" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alignParentTop="true" android:layout_centerHorizontal="true" android:accessibilityTraversalAfter="@id/title">
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TabWidget android:id="@id/tabs" android:background="@color/transparent" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:tabStripEnabled="false" android:paddingHorizontal="4.0dip" />
+            <FrameLayout android:id="@id/tabcontent" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <com.android.internal.app.ResolverViewPager android:id="@id/profile_pager" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+    <LinearLayout android:orientation="vertical" android:id="@id/button_bar_container" android:background="@color/sem_resolver_bg_color" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_alwaysShow="true">
+        <TextView android:textSize="14.0sp" android:textColor="?textColorPrimary" android:layout_gravity="start|center" android:id="@id/sem_resolver_ai_description" android:paddingTop="@dimen/resolver_small_margin" android:paddingBottom="@dimen/resolver_title_padding_bottom" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingStart="@dimen/resolver_edge_margin" android:paddingEnd="@dimen/resolver_edge_margin" />
+        <include android:id="@id/button_bar" android:layout_marginBottom="50.0dip" layout="@layout/sem_resolver_ai_button" />
+    </LinearLayout>
+</com.android.internal.widget.ResolverDrawerLayout>

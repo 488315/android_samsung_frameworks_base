@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="loader_horizontal_min_width_watch">78.0dip</dimen>
+    <dimen name="screen_percentage_0416">9.47998dip</dimen>
+    <dimen name="screen_percentage_05">11.399994dip</dimen>
+    <dimen name="screen_percentage_052">11.859985dip</dimen>
+    <dimen name="screen_percentage_10">22.799988dip</dimen>
+    <dimen name="screen_percentage_12">27.359985dip</dimen>
+    <dimen name="screen_percentage_15">34.19998dip</dimen>
+    <dimen name="screen_percentage_3646">83.54999dip</dimen>
+</resources>

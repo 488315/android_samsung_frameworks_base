@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar android:theme="?android:actionBarTheme" android:id="@id/support_action_bar" android:layout_width="fill_parent" android:layout_height="?actionBarSize" android:transitionName="shared_element_view" app:layout_collapseMode="pin"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" />

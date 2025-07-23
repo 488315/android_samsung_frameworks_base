@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set android:ordering="sequentially"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt">
+    <objectAnimator android:interpolator="@drawable/$$notification_progress_indeterminate_horizontal_material__2__0" android:duration="200" android:startOffset="200" android:valueFrom="0" android:valueTo="0.024" android:valueType="floatType" android:propertyName="trimPathEnd" />
+    <objectAnimator android:interpolator="@drawable/$$notification_progress_indeterminate_horizontal_material__2__1" android:duration="800" android:valueFrom="0.024" android:valueTo="0.98" android:valueType="floatType" android:propertyName="trimPathEnd" />
+    <objectAnimator android:interpolator="@drawable/$$notification_progress_indeterminate_horizontal_material__2__2" android:duration="30" android:valueFrom="0.98" android:valueTo="1" android:valueType="floatType" android:propertyName="trimPathEnd" />
+</set>

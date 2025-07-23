@@ -1,0 +1,36 @@
+package com.android.systemui.statusbar.pipeline.shared.ui.binder;
+
+import android.view.View;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class ModernStatusBarViewVisibilityHelper {
+    public static final Companion Companion = new Companion(null);
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class Companion {
+        public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
+            this();
+        }
+
+        public static void setVisibilityState(View view, View view2, int i) {
+            if (i == 0) {
+                view.setVisibility(0);
+                view2.setVisibility(8);
+            } else if (i == 1) {
+                view.setVisibility(4);
+                view2.setVisibility(0);
+            } else {
+                if (i != 2) {
+                    return;
+                }
+                view.setVisibility(4);
+                view2.setVisibility(4);
+            }
+        }
+
+        private Companion() {
+        }
+    }
+}

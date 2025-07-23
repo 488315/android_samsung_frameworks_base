@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset android:insetLeft="5.0dip" android:insetRight="5.0dip" android:insetTop="5.0dip" android:insetBottom="5.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.appcompat.util.SeslShapeDrawable android:shape="rectangle">
+        <padding android:top="@dimen/sesl_menu_popup_top_padding" android:bottom="0.0dip" />
+        <corners android:radius="@dimen/sesl_menu_popup_corner_radius" />
+        <solid android:color="@color/sesl_menu_popup_background_color" />
+    </androidx.appcompat.util.SeslShapeDrawable>
+</inset>

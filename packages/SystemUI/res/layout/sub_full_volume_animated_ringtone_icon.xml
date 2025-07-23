@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_gravity="center" android:id="@id/volume_animated_icon" android:visibility="visible" android:layout_width="@dimen/volume_icon_size" android:layout_height="@dimen/volume_icon_size" android:layoutDirection="ltr"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:layout_gravity="center" android:id="@id/volume_splash_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:rotation="45.0">
+        <ImageView android:layout_gravity="center" android:id="@id/volume_icon_mute_splash" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/tw_ic_audio_mute_splash" />
+    </FrameLayout>
+    <ImageView android:layout_gravity="center" android:id="@id/volume_mute_icon" android:layout_width="28.0dip" android:layout_height="28.0dip" android:src="@drawable/tw_ic_audio_mute_mtrl" android:tint="@color/volume_icon_color" />
+    <ImageView android:id="@id/volume_normal_icon" android:layout_width="14.0dip" android:layout_height="fill_parent" android:src="@drawable/tw_ic_audio_sound_ringtone" android:tint="@color/volume_icon_color" />
+    <ImageView android:id="@id/volume_sound_icon_wave_s" android:layout_width="4.0dip" android:layout_height="fill_parent" android:src="@drawable/tw_ic_audio_sound_wave_s" android:tint="@color/volume_icon_color" android:alpha="0.5" />
+    <ImageView android:id="@id/volume_sound_icon_wave_l" android:layout_width="7.0dip" android:layout_height="fill_parent" android:src="@drawable/tw_ic_audio_sound_wave_l" android:tint="@color/volume_icon_color" android:alpha="0.5" />
+    <ImageView android:layout_gravity="center" android:id="@id/volume_vibrate_icon" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/tw_ic_audio_vibrate_mtrl" android:tint="@color/volume_icon_color" />
+</FrameLayout>

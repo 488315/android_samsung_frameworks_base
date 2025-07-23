@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle" android:color="#42ffffff"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="37.5px" />
+    <solid android:color="#ff2d2d2d">
+        <size android:height="@dimen/clear_cover_subscreen_noti_list_item_background_height" android:width="@dimen/clear_cover_subscreen_noti_list_item_background_width" />
+    </solid>
+</shape>

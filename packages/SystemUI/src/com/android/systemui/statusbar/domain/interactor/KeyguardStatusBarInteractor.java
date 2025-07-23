@@ -1,0 +1,15 @@
+package com.android.systemui.statusbar.domain.interactor;
+
+import com.android.systemui.statusbar.data.repository.KeyguardStatusBarRepository;
+import com.android.systemui.statusbar.data.repository.KeyguardStatusBarRepositoryImpl;
+import kotlinx.coroutines.flow.FlowKt__ZipKt$combine$$inlined$unsafeFlow$1;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class KeyguardStatusBarInteractor {
+    public final FlowKt__ZipKt$combine$$inlined$unsafeFlow$1 isKeyguardUserSwitcherEnabled;
+
+    public KeyguardStatusBarInteractor(KeyguardStatusBarRepository keyguardStatusBarRepository) {
+        this.isKeyguardUserSwitcherEnabled = ((KeyguardStatusBarRepositoryImpl) keyguardStatusBarRepository).isKeyguardUserSwitcherEnabled;
+    }
+}

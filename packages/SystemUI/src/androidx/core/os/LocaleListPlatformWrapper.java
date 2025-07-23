@@ -1,0 +1,35 @@
+package androidx.core.os;
+
+import android.os.LocaleList;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes.dex */
+public final class LocaleListPlatformWrapper implements LocaleListInterface {
+    public final LocaleList mLocaleList;
+
+    public LocaleListPlatformWrapper(Object obj) {
+        this.mLocaleList = (LocaleList) obj;
+    }
+
+    public final boolean equals(Object obj) {
+        return this.mLocaleList.equals(((LocaleListInterface) obj).getLocaleList());
+    }
+
+    @Override // androidx.core.os.LocaleListInterface
+    public final Object getLocaleList() {
+        return this.mLocaleList;
+    }
+
+    public final int hashCode() {
+        return this.mLocaleList.hashCode();
+    }
+
+    @Override // androidx.core.os.LocaleListInterface
+    public final boolean isEmpty() {
+        return this.mLocaleList.isEmpty();
+    }
+
+    public final String toString() {
+        return this.mLocaleList.toString();
+    }
+}

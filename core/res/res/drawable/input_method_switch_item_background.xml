@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:color="@color/list_highlight_material"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@id/mask">
+        <shape android:shape="rectangle">
+            <corners android:radius="28.0dip" />
+            <solid android:color="@color/white" />
+        </shape>
+    </item>
+    <item>
+        <selector>
+            <item android:state_activated="true">
+                <shape android:shape="rectangle">
+                    <corners android:radius="28.0dip" />
+                    <solid android:color="@color/materialColorSecondaryContainer" />
+                </shape>
+            </item>
+        </selector>
+    </item>
+</ripple>

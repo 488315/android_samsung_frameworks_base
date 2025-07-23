@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/action_icon" android:background="@drawable/control_action_button_ripple" android:focusable="true" android:visibility="invisible" android:clickable="true" android:layout_width="@dimen/control_action_button_size" android:layout_height="@dimen/control_action_button_size" />
+    <ProgressBar android:id="@id/action_icon_progress_circle" android:visibility="gone" android:layout_width="@dimen/control_action_button_size" android:layout_height="@dimen/control_action_button_size" android:indeterminateDrawable="@drawable/progress_indeterminate_anim" android:indeterminateTint="@color/control_action_button_progress" android:indeterminateTintMode="src_atop" style="?android:progressBarStyleLarge" />
+</RelativeLayout>

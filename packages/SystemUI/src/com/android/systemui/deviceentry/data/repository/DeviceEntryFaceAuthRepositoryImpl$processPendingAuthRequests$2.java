@@ -1,0 +1,145 @@
+package com.android.systemui.deviceentry.data.repository;
+
+import android.hardware.face.FaceManager;
+import android.hardware.face.FaceSensorPropertiesInternal;
+import com.android.systemui.deviceentry.shared.FaceAuthUiEvent;
+import com.android.systemui.log.FaceAuthenticationLogger;
+import com.android.systemui.log.FaceAuthenticationLogger$$ExternalSyntheticLambda0;
+import com.android.systemui.log.LogBuffer;
+import com.android.systemui.log.LogMessageImpl;
+import com.android.systemui.log.core.LogLevel;
+import com.android.systemui.log.core.LogMessage;
+import java.util.List;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
+import kotlinx.coroutines.BuildersKt;
+import kotlinx.coroutines.CoroutineDispatcher;
+import kotlinx.coroutines.flow.StateFlowImpl;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+final class DeviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$2 extends SuspendLambda implements Function2 {
+    /* synthetic */ Object L$0;
+    int label;
+    final /* synthetic */ DeviceEntryFaceAuthRepositoryImpl this$0;
+
+    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+    public DeviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$2(DeviceEntryFaceAuthRepositoryImpl deviceEntryFaceAuthRepositoryImpl, Continuation continuation) {
+        super(2, continuation);
+        this.this$0 = deviceEntryFaceAuthRepositoryImpl;
+    }
+
+    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+    public final Continuation create(Object obj, Continuation continuation) {
+        DeviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$2 deviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$2 = new DeviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$2(this.this$0, continuation);
+        deviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$2.L$0 = obj;
+        return deviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$2;
+    }
+
+    @Override // kotlin.jvm.functions.Function2
+    public final Object invoke(Object obj, Object obj2) {
+        return ((DeviceEntryFaceAuthRepositoryImpl$processPendingAuthRequests$2) create((AuthenticationRequest) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+    }
+
+    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+    public final Object invokeSuspend(Object obj) {
+        Object obj2;
+        FaceSensorPropertiesInternal faceSensorPropertiesInternal;
+        Object obj3 = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            AuthenticationRequest authenticationRequest = (AuthenticationRequest) this.L$0;
+            if (authenticationRequest != null) {
+                DeviceEntryFaceAuthRepositoryImpl deviceEntryFaceAuthRepositoryImpl = this.this$0;
+                FaceAuthenticationLogger faceAuthenticationLogger = deviceEntryFaceAuthRepositoryImpl.faceAuthLogger;
+                faceAuthenticationLogger.getClass();
+                LogLevel logLevel = LogLevel.DEBUG;
+                FaceAuthenticationLogger$$ExternalSyntheticLambda0 faceAuthenticationLogger$$ExternalSyntheticLambda0 = new FaceAuthenticationLogger$$ExternalSyntheticLambda0(13);
+                LogBuffer logBuffer = faceAuthenticationLogger.logBuffer;
+                LogMessage obtain = logBuffer.obtain("DeviceEntryFaceAuthRepositoryLog", logLevel, faceAuthenticationLogger$$ExternalSyntheticLambda0, null);
+                FaceAuthUiEvent faceAuthUiEvent = authenticationRequest.uiEvent;
+                LogMessageImpl logMessageImpl = (LogMessageImpl) obtain;
+                logMessageImpl.str1 = String.valueOf(faceAuthUiEvent != null ? faceAuthUiEvent.getReason() : null);
+                boolean z = authenticationRequest.fallbackToDetection;
+                logMessageImpl.bool1 = z;
+                logBuffer.commit(obtain);
+                DeviceEntryFaceAuthRepositoryImpl.access$clearPendingAuthRequest(deviceEntryFaceAuthRepositoryImpl, "Authenticate was invoked");
+                this.label = 1;
+                StateFlowImpl stateFlowImpl = deviceEntryFaceAuthRepositoryImpl._isAuthRunning;
+                boolean booleanValue = ((Boolean) stateFlowImpl.getValue()).booleanValue();
+                FaceAuthenticationLogger faceAuthenticationLogger2 = deviceEntryFaceAuthRepositoryImpl.faceAuthLogger;
+                if (booleanValue) {
+                    faceAuthenticationLogger2.ignoredFaceAuthTrigger(faceAuthUiEvent, "face auth is currently running");
+                    obj2 = Unit.INSTANCE;
+                } else if (((Boolean) deviceEntryFaceAuthRepositoryImpl.cancellationInProgress.getValue()).booleanValue()) {
+                    faceAuthenticationLogger2.ignoredFaceAuthTrigger(faceAuthUiEvent, "cancellation in progress");
+                    obj2 = Unit.INSTANCE;
+                } else {
+                    boolean booleanValue2 = ((Boolean) deviceEntryFaceAuthRepositoryImpl.canRunFaceAuth.$$delegate_0.getValue()).booleanValue();
+                    CoroutineDispatcher coroutineDispatcher = deviceEntryFaceAuthRepositoryImpl.mainDispatcher;
+                    if (booleanValue2) {
+                        obj2 = BuildersKt.withContext(coroutineDispatcher, new DeviceEntryFaceAuthRepositoryImpl$authenticate$2(deviceEntryFaceAuthRepositoryImpl, faceAuthUiEvent, null), this);
+                    } else {
+                        if (!((Boolean) deviceEntryFaceAuthRepositoryImpl.canRunDetection.$$delegate_0.getValue()).booleanValue()) {
+                            faceAuthenticationLogger2.ignoredFaceAuthTrigger(faceAuthUiEvent, "face auth & detect gating check is false");
+                        } else if (z) {
+                            faceAuthenticationLogger2.ignoredFaceAuthTrigger(faceAuthUiEvent, "face auth gating check is false, falling back to detection.");
+                            LogBuffer logBuffer2 = faceAuthenticationLogger2.logBuffer;
+                            boolean z2 = false;
+                            if (!deviceEntryFaceAuthRepositoryImpl.isDetectionSupported) {
+                                FaceManager faceManager = deviceEntryFaceAuthRepositoryImpl.faceManager;
+                                List sensorPropertiesInternal = faceManager != null ? faceManager.getSensorPropertiesInternal() : null;
+                                LogMessage obtain2 = logBuffer2.obtain("DeviceEntryFaceAuthRepositoryLog", logLevel, new FaceAuthenticationLogger$$ExternalSyntheticLambda0(0), null);
+                                LogMessageImpl logMessageImpl2 = (LogMessageImpl) obtain2;
+                                logMessageImpl2.bool1 = faceManager == null;
+                                List list = sensorPropertiesInternal;
+                                if (list != null && !list.isEmpty()) {
+                                    r2 = false;
+                                }
+                                logMessageImpl2.bool2 = r2;
+                                if (sensorPropertiesInternal != null && (faceSensorPropertiesInternal = (FaceSensorPropertiesInternal) CollectionsKt___CollectionsKt.firstOrNull(sensorPropertiesInternal)) != null) {
+                                    z2 = faceSensorPropertiesInternal.supportsFaceDetection;
+                                }
+                                logMessageImpl2.bool2 = z2;
+                                logBuffer2.commit(obtain2);
+                                obj2 = Unit.INSTANCE;
+                            } else if (((Boolean) stateFlowImpl.getValue()).booleanValue()) {
+                                boolean booleanValue3 = ((Boolean) stateFlowImpl.getValue()).booleanValue();
+                                r2 = deviceEntryFaceAuthRepositoryImpl.detectCancellationSignal != null;
+                                LogMessage obtain3 = logBuffer2.obtain("DeviceEntryFaceAuthRepositoryLog", logLevel, new FaceAuthenticationLogger$$ExternalSyntheticLambda0(5), null);
+                                LogMessageImpl logMessageImpl3 = (LogMessageImpl) obtain3;
+                                logMessageImpl3.bool1 = booleanValue3;
+                                logMessageImpl3.bool2 = r2;
+                                logBuffer2.commit(obtain3);
+                                obj2 = Unit.INSTANCE;
+                            } else {
+                                obj2 = BuildersKt.withContext(coroutineDispatcher, new DeviceEntryFaceAuthRepositoryImpl$detect$2(deviceEntryFaceAuthRepositoryImpl, faceAuthUiEvent, null), this);
+                            }
+                            if (obj2 != obj3) {
+                                obj2 = Unit.INSTANCE;
+                            }
+                        } else {
+                            faceAuthenticationLogger2.ignoredFaceAuthTrigger(faceAuthUiEvent, "face auth gating check is false and fallback to detection is not requested");
+                        }
+                        obj2 = Unit.INSTANCE;
+                    }
+                }
+                if (obj2 == obj3) {
+                    return obj3;
+                }
+            }
+        } else {
+            if (i != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+        }
+        return Unit.INSTANCE;
+    }
+}

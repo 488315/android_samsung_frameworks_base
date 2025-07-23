@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_gravity="bottom|center" android:id="@id/gridFmControlLayoutMain" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layoutDirection="ltr"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:orientation="horizontal" android:id="@id/touch_pad_line" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <RelativeLayout android:id="@id/left_top_ic" android:background="@drawable/ic_touchpad_01" android:layout_width="@dimen/touchpad_corner_icon_size" android:layout_height="@dimen/touchpad_corner_icon_size" android:layout_margin="@dimen/touchpad_corner_icon_padding" android:layout_alignParentLeft="true" android:layout_alignParentTop="true" />
+        <RelativeLayout android:id="@id/right_top_ic" android:background="@drawable/ic_touchpad_02" android:layout_width="@dimen/touchpad_corner_icon_size" android:layout_height="@dimen/touchpad_corner_icon_size" android:layout_margin="@dimen/touchpad_corner_icon_padding" android:layout_alignParentTop="true" android:layout_alignParentRight="true" />
+        <RelativeLayout android:id="@id/left_bottom_ic" android:background="@drawable/ic_touchpad_03" android:layout_width="@dimen/touchpad_corner_icon_size" android:layout_height="@dimen/touchpad_corner_icon_size" android:layout_margin="@dimen/touchpad_corner_icon_padding" android:layout_alignParentLeft="true" android:layout_alignParentBottom="true" />
+        <RelativeLayout android:id="@id/right_bottom_ic" android:background="@drawable/ic_touchpad_04" android:layout_width="@dimen/touchpad_corner_icon_size" android:layout_height="@dimen/touchpad_corner_icon_size" android:layout_margin="@dimen/touchpad_corner_icon_padding" android:layout_alignParentRight="true" android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+    <TextView android:textSize="@dimen/touchpad_center_font_size" android:textColor="@color/touchpad_text_color" android:id="@id/center_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/flex_panel_touch_pad" android:layout_centerHorizontal="true" android:layout_centerVertical="true" android:textAlignment="center" />
+    <RelativeLayout android:id="@id/floatingUILayoutFm" android:clickable="true" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_alignParentBottom="true" android:layout_alignParentStart="true">
+        <LinearLayout android:orientation="horizontal" android:id="@id/touch_pad_bg" android:background="@drawable/touchpad_background" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    </RelativeLayout>
+</RelativeLayout>

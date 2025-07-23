@@ -1,0 +1,44 @@
+package com.android.systemui.media.mediaoutput.compose.widget;
+
+import androidx.compose.material3.SnackbarDuration;
+import androidx.compose.material3.SnackbarVisuals;
+import java.util.List;
+import kotlin.collections.ArraysKt___ArraysKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final class SnackbarDialogImpl implements SnackbarVisuals {
+    public final List actions;
+    public final String body;
+    public final String title;
+    public final String message = "";
+    public final String actionLabel = "";
+    public final SnackbarDuration duration = SnackbarDuration.Indefinite;
+
+    public SnackbarDialogImpl(String str, String str2, String... strArr) {
+        this.title = str;
+        this.body = str2;
+        this.actions = CollectionsKt___CollectionsKt.filterNotNull(ArraysKt___ArraysKt.toList(strArr));
+    }
+
+    @Override // androidx.compose.material3.SnackbarVisuals
+    public final String getActionLabel() {
+        return this.actionLabel;
+    }
+
+    @Override // androidx.compose.material3.SnackbarVisuals
+    public final SnackbarDuration getDuration() {
+        return this.duration;
+    }
+
+    @Override // androidx.compose.material3.SnackbarVisuals
+    public final String getMessage() {
+        return this.message;
+    }
+
+    @Override // androidx.compose.material3.SnackbarVisuals
+    public final boolean getWithDismissAction() {
+        return false;
+    }
+}

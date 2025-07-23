@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:color="?android:colorControlHighlight"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <layer-list android:paddingTop="@dimen/settingslib_expressive_space_extrasmall4" android:paddingBottom="@dimen/settingslib_expressive_space_extrasmall4" android:paddingStart="@dimen/settingslib_expressive_space_extrasmall4" android:paddingEnd="@dimen/settingslib_expressive_space_extrasmall4" android:paddingMode="stack">
+            <item>
+                <shape>
+                    <corners android:radius="@dimen/settingslib_expressive_radius_large3" />
+                    <solid android:color="@color/settingslib_materialColorSurfaceContainerLow" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+</ripple>

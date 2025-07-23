@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:gravity="fill_horizontal|center" android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/tw_progress_color_control_normal" />
+            <corners android:radius="@dimen/sec_brightness_slider_corner_radius" />
+            <stroke android:width="@dimen/sec_brightness_slider_background_stroke_width" android:color="@color/sec_brightness_slider_background_stroke_color" />
+        </shape>
+    </item>
+    <item android:gravity="fill_horizontal|center" android:id="@android:id/progress">
+        <transition>
+            <item>
+                <scale android:scaleWidth="100%">
+                    <shape android:shape="rectangle">
+                        <corners android:radius="@dimen/sec_brightness_slider_corner_radius" />
+                        <gradient android:startColor="@color/tw_progress_color_control_activated_start" android:endColor="@color/tw_progress_color_control_activated_end" />
+                        <stroke android:width="@dimen/sec_brightness_slider_background_stroke_width" android:color="@color/sec_brightness_slider_background_stroke_color" />
+                    </shape>
+                </scale>
+            </item>
+            <item>
+                <scale android:scaleWidth="100%">
+                    <shape android:shape="rectangle">
+                        <corners android:radius="@dimen/sec_brightness_slider_corner_radius" />
+                        <solid android:color="@color/tw_progress_color_control_activated_end" />
+                        <stroke android:width="@dimen/sec_brightness_slider_background_stroke_width" android:color="@color/sec_brightness_slider_background_stroke_color" />
+                    </shape>
+                </scale>
+            </item>
+        </transition>
+    </item>
+</layer-list>

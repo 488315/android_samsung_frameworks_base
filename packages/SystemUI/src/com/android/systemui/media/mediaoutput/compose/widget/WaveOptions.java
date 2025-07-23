@@ -1,0 +1,42 @@
+package com.android.systemui.media.mediaoutput.compose.widget;
+
+import androidx.compose.animation.FlingCalculator$FlingInfo$$ExternalSyntheticOutline0;
+import androidx.compose.foundation.shape.DpCornerSize$$ExternalSyntheticOutline0;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final class WaveOptions {
+    public final float amplitude;
+    public final float frequency;
+    public final float trackWidth;
+
+    public WaveOptions(float f, float f2, float f3) {
+        this.amplitude = f;
+        this.frequency = f2;
+        this.trackWidth = f3;
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof WaveOptions)) {
+            return false;
+        }
+        WaveOptions waveOptions = (WaveOptions) obj;
+        return Float.compare(this.amplitude, waveOptions.amplitude) == 0 && Float.compare(this.frequency, waveOptions.frequency) == 0 && Float.compare(this.trackWidth, waveOptions.trackWidth) == 0;
+    }
+
+    public final int hashCode() {
+        return Float.hashCode(this.trackWidth) + FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.frequency, Float.hashCode(this.amplitude) * 31, 31);
+    }
+
+    public final String toString() {
+        StringBuilder sb = new StringBuilder("WaveOptions(amplitude=");
+        sb.append(this.amplitude);
+        sb.append(", frequency=");
+        sb.append(this.frequency);
+        sb.append(", trackWidth=");
+        return DpCornerSize$$ExternalSyntheticOutline0.m(this.trackWidth, ")", sb);
+    }
+}

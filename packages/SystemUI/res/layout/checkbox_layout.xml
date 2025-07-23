@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:id="@id/do_not_show_again_layout" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/checkbox_popup_checkbox_margin"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <CheckBox android:id="@id/do_not_show_again" style="@style/DoNotShowAgainCheckBoxStyle" />
+    <TextView android:id="@id/do_not_show_again_text_view" style="@style/DoNotShowAgainTextStyle" />
+</LinearLayout>

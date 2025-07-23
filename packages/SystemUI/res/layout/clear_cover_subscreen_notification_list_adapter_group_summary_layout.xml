@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/main_layout" android:background="@drawable/clear_cover_subscreen_notification_list_type_item_background" android:paddingTop="@dimen/clear_cover_subscreen_noti_list_item_layout_margin" android:paddingBottom="@dimen/clear_cover_subscreen_noti_last_text_item_bottom_margin" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/clear_cover_subscreen_noti_list_layout_item_between_margin" android:layout_marginStart="@dimen/clear_cover_subscreen_noti_list_layout_margin" android:layout_marginEnd="@dimen/clear_cover_subscreen_noti_list_layout_margin" android:paddingHorizontal="@dimen/clear_cover_subscreen_noti_list_item_layout_margin"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <ImageView android:id="@id/icon" android:layout_width="@dimen/clear_cover_subscreen_noti_icon_size" android:layout_height="@dimen/clear_cover_subscreen_noti_icon_size" />
+        <LinearLayout android:gravity="center_vertical" android:layout_gravity="end" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <ImageView android:id="@id/two_phone_icon" android:visibility="gone" android:layout_width="10.0dip" android:layout_height="@dimen/clear_cover_subscreen_noti_secure_icon_size" android:tint="@color/subscreen_notification_two_phone_icon_tint_color" />
+            <ImageView android:id="@id/secure_icon" android:visibility="gone" android:layout_width="@dimen/clear_cover_subscreen_noti_secure_icon_size" android:layout_height="@dimen/clear_cover_subscreen_noti_secure_icon_size" android:layout_marginStart="@dimen/clear_cover_subscreen_noti_icon_between_margin" />
+            <FrameLayout android:id="@id/noti_group_count_layout" android:background="@drawable/clear_cover_subscreen_notification_group_count_background" android:visibility="visible" android:layout_width="@dimen/clear_cover_subscreen_noti_list_item_background_width" android:layout_height="@dimen/clear_cover_subscreen_noti_list_item_background_height" android:layout_marginStart="@dimen/clear_cover_subscreen_noti_icon_between_margin">
+                <TextView android:textSize="@dimen/clear_cover_subscreen_noti_group_count_text_size" android:textColor="#ffffffff" android:gravity="center_horizontal" android:layout_gravity="center" android:id="@id/noti_group_count" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="3" android:fontFamily="roboto-regular" />
+            </FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
+    <LinearLayout android:orientation="vertical" android:id="@id/group_child_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+</LinearLayout>

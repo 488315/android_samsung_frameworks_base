@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.statusbar.phone.SubScreenQuickPanelHeader android:theme="@style/Theme.SystemUI.QuickSettings.Header" android:id="@id/sub_screen_quick_panel_header" android:clipChildren="false" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="24.0dip" android:layout_marginTop="18.0dip" android:paddingStart="19.0dip" android:paddingEnd="19.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:systemui="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:gravity="start|center" android:id="@id/leftLayout" android:layout_width="wrap_content" android:layout_height="fill_parent">
+            <com.android.systemui.statusbar.policy.QSClockHeaderView android:textAppearance="@style/SecQuickCoverScreenStatusBarClockTextStyle" android:id="@id/header_clock" android:tag="sub_screen_header_clock" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:paddingStart="@dimen/status_bar_left_clock_starting_padding" android:paddingEnd="@dimen/status_bar_left_clock_end_padding" systemui:showDark="false" />
+        </LinearLayout>
+        <LinearLayout android:gravity="end|center" android:id="@id/rightLayout" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <ViewStub android:id="@id/quick_qs_network_speed_viewstub" android:layout="@layout/samsung_status_bar_network_speed_view" android:layout_width="wrap_content" android:layout_height="fill_parent" />
+            <com.android.systemui.statusbar.phone.StatusIconContainer android:id="@id/statusIcons" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0" android:paddingEnd="@dimen/signal_cluster_battery_padding" />
+            <com.android.systemui.battery.BatteryMeterView android:id="@id/batteryRemainingIcon" android:layout_width="wrap_content" android:layout_height="fill_parent" systemui:textAppearance="@style/TextAppearance.QS.Status" />
+        </LinearLayout>
+    </LinearLayout>
+</com.android.systemui.statusbar.phone.SubScreenQuickPanelHeader>

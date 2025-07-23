@@ -1,0 +1,43 @@
+package com.android.systemui.cover;
+
+import android.hardware.display.VirtualDisplay;
+import android.util.Log;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final /* synthetic */ class CoverScreenManager$$ExternalSyntheticLambda0 implements Runnable {
+    public final /* synthetic */ int $r8$classId;
+    public final /* synthetic */ CoverScreenManager f$0;
+
+    public /* synthetic */ CoverScreenManager$$ExternalSyntheticLambda0(CoverScreenManager coverScreenManager, int i) {
+        this.$r8$classId = i;
+        this.f$0 = coverScreenManager;
+    }
+
+    @Override // java.lang.Runnable
+    public final void run() {
+        switch (this.$r8$classId) {
+            case 0:
+                CoverScreenManager coverScreenManager = this.f$0;
+                Log.d("CoverScreenManager", "addPluginListener() PluginFaceWidget is connected");
+                if (coverScreenManager.mIsAttached) {
+                    coverScreenManager.requestPluginConnection(coverScreenManager.mCoverState);
+                    return;
+                }
+                return;
+            default:
+                CoverScreenManager coverScreenManager2 = this.f$0;
+                synchronized (coverScreenManager2) {
+                    try {
+                        VirtualDisplay virtualDisplay = coverScreenManager2.mVirtualDisplay;
+                        if (virtualDisplay != null) {
+                            coverScreenManager2.startCoverHomeActivity(virtualDisplay.getDisplay());
+                        }
+                    } catch (Throwable th) {
+                        throw th;
+                    }
+                }
+                return;
+        }
+    }
+}

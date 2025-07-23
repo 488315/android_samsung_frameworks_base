@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:id="@id/half_close_continuity_guide_root" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/half_close_continuity_guide_view" android:layout_width="@dimen/half_close_continuity_guide_view_width" android:layout_height="wrap_content" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent" app:layout_constraintVertical_bias="@dimen/half_close_continuity_guide_view_vertical_bias">
+            <com.samsung.android.sesl.transparentvideo.TransparentVideoView android:layout_gravity="center" android:id="@id/half_close_continuity_guide_animation" android:layout_width="@dimen/half_close_continuity_guide_view_icon_width" android:layout_height="@dimen/half_close_continuity_guide_view_icon_height" android:layout_marginBottom="@dimen/half_close_continuity_guide_view_icon_bottom_margin" android:scaleType="fitXY" />
+            <TextView android:textSize="@dimen/half_close_continuity_guide_view_text_size" android:textColor="@color/half_close_continuity_guide_view_text_color" android:gravity="center" android:id="@id/half_close_continuity_guide_text_view" android:layout_width="@dimen/half_close_continuity_guide_view_text_layout_width" android:layout_height="wrap_content" android:text="@string/half_close_continuity_guide_view_guide_text" android:fontFamily="sec" android:textDirection="locale" android:textAlignment="center" android:textFontWeight="600" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

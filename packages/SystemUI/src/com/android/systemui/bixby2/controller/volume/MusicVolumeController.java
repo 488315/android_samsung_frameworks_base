@@ -1,0 +1,121 @@
+package com.android.systemui.bixby2.controller.volume;
+
+import android.content.Context;
+import android.media.session.MediaController;
+import android.media.session.MediaSessionManager;
+import java.util.Iterator;
+import java.util.List;
+import kotlin.Lazy;
+import kotlin.LazyKt__LazyJVMKt;
+import kotlin.jvm.functions.Function0;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes.dex */
+public final class MusicVolumeController extends VolumeType {
+    public static final int $stable = 8;
+    private final Lazy mediaSessionManager$delegate;
+    private MediaController.PlaybackInfo playbackInfo;
+    private MediaController remoteController;
+    private final String streamTypeToString = "Media";
+
+    public MusicVolumeController(final Context context) {
+        this.mediaSessionManager$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.bixby2.controller.volume.MusicVolumeController$$ExternalSyntheticLambda0
+            @Override // kotlin.jvm.functions.Function0
+            public final Object invoke() {
+                MediaSessionManager mediaSessionManager_delegate$lambda$0;
+                mediaSessionManager_delegate$lambda$0 = MusicVolumeController.mediaSessionManager_delegate$lambda$0(context);
+                return mediaSessionManager_delegate$lambda$0;
+            }
+        });
+    }
+
+    private final List<MediaController> getActiveSessions() {
+        return getMediaSessionManager().getActiveSessions(null);
+    }
+
+    private final MediaSessionManager getMediaSessionManager() {
+        return (MediaSessionManager) this.mediaSessionManager$delegate.getValue();
+    }
+
+    private final boolean isRemotePlayerActive() {
+        Object obj;
+        Iterator<T> it = getActiveSessions().iterator();
+        while (true) {
+            if (!it.hasNext()) {
+                obj = null;
+                break;
+            }
+            obj = it.next();
+            MediaController.PlaybackInfo playbackInfo = ((MediaController) obj).getPlaybackInfo();
+            if (playbackInfo != null && playbackInfo.getPlaybackType() == 2) {
+                break;
+            }
+        }
+        MediaController mediaController = (MediaController) obj;
+        if (mediaController == null) {
+            return false;
+        }
+        this.remoteController = mediaController;
+        this.playbackInfo = mediaController.getPlaybackInfo();
+        mediaController.getPackageName();
+        return true;
+    }
+
+    /* JADX INFO: Access modifiers changed from: private */
+    public static final MediaSessionManager mediaSessionManager_delegate$lambda$0(Context context) {
+        return (MediaSessionManager) context.getSystemService("media_session");
+    }
+
+    @Override // com.android.systemui.bixby2.controller.volume.VolumeType
+    public int getMaxVolume() {
+        if (!isRemotePlayerActive()) {
+            return super.getMaxVolume();
+        }
+        MediaController.PlaybackInfo playbackInfo = this.playbackInfo;
+        if (playbackInfo != null) {
+            return playbackInfo.getMaxVolume();
+        }
+        return -1;
+    }
+
+    @Override // com.android.systemui.bixby2.controller.volume.VolumeType
+    public int getMinVolume() {
+        if (isRemotePlayerActive()) {
+            return 0;
+        }
+        return super.getMinVolume();
+    }
+
+    @Override // com.android.systemui.bixby2.controller.volume.VolumeType
+    public int getStreamType() {
+        return 3;
+    }
+
+    @Override // com.android.systemui.bixby2.controller.volume.VolumeType
+    public String getStreamTypeToString() {
+        return this.streamTypeToString;
+    }
+
+    @Override // com.android.systemui.bixby2.controller.volume.VolumeType
+    public int getVolume() {
+        if (!isRemotePlayerActive()) {
+            return super.getVolume();
+        }
+        MediaController.PlaybackInfo playbackInfo = this.playbackInfo;
+        if (playbackInfo != null) {
+            return playbackInfo.getCurrentVolume();
+        }
+        return -1;
+    }
+
+    @Override // com.android.systemui.bixby2.controller.volume.VolumeType
+    public void setStreamVolume(int i, int i2) {
+        MediaController mediaController;
+        if (!isRemotePlayerActive() || (mediaController = this.remoteController) == null) {
+            super.setStreamVolume(i, i2);
+        } else {
+            mediaController.getPackageName();
+            mediaController.setVolumeTo(i, i2);
+        }
+    }
+}

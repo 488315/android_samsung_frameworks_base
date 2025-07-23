@@ -1,0 +1,68 @@
+package androidx.compose.ui.text.style;
+
+import androidx.compose.runtime.OpaqueKey$$ExternalSyntheticOutline0;
+import androidx.compose.ui.util.ListUtilsKt;
+import java.util.ArrayList;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes.dex */
+public final class TextDecoration {
+    public final int mask;
+    public static final Companion Companion = new Companion(null);
+    public static final TextDecoration None = new TextDecoration(0);
+    public static final TextDecoration Underline = new TextDecoration(1);
+    public static final TextDecoration LineThrough = new TextDecoration(2);
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class Companion {
+        public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
+            this();
+        }
+
+        private Companion() {
+        }
+    }
+
+    public TextDecoration(int i) {
+        this.mask = i;
+    }
+
+    public final boolean contains(TextDecoration textDecoration) {
+        int i = textDecoration.mask;
+        int i2 = this.mask;
+        return (i | i2) == i2;
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj instanceof TextDecoration) {
+            return this.mask == ((TextDecoration) obj).mask;
+        }
+        return false;
+    }
+
+    public final int hashCode() {
+        return this.mask;
+    }
+
+    public final String toString() {
+        int i = this.mask;
+        if (i == 0) {
+            return "TextDecoration.None";
+        }
+        ArrayList arrayList = new ArrayList();
+        if ((Underline.mask & i) != 0) {
+            arrayList.add("Underline");
+        }
+        if ((i & LineThrough.mask) != 0) {
+            arrayList.add("LineThrough");
+        }
+        if (arrayList.size() != 1) {
+            return OpaqueKey$$ExternalSyntheticOutline0.m(new StringBuilder("TextDecoration["), ListUtilsKt.fastJoinToString$default(arrayList, ", ", null, 62), ']');
+        }
+        return "TextDecoration." + ((String) arrayList.get(0));
+    }
+}

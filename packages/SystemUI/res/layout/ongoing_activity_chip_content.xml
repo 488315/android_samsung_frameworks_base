@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.systemui.statusbar.chips.ui.view.ChipBackgroundContainer android:gravity="center" android:layout_gravity="center_vertical" android:id="@id/ongoing_activity_chip_background" android:background="@drawable/ongoing_activity_chip_bg" android:layout_width="wrap_content" android:layout_height="@dimen/ongoing_appops_chip_height" android:minWidth="@dimen/min_clickable_item_size" android:paddingStart="@dimen/ongoing_activity_chip_side_padding_legacy" android:paddingEnd="@dimen/ongoing_activity_chip_side_padding_legacy">
+        <ImageView android:id="@id/ongoing_activity_chip_icon" android:layout_width="@dimen/ongoing_activity_chip_icon_size" android:layout_height="@dimen/ongoing_activity_chip_icon_size" android:src="@android:drawable/ic_zen_mode_icon_hiking" android:tint="?android:colorPrimary" android:contentDescription="@string/ongoing_call_content_description" />
+        <com.android.systemui.statusbar.chips.ui.view.ChipChronometer android:id="@id/ongoing_activity_chip_time" style="@style/StatusBar.Chip.Text" />
+        <com.android.systemui.statusbar.chips.ui.view.ChipTextView android:id="@id/ongoing_activity_chip_text" android:visibility="gone" style="@style/StatusBar.Chip.Text" />
+        <com.android.systemui.statusbar.chips.ui.view.ChipDateTimeView android:id="@id/ongoing_activity_chip_short_time_delta" android:visibility="gone" style="@style/StatusBar.Chip.Text" />
+    </com.android.systemui.statusbar.chips.ui.view.ChipBackgroundContainer>
+</merge>

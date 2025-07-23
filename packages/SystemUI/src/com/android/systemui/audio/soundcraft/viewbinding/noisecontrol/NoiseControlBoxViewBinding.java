@@ -1,0 +1,24 @@
+package com.android.systemui.audio.soundcraft.viewbinding.noisecontrol;
+
+import android.view.View;
+import android.view.ViewGroup;
+import com.android.systemui.R;
+import com.android.systemui.audio.soundcraft.view.noisecontrol.NoiseControlBoxView;
+import com.android.systemui.audio.soundcraft.view.noisecontrol.NoiseControlLineView;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes.dex */
+public final class NoiseControlBoxViewBinding {
+    public final ViewGroup boxContainer;
+    public final ViewGroup effectView;
+    public final NoiseControlLineView noiseControlLineView;
+    public final NoiseControlBoxView root;
+
+    public NoiseControlBoxViewBinding(View view) {
+        NoiseControlBoxView noiseControlBoxView = (NoiseControlBoxView) view.requireViewById(R.id.soundcraft_noise_control_box);
+        this.root = noiseControlBoxView;
+        this.boxContainer = (ViewGroup) view.requireViewById(R.id.soundcraft_effect_box_container);
+        this.effectView = (ViewGroup) noiseControlBoxView.requireViewById(R.id.soundcraft_noise_control_effect_view);
+        this.noiseControlLineView = (NoiseControlLineView) noiseControlBoxView.requireViewById(R.id.soundcraft_effect_line);
+    }
+}

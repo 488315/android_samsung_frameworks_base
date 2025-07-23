@@ -1,0 +1,33 @@
+package com.android.keyguard;
+
+import android.content.res.Resources;
+import com.android.internal.widget.LockPatternUtils;
+import com.android.systemui.statusbar.policy.KeyguardStateController;
+import dagger.internal.Provider;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes.dex */
+public final class KeyguardSecurityModel_Factory implements Provider {
+    public final Provider keyguardUpdateMonitorProvider;
+    public final Provider lockPatternUtilsProvider;
+    public final Provider mKeyguardStateControllerProvider;
+    public final Provider resourcesProvider;
+
+    public KeyguardSecurityModel_Factory(Provider provider, Provider provider2, Provider provider3, Provider provider4) {
+        this.resourcesProvider = provider;
+        this.lockPatternUtilsProvider = provider2;
+        this.keyguardUpdateMonitorProvider = provider3;
+        this.mKeyguardStateControllerProvider = provider4;
+    }
+
+    public static KeyguardSecurityModel newInstance(Resources resources, LockPatternUtils lockPatternUtils, KeyguardUpdateMonitor keyguardUpdateMonitor) {
+        return new KeyguardSecurityModel(resources, lockPatternUtils, keyguardUpdateMonitor);
+    }
+
+    @Override // javax.inject.Provider
+    public final Object get() {
+        KeyguardSecurityModel keyguardSecurityModel = new KeyguardSecurityModel((Resources) this.resourcesProvider.get(), (LockPatternUtils) this.lockPatternUtilsProvider.get(), (KeyguardUpdateMonitor) this.keyguardUpdateMonitorProvider.get());
+        keyguardSecurityModel.mKeyguardStateController = (KeyguardStateController) this.mKeyguardStateControllerProvider.get();
+        return keyguardSecurityModel;
+    }
+}

@@ -1,0 +1,74 @@
+package com.android.systemui.media.mediaoutput.icons.device;
+
+import androidx.compose.material3.ComposableSingletons$SnackbarKt$lambda1$1$$ExternalSyntheticOutline0;
+import androidx.compose.ui.graphics.ColorKt;
+import androidx.compose.ui.graphics.PathFillType;
+import androidx.compose.ui.graphics.SolidColor;
+import androidx.compose.ui.graphics.StrokeCap;
+import androidx.compose.ui.graphics.StrokeJoin;
+import androidx.compose.ui.graphics.vector.ImageVector;
+import androidx.compose.ui.graphics.vector.PathBuilder;
+import androidx.compose.ui.unit.Dp;
+import com.samsung.android.knox.custom.IKnoxCustomManager;
+import kotlin.jvm.functions.Function0;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final /* synthetic */ class PcKt$$ExternalSyntheticLambda0 implements Function0 {
+    @Override // kotlin.jvm.functions.Function0
+    public final Object invoke() {
+        float f = (float) 36.0d;
+        Dp.Companion companion = Dp.Companion;
+        ImageVector.Builder builder = new ImageVector.Builder("Pc", f, f, 36.0f, 36.0f, 0L, 0, false, IKnoxCustomManager.Stub.TRANSACTION_setUsbConnectionType, null);
+        SolidColor solidColor = new SolidColor(ColorKt.Color(4278190080L), null);
+        SolidColor solidColor2 = new SolidColor(ColorKt.Color(0), null);
+        StrokeCap.Companion.getClass();
+        StrokeJoin.Companion.getClass();
+        PathFillType.Companion.getClass();
+        PathBuilder pathBuilder = new PathBuilder();
+        pathBuilder.moveTo(27.66f, 25.84f);
+        pathBuilder.lineTo(22.181f, 25.84f);
+        pathBuilder.lineTo(22.181f, 24.387f);
+        pathBuilder.lineTo(23.364f, 24.387f);
+        pathBuilder.curveTo(24.291f, 24.387f, 25.044f, 23.633f, 25.044f, 22.706f);
+        pathBuilder.lineTo(25.044f, 12.3f);
+        pathBuilder.curveTo(25.044f, 11.373f, 24.291f, 10.619f, 23.364f, 10.619f);
+        pathBuilder.lineTo(22.181f, 10.619f);
+        pathBuilder.lineTo(22.181f, 10.16f);
+        ComposableSingletons$SnackbarKt$lambda1$1$$ExternalSyntheticOutline0.m(pathBuilder, 27.66f, 10.16f, 27.66f, 25.84f);
+        pathBuilder.moveTo(23.364f, 22.706f);
+        pathBuilder.lineTo(23.365f, 22.706f);
+        ComposableSingletons$SnackbarKt$lambda1$1$$ExternalSyntheticOutline0.m(pathBuilder, 23.364f, 23.546f, 23.364f, 22.706f);
+        pathBuilder.moveTo(8.34f, 12.3f);
+        pathBuilder.lineTo(23.364f, 12.3f);
+        pathBuilder.lineTo(23.362f, 22.706f);
+        ComposableSingletons$SnackbarKt$lambda1$1$$ExternalSyntheticOutline0.m(pathBuilder, 8.34f, 22.706f, 8.34f, 12.3f);
+        pathBuilder.moveTo(27.66f, 8.48f);
+        pathBuilder.lineTo(22.181f, 8.48f);
+        pathBuilder.curveTo(21.254f, 8.48f, 20.501f, 9.234f, 20.501f, 10.16f);
+        pathBuilder.lineTo(20.501f, 10.619f);
+        pathBuilder.lineTo(8.34f, 10.619f);
+        pathBuilder.curveTo(7.414f, 10.619f, 6.66f, 11.373f, 6.66f, 12.3f);
+        pathBuilder.lineTo(6.66f, 22.706f);
+        pathBuilder.curveTo(6.66f, 23.633f, 7.414f, 24.387f, 8.34f, 24.387f);
+        pathBuilder.lineTo(15.013f, 24.387f);
+        pathBuilder.lineTo(15.013f, 25.602f);
+        pathBuilder.lineTo(12.392f, 25.602f);
+        pathBuilder.lineTo(12.392f, 27.281f);
+        pathBuilder.lineTo(19.313f, 27.281f);
+        pathBuilder.lineTo(19.313f, 25.602f);
+        pathBuilder.lineTo(16.692f, 25.602f);
+        pathBuilder.lineTo(16.692f, 24.387f);
+        pathBuilder.lineTo(20.501f, 24.387f);
+        pathBuilder.lineTo(20.501f, 25.84f);
+        pathBuilder.curveTo(20.501f, 26.766f, 21.254f, 27.52f, 22.181f, 27.52f);
+        pathBuilder.lineTo(27.66f, 27.52f);
+        pathBuilder.curveTo(28.586f, 27.52f, 29.34f, 26.766f, 29.34f, 25.84f);
+        pathBuilder.lineTo(29.34f, 10.16f);
+        pathBuilder.curveTo(29.34f, 9.234f, 28.586f, 8.48f, 27.66f, 8.48f);
+        pathBuilder.lineTo(27.66f, 8.48f);
+        pathBuilder.close();
+        builder.m565addPathoIyEayM("", pathBuilder._nodes, 0, solidColor, 1.0f, solidColor2, 1.0f, 1.0f, 0, 0, 4.0f, 0.0f, 1.0f, 0.0f);
+        return builder.build();
+    }
+}

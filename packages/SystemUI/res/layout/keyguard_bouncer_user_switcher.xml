@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/keyguard_bouncer_user_switcher" android:layout_width="fill_parent" android:layout_height="wrap_content" android:importantForAccessibility="yes"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/user_icon" android:layout_width="@dimen/bouncer_user_switcher_icon_size" android:layout_height="@dimen/bouncer_user_switcher_icon_size" />
+    <com.android.keyguard.KeyguardUserSwitcherAnchor android:orientation="horizontal" android:id="@id/user_switcher_anchor" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="30.0dip">
+        <TextView android:id="@id/user_switcher_header" android:clickable="false" android:layout_width="@dimen/bouncer_user_switcher_width" android:layout_height="fill_parent" android:textDirection="locale" style="@style/Bouncer.UserSwitcher.Spinner.Header" />
+    </com.android.keyguard.KeyguardUserSwitcherAnchor>
+</LinearLayout>

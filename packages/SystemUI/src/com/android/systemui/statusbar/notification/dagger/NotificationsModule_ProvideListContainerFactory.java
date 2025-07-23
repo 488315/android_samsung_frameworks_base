@@ -1,0 +1,27 @@
+package com.android.systemui.statusbar.notification.dagger;
+
+import com.android.systemui.statusbar.notification.stack.NotificationStackScrollLayoutController;
+import dagger.internal.Provider;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class NotificationsModule_ProvideListContainerFactory implements Provider {
+    public final Provider nsslControllerProvider;
+
+    public NotificationsModule_ProvideListContainerFactory(Provider provider) {
+        this.nsslControllerProvider = provider;
+    }
+
+    public static NotificationStackScrollLayoutController.NotificationListContainerImpl provideListContainer(NotificationStackScrollLayoutController notificationStackScrollLayoutController) {
+        NotificationStackScrollLayoutController.NotificationListContainerImpl notificationListContainerImpl = notificationStackScrollLayoutController.mNotificationListContainer;
+        notificationListContainerImpl.getClass();
+        return notificationListContainerImpl;
+    }
+
+    @Override // javax.inject.Provider
+    public final Object get() {
+        NotificationStackScrollLayoutController.NotificationListContainerImpl notificationListContainerImpl = ((NotificationStackScrollLayoutController) this.nsslControllerProvider.get()).mNotificationListContainer;
+        notificationListContainerImpl.getClass();
+        return notificationListContainerImpl;
+    }
+}

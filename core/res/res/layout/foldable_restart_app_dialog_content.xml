@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <TextView android:textSize="17.0sp" android:textColor="?textColorAlertDialogListItem" android:id="@id/foldable_restart_app_dialog_message_view" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="24.0dip" android:layout_marginBottom="24.0dip" android:text="@string/foldable_restart_app_dialog_message" android:layout_marginStart="24.0dip" android:layout_marginEnd="24.0dip" style="?textAppearance" />
+        <CheckBox android:textSize="17.0sp" android:id="@id/foldable_restart_app_dialog_checkbox_view" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="6.0dip" android:text="@string/foldable_restart_app_dialog_checkbox" android:fontFamily="sec-roboto-light" android:paddingStart="5.0dip" android:layout_marginStart="19.0dip" style="?textAppearance" />
+    </LinearLayout>
+</ScrollView>

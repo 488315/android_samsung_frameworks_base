@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <set>
+            <objectAnimator android:interpolator="@anim/sesl_recoil_pressed" android:duration="@integer/sesl_recoil_effect_press_duration" android:valueTo="0.98" android:valueType="floatType" android:propertyName="scaleX" />
+            <objectAnimator android:interpolator="@anim/sesl_recoil_pressed" android:duration="@integer/sesl_recoil_effect_press_duration" android:valueTo="0.98" android:valueType="floatType" android:propertyName="scaleY" />
+        </set>
+    </item>
+    <item android:state_pressed="false">
+        <set>
+            <objectAnimator android:interpolator="@anim/sesl_recoil_released" android:duration="@integer/sesl_recoil_effect_release_duration" android:valueTo="1" android:valueType="floatType" android:propertyName="scaleX" />
+            <objectAnimator android:interpolator="@anim/sesl_recoil_released" android:duration="@integer/sesl_recoil_effect_release_duration" android:valueTo="1" android:valueType="floatType" android:propertyName="scaleY" />
+        </set>
+    </item>
+</selector>

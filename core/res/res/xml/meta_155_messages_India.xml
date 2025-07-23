@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Messages" TargetApi="21" TargetPackageName="com.samsung.android.messaging" UID="Messages" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="Useful Card Delayed/Cancelled Marker background color" DefaultValue="#ffdf5178" DestAttribName="theme_useful_card_delayed_cancelled_marker_bg_color" DestQualifiers="" UID="155-3-1" ValueRef="24-G" ValueType="BgColor" />
+        <Property Comment="Useful Card Delayed/Cancelled Text color" DefaultValue="#ffffffff" DestAttribName="theme_useful_card_delayed_cancelled_text_color" DestQualifiers="" UID="155-3-2" ValueRef="1-E" ValueType="TextColor" />
+        <Property Comment="Useful Card main heading text color" DefaultValue="#ff252525" DestAttribName="theme_useful_card_v2_main_heading_text_color" DestQualifiers="" UID="155-5-1" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Useful Card second heading text color" DefaultValue="#ff858585" DestAttribName="theme_useful_card_v2_second_heading_text_color" DestQualifiers="" UID="155-5-2" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Useful Card third heading text color" DefaultValue="#ff252525" DestAttribName="theme_useful_card_v2_third_heading_text_color" DestQualifiers="" UID="155-5-3" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Useful Card special offer text color" DefaultValue="#ffdf5178" DestAttribName="theme_useful_card_v2_special_offer_text_color" DestQualifiers="" UID="155-5-4" ValueRef="24-G" ValueType="TextColor" />
+        <Property Comment="Useful Card untapped coupon code text color" DefaultValue="#ff272727" DestAttribName="theme_useful_card_v2_untapped_coupon_code_text_color" DestQualifiers="" UID="155-6-1" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Useful Card tapped coupon code text color" DefaultValue="#ff858585" DestAttribName="theme_useful_card_v2_tapped_coupon_code_text_color" DestQualifiers="" UID="155-6-2" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Useful Card coupon code container background color" DefaultValue="#ffeeeeee" DestAttribName="theme_useful_card_v2_coupon_code_container_bg_color" DestQualifiers="" UID="155-6-3" ValueRef="13-8-26" ValueType="BgColor" />
+        <Property Comment="Useful Card Coupon shape stroke color" DefaultValue="#ff858585" DestAttribName="theme_useful_card_v2_coupon_code_container_stroke_color" DestQualifiers="" UID="155-6-4" ValueRef="24-B" ValueType="BgColor" />
+        <Property Comment="Useful Card Tap to copy text color" DefaultValue="#ff858585" DestAttribName="theme_useful_card_v2_tap_to_copy_text_color" DestQualifiers="" UID="155-6-5" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Useful Card message description text color" DefaultValue="#ff252525" DestAttribName="theme_useful_card_v2_message_description_text_color" DestQualifiers="" UID="155-6-6" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Useful Card action buttons text color" DefaultValue="#ff0093c8" DestAttribName="theme_useful_card_v2_action_button_text_color" DestQualifiers="" UID="155-6-7" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Useful Card action buttons divider color" DefaultValue="#ffe6e6e6" DestAttribName="theme_useful_card_v2_action_button_divider_color" DestQualifiers="" UID="155-6-8" ValueRef="1-9-8" ValueType="BgColor" />
+        <Property Comment="Useful Card background color for all cards" DefaultValue="#fffafafa" DestAttribName="theme_useful_card_v2_card_bg_color" DestQualifiers="" UID="155-6-9" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Useful Card Finance disclaimer description text color" DefaultValue="#ff737373" DestAttribName="theme_useful_card_v2_finance_disclaimer_text_color" DestQualifiers="" UID="155-8-1" ValueRef="1-3-3-D" ValueType="TextColor" />
+        <Property Comment="Useful Card sub header text color" DefaultValue="#ff909090" DestAttribName="theme_useful_card_v2_finance_sub_header_text_color" DestQualifiers="" UID="155-9-1" ValueRef="1-19-2" ValueType="TextColor" />
+        <Property Comment="Useful Card Bottom bar icon/dismiss text color" DefaultValue="#ff909090" DestAttribName="theme_useful_card_v2_bottom_bar_dismiss_icon_and_text_color" DestQualifiers="" UID="155-12-1" ValueRef="1-14-3" ValueType="TextColor" />
+        <Property Comment="Useful Card Finance transaction debit text color" DefaultValue="#ffd0021b" DestAttribName="theme_useful_card_v2_finance_debit_text_color" DestQualifiers="" UID="155-13-1" ValueRef="1-23-8" ValueType="TextColor" />
+        <Property Comment="Useful Card Finance transaction credit text color" DefaultValue="#ff06b485" DestAttribName="theme_useful_card_v2_finance_credit_text_color" DestQualifiers="" UID="155-13-2" ValueRef="1-A" ValueType="TextColor" />
+        <Property Comment="Useful Card Finance transaction list item 1 text color" DefaultValue="#ff252525" DestAttribName="theme_useful_card_v2_finance_list_item_1_text_color" DestQualifiers="" UID="155-13-3" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Useful Card Finance transaction list item 2 text color" DefaultValue="#ff858585" DestAttribName="theme_useful_card_v2_finance_list_item_2_text_color" DestQualifiers="" UID="155-13-4" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Useful Card Payment due card pay button background color" DefaultValue="#ff0093c8" DestAttribName="theme_useful_card_v2_due_card_pay_button_bg_color" DestQualifiers="" UID="155-14-1" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="Useful Card Payment due card pay button text color" DefaultValue="#ffffffff" DestAttribName="theme_useful_card_v2_due_card_pay_button_text_color" DestQualifiers="" UID="155-14-2" ValueRef="1-E" ValueType="TextColor" />
+        <Property Comment="Useful Card payment due card background color" DefaultValue="#ffe1e1e1" DestAttribName="theme_useful_card_v2_due_card_background" DestQualifiers="" UID="155-15-1" ValueRef="13-8-26" ValueType="BgColor" />
+        <Property Comment="Useful Card Date Text color" DefaultValue="#ffe1e1e1" DestAttribName="theme_useful_card_date_text_color" DestQualifiers="" UID="155-15-2" ValueRef="24-A" ValueType="BgColor" />
+        <Property Comment="Useful Card Amount Text color" DefaultValue="#ffe1e1e1" DestAttribName="theme_useful_card_amount_text_color" DestQualifiers="" UID="155-15-3" ValueRef="24-A" ValueType="BgColor" />
+    </AppMetaData>
+</ThemeMetaData>

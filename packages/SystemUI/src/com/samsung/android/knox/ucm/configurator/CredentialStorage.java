@@ -1,0 +1,65 @@
+package com.samsung.android.knox.ucm.configurator;
+
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes4.dex */
+public class CredentialStorage implements Parcelable {
+    public static final Parcelable.Creator<CredentialStorage> CREATOR = new Parcelable.Creator<CredentialStorage>() { // from class: com.samsung.android.knox.ucm.configurator.CredentialStorage.1
+        /* JADX WARN: Can't rename method to resolve collision */
+        @Override // android.os.Parcelable.Creator
+        public CredentialStorage createFromParcel(Parcel parcel) {
+            return new CredentialStorage(parcel, 0);
+        }
+
+        /* JADX WARN: Can't rename method to resolve collision */
+        @Override // android.os.Parcelable.Creator
+        public CredentialStorage[] newArray(int i) {
+            return new CredentialStorage[i];
+        }
+    };
+    public Bundle bundle;
+    public String manufacturer;
+    public String name;
+    public String packageName;
+    public String signature;
+
+    public /* synthetic */ CredentialStorage(Parcel parcel, int i) {
+        this(parcel);
+    }
+
+    @Override // android.os.Parcelable
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override // android.os.Parcelable
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(this.name);
+        parcel.writeString(this.manufacturer);
+        parcel.writeString(this.packageName);
+        parcel.writeParcelable(this.bundle, i);
+        parcel.writeString(this.signature);
+    }
+
+    public CredentialStorage() {
+        this.name = null;
+        this.manufacturer = null;
+        this.packageName = null;
+        this.bundle = null;
+    }
+
+    private CredentialStorage(Parcel parcel) {
+        this.name = null;
+        this.manufacturer = null;
+        this.packageName = null;
+        this.bundle = null;
+        this.name = parcel.readString();
+        this.manufacturer = parcel.readString();
+        this.packageName = parcel.readString();
+        this.bundle = (Bundle) parcel.readParcelable(Bundle.class.getClassLoader());
+        this.signature = parcel.readString();
+    }
+}

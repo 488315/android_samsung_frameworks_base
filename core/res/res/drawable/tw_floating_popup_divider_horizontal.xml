@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset android:insetLeft="@dimen/sem_floating_popup_divider_left_right_margin" android:insetRight="@dimen/sem_floating_popup_divider_left_right_margin"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <shape android:shape="rectangle">
+        <solid android:color="?^attr-private/semCopyAndPastePopupDividerColor" />
+        <size android:height="@dimen/tw_floating_popup_divider_width" />
+    </shape>
+</inset>

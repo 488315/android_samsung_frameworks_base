@@ -1,0 +1,59 @@
+package gov.nist.javax.sip.header;
+
+import gov.nist.javax.sip.address.GenericURI;
+import javax.sip.header.Header;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes4.dex */
+public final class AlertInfo extends ParametersHeader implements Header {
+    private static final long serialVersionUID = 4159657362051508719L;
+    protected String string;
+    protected GenericURI uri;
+
+    public AlertInfo() {
+        super("Alert-Info");
+    }
+
+    @Override // gov.nist.javax.sip.header.ParametersHeader, gov.nist.core.GenericObject
+    public final Object clone() {
+        AlertInfo alertInfo = (AlertInfo) super.clone();
+        GenericURI genericURI = this.uri;
+        if (genericURI != null) {
+            alertInfo.uri = (GenericURI) genericURI.clone();
+            return alertInfo;
+        }
+        String str = this.string;
+        if (str != null) {
+            alertInfo.string = str;
+        }
+        return alertInfo;
+    }
+
+    @Override // gov.nist.javax.sip.header.SIPHeader
+    public final String encodeBody() {
+        StringBuffer stringBuffer = new StringBuffer();
+        if (this.uri != null) {
+            stringBuffer.append("<");
+            stringBuffer.append(this.uri.encode());
+            stringBuffer.append(">");
+        } else {
+            String str = this.string;
+            if (str != null) {
+                stringBuffer.append(str);
+            }
+        }
+        if (!this.parameters.isEmpty()) {
+            stringBuffer.append(";");
+            stringBuffer.append(this.parameters.encode());
+        }
+        return stringBuffer.toString();
+    }
+
+    public final void setAlertInfo(GenericURI genericURI) {
+        this.uri = genericURI;
+    }
+
+    public final void setAlertInfo(String str) {
+        this.string = str;
+    }
+}

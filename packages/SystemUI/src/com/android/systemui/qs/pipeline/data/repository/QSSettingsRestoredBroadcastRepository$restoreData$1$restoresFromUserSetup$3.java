@@ -1,0 +1,61 @@
+package com.android.systemui.qs.pipeline.data.repository;
+
+import com.android.systemui.log.LogBuffer;
+import com.android.systemui.log.LogMessageImpl;
+import com.android.systemui.log.core.LogLevel;
+import com.android.systemui.log.core.LogMessage;
+import com.android.systemui.qs.pipeline.data.model.RestoreData;
+import com.android.systemui.qs.pipeline.shared.logging.QSPipelineLogger;
+import com.android.systemui.qs.pipeline.shared.logging.QSPipelineLogger$$ExternalSyntheticLambda0;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+final class QSSettingsRestoredBroadcastRepository$restoreData$1$restoresFromUserSetup$3 extends SuspendLambda implements Function2 {
+    final /* synthetic */ QSPipelineLogger $logger;
+    /* synthetic */ Object L$0;
+    int label;
+
+    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+    public QSSettingsRestoredBroadcastRepository$restoreData$1$restoresFromUserSetup$3(QSPipelineLogger qSPipelineLogger, Continuation continuation) {
+        super(2, continuation);
+        this.$logger = qSPipelineLogger;
+    }
+
+    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+    public final Continuation create(Object obj, Continuation continuation) {
+        QSSettingsRestoredBroadcastRepository$restoreData$1$restoresFromUserSetup$3 qSSettingsRestoredBroadcastRepository$restoreData$1$restoresFromUserSetup$3 = new QSSettingsRestoredBroadcastRepository$restoreData$1$restoresFromUserSetup$3(this.$logger, continuation);
+        qSSettingsRestoredBroadcastRepository$restoreData$1$restoresFromUserSetup$3.L$0 = obj;
+        return qSSettingsRestoredBroadcastRepository$restoreData$1$restoresFromUserSetup$3;
+    }
+
+    @Override // kotlin.jvm.functions.Function2
+    public final Object invoke(Object obj, Object obj2) {
+        return ((QSSettingsRestoredBroadcastRepository$restoreData$1$restoresFromUserSetup$3) create((RestoreData) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+    }
+
+    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+    public final Object invokeSuspend(Object obj) {
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        if (this.label != 0) {
+            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+        }
+        ResultKt.throwOnFailure(obj);
+        RestoreData restoreData = (RestoreData) this.L$0;
+        QSPipelineLogger qSPipelineLogger = this.$logger;
+        int i = restoreData.userId;
+        qSPipelineLogger.getClass();
+        LogLevel logLevel = LogLevel.DEBUG;
+        QSPipelineLogger$$ExternalSyntheticLambda0 qSPipelineLogger$$ExternalSyntheticLambda0 = new QSPipelineLogger$$ExternalSyntheticLambda0(22);
+        LogBuffer logBuffer = qSPipelineLogger.restoreLogBuffer;
+        LogMessage obtain = logBuffer.obtain("QSRestoreLog", logLevel, qSPipelineLogger$$ExternalSyntheticLambda0, null);
+        ((LogMessageImpl) obtain).int1 = i;
+        logBuffer.commit(obtain);
+        return Unit.INSTANCE;
+    }
+}

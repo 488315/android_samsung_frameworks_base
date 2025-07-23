@@ -1,0 +1,57 @@
+package com.android.systemui.plank.monitor;
+
+import defpackage.ReorderTile$$ExternalSyntheticOutline0;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final class EventData {
+    public final int endX;
+    public final int endY;
+    public final EventType eventType;
+    public final int interval;
+    public final int startX;
+    public final int startY;
+    public final int steps;
+
+    public EventData(EventType eventType, int i, int i2, int i3, int i4, int i5, int i6) {
+        this.eventType = eventType;
+        this.startX = i;
+        this.startY = i2;
+        this.endX = i3;
+        this.endY = i4;
+        this.steps = i5;
+        this.interval = i6;
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof EventData)) {
+            return false;
+        }
+        EventData eventData = (EventData) obj;
+        return this.eventType == eventData.eventType && this.startX == eventData.startX && this.startY == eventData.startY && this.endX == eventData.endX && this.endY == eventData.endY && this.steps == eventData.steps && this.interval == eventData.interval;
+    }
+
+    public final int hashCode() {
+        return Integer.hashCode(this.interval) + ReorderTile$$ExternalSyntheticOutline0.m(this.steps, ReorderTile$$ExternalSyntheticOutline0.m(this.endY, ReorderTile$$ExternalSyntheticOutline0.m(this.endX, ReorderTile$$ExternalSyntheticOutline0.m(this.startY, ReorderTile$$ExternalSyntheticOutline0.m(this.startX, this.eventType.hashCode() * 31, 31), 31), 31), 31), 31);
+    }
+
+    public final String toString() {
+        StringBuilder sb = new StringBuilder("EventData(eventType=");
+        sb.append(this.eventType);
+        sb.append(", startX=");
+        sb.append(this.startX);
+        sb.append(", startY=");
+        sb.append(this.startY);
+        sb.append(", endX=");
+        sb.append(this.endX);
+        sb.append(", endY=");
+        sb.append(this.endY);
+        sb.append(", steps=");
+        sb.append(this.steps);
+        sb.append(", interval=");
+        return ReorderTile$$ExternalSyntheticOutline0.m(this.interval, ")", sb);
+    }
+}

@@ -1,0 +1,44 @@
+package com.android.systemui.qs.tiles.impl.work.domain.interactor;
+
+import android.content.Intent;
+import com.android.systemui.qs.tiles.base.domain.actions.QSTileIntentUserInputHandler;
+import com.android.systemui.qs.tiles.base.domain.interactor.QSTileUserActionInteractor;
+import com.android.systemui.qs.tiles.base.domain.model.QSTileInput;
+import com.android.systemui.qs.tiles.base.shared.model.QSTileUserAction;
+import com.android.systemui.qs.tiles.impl.work.domain.model.WorkModeTileModel;
+import com.android.systemui.statusbar.phone.ManagedProfileController;
+import com.android.systemui.statusbar.phone.ManagedProfileControllerImpl;
+import kotlin.NoWhenBranchMatchedException;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final class WorkModeTileUserActionInteractor implements QSTileUserActionInteractor {
+    public final ManagedProfileController profileController;
+    public final QSTileIntentUserInputHandler qsTileIntentUserActionHandler;
+
+    public WorkModeTileUserActionInteractor(ManagedProfileController managedProfileController, QSTileIntentUserInputHandler qSTileIntentUserInputHandler) {
+        this.profileController = managedProfileController;
+        this.qsTileIntentUserActionHandler = qSTileIntentUserInputHandler;
+    }
+
+    @Override // com.android.systemui.qs.tiles.base.domain.interactor.QSTileUserActionInteractor
+    public final Object handleInput(QSTileInput qSTileInput, Continuation continuation) {
+        QSTileUserAction qSTileUserAction = qSTileInput.action;
+        boolean z = qSTileUserAction instanceof QSTileUserAction.Click;
+        Object obj = qSTileInput.data;
+        if (z) {
+            if (obj instanceof WorkModeTileModel.HasActiveProfile) {
+                ((ManagedProfileControllerImpl) this.profileController).setWorkModeEnabled(!((WorkModeTileModel.HasActiveProfile) obj).isEnabled);
+            }
+        } else if (qSTileUserAction instanceof QSTileUserAction.LongClick) {
+            if (obj instanceof WorkModeTileModel.HasActiveProfile) {
+                QSTileIntentUserInputHandler.handle$default(this.qsTileIntentUserActionHandler, ((QSTileUserAction.LongClick) qSTileUserAction).expandable, new Intent("android.settings.MANAGED_PROFILE_SETTINGS"));
+            }
+        } else if (!(qSTileUserAction instanceof QSTileUserAction.ToggleClick)) {
+            throw new NoWhenBranchMatchedException();
+        }
+        return Unit.INSTANCE;
+    }
+}

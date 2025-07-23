@@ -1,0 +1,68 @@
+package com.android.systemui.lockstar.shortcut;
+
+import android.content.Context;
+import com.android.keyguard.ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0;
+import com.android.systemui.R;
+import com.android.systemui.pluginlock.component.PluginLockShortcutTask;
+import com.android.systemui.statusbar.policy.ZenModeController;
+import com.android.systemui.statusbar.policy.ZenModeControllerImpl;
+import com.samsung.systemui.splugins.lockstar.PluginLockStar;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final class LockStarShortcutDnd extends LockStarShortcutTask implements ZenModeController.Callback {
+    public final String name;
+    public final PluginLockStar pluginLockStar;
+    public final ZenModeController zenModeController;
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class Companion {
+        public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
+            this();
+        }
+
+        private Companion() {
+        }
+    }
+
+    static {
+        new Companion(null);
+    }
+
+    public LockStarShortcutDnd(Context context, PluginLockStar pluginLockStar, ZenModeController zenModeController) {
+        super(context);
+        this.pluginLockStar = pluginLockStar;
+        this.zenModeController = zenModeController;
+        this.name = PluginLockShortcutTask.DO_NOT_DISTURB_TASK;
+        context.getString(R.string.lock_app_shortcut_dnd_app_label);
+    }
+
+    @Override // com.android.systemui.lockstar.shortcut.LockStarShortcutTask
+    public final void execute() {
+        int i = ((ZenModeControllerImpl) this.zenModeController).mZenMode == 1 ? 0 : 1;
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "execute to ", "PluginLockShortcutDnd");
+        ((ZenModeControllerImpl) this.zenModeController).setZen(i, null, "Keyguard");
+    }
+
+    @Override // com.android.systemui.lockstar.shortcut.LockStarShortcutTask
+    public final String getName() {
+        return this.name;
+    }
+
+    @Override // com.android.systemui.lockstar.shortcut.LockStarShortcutTask
+    public final void init() {
+        ((ZenModeControllerImpl) this.zenModeController).addCallback(this);
+    }
+
+    @Override // com.android.systemui.statusbar.policy.ZenModeController.Callback
+    public final void onZenChanged(int i) {
+        ConnectedDisplayKeyguardPresentation$$ExternalSyntheticOutline0.m(i, "onZenChanged [zen] ", "PluginLockShortcutDnd");
+        this.pluginLockStar.onChangedNoNeedUnlockServiceState(PluginLockShortcutTask.DO_NOT_DISTURB_TASK, ((ZenModeControllerImpl) this.zenModeController).mZenMode == 1);
+    }
+
+    @Override // com.android.systemui.lockstar.shortcut.LockStarShortcutTask
+    public final void terminate() {
+        ((ZenModeControllerImpl) this.zenModeController).removeCallback(this);
+    }
+}

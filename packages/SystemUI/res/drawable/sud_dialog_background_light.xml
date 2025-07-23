@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <shape android:shape="rectangle">
+        <corners android:radius="?dialogCornerRadius" />
+        <solid android:color="@color/sud_glif_window_bg_light_color" />
+    </shape>
+</inset>

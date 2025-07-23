@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="delete_blob_confirmation_text">¿Seguro que quieres borrar estos datos compartidos?</string>
+</resources>

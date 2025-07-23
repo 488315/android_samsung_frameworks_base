@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.volume.view.subscreen.simple.SubLargeDisplayVolumeRowView android:id="@id/sub_display_volume_view" android:background="@android:color/transparent" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="horizontal" android:id="@id/sub_display_dual_volume_icon_label" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="12.0dip" android:layout_marginEnd="12.0dip">
+            <TextView android:textSize="21.0sp" android:textColor="@color/sub_large_display_volume_icon_color" android:ellipsize="marquee" android:id="@id/volume_row_header" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12.0dip" android:singleLine="true" android:fontFamily="sec-roboto-regular" />
+        </LinearLayout>
+        <FrameLayout android:layout_gravity="center" android:id="@id/volume_seekbar_container" android:paddingBottom="20.0dip" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="12.0dip" android:layout_marginStart="12.0dip" android:layout_marginEnd="12.0dip">
+            <ImageView android:layout_gravity="center" android:id="@id/sub_volume_panel_captured_blur" android:background="@drawable/sub_volume_seekbar_bg_blur" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="@dimen/volume_sub_large_display_seek_bar_height" />
+            <FrameLayout android:layout_gravity="center" android:id="@id/volume_seekbar_background" android:background="@drawable/sub_volume_seekbar_bg_blur" android:layout_width="fill_parent" android:layout_height="@dimen/volume_sub_large_display_seek_bar_height" android:outlineProvider="background">
+                <com.android.systemui.volume.view.VolumeSeekBar android:id="@id/volume_row_slider" android:background="@null" android:layout_width="fill_parent" android:layout_height="@dimen/volume_sub_large_display_seek_bar_height" android:progressDrawable="@drawable/sub_display_volume_seekbar_drawable" android:thumb="@null" android:paddingStart="0.0dip" android:paddingEnd="0.0dip" />
+            </FrameLayout>
+            <FrameLayout android:layout_gravity="center" android:id="@id/volume_seekbar_outline_stroke" android:background="@drawable/sub_display_volume_seekbar_bg_outline" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="@dimen/volume_sub_large_display_seek_bar_height" />
+            <com.android.systemui.volume.view.icon.SubVolumeIcon android:layout_gravity="start|center" android:id="@id/volume_row_icon" android:background="@null" android:layout_width="36.0dip" android:layout_height="36.0dip" android:scaleType="fitCenter" android:layout_marginStart="7.0dip" />
+        </FrameLayout>
+    </LinearLayout>
+</com.android.systemui.volume.view.subscreen.simple.SubLargeDisplayVolumeRowView>

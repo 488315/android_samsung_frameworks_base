@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.setupdesign.GlifLayout android:orientation="vertical" android:id="@id/sswl_glif_root" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/sswl_contents_area" android:paddingBottom="@dimen/sswl_contents_area_bottom_padding" android:clipChildren="false" android:layout_width="@dimen/sswl_contents_area_width" android:layout_height="@dimen/sswl_contents_area_height" android:layout_centerInParent="true" android:focusedByDefault="true">
+        <FrameLayout android:id="@id/sswl_layout_content" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+            <com.sec.android.secsetupwizardlib.view.BottomScrollView android:id="@id/sswl_scroll_view" android:layout_width="fill_parent" android:layout_height="fill_parent" android:fillViewport="true" />
+        </FrameLayout>
+    </LinearLayout>
+</com.google.android.setupdesign.GlifLayout>

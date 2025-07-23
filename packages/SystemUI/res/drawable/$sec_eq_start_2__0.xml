@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector android:height="56.0dip" android:width="122.0dip" android:viewportWidth="122.0" android:viewportHeight="56.0" aapt:fps="60"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt">
+    <group android:name="s7" android:pivotX="0.0" android:pivotY="0.0" android:scaleX="1.0" android:scaleY="1.0" android:rotation="0.0" android:translateX="15.085" android:translateY="28.0" aapt:layer_name="Line 2">
+        <group android:name="s7pg1" android:pivotX="0.0" android:pivotY="0.0" android:scaleX="4.0" android:scaleY="4.0" android:rotation="0.0" android:translateX="0.0" android:translateY="0.0" aapt:layer_name="Line 2">
+            <path android:name="s7pg1p10" android:pathData="M -0.005 -0.17 C -0.005 -0.17 -0.005 0.17 -0.005 0.17 " android:strokeColor="#ffffffff" android:strokeWidth="1.8" android:strokeLineCap="round" android:strokeLineJoin="round" android:strokeMiterLimit="4.0" android:strokeAlpha="0.8" aapt:layer_name="Path 1" aapt:style_name="Stroke 1" />
+        </group>
+    </group>
+    <group android:name="s6" android:pivotX="0.0" android:pivotY="0.0" android:scaleX="1.0" android:scaleY="1.0" android:rotation="0.0" android:translateX="30.274" android:translateY="28.0" aapt:layer_name="Line 2 Copy">
+        <group android:name="s6pg1" android:pivotX="0.0" android:pivotY="0.0" android:scaleX="4.0" android:scaleY="4.0" android:rotation="0.0" android:translateX="0.0" android:translateY="0.0" aapt:layer_name="Line 2 Copy">
+            <path android:name="s6pg1p10" android:pathData="M -0.005 -0.17 C -0.005 -0.17 -0.005 0.17 -0.005 0.17 " android:strokeColor="#ffffffff" android:strokeWidth="1.8" android:strokeLineCap="round" android:strokeLineJoin="round" android:strokeMiterLimit="4.0" android:strokeAlpha="0.9" aapt:layer_name="Path 1" aapt:style_name="Stroke 1" />
+        </group>
+    </group>
+    <group android:name="s5" android:pivotX="0.0" android:pivotY="0.0" android:scaleX="1.0" android:scaleY="1.0" android:rotation="0.0" android:translateX="45.637" android:translateY="28.0" aapt:layer_name="Line 2 Copy 2">
+        <group android:name="s5pg1" android:pivotX="0.0" android:pivotY="0.0" android:scaleX="4.0" android:scaleY="4.0" android:rotation="0.0" android:translateX="0.0" android:translateY="0.0" aapt:layer_name="Line 2 Copy 2">
+            <path android:name="s5pg1p10" android:pathData="M -0.005 -0.17 C -0.005 -0.17 -0.005 0.17 -0.005 0.17 " android:strokeColor="#ffffffff" android:strokeWidth="1.8" android:strokeLineCap="round" android:strokeLineJoin="round" android:strokeMiterLimit="4.0" android:strokeAlpha="1.0" aapt:layer_name="Path 1" aapt:style_name="Stroke 1" />
+        </group>
+    </group>
+    <group android:name="s4" android:pivotX="0.0" android:pivotY="0.0" android:scaleX="1.0" android:scaleY="1.0" android:rotation="0.0" android:translateX="61.0" android:translateY="28.0" aapt:layer_name="Line 2 Copy 3">
+        <group android:name="s4pg1" android:pivotX="0.0" android:pivotY="0.0" android:scaleX="4.0" android:scaleY="4.0" android:rotation="0.0" android:translateX="0.0" android:translateY="0.0" aapt:layer_name="Line 2 Copy 3">
+            <path android:name="s4pg1p10" android:pathData="M -0.005 -0.17 C -0.005 -0.17 -0.005 0.17 -0.005 0.17 " android:strokeColor="#ffffffff" android:strokeWidth="1.8" android:strokeLineCap="round" android:strokeLineJoin="round" android:strokeMiterLimit="4.0" android:strokeAlpha="1.0" aapt:layer_name="Path 1" aapt:style_name="Stroke 1" />
+        </group>
+    </group>
+    <group android:name="s3" android:pivotX="0.0" android:pivotY="0.0" android:scaleX="1.0" android:scaleY="1.0" android:rotation="0.0" android:translateX="76.363" android:translateY="28.0" aapt:layer_name="Line 2 Copy 5">
+        <group android:name="s3pg1" android:pivotX="0.0" android:pivotY="0.0" android:scaleX="4.0" android:scaleY="4.0" android:rotation="0.0" android:translateX="0.0" android:translateY="0.0" aapt:layer_name="Line 2 Copy 5">
+            <path android:name="s3pg1p10" android:pathData="M -0.005 -0.17 C -0.005 -0.17 -0.005 0.17 -0.005 0.17 " android:strokeColor="#ffffffff" android:strokeWidth="1.8" android:strokeLineCap="round" android:strokeLineJoin="round" android:strokeMiterLimit="4.0" android:strokeAlpha="1.0" aapt:layer_name="Path 1" aapt:style_name="Stroke 1" />
+        </group>
+    </group>
+    <group android:name="s2" android:pivotX="0.0" android:pivotY="0.0" android:scaleX="1.0" android:scaleY="1.0" android:rotation="0.0" android:translateX="91.726" android:translateY="28.0" aapt:layer_name="Line 2 Copy 4">
+        <group android:name="s2pg1" android:pivotX="0.0" android:pivotY="0.0" android:scaleX="4.0" android:scaleY="4.0" android:rotation="0.0" android:translateX="0.0" android:translateY="0.0" aapt:layer_name="Line 2 Copy 4">
+            <path android:name="s2pg1p10" android:pathData="M -0.005 -0.17 C -0.005 -0.17 -0.005 0.17 -0.005 0.17 " android:strokeColor="#ffffffff" android:strokeWidth="1.8" android:strokeLineCap="round" android:strokeLineJoin="round" android:strokeMiterLimit="4.0" android:strokeAlpha="0.9" aapt:layer_name="Path 1" aapt:style_name="Stroke 1" />
+        </group>
+    </group>
+    <group android:name="s1" android:pivotX="0.0" android:pivotY="0.0" android:scaleX="1.0" android:scaleY="1.0" android:rotation="0.0" android:translateX="106.915" android:translateY="28.0" aapt:layer_name="Line 2 Copy 6">
+        <group android:name="s1pg1" android:pivotX="0.0" android:pivotY="0.0" android:scaleX="4.0" android:scaleY="4.0" android:rotation="0.0" android:translateX="0.0" android:translateY="0.0" aapt:layer_name="Line 2 Copy 6">
+            <path android:name="s1pg1p10" android:pathData="M -0.005 -0.17 C -0.005 -0.17 -0.005 0.17 -0.005 0.17 " android:strokeColor="#ffffffff" android:strokeWidth="1.8" android:strokeLineCap="round" android:strokeLineJoin="round" android:strokeMiterLimit="4.0" android:strokeAlpha="0.8" aapt:layer_name="Path 1" aapt:style_name="Stroke 1" />
+        </group>
+    </group>
+</vector>

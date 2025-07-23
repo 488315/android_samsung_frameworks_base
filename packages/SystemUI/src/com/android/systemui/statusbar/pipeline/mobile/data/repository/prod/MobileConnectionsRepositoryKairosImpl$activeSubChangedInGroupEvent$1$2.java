@@ -1,0 +1,65 @@
+package com.android.systemui.statusbar.pipeline.mobile.data.repository.prod;
+
+import com.android.systemui.kairos.util.WithPrev;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
+import kotlinx.coroutines.BuildersKt;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+final class MobileConnectionsRepositoryKairosImpl$activeSubChangedInGroupEvent$1$2 extends SuspendLambda implements Function2 {
+    /* synthetic */ Object L$0;
+    int label;
+    final /* synthetic */ MobileConnectionsRepositoryKairosImpl this$0;
+
+    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+    public MobileConnectionsRepositoryKairosImpl$activeSubChangedInGroupEvent$1$2(MobileConnectionsRepositoryKairosImpl mobileConnectionsRepositoryKairosImpl, Continuation continuation) {
+        super(2, continuation);
+        this.this$0 = mobileConnectionsRepositoryKairosImpl;
+    }
+
+    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+    public final Continuation create(Object obj, Continuation continuation) {
+        MobileConnectionsRepositoryKairosImpl$activeSubChangedInGroupEvent$1$2 mobileConnectionsRepositoryKairosImpl$activeSubChangedInGroupEvent$1$2 = new MobileConnectionsRepositoryKairosImpl$activeSubChangedInGroupEvent$1$2(this.this$0, continuation);
+        mobileConnectionsRepositoryKairosImpl$activeSubChangedInGroupEvent$1$2.L$0 = obj;
+        return mobileConnectionsRepositoryKairosImpl$activeSubChangedInGroupEvent$1$2;
+    }
+
+    @Override // kotlin.jvm.functions.Function2
+    public final Object invoke(Object obj, Object obj2) {
+        return ((MobileConnectionsRepositoryKairosImpl$activeSubChangedInGroupEvent$1$2) create((WithPrev) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+    }
+
+    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+    public final Object invokeSuspend(Object obj) {
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            WithPrev withPrev = (WithPrev) this.L$0;
+            int intValue = ((Number) withPrev.previousValue).intValue();
+            int intValue2 = ((Number) withPrev.newValue).intValue();
+            MobileConnectionsRepositoryKairosImpl mobileConnectionsRepositoryKairosImpl = this.this$0;
+            this.label = 1;
+            int i2 = MobileConnectionsRepositoryKairosImpl.$r8$clinit;
+            mobileConnectionsRepositoryKairosImpl.getClass();
+            obj = BuildersKt.withContext(mobileConnectionsRepositoryKairosImpl.bgDispatcher, new MobileConnectionsRepositoryKairosImpl$isActiveSubChangeInGroup$2(mobileConnectionsRepositoryKairosImpl, intValue, intValue2, null), this);
+            if (obj == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+        }
+        if (((Boolean) obj).booleanValue()) {
+            return Unit.INSTANCE;
+        }
+        return null;
+    }
+}

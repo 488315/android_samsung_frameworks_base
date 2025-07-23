@@ -1,0 +1,103 @@
+package com.samsung.android.hardware.context;
+
+import android.hardware.scontext.SContextConstants;
+import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.util.Log;
+
+/* loaded from: classes6.dex */
+public class SemContextPedometerAttribute extends SemContextAttribute {
+    public static final Parcelable.Creator<SemContextPedometerAttribute> CREATOR = new Parcelable.Creator<SemContextPedometerAttribute>() { // from class: com.samsung.android.hardware.context.SemContextPedometerAttribute.1
+        /* JADX WARN: Can't rename method to resolve collision */
+        @Override // android.os.Parcelable.Creator
+        public SemContextPedometerAttribute createFromParcel(Parcel parcel) {
+            return new SemContextPedometerAttribute(parcel);
+        }
+
+        /* JADX WARN: Can't rename method to resolve collision */
+        @Override // android.os.Parcelable.Creator
+        public SemContextPedometerAttribute[] newArray(int i) {
+            return new SemContextPedometerAttribute[i];
+        }
+    };
+    private static final int MODE_EXERCISE = 1;
+    private static final int MODE_USER_INFO = 0;
+    private static final String TAG = "SemContextPedometerAttribute";
+    private int mExerciseMode;
+    private int mGender;
+    private double mHeight;
+    private int mMode;
+    private double mWeight;
+
+    SemContextPedometerAttribute() {
+        this.mGender = 1;
+        this.mHeight = 170.0d;
+        this.mWeight = 60.0d;
+        this.mExerciseMode = -1;
+        this.mMode = 0;
+        setAttribute();
+    }
+
+    SemContextPedometerAttribute(Parcel parcel) {
+        super(parcel);
+        this.mGender = 1;
+        this.mHeight = 170.0d;
+        this.mWeight = 60.0d;
+        this.mExerciseMode = -1;
+        this.mMode = -1;
+    }
+
+    public SemContextPedometerAttribute(int i, double d, double d2) {
+        this.mExerciseMode = -1;
+        this.mMode = 0;
+        this.mGender = i;
+        this.mHeight = d;
+        this.mWeight = d2;
+        setAttribute();
+    }
+
+    public SemContextPedometerAttribute(int i) {
+        this.mGender = 1;
+        this.mHeight = 170.0d;
+        this.mWeight = 60.0d;
+        this.mMode = 1;
+        this.mExerciseMode = i;
+        setAttribute();
+    }
+
+    @Override // com.samsung.android.hardware.context.SemContextAttribute
+    public boolean checkAttribute() {
+        int i = this.mGender;
+        if (i < 1 || i > 2) {
+            Log.e(TAG, "The gender is wrong.");
+            return false;
+        }
+        if (this.mHeight <= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
+            Log.e(TAG, "The height is wrong.");
+            return false;
+        }
+        if (this.mWeight <= SContextConstants.ENVIRONMENT_VALUE_UNKNOWN) {
+            Log.e(TAG, "The weight is wrong.");
+            return false;
+        }
+        if (this.mExerciseMode >= -1) {
+            return true;
+        }
+        Log.e(TAG, "The exercise mode is wrong.");
+        return false;
+    }
+
+    private void setAttribute() {
+        Bundle bundle = new Bundle();
+        bundle.putInt("mode", this.mMode);
+        if (this.mMode == 0) {
+            bundle.putInt("gender", this.mGender);
+            bundle.putDouble("height", this.mHeight);
+            bundle.putDouble("weight", this.mWeight);
+        } else {
+            bundle.putInt("exercise_mode", this.mExerciseMode);
+        }
+        super.setAttribute(2, bundle);
+    }
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<actions
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <action category="effects" component="com.android.systemui.edgelighting.routine.EdgelightingRoutineActionHandler" description="@string/edge_lighting_action_description" icon="@drawable/ic_routines_edge_light" label="@string/edge_lighting_action_label" reversible="false" tag="edge_lighting_v3">
+        <configuration targetUi="com.android.systemui.edgelighting.settings.EdgeLightingStyleActivity" />
+    </action>
+</actions>

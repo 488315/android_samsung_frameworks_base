@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="start|center|top" android:id="@id/icon_frame" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="@dimen/settingslib_expressive_space_small1" android:minWidth="@dimen/settingslib_expressive_space_medium4" android:paddingStart="@dimen/settingslib_expressive_space_extrasmall4" android:paddingEnd="@dimen/settingslib_expressive_space_small1"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.preference.internal.PreferenceImageView android:id="@android:id/icon" android:layout_width="wrap_content" android:layout_height="wrap_content" app:maxHeight="@dimen/settingslib_expressive_space_small4" app:maxWidth="@dimen/settingslib_expressive_space_small4" />
+</LinearLayout>

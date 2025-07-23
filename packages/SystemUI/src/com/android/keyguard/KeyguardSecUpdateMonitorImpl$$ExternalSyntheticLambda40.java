@@ -1,0 +1,38 @@
+package com.android.keyguard;
+
+import android.hardware.biometrics.BiometricSourceType;
+import com.android.systemui.settings.UserTrackerImpl;
+import com.samsung.android.bio.face.SemBioFaceManager;
+import java.util.function.Consumer;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes.dex */
+public final /* synthetic */ class KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda40 implements Consumer {
+    public final /* synthetic */ int $r8$classId;
+    public final /* synthetic */ Object f$0;
+    public final /* synthetic */ boolean f$1;
+
+    public /* synthetic */ KeyguardSecUpdateMonitorImpl$$ExternalSyntheticLambda40(int i, boolean z, Object obj) {
+        this.$r8$classId = i;
+        this.f$0 = obj;
+        this.f$1 = z;
+    }
+
+    @Override // java.util.function.Consumer
+    public final void accept(Object obj) {
+        switch (this.$r8$classId) {
+            case 0:
+                KeyguardSecUpdateMonitorImpl keyguardSecUpdateMonitorImpl = (KeyguardSecUpdateMonitorImpl) this.f$0;
+                boolean z = this.f$1;
+                SemBioFaceManager semBioFaceManager = KeyguardSecUpdateMonitorImpl.sFaceManager;
+                ((KeyguardUpdateMonitorCallback) obj).onBiometricAuthenticated(((UserTrackerImpl) keyguardSecUpdateMonitorImpl.mUserTracker).getUserId(), BiometricSourceType.FACE, z);
+                break;
+            default:
+                String str = (String) this.f$0;
+                boolean z2 = this.f$1;
+                SemBioFaceManager semBioFaceManager2 = KeyguardSecUpdateMonitorImpl.sFaceManager;
+                ((KeyguardUpdateMonitorCallback) obj).onPackageRemoved(str, z2);
+                break;
+        }
+    }
+}

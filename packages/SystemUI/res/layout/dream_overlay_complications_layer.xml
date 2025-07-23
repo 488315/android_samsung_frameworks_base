@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:id="@id/dream_overlay_complications_layer" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.Guideline android:orientation="horizontal" android:id="@id/complication_top_guide" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintGuide_percent="@dimen/dream_overlay_complication_guide_top_percent" />
+    <androidx.constraintlayout.widget.Guideline android:orientation="vertical" android:id="@id/complication_end_guide" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintGuide_percent="@dimen/dream_overlay_complication_guide_end_percent" />
+    <androidx.constraintlayout.widget.Guideline android:orientation="horizontal" android:id="@id/complication_bottom_guide" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintGuide_percent="@dimen/dream_overlay_complication_guide_bottom_percent" />
+    <androidx.constraintlayout.widget.Guideline android:orientation="vertical" android:id="@id/complication_start_guide" android:layout_width="wrap_content" android:layout_height="wrap_content" app:layout_constraintGuide_percent="@dimen/dream_overlay_complication_guide_start_percent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

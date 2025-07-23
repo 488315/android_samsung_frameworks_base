@@ -1,0 +1,102 @@
+package com.android.systemui.statusbar.chips.ui.viewmodel;
+
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function3;
+import kotlinx.coroutines.flow.FlowCollector;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+final class ChipTransitionHelper$wasActivityRecentlyStoppedFromDialog$1 extends SuspendLambda implements Function3 {
+    private /* synthetic */ Object L$0;
+    int label;
+
+    public ChipTransitionHelper$wasActivityRecentlyStoppedFromDialog$1(Continuation continuation) {
+        super(3, continuation);
+    }
+
+    @Override // kotlin.jvm.functions.Function3
+    public final Object invoke(Object obj, Object obj2, Object obj3) {
+        ChipTransitionHelper$wasActivityRecentlyStoppedFromDialog$1 chipTransitionHelper$wasActivityRecentlyStoppedFromDialog$1 = new ChipTransitionHelper$wasActivityRecentlyStoppedFromDialog$1((Continuation) obj3);
+        chipTransitionHelper$wasActivityRecentlyStoppedFromDialog$1.L$0 = (FlowCollector) obj;
+        return chipTransitionHelper$wasActivityRecentlyStoppedFromDialog$1.invokeSuspend(Unit.INSTANCE);
+    }
+
+    /* JADX WARN: Code restructure failed: missing block: B:14:0x0058, code lost:
+    
+        if (r1.emit(r6, r5) == r0) goto L21;
+     */
+    /* JADX WARN: Code restructure failed: missing block: B:18:0x004a, code lost:
+    
+        if (kotlinx.coroutines.DelayKt.delay(500, r5) == r0) goto L21;
+     */
+    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+    /*
+        Code decompiled incorrectly, please refer to instructions dump.
+        To view partially-correct code enable 'Show inconsistent code' option in preferences
+    */
+    public final java.lang.Object invokeSuspend(java.lang.Object r6) {
+        /*
+            r5 = this;
+            kotlin.coroutines.intrinsics.CoroutineSingletons r0 = kotlin.coroutines.intrinsics.CoroutineSingletons.COROUTINE_SUSPENDED
+            int r1 = r5.label
+            r2 = 3
+            r3 = 2
+            r4 = 1
+            if (r1 == 0) goto L2b
+            if (r1 == r4) goto L23
+            if (r1 == r3) goto L1b
+            if (r1 != r2) goto L13
+            kotlin.ResultKt.throwOnFailure(r6)
+            goto L5b
+        L13:
+            java.lang.IllegalStateException r5 = new java.lang.IllegalStateException
+            java.lang.String r6 = "call to 'resume' before 'invoke' with coroutine"
+            r5.<init>(r6)
+            throw r5
+        L1b:
+            java.lang.Object r1 = r5.L$0
+            kotlinx.coroutines.flow.FlowCollector r1 = (kotlinx.coroutines.flow.FlowCollector) r1
+            kotlin.ResultKt.throwOnFailure(r6)
+            goto L4d
+        L23:
+            java.lang.Object r1 = r5.L$0
+            kotlinx.coroutines.flow.FlowCollector r1 = (kotlinx.coroutines.flow.FlowCollector) r1
+            kotlin.ResultKt.throwOnFailure(r6)
+            goto L40
+        L2b:
+            kotlin.ResultKt.throwOnFailure(r6)
+            java.lang.Object r6 = r5.L$0
+            kotlinx.coroutines.flow.FlowCollector r6 = (kotlinx.coroutines.flow.FlowCollector) r6
+            java.lang.Boolean r1 = java.lang.Boolean.TRUE
+            r5.L$0 = r6
+            r5.label = r4
+            java.lang.Object r1 = r6.emit(r1, r5)
+            if (r1 != r0) goto L3f
+            goto L5a
+        L3f:
+            r1 = r6
+        L40:
+            r5.L$0 = r1
+            r5.label = r3
+            r3 = 500(0x1f4, double:2.47E-321)
+            java.lang.Object r6 = kotlinx.coroutines.DelayKt.delay(r3, r5)
+            if (r6 != r0) goto L4d
+            goto L5a
+        L4d:
+            java.lang.Boolean r6 = java.lang.Boolean.FALSE
+            r3 = 0
+            r5.L$0 = r3
+            r5.label = r2
+            java.lang.Object r5 = r1.emit(r6, r5)
+            if (r5 != r0) goto L5b
+        L5a:
+            return r0
+        L5b:
+            kotlin.Unit r5 = kotlin.Unit.INSTANCE
+            return r5
+        */
+        throw new UnsupportedOperationException("Method not decompiled: com.android.systemui.statusbar.chips.ui.viewmodel.ChipTransitionHelper$wasActivityRecentlyStoppedFromDialog$1.invokeSuspend(java.lang.Object):java.lang.Object");
+    }
+}

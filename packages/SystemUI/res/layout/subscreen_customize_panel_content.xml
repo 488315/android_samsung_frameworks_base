@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:background="@color/subscreen_panel_customize_background" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.systemui.qp.customize.SubscreenCustomizer android:orientation="vertical" android:id="@id/subscreen_customize_baseview" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <FrameLayout android:gravity="start" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="@dimen/subscreen_panel_toolbar_height">
+            <ImageView android:gravity="center" android:layout_gravity="start|center" android:id="@id/subroom_back_button" android:background="@drawable/subscreen_ripple_drawable" android:padding="@dimen/subscreen_close_button_padding" android:layout_width="@dimen/subscreen_close_button_width" android:layout_height="@dimen/subscreen_close_button_width" android:src="@drawable/subroom_close_button" android:tint="@color/subscreen_panel_customize_text_color" android:contentDescription="@string/subscreen_close_button" android:layout_marginStart="@dimen/subscreen_close_button_start_margin" />
+            <androidx.appcompat.widget.AppCompatTextView android:textAppearance="@style/TextAppearance.SecLight" android:textSize="@dimen/brightness_lbl_text_size" android:textStyle="bold" android:textColor="@color/subscreen_brightness_lbl_view_color" android:gravity="center" android:layout_gravity="start|center" android:id="@id/tv_edit" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/subscreen_customize_detail_title" android:layout_marginStart="@dimen/qs_tile_subscreen_panel_flashlight_label_start_margin" />
+        </FrameLayout>
+        <LinearLayout android:layout_gravity="center" android:orientation="vertical" android:id="@id/subscreen_customize_tile_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/qs_customizer_tile_page_layout_top_margin" android:layout_marginStart="@dimen/qs_tile_subscreen_page_layout_start_margin" android:layout_marginEnd="@dimen/qs_tile_subscreen_page_layout_start_margin">
+            <com.android.systemui.qp.SubscreenPagedTileLayout android:id="@id/subscreen_customize_qs_paged" android:clipChildren="false" android:clipToPadding="false" android:layout_width="wrap_content" android:layout_height="fill_parent" />
+        </LinearLayout>
+        <RelativeLayout android:layout_gravity="center" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/subscreen_qs_footer_top_margin" android:layout_alignParentBottom="true">
+            <com.android.systemui.qs.SecPageIndicator android:gravity="center" android:layout_gravity="center_vertical" android:id="@id/subscreen_customize_page_indicator" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </RelativeLayout>
+        <LinearLayout android:id="@id/subscreen_customize_text_container" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/subscreen_brightness_qp_layout_top_margin" android:layout_marginStart="@dimen/subscreen_brightness_margin_right" android:layout_marginEnd="@dimen/subscreen_brightness_margin_right">
+            <TextView android:textSize="@dimen/subscreen_drag_text_size" android:textColor="@color/subscreen_panel_customize_text_color" android:gravity="center_horizontal" android:id="@id/subscreen_touch_and_hold_text" android:layout_width="fill_parent" android:layout_height="fill_parent" android:text="@string/subscreen_touch_hold_text" android:fontFamily="sans-serif" />
+        </LinearLayout>
+    </com.android.systemui.qp.customize.SubscreenCustomizer>
+</FrameLayout>

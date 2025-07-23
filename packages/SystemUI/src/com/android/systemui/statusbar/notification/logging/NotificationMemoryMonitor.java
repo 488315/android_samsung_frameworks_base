@@ -1,0 +1,43 @@
+package com.android.systemui.statusbar.notification.logging;
+
+import android.app.StatsManager;
+import android.util.Log;
+import com.android.systemui.CoreStartable;
+import dagger.Lazy;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class NotificationMemoryMonitor implements CoreStartable {
+    public final NotificationMemoryDumper notificationMemoryDumper;
+    public final Lazy notificationMemoryLogger;
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class Companion {
+        public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
+            this();
+        }
+
+        private Companion() {
+        }
+    }
+
+    static {
+        new Companion(null);
+    }
+
+    public NotificationMemoryMonitor(NotificationMemoryDumper notificationMemoryDumper, Lazy lazy) {
+        this.notificationMemoryDumper = notificationMemoryDumper;
+        this.notificationMemoryLogger = lazy;
+    }
+
+    @Override // com.android.systemui.CoreStartable
+    public final void start() {
+        Log.d("NotificationMemory", "NotificationMemoryMonitor initialized.");
+        NotificationMemoryDumper notificationMemoryDumper = this.notificationMemoryDumper;
+        notificationMemoryDumper.dumpManager.registerNormalDumpable("NotificationMemoryDumper", notificationMemoryDumper);
+        Log.i("NotificationMemory", "Registered dumpable.");
+        NotificationMemoryLogger notificationMemoryLogger = (NotificationMemoryLogger) this.notificationMemoryLogger.get();
+        notificationMemoryLogger.statsManager.setPullAtomCallback(10174, (StatsManager.PullAtomMetadata) null, notificationMemoryLogger.backgroundExecutor, notificationMemoryLogger);
+    }
+}

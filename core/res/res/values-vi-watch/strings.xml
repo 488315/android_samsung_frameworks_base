@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="global_action_emergency">SOS khẩn cấp</string>
+    <string name="permgrouplab_sensors">Cảm biến</string>
+    <string name="reboot_to_update_prepare">Đang chuẩn bị cập nhật</string>
+    <string name="reboot_to_update_title">Bản cập nhật hệ thống Wear OS</string>
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <item android:state_selected="true" android:color="@color/sem_profile_tab_selected_text_color" />
+    <item android:color="@color/sem_profile_tab_unselected_text_color" />
+</selector>

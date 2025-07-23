@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView android:scrollbarStyle="outsideOverlay" android:gravity="top" android:layout_width="fill_parent" android:layout_height="fill_parent" android:textDirection="locale"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:accessibilityDataSensitive="yes" style="@style/AccessibilityDialog">
+        <LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:paddingLeft="24.0dip" android:paddingRight="24.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <LinearLayout android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                <ImageView android:id="@id/accessibility_permissionDialog_icon" style="@style/AccessibilityDialogServiceIcon" />
+                <TextView android:id="@id/accessibility_permissionDialog_title" style="@style/AccessibilityDialogTitle" />
+            </LinearLayout>
+            <TextView android:id="@id/permissionDialog_description" android:text="@string/accessibility_service_warning_description" style="@style/AccessibilityDialogDescriptionSamsung" />
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="17.0dip">
+                <ImageView android:id="@id/controlScreen_icon" style="@style/AccessibilityDialogIconSamsung" />
+                <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <TextView android:id="@id/controlScreen_title" android:text="@string/accessibility_service_screen_control_title" style="@style/AccessibilityDialogPermissionTitleSamsung" />
+                    <TextView android:id="@id/controlScreen_description" android:text="@string/accessibility_service_screen_control_description" style="@style/AccessibilityDialogPermissionDescriptionSamsung" />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="17.0dip">
+                <ImageView android:id="@id/performAction_icon" style="@style/AccessibilityDialogIconSamsung" />
+                <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+                    <TextView android:id="@id/performAction_title" android:text="@string/accessibility_service_action_perform_title" style="@style/AccessibilityDialogPermissionTitleSamsung" />
+                    <TextView android:id="@id/performAction_description" android:text="@string/accessibility_service_action_perform_description" style="@style/AccessibilityDialogPermissionDescriptionSamsung" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:visibility="gone" style="@style/AccessibilityDialogButtonList">
+            <Space style="@style/AccessibilityDialogButtonBarSpace" />
+            <Button android:id="@id/accessibility_permission_enable_allow_button" android:text="@string/accessibility_dialog_button_allow" style="@style/AccessibilityDialogButton" />
+            <Button android:id="@id/accessibility_permission_enable_deny_button" android:text="@string/accessibility_dialog_button_deny" style="@style/AccessibilityDialogButton" />
+            <Button android:id="@id/accessibility_permission_enable_uninstall_button" android:visibility="gone" android:text="@string/accessibility_dialog_button_uninstall" style="@style/AccessibilityDialogButton" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

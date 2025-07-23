@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background" android:left="@dimen/volume_seekbar_stroke_width_expand" android:top="@dimen/volume_seekbar_stroke_width_expand" android:right="@dimen/volume_seekbar_stroke_width_expand" android:bottom="@dimen/volume_seekbar_stroke_width_expand">
+        <shape android:shape="rectangle">
+            <corners android:radius="23.0dip" />
+            <solid android:color="@color/sub_large_display_volume_seekbar_background_color_expand_blur" />
+        </shape>
+    </item>
+    <item android:id="@android:id/progress">
+        <com.android.systemui.volume.view.SecRoundedCornerSeekBarDrawable android:drawable="@drawable/volume_seekbar_progress_drawable" />
+    </item>
+</layer-list>

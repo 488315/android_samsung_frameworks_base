@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list android:paddingMode="stack"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <item android:gravity="center" android:height="2.0dip" android:width="@dimen/rear_display_progress_width">
+        <shape android:shape="rectangle">
+            <solid android:color="?android:colorAccent" />
+        </shape>
+    </item>
+    <item android:gravity="fill_horizontal|center" android:id="@android:id/progress">
+        <com.android.systemui.util.RoundedCornerProgressDrawable android:drawable="@drawable/rear_display_dialog_seekbar_progress" />
+    </item>
+</layer-list>

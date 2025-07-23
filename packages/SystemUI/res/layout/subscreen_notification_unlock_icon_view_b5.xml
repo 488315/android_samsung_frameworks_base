@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:background="@drawable/subscreen_notification_unlock_icon_bg_b5" android:layout_width="@dimen/subscreen_noti_unlock_icon_bg_size_b5" android:layout_height="@dimen/subscreen_noti_unlock_icon_bg_size_b5"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_gravity="center" android:id="@id/unlock_icon_view" android:layout_width="@dimen/subscreen_noti_unlock_icon_size_b5" android:layout_height="@dimen/subscreen_noti_unlock_icon_size_b5" android:src="@drawable/lock_unlock" />
+</LinearLayout>

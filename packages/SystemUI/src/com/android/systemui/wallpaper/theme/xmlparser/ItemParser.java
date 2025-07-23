@@ -1,0 +1,46 @@
+package com.android.systemui.wallpaper.theme.xmlparser;
+
+import android.text.TextUtils;
+import com.android.systemui.aibrief.ui.BriefViewController;
+import com.android.systemui.wallpaper.theme.builder.AnimationBuilder;
+import org.xmlpull.v1.XmlPullParser;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public class ItemParser extends BaseParser {
+    @Override // com.android.systemui.wallpaper.theme.xmlparser.BaseParser
+    public final void parseAttribute(ParserData parserData) {
+        AnimationBuilder animationBuilder;
+        XmlPullParser xmlPullParser;
+        if (parserData == null || (animationBuilder = parserData.mAnimationBuilder) == null || (xmlPullParser = parserData.mXpp) == null) {
+            return;
+        }
+        int attributeCount = xmlPullParser.getAttributeCount();
+        for (int i = 0; i < attributeCount; i++) {
+            String attributeName = xmlPullParser.getAttributeName(i);
+            String attributeValue = xmlPullParser.getAttributeValue(i);
+            if (!TextUtils.isEmpty(attributeName) && !TextUtils.isEmpty(attributeValue)) {
+                if (attributeName.equalsIgnoreCase("frameSize")) {
+                    animationBuilder.frameSize.add(Integer.valueOf(Integer.parseInt(attributeValue)));
+                } else {
+                    boolean equalsIgnoreCase = attributeName.equalsIgnoreCase("image");
+                    String str = parserData.mPkgName;
+                    if (equalsIgnoreCase) {
+                        animationBuilder.imageViewSetId.add(Integer.valueOf(parserData.mApkResources.getIdentifier(attributeValue, "drawable", str)));
+                    } else if (attributeName.equalsIgnoreCase(BriefViewController.SUGGESTION_BACKGROUND_KEY)) {
+                        animationBuilder.backgroundId = parserData.mApkResources.getIdentifier(attributeValue, "drawable", str);
+                    } else if (attributeName.equalsIgnoreCase("x")) {
+                        animationBuilder.x.add(Float.valueOf(Float.parseFloat(attributeValue)));
+                    } else if (attributeName.equalsIgnoreCase("y")) {
+                        animationBuilder.y.add(Float.valueOf(Float.parseFloat(attributeValue)));
+                    } else if (attributeName.equalsIgnoreCase("scale")) {
+                        parserData.mAnimationBuilder.scale.add(Float.valueOf(Float.parseFloat(attributeValue)));
+                    } else if (attributeName.equalsIgnoreCase("startIndex")) {
+                        animationBuilder.startIndex.add(Integer.valueOf(Integer.parseInt(attributeValue)));
+                    }
+                }
+            }
+        }
+        parserData.mAnimationBuilder = animationBuilder;
+    }
+}

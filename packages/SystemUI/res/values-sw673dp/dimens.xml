@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="kg_table_mode_pattern_lock_pattern_view_height">255.0dip</dimen>
+    <dimen name="kg_table_mode_pattern_lock_pattern_view_width">255.0dip</dimen>
+    <dimen name="kg_table_mode_pattern_message_margin_bottom">121.0dip</dimen>
+    <dimen name="kg_table_mode_pin_message_margin_bottom">97.0dip</dimen>
+    <item type="dimen" name="tablet_num_pad_key_size_ratio">0.075</item>
+</resources>

@@ -1,0 +1,69 @@
+package com.android.systemui.shared.system.smartspace;
+
+import android.graphics.Rect;
+import android.os.Parcel;
+import android.os.Parcelable;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.PropertyReference1Impl;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class SmartspaceState implements Parcelable {
+    public static final CREATOR CREATOR = new CREATOR(null);
+    public final Rect boundsOnScreen;
+    public final int selectedPage;
+    public final boolean visibleOnScreen;
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class CREATOR implements Parcelable.Creator {
+        public /* synthetic */ CREATOR(DefaultConstructorMarker defaultConstructorMarker) {
+            this();
+        }
+
+        @Override // android.os.Parcelable.Creator
+        public final Object createFromParcel(Parcel parcel) {
+            return new SmartspaceState(parcel);
+        }
+
+        @Override // android.os.Parcelable.Creator
+        public final Object[] newArray(int i) {
+            return new SmartspaceState[i];
+        }
+
+        private CREATOR() {
+        }
+    }
+
+    public SmartspaceState() {
+        this.boundsOnScreen = new Rect();
+    }
+
+    @Override // android.os.Parcelable
+    public final int describeContents() {
+        return 0;
+    }
+
+    public final String toString() {
+        return "boundsOnScreen: " + this.boundsOnScreen + ", selectedPage: " + this.selectedPage + ", visibleOnScreen: " + this.visibleOnScreen;
+    }
+
+    @Override // android.os.Parcelable
+    public final void writeToParcel(Parcel parcel, int i) {
+        parcel.writeParcelable(this.boundsOnScreen, 0);
+        parcel.writeInt(this.selectedPage);
+        parcel.writeBoolean(this.visibleOnScreen);
+    }
+
+    public SmartspaceState(Parcel parcel) {
+        this();
+        Rect rect = (Rect) parcel.readParcelable(new PropertyReference1Impl() { // from class: com.android.systemui.shared.system.smartspace.SmartspaceState.1
+            @Override // kotlin.jvm.internal.PropertyReference1Impl, kotlin.reflect.KProperty1
+            public final Object get(Object obj) {
+                return obj.getClass();
+            }
+        }.getClass().getClassLoader());
+        this.boundsOnScreen = rect == null ? new Rect() : rect;
+        this.selectedPage = parcel.readInt();
+        this.visibleOnScreen = parcel.readBoolean();
+    }
+}

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="delete_blob_confirmation_text">¿Segura que quieres borrar estos datos compartidos?</string>
+    <string name="guest_wipe_session_title">¡Hola de nuevo, invitada!</string>
+</resources>

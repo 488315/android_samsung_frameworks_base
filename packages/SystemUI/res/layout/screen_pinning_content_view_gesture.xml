@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:paddingLeft="@dimen/screen_pinning_request_padding_dialog" android:paddingRight="@dimen/screen_pinning_request_padding_dialog" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ScrollView android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="18.0dip">
+                <TextView android:textSize="14.0sp" android:id="@id/pinning_desc_optional" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/screen_pinning_msg_in_gesture" android:lineSpacingExtra="4.0sp" android:fontFamily="sec" android:textFontWeight="400" style="?android:textAppearance" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

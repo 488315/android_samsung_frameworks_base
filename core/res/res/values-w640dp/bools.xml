@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="autofill_dialog_horizontal_space_included">true</bool>
+</resources>

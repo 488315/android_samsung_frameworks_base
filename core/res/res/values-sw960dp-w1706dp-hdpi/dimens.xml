@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="task_bar_height">37.51999dip</dimen>
+    <item type="dimen" name="task_bar_ratio">0.67</item>
+</resources>

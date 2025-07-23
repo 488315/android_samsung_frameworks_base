@@ -1,0 +1,69 @@
+package com.samsung.android.nexus.base.animator;
+
+import android.view.Choreographer;
+import com.samsung.android.nexus.base.DrawRequester;
+import com.samsung.android.nexus.base.utils.Log;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes4.dex */
+public class AnimatorCore {
+    public final Choreographer mChoreographer;
+    public DrawRequester mDrawRequester;
+    public int mFrameRate;
+    public long mFrameTime;
+    public int mRenderMode = 2;
+    public long mFrameStartTime = 0;
+    public final List mAnimatorList = new ArrayList();
+    public final AnonymousClass1 mFrameCallback = new Choreographer.FrameCallback() { // from class: com.samsung.android.nexus.base.animator.AnimatorCore.1
+        @Override // android.view.Choreographer.FrameCallback
+        public final void doFrame(long j) {
+            Method method;
+            AnimatorCore animatorCore = AnimatorCore.this;
+            if (j - animatorCore.mFrameStartTime < animatorCore.mFrameTime) {
+                animatorCore.mChoreographer.postFrameCallbackDelayed(this, 1L);
+                return;
+            }
+            animatorCore.mFrameStartTime = j;
+            int i = animatorCore.mRenderMode;
+            if (i != 2 && (i != 1 || ((ArrayList) animatorCore.mAnimatorList).isEmpty())) {
+                AnimatorCore.this.getClass();
+                return;
+            }
+            for (int size = ((ArrayList) AnimatorCore.this.mAnimatorList).size() - 1; size >= 0; size--) {
+                ((Animator) ((ArrayList) AnimatorCore.this.mAnimatorList).get(size)).getClass();
+            }
+            AnimatorCore.this.mChoreographer.postFrameCallbackDelayed(this, 1L);
+            DrawRequester drawRequester = AnimatorCore.this.mDrawRequester;
+            if (drawRequester == null || (method = drawRequester.mInvalidateMethod) == null) {
+                return;
+            }
+            try {
+                method.invoke(drawRequester.mInvalidatorInstance, null);
+            } catch (IllegalAccessException | InvocationTargetException unused) {
+            }
+        }
+    };
+
+    /* JADX WARN: Type inference failed for: r1v4, types: [com.samsung.android.nexus.base.animator.AnimatorCore$1] */
+    public AnimatorCore() {
+        this.mFrameRate = 60;
+        this.mChoreographer = null;
+        Log.i("AnimatorCore", "AnimatorCore() : create AnimatorCore");
+        this.mFrameRate = this.mFrameRate;
+        this.mFrameTime = 1000000000 / (r1 + 1);
+        this.mChoreographer = Choreographer.getInstance();
+        if (this.mRenderMode == 2) {
+            startAnimator();
+        }
+    }
+
+    public final void startAnimator() {
+        Log.i("AnimatorCore", "startAnimator() : " + this.mFrameCallback);
+        this.mChoreographer.removeFrameCallback(this.mFrameCallback);
+        this.mChoreographer.postFrameCallback(this.mFrameCallback);
+    }
+}

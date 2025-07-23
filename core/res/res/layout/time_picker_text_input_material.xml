@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:textAppearance="@style/TextAppearance.Material.TimePicker.PromptLabel" android:id="@id/top_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="26.0dip" android:layout_marginBottom="8.0dip" android:text="@string/time_picker_prompt_label" />
+    <RelativeLayout android:id="@id/input_block" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@id/top_label" android:layoutDirection="ltr">
+        <EditText android:textAppearance="@style/TextAppearance.Material.TimePicker.InputField" android:id="@id/input_hour" android:layout_width="50.0sp" android:layout_height="wrap_content" android:inputType="number" android:imeOptions="actionNext" android:layout_alignEnd="@id/hour_label_holder" />
+        <FrameLayout android:id="@id/hour_label_holder" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@id/input_hour">
+            <TextView android:layout_gravity="center" android:id="@id/label_hour" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/time_picker_hour_label" android:labelFor="@id/input_hour" />
+            <Space android:layout_width="50.0sp" android:layout_height="0.0dip" />
+        </FrameLayout>
+        <TextView android:textAppearance="@style/TextAppearance.Material.TimePicker.InputField" android:id="@id/input_separator" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignBaseline="@id/input_hour" android:layout_alignEnd="@id/input_hour" />
+        <EditText android:textAppearance="@style/TextAppearance.Material.TimePicker.InputField" android:id="@id/input_minute" android:layout_width="50.0sp" android:layout_height="wrap_content" android:layout_alignBaseline="@id/input_hour" android:inputType="number" android:layout_toEndOf="@id/input_separator" />
+        <FrameLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_below="@id/input_minute" android:layout_alignStart="@id/input_minute">
+            <TextView android:layout_gravity="center" android:id="@id/label_minute" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/time_picker_minute_label" android:labelFor="@id/input_minute" />
+            <Space android:layout_width="50.0sp" android:layout_height="0.0dip" />
+        </FrameLayout>
+        <TextView android:textColor="?colorError" android:id="@id/label_error" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/time_picker_input_error" android:layout_below="@id/input_hour" android:layout_alignStart="@id/input_hour" android:accessibilityLiveRegion="assertive" />
+    </RelativeLayout>
+    <Spinner android:id="@id/am_pm_spinner" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignBaseline="@id/input_block" android:layout_alignParentEnd="true" />
+</merge>

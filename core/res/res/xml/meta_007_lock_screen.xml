@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData AppendTo="NotificationPanel" Name="Lock_screen" TargetApi="19" TargetPackageName="com.android.systemui" UID="Lock_screen" VersionCode="1" VersionName="1.0">
+        <Property Comment="textclock_font_style: Font style of text clock" DefaultValue="Clock2017L.ttf" UID="7-1-1" ValueRef="24-2" ValueType="FontStyle" />
+        <Property Comment="textclock_font_style: Font style of text clock" DefaultValue="Clock2017L.ttf" UID="7-1-1-B" ValueRef="24-2" ValueType="FontStyle" />
+        <Property Comment="Linked font type : Common > Font > Clock. Color of text clock" DefaultValue="#ffffffff" DestAttribName="theme_textclock_color" DestQualifiers="sw360dp,sw411dp" UID="7-1-2" ValueType="TextColor" />
+        <Property Comment="Linked font type : Common > Font > Clock. Color of text clock" DefaultValue="#ff444444" DestAttribName="theme_textclock_color_black" DestQualifiers="sw360dp,sw411dp" UID="7-1-2-B" ValueType="TextColor" />
+        <Property Comment="digitial_clock_type: Text clock or image clock" DefaultValue="false" DestAttribName="theme_use_image_clock" UID="7-1-3" ValueType="Bool" />
+        <Property Comment="digitial_clock_type: Text clock or image clock" DefaultValue="false" DestAttribName="theme_use_image_clock_for_black" UID="7-1-3-B" ValueType="Bool" />
+        <Property Comment="date_font_color" DefaultValue="#ffffffff" DestAttribName="theme_clock_date_color" DestQualifiers="sw360dp,sw411dp" UID="7-1-6" ValueType="TextColor" />
+        <Property Comment="date_font_color" DefaultValue="#ff444444" DestAttribName="theme_clock_date_color_black" DestQualifiers="sw360dp,sw411dp" UID="7-1-6-B" ValueType="TextColor" />
+        <Property Comment="clockfont_effect_type: effect type of clock font" DefaultValue="0" DestAttribName="theme_clockfont_effect_type" UID="7-1-7" ValueType="FontEffect" />
+        <Property Comment="clockfont_effect_type: effect type of clock font" DefaultValue="0" DestAttribName="theme_clockfont_effect_type_black" UID="7-1-7-B" ValueType="FontEffect" />
+        <Property Comment="Shadow_on_off: Check clock shadow visibility" DefaultValue="false" DestAttribName="theme_use_clock_shadow" POption="AlwaysOverriden" UID="7-1-8" ValueType="Bool" />
+        <Property Comment="Shadow_on_off: Check clock shadow visibility" DefaultValue="false" DestAttribName="theme_use_clock_shadow_black" POption="AlwaysOverriden" UID="7-1-8-B" ValueType="Bool" />
+        <Property Comment="Shadow Color : Color of clock shadow" DefaultValue="#66000000" DestAttribName="theme_clock_shadow_color" DestQualifiers="sw360dp,sw411dp" POption="AlwaysOverriden" UID="7-1-9" ValueType="TextColor" />
+        <Property Comment="Shadow Color : Color of clock shadow" DefaultValue="#4dffffff" DestAttribName="theme_clock_shadow_color_black" DestQualifiers="sw360dp,sw411dp" POption="AlwaysOverriden" UID="7-1-9-B" ValueType="TextColor" />
+        <Property Comment="Lock icon color" DefaultValue="#66000000" DestAttribName="lock_icon_color" DestQualifiers="sw360dp,sw411dp" UID="7-1-10" ValueRef="7-1-6" ValueType="TextColor" />
+        <Property Comment="Lock icon color for black" DefaultValue="#4dffffff" DestAttribName="lock_icon_color_black" DestQualifiers="sw360dp,sw411dp" UID="7-1-10-B" ValueRef="7-1-6-B" ValueType="TextColor" />
+        <Property Comment="Clock Digit Image 0" DefaultValue="lock_clock_number_0" DestAttribName="clock_digit_0" DestQualifiers="xxxhdpi" ImageSize="40X68" UID="7-1-3-0" ValueType="Image" />
+        <Property Comment="Clock Digit Image 1" DefaultValue="lock_clock_number_1" DestAttribName="clock_digit_1" DestQualifiers="xxxhdpi" ImageSize="34X68" UID="7-1-3-1" ValueType="Image" />
+        <Property Comment="Clock Digit Image 2" DefaultValue="lock_clock_number_2" DestAttribName="clock_digit_2" DestQualifiers="xxxhdpi" ImageSize="40X68" UID="7-1-3-2" ValueType="Image" />
+        <Property Comment="Clock Digit Image 3" DefaultValue="lock_clock_number_3" DestAttribName="clock_digit_3" DestQualifiers="xxxhdpi" ImageSize="40X68" UID="7-1-3-3" ValueType="Image" />
+        <Property Comment="Clock Digit Image 4" DefaultValue="lock_clock_number_4" DestAttribName="clock_digit_4" DestQualifiers="xxxhdpi" ImageSize="40X68" UID="7-1-3-4" ValueType="Image" />
+        <Property Comment="Clock Digit Image 5" DefaultValue="lock_clock_number_5" DestAttribName="clock_digit_5" DestQualifiers="xxxhdpi" ImageSize="40X68" UID="7-1-3-5" ValueType="Image" />
+        <Property Comment="Clock Digit Image 6" DefaultValue="lock_clock_number_6" DestAttribName="clock_digit_6" DestQualifiers="xxxhdpi" ImageSize="40X68" UID="7-1-3-6" ValueType="Image" />
+        <Property Comment="Clock Digit Image 7" DefaultValue="lock_clock_number_7" DestAttribName="clock_digit_7" DestQualifiers="xxxhdpi" ImageSize="40X68" UID="7-1-3-7" ValueType="Image" />
+        <Property Comment="Clock Digit Image 8" DefaultValue="lock_clock_number_8" DestAttribName="clock_digit_8" DestQualifiers="xxxhdpi" ImageSize="40X68" UID="7-1-3-8" ValueType="Image" />
+        <Property Comment="Clock Digit Image 9" DefaultValue="lock_clock_number_9" DestAttribName="clock_digit_9" DestQualifiers="xxxhdpi" ImageSize="40X68" UID="7-1-3-9" ValueType="Image" />
+        <Property Comment="Clock Image colon" DefaultValue="clock_colon" DestAttribName="clock_colon" DestQualifiers="xxxhdpi" ImageSize="18X68" UID="7-1-3-10" ValueType="Image" />
+        <Property Comment="Clock Digit Image 0" DefaultValue="lock_clock_number_0_dark" DestAttribName="clock_digit_0_black" DestQualifiers="xxxhdpi" ImageSize="40X68" UID="7-1-3-0-B" ValueType="Image" />
+        <Property Comment="Clock Digit Image 1" DefaultValue="lock_clock_number_1_dark" DestAttribName="clock_digit_1_black" DestQualifiers="xxxhdpi" ImageSize="34X68" UID="7-1-3-1-B" ValueType="Image" />
+        <Property Comment="Clock Digit Image 2" DefaultValue="lock_clock_number_2_dark" DestAttribName="clock_digit_2_black" DestQualifiers="xxxhdpi" ImageSize="40X68" UID="7-1-3-2-B" ValueType="Image" />
+        <Property Comment="Clock Digit Image 3" DefaultValue="lock_clock_number_3_dark" DestAttribName="clock_digit_3_black" DestQualifiers="xxxhdpi" ImageSize="40X68" UID="7-1-3-3-B" ValueType="Image" />
+        <Property Comment="Clock Digit Image 4" DefaultValue="lock_clock_number_4_dark" DestAttribName="clock_digit_4_black" DestQualifiers="xxxhdpi" ImageSize="40X68" UID="7-1-3-4-B" ValueType="Image" />
+        <Property Comment="Clock Digit Image 5" DefaultValue="lock_clock_number_5_dark" DestAttribName="clock_digit_5_black" DestQualifiers="xxxhdpi" ImageSize="40X68" UID="7-1-3-5-B" ValueType="Image" />
+        <Property Comment="Clock Digit Image 6" DefaultValue="lock_clock_number_6_dark" DestAttribName="clock_digit_6_black" DestQualifiers="xxxhdpi" ImageSize="40X68" UID="7-1-3-6-B" ValueType="Image" />
+        <Property Comment="Clock Digit Image 7" DefaultValue="lock_clock_number_7_dark" DestAttribName="clock_digit_7_black" DestQualifiers="xxxhdpi" ImageSize="40X68" UID="7-1-3-7-B" ValueType="Image" />
+        <Property Comment="Clock Digit Image 8" DefaultValue="lock_clock_number_8_dark" DestAttribName="clock_digit_8_black" DestQualifiers="xxxhdpi" ImageSize="40X68" UID="7-1-3-8-B" ValueType="Image" />
+        <Property Comment="Clock Digit Image 9" DefaultValue="lock_clock_number_9_dark" DestAttribName="clock_digit_9_black" DestQualifiers="xxxhdpi" ImageSize="40X68" UID="7-1-3-9-B" ValueType="Image" />
+        <Property Comment="Clock Image colon" DefaultValue="clock_colon_dark" DestAttribName="clock_colon_black" DestQualifiers="xxxhdpi" ImageSize="18X68" UID="7-1-3-10-B" ValueType="Image" />
+        <Property Comment="notification icons only icon color" DefaultValue="#fffafafa" DestAttribName="open_theme_nio_tint_color" UID="7-3-1" ValueRef="7-1-6" ValueType="TintColor" />
+        <Property Comment="notification icons only icon color" DefaultValue="#ff444444" DestAttribName="open_theme_nio_tint_color_black" UID="7-3-1-B" ValueRef="7-1-6-B" ValueType="TintColor" />
+        <Property Comment="shadow on/off (default on)" DefaultValue="true" DestAttribName="open_theme_nio_shadow" UID="7-3-2" ValueRef="7-1-8" ValueType="Bool" />
+        <Property Comment="shadow on/off (default on)" DefaultValue="true" DestAttribName="open_theme_nio_shadow_black" UID="7-3-2-B" ValueRef="7-1-8-B" ValueType="Bool" />
+        <Property Comment="shadow color" DefaultValue="#66000000" DestAttribName="open_theme_nio_shadow_color" UID="7-3-3" ValueRef="7-1-9" ValueType="TintColor" />
+        <Property Comment="shadow color" DefaultValue="#66000000" DestAttribName="open_theme_nio_shadow_color_black" UID="7-3-3-B" ValueRef="7-1-9-B" ValueType="TintColor" />
+        <Property Comment="touch effect" DefaultValue="#66000000" DestAttribName="nio_shadow_color" Opacity="15" POption="AlwaysOverriden" UID="7-3-5" ValueRef="7-1-6" ValueType="TintColor" />
+        <Property Comment="touch effect" DefaultValue="#66000000" DestAttribName="nio_shadow_color_black" Opacity="15" POption="AlwaysOverriden" UID="7-3-5-B" ValueRef="7-1-6-B" ValueType="TintColor" />
+        <Property Comment="Notification count text color" DefaultValue="#ff444444" DestAttribName="notification_count_text_color" POption="AlwaysOverriden" UID="7-3-6" ValueType="TextColor" />
+        <Property Comment="Notification count text color for black" DefaultValue="#ffffffff" DestAttribName="notification_count_text_color_black" POption="AlwaysOverriden" UID="7-3-6-B" ValueType="TextColor" />
+        <Property Comment="Normal: default pattern image for none" DefaultValue="point_icon_normal" DestAttribName="indicator_code_lock_point_area_default_holo" DestQualifiers="xxxhdpi" ImageSize="54X54" UID="7-6-1" ValueType="Image" />
+        <Property Comment="variable for checking whether image is set" DestAttribName="theme_use_pattern_normal_image" UID="7-6-1-1" ValueRef="7-6-1" ValueType="MetaInfo" />
+        <Property Comment="Success: circle default for none" DefaultValue="pressed_success" DestAttribName="indicator_code_lock_point_area_green_holo" DestQualifiers="xxxhdpi" ImageSize="54X54" UID="7-6-3" ValueType="Image" />
+        <Property Comment="variable for checking whether image is set" DestAttribName="theme_use_pattern_success_image" UID="7-6-3-1" ValueRef="7-6-3" ValueType="MetaInfo" />
+        <Property Comment="pattern_line_color" DefaultValue="#48ffffff" DestAttribName="theme_pattern_line_color" DestQualifiers="" UID="7-6-5" ValueType="Color" />
+        <Property Comment="Normal: default pattern image for none" DefaultValue="lock_whitebg_pattern_dot_normal" DestAttribName="indicator_code_lock_point_area_default_holo_black" DestQualifiers="xxxhdpi" ImageSize="54X54" UID="7-6-1-B" ValueType="Image" />
+        <Property Comment="variable for checking whether image is set" DestAttribName="theme_use_pattern_normal_image_black" UID="7-6-1-1-B" ValueRef="7-6-1-B" ValueType="MetaInfo" />
+        <Property Comment="Success: circle default for none" DefaultValue="lock_whitebg_pattern_dot_normal" DestAttribName="indicator_code_lock_point_area_green_holo_black" DestQualifiers="xxxhdpi" ImageSize="54X54" UID="7-6-3-B" ValueType="Image" />
+        <Property Comment="variable for checking whether image is set" DestAttribName="theme_use_pattern_success_image_black" UID="7-6-3-1-B" ValueRef="7-6-3-B" ValueType="MetaInfo" />
+        <Property Comment="pattern_line_color" DefaultValue="#48000000" DestAttribName="theme_pattern_line_color_black" DestQualifiers="" UID="7-6-5-B" ValueType="Color" />
+        <Property Comment="pin_number_font_style: pin_number_font_style" DefaultValue="SamsungSans-Num4Tv.ttf" UID="7-7-1" ValueRef="24-3" ValueType="FontStyle" />
+        <Property Comment="Number: pin_number_font_color" DefaultValue="#ffffffff" DestAttribName="theme_pin_digit_text_color" UID="7-7-2" ValueType="TextColor" />
+        <Property Comment="pinlock_type: Text or image pin" DefaultValue="false" DestAttribName="theme_use_image_pinlock" UID="7-7-3" ValueType="Bool" />
+        <Property Comment="pin_number_image_0" DefaultValue="lock_pin_btn_0_mtrl" DestAttribName="pin_number_image_0" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-7-3-0" ValueType="Image" />
+        <Property Comment="pin_number_image_1" DefaultValue="lock_pin_btn_1_mtrl" DestAttribName="pin_number_image_1" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-7-3-1" ValueType="Image" />
+        <Property Comment="pin_number_image_2" DefaultValue="lock_pin_btn_2_mtrl" DestAttribName="pin_number_image_2" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-7-3-2" ValueType="Image" />
+        <Property Comment="pin_number_image_3" DefaultValue="lock_pin_btn_3_mtrl" DestAttribName="pin_number_image_3" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-7-3-3" ValueType="Image" />
+        <Property Comment="pin_number_image_4" DefaultValue="lock_pin_btn_4_mtrl" DestAttribName="pin_number_image_4" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-7-3-4" ValueType="Image" />
+        <Property Comment="pin_number_image_5" DefaultValue="lock_pin_btn_5_mtrl" DestAttribName="pin_number_image_5" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-7-3-5" ValueType="Image" />
+        <Property Comment="pin_number_image_6" DefaultValue="lock_pin_btn_6_mtrl" DestAttribName="pin_number_image_6" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-7-3-6" ValueType="Image" />
+        <Property Comment="pin_number_image_7" DefaultValue="lock_pin_btn_7_mtrl" DestAttribName="pin_number_image_7" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-7-3-7" ValueType="Image" />
+        <Property Comment="pin_number_image_8" DefaultValue="lock_pin_btn_8_mtrl" DestAttribName="pin_number_image_8" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-7-3-8" ValueType="Image" />
+        <Property Comment="pin_number_image_9" DefaultValue="lock_pin_btn_9_mtrl" DestAttribName="pin_number_image_9" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-7-3-9" ValueType="Image" />
+        <Property Comment="pin_number_bg_image" DefaultValue="lock_pin_btn_BG" DestAttribName="pin_number_bg_image" DestQualifiers="xxxhdpi" ImageSize="60X60" UID="7-7-3-10" ValueType="Image" />
+        <Property Comment="pin_number_image_ok" DefaultValue="lock_pin_btn_OK_mtrl" DestAttribName="ic_done_wht" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-10-3" ValueType="Image" />
+        <Property Comment="Linked color : Lock screen > PIN > Number font color. pin_text_font_color" DefaultValue="#ffffffff" DestAttribName="theme_pin_text_color" DestQualifiers="sw360dp,sw411dp" UID="7-8-2" ValueRef="7-7-2" ValueType="TextColor" />
+        <Property Comment="ABC: alphabet_text_font_color" DefaultValue="#ffffffff" DestAttribName="theme_pin_klondike_text_color" UID="7-9-2" ValueRef="7-7-2" ValueType="TextColor" />
+        <Property Comment="pin_component_backspace_icon_image" DefaultValue="lock_pin_btn_delete_mtrl" DestAttribName="pin_lock_btn_back" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-11-2" ValueType="Image" />
+        <Property Comment="pin_number_font_style: pin_number_font_style for black" DefaultValue="SamsungSans-Num4Tv.ttf" UID="7-7-1-B" ValueRef="24-3" ValueType="FontStyle" />
+        <Property Comment="Number: pin_number_font_color" DefaultValue="#ff444444" DestAttribName="theme_pin_digit_text_color_black" UID="7-7-2-B" ValueType="TextColor" />
+        <Property Comment="pinlock_type: Text or image pin for black" DefaultValue="false" DestAttribName="theme_use_image_pinlock_for_black" UID="7-7-3-B" ValueType="Bool" />
+        <Property Comment="pin_number_image_0" DefaultValue="lock_pin_btn_0_mtrl_dark" DestAttribName="pin_number_image_0_black" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-7-3-0-B" ValueType="Image" />
+        <Property Comment="pin_number_image_1" DefaultValue="lock_pin_btn_1_mtrl_dark" DestAttribName="pin_number_image_1_black" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-7-3-1-B" ValueType="Image" />
+        <Property Comment="pin_number_image_2" DefaultValue="lock_pin_btn_2_mtrl_dark" DestAttribName="pin_number_image_2_black" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-7-3-2-B" ValueType="Image" />
+        <Property Comment="pin_number_image_3" DefaultValue="lock_pin_btn_3_mtrl_dark" DestAttribName="pin_number_image_3_black" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-7-3-3-B" ValueType="Image" />
+        <Property Comment="pin_number_image_4" DefaultValue="lock_pin_btn_4_mtrl_dark" DestAttribName="pin_number_image_4_black" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-7-3-4-B" ValueType="Image" />
+        <Property Comment="pin_number_image_5" DefaultValue="lock_pin_btn_5_mtrl_dark" DestAttribName="pin_number_image_5_black" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-7-3-5-B" ValueType="Image" />
+        <Property Comment="pin_number_image_6" DefaultValue="lock_pin_btn_6_mtrl_dark" DestAttribName="pin_number_image_6_black" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-7-3-6-B" ValueType="Image" />
+        <Property Comment="pin_number_image_7" DefaultValue="lock_pin_btn_7_mtrl_dark" DestAttribName="pin_number_image_7_black" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-7-3-7-B" ValueType="Image" />
+        <Property Comment="pin_number_image_8" DefaultValue="lock_pin_btn_8_mtrl_dark" DestAttribName="pin_number_image_8_black" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-7-3-8-B" ValueType="Image" />
+        <Property Comment="pin_number_image_9" DefaultValue="lock_pin_btn_9_mtrl_dark" DestAttribName="pin_number_image_9_black" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-7-3-9-B" ValueType="Image" />
+        <Property Comment="pin_number_bg_image_black" DefaultValue="lock_pin_btn_BG_Dark" DestAttribName="pin_number_bg_image_black" DestQualifiers="xxxhdpi" ImageSize="60X60" UID="7-7-3-10-B" ValueType="Image" />
+        <Property Comment="pin_number_image_ok" DefaultValue="lock_pin_btn_OK_mtrl_dark" DestAttribName="ic_done_wht_black" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-10-3-B" ValueType="Image" />
+        <Property Comment="Linked color : Lock screen > PIN > Number font color. pin_text_font_color" DefaultValue="#ff444444" DestAttribName="theme_pin_text_color_black" DestQualifiers="sw360dp,sw411dp" UID="7-8-2-B" ValueRef="7-7-2-B" ValueType="TintColor" />
+        <Property Comment="ABC: alphabet_text_font_color" DefaultValue="#cc444444" DestAttribName="theme_pin_klondike_text_color_black" UID="7-9-2-B" ValueRef="7-7-2-B" ValueType="TextColor" />
+        <Property Comment="pin_component_backspace_icon_image" DefaultValue="lock_pin_btn_delete_mtrl_dark" DestAttribName="pin_lock_btn_back_black" DestQualifiers="xxxhdpi" ImageSize="60X61" UID="7-11-2-B" ValueType="Image" />
+        <Property Comment="Linked color : Lock screen > PIN > Number font color. charging_text_font_color" DefaultValue="#ffffffff" DestAttribName="theme_keyguard_message_area_text_color" UID="7-14-1" ValueType="TextColor" />
+        <Property Comment="Linked color : Lock screen > PIN > Number font color. charging_text_font_color" DefaultValue="#ff444444" DestAttribName="theme_keyguard_message_area_text_color_black" UID="7-14-1-B" ValueType="TextColor" />
+        <Property Comment="Shadow On/Off (Default ON)" DefaultValue="false" DestAttribName="theme_helptext_use_shadow" POption="AlwaysOverriden" UID="7-14-2" ValueRef="7-1-8" ValueType="Bool" />
+        <Property Comment="Shadow On/Off (Default ON)" DefaultValue="false" DestAttribName="theme_helptext_use_shadow_black" POption="AlwaysOverriden" UID="7-14-2-B" ValueRef="7-1-8-B" ValueType="Bool" />
+        <Property Comment="Shadow Color : Color of clock shadow" DefaultValue="#66000000" DestAttribName="theme_helptext_shadow_color" DestQualifiers="sw360dp,sw411dp" POption="AlwaysOverriden" UID="7-14-3" ValueRef="7-1-9" ValueType="TextColor" />
+        <Property Comment="Shadow Color : Color of clock shadow" DefaultValue="#66000000" DestAttribName="theme_helptext_shadow_color_black" DestQualifiers="sw360dp,sw411dp" POption="AlwaysOverriden" UID="7-14-3-B" ValueRef="7-1-9-B" ValueType="TextColor" />
+        <Property Comment="Shortcut icon label text color" DefaultValue="#ff252525" DestAttribName="sec_lock_setting_shortcut_list_item_text_color" UID="7-17-6" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Music player Background Color" DefaultValue="#fffafafa" DestAttribName="theme_music_bg_color" UID="7-22-1" ValueRef="4-4-1" ValueType="BgColor" />
+        <Property Comment="Connected device name text color" DefaultValue="#ff000000" DestAttribName="theme_device_name_color" Opacity="80" UID="7-22-2" ValueRef="4-22-1" ValueType="TextColor" />
+        <Property Comment="Music title text color" DefaultValue="#ff000000" DestAttribName="theme_music_title_color" UID="7-22-3" ValueRef="4-22-1" ValueType="TextColor" />
+        <Property Comment="artist text color" DefaultValue="#ff000000" DestAttribName="theme_artist_color" UID="7-22-4" ValueRef="4-22-1" ValueType="TextColor" />
+        <Property Comment="player controller icon color" DefaultValue="#fffafafa" DestAttribName="theme_controller_bg_color" UID="7-22-5" ValueRef="4-22-1" ValueType="TintColor" />
+        <Property Comment="seek bar background color" DefaultValue="#fffafafa" DestAttribName="theme_seekbar_bg_color" Opacity="30" UID="7-22-6" ValueRef="4-22-1" ValueType="BgColor" />
+        <Property Comment="seek bar progress color" DefaultValue="#ff000000" DestAttribName="theme_seekbar_progress_color" UID="7-22-7" ValueRef="4-22-1" ValueType="TintColor" />
+        <Property Comment="seek bar thumb color" DefaultValue="#ff000000" DestAttribName="theme_seekbar_thumb_color" UID="7-22-8" ValueRef="4-22-1" ValueType="TintColor" />
+        <Property Comment="music play time text color" DefaultValue="#ff000000" DestAttribName="theme_play_time_color" Opacity="50" UID="7-22-9" ValueRef="4-22-1" ValueType="TextColor" />
+        <Property Comment="current page dot color" DefaultValue="#fffafafa" DestAttribName="theme_current_page_dot_color" Opacity="80" UID="7-22-10" ValueRef="4-22-1" ValueType="TintColor" />
+        <Property Comment="page dot color" DefaultValue="#fffafafa" DestAttribName="theme_page_dot_color" Opacity="40" UID="7-22-11" ValueRef="4-22-1" ValueType="TintColor" />
+        <Property Comment="music player background color" DefaultValue="#fffafafa" DestAttribName="theme_setting_music_bg_color" UID="7-23-1" ValueRef="4-4-1" ValueType="BgColor" />
+        <Property Comment="connected device name text color" DefaultValue="#ff000000" DestAttribName="theme_setting_device_name_color" Opacity="80" UID="7-23-2" ValueRef="4-22-1" ValueType="BgColor" />
+        <Property Comment="music title text color" DefaultValue="#ff000000" DestAttribName="theme_setting_music_title_color" UID="7-23-3" ValueRef="4-22-1" ValueType="TextColor" />
+        <Property Comment="artist text color" DefaultValue="#ff000000" DestAttribName="theme_setting_music_artist_color" UID="7-23-4" ValueRef="4-22-1" ValueType="TextColor" />
+        <Property Comment="player controller icon color" DefaultValue="#ff000000" DestAttribName="theme_setting_music_icon_color" UID="7-23-5" ValueRef="4-22-1" ValueType="TintColor" />
+        <Property Comment="clock font color" DefaultValue="#fffafafa" DestAttribName="theme_clock_font_color" UID="7-24-1" ValueRef="7-1-2" ValueType="TintColor" />
+        <Property Comment="clock date font color" DefaultValue="#fffafafa" DestAttribName="theme_clock_date_font_color" UID="7-24-2" ValueRef="7-1-2" ValueType="TintColor" />
+        <Property Comment="clock lunar date font color" DefaultValue="#fffafafa" DestAttribName="theme_clock_lunar_date_font_color" UID="7-24-3" ValueRef="7-1-6" ValueType="TintColor" />
+        <Property Comment="clock font color" DefaultValue="#ff000000" DestAttribName="theme_clock_font_color_dark" UID="7-24-1-B" ValueRef="7-1-2-B" ValueType="TintColor" />
+        <Property Comment="clock date font color" DefaultValue="#ff000000" DestAttribName="theme_clock_date_font_color_dark" UID="7-24-2-B" ValueRef="7-1-2-B" ValueType="TintColor" />
+        <Property Comment="clock lunar date font color" DefaultValue="#ff000000" DestAttribName="theme_clock_lunar_date_font_color_dark" UID="7-24-3-B" ValueRef="7-1-6-B" ValueType="TintColor" />
+        <Property Comment="analog clock bg color" DefaultValue="#fffafafa" DestAttribName="theme_analog_clock_bg_color" UID="7-25-1" ValueRef="7-1-2" ValueType="TintColor" />
+        <Property Comment="analog clock pin color" DefaultValue="#fffafafa" DestAttribName="theme_analog_clock_pin_color" UID="7-25-2" ValueRef="7-1-2" ValueType="TintColor" />
+        <Property Comment="analog clock hour color" DefaultValue="#fffafafa" DestAttribName="theme_analog_clock_hour_color" UID="7-25-3" ValueRef="7-1-2" ValueType="TintColor" />
+        <Property Comment="analog clock minute color" DefaultValue="#fffafafa" DestAttribName="theme_analog_clock_min_color" UID="7-25-4" ValueRef="7-1-2" ValueType="TintColor" />
+        <Property Comment="analog clock second color" DefaultValue="#fffafafa" DestAttribName="theme_analog_clock_sec_color" UID="7-25-5" ValueRef="7-1-2" ValueType="TintColor" />
+        <Property Comment="analog clock bg color" DefaultValue="#ff000000" DestAttribName="theme_analog_clock_bg_color_dark" UID="7-25-1-B" ValueRef="7-1-2-B" ValueType="TintColor" />
+        <Property Comment="analog clock pin color" DefaultValue="#ff000000" DestAttribName="theme_analog_clock_pin_color_dark" UID="7-25-2-B" ValueRef="7-1-2-B" ValueType="TintColor" />
+        <Property Comment="analog clock hour color" DefaultValue="#ff000000" DestAttribName="theme_analog_clock_hour_color_dark" UID="7-25-3-B" ValueRef="7-1-2-B" ValueType="TintColor" />
+        <Property Comment="analog clock minute color" DefaultValue="#ff000000" DestAttribName="theme_analog_clock_min_color_dark" UID="7-25-4-B" ValueRef="7-1-2-B" ValueType="TintColor" />
+        <Property Comment="analog clock second color" DefaultValue="#ff000000" DestAttribName="theme_analog_clock_sec_color_dark" UID="7-25-5-B" ValueRef="7-1-2-B" ValueType="TintColor" />
+        <Property Comment="contact info text color" DefaultValue="#fffafafa" DestAttribName="theme_contact_info_text_color" UID="7-26-1" ValueRef="7-1-6" ValueType="TintColor" />
+        <Property Comment="contact info shadow on off" DefaultValue="false" DestAttribName="theme_contact_info_shadow" UID="7-26-2" ValueRef="7-1-8" ValueType="Bool" />
+        <Property Comment="contact info shadow color" DefaultValue="#ff000000" DestAttribName="theme_contact_info_shadow_color" UID="7-26-3" ValueRef="7-1-9" ValueType="TintColor" />
+        <Property Comment="contact info text color" DefaultValue="#ff000000" DestAttribName="theme_contact_info_text_color_dark" UID="7-26-1-B" ValueRef="7-1-6-B" ValueType="TintColor" />
+        <Property Comment="contact info shadow on off" DefaultValue="false" DestAttribName="theme_contact_info_shadow_dark" UID="7-26-2-B" ValueRef="7-1-8-B" ValueType="Bool" />
+        <Property Comment="contact info shadow color" DefaultValue="#fffafafa" DestAttribName="theme_contact_info_shadow_color_dark" UID="7-26-3-B" ValueRef="7-1-9-B" ValueType="TintColor" />
+    </AppMetaData>
+</ThemeMetaData>

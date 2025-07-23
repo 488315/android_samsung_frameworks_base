@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:focusable="true" android:layout_width="@dimen/setting_edge_lighting_style_grid_item_select_size" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:duplicateParentState="true" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <RelativeLayout android:id="@id/preview_layout" android:background="@drawable/settings_rounded_rect" android:duplicateParentState="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/setting_edge_lighting_style_grid_item_title_top_margin" android:layout_centerVertical="true">
+            <ImageView android:id="@id/item_image" android:background="@drawable/settings_rounded_rect" android:duplicateParentState="true" android:layout_width="@dimen/setting_edge_lighting_style_grid_item_size" android:layout_height="@dimen/setting_edge_lighting_style_grid_item_size" android:layout_centerHorizontal="true" />
+            <ImageView android:id="@id/item_image_check" android:background="@drawable/lighting_style_effect_item_selected_shape" android:visibility="invisible" android:layout_width="@dimen/setting_edge_lighting_style_grid_item_select_size" android:layout_height="@dimen/setting_edge_lighting_style_grid_item_select_size" android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+        <TextView android:textSize="@dimen/settings_edge_lighting_style_list_item_text_size" android:textColor="@color/settings_edge_style_option_color_selector" android:id="@id/item_title" android:focusable="false" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" android:layout_below="@id/preview_layout" android:layout_centerHorizontal="true" android:importantForAccessibility="no" android:fontFamily="sec" />
+    </LinearLayout>
+</RelativeLayout>

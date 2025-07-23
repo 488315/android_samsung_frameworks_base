@@ -1,0 +1,51 @@
+package com.android.app.tracing;
+
+import android.os.Trace;
+import kotlin.Lazy;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function2;
+import kotlin.jvm.internal.Ref$IntRef;
+
+/* JADX INFO: Access modifiers changed from: package-private */
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes.dex */
+public final class FlowTracing$traceEmissionCount$1 extends SuspendLambda implements Function2 {
+    final /* synthetic */ Ref$IntRef $count;
+    final /* synthetic */ Lazy $trackName$delegate;
+    int label;
+
+    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+    public FlowTracing$traceEmissionCount$1(Ref$IntRef ref$IntRef, Lazy lazy, Continuation continuation) {
+        super(2, continuation);
+        this.$count = ref$IntRef;
+        this.$trackName$delegate = lazy;
+    }
+
+    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+    public final Continuation create(Object obj, Continuation continuation) {
+        return new FlowTracing$traceEmissionCount$1(this.$count, this.$trackName$delegate, continuation);
+    }
+
+    @Override // kotlin.jvm.functions.Function2
+    public final Object invoke(Object obj, Object obj2) {
+        return ((FlowTracing$traceEmissionCount$1) create(obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
+    }
+
+    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+    public final Object invokeSuspend(Object obj) {
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        if (this.label != 0) {
+            throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+        }
+        ResultKt.throwOnFailure(obj);
+        this.$count.element++;
+        Lazy lazy = this.$trackName$delegate;
+        FlowTracing flowTracing = FlowTracing.INSTANCE;
+        Trace.traceCounter(4096L, (String) lazy.getValue(), this.$count.element);
+        return Unit.INSTANCE;
+    }
+}

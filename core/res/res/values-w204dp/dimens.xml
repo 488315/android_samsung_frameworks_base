@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="loader_horizontal_min_width_watch">70.0dip</dimen>
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:scrollbars="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/wallpaper_area" android:layout_width="fill_parent" android:layout_height="fill_parent" android:importantForAccessibility="no" />
+    <FrameLayout android:background="@color/panel_background_blur_color" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:gravity="left" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_marginStart="@dimen/basic_panel_left_margin">
+            <LinearLayout android:orientation="horizontal" android:id="@id/main_floating_area" android:background="@drawable/flex_panel_background_expand" android:layout_width="wrap_content" android:layout_height="fill_parent">
+                <LinearLayout android:gravity="top" android:orientation="horizontal" android:id="@id/upper_area" android:layout_width="wrap_content" android:layout_height="fill_parent">
+                    <GridView android:id="@id/gridView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:stretchMode="columnWidth" android:numColumns="1" />
+                </LinearLayout>
+                <com.android.wm.shell.controlpanel.widget.BrightnessVolumeView android:id="@id/brightness_volume_view" android:visibility="gone" android:layout_width="@dimen/basic_panel_width" android:layout_height="fill_parent" />
+                <LinearLayout android:orientation="horizontal" android:id="@id/edit_panel_view" android:layout_width="fill_parent" android:layout_height="fill_parent">
+                    <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="fill_parent" android:weightSum="38.9">
+                        <View android:layout_gravity="center_vertical" android:background="@color/edit_panel_dividing_line_color" android:layout_width="0.5dip" android:layout_height="0.0dip" android:layout_weight="34.5" />
+                    </LinearLayout>
+                    <android.widget.GridLayout android:id="@id/gridLayout" android:layout_width="wrap_content" android:layout_height="fill_parent" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

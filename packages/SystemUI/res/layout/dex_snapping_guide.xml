@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.wm.shell.freeform.DexSnappingGuideView android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layoutDirection="ltr"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/dex_snapping_guide_view" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/dex_snapping_guide_view" android:scaleType="fitXY" />
+</com.android.wm.shell.freeform.DexSnappingGuideView>

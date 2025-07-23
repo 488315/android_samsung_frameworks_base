@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.samsung.android.share.SemShareButtonLinearLayout android:id="@id/sem_chooser_title_settings" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:contentDescription="@string/sem_chooser_multi_select_settings_button_text"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:textAppearance="?windowTitleStyle" android:textSize="12.0dip" android:textColor="@color/sem_chooser_top_panel_settings_color" android:gravity="start" android:layout_gravity="center_vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/sem_chooser_multi_select_settings_button_text" android:importantForAccessibility="no" android:fontFamily="sec-roboto-light" android:paddingStart="5.0dip" />
+    <ImageView android:layout_gravity="center_vertical" android:id="@id/sem_chooser_ic_next" android:layout_width="8.0dip" android:layout_height="12.0dip" android:src="@drawable/sem_chooser_ic_tw_ic_next" android:tint="@color/sem_chooser_top_panel_settings_color" android:paddingStart="2.0dip" />
+</com.samsung.android.share.SemShareButtonLinearLayout>

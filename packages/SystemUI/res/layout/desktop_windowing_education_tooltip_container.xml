@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:id="@id/tooltip_container" android:background="@drawable/desktop_windowing_education_tooltip_background" android:padding="@dimen/desktop_windowing_education_tooltip_padding" android:layout_width="wrap_content" android:layout_height="wrap_content" android:elevation="2.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_gravity="center_vertical" android:id="@id/tooltip_icon" android:layout_width="32.0dip" android:layout_height="32.0dip" android:layout_margin="8.0dip" android:src="@drawable/app_handle_education_tooltip_icon" />
+    <TextView android:textSize="14.0sp" android:textColor="@android:color/system_on_tertiary_container_light" android:layout_gravity="center_vertical" android:id="@id/tooltip_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxWidth="220.0dip" android:layout_marginHorizontal="8.0dip" android:lineHeight="20.0dip" android:textFontWeight="500" />
+</LinearLayout>

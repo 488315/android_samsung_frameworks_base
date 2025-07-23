@@ -1,0 +1,42 @@
+package com.android.systemui.shade;
+
+import androidx.compose.animation.FlingCalculator$FlingInfo$$ExternalSyntheticOutline0;
+import defpackage.ReorderTile$$ExternalSyntheticOutline0;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class PanelTransitionStateChangeEvent {
+    public final boolean enabled;
+    public final float fraction;
+    public final int state;
+
+    public PanelTransitionStateChangeEvent(boolean z, float f, int i) {
+        this.enabled = z;
+        this.fraction = f;
+        this.state = i;
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof PanelTransitionStateChangeEvent)) {
+            return false;
+        }
+        PanelTransitionStateChangeEvent panelTransitionStateChangeEvent = (PanelTransitionStateChangeEvent) obj;
+        return this.enabled == panelTransitionStateChangeEvent.enabled && Float.compare(this.fraction, panelTransitionStateChangeEvent.fraction) == 0 && this.state == panelTransitionStateChangeEvent.state;
+    }
+
+    public final int hashCode() {
+        return Integer.hashCode(this.state) + FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.fraction, Boolean.hashCode(this.enabled) * 31, 31);
+    }
+
+    public final String toString() {
+        StringBuilder sb = new StringBuilder("PanelTransitionStateChangeEvent(enabled=");
+        sb.append(this.enabled);
+        sb.append(", fraction=");
+        sb.append(this.fraction);
+        sb.append(", state=");
+        return ReorderTile$$ExternalSyntheticOutline0.m(this.state, ")", sb);
+    }
+}

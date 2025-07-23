@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:color="?colorControlHighlight"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@id/mask">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/config_wearMaterial3_buttonCornerRadius" />
+            <solid android:color="#ffffffff" />
+            <size android:height="@dimen/btn_material_height" android:width="@dimen/btn_material_width" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/config_wearMaterial3_buttonCornerRadius" />
+            <stroke android:width="1.0dip" android:color="@color/btn_material_outlined_background_color_watch" />
+            <size android:height="@dimen/btn_material_height" android:width="@dimen/btn_material_width" />
+        </shape>
+    </item>
+</ripple>

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Dynamic Lockscreen" TargetApi="28" TargetPackageName="com.samsung.android.dynamiclock" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="Category item name's color" DestAttribName="theme_category_item_name_color" UID="7_1-2-1" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property DestAttribName="theme_content_area_background_color" UID="7_1-3-5" ValueRef="1-18-1" ValueType="TextColor" />
+        <Property DefaultValue="" DestAttribName="theme_content_area_background_image" DestQualifiers="xxxhdpi" ImageSize="360X56" UID="7_1-3-6" ValueRef="1-18-2" ValueType="BgImage" />
+        <Property DestAttribName="theme_screen_background_color" UID="7_1-4-1" ValueRef="1-1-1" ValueType="TextColor" />
+        <Property DestAttribName="theme_description_color" UID="7_1-4-2" ValueRef="24-B" ValueType="TextColor" />
+        <Property DestAttribName="theme_fresh_pack_description_color" UID="7_1-11-1" ValueRef="7-1-6" ValueType="TextColor" />
+        <Property DestAttribName="theme_fresh_pack_description_use_shadow" UID="7_1-11-2" ValueRef="7-1-8" ValueType="Bool" />
+        <Property DestAttribName="theme_fresh_pack_description_shadow_color" UID="7_1-11-3" ValueRef="7-1-9" ValueType="TextColor" />
+        <Property DestAttribName="theme_fresh_pack_description_color_white" UID="7_1-11-1-B" ValueRef="7-1-6-B" ValueType="TextColor" />
+        <Property DestAttribName="theme_fresh_pack_description_use_shadow_white" UID="7_1-11-2-B" ValueRef="7-1-8-B" ValueType="Bool" />
+        <Property DestAttribName="theme_fresh_pack_description_shadow_color_white" UID="7_1-11-3-B" ValueRef="7-1-9-B" ValueType="TextColor" />
+        <Property DestAttribName="theme_more_wallpaper_text_color" UID="7_1-13-1" ValueRef="7-14-1" ValueType="TextColor" />
+        <Property DestAttribName="theme_more_wallpaper_text_shadow_on" UID="7_1-13-2" ValueRef="7-1-8" ValueType="Bool" />
+        <Property DestAttribName="theme_more_wallpaper_text_shadow_color" UID="7_1-13-3" ValueRef="7-1-9" ValueType="TextColor" />
+        <Property DestAttribName="theme_more_wallpaper_background_color" Opacity="20" UID="7_1-13-5" ValueRef="7-14-1" ValueType="TextColor" />
+        <Property DestAttribName="theme_uninstall_button_color" UID="7_1-13-6" ValueRef="7-1-6" ValueType="TextColor" />
+        <Property DestAttribName="theme_uninstall_button_text_color" UID="7_1-13-7" ValueRef="7-1-6" ValueType="TextColor" />
+        <Property DestAttribName="theme_more_wallpaper_text_color_white" UID="7_1-13-1-B" ValueRef="7-14-1-B" ValueType="TextColor" />
+        <Property DestAttribName="theme_more_wallpaper_text_shadow_on_white" UID="7_1-13-2-B" ValueRef="7-1-8-B" ValueType="Bool" />
+        <Property DestAttribName="theme_more_wallpaper_text_shadow_color_white" UID="7_1-13-3-B" ValueRef="7-1-9-B" ValueType="TextColor" />
+        <Property DestAttribName="theme_more_wallpaper_background_color_white" Opacity="10" UID="7_1-13-5-B" ValueRef="7-14-1-B" ValueType="TextColor" />
+        <Property DestAttribName="theme_uninstall_button_color_white" UID="7_1-13-6-B" ValueRef="7-1-6-B" ValueType="TextColor" />
+        <Property DestAttribName="theme_uninstall_button_text_color_white" UID="7_1-13-7-B" ValueRef="7-1-6-B" ValueType="TextColor" />
+        <Property DestAttribName="theme_fresh_pack_more_button_color" UID="7_1-15-1" ValueRef="7-1-6" ValueType="TextColor" />
+        <Property DestAttribName="theme_fresh_pack_more_button_shadow_on" UID="7_1-15-2" ValueRef="7-1-8" ValueType="Bool" />
+        <Property DestAttribName="theme_fresh_pack_more_button_shadow_color" UID="7_1-15-3" ValueRef="7-1-9" ValueType="TextColor" />
+        <Property DestAttribName="theme_fresh_pack_more_button_color_white" UID="7_1-15-1-B" ValueRef="7-1-6-B" ValueType="TextColor" />
+        <Property DestAttribName="theme_fresh_pack_more_button_shadow_on_white" UID="7_1-15-2-B" ValueRef="7-1-8-B" ValueType="Bool" />
+        <Property DestAttribName="theme_fresh_pack_more_button_shadow_color_white" UID="7_1-15-3-B" ValueRef="7-1-9-B" ValueType="TextColor" />
+        <Property DestAttribName="theme_popup_background_color" UID="7_1-16-1" ValueRef="1-10-1" ValueType="TextColor" />
+        <Property DestAttribName="theme_popup_background_drawable" UID="7_1-16-2" ValueRef="1-10-1-1" ValueType="BgImage" />
+        <Property DestAttribName="theme_popup_stroke_color" UID="7_1-16-3" ValueRef="1-10-2" ValueType="TextColor" />
+        <Property DestAttribName="theme_popup_text_color" UID="7_1-16-4" ValueRef="1-10-3" ValueType="TextColor" />
+        <Property DestAttribName="theme_ripple_color" UID="7_1-17-1" ValueRef="1-52-2" ValueType="TextColor" />
+        <Property DestAttribName="theme_about_page_title_color" UID="7_1-18-1" ValueRef="1-1-3" ValueType="Color" />
+        <Property DestAttribName="theme_about_page_des_color" UID="7_1-18-2" ValueRef="1-1-4" ValueType="Color" />
+        <Property DestAttribName="theme_about_page_update_button_background_color" UID="7_1-18-3" ValueRef="1-8-1" ValueType="Color" />
+        <Property DestAttribName="theme_about_page_update_button_text_color" UID="7_1-18-4" ValueRef="1-8-3" ValueType="Color" />
+        <Property DestAttribName="theme_about_page_license_background_color" UID="7_1-18-5" ValueRef="1-7-1-D" ValueType="Color" />
+        <Property DestAttribName="theme_about_page_hyperlink_color" UID="7_1-18-6" ValueRef="1-7-2-D" ValueType="Color" />
+        <Property DestAttribName="theme_about_page_info_tint" UID="7_1-18-7" ValueRef="1-1-3" ValueType="Color" />
+        <Property DestAttribName="theme_about_page_background_color" UID="7_1-18-8" ValueRef="1-18-1" ValueType="Color" />
+        <Property DestAttribName="theme_settings_preference_main_text" UID="7_1-19-1" ValueRef="24-A" ValueType="Color" />
+        <Property DestAttribName="theme_settings_divider_color" UID="7_1-20-1" ValueRef="1-2" ValueType="Color" />
+        <Property DestAttribName="theme_settings_vertical_divider_color" UID="7_1-20-2" ValueRef="1-2" ValueType="Color" />
+        <Property DestAttribName="theme_settings_icon_tint_color" UID="7_1-21-1" ValueRef="24-D" ValueType="Color" />
+        <Property DestAttribName="theme_settings_app_bar_ripple_color" UID="7_1-22-1" ValueRef="1-52-1" ValueType="Color" />
+        <Property DestAttribName="theme_settings_preference_ripple_color" UID="7_1-22-2" ValueRef="1-52-2" ValueType="Color" />
+        <Property DefaultValue="true" DestAttribName="theme_settings_navigation_color" UID="7_1-23-1" ValueRef="1-69-2" ValueType="Bool" />
+        <Property DestAttribName="theme_hyperlink_text_color" UID="7_1-24-1" ValueRef="1-3-4" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

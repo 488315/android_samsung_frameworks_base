@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="RingtonePicker" TargetApi="19" TargetPackageName="com.android.providers.media" UID="RingtonePicker" VersionCode="7" VersionName="2.0.0">
+        <Include RefName="SESL" />
+        <Property Comment="Add icon image color" DefaultValue="#ff252525" DestAttribName="add" UID="47-1-1" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Round Corner color" DefaultValue="#fff2f2f2" DestAttribName="background_color" UID="47-1-6" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="Navigation and Status bar icon color" DefaultValue="true" DestAttribName="use_light_status_navi_bar" UID="47-S-2" ValueRef="1-51-1" ValueType="Bool" />
+    </AppMetaData>
+</ThemeMetaData>

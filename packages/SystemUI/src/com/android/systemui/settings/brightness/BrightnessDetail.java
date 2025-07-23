@@ -1,0 +1,30 @@
+package com.android.systemui.settings.brightness;
+
+import android.content.Context;
+import android.widget.FrameLayout;
+import com.android.systemui.qs.SecQSDetailController;
+import com.android.systemui.settings.brightness.BrightnessController;
+import kotlin.Lazy;
+import kotlin.LazyKt__LazyJVMKt;
+import kotlin.jvm.functions.Function0;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class BrightnessDetail extends FrameLayout {
+    public static final /* synthetic */ int $r8$clinit = 0;
+    public final Lazy adapter$delegate;
+    public final SecQSDetailController qsDetailController;
+
+    public BrightnessDetail(final Context context, SecQSDetailController secQSDetailController, final BrightnessController.Factory factory) {
+        super(context);
+        this.qsDetailController = secQSDetailController;
+        this.adapter$delegate = LazyKt__LazyJVMKt.lazy(new Function0() { // from class: com.android.systemui.settings.brightness.BrightnessDetail$$ExternalSyntheticLambda0
+            @Override // kotlin.jvm.functions.Function0
+            public final Object invoke() {
+                Context context2 = context;
+                int i = BrightnessDetail.$r8$clinit;
+                return new BrightnessDetailAdapter(context2, factory);
+            }
+        });
+    }
+}

@@ -1,0 +1,167 @@
+package android.telephony.mbms;
+
+import android.os.Binder;
+import android.os.IBinder;
+import android.os.IInterface;
+import android.os.Parcel;
+import android.os.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
+
+/* loaded from: classes4.dex */
+public interface IMbmsDownloadSessionCallback extends IInterface {
+
+    public static class Default implements IMbmsDownloadSessionCallback {
+        @Override // android.os.IInterface
+        public IBinder asBinder() {
+            return null;
+        }
+
+        @Override // android.telephony.mbms.IMbmsDownloadSessionCallback
+        public void onError(int i, String str) throws RemoteException {
+        }
+
+        @Override // android.telephony.mbms.IMbmsDownloadSessionCallback
+        public void onFileServicesUpdated(List<FileServiceInfo> list) throws RemoteException {
+        }
+
+        @Override // android.telephony.mbms.IMbmsDownloadSessionCallback
+        public void onMiddlewareReady() throws RemoteException {
+        }
+    }
+
+    void onError(int i, String str) throws RemoteException;
+
+    void onFileServicesUpdated(List<FileServiceInfo> list) throws RemoteException;
+
+    void onMiddlewareReady() throws RemoteException;
+
+    public static abstract class Stub extends Binder implements IMbmsDownloadSessionCallback {
+        public static final String DESCRIPTOR = "android.telephony.mbms.IMbmsDownloadSessionCallback";
+        static final int TRANSACTION_onError = 1;
+        static final int TRANSACTION_onFileServicesUpdated = 2;
+        static final int TRANSACTION_onMiddlewareReady = 3;
+
+        @Override // android.os.IInterface
+        public IBinder asBinder() {
+            return this;
+        }
+
+        @Override // android.os.Binder
+        public int getMaxTransactionId() {
+            return 2;
+        }
+
+        public Stub() {
+            attachInterface(this, DESCRIPTOR);
+        }
+
+        public static IMbmsDownloadSessionCallback asInterface(IBinder iBinder) {
+            if (iBinder == null) {
+                return null;
+            }
+            IInterface queryLocalInterface = iBinder.queryLocalInterface(DESCRIPTOR);
+            if (queryLocalInterface != null && (queryLocalInterface instanceof IMbmsDownloadSessionCallback)) {
+                return (IMbmsDownloadSessionCallback) queryLocalInterface;
+            }
+            return new Proxy(iBinder);
+        }
+
+        public static String getDefaultTransactionName(int i) {
+            if (i == 1) {
+                return "onError";
+            }
+            if (i == 2) {
+                return "onFileServicesUpdated";
+            }
+            if (i != 3) {
+                return null;
+            }
+            return "onMiddlewareReady";
+        }
+
+        @Override // android.os.Binder
+        public String getTransactionName(int i) {
+            return getDefaultTransactionName(i);
+        }
+
+        @Override // android.os.Binder
+        public boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) throws RemoteException {
+            if (i >= 1 && i <= 16777215) {
+                parcel.enforceInterface(DESCRIPTOR);
+            }
+            if (i == 1598968902) {
+                parcel2.writeString(DESCRIPTOR);
+                return true;
+            }
+            if (i == 1) {
+                int readInt = parcel.readInt();
+                String readString = parcel.readString();
+                parcel.enforceNoDataAvail();
+                onError(readInt, readString);
+            } else if (i == 2) {
+                ArrayList createTypedArrayList = parcel.createTypedArrayList(FileServiceInfo.CREATOR);
+                parcel.enforceNoDataAvail();
+                onFileServicesUpdated(createTypedArrayList);
+            } else if (i == 3) {
+                onMiddlewareReady();
+            } else {
+                return super.onTransact(i, parcel, parcel2, i2);
+            }
+            return true;
+        }
+
+        private static class Proxy implements IMbmsDownloadSessionCallback {
+            private IBinder mRemote;
+
+            Proxy(IBinder iBinder) {
+                this.mRemote = iBinder;
+            }
+
+            @Override // android.os.IInterface
+            public IBinder asBinder() {
+                return this.mRemote;
+            }
+
+            public String getInterfaceDescriptor() {
+                return Stub.DESCRIPTOR;
+            }
+
+            @Override // android.telephony.mbms.IMbmsDownloadSessionCallback
+            public void onError(int i, String str) throws RemoteException {
+                Parcel obtain = Parcel.obtain(asBinder());
+                try {
+                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    obtain.writeInt(i);
+                    obtain.writeString(str);
+                    this.mRemote.transact(1, obtain, null, 1);
+                } finally {
+                    obtain.recycle();
+                }
+            }
+
+            @Override // android.telephony.mbms.IMbmsDownloadSessionCallback
+            public void onFileServicesUpdated(List<FileServiceInfo> list) throws RemoteException {
+                Parcel obtain = Parcel.obtain(asBinder());
+                try {
+                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    obtain.writeTypedList(list, 0);
+                    this.mRemote.transact(2, obtain, null, 1);
+                } finally {
+                    obtain.recycle();
+                }
+            }
+
+            @Override // android.telephony.mbms.IMbmsDownloadSessionCallback
+            public void onMiddlewareReady() throws RemoteException {
+                Parcel obtain = Parcel.obtain(asBinder());
+                try {
+                    obtain.writeInterfaceToken(Stub.DESCRIPTOR);
+                    this.mRemote.transact(3, obtain, null, 1);
+                } finally {
+                    obtain.recycle();
+                }
+            }
+        }
+    }
+}

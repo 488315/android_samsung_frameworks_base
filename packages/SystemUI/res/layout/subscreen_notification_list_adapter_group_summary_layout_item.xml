@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="12.0dip" android:maxWidth="389.0dip" android:layout_marginEnd="@dimen/subscreen_noti_layout_margin_end"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:textSize="@dimen/subscreen_noti_list_title_text_size" android:textStyle="bold" android:textColor="@color/subscreen_notification_text_color" android:ellipsize="end" android:id="@id/group_item_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxWidth="180.0dip" android:maxLines="1" android:fontFamily="sec-roboto-light" android:layout_marginEnd="8.0dip" />
+    <TextView android:textSize="@dimen/subscreen_noti_list_title_text_size" android:textColor="@color/subscreen_notification_content_text_color" android:ellipsize="end" android:layout_gravity="end" android:id="@id/group_item_content" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="1" android:fontFamily="roboto-regular" />
+</LinearLayout>

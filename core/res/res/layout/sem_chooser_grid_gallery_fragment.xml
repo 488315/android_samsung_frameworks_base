@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/sem_chooser_gallery_settings_parent" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <Toolbar androidprv:theme="@style/Theme.DeviceDefault.Resolver" android:layout_gravity="top" android:id="@id/sem_chooser_gallery_settings_toolbar" android:background="@color/sem_chooser_gallery_settings_background_color" android:layout_width="fill_parent" android:layout_height="?actionBarSize"
+      xmlns:androidprv="http://schemas.android.com/apk/prv/res/android" />
+    <FrameLayout android:id="@id/list_container" android:background="@color/sem_resolver_bg_color" android:layout_width="fill_parent" android:layout_height="0.0px" android:layout_weight="1.0">
+        <ListView android:scrollbarAlwaysDrawVerticalTrack="true" android:scrollbarStyle="@integer/preference_fragment_scrollbarStyle" android:id="@id/list" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="fill_parent" android:drawSelectorOnTop="false" android:cacheColorHint="@color/transparent" style="?^attr-private/preferenceFragmentListStyle" />
+    </FrameLayout>
+</LinearLayout>

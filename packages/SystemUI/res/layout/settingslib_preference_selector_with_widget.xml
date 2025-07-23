@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:background="?android:selectableItemBackground" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="?android:listPreferredItemHeightSmall" android:paddingStart="?android:listPreferredItemPaddingStart" android:paddingEnd="?android:listPreferredItemPaddingEnd"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:settings="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@android:id/widget_frame" android:layout_width="wrap_content" android:layout_height="wrap_content" android:minWidth="@dimen/settingslib_expressive_space_medium3" android:minHeight="@dimen/settingslib_expressive_space_medium3" android:layout_marginEnd="@dimen/settingslib_expressive_space_extrasmall6" />
+    <include layout="@layout/settingslib_expressive_preference_icon_frame" />
+    <LinearLayout android:orientation="vertical" android:paddingTop="@dimen/settingslib_expressive_space_small1" android:paddingBottom="@dimen/settingslib_expressive_space_small1" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" android:paddingEnd="?android:listPreferredItemPaddingEnd">
+        <TextView android:textAppearance="?android:textAppearanceListItem" android:ellipsize="end" android:id="@android:id/title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:maxLines="2" android:hyphenationFrequency="normalFast" android:lineBreakWordStyle="phrase" />
+        <LinearLayout android:id="@id/summary_container" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textAppearance="?android:textAppearanceSmall" android:textColor="?android:textColorSecondary" android:id="@android:id/summary" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0" android:textAlignment="viewStart" android:hyphenationFrequency="normalFast" android:lineBreakWordStyle="phrase" />
+            <TextView android:textAppearance="?android:textAppearanceSmall" android:textColor="?android:textColorSecondary" android:ellipsize="end" android:id="@id/appendix" android:visibility="gone" android:layout_width="0.0dip" android:layout_height="wrap_content" android:maxLines="1" android:layout_weight="1.0" android:textAlignment="viewEnd" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/selector_extra_widget_container" android:layout_width="wrap_content" android:layout_height="fill_parent">
+        <View android:background="?android:dividerVertical" android:layout_width="0.75dip" android:layout_height="32.0dip" android:layout_marginTop="@dimen/settingslib_expressive_space_small1" android:layout_marginBottom="@dimen/settingslib_expressive_space_small1" />
+        <ImageView android:layout_gravity="center" android:id="@id/selector_extra_widget" android:background="?android:selectableItemBackground" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/ic_settings_accent" android:minWidth="@dimen/two_target_min_width" android:contentDescription="@string/settings_label" android:paddingStart="@dimen/settingslib_expressive_space_small4" android:paddingEnd="@dimen/settingslib_expressive_space_small4" />
+    </LinearLayout>
+</LinearLayout>

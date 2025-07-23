@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="5.1">
+    <AppMetaData Name="ClockPack" TargetApi="21" TargetPackageName="com.samsung.android.app.clockpack" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="clock style setting background color" DefaultValue="#fff2f2f2" DestAttribName="settings_preview_background" UID="7_2-1-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="clock style setting dialog background color" DefaultValue="#fffcfcfc" DestAttribName="settings_clockstyle_dialog_background_color" UID="7_2-1-2" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="handler icon color" DefaultValue="#ff505050" DestAttribName="setting_clock_pack_handler_color" Opacity="30" UID="7_2-1-3" ValueRef="24-A" ValueType="TintColor" />
+        <Property Comment="About Page Title" DefaultValue="#ff252525" DestAttribName="about_page_title_color" DestQualifiers="" UID="7_2-2-1" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="About Page des text" DefaultValue="#ff979797" DestAttribName="about_page_des_color" DestQualifiers="" UID="7_2-2-2" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="About Page button bg color" DefaultValue="#ff008cff" DestAttribName="about_page_update_button_background_color" DestQualifiers="" UID="7_2-2-3" ValueRef="1-8-1" ValueType="TextColor" />
+        <Property Comment="About Page button text color" DefaultValue="#fffafafa" DestAttribName="about_page_update_button_text_color" DestQualifiers="" UID="7_2-2-4" ValueRef="1-8-3" ValueType="TextColor" />
+        <Property Comment="About Page button open source bg color" DefaultValue="#ffebebeb" DestAttribName="about_page_license_background_color" DestQualifiers="" UID="7_2-2-5" ValueRef="1-7-1-D" ValueType="TextColor" />
+        <Property Comment="About Page button open source text color" DefaultValue="#ff252525" DestAttribName="about_page_hyperlink_color" DestQualifiers="" UID="7_2-2-6" ValueRef="1-7-2-D" ValueType="TextColor" />
+        <Property Comment="About Page Info icon tint color" DefaultValue="#ff454545" DestAttribName="about_page_app_info_menu_color" DestQualifiers="" UID="7_2-2-7" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="About Page background color" DefaultValue="#fffcfcfc" DestAttribName="about_page_update_window_background_color" DestQualifiers="" UID="7_2-2-8" ValueRef="1-18-1" ValueType="TextColor" />
+    </AppMetaData>
+</ThemeMetaData>

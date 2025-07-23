@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Settings" TargetApi="19" TargetPackageName="com.android.settings" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="Status bar icon color" DefaultValue="true" DestAttribName="use_light_status_navi_bar" UID="9-S-2" ValueRef="1-51-1" ValueType="Bool" />
+        <Property Comment="Connections icon color" DefaultValue="#ff53a4ff" DestAttribName="sec_dashboard_connections_color" UID="9-3-2-1" ValueRef="" ValueType="TintColor" />
+        <Property Comment="Sound and vibration icon color" DefaultValue="#ff8c84f3" DestAttribName="sec_dashboard_sounds_color" UID="9-3-2-2" ValueRef="" ValueType="TintColor" />
+        <Property Comment="Notifications icon color" DefaultValue="#fff28072" DestAttribName="sec_dashboard_notifications_color" UID="9-3-2-3" ValueRef="" ValueType="TintColor" />
+        <Property Comment="Display icon color" DefaultValue="#ff9dd31d" DestAttribName="sec_dashboard_display_color" UID="9-3-2-4" ValueRef="" ValueType="TintColor" />
+        <Property Comment="Wallpaper icon color" DefaultValue="#ffe87092" DestAttribName="sec_dashboard_wallpapers_color" UID="9-3-2-5" ValueRef="9-3-2-1" ValueType="TintColor" />
+        <Property Comment="Theme icon color" DefaultValue="#ffc17adf" DestAttribName="sec_dashboard_wallpapers_and_themes_color" UID="9-3-2-6" ValueRef="9-3-2-2" ValueType="TintColor" />
+        <Property Comment="Home icon color" DefaultValue="#ff29b9d8" DestAttribName="sec_dashboard_homescreen_color" UID="9-3-2-7" ValueRef="9-3-2-3" ValueType="TintColor" />
+        <Property Comment="Lock screen icon color" DefaultValue="#ff2eaa9b" DestAttribName="sec_dashboard_lock_screen_security_color" UID="9-3-2-8" ValueRef="9-3-2-4" ValueType="TintColor" />
+        <Property Comment="Biometrics and security icon color" DefaultValue="#ff7882ff" DestAttribName="sec_dashboard_biometrics_and_security_color" UID="9-3-2-9" ValueRef="9-3-2-1" ValueType="TintColor" />
+        <Property Comment="Privacy icon color" DefaultValue="#ff8bb0fc" DestAttribName="sec_dashboard_privacy_color" UID="9-3-2-10" ValueRef="9-3-2-2" ValueType="TintColor" />
+        <Property Comment="Location icon color" DefaultValue="#ff6dbd63" DestAttribName="sec_dashboard_location_color" UID="9-3-2-11" ValueRef="9-3-2-3" ValueType="TintColor" />
+        <Property Comment="Google icon color" DefaultValue="#ff458bff" DestAttribName="sec_dashboard_google_color" UID="9-3-2-13" ValueRef="9-3-2-1" ValueType="TintColor" />
+        <Property Comment="Accounts and backup icon color" DefaultValue="#ff4772e6" DestAttribName="sec_dashboard_cloud_account_color" UID="9-3-2-14" ValueRef="9-3-2-2" ValueType="TintColor" />
+        <Property Comment="Advanced features icon color" DefaultValue="#fffdba44" DestAttribName="sec_dashboard_advanced_features_color" UID="9-3-2-15" ValueRef="9-3-2-3" ValueType="TintColor" />
+        <Property Comment="Digital Wellbeing icon color" DefaultValue="#ff6dbd63" DestAttribName="sec_dashboard_digitalwellbeing_color" UID="9-3-2-16" ValueRef="9-3-2-4" ValueType="TintColor" />
+        <Property Comment="Device care icon color" DefaultValue="#ff00af9a" DestAttribName="sec_dashboard_devicecare_color" UID="9-3-2-17" ValueRef="9-3-2-1" ValueType="TintColor" />
+        <Property Comment="Applications icon color" DefaultValue="#ff69a9f1" DestAttribName="sec_dashboard_applications_color" UID="9-3-2-18" ValueRef="9-3-2-2" ValueType="TintColor" />
+        <Property Comment="General management icon color / Others icon color" DefaultValue="#ff5d7e95" DestAttribName="sec_dashboard_general_device_management_color" UID="9-3-2-19" ValueRef="9-3-2-3" ValueType="TintColor" />
+        <Property Comment="Accessibility icon color" DefaultValue="#ff32965a" DestAttribName="sec_dashboard_accessibility_color" UID="9-3-2-20" ValueRef="9-3-2-4" ValueType="TintColor" />
+        <Property Comment="SW update icon color" DefaultValue="#ff7882ff" DestAttribName="sec_dashboard_software_update_color" UID="9-3-2-21" ValueRef="9-3-2-3" ValueType="TintColor" />
+        <Property Comment="Tips icon color" DefaultValue="#ffffa746" DestAttribName="sec_dashboard_online_help_color,sec_dashboard_tips_color" UID="9-3-2-22" ValueRef="9-3-2-2" ValueType="TintColor" />
+        <Property Comment="About device icon color" DefaultValue="#ffbababa" DestAttribName="sec_dashboard_about_phone_color" UID="9-3-2-23" ValueRef="9-3-2-1" ValueType="TintColor" />
+        <Property Comment="Developer icon color" DefaultValue="#ff8b8b8b" DestAttribName="sec_dashboard_development_color" UID="9-3-2-24" ValueRef="9-3-2-2" ValueType="TintColor" />
+        <Property Comment="Workspace icon color" DefaultValue="#ff457ae5" DestAttribName="sec_dashboard_workspace_color" UID="9-3-2-25" ValueRef="9-3-2-3" ValueType="TintColor" />
+        <Property Comment="Work icon color" DefaultValue="" DestAttribName="" UID="9-3-2-26" ValueRef="9-3-2-4" ValueType="TintColor" />
+        <Property Comment="DCM service icon color" DefaultValue="#ffe17282" DestAttribName="sec_dashboard_docomo_au_color" UID="9-3-2-27" ValueRef="9-3-2-1" ValueType="TintColor" />
+        <Property Comment="Carrier service icon color" DefaultValue="#fff2a1a1" DestAttribName="sec_dashboard_t_roaming_color" UID="9-3-2-28" ValueRef="9-3-2-2" ValueType="TintColor" />
+        <Property Comment="Others icon color" DefaultValue="" DestAttribName="" UID="9-3-2-29" ValueRef="9-3-2-3" ValueType="TintColor" />
+        <Property Comment="Coverscreen icon color" DefaultValue="" DestAttribName="sec_dashboard_cover_screen_color" UID="9-3-2-30" ValueRef="9-3-2-3" ValueType="TintColor" />
+        <Property Comment="Default ID icon color" DefaultValue="#ffc4c4c4" DestAttribName="sec_dashboard_account_default_id_color" UID="9-3-3-1" ValueRef="24-B" ValueType="TintColor" />
+        <Property Comment="None button type icon tint color Volume brightness" DefaultValue="#ff008cff" DestAttribName="sec_volume_icon_color" DestQualifiers="" UID="9-4-1" ValueRef="1-A" ValueType="TintColor" />
+        <Property Comment="None button type icon tint color Volume brightness" DefaultValue="#ff919799" DestAttribName="sec_volume_icon_no_sound_color" DestQualifiers="" UID="9-4-1-1" ValueRef="24-D" ValueType="TintColor" />
+        <Property Comment="slider label text color" DefaultValue="#ff545454" DestAttribName="sec_widget_seekbar_preference_label_text_color" DestQualifiers="" UID="9-6-11" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Settings icon tint color" DefaultValue="#ff56c0e5" DestAttribName="sub_app_bar_icon_color" DestQualifiers="" UID="9-7-3" ValueRef="1-24-6" ValueType="TintColor" />
+        <Property Comment="info icon tint color" DefaultValue="#ffa5b0b3" DestAttribName="" DestQualifiers="" UID="9-7-7" ValueRef="1-16-1" ValueType="TintColor" />
+        <Property Comment="Settings icon tint color" DefaultValue="#ff909090" DestAttribName="sec_widget_list_item_config_normal_color,sec_winset_icon_tint_color" DestQualifiers="" UID="9-7-8" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Reorder icon tint color" DefaultValue="#ff808080" DestAttribName="sec_winset_reorder_drag_handler" DestQualifiers="" UID="9-7-10" ValueRef="1-16-1" ValueType="TintColor" />
+        <Property Comment="Bottom bar bg color" DefaultValue="#fff2f2f2" DestAttribName="sec_widget_bottom_bar_bg_color" DestQualifiers="" UID="9-9-1" ValueRef="1-14-1" ValueType="BgColor" />
+        <Property Comment="bottom bar text color" DefaultValue="#ff0074d4" DestAttribName="sec_widget_bottom_bar_button_text_color" DestQualifiers="" UID="9-9-2" ValueRef="1-14-2" ValueType="TextColor" />
+        <Property Comment="Sub app bar BG color" DefaultValue="#ff454545" DestAttribName="" DestQualifiers="" UID="9-10-1" ValueRef="1-39-1" ValueType="BgColor" />
+        <Property Comment="Sub app bar text color" DefaultValue="#ff252525" DestAttribName="sec_sub_app_bar_text_color" DestQualifiers="" UID="9-10-2" ValueRef="1-24-2" ValueType="TextColor" />
+        <Property Comment="Sub app bar spinner arrow icon tint color" DefaultValue="#ff3b3b3b" DestAttribName="sec_sub_app_bar_spinner_arrow_color" DestQualifiers="" UID="9-10-3" ValueRef="1-24-2" ValueType="TintColor" />
+        <Property Comment="Sub app bar master ON BG color" DefaultValue="#ff4297ff" DestAttribName="sec_widget_switchbar_checked_background_color" DestQualifiers="" UID="9-10-5" ValueRef="1-40-1" ValueType="BgColor" />
+        <Property Comment="Sub app bar master OFF BG color" DefaultValue="#fffafafa" DestAttribName="sec_widget_switchbar_background_color" DestQualifiers="" UID="9-10-6" ValueRef="1-40-2" ValueType="BgColor" />
+        <Property Comment="Sub app bar master ON text color" DefaultValue="#fffafafa" DestAttribName="sec_widget_switchbar_on_text_color" DestQualifiers="" UID="9-10-7" ValueRef="1-40-3" ValueType="BgColor" />
+        <Property Comment="Sub app bar master OFF text color" DefaultValue="#ff252525" DestAttribName="sec_widget_switchbar_off_text_color" DestQualifiers="" UID="9-10-8" ValueRef="1-40-4" ValueType="BgColor" />
+        <Property Comment="bullet description text color" DefaultValue="#ff6b6f72" DestAttribName="sec_widget_sub_body_text_color" DestQualifiers="" UID="9-11-10" ValueRef="1-3-3" ValueType="TextColor" />
+        <Property Comment="Data usage text color" DefaultValue="#ff252525" DestAttribName="sec_data_usage_header_title_text_color" DestQualifiers="" UID="9-11-11" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="No item text color" DefaultValue="#7f252525" DestAttribName="sec_no_item_text_color" UID="9-11-15" ValueRef="1-53-1" ValueType="Color" />
+        <Property Comment="Seekbar title text color" DefaultValue="#ff252525" DestAttribName="sec_font_size_screen_zoom_seekbar_title_text_color,sec_font_size_screen_mode_seekbar_title_text_color" UID="9-11-17" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Do not disturb turned on text color" DefaultValue="#ff737373" DestAttribName="sec_dnd_status_text_color" UID="9-11-18" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="App name text color" DefaultValue="#ff252525" DestAttribName="sec_app_name_text_color" UID="9-11-19" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="App state text color" DefaultValue="#ff9e9e9e" DestAttribName="sec_app_state_text_color" UID="9-11-20" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Description text" DefaultValue="#ff505050" DestAttribName="sec_widget_body_text_color,sec_data_usage_header_label_text_color,sec_data_usage_graph_label_text_color,sec_data_usage_graph_warning_line_color,sec_data_usage_graph_limit_line_color,sec_display_resolution_help_desc_text_color" DestQualifiers="" UID="9-12-1" ValueRef="1-3-3" ValueType="TextColor" />
+        <Property Comment="Add icon color" DefaultValue="#ff00a53c" DestAttribName="sec_display_ic_plus_mtrl_color" DestQualifiers="" UID="9-16-2" ValueRef="1-17-1" ValueType="Color" />
+        <Property Comment="Add icon image" DefaultValue="" DestAttribName="sec_display_ic_plus_mtrl" DestQualifiers="xxxhdpi" ImageSize="32X32" UID="9-16-3" ValueRef="1-17-2" ValueType="Image" />
+        <Property Comment="delete icon color" DefaultValue="#ffdc2217" DestAttribName="sec_display_ic_minus_mtrl_color" DestQualifiers="" UID="9-16-4" ValueRef="1-17-3" ValueType="Color" />
+        <Property Comment="delete icon image" DefaultValue="" DestAttribName="sec_display_ic_minus_mtrl" DestQualifiers="xxxhdpi" ImageSize="32X32" UID="9-16-5" ValueRef="1-17-4" ValueType="Image" />
+        <Property Comment="About device Main text color" DefaultValue="#ff252525" DestAttribName="device_info_device_name_text_color" UID="9-17-1" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="About device Button text color" DefaultValue="#ff252525" DestAttribName="device_info_device_name_button_text_color" UID="9-17-3" ValueRef="1-7-2-D" ValueType="Color" />
+        <Property Comment="About device Body text color" DefaultValue="#ff808080" DestAttribName="device_info_info_chart_text_color" UID="9-17-5" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="About device Edit button background" DefaultValue="#0d000000" DestAttribName="device_info_button_background_color" UID="9-17-7" ValueRef="1-7-1-D" ValueType="Color" />
+        <Property Comment="Relative box color" DefaultValue="#ffe4e4e4" DestAttribName="sec_widget_relative_link_bg_color" UID="9-18-1" ValueRef="1-7-1-D" ValueType="BgColor" />
+        <Property Comment="Relative title color" DefaultValue="#ff252525" DestAttribName="sec_widget_relative_link_title_text_color" UID="9-18-2" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Relative link text color" DefaultValue="#ff0075d4" DestAttribName="sec_widget_relative_link_text_color" UID="9-18-3" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="fingerprint_backup_password_sub_text_color" DefaultValue="#ff6b6f72" DestAttribName="fingerprint_backup_password_sub_text_color" DestQualifiers="" UID="9-20-1" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Data usage app info summary color" DefaultValue="#ff6b6f72" DestAttribName="" DestQualifiers="" UID="9-22-1" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Card BG color" DefaultValue="#99008cff" DestAttribName="sec_suggestion_card_background_color" DestQualifiers="" UID="9-26-2" ValueRef="1-48-2" ValueType="BgColor" />
+        <Property Comment="Title text color" DefaultValue="#fffafafa" DestAttribName="sec_suggestion_card_text_color" DestQualifiers="" UID="9-26-4" ValueRef="1-48-4" ValueType="Color" />
+        <Property Comment="Acton button Text color" DefaultValue="#fffafafa" DestAttribName="sec_suggestion_card_action_button_color" DestQualifiers="" POption="AlwaysOverriden|FixedOpacity" UID="9-26-7" ValueRef="1-48-5" ValueType="Color" />
+        <Property Comment="Title text color" DefaultValue="#ff0074d4" DestAttribName="sec_biometrics_guide_common_title_text_color" DestQualifiers="" UID="9-28-1" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Description text color" DefaultValue="#ff979797" DestAttribName="sec_biometrics_guide_common_main_guide_text_color" Opacity="80" UID="9-28-2" ValueRef="1-3-3" ValueType="TextColor" />
+        <Property Comment="Button background color" DefaultValue="#ff0381fe" DestAttribName="sec_biometrics_guide_common_continue_button_color" UID="9-28-5" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Title icon tint color" DefaultValue="#ff0074d4" DestAttribName="sec_biometrics_guide_common_icon_color" UID="9-28-6" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Info text color" DefaultValue="#ff8f8f8f" DestAttribName="sec_biometrics_guide_common_info_text_color" Opacity="70" UID="9-28-7" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Spinner text color" DefaultValue="#ff252525" DestAttribName="sec_biometrics_guide_common_spinner_text_color" UID="9-28-8" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Spinner icon color" DefaultValue="#ff252525" DestAttribName="sec_biometrics_guide_common_spinner_icon_color" UID="9-28-9" ValueRef="1-39-2" ValueType="TextColor" />
+        <Property Comment="Disclaimer BG color" DefaultValue="#fffcfcfc" DestAttribName="sec_biometrics_guide_common_guide_background,sec_biometrics_common_background_color" UID="9-28-11" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="PPP setup guide text color" DefaultValue="#ff252525" DestAttribName="sec_biometrics_guide_common_lock_guide_text_color" UID="9-28-12" ValueRef="24-A" ValueType="TextColor" />
+        <Property Comment="Continue Button Text color" DefaultValue="#fffafafa" DestAttribName="sec_biometrics_guide_common_continue_button_text_color" UID="9-28-13" ValueRef="1-E" ValueType="BgColor" />
+        <Property Comment="ChooseLockGeneric Biometrics header discription color" DefaultValue="#ff505050" DestAttribName="sec_biometrics_choose_lock_header_description_color" UID="9-28-14" ValueRef="1-3-3" ValueType="TextColor" />
+        <Property Comment="Description text primary dark color" DefaultValue="#ffdb332a" DestAttribName="sec_lockscreen_ppp_help_text_color" UID="9-28-15" ValueRef="24-G" ValueType="TextColor" />
+        <Property Comment="Button Text color_Functional_02" DefaultValue="#ffdb332a" DestAttribName="sec_biometrics_dialog_remove_btn_color" UID="9-28-16" ValueRef="24-G" ValueType="TextColor" />
+        <Property Comment="Time setting bottom sheet BG color" DefaultValue="#fffafafa" DestAttribName="sec_dnd_schedule_bg_color" DestQualifiers="" UID="9-29-5" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Toggle switch Off icon color" DefaultValue="#ff505050" DestAttribName="sec_widget_multi_button_unselected_color,sec_widget_multi_button_unselected_icon_color" UID="9-31-1" ValueRef="24-B" ValueType="BgColor" />
+        <Property Comment="Toggle switch On icon color" DefaultValue="#ff0074d4" DestAttribName="sec_widget_multi_button_selected_color" UID="9-31-3" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Badge icon tint color" DefaultValue="#fff56a0d" DestAttribName="sec_widget_badge_color" UID="9-32-1" ValueRef="1-33-1" ValueType="TintColor" />
+        <Property Comment="Badge: Icon image" DestAttribName="tw_noti_badge_mtrl" DestQualifiers="xxxhdpi" POption="NinePatch" UID="9-32-2" ValueRef="1-33-2" ValueType="BgImage" />
+        <Property Comment="Badge text color" DefaultValue="#fffafafa" DestAttribName="sec_widget_badge_text_color" UID="9-32-3" ValueRef="1-33-3" ValueType="TextColor" />
+        <Property Comment="Color Button BG tint color" DefaultValue="#ff0074d4" DestAttribName="sec_widget_color_round_button_bg_color" UID="9-33-1" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Color Button text color" DefaultValue="#fffafafa" DestAttribName="sec_widget_color_round_button_text_color" UID="9-33-2" ValueRef="1-E" ValueType="Color" />
+        <Property Comment="Button BG tint color" DefaultValue="#0f000000" DestAttribName="sec_widget_default_round_button_bg_color" UID="9-33-3" ValueRef="1-7-1-D" ValueType="Color" />
+        <Property Comment="Button text color" DefaultValue="#ff252525" DestAttribName="sec_widget_default_round_button_text_color" UID="9-33-4" ValueRef="1-7-2-D" ValueType="Color" />
+        <Property Comment="Actionbar text color" DefaultValue="#ff252525" DestAttribName="actionbar_text_color" DestQualifiers="" UID="9-34-1" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Title text color" DefaultValue="#ff252525" DestAttribName="sec_tips_title_text_color" UID="9-35-1" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Link text color" DefaultValue="#ff0074d4" DestAttribName="sec_tips_description_link_text_color,sec_high_refresh_rate_vi_text_color" UID="9-35-2" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Sub text color" DefaultValue="#ff505050" DestAttribName="sec_tips_description_text_color" UID="9-35-3" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="Data usage graph line color" DefaultValue="#ff0074d4" DestAttribName="sec_data_usage_graph_line_color" UID="9-36-2" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Data usage graph color" DefaultValue="#ff3e91ff" DestAttribName="usage_graph_dots" Opacity="50" UID="9-36-5" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Data usage graph BG Line color" DefaultValue="#ff979797" DestAttribName="sec_data_usage_graph_bottom_line_color" Opacity="50" UID="9-36-6" ValueRef="1-3-3-D" ValueType="Color" />
+        <Property Comment="Data usage bar background color" DefaultValue="#1a252525" DestAttribName="data_usage_progress_bar_bg_color" Opacity="30" UID="9-37-1" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Data usage bar color" DefaultValue="#ff3e91ff" DestAttribName="data_usage_progress_bar_color" UID="9-37-2" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="CE and WEEE marks color" DefaultValue="#ff252525" DestAttribName="device_info_ce_and_weee_marks_tint_color" UID="9-38-1" ValueRef="1-39-2" ValueType="TintColor" />
+        <Property Comment="Display Settings Seek Bar Controller Background Color" DefaultValue="#ffffffff" DestAttribName="sec_display_setting_seek_bar_controller_background_color" UID="9-39-1" ValueRef="1-18-1" ValueType="Color" />
+        <Property Comment="Display Settings Seek Bar Controller Stroke Color" DefaultValue="#ffcccccc" DestAttribName="sec_display_setting_seek_bar_controller_stroke_color" UID="9-39-2" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="Display Settings Seek Bar Controller Thumb Drawable Color" DefaultValue="#ff0381fe" DestAttribName="sec_screen_zoom_seekbar_thumb_drawable_solid_color" UID="9-40-1" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Display Settings Seek Bar Controller Tick Mark Color" DefaultValue="#ff9c9c9c" DestAttribName="sec_screen_zoom_seekbar_tickmark_drawable_solid_color" UID="9-40-2" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="Display Settings Seek Bar Controller Progress Drawable Color" DefaultValue="#4c979797" DestAttribName="sec_screen_zoom_seekbar_progress_drawable_solid_color" Opacity="40" UID="9-40-3" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="Action button tint color" DefaultValue="#ff686868" DestAttribName="sec_app_sort_by_button_color" UID="9-41-1" ValueRef="1-16-1" ValueType="Color" />
+        <Property Comment="Divder color" DefaultValue="#ff979797" DestAttribName="sec_widget_subheader_divider_color" UID="9-47-1" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="RGB label text color" DefaultValue="#ff686868" DestAttribName="sec_display_color_balance_label_text_color" UID="9-48-1" ValueRef="24-B" ValueType="TextColor" />
+        <Property Comment="Pattern Dot Normal" DefaultValue="#ff444444" DestAttribName="sec_lock_pattern_line_color_draw" UID="9-50-1" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="Pattern Dot Success" DefaultValue="#ff0074d4" DestAttribName="sec_lock_pattern_line_color_confirm" UID="9-50-2" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Pattern Dot Failed" DefaultValue="#ffb00020" DestAttribName="sec_lock_pattern_line_color_fail" UID="9-50-3" ValueRef="24-G" ValueType="Color" />
+        <Property DefaultValue="#ff252525" DestAttribName="sec_zen_mode_schedule_repeat_toggle_btn_text_color_normal,sec_zen_mode_schedule_repeat_saturday_color" UID="9-51-1" ValueRef="1-9-3" ValueType="TextColor" />
+        <Property DefaultValue="#ff0074d4" DestAttribName="sec_zen_mode_schedule_repeat_sunday_color" UID="9-51-2" ValueRef="24-E" ValueType="TextColor" />
+        <Property DefaultValue="#ff0074d4" DestAttribName="sec_zen_mode_schedule_repeat_toggle_btn_text_color_select" UID="9-51-3" ValueRef="24-E" ValueType="TintColor" />
+        <Property DefaultValue="#ff36be1f" DestAttribName="sec_dnd_schedule_add" UID="9-51-4" ValueRef="1-17-1" ValueType="Color" />
+        <Property DefaultValue="#ff252525" DestAttribName="sec_notification_info_icon_bg_color" UID="9-51-8" ValueRef="1-3-1" ValueType="TintColor" />
+        <Property Comment="Graph index text color" DefaultValue="#ff636363" DestAttribName="home_chart_item_text_color, privacy_dashboard_view_all_text_color" UID="9-60-1" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Graph bar color" DefaultValue="#ff8bb0fc" DestAttribName="home_chart_item_bar_color" UID="9-60-2" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Graph bar background color" DefaultValue="#ff8bb0fc" DestAttribName="home_chart_item_empty_bar_color" Opacity="30" UID="9-60-3" ValueRef="1-A" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

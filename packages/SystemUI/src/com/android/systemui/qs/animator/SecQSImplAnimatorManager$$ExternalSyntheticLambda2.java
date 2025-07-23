@@ -1,0 +1,30 @@
+package com.android.systemui.qs.animator;
+
+import java.util.function.Consumer;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final /* synthetic */ class SecQSImplAnimatorManager$$ExternalSyntheticLambda2 implements Consumer {
+    public final /* synthetic */ int $r8$classId;
+    public final /* synthetic */ int f$0;
+
+    public /* synthetic */ SecQSImplAnimatorManager$$ExternalSyntheticLambda2(int i, int i2) {
+        this.$r8$classId = i2;
+        this.f$0 = i;
+    }
+
+    @Override // java.util.function.Consumer
+    public final void accept(Object obj) {
+        int i = this.$r8$classId;
+        int i2 = this.f$0;
+        SecQSImplAnimatorBase secQSImplAnimatorBase = (SecQSImplAnimatorBase) obj;
+        switch (i) {
+            case 0:
+                secQSImplAnimatorBase.onNotificationScrolled(i2);
+                break;
+            default:
+                secQSImplAnimatorBase.onStateChanged(i2);
+                break;
+        }
+    }
+}

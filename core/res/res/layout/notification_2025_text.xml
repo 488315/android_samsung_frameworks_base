@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.internal.widget.ImageFloatingTextView android:ellipsize="end" android:gravity="top" android:layout_gravity="center_vertical" android:id="@id/text" android:fadingEdge="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="@dimen/notification_text_height" android:maxLines="1" android:textAlignment="viewStart" style="@style/Widget.DeviceDefault.Notification.Text"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

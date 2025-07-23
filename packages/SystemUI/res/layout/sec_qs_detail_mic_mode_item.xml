@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:paddingStart="@dimen/qs_detail_padding_start" android:paddingEnd="@dimen/qs_detail_padding_start"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center_vertical" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="@dimen/qs_detail_mic_mode_item_height">
+        <CheckedTextView android:textSize="@dimen/qs_detail_mic_mode_check_text_size" android:textColor="@color/mic_mode_detail_unselected_text_color" android:id="@id/check_text" android:checkMark="@null" style="@style/micModeTile_checkbox_style" />
+    </LinearLayout>
+    <View android:layout_gravity="center_horizontal" android:id="@id/divider" android:background="@color/mic_mode_detail_divider_color" android:layout_width="fill_parent" android:layout_height="@dimen/qs_toggle_divider_height" />
+</LinearLayout>

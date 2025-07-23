@@ -1,0 +1,131 @@
+package com.android.systemui.shade.data.repository;
+
+import android.content.SharedPreferences;
+import kotlinx.coroutines.flow.FlowKt;
+import kotlinx.coroutines.flow.ReadonlyStateFlow;
+import kotlinx.coroutines.flow.StateFlowImpl;
+import kotlinx.coroutines.flow.StateFlowKt;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class SecPanelSAStatusLogRepository {
+    public final StateFlowImpl _openNotificationPanelFromEtc;
+    public final StateFlowImpl _openNotificationPanelFromHomescreen;
+    public final StateFlowImpl _openNotificationPanelFromHun;
+    public final StateFlowImpl _openNotificationPanelFromKeyguard;
+    public final StateFlowImpl _openNotificationPanelFromStatusbarInKeyguard;
+    public final StateFlowImpl _openNotificationPanelFromStatusbarInShade;
+    public final StateFlowImpl _openNotificationPanelFromSwipeDownInKeyguard;
+    public final StateFlowImpl _openNotificationPanelFromSwipeDownInShade;
+    public final StateFlowImpl _openNotificationPanelFromSwipeRightInKeyguard;
+    public final StateFlowImpl _openNotificationPanelFromSwipeRightInShade;
+    public final StateFlowImpl _openQuickPanelFrom1DepthEtcInKeyguard;
+    public final StateFlowImpl _openQuickPanelFrom1DepthEtcInShade;
+    public final StateFlowImpl _openQuickPanelFrom1DepthStatusBarInKeyguard;
+    public final StateFlowImpl _openQuickPanelFrom1DepthStatusBarInShade;
+    public final StateFlowImpl _openQuickPanelFrom2Depth;
+    public final StateFlowImpl _openQuickPanelFrom2Depth2Finger;
+    public final StateFlowImpl _openQuickPanelFromHorizontalSwipingInKeyguard;
+    public final StateFlowImpl _openQuickPanelFromHorizontalSwipingInShade;
+    public final StateFlowImpl _openQuickPanelFromStatusBarInKeyguard;
+    public final StateFlowImpl _openQuickPanelFromStatusBarInShade;
+    public final StateFlowImpl _openQuickPanelFromWipeDownInKeyguard;
+    public final StateFlowImpl _openQuickPanelFromWipeDownInShade;
+    public final ReadonlyStateFlow openNotificationPanelFromEtc;
+    public final ReadonlyStateFlow openNotificationPanelFromHomescreen;
+    public final ReadonlyStateFlow openNotificationPanelFromHun;
+    public final ReadonlyStateFlow openNotificationPanelFromKeyguard;
+    public final ReadonlyStateFlow openNotificationPanelFromStatusbarInKeyguard;
+    public final ReadonlyStateFlow openNotificationPanelFromStatusbarInShade;
+    public final ReadonlyStateFlow openNotificationPanelFromSwipeDownInKeyguard;
+    public final ReadonlyStateFlow openNotificationPanelFromSwipeDownInShade;
+    public final ReadonlyStateFlow openNotificationPanelFromSwipeRightInKeyguard;
+    public final ReadonlyStateFlow openNotificationPanelFromSwipeRightInShade;
+    public final ReadonlyStateFlow openQuickPanelFrom1DepthEtcInKeyguard;
+    public final ReadonlyStateFlow openQuickPanelFrom1DepthEtcInShade;
+    public final ReadonlyStateFlow openQuickPanelFrom1DepthStatusBarInKeyguard;
+    public final ReadonlyStateFlow openQuickPanelFrom1DepthStatusBarInShade;
+    public final ReadonlyStateFlow openQuickPanelFrom2Depth;
+    public final ReadonlyStateFlow openQuickPanelFrom2Depth2Finger;
+    public final ReadonlyStateFlow openQuickPanelFromHorizontalSwipingInKeyguard;
+    public final ReadonlyStateFlow openQuickPanelFromHorizontalSwipingInShade;
+    public final ReadonlyStateFlow openQuickPanelFromStatusBarInKeyguard;
+    public final ReadonlyStateFlow openQuickPanelFromStatusBarInShade;
+    public final ReadonlyStateFlow openQuickPanelFromWipeDownInKeyguard;
+    public final ReadonlyStateFlow openQuickPanelFromWipeDownInShade;
+    public final SharedPreferences sharedPreferences;
+
+    public SecPanelSAStatusLogRepository(SharedPreferences sharedPreferences) {
+        this.sharedPreferences = sharedPreferences;
+        StateFlowImpl mutableStateFlow = toMutableStateFlow("open_quick_panel_from_status_bar_in_shade");
+        this._openQuickPanelFromStatusBarInShade = mutableStateFlow;
+        this.openQuickPanelFromStatusBarInShade = FlowKt.asStateFlow(mutableStateFlow);
+        StateFlowImpl mutableStateFlow2 = toMutableStateFlow("open_quick_panel_from_status_bar_in_keyguard");
+        this._openQuickPanelFromStatusBarInKeyguard = mutableStateFlow2;
+        this.openQuickPanelFromStatusBarInKeyguard = FlowKt.asStateFlow(mutableStateFlow2);
+        StateFlowImpl mutableStateFlow3 = toMutableStateFlow("open_quick_panel_from_wipe_down_in_shade");
+        this._openQuickPanelFromWipeDownInShade = mutableStateFlow3;
+        this.openQuickPanelFromWipeDownInShade = FlowKt.asStateFlow(mutableStateFlow3);
+        StateFlowImpl mutableStateFlow4 = toMutableStateFlow("open_quick_panel_from_wipe_down_in_keyguard");
+        this._openQuickPanelFromWipeDownInKeyguard = mutableStateFlow4;
+        this.openQuickPanelFromWipeDownInKeyguard = FlowKt.asStateFlow(mutableStateFlow4);
+        StateFlowImpl mutableStateFlow5 = toMutableStateFlow("open_quick_panel_from_horizontal_swiping_in_shade");
+        this._openQuickPanelFromHorizontalSwipingInShade = mutableStateFlow5;
+        this.openQuickPanelFromHorizontalSwipingInShade = FlowKt.asStateFlow(mutableStateFlow5);
+        StateFlowImpl mutableStateFlow6 = toMutableStateFlow("open_quick_panel_from_horizontal_swiping_in_keyguard");
+        this._openQuickPanelFromHorizontalSwipingInKeyguard = mutableStateFlow6;
+        this.openQuickPanelFromHorizontalSwipingInKeyguard = FlowKt.asStateFlow(mutableStateFlow6);
+        StateFlowImpl mutableStateFlow7 = toMutableStateFlow("open_notification_panel_from_statusbar_in_keyguard");
+        this._openNotificationPanelFromStatusbarInKeyguard = mutableStateFlow7;
+        this.openNotificationPanelFromStatusbarInKeyguard = FlowKt.asStateFlow(mutableStateFlow7);
+        StateFlowImpl mutableStateFlow8 = toMutableStateFlow("open_notification_panel_from_statusbar_in_shade");
+        this._openNotificationPanelFromStatusbarInShade = mutableStateFlow8;
+        this.openNotificationPanelFromStatusbarInShade = FlowKt.asStateFlow(mutableStateFlow8);
+        StateFlowImpl mutableStateFlow9 = toMutableStateFlow("open_notification_panel_from_swipe_down_in_keyguard");
+        this._openNotificationPanelFromSwipeDownInKeyguard = mutableStateFlow9;
+        this.openNotificationPanelFromSwipeDownInKeyguard = FlowKt.asStateFlow(mutableStateFlow9);
+        StateFlowImpl mutableStateFlow10 = toMutableStateFlow("open_notification_panel_from_swipe_down_in_shade");
+        this._openNotificationPanelFromSwipeDownInShade = mutableStateFlow10;
+        this.openNotificationPanelFromSwipeDownInShade = FlowKt.asStateFlow(mutableStateFlow10);
+        StateFlowImpl mutableStateFlow11 = toMutableStateFlow("open_notification_panel_from_swipe_right_in_keyguard");
+        this._openNotificationPanelFromSwipeRightInKeyguard = mutableStateFlow11;
+        this.openNotificationPanelFromSwipeRightInKeyguard = FlowKt.asStateFlow(mutableStateFlow11);
+        StateFlowImpl mutableStateFlow12 = toMutableStateFlow("open_notification_panel_from_swipe_right_in_shade");
+        this._openNotificationPanelFromSwipeRightInShade = mutableStateFlow12;
+        this.openNotificationPanelFromSwipeRightInShade = FlowKt.asStateFlow(mutableStateFlow12);
+        StateFlowImpl mutableStateFlow13 = toMutableStateFlow("open_notification_panel_from_keyguard");
+        this._openNotificationPanelFromKeyguard = mutableStateFlow13;
+        this.openNotificationPanelFromKeyguard = FlowKt.asStateFlow(mutableStateFlow13);
+        StateFlowImpl mutableStateFlow14 = toMutableStateFlow("open_notification_panel_from_homescreen");
+        this._openNotificationPanelFromHomescreen = mutableStateFlow14;
+        this.openNotificationPanelFromHomescreen = FlowKt.asStateFlow(mutableStateFlow14);
+        StateFlowImpl mutableStateFlow15 = toMutableStateFlow("open_notification_panel_from_hun");
+        this._openNotificationPanelFromHun = mutableStateFlow15;
+        this.openNotificationPanelFromHun = FlowKt.asStateFlow(mutableStateFlow15);
+        StateFlowImpl mutableStateFlow16 = toMutableStateFlow("open_notification_panel_from_etc");
+        this._openNotificationPanelFromEtc = mutableStateFlow16;
+        this.openNotificationPanelFromEtc = FlowKt.asStateFlow(mutableStateFlow16);
+        StateFlowImpl mutableStateFlow17 = toMutableStateFlow("open_quick_panel_from_1depth_status_bar_in shade");
+        this._openQuickPanelFrom1DepthStatusBarInShade = mutableStateFlow17;
+        this.openQuickPanelFrom1DepthStatusBarInShade = FlowKt.asStateFlow(mutableStateFlow17);
+        StateFlowImpl mutableStateFlow18 = toMutableStateFlow("open_quick_panel_from_1depth_status_bar_in_keyguard");
+        this._openQuickPanelFrom1DepthStatusBarInKeyguard = mutableStateFlow18;
+        this.openQuickPanelFrom1DepthStatusBarInKeyguard = FlowKt.asStateFlow(mutableStateFlow18);
+        StateFlowImpl mutableStateFlow19 = toMutableStateFlow("open_quick_panel_from_1depth_etc_in shade");
+        this._openQuickPanelFrom1DepthEtcInShade = mutableStateFlow19;
+        this.openQuickPanelFrom1DepthEtcInShade = FlowKt.asStateFlow(mutableStateFlow19);
+        StateFlowImpl mutableStateFlow20 = toMutableStateFlow("open_quick_panel_from_1depth_etc_in_keyguard");
+        this._openQuickPanelFrom1DepthEtcInKeyguard = mutableStateFlow20;
+        this.openQuickPanelFrom1DepthEtcInKeyguard = FlowKt.asStateFlow(mutableStateFlow20);
+        StateFlowImpl mutableStateFlow21 = toMutableStateFlow("open_quick_panel_from_2depth");
+        this._openQuickPanelFrom2Depth = mutableStateFlow21;
+        this.openQuickPanelFrom2Depth = FlowKt.asStateFlow(mutableStateFlow21);
+        StateFlowImpl mutableStateFlow22 = toMutableStateFlow("open_quick_panel_from_2depth_2finger");
+        this._openQuickPanelFrom2Depth2Finger = mutableStateFlow22;
+        this.openQuickPanelFrom2Depth2Finger = FlowKt.asStateFlow(mutableStateFlow22);
+    }
+
+    public final StateFlowImpl toMutableStateFlow(String str) {
+        return StateFlowKt.MutableStateFlow(Long.valueOf(this.sharedPreferences.getLong(str, 0L)));
+    }
+}

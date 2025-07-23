@@ -1,0 +1,41 @@
+package com.android.systemui.edgelighting.effect.utils;
+
+import android.os.SemSystemProperties;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public class SalesCode {
+    public static final boolean isChn;
+    public static final boolean isIND;
+    public static final boolean isKor;
+    public static final boolean isMAL;
+    public static final boolean isMYM;
+    public static final boolean isPHI;
+    public static final boolean isSIN;
+    public static final boolean isTHL;
+    public static final boolean isVn;
+
+    static {
+        String str = SemSystemProperties.get("ro.csc.sales_code", "unknown");
+        isVn = is(str, "XXV", "XEV");
+        isPHI = is(str, "XTC", "SMA", "GLB", "XTE");
+        isMAL = is(str, "XME");
+        isTHL = is(str, "THL");
+        isIND = is(str, "XID", "XSE", "INS", "INU");
+        isMYM = is(str, "MYM");
+        isSIN = is(str, "XSP", "SIN", "MM1", "STH");
+        isKor = is(str, "SKC", "KTC", "LUC", "KOO", "SKT", "SKO", "KTT", "KTO", "LGT", "LUO", "K06", "K01");
+        isChn = is(str, "CHM", "CHU", "CTC", "CHC", "CHN");
+    }
+
+    public static boolean is(String str, String... strArr) {
+        if (strArr.length > 0) {
+            for (String str2 : strArr) {
+                if (str2.equals(str)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+}

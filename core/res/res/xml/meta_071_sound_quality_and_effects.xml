@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.0" GuideVersion="4.6">
+    <AppMetaData Name="Sound Alive" TargetApi="28" TargetPackageName="com.sec.android.app.soundalive" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="Window background color" DefaultValue="#ffe6e6e6" DestAttribName="window_background_color" UID="71-1-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Title text color" DefaultValue="#ff252525" DestAttribName="title_text_color" UID="71-1-2" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Content area background color" DefaultValue="#ffe4e4e4" DestAttribName="rounded_bg_color" UID="71-2-1" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Content area background Image" DefaultValue="" DestAttribName="rounded" DestQualifiers="" UID="71-2-2" ValueRef="1-18-2" ValueType="BgImage" />
+        <Property Comment="Main text color" DefaultValue="#ff252525" DestAttribName="header_text_color" UID="71-2-3" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="Sub text color" DefaultValue="#ff505050" DestAttribName="summary_text_color" UID="71-2-4" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="highlight text color" DefaultValue="#ff0074d4" DestAttribName="highlight_text_color" UID="71-2-5" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Radio button unchecked" DefaultValue="#ff878787" DestAttribName="radio_btn_unchecked" UID="71-3-1" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="Sub-Header background color" DefaultValue="#ff000000" DestAttribName="subheader_background_color" UID="71-4-1" ValueRef="1-19-1" ValueType="BgColor" />
+        <Property Comment="Sub-Header text color" DefaultValue="#ffc2c2c2" DestAttribName="subheader_text_color" UID="71-4-2" ValueRef="1-19-2" ValueType="Color" />
+        <Property Comment="Button background color" DefaultValue="#0f000000" DestAttribName="raised_button_color" UID="71-5-1" ValueRef="1-7-1" ValueType="BgColor" />
+        <Property Comment="Button text color" DefaultValue="#ff252525" DestAttribName="raised_button_text_color" UID="71-5-2" ValueRef="1-7-2" ValueType="Color" />
+        <Property Comment="Divider color" DefaultValue="#ffe6e6e6" DestAttribName="divider_color" POption="AlwaysOverriden" UID="71-7-1" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="Master-switch ON background color" DefaultValue="#bd4297ff" DestAttribName="master_switch_on_background_color" UID="71-9-1" ValueRef="1-40-1" ValueType="BgColor" />
+        <Property Comment="Master-switch ON text color" DefaultValue="#fffafafa" DestAttribName="master_switch_on_text_color" UID="71-9-2" ValueRef="1-40-3" ValueType="BgColor" />
+        <Property Comment="Master-switch OFF background color" DefaultValue="#fffafafa" DestAttribName="master_switch_off_background_color" UID="71-9-3" ValueRef="1-40-2" ValueType="BgColor" />
+        <Property Comment="Master-switch OFF text color" DefaultValue="#ff252525" DestAttribName="master_switch_off_text_color" UID="71-9-4" ValueRef="1-40-4" ValueType="Color" />
+        <Property Comment="Text color" DefaultValue="#ff505050" DestAttribName="equalizer_text_color" UID="71-11-1" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="Seek Bar Color" DefaultValue="#ffe6e6e6" DestAttribName="equalizer_main_divider_color" UID="71-11-2" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="Seek Bar Color" DefaultValue="#ffe6e6e6" DestAttribName="equalizer_sub_divider_color" UID="71-11-3" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="Seek Bar Color" DefaultValue="#ffe6e6e6" DestAttribName="equalizer_bar_background_disable_color" UID="71-11-4" ValueRef="1-22-9" ValueType="BgColor" />
+        <Property Comment="Seek Bar Color Highlight" DefaultValue="#ff252525" DestAttribName="equalizer_bar_thumb_color" UID="71-11-5" ValueRef="1-22-5" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

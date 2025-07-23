@@ -1,0 +1,98 @@
+package com.android.systemui.screenshot;
+
+import android.net.Uri;
+import android.os.Handler;
+import android.os.Message;
+import android.os.Messenger;
+import android.os.RemoteException;
+import android.os.UserManager;
+import android.util.Log;
+import androidx.concurrent.futures.CallbackToFutureAdapter;
+import com.android.internal.logging.UiEventLogger;
+import com.android.systemui.R;
+import com.android.systemui.screenshot.ImageExporter;
+import com.android.systemui.screenshot.ScreenshotNotificationsController;
+import com.android.systemui.screenshot.TakeScreenshotService;
+import com.google.common.util.concurrent.ListenableFuture;
+import java.util.UUID;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+import java.util.function.Consumer;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final class HeadlessScreenshotHandler implements ScreenshotHandler {
+    public final ImageExporter imageExporter;
+    public final Executor mainExecutor;
+    public final ScreenshotNotificationsController.Factory notificationsControllerFactory;
+    public final UiEventLogger uiEventLogger;
+    public final UserManager userManager;
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class Companion {
+        public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
+            this();
+        }
+
+        private Companion() {
+        }
+    }
+
+    static {
+        new Companion(null);
+    }
+
+    public HeadlessScreenshotHandler(ImageExporter imageExporter, Executor executor, ImageCapture imageCapture, UserManager userManager, UiEventLogger uiEventLogger, ScreenshotNotificationsController.Factory factory) {
+        this.imageExporter = imageExporter;
+        this.mainExecutor = executor;
+        this.userManager = userManager;
+        this.uiEventLogger = uiEventLogger;
+        this.notificationsControllerFactory = factory;
+    }
+
+    public static final void access$logScreenshotResultStatus(HeadlessScreenshotHandler headlessScreenshotHandler, Uri uri, ScreenshotData screenshotData) {
+        if (uri == null) {
+            headlessScreenshotHandler.uiEventLogger.log(ScreenshotEvent.SCREENSHOT_NOT_SAVED, 0, screenshotData.getPackageNameString());
+            headlessScreenshotHandler.notificationsControllerFactory.create(screenshotData.displayId).notifyScreenshotError(R.string.screenshot_failed_to_save_text);
+        } else {
+            headlessScreenshotHandler.uiEventLogger.log(ScreenshotEvent.SCREENSHOT_SAVED, 0, screenshotData.getPackageNameString());
+            if (headlessScreenshotHandler.userManager.isManagedProfile(screenshotData.userHandle.getIdentifier())) {
+                headlessScreenshotHandler.uiEventLogger.log(ScreenshotEvent.SCREENSHOT_SAVED_TO_WORK_PROFILE, 0, screenshotData.getPackageNameString());
+            }
+        }
+    }
+
+    @Override // com.android.systemui.screenshot.ScreenshotHandler
+    public final void handleScreenshot(final ScreenshotData screenshotData, final Consumer consumer, final TakeScreenshotService.RequestCallback requestCallback) {
+        if (screenshotData.bitmap == null) {
+            Log.e("HeadlessScreenshotHandler", "handleScreenshot: Screenshot bitmap was null");
+            this.notificationsControllerFactory.create(screenshotData.displayId).notifyScreenshotError(R.string.screenshot_failed_to_capture_text);
+            ((TakeScreenshotService.RequestCallbackImpl) requestCallback).reportError();
+            return;
+        }
+        final CallbackToFutureAdapter.SafeFuture export = this.imageExporter.export(Executors.newSingleThreadExecutor(), UUID.randomUUID(), screenshotData.bitmap, screenshotData.userHandle, screenshotData.displayId);
+        export.delegate.addListener(new Runnable() { // from class: com.android.systemui.screenshot.HeadlessScreenshotHandler$handleScreenshot$1
+            @Override // java.lang.Runnable
+            public final void run() {
+                try {
+                    ImageExporter.Result result = (ImageExporter.Result) ListenableFuture.this.get();
+                    Log.d("HeadlessScreenshotHandler", "Saved screenshot: " + result);
+                    HeadlessScreenshotHandler.access$logScreenshotResultStatus(this, result.uri, screenshotData);
+                    consumer.accept(result.uri);
+                    Messenger messenger = ((TakeScreenshotService.RequestCallbackImpl) requestCallback).mReplyTo;
+                    boolean z = TakeScreenshotService.sConfigured;
+                    try {
+                        messenger.send(Message.obtain((Handler) null, 2));
+                    } catch (RemoteException e) {
+                        Log.d("Screenshot", "ignored remote exception", e);
+                    }
+                } catch (Exception e2) {
+                    Log.d("HeadlessScreenshotHandler", "Failed to store screenshot", e2);
+                    consumer.accept(null);
+                    ((TakeScreenshotService.RequestCallbackImpl) requestCallback).reportError();
+                }
+            }
+        }, this.mainExecutor);
+    }
+}

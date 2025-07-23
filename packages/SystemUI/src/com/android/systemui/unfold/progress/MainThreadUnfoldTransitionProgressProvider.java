@@ -1,0 +1,87 @@
+package com.android.systemui.unfold.progress;
+
+import android.os.Handler;
+import com.android.systemui.unfold.UnfoldTransitionProgressProvider;
+import com.android.systemui.unfold.progress.MainThreadUnfoldTransitionProgressProvider;
+import java.util.Collections;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class MainThreadUnfoldTransitionProgressProvider implements UnfoldTransitionProgressProvider {
+    public final Map listenerMap = Collections.synchronizedMap(new LinkedHashMap());
+    public final Handler mainHandler;
+    public final UnfoldTransitionProgressProvider rootProvider;
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class TransitionProgressListerProxy implements UnfoldTransitionProgressProvider.TransitionProgressListener {
+        public final UnfoldTransitionProgressProvider.TransitionProgressListener listener;
+
+        public TransitionProgressListerProxy(UnfoldTransitionProgressProvider.TransitionProgressListener transitionProgressListener) {
+            this.listener = transitionProgressListener;
+        }
+
+        @Override // com.android.systemui.unfold.UnfoldTransitionProgressProvider.TransitionProgressListener
+        public final void onTransitionFinished() {
+            MainThreadUnfoldTransitionProgressProvider.this.mainHandler.post(new Runnable() { // from class: com.android.systemui.unfold.progress.MainThreadUnfoldTransitionProgressProvider$TransitionProgressListerProxy$onTransitionFinished$1
+                @Override // java.lang.Runnable
+                public final void run() {
+                    MainThreadUnfoldTransitionProgressProvider.TransitionProgressListerProxy.this.listener.onTransitionFinished();
+                }
+            });
+        }
+
+        @Override // com.android.systemui.unfold.UnfoldTransitionProgressProvider.TransitionProgressListener
+        public final void onTransitionFinishing() {
+            MainThreadUnfoldTransitionProgressProvider.this.mainHandler.post(new Runnable() { // from class: com.android.systemui.unfold.progress.MainThreadUnfoldTransitionProgressProvider$TransitionProgressListerProxy$onTransitionFinishing$1
+                @Override // java.lang.Runnable
+                public final void run() {
+                    MainThreadUnfoldTransitionProgressProvider.TransitionProgressListerProxy.this.listener.onTransitionFinishing();
+                }
+            });
+        }
+
+        @Override // com.android.systemui.unfold.UnfoldTransitionProgressProvider.TransitionProgressListener
+        public final void onTransitionProgress(final float f) {
+            MainThreadUnfoldTransitionProgressProvider.this.mainHandler.post(new Runnable() { // from class: com.android.systemui.unfold.progress.MainThreadUnfoldTransitionProgressProvider$TransitionProgressListerProxy$onTransitionProgress$1
+                @Override // java.lang.Runnable
+                public final void run() {
+                    MainThreadUnfoldTransitionProgressProvider.TransitionProgressListerProxy.this.listener.onTransitionProgress(f);
+                }
+            });
+        }
+
+        @Override // com.android.systemui.unfold.UnfoldTransitionProgressProvider.TransitionProgressListener
+        public final void onTransitionStarted() {
+            MainThreadUnfoldTransitionProgressProvider.this.mainHandler.post(new Runnable() { // from class: com.android.systemui.unfold.progress.MainThreadUnfoldTransitionProgressProvider$TransitionProgressListerProxy$onTransitionStarted$1
+                @Override // java.lang.Runnable
+                public final void run() {
+                    MainThreadUnfoldTransitionProgressProvider.TransitionProgressListerProxy.this.listener.onTransitionStarted();
+                }
+            });
+        }
+    }
+
+    public MainThreadUnfoldTransitionProgressProvider(Handler handler, UnfoldTransitionProgressProvider unfoldTransitionProgressProvider) {
+        this.mainHandler = handler;
+        this.rootProvider = unfoldTransitionProgressProvider;
+    }
+
+    @Override // com.android.systemui.unfold.util.CallbackController
+    public final void addCallback(Object obj) {
+        UnfoldTransitionProgressProvider.TransitionProgressListener transitionProgressListener = (UnfoldTransitionProgressProvider.TransitionProgressListener) obj;
+        TransitionProgressListerProxy transitionProgressListerProxy = new TransitionProgressListerProxy(transitionProgressListener);
+        this.rootProvider.addCallback(transitionProgressListerProxy);
+        this.listenerMap.put(transitionProgressListener, transitionProgressListerProxy);
+    }
+
+    @Override // com.android.systemui.unfold.util.CallbackController
+    public final void removeCallback(Object obj) {
+        UnfoldTransitionProgressProvider.TransitionProgressListener transitionProgressListener = (UnfoldTransitionProgressProvider.TransitionProgressListener) this.listenerMap.remove((UnfoldTransitionProgressProvider.TransitionProgressListener) obj);
+        if (transitionProgressListener == null) {
+            return;
+        }
+        this.rootProvider.removeCallback(transitionProgressListener);
+    }
+}

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="@dimen/bluetooth_dialog_layout_margin" android:layout_marginEnd="@dimen/bluetooth_dialog_layout_margin"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView android:textAppearance="@style/TextAppearance.Dialog.Title" android:textSize="14.0sp" android:gravity="center_vertical" android:layout_gravity="center_vertical" android:id="@id/ambient_volume_slider_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textDirection="locale" android:paddingStart="@dimen/hearing_devices_small_title_padding_horizontal" android:labelFor="@id/ambient_volume_slider" />
+    <com.google.android.material.slider.Slider android:theme="@style/Theme.Material3.DayNight" android:layout_gravity="center_vertical" android:id="@id/ambient_volume_slider" android:layout_width="fill_parent" android:layout_height="@dimen/bluetooth_dialog_device_height" app:labelBehavior="gone" style="@style/SystemUI.Material3.Slider" />
+</LinearLayout>

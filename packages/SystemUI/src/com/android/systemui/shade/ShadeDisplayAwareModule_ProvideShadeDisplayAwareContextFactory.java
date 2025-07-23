@@ -1,0 +1,32 @@
+package com.android.systemui.shade;
+
+import android.content.Context;
+import com.android.systemui.R;
+import com.android.systemui.shade.shared.flag.ShadeWindowGoesAround;
+import dagger.internal.Provider;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class ShadeDisplayAwareModule_ProvideShadeDisplayAwareContextFactory implements Provider {
+    public final Provider contextProvider;
+
+    public ShadeDisplayAwareModule_ProvideShadeDisplayAwareContextFactory(Provider provider) {
+        this.contextProvider = provider;
+    }
+
+    public static Context provideShadeDisplayAwareContext(Context context) {
+        ShadeDisplayAwareModule.INSTANCE.getClass();
+        ShadeWindowGoesAround.INSTANCE.getClass();
+        if (ShadeWindowGoesAround.FLAG.isTrue()) {
+            context = context.createWindowContext(context.getDisplay(), 2040, null);
+            context.setTheme(R.style.Theme_SystemUI);
+        }
+        context.getClass();
+        return context;
+    }
+
+    @Override // javax.inject.Provider
+    public final Object get() {
+        return provideShadeDisplayAwareContext((Context) this.contextProvider.get());
+    }
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.wm.shell.splitscreen.tv.TvSplitMenuView android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/tv_split_main_menu" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <Space android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+                <com.android.wm.shell.common.TvWindowMenuActionButton android:id="@id/tv_split_main_menu_focus_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/tv_split_menu_ic_focus" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+                <com.android.wm.shell.common.TvWindowMenuActionButton android:id="@id/tv_split_main_menu_close_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/pip_ic_close_white" />
+            </LinearLayout>
+        </LinearLayout>
+        <com.android.wm.shell.common.TvWindowMenuActionButton android:id="@id/tv_split_menu_swap_stages" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/tv_split_menu_ic_swap" />
+        <LinearLayout android:gravity="center" android:orientation="vertical" android:id="@id/tv_split_side_menu" android:layout_width="0.0dip" android:layout_height="fill_parent" android:layout_weight="1.0">
+            <Space android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0" />
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+                <com.android.wm.shell.common.TvWindowMenuActionButton android:id="@id/tv_split_side_menu_focus_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/tv_split_menu_ic_focus" />
+            </LinearLayout>
+            <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+                <com.android.wm.shell.common.TvWindowMenuActionButton android:id="@id/tv_split_side_menu_close_button" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/pip_ic_close_white" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</com.android.wm.shell.splitscreen.tv.TvSplitMenuView>

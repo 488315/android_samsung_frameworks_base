@@ -1,0 +1,61 @@
+package com.android.systemui.audio.soundcraft.viewmodel.buds.noisecontrol;
+
+import android.content.Context;
+import com.android.systemui.R;
+import com.android.systemui.audio.soundcraft.interfaces.connectivity.BluetoothDeviceManager;
+import com.android.systemui.audio.soundcraft.model.ModelProvider;
+import com.android.systemui.audio.soundcraft.utils.SoundCraftSALogging;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes.dex */
+public final class NoiseControlOffViewModel extends NoiseControlIconViewModel {
+    public final BluetoothDeviceManager bluetoothDeviceManager;
+    public final Context context;
+    public final ModelProvider modelProvider;
+
+    public NoiseControlOffViewModel(Context context, ModelProvider modelProvider, BluetoothDeviceManager bluetoothDeviceManager) {
+        this.context = context;
+        this.modelProvider = modelProvider;
+        this.bluetoothDeviceManager = bluetoothDeviceManager;
+    }
+
+    @Override // com.android.systemui.audio.soundcraft.viewmodel.buds.noisecontrol.NoiseControlIconViewModel
+    public final boolean checkWearingOn() {
+        return true;
+    }
+
+    @Override // com.android.systemui.audio.soundcraft.viewmodel.buds.noisecontrol.NoiseControlIconViewModel
+    public final BluetoothDeviceManager getBluetoothDeviceManager() {
+        return this.bluetoothDeviceManager;
+    }
+
+    @Override // com.android.systemui.audio.soundcraft.viewmodel.buds.noisecontrol.NoiseControlIconViewModel
+    public final String getDisplayItemName() {
+        return this.context.getResources().getString(R.string.sound_craft_noise_control_off);
+    }
+
+    @Override // com.android.systemui.audio.soundcraft.viewmodel.buds.noisecontrol.NoiseControlIconViewModel
+    public final int getDrawableOff() {
+        return R.drawable.soundcraft_ic_buds3_anc_off_unselelcted;
+    }
+
+    @Override // com.android.systemui.audio.soundcraft.viewmodel.buds.noisecontrol.NoiseControlIconViewModel
+    public final int getDrawableOn() {
+        return R.drawable.soundcraft_ic_buds3_anc_off;
+    }
+
+    @Override // com.android.systemui.audio.soundcraft.viewmodel.buds.noisecontrol.NoiseControlIconViewModel
+    public final String getItemName() {
+        return this.bluetoothDeviceManager.context.getResources().getString(R.string.sound_craft_wearable_noise_control_off);
+    }
+
+    @Override // com.android.systemui.audio.soundcraft.viewmodel.buds.noisecontrol.NoiseControlIconViewModel
+    public final ModelProvider getModelProvider() {
+        return this.modelProvider;
+    }
+
+    @Override // com.android.systemui.audio.soundcraft.viewmodel.buds.noisecontrol.NoiseControlIconViewModel
+    public final SoundCraftSALogging.Event getSALoggingEvent() {
+        return SoundCraftSALogging.Event.NOISE_CONTROL_OFF;
+    }
+}

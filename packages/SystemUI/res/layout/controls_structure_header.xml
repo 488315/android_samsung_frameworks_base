@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:focusable="true" android:layout_width="fill_parent" android:layout_height="@dimen/control_management_row_height"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/check_all_structure_layout" android:focusable="false" android:layout_width="@dimen/sec_control_management_checkbox_size" android:layout_height="fill_parent" android:layout_marginRight="12.0dip">
+        <CheckBox android:layout_gravity="center_vertical" android:id="@id/check_all_structure" android:focusable="false" android:clickable="false" android:layout_width="@dimen/sec_control_management_checkbox_size" android:layout_height="@dimen/sec_control_management_checkbox_size" />
+    </FrameLayout>
+    <TextView android:textAppearance="@style/TextAppearance.Font.Regular" android:textSize="18.0sp" android:textColor="@color/control_manage_apps_category_title" android:ellipsize="end" android:gravity="left" android:id="@id/header_title" android:layout_width="0.0dip" android:layout_height="wrap_content" android:maxLines="1" android:layout_weight="1.0" android:importantForAccessibility="no" />
+</LinearLayout>

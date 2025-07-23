@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageButton android:layout_gravity="center" android:id="@id/volume_dialog_settings" android:background="@drawable/ripple_drawable_20dp" android:layout_width="@dimen/volume_dialog_button_size" android:layout_height="@dimen/volume_dialog_button_size" android:scaleType="centerInside" android:tint="@android:color/secondary_material_settings_light" android:soundEffectsEnabled="false" android:contentDescription="@string/accessibility_volume_settings"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android" />

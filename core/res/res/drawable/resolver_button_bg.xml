@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:color="@color/resolver_accent_ripple"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <item android:id="@id/mask">
+        <shape android:shape="rectangle">
+            <corners android:radius="12.0dip" />
+            <solid android:color="@color/resolver_accent_ripple" />
+        </shape>
+    </item>
+    <item>
+        <inset android:insetLeft="0.0dip" android:insetRight="0.0dip" android:insetTop="6.0dip" android:insetBottom="6.0dip">
+            <shape android:shape="rectangle">
+                <corners android:radius="12.0dip" />
+                <solid android:color="@color/resolver_profile_tab_selected_bg" />
+            </shape>
+        </inset>
+    </item>
+</ripple>

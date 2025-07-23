@@ -1,0 +1,43 @@
+package com.android.systemui.statusbar.notification.stack.shared.model;
+
+import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class ShadeScrimClipping {
+    public final ShadeScrimBounds bounds;
+    public final ShadeScrimRounding rounding;
+
+    public ShadeScrimClipping() {
+        this(null, 0 == true ? 1 : 0, 3, 0 == true ? 1 : 0);
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof ShadeScrimClipping)) {
+            return false;
+        }
+        ShadeScrimClipping shadeScrimClipping = (ShadeScrimClipping) obj;
+        return Intrinsics.areEqual(this.bounds, shadeScrimClipping.bounds) && Intrinsics.areEqual(this.rounding, shadeScrimClipping.rounding);
+    }
+
+    public final int hashCode() {
+        return this.rounding.hashCode() + (this.bounds.hashCode() * 31);
+    }
+
+    public final String toString() {
+        return "ShadeScrimClipping(bounds=" + this.bounds + ", rounding=" + this.rounding + ")";
+    }
+
+    public ShadeScrimClipping(ShadeScrimBounds shadeScrimBounds, ShadeScrimRounding shadeScrimRounding) {
+        this.bounds = shadeScrimBounds;
+        this.rounding = shadeScrimRounding;
+    }
+
+    public /* synthetic */ ShadeScrimClipping(ShadeScrimBounds shadeScrimBounds, ShadeScrimRounding shadeScrimRounding, int i, DefaultConstructorMarker defaultConstructorMarker) {
+        this((i & 1) != 0 ? new ShadeScrimBounds(0.0f, 0.0f, 0.0f, 0.0f, 15, null) : shadeScrimBounds, (i & 2) != 0 ? new ShadeScrimRounding(false, false, 3, null) : shadeScrimRounding);
+    }
+}

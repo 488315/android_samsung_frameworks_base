@@ -1,0 +1,87 @@
+package com.android.systemui.audio.soundcraft.interfaces.soundalive;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.net.Uri;
+import android.util.Log;
+import kotlin.Result;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes.dex */
+public final class SoundAliveManager {
+    public static final String TAG;
+    public final Context context;
+    public final Uri uri = Uri.parse("content://com.sec.android.app.soundalive.compatibility.SAContentProvider");
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class Companion {
+        public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
+            this();
+        }
+
+        private Companion() {
+        }
+    }
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public abstract /* synthetic */ class WhenMappings {
+        public static final /* synthetic */ int[] $EnumSwitchMapping$0;
+
+        static {
+            int[] iArr = new int[SoundAliveEffectEnum.values().length];
+            try {
+                iArr[SoundAliveEffectEnum.DOLBY_INDEX.ordinal()] = 1;
+            } catch (NoSuchFieldError unused) {
+            }
+            try {
+                iArr[SoundAliveEffectEnum.EQ_INDEX.ordinal()] = 2;
+            } catch (NoSuchFieldError unused2) {
+            }
+            try {
+                iArr[SoundAliveEffectEnum.VOICE_BOOST_EFFECT.ordinal()] = 3;
+            } catch (NoSuchFieldError unused3) {
+            }
+            try {
+                iArr[SoundAliveEffectEnum.VOLUME_NORMALIZATION_EFFECT.ordinal()] = 4;
+            } catch (NoSuchFieldError unused4) {
+            }
+            try {
+                iArr[SoundAliveEffectEnum.UHQ_UPSCALER.ordinal()] = 5;
+            } catch (NoSuchFieldError unused5) {
+            }
+            try {
+                iArr[SoundAliveEffectEnum.SPATIAL_AUDIO.ordinal()] = 6;
+            } catch (NoSuchFieldError unused6) {
+            }
+            $EnumSwitchMapping$0 = iArr;
+        }
+    }
+
+    static {
+        new Companion(null);
+        TAG = "SoundCraft.SoundAliveManager";
+    }
+
+    public SoundAliveManager(Context context) {
+        this.context = context;
+    }
+
+    public final void setState(int i, String str) {
+        Object failure;
+        String str2 = TAG;
+        Log.i(str2, "setState : key=" + str + ", state=" + i);
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(str, Integer.valueOf(i));
+        try {
+            int i2 = Result.$r8$clinit;
+            failure = this.context.getContentResolver().insert(this.uri, contentValues);
+        } catch (Throwable th) {
+            int i3 = Result.$r8$clinit;
+            failure = new Result.Failure(th);
+        }
+        if (Result.m3422exceptionOrNullimpl(failure) != null) {
+            Log.e(str2, "Exception occurs, can't execute requested insert");
+        }
+    }
+}

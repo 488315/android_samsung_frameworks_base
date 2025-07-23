@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include android:id="@id/drop_target" layout="@layout/dnd_drop_target_view" />
+    <com.android.wm.shell.draganddrop.DragAppIcon android:id="@id/drag_app_icon" android:visibility="gone" android:layout_width="@dimen/drag_app_icon_width" android:layout_height="@dimen/drag_app_icon_height" />
+</FrameLayout>

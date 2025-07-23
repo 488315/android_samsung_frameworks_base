@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.wm.shell.windowdecor.tiling.TilingDividerView android:id="@id/divider_bar" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.wm.shell.common.split.DividerHandleView android:layout_gravity="center" android:id="@id/docked_divider_handle" android:background="@null" android:layout_width="fill_parent" android:layout_height="fill_parent" android:contentDescription="@string/accessibility_divider" />
+    <com.android.wm.shell.common.split.DividerRoundedCorner android:id="@id/docked_divider_rounded_corner" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+</com.android.wm.shell.windowdecor.tiling.TilingDividerView>

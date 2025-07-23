@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/root_layout" android:layout_width="@dimen/touchpad_spen_popup_width" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:id="@id/title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/dex_touchpad_dialog_spen_gesture_title" style="@style/TouchpadSpenPopupTitleStyle" />
+    <ScrollView android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
+        <LinearLayout android:orientation="vertical" android:id="@id/content_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginStart="@dimen/touchpad_spen_popup_side_margin" android:layout_marginEnd="@dimen/touchpad_spen_popup_side_margin">
+            <ImageView android:id="@id/content_image" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/tw_img_welcome_spen" android:importantForAccessibility="no" />
+            <com.android.systemui.dextouchpad.widget.MaxLargeTextView android:id="@id/content_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/touchpad_spen_popup_content_top_margin" android:layout_marginBottom="@dimen/touchpad_popup_image_bottom_margin" android:text="@string/dex_touchpad_dialog_spen_gesture_content" style="@style/TouchpadSpenPopupCenterTextStyle" />
+            <LinearLayout android:orientation="vertical" android:id="@id/container_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout android:gravity="end" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <com.android.systemui.dextouchpad.widget.MaxLargeButton android:id="@id/ok_button" android:text="@string/dex_touchpad_dialog_btn_ok" style="@style/TouchpadPopupBottomButtonStyle" />
+    </LinearLayout>
+</LinearLayout>

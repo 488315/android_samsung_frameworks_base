@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:color="@color/subroom_flashlight_button_turn_off_ripple"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle"
+          xmlns:android="http://schemas.android.com/apk/res/android">
+            <solid android:color="@color/subroom_flashlight_button_turn_off" />
+            <corners android:radius="@dimen/subscreen_turnoff_radius" />
+        </shape>
+    </item>
+    <item android:id="@android:id/mask">
+        <shape>
+            <corners android:radius="@dimen/subscreen_turnoff_radius" />
+            <solid android:color="@android:color/white" />
+        </shape>
+    </item>
+</ripple>

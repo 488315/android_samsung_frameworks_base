@@ -1,0 +1,46 @@
+package com.android.systemui.biometrics.domain.model;
+
+import defpackage.MoveResult$$ExternalSyntheticOutline0;
+import defpackage.ReorderTile$$ExternalSyntheticOutline0;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes.dex */
+public final class SideFpsSensorLocation {
+    public final boolean isSensorVerticalInDefaultOrientation;
+    public final int left;
+    public final int length;
+    public final int top;
+
+    public SideFpsSensorLocation(int i, int i2, int i3, boolean z) {
+        this.left = i;
+        this.top = i2;
+        this.length = i3;
+        this.isSensorVerticalInDefaultOrientation = z;
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof SideFpsSensorLocation)) {
+            return false;
+        }
+        SideFpsSensorLocation sideFpsSensorLocation = (SideFpsSensorLocation) obj;
+        return this.left == sideFpsSensorLocation.left && this.top == sideFpsSensorLocation.top && this.length == sideFpsSensorLocation.length && this.isSensorVerticalInDefaultOrientation == sideFpsSensorLocation.isSensorVerticalInDefaultOrientation;
+    }
+
+    public final int hashCode() {
+        return Boolean.hashCode(this.isSensorVerticalInDefaultOrientation) + ReorderTile$$ExternalSyntheticOutline0.m(this.length, ReorderTile$$ExternalSyntheticOutline0.m(this.top, Integer.hashCode(this.left) * 31, 31), 31);
+    }
+
+    public final String toString() {
+        StringBuilder sb = new StringBuilder("SideFpsSensorLocation(left=");
+        sb.append(this.left);
+        sb.append(", top=");
+        sb.append(this.top);
+        sb.append(", length=");
+        sb.append(this.length);
+        sb.append(", isSensorVerticalInDefaultOrientation=");
+        return MoveResult$$ExternalSyntheticOutline0.m(sb, this.isSensorVerticalInDefaultOrientation, ")");
+    }
+}

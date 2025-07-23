@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent" systemui:layout_constraintEnd_toEndOf="parent" systemui:layout_constraintStart_toStartOf="parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:systemui="http://schemas.android.com/apk/res-auto">
+    <com.android.systemui.blur.SecQSBlurShadowView android:layout_gravity="center_horizontal" android:id="@id/qs_large_shadow_view" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <com.android.systemui.blur.SecQSBlurShadowView android:layout_gravity="center_horizontal" android:id="@id/qs_small_shadow_view" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <FrameLayout android:layout_gravity="center_horizontal" android:id="@id/qs_new_blur_view" android:layout_width="fill_parent" android:layout_height="fill_parent" android:forceHasOverlappingRendering="false">
+        <com.android.systemui.blur.SecQSNewBlurView android:id="@id/qs_new_blur" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:importantForAccessibility="no" android:forceHasOverlappingRendering="false">
+            <ImageView android:layout_gravity="top" android:id="@id/qs_blur_gradient" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="216.0dip" android:src="@drawable/qs_blur_gradient_drawable" android:contentDescription="@null" />
+        </com.android.systemui.blur.SecQSNewBlurView>
+        <com.android.systemui.statusbar.phone.SecPanelBackground android:id="@id/qs_new_blur_background" android:background="@drawable/qs_blur_drawable" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:alpha="0.0" android:importantForAccessibility="no" />
+    </FrameLayout>
+</FrameLayout>

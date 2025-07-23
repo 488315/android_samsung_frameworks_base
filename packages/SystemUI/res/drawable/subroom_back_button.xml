@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector android:height="@dimen/subscreen_back_button_height" android:width="@dimen/subscreen_back_button_height" android:viewportWidth="46.0" android:viewportHeight="46.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <clip-path android:pathData="M29.8313,7.9583C30.3967,7.4006 30.4043,6.4902 29.8466,5.9247C29.2888,5.3612 28.3784,5.3555 27.813,5.9132L12.9052,20.6141C12.2612,21.2485 11.9066,22.0976 11.9066,23.0022C11.9066,23.905 12.2612,24.756 12.9052,25.3904L27.813,40.0893C28.0929,40.3634 28.457,40.5014 28.8231,40.5014C29.193,40.5014 29.5649,40.3577 29.8466,40.074C30.4043,39.5086 30.3967,38.5982 29.8313,38.0404L14.9253,23.3415C14.7989,23.2207 14.7816,23.077 14.7816,23.0022C14.7816,22.9275 14.7989,22.7818 14.9253,22.6611L29.8313,7.9583Z" />
+        <path android:fillColor="#fffafafa" android:pathData="M0,0h46v46h-46z" android:strokeColor="#00000000" android:strokeWidth="1.0" android:fillType="evenOdd" />
+    </group>
+</vector>

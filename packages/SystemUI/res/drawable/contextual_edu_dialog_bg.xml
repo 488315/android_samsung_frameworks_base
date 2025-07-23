@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset android:insetBottom="@dimen/contextual_edu_dialog_elevation"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <shape>
+        <corners android:radius="28.0dip" />
+        <solid android:color="@android:color/surface_header_light" />
+    </shape>
+</inset>

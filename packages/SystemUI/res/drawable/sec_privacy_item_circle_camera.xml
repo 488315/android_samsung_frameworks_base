@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:gravity="center" android:id="@id/background">
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/sec_ongoing_appops_dialog_icon_backgroud_corner_radius" />
+            <size android:height="@dimen/sec_ongoing_appops_dialog_icon_background_height" android:width="@dimen/sec_ongoing_appops_dialog_icon_background_weight" />
+            <solid android:color="@color/privacy_chip_bg_color" />
+        </shape>
+    </item>
+    <item android:gravity="center" android:id="@id/icon" android:drawable="@drawable/stat_sys_privacy_camera" />
+</layer-list>

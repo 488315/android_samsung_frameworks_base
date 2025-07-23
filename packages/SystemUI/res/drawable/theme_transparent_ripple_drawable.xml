@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:color="@color/ripple_drawable_color"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/mask">
+        <shape android:shape="rectangle">
+            <solid android:color="#40ffffff" />
+            <corners android:radius="@dimen/kg_emergency_button_radius" />
+            <padding android:left="@dimen/kg_emergency_button_padding" android:top="@dimen/kg_emergency_button_padding" android:right="@dimen/kg_emergency_button_padding" android:bottom="@dimen/kg_emergency_button_padding" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/theme_ripple_effect_transparent_button_solid_color" />
+            <stroke android:width="@dimen/kg_emergency_button_stroke" android:color="@color/theme_ripple_effect_transparent_button_outer_color" />
+            <corners android:radius="@dimen/kg_emergency_button_radius" />
+            <padding android:left="@dimen/kg_emergency_button_padding" android:top="@dimen/kg_emergency_button_padding" android:right="@dimen/kg_emergency_button_padding" android:bottom="@dimen/kg_emergency_button_padding" />
+        </shape>
+    </item>
+</ripple>

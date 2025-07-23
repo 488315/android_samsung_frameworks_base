@@ -1,0 +1,59 @@
+package com.android.systemui.media;
+
+import androidx.compose.animation.TransitionData$$ExternalSyntheticOutline0;
+import com.android.systemui.media.controls.shared.model.MediaData;
+import defpackage.MoveResult$$ExternalSyntheticOutline0;
+import defpackage.ReorderTile$$ExternalSyntheticOutline0;
+import kotlin.jvm.internal.Intrinsics;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final class MediaDataFormat {
+    public final MediaData data;
+    public final boolean isImmediately;
+    public final boolean isSsReactivated;
+    public final String key;
+    public final String oldKey;
+    public final int receivedSmartspaceCardLatency;
+
+    public MediaDataFormat(String str, String str2, MediaData mediaData, boolean z, int i, boolean z2) {
+        this.key = str;
+        this.oldKey = str2;
+        this.data = mediaData;
+        this.isImmediately = z;
+        this.receivedSmartspaceCardLatency = i;
+        this.isSsReactivated = z2;
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof MediaDataFormat)) {
+            return false;
+        }
+        MediaDataFormat mediaDataFormat = (MediaDataFormat) obj;
+        return Intrinsics.areEqual(this.key, mediaDataFormat.key) && Intrinsics.areEqual(this.oldKey, mediaDataFormat.oldKey) && Intrinsics.areEqual(this.data, mediaDataFormat.data) && this.isImmediately == mediaDataFormat.isImmediately && this.receivedSmartspaceCardLatency == mediaDataFormat.receivedSmartspaceCardLatency && this.isSsReactivated == mediaDataFormat.isSsReactivated;
+    }
+
+    public final int hashCode() {
+        int hashCode = this.key.hashCode() * 31;
+        String str = this.oldKey;
+        return Boolean.hashCode(this.isSsReactivated) + ReorderTile$$ExternalSyntheticOutline0.m(this.receivedSmartspaceCardLatency, TransitionData$$ExternalSyntheticOutline0.m((this.data.hashCode() + ((hashCode + (str == null ? 0 : str.hashCode())) * 31)) * 31, 31, this.isImmediately), 31);
+    }
+
+    public final String toString() {
+        StringBuilder sb = new StringBuilder("MediaDataFormat(key=");
+        sb.append(this.key);
+        sb.append(", oldKey=");
+        sb.append(this.oldKey);
+        sb.append(", data=");
+        sb.append(this.data);
+        sb.append(", isImmediately=");
+        sb.append(this.isImmediately);
+        sb.append(", receivedSmartspaceCardLatency=");
+        sb.append(this.receivedSmartspaceCardLatency);
+        sb.append(", isSsReactivated=");
+        return MoveResult$$ExternalSyntheticOutline0.m(sb, this.isSsReactivated, ")");
+    }
+}

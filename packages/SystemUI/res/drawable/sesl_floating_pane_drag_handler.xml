@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="2.0dip" />
+    <size android:height="@dimen/sesl_floating_pane_drag_handler_height" android:width="@dimen/sesl_floating_pane_drag_handler_width" />
+    <solid android:color="@color/sesl_floating_pane_drag_handler_color" />
+</shape>

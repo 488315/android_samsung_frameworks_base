@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/sud_card_view_default" android:layout_width="fill_parent" android:layout_height="wrap_content" android:filterTouchesWhenObscured="true" style="?sudCardContainerStyle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:id="@id/sud_items_icon_container" android:duplicateParentState="true" android:layout_width="fill_parent" android:layout_height="wrap_content" style="?sudCardIconContainerStyle">
+        <ImageView android:layout_gravity="center" android:id="@id/sud_items_icon" android:duplicateParentState="true" style="?sudCardIconStyle" />
+    </FrameLayout>
+    <com.google.android.setupdesign.view.WrapTextView android:ellipsize="end" android:id="@id/sud_items_title" android:duplicateParentState="true" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minLines="2" android:textAlignment="center" android:breakStrategy="high_quality" android:hyphenationFrequency="none" style="?sudCardTitleStyle" />
+    <TextView android:id="@id/sud_items_summary" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" />
+</LinearLayout>

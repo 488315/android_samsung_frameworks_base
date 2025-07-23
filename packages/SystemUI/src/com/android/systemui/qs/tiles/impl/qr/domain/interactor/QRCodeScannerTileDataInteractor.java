@@ -1,0 +1,35 @@
+package com.android.systemui.qs.tiles.impl.qr.domain.interactor;
+
+import android.os.UserHandle;
+import com.android.systemui.qrcodescanner.controller.QRCodeScannerController;
+import com.android.systemui.qs.tiles.base.domain.interactor.QSTileDataInteractor;
+import com.android.systemui.utils.coroutines.flow.FlowConflatedKt;
+import kotlin.coroutines.CoroutineContext;
+import kotlinx.coroutines.CoroutineScope;
+import kotlinx.coroutines.flow.Flow;
+import kotlinx.coroutines.flow.FlowKt;
+import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
+import kotlinx.coroutines.flow.FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1;
+import kotlinx.coroutines.flow.ReadonlyStateFlow;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final class QRCodeScannerTileDataInteractor implements QSTileDataInteractor {
+    public final CoroutineContext bgCoroutineContext;
+    public final QRCodeScannerController qrController;
+
+    public QRCodeScannerTileDataInteractor(CoroutineContext coroutineContext, CoroutineScope coroutineScope, QRCodeScannerController qRCodeScannerController) {
+        this.bgCoroutineContext = coroutineContext;
+        this.qrController = qRCodeScannerController;
+    }
+
+    @Override // com.android.systemui.qs.tiles.base.domain.interactor.QSTileAvailabilityInteractor
+    public final Flow availability(UserHandle userHandle) {
+        return new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(Boolean.valueOf(this.qrController.isCameraAvailable()));
+    }
+
+    @Override // com.android.systemui.qs.tiles.base.domain.interactor.QSTileDataInteractor
+    public final Flow tileData(UserHandle userHandle, ReadonlyStateFlow readonlyStateFlow) {
+        return FlowKt.flowOn(new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new QRCodeScannerTileDataInteractor$tileData$2(this, null), FlowConflatedKt.conflatedCallbackFlow(new QRCodeScannerTileDataInteractor$tileData$1(this, null))), this.bgCoroutineContext);
+    }
+}

@@ -1,0 +1,62 @@
+package com.android.systemui.edgelighting.turnover;
+
+import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
+import android.util.Log;
+import com.android.systemui.edgelighting.turnover.TurnOverEdgeLighting;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public class CallStateObserver {
+    public final AnonymousClass2 mPhoneStateListener;
+    public TurnOverEdgeLighting.AnonymousClass1 mStateListener;
+    public final TelephonyManager mTelephonyManager;
+    public int mState = 0;
+    public final AnonymousClass1 mHandler = new Handler() { // from class: com.android.systemui.edgelighting.turnover.CallStateObserver.1
+        @Override // android.os.Handler
+        public final void handleMessage(Message message) {
+            TurnOverEdgeLighting.AnonymousClass1 anonymousClass1;
+            super.handleMessage(message);
+            if (message.what == 0 && (anonymousClass1 = CallStateObserver.this.mStateListener) != null) {
+                int i = message.arg1;
+                TurnOverEdgeLighting turnOverEdgeLighting = TurnOverEdgeLighting.this;
+                turnOverEdgeLighting.getClass();
+                if (i != 1) {
+                    TurnOverEdgeLighting.StateIdle stateIdle = turnOverEdgeLighting.mCurrentTurnMode;
+                    Log.d(stateIdle.TAG, "onRingingEnd");
+                    turnOverEdgeLighting.mCurrentTurnMode = stateIdle;
+                } else {
+                    TurnOverEdgeLighting.StateIdle stateIdle2 = turnOverEdgeLighting.mCurrentTurnMode;
+                    Log.d(stateIdle2.TAG, "onRinging");
+                    stateIdle2.isNeedTurnOverChecker();
+                    turnOverEdgeLighting.mCurrentTurnMode = stateIdle2;
+                }
+            }
+        }
+    };
+
+    /* JADX WARN: Multi-variable type inference failed */
+    /* JADX WARN: Type inference failed for: r0v1, types: [com.android.systemui.edgelighting.turnover.CallStateObserver$1] */
+    /* JADX WARN: Type inference failed for: r0v2, types: [android.telephony.PhoneStateListener, com.android.systemui.edgelighting.turnover.CallStateObserver$2] */
+    public CallStateObserver(Context context) {
+        ?? r0 = new PhoneStateListener() { // from class: com.android.systemui.edgelighting.turnover.CallStateObserver.2
+            @Override // android.telephony.PhoneStateListener
+            public final void onCallStateChanged(int i, String str) {
+                CallStateObserver callStateObserver = CallStateObserver.this;
+                if (i != callStateObserver.mState) {
+                    AnonymousClass1 anonymousClass1 = callStateObserver.mHandler;
+                    anonymousClass1.sendMessage(anonymousClass1.obtainMessage(0, i, 0, str));
+                    CallStateObserver.this.mState = i;
+                }
+                super.onCallStateChanged(i, str);
+            }
+        };
+        this.mPhoneStateListener = r0;
+        TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService("phone");
+        this.mTelephonyManager = telephonyManager;
+        telephonyManager.listen(r0, 32);
+    }
+}

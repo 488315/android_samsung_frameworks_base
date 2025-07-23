@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rotate android:fromDegrees="270.0" android:toDegrees="270.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <layer-list>
+        <item>
+            <shape android:shape="arc" android:innerRadiusRatio="@dimen/progressbar_inner_radius_ratio" android:useLevel="false" android:thickness="@dimen/progressbar_thickness" android:strokeCap="round">
+                <solid android:color="@color/materialColorSurfaceContainer" />
+            </shape>
+        </item>
+        <item>
+            <shape android:shape="arc" android:innerRadiusRatio="@dimen/progressbar_inner_radius_ratio" android:useLevel="true" android:thickness="@dimen/progressbar_thickness" android:strokeCap="round">
+                <solid android:color="@color/materialColorPrimary" />
+            </shape>
+        </item>
+    </layer-list>
+</rotate>

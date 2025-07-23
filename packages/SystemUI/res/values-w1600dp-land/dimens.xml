@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="avatar_picker_margin">6.0dip</dimen>
+    <dimen name="avatar_size_in_picker">148.0dip</dimen>
+</resources>

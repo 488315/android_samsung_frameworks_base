@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="ambient_indication_container_margin_top">20.0dip</dimen>
+    <dimen name="keyguard_large_clock_top_margin">-112.0dip</dimen>
+    <item type="dimen" name="ksh_dialog_height_ratio">60.000004%</item>
+    <dimen name="large_clock_text_size">200.0dip</dimen>
+</resources>

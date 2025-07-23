@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple android:color="@color/notification_panel_theme_ripple_color"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <stroke android:width="@dimen/sec_cover_media_player_audio_output_button_border_width" android:color="@color/sec_cover_media_player_audio_output_button_border_color" />
+            <solid android:color="@color/sec_cover_media_player_audio_output_button_background_color" />
+            <corners android:radius="@dimen/sec_cover_media_player_audio_output_button_radius" />
+            <size android:height="@dimen/sec_cover_media_player_audio_output_button_height" android:width="@dimen/sec_cover_media_player_audio_output_button_width" />
+        </shape>
+    </item>
+    <item android:id="@android:id/mask">
+        <shape>
+            <corners android:radius="@dimen/sec_cover_media_player_audio_output_button_radius" />
+            <solid android:color="@android:color/white" />
+        </shape>
+    </item>
+</ripple>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.7">
+    <AppMetaData Name="Digital Wellbeing" TargetApi="19" TargetPackageName="com.samsung.android.forest" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="Digital Wellbeing Primary Color" DefaultValue="#ff0381fe" DestAttribName="dw_app_primary_color, dw_app_primary_dark_color" UID="67-A" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Digital Wellbeing Common Component Color" DefaultValue="#ff0381fe" DestAttribName="dw_common_component_color" UID="67-B" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="Digital Wellbeing Color Control Activated Color" DefaultValue="#ff0381fe" DestAttribName="dw_color_control_activated_color" UID="67-C" ValueRef="1-D" ValueType="Color" />
+        <Property Comment="Digital Wellbeing Primary Text Color" DefaultValue="#ff0072de" DestAttribName="dw_app_primary_dark_text_color" UID="67-D" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="DW Data Type Basic Color" DefaultValue="#ff77abff" DestAttribName="dw_data_type_basic_color" UID="67-1-1" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="DW Data Type Empty Color" DefaultValue="#0f000000" DestAttribName="dw_data_type_empty_color" UID="67-1-2" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="DW Data Type Features Color" DefaultValue="#ffff7aa2" DestAttribName="dw_focus_mode_color, dw_focus_goal_screentime_color, dw_goal_screentime_icon_color, dw_focus_goal_unlocks_color, dw_focus_wind_down_color, dw_app_timer_color, dw_volume_monitor_color, dw_car_time_color, dw_focus_mode_type_one_color, dw_focus_mode_type_two_color, dw_focus_mode_type_three_color" UID="67-1-3" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="DW Status Good Color" DefaultValue="#ff58e47e" DestAttribName="dw_status_good_color, dw_status_ok_color" UID="67-1-4" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="DW Status Bad Color" DefaultValue="#fffa8885" DestAttribName="dw_status_bad_color" UID="67-1-5" ValueRef="1-23-8" ValueType="Color" />
+        <Property Comment="DW Header Message Color" DefaultValue="#ff505050" DestAttribName="dw_header_message_text_color" UID="67-1-6" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="DW Focus Mode Button Outline Color" DefaultValue="#ffdcdcdc" DestAttribName="dw_button_bg_gray" UID="67-1-7" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="DW Card Description Color, View More Text Color" DefaultValue="#ff858585" DestAttribName="dw_content_message_text_color_weekly_report, dw_content_message_text_color_goal, dw_value_goal_text_color_goal, dw_button_tiny_text_color" UID="67-1-8" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="DW Winset Raised Button Colored Text Color" DefaultValue="#fffafafa" DestAttribName="dw_winset_button_colored_text_color" UID="67-1-9" ValueRef="1-E" ValueType="TextColor" />
+        <Property Comment="DW Winset Raised Button Colored Bg Color" DefaultValue="#ff0072de" DestAttribName="dw_winset_button_colored_bg_color" UID="67-1-10" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="DW Header Date Text Color" DefaultValue="#ff454545" DestAttribName="dw_header_date_text_color" UID="67-1-11" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="DW Value Large Text Color" DefaultValue="#ff252525" DestAttribName="dw_value_large_text_color" UID="67-1-12" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="DW Value Small Text Color" DefaultValue="#ff252525" DestAttribName="dw_value_small_text_color" UID="67-1-13" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="DW Content Message Text Color" DefaultValue="#ff717171" DestAttribName="dw_content_message_text_color" UID="67-1-15" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="DW Title Small Text Color" DefaultValue="#ff9d9d9d" DestAttribName="dw_title_small_text_color" UID="67-1-16" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="DW Value Medium Text Color" DefaultValue="#ff252525" DestAttribName="dw_value_medium_text_color" UID="67-1-17" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Weekly Report Goal Button Color" DefaultValue="#ffffffff" DestAttribName="goal_button_stroke_color, dw_value_goal_text_color" UID="67-1-18" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="Select All Checkbox Color" DefaultValue="#ff252525" DestAttribName="dw_winset_action_bar_title_text_color, dw_winset_multiple_selection_all_text_color" UID="67-1-19" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="Action bar More option Icon Color" DefaultValue="#ff252525" DestAttribName="dw_winset_action_bar_more_option_icon_color" UID="67-1-20" ValueRef="1-11-1" ValueType="Color" />
+        <Property Comment="No Item Text Color" DefaultValue="#ff252525" DestAttribName="dw_winset_no_item_text_main_color, dw_winset_no_item_text_sub_color" UID="67-1-21" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="DW Winset Raised Button Text Color" DefaultValue="#fffafafa" DestAttribName="dw_winset_button_text_color" UID="67-1-22" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="DW Winset Description Text Color" DefaultValue="#ff252525" DestAttribName="dw_winset_description_text_color, dw_time_description_text_color" UID="67-1-23" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="DW Weekly Report Screen Time Compare Icon Color" DefaultValue="#ff717171" DestAttribName="dw_weekly_report_compare_icon_color" UID="67-1-26" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="DW Graph Line Color" DefaultValue="#0a4a4a4a" DestAttribName="dw_graph_line_color" UID="67-2-1" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="DW Graph Bg Grid Color" DefaultValue="#0a000000" DestAttribName="dw_graph_bg_section_color" Opacity="50" UID="67-2-2" ValueRef="1-2" ValueType="Color" />
+        <Property Comment="DW Graph Data Index Text Color" DefaultValue="#66252525" DestAttribName="dw_data_index_text_color" UID="67-2-3" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="DW Graph Data Selected Index, Marker Text Color" DefaultValue="#fffafafa" DestAttribName="dw_data_index_selected_text_color_dark, dw_data_index_text_color_dark, dw_value_small_text_color_dark" UID="67-2-4" ValueRef="1-18-1" ValueType="TextColor" />
+        <Property Comment="DW Graph Marker Bg and Line Color" DefaultValue="#ff797979" DestAttribName="dw_marker_line_color" UID="67-2-5" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="DW Header Sub Text Color" DefaultValue="#ff505050" DestAttribName="dw_header_sub_text_color" UID="67-3-3" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="DW Main Title Text Color" DefaultValue="#ff252525" DestAttribName="dw_main_title_text_color" UID="67-3-4" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="DW Value Large Text Color" DefaultValue="#ff252525" DestAttribName="dw_value_large_text_color_home_goal" UID="67-3-5" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="DW Content Message Text Color" DefaultValue="#ff717171" DestAttribName="dw_content_message_text_color_home_app_timer_desc" UID="67-3-6" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="DW Main Title Text Color" DefaultValue="#ff252525" DestAttribName="dw_main_title_text_color_home_goal, dw_value_goal_text_color_home_goal" UID="67-3-8" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="DW Home Focus Icon Color" DefaultValue="#ff797979" DestAttribName="dw_system_gray_color_focus, dw_gray_light_color" UID="67-3-10" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="DW Content Message Text Color" DefaultValue="#ff717171" DestAttribName="dw_content_message_text_color_home_focus, dw_button_small_text_color" UID="67-3-11" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="DW Home Menu Icon Default Color" DefaultValue="#ff797979" DestAttribName="dw_home_menu_icon_default_color" UID="67-3-13" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="DW Home Focus Summary Text Color" DefaultValue="#ff656565" DestAttribName="dw_home_focus_summary_text_color" UID="67-3-14" ValueRef="1-C" ValueType="TextColor" />
+        <Property Comment="DW System App Icon Color" DefaultValue="#ff797979" DestAttribName="dw_system_gray_color_app_timer" UID="67-5-6" ValueRef="1-3-2" ValueType="Color" />
+        <Property Comment="DW Main Title Color" DefaultValue="#ff252525" DestAttribName="dw_main_title_text_color_wind_down" UID="67-6-1" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="DW Schedule Day Selected Text Color" DefaultValue="#ff0074d4" DestAttribName="dw_schedule_day_selected_text_color" UID="67-6-2" ValueRef="1-A" ValueType="TextColor" />
+        <Property Comment="DW Schedule Day Text Color" DefaultValue="#ff252525" DestAttribName="dw_schedule_day_text_color" UID="67-6-3" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="DW Schedule Holiday Text Color" DefaultValue="#ffd92442" DestAttribName="dw_schedule_holiday_text_color" UID="67-6-3-1" ValueRef="1-23-8" ValueType="TextColor" />
+        <Property Comment="DW Schedule Day Text Color" DefaultValue="#ff0074d4" DestAttribName="dw_schedule_day_selected_text_color_wind_down" UID="67-6-3-2" ValueRef="1-A" ValueType="TextColor" />
+        <Property Comment="DW Content Message Text Color" DefaultValue="#ff717171" DestAttribName="dw_content_message_text_color_wind_down" UID="67-6-5" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="DW About Page Bg Color" DefaultValue="#fffcfcfc" DestAttribName="dw_winset_about_content_area_bg_color" UID="67-7-1" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="DW About Page App info icon Color" DefaultValue="#ff454545" DestAttribName="dw_winset_about_app_info_icon_color" UID="67-7-2" ValueRef="1-11-1" ValueType="Color" />
+        <Property Comment="DW About Page App Name Text Color" DefaultValue="#ff010101" DestAttribName="dw_winset_about_app_name_text_color" UID="67-7-3" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="DW About Page App Version Text Color" DefaultValue="#ff8c8c8c" DestAttribName="dw_winset_about_version_text_color" UID="67-7-4" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="DW About Page App Update Button Text Color" DefaultValue="#ff4297ff" DestAttribName="dw_winset_about_update_button_text_color" UID="67-7-5" ValueRef="1-E" ValueType="Color" />
+        <Property Comment="DW About Page App Update Button BG Color" DefaultValue="#ff0072de" DestAttribName="dw_winset_about_update_button_bg_color" UID="67-7-6" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="DW About Page Bottom Button Text Color" DefaultValue="#ff252525" DestAttribName="dw_winset_about_button_text_color" UID="67-7-7" ValueRef="1-7-2-D" ValueType="TextColor" />
+        <Property Comment="DW About Page Bottom Button BG Color" DefaultValue="#ffebebeb" DestAttribName="dw_winset_about_button_bg_color" UID="67-7-8" ValueRef="1-7-1-D" ValueType="Color" />
+        <Property Comment="Navigation Bar Is Light/Dark" DefaultValue="true" DestAttribName="isLightNavigationBar" UID="67-7-9" ValueRef="1-69-2" ValueType="Bool" />
+        <Property Comment="Navigation BG color" DefaultValue="#fffcfcfc" DestAttribName="dw_winset_theme_about_navigation_bar_bg_color" UID="67-7-10" ValueRef="1-69-1" ValueType="Color" />
+        <Property Comment="Description Underline Text Color" DefaultValue="#ff3b3b3b" DestAttribName="dw_winset_description_underline_text_color" UID="67-8-2" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="DW Goal remaining Text Color" DefaultValue="#ff717171" DestAttribName="dw_content_message_text_color_goal_center" UID="67-8-3" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Wellbeing App Icon Color" DefaultValue="#ff6dbd63" DestAttribName="dw_app_icon_color, dw_system_gray_color_parental_icon" UID="67-9-1" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Onboarding Title Text Color" DefaultValue="#ff505050" DestAttribName="dw_header_message_text_color_onboarding" UID="67-9-2" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Onboarding Icon Color" DefaultValue="#ff797979" DestAttribName="dw_system_gray_color_onboarding_icon" UID="67-9-3" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="Onboarding Description Text Color" DefaultValue="#ff505050" DestAttribName="dw_description_center_text_color" UID="67-9-4" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Volume monitor No data Icon Color" DefaultValue="#ffc0c0c0" DestAttribName="dw_gray_light_color_volume_monitor, dw_status_nodata_color" UID="67-10-1" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="Dialog Main Text Color" DefaultValue="#ff252525" DestAttribName="dw_value_medium_color_volume_monitor" UID="67-10-2" ValueRef="1-9-6" ValueType="TextColor" />
+        <Property Comment="DW Winset Date Picker Arrow Tint Color" DefaultValue="#ff8e8e8e" DestAttribName="dw_winset_dialog_date_picker_arrow_tint_color" UID="67-10-3" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="DW AppTimer Noti Background Color" DefaultValue="#fffcfcfc" DestAttribName="dw_warning_popup_background_color" UID="67-11-1" ValueRef="4-4-2" ValueType="Color" />
+        <Property Comment="DW AppTimer Noti Title Text Color" DefaultValue="#ff3e3e3e" DestAttribName="dw_warning_popup_title_text_color" UID="67-11-3" ValueRef="4-22-1" ValueType="Color" />
+        <Property Comment="DW AppTimer Noti Body Text Color" DefaultValue="#bf252525" DestAttribName="dw_warning_popup_secondary_text_color" Opacity="80" UID="67-11-4" ValueRef="4-22-1" ValueType="Color" />
+        <Property Comment="DW AppTimer Noti Button Divider Color" DefaultValue="#bf252525" DestAttribName="dw_warning_popup_button_divider_color" UID="67-11-5" ValueRef="4-22-12" ValueType="Color" />
+        <Property Comment="DW AppTimer Action Button Text Color" DefaultValue="#ff0072de" DestAttribName="dw_winset_dialog_button_text_color" UID="67-11-6" ValueRef="4-22-11" ValueType="Color" />
+        <Property Comment="DW Dialog Error Button Text Color" DefaultValue="#ffdb332a" DestAttribName="dw_winset_dialog_error_color" UID="67-11-7" ValueRef="1-9-16" ValueType="Color" />
+        <Property Comment="DW Search Background Color" DefaultValue="#0d000000" DestAttribName="dw_winset_search_bg_color" UID="67-12-1" ValueRef="1-59-1" ValueType="Color" />
+        <Property Comment="DW Search Hint Text Color" DefaultValue="#ff7a7a7a" DestAttribName="dw_winset_search_hint_text_color" UID="67-12-2" ValueRef="1-59-4" ValueType="TextColor" />
+        <Property Comment="DW Thumb Disabled Color" DefaultValue="#ff9c9c9c" DestAttribName="dw_winset_widget_settings_seek_bar_tick_color" UID="67-13-1" ValueRef="24-B" ValueType="Color" />
+        <Property Comment="DW Bar Background Color" DefaultValue="#66cacaca" DestAttribName="dw_winset_widget_settings_seek_bar_background_color" Opacity="40" UID="67-13-2" ValueRef="24-B" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

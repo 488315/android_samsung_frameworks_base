@@ -1,0 +1,103 @@
+package com.android.systemui.media.mediaoutput.icons.device;
+
+import androidx.compose.material.icons.outlined.WidgetsKt$$ExternalSyntheticOutline0;
+import androidx.compose.material3.ComposableSingletons$SnackbarKt$lambda1$1$$ExternalSyntheticOutline0;
+import androidx.compose.ui.graphics.ColorKt;
+import androidx.compose.ui.graphics.PathFillType;
+import androidx.compose.ui.graphics.SolidColor;
+import androidx.compose.ui.graphics.StrokeCap;
+import androidx.compose.ui.graphics.StrokeJoin;
+import androidx.compose.ui.graphics.vector.ImageVector;
+import androidx.compose.ui.graphics.vector.PathBuilder;
+import androidx.compose.ui.unit.Dp;
+import com.samsung.android.knox.custom.IKnoxCustomManager;
+import kotlin.jvm.functions.Function0;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final /* synthetic */ class CarKt$$ExternalSyntheticLambda0 implements Function0 {
+    @Override // kotlin.jvm.functions.Function0
+    public final Object invoke() {
+        float f = (float) 36.0d;
+        Dp.Companion companion = Dp.Companion;
+        ImageVector.Builder builder = new ImageVector.Builder("Car", f, f, 36.0f, 36.0f, 0L, 0, false, IKnoxCustomManager.Stub.TRANSACTION_setUsbConnectionType, null);
+        SolidColor solidColor = new SolidColor(ColorKt.Color(4278190080L), null);
+        SolidColor solidColor2 = new SolidColor(ColorKt.Color(0), null);
+        StrokeCap.Companion.getClass();
+        StrokeJoin.Companion.getClass();
+        PathFillType.Companion.getClass();
+        PathBuilder pathBuilder = new PathBuilder();
+        pathBuilder.moveTo(25.2905f, 25.5545f);
+        pathBuilder.lineTo(25.2925f, 24.8955f);
+        pathBuilder.lineTo(25.4175f, 24.8965f);
+        pathBuilder.lineTo(25.4255f, 24.8965f);
+        pathBuilder.curveTo(26.1385f, 24.8965f, 26.8005f, 24.6815f, 27.3625f, 24.3235f);
+        ComposableSingletons$SnackbarKt$lambda1$1$$ExternalSyntheticOutline0.m(pathBuilder, 27.3625f, 25.5585f, 25.2905f, 25.5545f);
+        pathBuilder.moveTo(10.6875f, 25.5205f);
+        pathBuilder.lineTo(8.6245f, 25.5155f);
+        pathBuilder.lineTo(8.6245f, 24.2835f);
+        pathBuilder.curveTo(9.2005f, 24.6545f, 9.8665f, 24.8595f, 10.5655f, 24.8615f);
+        ComposableSingletons$SnackbarKt$lambda1$1$$ExternalSyntheticOutline0.m(pathBuilder, 10.6895f, 24.8615f, 10.6875f, 25.5205f);
+        pathBuilder.moveTo(11.5825f, 11.1985f);
+        pathBuilder.curveTo(11.7355f, 10.8085f, 12.2755f, 10.4395f, 12.6945f, 10.4395f);
+        pathBuilder.lineTo(12.6965f, 10.4395f);
+        pathBuilder.lineTo(23.0955f, 10.4645f);
+        pathBuilder.curveTo(23.5245f, 10.4645f, 24.0895f, 10.8405f, 24.2565f, 11.2365f);
+        pathBuilder.lineTo(25.8165f, 14.9355f);
+        pathBuilder.curveTo(25.6915f, 14.9215f, 25.5685f, 14.8985f, 25.4415f, 14.8985f);
+        pathBuilder.lineTo(10.5805f, 14.8635f);
+        pathBuilder.curveTo(10.4275f, 14.8635f, 10.2815f, 14.8895f, 10.1345f, 14.9085f);
+        WidgetsKt$$ExternalSyntheticOutline0.m(pathBuilder, 11.5825f, 11.1985f, 8.6335f, 20.1765f);
+        pathBuilder.lineTo(12.3165f, 20.1855f);
+        pathBuilder.lineTo(12.3205f, 18.5055f);
+        pathBuilder.lineTo(8.6375f, 18.4955f);
+        pathBuilder.lineTo(8.6375f, 18.4805f);
+        pathBuilder.curveTo(8.6395f, 17.4115f, 9.5115f, 16.5425f, 10.5855f, 16.5425f);
+        pathBuilder.lineTo(25.4375f, 16.5775f);
+        pathBuilder.curveTo(25.9525f, 16.5785f, 26.4395f, 16.7835f, 26.8075f, 17.1525f);
+        pathBuilder.curveTo(27.1745f, 17.5215f, 27.3765f, 18.0095f, 27.3755f, 18.5255f);
+        pathBuilder.lineTo(27.3755f, 18.5405f);
+        pathBuilder.lineTo(23.6935f, 18.5325f);
+        pathBuilder.lineTo(23.6895f, 20.2115f);
+        pathBuilder.lineTo(27.3715f, 20.2205f);
+        pathBuilder.lineTo(27.3685f, 21.2775f);
+        pathBuilder.curveTo(27.3665f, 22.3455f, 26.4945f, 23.2155f, 25.4255f, 23.2155f);
+        pathBuilder.lineTo(25.4255f, 24.0565f);
+        pathBuilder.lineTo(25.4215f, 23.2155f);
+        pathBuilder.lineTo(10.5695f, 23.1815f);
+        pathBuilder.curveTo(10.0535f, 23.1795f, 9.5675f, 22.9765f, 9.1995f, 22.6065f);
+        pathBuilder.curveTo(8.8325f, 22.2365f, 8.6305f, 21.7485f, 8.6315f, 21.2335f);
+        WidgetsKt$$ExternalSyntheticOutline0.m(pathBuilder, 8.6335f, 20.1765f, 29.0555f, 18.5295f);
+        pathBuilder.curveTo(29.0575f, 17.6485f, 28.7305f, 16.8225f, 28.1555f, 16.1595f);
+        pathBuilder.lineTo(25.8035f, 10.5825f);
+        pathBuilder.curveTo(25.3715f, 9.5605f, 24.2085f, 8.7865f, 23.0995f, 8.7845f);
+        pathBuilder.lineTo(12.7005f, 8.7595f);
+        pathBuilder.lineTo(12.6955f, 8.7595f);
+        pathBuilder.curveTo(11.5755f, 8.7595f, 10.4255f, 9.5445f, 10.0185f, 10.5865f);
+        pathBuilder.lineTo(8.4345f, 14.6405f);
+        pathBuilder.curveTo(8.1625f, 15.3375f, 7.9035f, 15.9995f, 7.8485f, 16.1325f);
+        pathBuilder.curveTo(7.3025f, 16.7655f, 6.9595f, 17.5785f, 6.9575f, 18.4775f);
+        pathBuilder.lineTo(6.9515f, 21.2295f);
+        pathBuilder.curveTo(6.9515f, 21.2455f, 6.9555f, 21.2615f, 6.9565f, 21.2795f);
+        pathBuilder.lineTo(6.9445f, 21.2795f);
+        pathBuilder.lineTo(6.9445f, 26.0755f);
+        pathBuilder.curveTo(6.9445f, 26.6905f, 7.4445f, 27.1925f, 8.0605f, 27.1945f);
+        pathBuilder.lineTo(11.2485f, 27.2005f);
+        pathBuilder.curveTo(11.8645f, 27.2005f, 12.3665f, 26.7005f, 12.3665f, 26.0855f);
+        pathBuilder.lineTo(12.3695f, 24.8655f);
+        pathBuilder.lineTo(23.6125f, 24.8915f);
+        pathBuilder.lineTo(23.6095f, 26.1145f);
+        pathBuilder.curveTo(23.6095f, 26.7295f, 24.1095f, 27.2305f, 24.7255f, 27.2335f);
+        pathBuilder.lineTo(27.9215f, 27.2405f);
+        pathBuilder.lineTo(27.9255f, 27.2405f);
+        pathBuilder.curveTo(28.2225f, 27.2405f, 28.5025f, 27.1235f, 28.7135f, 26.9135f);
+        pathBuilder.curveTo(28.9255f, 26.7025f, 29.0425f, 26.4215f, 29.0425f, 26.1225f);
+        pathBuilder.lineTo(29.0425f, 21.3555f);
+        pathBuilder.lineTo(29.0415f, 21.3555f);
+        pathBuilder.curveTo(29.0415f, 21.3295f, 29.0485f, 21.3065f, 29.0485f, 21.2815f);
+        pathBuilder.lineTo(29.0555f, 18.5295f);
+        pathBuilder.close();
+        builder.m565addPathoIyEayM("", pathBuilder._nodes, 0, solidColor, 1.0f, solidColor2, 1.0f, 1.0f, 0, 0, 4.0f, 0.0f, 1.0f, 0.0f);
+        return builder.build();
+    }
+}

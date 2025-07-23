@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextAppearance.Toast" parent="@style/TextAppearance">
+        <item name="textSize">15.0sp</item>
+        <item name="fontFamily">roboto</item>
+    </style>
+</resources>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:id="@id/ap_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="6.0dip" android:minHeight="70.0dip" android:paddingStart="@dimen/sec_qs_detail_items_side_padding" android:paddingEnd="@dimen/sec_qs_detail_items_side_padding">
+        <TextView android:textSize="13.0sp" android:textColor="@color/sec_qs_detail_secondary_text_color" android:ellipsize="end" android:id="@id/ap_name_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/wifi_ssid" android:importantForAccessibility="no" android:textDirection="locale" android:textAlignment="viewStart" />
+        <TextView android:textSize="18.0sp" android:textColor="@color/sec_qs_detail_primary_text_color" android:ellipsize="end" android:id="@id/ap_name" android:layout_width="fill_parent" android:layout_height="wrap_content" android:importantForAccessibility="no" android:textDirection="locale" android:textAlignment="viewStart" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@id/password_layout" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="70.0dip" android:paddingStart="@dimen/sec_qs_detail_items_side_padding" android:paddingEnd="@dimen/sec_qs_detail_items_side_padding">
+        <TextView android:textSize="13.0sp" android:textColor="@color/sec_qs_detail_secondary_text_color" android:ellipsize="end" android:id="@id/ap_password_title" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/mobile_hotspot_detail_password" android:importantForAccessibility="no" android:textDirection="locale" android:textAlignment="viewStart" />
+        <TextView android:textSize="18.0sp" android:textColor="@color/sec_qs_detail_primary_text_color" android:ellipsize="end" android:id="@id/ap_password" android:layout_width="fill_parent" android:layout_height="wrap_content" android:importantForAccessibility="no" android:textDirection="locale" android:textAlignment="viewStart" />
+    </LinearLayout>
+    <LinearLayout android:orientation="vertical" android:id="@id/connected_list_container" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:orientation="horizontal" android:paddingBottom="15.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content">
+            <TextView android:textSize="14.0sp" android:textColor="@color/sec_qs_detail_secondary_text_color" android:gravity="center" android:id="@id/connected_list_title" android:visibility="visible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/mobile_hotspot_detail_connected_devices" android:paddingStart="@dimen/qs_detail_items_side_padding" />
+            <View android:layout_gravity="center" android:id="@id/connected_list_title_divider" android:background="@drawable/sec_qs_detail_sub_header_divider" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginStart="@dimen/qs_detail_category_divider_start" android:layout_marginEnd="@dimen/qs_detail_category_divider_end" />
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:id="@id/connected_devices" android:layout_width="fill_parent" android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

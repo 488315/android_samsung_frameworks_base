@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set android:ordering="together"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt">
+    <objectAnimator android:interpolator="@drawable/$$qs_mic_access_off__5__0" android:duration="250" android:startOffset="0" android:valueFrom="M-9.89 -7.81 C-9.89,-7.81 -9.9,-7.8 -9.9,-7.8 C-9.9,-7.8 -8.5,-9.2 -8.5,-9.2 C-8.5,-9.2 -8.49,-9.21 -8.49,-9.21 C-8.49,-9.21 -9.89,-7.81 -9.89,-7.81c " android:valueTo="M8.5 10.6 C8.5,10.6 -9.9,-7.8 -9.9,-7.8 C-9.9,-7.8 -8.5,-9.2 -8.5,-9.2 C-8.5,-9.2 9.9,9.2 9.9,9.2 C9.9,9.2 8.5,10.6 8.5,10.6c " android:valueType="pathType" android:propertyName="pathData" />
+</set>

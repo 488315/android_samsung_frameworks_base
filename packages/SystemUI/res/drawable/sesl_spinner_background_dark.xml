@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.graphics.drawable.SeslRecoilDrawable android:paddingEnd="@dimen/sesl_spinner_arrow_icon_entire_width" android:paddingMode="stack" app:seslRecoilColor="@color/sesl_ripple_color_dark" xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:gravity="end|center" android:width="@dimen/sesl_spinner_arrow_icon_width" android:drawable="@drawable/sesl_spinner_background_am_alpha_dark" android:end="@dimen/sesl_spinner_arrow_icon_end_padding" />
+    <item android:id="@android:id/mask" android:drawable="@drawable/sesl_spinner_background_mask" />
+</androidx.appcompat.graphics.drawable.SeslRecoilDrawable>

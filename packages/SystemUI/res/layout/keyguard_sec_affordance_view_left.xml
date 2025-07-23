@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_gravity="start|bottom|center" android:orientation="vertical" android:id="@id/left_shortcut_area" android:clipChildren="false" android:layout_width="wrap_content" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:sysui="http://schemas.android.com/apk/res-auto">
+    <FrameLayout android:id="@id/start_button_effectview" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <com.android.systemui.statusbar.KeyguardSecAffordanceView android:id="@id/start_button" android:layout_width="@dimen/keyguard_affordance_width" android:layout_height="@dimen/keyguard_affordance_height" android:scaleType="fitXY" android:hapticFeedbackEnabled="true" android:contentDescription="@string/kg_tts_shortcut_phone" sysui:wallpaperArea="none" />
+    </FrameLayout>
+</LinearLayout>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.samsung.android.multiwindow.FreeformResizeGuideView android:layout_width="fill_parent" android:layout_height="fill_parent" android:layoutDirection="ltr"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:id="@id/freeform_resize_guide_dim" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="fitXY" />
+    <ImageView android:id="@id/freeform_resize_guide_app_icon" android:visibility="invisible" android:layout_width="@dimen/freeform_resize_guide_view_app_icon_size" android:layout_height="@dimen/freeform_resize_guide_view_app_icon_size" android:scaleType="fitXY" />
+</com.samsung.android.multiwindow.FreeformResizeGuideView>

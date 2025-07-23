@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animated-vector android:drawable="@drawable/$loader_horizontal_watch__0"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt">
+    <target android:name="_R_G_L_0_G_L_6_G" android:animation="@drawable/$loader_horizontal_watch__1" />
+    <target android:name="_R_G_L_0_G_L_5_G" android:animation="@drawable/$loader_horizontal_watch__2" />
+    <target android:name="_R_G_L_0_G_L_5_G" android:animation="@drawable/$loader_horizontal_watch__3" />
+    <target android:name="_R_G_L_0_G_L_2_G" android:animation="@drawable/$loader_horizontal_watch__4" />
+    <target android:name="_R_G_L_0_G_L_2_G" android:animation="@drawable/$loader_horizontal_watch__5" />
+    <target android:name="time_group" android:animation="@drawable/$loader_horizontal_watch__6" />
+</animated-vector>

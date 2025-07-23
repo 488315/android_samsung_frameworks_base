@@ -1,0 +1,800 @@
+package androidx.datastore.preferences.protobuf;
+
+import androidx.compose.ui.platform.AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0;
+import androidx.datastore.preferences.protobuf.Utf8;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes.dex */
+public abstract class CodedOutputStream extends ByteOutput {
+    public CodedOutputStreamWriter wrapper;
+    public static final Logger logger = Logger.getLogger(CodedOutputStream.class.getName());
+    public static final boolean HAS_UNSAFE_ARRAY_OPERATIONS = UnsafeUtil.HAS_UNSAFE_ARRAY_OPERATIONS;
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public abstract class AbstractBufferedEncoder extends CodedOutputStream {
+        public final byte[] buffer;
+        public final int limit;
+        public int position;
+
+        public AbstractBufferedEncoder(int i) {
+            super();
+            if (i < 0) {
+                throw new IllegalArgumentException("bufferSize must be >= 0");
+            }
+            byte[] bArr = new byte[Math.max(i, 20)];
+            this.buffer = bArr;
+            this.limit = bArr.length;
+        }
+
+        public final void bufferFixed32NoTag(int i) {
+            int i2 = this.position;
+            int i3 = i2 + 1;
+            this.position = i3;
+            byte[] bArr = this.buffer;
+            bArr[i2] = (byte) (i & 255);
+            int i4 = i2 + 2;
+            this.position = i4;
+            bArr[i3] = (byte) ((i >> 8) & 255);
+            int i5 = i2 + 3;
+            this.position = i5;
+            bArr[i4] = (byte) ((i >> 16) & 255);
+            this.position = i2 + 4;
+            bArr[i5] = (byte) ((i >> 24) & 255);
+        }
+
+        public final void bufferFixed64NoTag(long j) {
+            int i = this.position;
+            int i2 = i + 1;
+            this.position = i2;
+            byte[] bArr = this.buffer;
+            bArr[i] = (byte) (j & 255);
+            int i3 = i + 2;
+            this.position = i3;
+            bArr[i2] = (byte) ((j >> 8) & 255);
+            int i4 = i + 3;
+            this.position = i4;
+            bArr[i3] = (byte) ((j >> 16) & 255);
+            int i5 = i + 4;
+            this.position = i5;
+            bArr[i4] = (byte) (255 & (j >> 24));
+            int i6 = i + 5;
+            this.position = i6;
+            bArr[i5] = (byte) (((int) (j >> 32)) & 255);
+            int i7 = i + 6;
+            this.position = i7;
+            bArr[i6] = (byte) (((int) (j >> 40)) & 255);
+            int i8 = i + 7;
+            this.position = i8;
+            bArr[i7] = (byte) (((int) (j >> 48)) & 255);
+            this.position = i + 8;
+            bArr[i8] = (byte) (((int) (j >> 56)) & 255);
+        }
+
+        public final void bufferTag(int i, int i2) {
+            bufferUInt32NoTag((i << 3) | i2);
+        }
+
+        public final void bufferUInt32NoTag(int i) {
+            boolean z = CodedOutputStream.HAS_UNSAFE_ARRAY_OPERATIONS;
+            byte[] bArr = this.buffer;
+            if (z) {
+                while ((i & (-128)) != 0) {
+                    int i2 = this.position;
+                    this.position = i2 + 1;
+                    UnsafeUtil.putByte(bArr, i2, (byte) ((i | 128) & 255));
+                    i >>>= 7;
+                }
+                int i3 = this.position;
+                this.position = i3 + 1;
+                UnsafeUtil.putByte(bArr, i3, (byte) i);
+                return;
+            }
+            while ((i & (-128)) != 0) {
+                int i4 = this.position;
+                this.position = i4 + 1;
+                bArr[i4] = (byte) ((i | 128) & 255);
+                i >>>= 7;
+            }
+            int i5 = this.position;
+            this.position = i5 + 1;
+            bArr[i5] = (byte) i;
+        }
+
+        public final void bufferUInt64NoTag(long j) {
+            boolean z = CodedOutputStream.HAS_UNSAFE_ARRAY_OPERATIONS;
+            byte[] bArr = this.buffer;
+            if (z) {
+                while ((j & (-128)) != 0) {
+                    int i = this.position;
+                    this.position = i + 1;
+                    UnsafeUtil.putByte(bArr, i, (byte) ((((int) j) | 128) & 255));
+                    j >>>= 7;
+                }
+                int i2 = this.position;
+                this.position = i2 + 1;
+                UnsafeUtil.putByte(bArr, i2, (byte) j);
+                return;
+            }
+            while ((j & (-128)) != 0) {
+                int i3 = this.position;
+                this.position = i3 + 1;
+                bArr[i3] = (byte) ((((int) j) | 128) & 255);
+                j >>>= 7;
+            }
+            int i4 = this.position;
+            this.position = i4 + 1;
+            bArr[i4] = (byte) j;
+        }
+    }
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public class OutOfSpaceException extends IOException {
+        private static final long serialVersionUID = -6947486886997889499L;
+
+        public OutOfSpaceException() {
+            super("CodedOutputStream was writing to a flat byte array and ran out of space.");
+        }
+
+        public OutOfSpaceException(String str) {
+            super(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("CodedOutputStream was writing to a flat byte array and ran out of space.: ", str));
+        }
+
+        public OutOfSpaceException(Throwable th) {
+            super("CodedOutputStream was writing to a flat byte array and ran out of space.", th);
+        }
+
+        public OutOfSpaceException(String str, Throwable th) {
+            super(AndroidCompositionLocals_androidKt$$ExternalSyntheticOutline0.m("CodedOutputStream was writing to a flat byte array and ran out of space.: ", str), th);
+        }
+    }
+
+    public static int computeBytesSize(int i, ByteString byteString) {
+        return computeBytesSizeNoTag(byteString) + computeTagSize(i);
+    }
+
+    public static int computeBytesSizeNoTag(ByteString byteString) {
+        int size = byteString.size();
+        return computeUInt32SizeNoTag(size) + size;
+    }
+
+    public static int computeLazyFieldSizeNoTag(LazyFieldLite lazyFieldLite) {
+        int size;
+        if (lazyFieldLite.memoizedBytes != null) {
+            size = lazyFieldLite.memoizedBytes.size();
+        } else {
+            ByteString byteString = lazyFieldLite.delayedBytes;
+            size = byteString != null ? byteString.size() : lazyFieldLite.value != null ? ((GeneratedMessageLite) lazyFieldLite.value).getSerializedSize(null) : 0;
+        }
+        return computeUInt32SizeNoTag(size) + size;
+    }
+
+    public static int computeSInt32SizeNoTag(int i) {
+        return computeUInt32SizeNoTag((i >> 31) ^ (i << 1));
+    }
+
+    public static int computeSInt64SizeNoTag(long j) {
+        return computeUInt64SizeNoTag((j >> 63) ^ (j << 1));
+    }
+
+    public static int computeStringSizeNoTag(String str) {
+        int length;
+        try {
+            length = Utf8.encodedLength(str);
+        } catch (Utf8.UnpairedSurrogateException unused) {
+            length = str.getBytes(Internal.UTF_8).length;
+        }
+        return computeUInt32SizeNoTag(length) + length;
+    }
+
+    public static int computeTagSize(int i) {
+        return computeUInt32SizeNoTag(i << 3);
+    }
+
+    public static int computeUInt32SizeNoTag(int i) {
+        return (352 - (Integer.numberOfLeadingZeros(i) * 9)) >>> 6;
+    }
+
+    public static int computeUInt64SizeNoTag(long j) {
+        return (640 - (Long.numberOfLeadingZeros(j) * 9)) >>> 6;
+    }
+
+    public final void inefficientWriteStringNoTag(String str, Utf8.UnpairedSurrogateException unpairedSurrogateException) {
+        logger.log(Level.WARNING, "Converting ill-formed UTF-16. Your Protocol Buffer will not round trip correctly!", (Throwable) unpairedSurrogateException);
+        byte[] bytes = str.getBytes(Internal.UTF_8);
+        try {
+            writeUInt32NoTag(bytes.length);
+            writeLazy(0, bytes.length, bytes);
+        } catch (IndexOutOfBoundsException e) {
+            throw new OutOfSpaceException(e);
+        }
+    }
+
+    public abstract void write(byte b);
+
+    public abstract void writeBool(int i, boolean z);
+
+    public abstract void writeByteArrayNoTag(int i, byte[] bArr);
+
+    public abstract void writeBytes(int i, ByteString byteString);
+
+    public abstract void writeBytesNoTag(ByteString byteString);
+
+    public abstract void writeFixed32(int i, int i2);
+
+    public abstract void writeFixed32NoTag(int i);
+
+    public abstract void writeFixed64(int i, long j);
+
+    public abstract void writeFixed64NoTag(long j);
+
+    public abstract void writeInt32(int i, int i2);
+
+    public abstract void writeInt32NoTag(int i);
+
+    public abstract void writeMessage(int i, MessageLite messageLite, Schema schema);
+
+    public abstract void writeMessageNoTag(MessageLite messageLite);
+
+    public abstract void writeMessageSetExtension(int i, MessageLite messageLite);
+
+    public abstract void writeRawMessageSetExtension(int i, ByteString byteString);
+
+    public abstract void writeString(int i, String str);
+
+    public abstract void writeStringNoTag(String str);
+
+    public abstract void writeTag(int i, int i2);
+
+    public abstract void writeUInt32(int i, int i2);
+
+    public abstract void writeUInt32NoTag(int i);
+
+    public abstract void writeUInt64(int i, long j);
+
+    public abstract void writeUInt64NoTag(long j);
+
+    private CodedOutputStream() {
+    }
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public class ArrayEncoder extends CodedOutputStream {
+        public final byte[] buffer;
+        public final int limit;
+        public int position;
+
+        public ArrayEncoder(byte[] bArr, int i, int i2) {
+            super();
+            if (bArr == null) {
+                throw new NullPointerException("buffer");
+            }
+            int i3 = i + i2;
+            if ((i | i2 | (bArr.length - i3)) < 0) {
+                throw new IllegalArgumentException(String.format("Array range is invalid. Buffer.length=%d, offset=%d, length=%d", Integer.valueOf(bArr.length), Integer.valueOf(i), Integer.valueOf(i2)));
+            }
+            this.buffer = bArr;
+            this.position = i;
+            this.limit = i3;
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void write(byte b) {
+            try {
+                byte[] bArr = this.buffer;
+                int i = this.position;
+                this.position = i + 1;
+                bArr[i] = b;
+            } catch (IndexOutOfBoundsException e) {
+                throw new OutOfSpaceException(String.format("Pos: %d, limit: %d, len: %d", Integer.valueOf(this.position), Integer.valueOf(this.limit), 1), e);
+            }
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeBool(int i, boolean z) {
+            writeTag(i, 0);
+            write(z ? (byte) 1 : (byte) 0);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeByteArrayNoTag(int i, byte[] bArr) {
+            writeUInt32NoTag(i);
+            write(bArr, 0, i);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeBytes(int i, ByteString byteString) {
+            writeTag(i, 2);
+            writeBytesNoTag(byteString);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeBytesNoTag(ByteString byteString) {
+            writeUInt32NoTag(byteString.size());
+            byteString.writeTo(this);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeFixed32(int i, int i2) {
+            writeTag(i, 5);
+            writeFixed32NoTag(i2);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeFixed32NoTag(int i) {
+            try {
+                byte[] bArr = this.buffer;
+                int i2 = this.position;
+                int i3 = i2 + 1;
+                this.position = i3;
+                bArr[i2] = (byte) (i & 255);
+                int i4 = i2 + 2;
+                this.position = i4;
+                bArr[i3] = (byte) ((i >> 8) & 255);
+                int i5 = i2 + 3;
+                this.position = i5;
+                bArr[i4] = (byte) ((i >> 16) & 255);
+                this.position = i2 + 4;
+                bArr[i5] = (byte) ((i >> 24) & 255);
+            } catch (IndexOutOfBoundsException e) {
+                throw new OutOfSpaceException(String.format("Pos: %d, limit: %d, len: %d", Integer.valueOf(this.position), Integer.valueOf(this.limit), 1), e);
+            }
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeFixed64(int i, long j) {
+            writeTag(i, 1);
+            writeFixed64NoTag(j);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeFixed64NoTag(long j) {
+            try {
+                byte[] bArr = this.buffer;
+                int i = this.position;
+                int i2 = i + 1;
+                this.position = i2;
+                bArr[i] = (byte) (((int) j) & 255);
+                int i3 = i + 2;
+                this.position = i3;
+                bArr[i2] = (byte) (((int) (j >> 8)) & 255);
+                int i4 = i + 3;
+                this.position = i4;
+                bArr[i3] = (byte) (((int) (j >> 16)) & 255);
+                int i5 = i + 4;
+                this.position = i5;
+                bArr[i4] = (byte) (((int) (j >> 24)) & 255);
+                int i6 = i + 5;
+                this.position = i6;
+                bArr[i5] = (byte) (((int) (j >> 32)) & 255);
+                int i7 = i + 6;
+                this.position = i7;
+                bArr[i6] = (byte) (((int) (j >> 40)) & 255);
+                int i8 = i + 7;
+                this.position = i8;
+                bArr[i7] = (byte) (((int) (j >> 48)) & 255);
+                this.position = i + 8;
+                bArr[i8] = (byte) (((int) (j >> 56)) & 255);
+            } catch (IndexOutOfBoundsException e) {
+                throw new OutOfSpaceException(String.format("Pos: %d, limit: %d, len: %d", Integer.valueOf(this.position), Integer.valueOf(this.limit), 1), e);
+            }
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeInt32(int i, int i2) {
+            writeTag(i, 0);
+            writeInt32NoTag(i2);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeInt32NoTag(int i) {
+            if (i >= 0) {
+                writeUInt32NoTag(i);
+            } else {
+                writeUInt64NoTag(i);
+            }
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.ByteOutput
+        public final void writeLazy(int i, int i2, byte[] bArr) {
+            write(bArr, i, i2);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeMessage(int i, MessageLite messageLite, Schema schema) {
+            writeTag(i, 2);
+            writeUInt32NoTag(((AbstractMessageLite) messageLite).getSerializedSize(schema));
+            schema.writeTo(messageLite, this.wrapper);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeMessageNoTag(MessageLite messageLite) {
+            writeUInt32NoTag(((GeneratedMessageLite) messageLite).getSerializedSize(null));
+            ((GeneratedMessageLite) messageLite).writeTo(this);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeMessageSetExtension(int i, MessageLite messageLite) {
+            writeTag(1, 3);
+            writeUInt32(2, i);
+            writeTag(3, 2);
+            writeMessageNoTag(messageLite);
+            writeTag(1, 4);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeRawMessageSetExtension(int i, ByteString byteString) {
+            writeTag(1, 3);
+            writeUInt32(2, i);
+            writeBytes(3, byteString);
+            writeTag(1, 4);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeString(int i, String str) {
+            writeTag(i, 2);
+            writeStringNoTag(str);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeStringNoTag(String str) {
+            int i = this.position;
+            try {
+                int computeUInt32SizeNoTag = CodedOutputStream.computeUInt32SizeNoTag(str.length() * 3);
+                int computeUInt32SizeNoTag2 = CodedOutputStream.computeUInt32SizeNoTag(str.length());
+                int i2 = this.limit;
+                byte[] bArr = this.buffer;
+                if (computeUInt32SizeNoTag2 != computeUInt32SizeNoTag) {
+                    writeUInt32NoTag(Utf8.encodedLength(str));
+                    int i3 = this.position;
+                    this.position = Utf8.processor.encodeUtf8(str, bArr, i3, i2 - i3);
+                    return;
+                }
+                int i4 = i + computeUInt32SizeNoTag2;
+                this.position = i4;
+                int encodeUtf8 = Utf8.processor.encodeUtf8(str, bArr, i4, i2 - i4);
+                this.position = i;
+                writeUInt32NoTag((encodeUtf8 - i) - computeUInt32SizeNoTag2);
+                this.position = encodeUtf8;
+            } catch (Utf8.UnpairedSurrogateException e) {
+                this.position = i;
+                inefficientWriteStringNoTag(str, e);
+            } catch (IndexOutOfBoundsException e2) {
+                throw new OutOfSpaceException(e2);
+            }
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeTag(int i, int i2) {
+            writeUInt32NoTag((i << 3) | i2);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeUInt32(int i, int i2) {
+            writeTag(i, 0);
+            writeUInt32NoTag(i2);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeUInt32NoTag(int i) {
+            while (true) {
+                int i2 = i & (-128);
+                byte[] bArr = this.buffer;
+                if (i2 == 0) {
+                    int i3 = this.position;
+                    this.position = i3 + 1;
+                    bArr[i3] = (byte) i;
+                    return;
+                } else {
+                    try {
+                        int i4 = this.position;
+                        this.position = i4 + 1;
+                        bArr[i4] = (byte) ((i | 128) & 255);
+                        i >>>= 7;
+                    } catch (IndexOutOfBoundsException e) {
+                        throw new OutOfSpaceException(String.format("Pos: %d, limit: %d, len: %d", Integer.valueOf(this.position), Integer.valueOf(this.limit), 1), e);
+                    }
+                }
+                throw new OutOfSpaceException(String.format("Pos: %d, limit: %d, len: %d", Integer.valueOf(this.position), Integer.valueOf(this.limit), 1), e);
+            }
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeUInt64(int i, long j) {
+            writeTag(i, 0);
+            writeUInt64NoTag(j);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeUInt64NoTag(long j) {
+            boolean z = CodedOutputStream.HAS_UNSAFE_ARRAY_OPERATIONS;
+            int i = this.limit;
+            byte[] bArr = this.buffer;
+            if (z && i - this.position >= 10) {
+                while ((j & (-128)) != 0) {
+                    int i2 = this.position;
+                    this.position = i2 + 1;
+                    UnsafeUtil.putByte(bArr, i2, (byte) ((((int) j) | 128) & 255));
+                    j >>>= 7;
+                }
+                int i3 = this.position;
+                this.position = i3 + 1;
+                UnsafeUtil.putByte(bArr, i3, (byte) j);
+                return;
+            }
+            while ((j & (-128)) != 0) {
+                try {
+                    int i4 = this.position;
+                    this.position = i4 + 1;
+                    bArr[i4] = (byte) ((((int) j) | 128) & 255);
+                    j >>>= 7;
+                } catch (IndexOutOfBoundsException e) {
+                    throw new OutOfSpaceException(String.format("Pos: %d, limit: %d, len: %d", Integer.valueOf(this.position), Integer.valueOf(i), 1), e);
+                }
+            }
+            int i5 = this.position;
+            this.position = i5 + 1;
+            bArr[i5] = (byte) j;
+        }
+
+        public final void write(byte[] bArr, int i, int i2) {
+            try {
+                System.arraycopy(bArr, i, this.buffer, this.position, i2);
+                this.position += i2;
+            } catch (IndexOutOfBoundsException e) {
+                throw new OutOfSpaceException(String.format("Pos: %d, limit: %d, len: %d", Integer.valueOf(this.position), Integer.valueOf(this.limit), Integer.valueOf(i2)), e);
+            }
+        }
+    }
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class OutputStreamEncoder extends AbstractBufferedEncoder {
+        public final OutputStream out;
+
+        public OutputStreamEncoder(OutputStream outputStream, int i) {
+            super(i);
+            if (outputStream == null) {
+                throw new NullPointerException("out");
+            }
+            this.out = outputStream;
+        }
+
+        public final void doFlush() {
+            this.out.write(this.buffer, 0, this.position);
+            this.position = 0;
+        }
+
+        public final void flushIfNotAvailable(int i) {
+            if (this.limit - this.position < i) {
+                doFlush();
+            }
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void write(byte b) {
+            if (this.position == this.limit) {
+                doFlush();
+            }
+            int i = this.position;
+            this.position = i + 1;
+            this.buffer[i] = b;
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeBool(int i, boolean z) {
+            flushIfNotAvailable(11);
+            bufferTag(i, 0);
+            byte b = z ? (byte) 1 : (byte) 0;
+            int i2 = this.position;
+            this.position = i2 + 1;
+            this.buffer[i2] = b;
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeByteArrayNoTag(int i, byte[] bArr) {
+            writeUInt32NoTag(i);
+            write(bArr, 0, i);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeBytes(int i, ByteString byteString) {
+            writeTag(i, 2);
+            writeBytesNoTag(byteString);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeBytesNoTag(ByteString byteString) {
+            writeUInt32NoTag(byteString.size());
+            byteString.writeTo(this);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeFixed32(int i, int i2) {
+            flushIfNotAvailable(14);
+            bufferTag(i, 5);
+            bufferFixed32NoTag(i2);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeFixed32NoTag(int i) {
+            flushIfNotAvailable(4);
+            bufferFixed32NoTag(i);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeFixed64(int i, long j) {
+            flushIfNotAvailable(18);
+            bufferTag(i, 1);
+            bufferFixed64NoTag(j);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeFixed64NoTag(long j) {
+            flushIfNotAvailable(8);
+            bufferFixed64NoTag(j);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeInt32(int i, int i2) {
+            flushIfNotAvailable(20);
+            bufferTag(i, 0);
+            if (i2 >= 0) {
+                bufferUInt32NoTag(i2);
+            } else {
+                bufferUInt64NoTag(i2);
+            }
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeInt32NoTag(int i) {
+            if (i >= 0) {
+                writeUInt32NoTag(i);
+            } else {
+                writeUInt64NoTag(i);
+            }
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.ByteOutput
+        public final void writeLazy(int i, int i2, byte[] bArr) {
+            write(bArr, i, i2);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeMessage(int i, MessageLite messageLite, Schema schema) {
+            writeTag(i, 2);
+            writeUInt32NoTag(((AbstractMessageLite) messageLite).getSerializedSize(schema));
+            schema.writeTo(messageLite, this.wrapper);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeMessageNoTag(MessageLite messageLite) {
+            writeUInt32NoTag(((GeneratedMessageLite) messageLite).getSerializedSize(null));
+            ((GeneratedMessageLite) messageLite).writeTo(this);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeMessageSetExtension(int i, MessageLite messageLite) {
+            writeTag(1, 3);
+            writeUInt32(2, i);
+            writeTag(3, 2);
+            writeMessageNoTag(messageLite);
+            writeTag(1, 4);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeRawMessageSetExtension(int i, ByteString byteString) {
+            writeTag(1, 3);
+            writeUInt32(2, i);
+            writeBytes(3, byteString);
+            writeTag(1, 4);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeString(int i, String str) {
+            writeTag(i, 2);
+            writeStringNoTag(str);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeStringNoTag(String str) {
+            try {
+                int length = str.length() * 3;
+                int computeUInt32SizeNoTag = CodedOutputStream.computeUInt32SizeNoTag(length);
+                int i = computeUInt32SizeNoTag + length;
+                int i2 = this.limit;
+                if (i > i2) {
+                    byte[] bArr = new byte[length];
+                    int encodeUtf8 = Utf8.processor.encodeUtf8(str, bArr, 0, length);
+                    writeUInt32NoTag(encodeUtf8);
+                    write(bArr, 0, encodeUtf8);
+                    return;
+                }
+                if (i > i2 - this.position) {
+                    doFlush();
+                }
+                int computeUInt32SizeNoTag2 = CodedOutputStream.computeUInt32SizeNoTag(str.length());
+                int i3 = this.position;
+                byte[] bArr2 = this.buffer;
+                try {
+                    try {
+                        if (computeUInt32SizeNoTag2 == computeUInt32SizeNoTag) {
+                            int i4 = i3 + computeUInt32SizeNoTag2;
+                            this.position = i4;
+                            int encodeUtf82 = Utf8.processor.encodeUtf8(str, bArr2, i4, i2 - i4);
+                            this.position = i3;
+                            bufferUInt32NoTag((encodeUtf82 - i3) - computeUInt32SizeNoTag2);
+                            this.position = encodeUtf82;
+                        } else {
+                            int encodedLength = Utf8.encodedLength(str);
+                            bufferUInt32NoTag(encodedLength);
+                            this.position = Utf8.processor.encodeUtf8(str, bArr2, this.position, encodedLength);
+                        }
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new OutOfSpaceException(e);
+                    }
+                } catch (Utf8.UnpairedSurrogateException e2) {
+                    this.position = i3;
+                    throw e2;
+                }
+            } catch (Utf8.UnpairedSurrogateException e3) {
+                inefficientWriteStringNoTag(str, e3);
+            }
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeTag(int i, int i2) {
+            writeUInt32NoTag((i << 3) | i2);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeUInt32(int i, int i2) {
+            flushIfNotAvailable(20);
+            bufferTag(i, 0);
+            bufferUInt32NoTag(i2);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeUInt32NoTag(int i) {
+            flushIfNotAvailable(5);
+            bufferUInt32NoTag(i);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeUInt64(int i, long j) {
+            flushIfNotAvailable(20);
+            bufferTag(i, 0);
+            bufferUInt64NoTag(j);
+        }
+
+        @Override // androidx.datastore.preferences.protobuf.CodedOutputStream
+        public final void writeUInt64NoTag(long j) {
+            flushIfNotAvailable(10);
+            bufferUInt64NoTag(j);
+        }
+
+        public final void write(byte[] bArr, int i, int i2) {
+            int i3 = this.position;
+            int i4 = this.limit;
+            int i5 = i4 - i3;
+            byte[] bArr2 = this.buffer;
+            if (i5 >= i2) {
+                System.arraycopy(bArr, i, bArr2, i3, i2);
+                this.position += i2;
+                return;
+            }
+            System.arraycopy(bArr, i, bArr2, i3, i5);
+            int i6 = i + i5;
+            int i7 = i2 - i5;
+            this.position = i4;
+            doFlush();
+            if (i7 <= i4) {
+                System.arraycopy(bArr, i6, bArr2, 0, i7);
+                this.position = i7;
+            } else {
+                this.out.write(bArr, i6, i7);
+            }
+        }
+    }
+}

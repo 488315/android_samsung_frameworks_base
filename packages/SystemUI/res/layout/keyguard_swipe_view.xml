@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.keyguard.KeyguardSwipeView android:gravity="center" android:orientation="vertical" android:id="@id/keyguard_swipe_view" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:sysui="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <include android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" layout="@layout/keyguard_sec_bouncer_message_area" />
+        <com.android.systemui.widget.SystemUITextView android:gravity="center" android:id="@id/keyguard_indication_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:fontFamily="sec" android:accessibilityLiveRegion="polite" android:textFontWeight="400" sysui:originColor="keyguard_message_area_color" sysui:themeColor="theme_keyguard_message_area_text_color" sysui:whitebgColor="whitebg_keyguard_text_color" style="@style/keyguard_swipe_view_text_style" />
+    </LinearLayout>
+</com.android.keyguard.KeyguardSwipeView>

@@ -1,0 +1,58 @@
+package com.android.systemui.popup.viewmodel;
+
+import android.content.Intent;
+import com.android.keyguard.logging.CarrierTextManagerLogger$$ExternalSyntheticOutline0;
+import com.android.systemui.basic.util.LogWrapper;
+import com.android.systemui.popup.util.PopupUIIntentWrapper;
+import com.android.systemui.popup.util.PopupUIUtil;
+import com.android.systemui.popup.view.PopupUIAlertDialog;
+import com.android.systemui.popup.view.PopupUIAlertDialogFactory;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public class MWOverheatWarningViewModel implements PopupUIViewModel {
+    private static final String TAG = "MWOverheatWarningViewModel";
+    private PopupUIAlertDialogFactory mDialogFactory;
+    private PopupUIIntentWrapper mIntentWrapper;
+    private LogWrapper mLogWrapper;
+    private PopupUIAlertDialog mMWOverheatWarningDialog;
+
+    public MWOverheatWarningViewModel(PopupUIAlertDialogFactory popupUIAlertDialogFactory, LogWrapper logWrapper, PopupUIIntentWrapper popupUIIntentWrapper) {
+        this.mDialogFactory = popupUIAlertDialogFactory;
+        this.mLogWrapper = logWrapper;
+        this.mIntentWrapper = popupUIIntentWrapper;
+    }
+
+    @Override // com.android.systemui.popup.viewmodel.PopupUIViewModel
+    public void dismiss() {
+        PopupUIAlertDialog popupUIAlertDialog = this.mMWOverheatWarningDialog;
+        if (popupUIAlertDialog != null) {
+            popupUIAlertDialog.dismiss();
+        }
+    }
+
+    @Override // com.android.systemui.popup.viewmodel.PopupUIViewModel
+    public String getAction() {
+        return PopupUIUtil.ACTION_MULTI_WINDOW_ENABLE_CHANGED;
+    }
+
+    @Override // com.android.systemui.popup.viewmodel.PopupUIViewModel
+    public void show(Intent intent) {
+        if (this.mIntentWrapper.getAction(intent).equals(getAction())) {
+            String stringExtra = this.mIntentWrapper.getStringExtra(intent, PopupUIUtil.EXTRA_MULTI_WINDOW_ENABLE_REQUESTER);
+            boolean booleanExtra = this.mIntentWrapper.getBooleanExtra(intent, PopupUIUtil.EXTRA_MULTI_WINDOW_ENABLED, true);
+            boolean booleanExtra2 = this.mIntentWrapper.getBooleanExtra(intent, PopupUIUtil.EXTRA_IN_MULTI_WINDOW_MODE, false);
+            LogWrapper logWrapper = this.mLogWrapper;
+            StringBuilder m = CarrierTextManagerLogger$$ExternalSyntheticOutline0.m("show : ", stringExtra, ", ", ", ", booleanExtra);
+            m.append(booleanExtra2);
+            logWrapper.d(TAG, m.toString());
+            PopupUIAlertDialog overheatWarningDialog = this.mDialogFactory.getOverheatWarningDialog(stringExtra, booleanExtra, booleanExtra2);
+            this.mMWOverheatWarningDialog = overheatWarningDialog;
+            if (overheatWarningDialog != null) {
+                overheatWarningDialog.show();
+            } else {
+                this.mLogWrapper.d(TAG, "show() invalid AlertDialog");
+            }
+        }
+    }
+}

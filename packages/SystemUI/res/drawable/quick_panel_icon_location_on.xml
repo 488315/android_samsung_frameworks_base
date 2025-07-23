@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list android:oneshot="true"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_location_000" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_location_001" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_location_002" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_location_003" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_location_004" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_location_005" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_location_006" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_location_007" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_location_008" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_location_009" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_location_010" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_location_011" />
+    <item android:duration="33" android:drawable="@drawable/quick_panel_icon_location_012" />
+</animation-list>

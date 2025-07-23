@@ -1,0 +1,118 @@
+package com.android.systemui.controls.controller.util;
+
+import android.content.ComponentName;
+import android.content.Context;
+import android.util.Log;
+import android.view.View;
+import androidx.appcompat.view.menu.MenuItemImpl;
+import com.android.systemui.Prefs;
+import com.android.systemui.R;
+import com.android.systemui.controls.controller.util.BadgeProviderImpl;
+import com.android.systemui.util.concurrency.DelayableExecutor;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final class BadgeProviderImpl implements BadgeProvider, BadgeSubject {
+    public static final Companion Companion = new Companion(null);
+    public final Set badgeNotRequiredSet;
+    public final Set badgeObservers = new LinkedHashSet();
+    public final Set badgeRequiredSet;
+    public final DelayableExecutor bgExecutor;
+    public final Context context;
+    public final DelayableExecutor uiExecutor;
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class Companion {
+        public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
+            this();
+        }
+
+        public static Set toPackagesSet(Set set) {
+            Set set2 = set;
+            ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(set2, 10));
+            Iterator it = set2.iterator();
+            while (it.hasNext()) {
+                arrayList.add(((ComponentName) it.next()).getPackageName());
+            }
+            return CollectionsKt___CollectionsKt.toSet(arrayList);
+        }
+
+        private Companion() {
+        }
+    }
+
+    public BadgeProviderImpl(Context context, DelayableExecutor delayableExecutor, DelayableExecutor delayableExecutor2) {
+        this.context = context;
+        this.bgExecutor = delayableExecutor;
+        this.uiExecutor = delayableExecutor2;
+        this.badgeRequiredSet = Prefs.get(context).getStringSet("ControlsBadgeRequired", new LinkedHashSet());
+        this.badgeNotRequiredSet = Prefs.get(context).getStringSet("ControlsBadgeNotRequired", new LinkedHashSet());
+    }
+
+    public static final void dismiss$flush$9(final BadgeProviderImpl badgeProviderImpl, final Set set, final String str, String str2) {
+        badgeProviderImpl.bgExecutor.execute(new Runnable() { // from class: com.android.systemui.controls.controller.util.BadgeProviderImpl$dismiss$flush$1$1
+            @Override // java.lang.Runnable
+            public final void run() {
+                BadgeProviderImpl badgeProviderImpl2 = BadgeProviderImpl.this;
+                String str3 = str;
+                Set<String> set2 = set;
+                BadgeProviderImpl.Companion companion = BadgeProviderImpl.Companion;
+                badgeProviderImpl2.getClass();
+                if (set2.isEmpty()) {
+                    Prefs.get(badgeProviderImpl2.context).edit().remove(str3).apply();
+                } else {
+                    Prefs.get(badgeProviderImpl2.context).edit().putStringSet(str3, set2).apply();
+                }
+            }
+        });
+        Log.d("BadgeProviderImpl", "dismiss(): " + str2 + ": " + set);
+    }
+
+    public static final void onServicesUpdated$flush(BadgeProviderImpl badgeProviderImpl, Set set, String str, String str2) {
+        badgeProviderImpl.getClass();
+        if (set.isEmpty()) {
+            Prefs.get(badgeProviderImpl.context).edit().remove(str).apply();
+        } else {
+            Prefs.get(badgeProviderImpl.context).edit().putStringSet(str, set).apply();
+        }
+        Log.d("BadgeProviderImpl", "onServicesUpdated(): " + str2 + ": " + set);
+    }
+
+    public final void dismiss() {
+        Set set = this.badgeRequiredSet;
+        if (set.isEmpty()) {
+            set = null;
+        }
+        if (set != null) {
+            Iterator it = this.badgeObservers.iterator();
+            while (it.hasNext()) {
+                MenuItemImpl menuItemImpl = (MenuItemImpl) ((BadgeObserver) it.next()).menuItem;
+                String str = menuItemImpl.mBadgeText;
+                if (str == null || !str.equals(null)) {
+                    menuItemImpl.mBadgeText = null;
+                    menuItemImpl.mMenu.onItemsChanged(false);
+                }
+            }
+            Set set2 = this.badgeNotRequiredSet;
+            set2.addAll(set);
+            dismiss$flush$9(this, set2, "ControlsBadgeNotRequired", "badgeNotRequiredSet");
+            set.clear();
+            dismiss$flush$9(this, set, "ControlsBadgeRequired", "badgeRequiredSet");
+        }
+    }
+
+    public final void setDescription(ComponentName componentName, View view, CharSequence charSequence) {
+        if (!this.badgeRequiredSet.contains(componentName.getPackageName())) {
+            view.setContentDescription(charSequence);
+            return;
+        }
+        view.setContentDescription(((Object) charSequence) + ", " + this.context.getResources().getString(R.string.controls_badge_description));
+    }
+}

@@ -1,0 +1,52 @@
+package com.android.systemui.qs.panels.shared.model;
+
+import com.android.systemui.common.shared.model.Icon;
+import com.android.systemui.common.shared.model.Text;
+import com.android.systemui.qs.pipeline.shared.TileSpec;
+import com.android.systemui.qs.shared.model.TileCategory;
+import kotlin.jvm.internal.Intrinsics;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final class EditTileData {
+    public final Text appName;
+    public final TileCategory category;
+    public final Icon icon;
+    public final Text label;
+    public final TileSpec tileSpec;
+
+    public EditTileData(TileSpec tileSpec, Icon icon, Text text, Text text2, TileCategory tileCategory) {
+        this.tileSpec = tileSpec;
+        this.icon = icon;
+        this.label = text;
+        this.appName = text2;
+        this.category = tileCategory;
+        if ((tileSpec instanceof TileSpec.PlatformTileSpec) && text2 == null) {
+            return;
+        }
+        if (!(tileSpec instanceof TileSpec.CustomTileSpec) || text2 == null) {
+            throw new IllegalStateException(("tileSpec: " + tileSpec + " - appName: " + text2 + ". appName must be non-null for custom tiles and only for custom tiles.").toString());
+        }
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof EditTileData)) {
+            return false;
+        }
+        EditTileData editTileData = (EditTileData) obj;
+        return Intrinsics.areEqual(this.tileSpec, editTileData.tileSpec) && Intrinsics.areEqual(this.icon, editTileData.icon) && Intrinsics.areEqual(this.label, editTileData.label) && Intrinsics.areEqual(this.appName, editTileData.appName) && this.category == editTileData.category;
+    }
+
+    public final int hashCode() {
+        int hashCode = (this.label.hashCode() + ((this.icon.hashCode() + (this.tileSpec.hashCode() * 31)) * 31)) * 31;
+        Text text = this.appName;
+        return this.category.hashCode() + ((hashCode + (text == null ? 0 : text.hashCode())) * 31);
+    }
+
+    public final String toString() {
+        return "EditTileData(tileSpec=" + this.tileSpec + ", icon=" + this.icon + ", label=" + this.label + ", appName=" + this.appName + ", category=" + this.category + ")";
+    }
+}

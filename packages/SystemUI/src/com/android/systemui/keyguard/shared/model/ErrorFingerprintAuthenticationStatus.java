@@ -1,0 +1,51 @@
+package com.android.systemui.keyguard.shared.model;
+
+import android.os.SystemClock;
+import android.support.v4.media.session.MediaSessionCompat$QueueItem$$ExternalSyntheticOutline0;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final class ErrorFingerprintAuthenticationStatus extends FingerprintAuthenticationStatus {
+    public final long createdAt;
+    public final String msg;
+    public final int msgId;
+
+    public /* synthetic */ ErrorFingerprintAuthenticationStatus(int i, String str, long j, int i2, DefaultConstructorMarker defaultConstructorMarker) {
+        this(i, (i2 & 2) != 0 ? null : str, (i2 & 4) != 0 ? SystemClock.elapsedRealtime() : j);
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof ErrorFingerprintAuthenticationStatus)) {
+            return false;
+        }
+        ErrorFingerprintAuthenticationStatus errorFingerprintAuthenticationStatus = (ErrorFingerprintAuthenticationStatus) obj;
+        return this.msgId == errorFingerprintAuthenticationStatus.msgId && Intrinsics.areEqual(this.msg, errorFingerprintAuthenticationStatus.msg) && this.createdAt == errorFingerprintAuthenticationStatus.createdAt;
+    }
+
+    public final int hashCode() {
+        int hashCode = Integer.hashCode(this.msgId) * 31;
+        String str = this.msg;
+        return Long.hashCode(this.createdAt) + ((hashCode + (str == null ? 0 : str.hashCode())) * 31);
+    }
+
+    public final String toString() {
+        StringBuilder sb = new StringBuilder("ErrorFingerprintAuthenticationStatus(msgId=");
+        sb.append(this.msgId);
+        sb.append(", msg=");
+        sb.append(this.msg);
+        sb.append(", createdAt=");
+        return MediaSessionCompat$QueueItem$$ExternalSyntheticOutline0.m(this.createdAt, ")", sb);
+    }
+
+    public ErrorFingerprintAuthenticationStatus(int i, String str, long j) {
+        super(Boolean.FALSE, null);
+        this.msgId = i;
+        this.msg = str;
+        this.createdAt = j;
+    }
+}

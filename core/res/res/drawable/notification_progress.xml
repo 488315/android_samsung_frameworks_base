@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:gravity="fill_horizontal|center" android:id="@id/background">
+        <com.android.internal.widget.NotificationProgressDrawable android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <segments android:height="@dimen/notification_progress_segments_height" android:color="?^attr-private/colorProgressBackgroundNormal" android:cornerRadius="@dimen/notification_progress_segments_corner_radius" android:fadedHeight="@dimen/notification_progress_segments_faded_height" />
+            <points android:color="?^attr-private/colorProgressBackgroundNormal" android:radius="@dimen/notification_progress_points_radius" android:inset="@dimen/notification_progress_points_inset" android:cornerRadius="@dimen/notification_progress_points_corner_radius" />
+        </com.android.internal.widget.NotificationProgressDrawable>
+    </item>
+</layer-list>

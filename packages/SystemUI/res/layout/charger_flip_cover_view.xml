@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.power.view.ChargerFlipCoverView android:layout_width="fill_parent" android:layout_height="fill_parent" android:layoutDirection="locale"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView android:layout_gravity="end" android:id="@id/flip_cover_card_view" android:clipChildren="false" android:clipToPadding="false" android:layout_width="@dimen/charging_flip_cover_card_width" android:layout_height="@dimen/charging_flip_cover_card_height" android:layout_marginTop="@dimen/charging_flip_cover_card_margin_top" android:alpha="0.0" android:layout_marginEnd="@dimen/charging_flip_cover_card_margin_end" app:cardBackgroundColor="@color/transparent" app:cardCornerRadius="@dimen/charging_flip_cover_card_radius">
+        <ImageView android:id="@id/background_blur" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        <com.airbnb.lottie.LottieAnimationView android:id="@id/battery_progressbar" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+        <LinearLayout android:layout_gravity="center" android:orientation="horizontal" android:id="@id/battery_level_container" android:clipChildren="false" android:clipToPadding="false" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <ImageView android:layout_gravity="center_vertical" android:id="@id/battery_icon" android:layout_width="@dimen/charging_flip_cover_icon_size" android:layout_height="@dimen/charging_flip_cover_icon_size" android:src="@drawable/ic_cover_charging" />
+            <TextView android:textSize="@dimen/charging_flip_cover_text_size" android:layout_gravity="center_vertical" android:id="@id/battery_level" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="sec" android:textFontWeight="700" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</com.android.systemui.power.view.ChargerFlipCoverView>

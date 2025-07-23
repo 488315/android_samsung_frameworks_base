@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.searcle.SearcleTipView android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:id="@id/searcle_tip_bubble" android:background="@drawable/searcle_tips_bg" android:paddingTop="8.0dip" android:paddingBottom="18.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content" android:paddingHorizontal="20.0dip">
+        <LinearLayout android:orientation="vertical" android:id="@id/searcle_tip_content" android:layout_width="wrap_content" android:layout_height="wrap_content">
+            <ImageView android:layout_width="20.0dip" android:layout_height="20.0dip" android:layout_marginBottom="2.0dip" android:src="@drawable/searcle_tips_icon" />
+            <TextView android:textSize="15.0sp" android:textColor="#fffafaff" android:layout_gravity="center_vertical" android:id="@id/searcle_tip_text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/searcle_tip_button" />
+        </LinearLayout>
+    </LinearLayout>
+</com.android.systemui.searcle.SearcleTipView>

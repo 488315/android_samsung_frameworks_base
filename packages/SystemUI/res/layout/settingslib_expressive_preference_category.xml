@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:background="?android:selectableItemBackground" android:paddingLeft="?android:listPreferredItemPaddingLeft" android:paddingRight="?android:listPreferredItemPaddingRight" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/settingslib_expressive_space_small1" android:baselineAligned="false" android:filterTouchesWhenObscured="false" android:paddingStart="?android:listPreferredItemPaddingStart" android:paddingEnd="?android:listPreferredItemPaddingEnd"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:layout_gravity="start" android:id="@android:id/title" android:paddingTop="@dimen/settingslib_expressive_space_extrasmall4" android:paddingBottom="@dimen/settingslib_expressive_space_extrasmall4" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textAlignment="viewStart" android:paddingStart="@dimen/settingslib_expressive_space_extrasmall4" style="@style/PreferenceCategoryTitleTextStyle" />
+</LinearLayout>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_vertical" android:orientation="horizontal" android:id="@id/list_item" android:background="@drawable/input_method_switch_item_background" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="8.0dip" android:minHeight="72.0dip" android:paddingStart="20.0dip" android:paddingEnd="24.0dip" android:layout_marginHorizontal="16.0dip" android:paddingVertical="8.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="start|center" android:orientation="vertical" android:layout_width="0.0dip" android:layout_height="wrap_content" android:layout_weight="1.0">
+        <TextView android:textAppearance="?textAppearanceListItem" android:textColor="@color/input_method_switch_on_item" android:ellipsize="marquee" android:id="@id/text" android:layout_width="wrap_content" android:layout_height="wrap_content" android:singleLine="true" android:marqueeRepeatLimit="1" android:fontFamily="google-sans-text" />
+        <TextView android:textAppearance="?textAppearanceListItemSecondary" android:textColor="@color/materialColorOnSurfaceVariant" android:ellipsize="marquee" android:id="@id/text2" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="4.0dip" android:singleLine="true" android:marqueeRepeatLimit="1" android:textAllCaps="true" android:fontFamily="google-sans-text" />
+    </LinearLayout>
+    <ImageView android:gravity="center_vertical" android:id="@id/image" android:visibility="gone" android:layout_width="24.0dip" android:layout_height="24.0dip" android:src="@drawable/ic_check_24dp" android:tint="@color/input_method_switch_on_item" android:importantForAccessibility="no" android:layout_marginStart="12.0dip" />
+</LinearLayout>

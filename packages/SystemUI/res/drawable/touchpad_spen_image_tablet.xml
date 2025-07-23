@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_enabled="false">
+        <bitmap android:src="@drawable/touchpad_spen_icon_tablet" android:tint="@color/touchpad_spen_icon_color" />
+    </item>
+</layer-list>

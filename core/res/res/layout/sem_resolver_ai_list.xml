@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <GridView android:scrollbarStyle="outsideOverlay" android:gravity="center" android:id="@id/resolver_list" android:paddingTop="@dimen/sem_resolver_grid_padding_start" android:paddingBottom="@dimen/sem_resolver_grid_padding_end" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:listSelector="@color/transparent" android:divider="@null" android:dividerHeight="0.0dip" android:headerDividersEnabled="false" android:footerDividersEnabled="false" android:paddingStart="@dimen/sem_resolver_grid_padding_start" android:paddingEnd="@dimen/sem_resolver_grid_padding_end" android:nestedScrollingEnabled="true" android:elevation="@dimen/resolver_elevation" />
+    <include layout="@layout/resolver_empty_states" />
+</RelativeLayout>

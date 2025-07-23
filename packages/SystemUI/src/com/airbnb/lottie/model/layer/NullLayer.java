@@ -1,0 +1,24 @@
+package com.airbnb.lottie.model.layer;
+
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.RectF;
+import com.airbnb.lottie.LottieDrawable;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes.dex */
+public class NullLayer extends BaseLayer {
+    public NullLayer(LottieDrawable lottieDrawable, Layer layer) {
+        super(lottieDrawable, layer);
+    }
+
+    @Override // com.airbnb.lottie.model.layer.BaseLayer, com.airbnb.lottie.animation.content.DrawingContent
+    public final void getBounds(RectF rectF, Matrix matrix, boolean z) {
+        super.getBounds(rectF, matrix, z);
+        rectF.set(0.0f, 0.0f, 0.0f, 0.0f);
+    }
+
+    @Override // com.airbnb.lottie.model.layer.BaseLayer
+    public final void drawLayer(Canvas canvas, Matrix matrix, int i) {
+    }
+}

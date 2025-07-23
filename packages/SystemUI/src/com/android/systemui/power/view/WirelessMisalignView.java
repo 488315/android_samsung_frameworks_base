@@ -1,0 +1,83 @@
+package com.android.systemui.power.view;
+
+import android.content.Context;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.SemBlurInfo;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import com.android.systemui.PowerUiRune;
+import com.android.systemui.R;
+import com.android.systemui.power.SecPowerUI;
+import com.android.systemui.power.utils.DisplayUtils;
+import com.samsung.android.view.SemWindowManager;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public class WirelessMisalignView extends RelativeLayout implements View.OnClickListener {
+    public LinearLayout mBackgroundArea;
+    public Button mButton;
+    public ImageView mCenterImageView;
+    public SecPowerUI mListener;
+    public final AnonymousClass1 mOnClickListener;
+    public RelativeLayout mTextContainerLayout;
+
+    public WirelessMisalignView(Context context) {
+        this(context, null);
+    }
+
+    @Override // android.view.View.OnClickListener
+    public final void onClick(View view) {
+        Log.d("PowerUI.WirelessMisalignView", "onClick : misalign view gone");
+        setWirelessMisalignViewVisibility(8);
+        SecPowerUI secPowerUI = this.mListener;
+        secPowerUI.getClass();
+        Log.i("PowerUI", "onWirelessMisalignCompleted");
+        secPowerUI.removeMisalignView();
+    }
+
+    @Override // android.view.View
+    public final void onFinishInflate() {
+        super.onFinishInflate();
+        Log.d("PowerUI.WirelessMisalignView", "onFinishInflate");
+        this.mBackgroundArea = (LinearLayout) findViewById(R.id.misalign_backgroundArea);
+        this.mTextContainerLayout = (RelativeLayout) findViewById(R.id.misalign_text_container);
+        this.mCenterImageView = (ImageView) findViewById(R.id.center_align_image);
+        Button button = (Button) findViewById(R.id.misalign_ok_button);
+        this.mButton = button;
+        button.setOnClickListener(this.mOnClickListener);
+        setOnClickListener(this.mOnClickListener);
+        if (DisplayUtils.isFlipSubDisplayOn(SemWindowManager.getInstance().isFolded()) || !PowerUiRune.WINDOW_BLUR_SUPPORTED) {
+            return;
+        }
+        this.mBackgroundArea.semSetBlurInfo(new SemBlurInfo.Builder(0).setColorCurvePreset(137).build());
+    }
+
+    public final void setWirelessMisalignViewVisibility(int i) {
+        Log.d("PowerUI.WirelessMisalignView", "setWirelessMisalignViewVisibility : " + (i == 0));
+        setVisibility(i);
+    }
+
+    public WirelessMisalignView(Context context, AttributeSet attributeSet) {
+        this(context, attributeSet, 0);
+    }
+
+    /* JADX WARN: Type inference failed for: r1v1, types: [com.android.systemui.power.view.WirelessMisalignView$1] */
+    public WirelessMisalignView(Context context, AttributeSet attributeSet, int i) {
+        super(context, attributeSet, i);
+        this.mOnClickListener = new View.OnClickListener() { // from class: com.android.systemui.power.view.WirelessMisalignView.1
+            @Override // android.view.View.OnClickListener
+            public final void onClick(View view) {
+                Log.d("PowerUI.WirelessMisalignView", "button click : misalign view gone");
+                WirelessMisalignView.this.setWirelessMisalignViewVisibility(8);
+                SecPowerUI secPowerUI = WirelessMisalignView.this.mListener;
+                secPowerUI.getClass();
+                Log.i("PowerUI", "onWirelessMisalignCompleted");
+                secPowerUI.removeMisalignView();
+            }
+        };
+    }
+}

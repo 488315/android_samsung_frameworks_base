@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <item>
+        <shape>
+            <solid android:color="@android:color/secondary_text_nodisable_holo_light" />
+            <corners android:topLeftRadius="@dimen/volume_dialog_background_corner_radius" android:topRightRadius="@dimen/volume_dialog_background_corner_radius" />
+        </shape>
+    </item>
+</layer-list>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Wallpaper setting" TargetApi="19" TargetPackageName="com.samsung.android.app.dressroom" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="Setting background color" DefaultValue="#fff2f2f2" DestAttribName="base_bg_color" DestQualifiers="" UID="82-1-2" ValueRef="1-1-1-1" ValueType="BgColor" />
+        <Property Comment="Main menu background color" DefaultValue="#fffcfcfc" DestAttribName="list_bg_color" DestQualifiers="" POption="FixedOpacity|Mandatory|AlwaysOverriden" UID="82-1-3" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Contained button text color" DefaultValue="#ff000000" DestAttribName="contained_button_text" DestQualifiers="" UID="82-1-5" ValueRef="1-7-2-D" ValueType="TextColor" />
+        <Property Comment="Contained button background color" DefaultValue="#0f000000" DestAttribName="contained_button_bg" DestQualifiers="" UID="82-1-6" ValueRef="1-7-1-D" ValueType="Color" />
+        <Property Comment="My wallpapers item title color" DefaultValue="#ff252525" DestAttribName="my_wallpapers_item_title_color" DestQualifiers="" UID="82-2-1" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="My wallpapers no item color" DefaultValue="#ad252525" DestAttribName="my_wallpapers_no_item_color" DestQualifiers="" UID="82-2-2" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="My wallpapers sub header text color" DefaultValue="#ff909090" DestAttribName="my_wallpapers_sub_header" DestQualifiers="" UID="82-2-3" ValueRef="1-19-2" ValueType="TextColor" />
+        <Property Comment="Navigation background color" DefaultValue="#fff2f2f2" DestAttribName="navigation_bar_bg" DestQualifiers="" POption="FixedOpacity" UID="82-4-1" ValueRef="1-69-1" ValueType="BgColor" />
+        <Property Comment="Navigation icon color(Light/Dark)" DefaultValue="true" DestAttribName="use_light_navi_bar" DestQualifiers="" UID="82-4-8" ValueRef="1-69-2" ValueType="Bool" />
+    </AppMetaData>
+</ThemeMetaData>

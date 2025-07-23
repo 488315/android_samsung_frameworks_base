@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData BuildType="Home" IsStandAlone="true" Name="Home_screen" PackageNameSuffix="home" TargetApi="19" TargetPackageName="com.sec.android.app.launcher" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="Title Color of App/Folder Icon" DefaultValue="#fffafafa" DestAttribName="home_title_color" DestQualifiers="" UID="8-5-2" ValueType="TextColor" />
+        <Property Comment="Background image of  App/Folder Title" DefaultValue="" DestAttribName="title_background" DestQualifiers="nodpi" POption="NinePatch" UID="8-5-3" ValueType="BgImage" />
+        <Property Comment="shadow on/off of  App/Folder Title" DefaultValue="true" DestAttribName="enable_text_shadow" DestQualifiers="" UID="8-5-4" ValueType="Bool" />
+        <Property Comment="label shadow color" DefaultValue="#99000000" DestAttribName="text_shadow_color" DestQualifiers="" UID="8-5-5" ValueType="TextColor" />
+        <Property Comment="Select Folder icon Shape" DefaultValue="0" DestAttribName="close_folder_shape" UID="8-6-1" ValueType="Integer" />
+        <Property Comment="Close Folder Shape BgColor 1" DestAttribName="close_folder_color1" UID="8-6-2" ValueType="BgColor" />
+        <Property Comment="Close Folder Shape BgColor 2" DestAttribName="close_folder_color2" UID="8-6-3" ValueType="BgColor" />
+        <Property Comment="Close Folder Shape BgColor 3" DestAttribName="close_folder_color3" UID="8-6-4" ValueType="BgColor" />
+        <Property Comment="Close Folder Shape BgColor 4" DestAttribName="close_folder_color4" UID="8-6-5" ValueType="BgColor" />
+        <Property Comment="Close Folder Shape BgColor 5" DestAttribName="close_folder_color5" UID="8-6-6" ValueType="BgColor" />
+        <Property Comment="Folder icon background image" DefaultValue="homescreen_ic_folder_default" DestAttribName="homescreen_ic_folder_default" DestQualifiers="xxxhdpi" ImageSize="55x55" POption="FIXEDSIZE" UID="8-6-7" ValueType="BgImage" />
+        <Property Comment="Select Folder Type" DefaultValue="0" DestAttribName="close_folder_type" UID="8-6-8" ValueType="Integer" />
+        <Property Comment="Quick Option BG With Blur" DestAttribName="quick_option_bg_color_blur" UID="8-7-1" ValueType="BgColor" />
+        <Property Comment="Quick Option BG Without Blur" DestAttribName="quick_option_bg_color" UID="8-7-2" ValueType="BgColor" />
+        <Property Comment="Normal Page Indicator" DefaultValue="homescreen_menu_page_navi_default_f" DestAttribName="homescreen_menu_page_navi_default_f" DestQualifiers="xxxhdpi" ImageSize="17x17" UID="8-8-1" ValueType="Image" />
+        <Property Comment="Home Page Indicator" DefaultValue="homescreen_menu_page_navi_home_f" DestAttribName="homescreen_menu_page_navi_home_f" DestQualifiers="xxxhdpi" ImageSize="17x17" UID="8-8-2" ValueType="Image" />
+        <Property Comment="-1 Page Indicator" DefaultValue="homescreen_menu_page_navi_headlines_f" DestAttribName="homescreen_menu_page_navi_headlines_f" DestQualifiers="xxxhdpi" ImageSize="17x17" UID="8-8-3" ValueType="Image" />
+        <Property Comment="+ Icon Indicator" DefaultValue="homescreen_menu_page_navi_plus_f" DestAttribName="homescreen_menu_page_navi_plus_f" DestQualifiers="xxxhdpi" ImageSize="17x17" UID="8-8-4" ValueType="Image" />
+        <Property Comment="Badge icon tint color: Badge tint color" DefaultValue="" DestAttribName="badge_bg_color" DestQualifiers="" UID="8-11-1" ValueRef="1-33-1" ValueType="BgColor" />
+        <Property Comment="Badge icon: Badge BG image, should be a 9 patch image" DefaultValue="messages_counter_bubble.9" DestAttribName="counter_bubble" DestQualifiers="xxxhdpi" POption="NinePatch" UID="8-11-2" ValueRef="1-33-2" ValueType="BgImage" />
+        <Property Comment="Badge text color: priofity sender badge font color" DefaultValue="#fffafafa" DestAttribName="badge_text_color" DestQualifiers="" UID="8-11-3" ValueRef="1-33-3" ValueType="TextColor" />
+        <Property Comment="Drop down list - check image" DefaultValue="" DestAttribName="tw_dropdown_ic_check" DestQualifiers="" ImageSize="20x20" UID="8-12-1" ValueRef="1-10-10" ValueType="Image" />
+        <Property Comment="Highlight text color" DefaultValue="#ff0000ee" DestAttribName="material_blue_grey_900" UID="8-13" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="Widget Inside BG" DestAttribName="" UID="8-13-1" ValueType="BgColor" />
+        <Property Comment="Widget Title BG" DestAttribName="" UID="8-13-1-1" ValueType="BgColor" />
+        <Property Comment="Widget Handler" DestAttribName="app_widget_resize_handler_color" UID="8-13-3" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="Widget Handler Stroke" DestAttribName="app_widget_resize_frame_color" UID="8-13-4" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="Widget Icon" DestAttribName="" Opacity="100" UID="8-14-1" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Widget Icon BG" DestAttribName="" UID="8-14-1-1" ValueRef="8-13-1" ValueType="Color" />
+        <Property Comment="Tablet Folder BG" DestAttribName="" UID="8-21-1" ValueType="Color" />
+        <Property Comment="Taskbar Folder BG" DestAttribName="" UID="8-21-2" ValueType="Color" />
+        <Property Comment="Taskbar Apps BG" DestAttribName="" UID="8-21-3" ValueType="Color" />
+        <Property Comment="Title Color of App For Preview" DefaultValue="#fffafafa" DestQualifiers="" UID="8-5-6" ValueType="TextColor" />
+        <Property Comment="Palette Image Visibility (Shape and Color, Image)" DefaultValue="ShapeAndColor" DestAttribName="" DestQualifiers="" UID="8-6-PaletteVisibility" ValueType="Text" />
+    </AppMetaData>
+</ThemeMetaData>

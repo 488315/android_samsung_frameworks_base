@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content" style="@style/SettingsSpinnerDropdown.Expressive"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_gravity="center_vertical" android:id="@android:id/icon" android:layout_width="@dimen/settingslib_expressive_space_small3" android:layout_height="@dimen/settingslib_expressive_space_small3" android:src="@drawable/settingslib_expressive_icon_check" android:scaleType="centerInside" android:tint="@color/settingslib_spinner_dropdown_color" android:importantForAccessibility="no" android:layout_marginEnd="@dimen/settingslib_expressive_space_extrasmall4" />
+    <TextView android:gravity="center_vertical" android:id="@android:id/text1" android:layout_width="fill_parent" android:layout_height="wrap_content" android:filterTouchesWhenObscured="true" style="@style/SettingsSpinnerDropdownText" />
+</LinearLayout>

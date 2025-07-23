@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.util.SeslShapeDrawable android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="@dimen/sesl_appbar_button_round" />
+    <solid android:color="@color/sesl_suggest_button_background" />
+</androidx.appcompat.util.SeslShapeDrawable>

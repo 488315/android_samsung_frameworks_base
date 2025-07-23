@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="sud_glif_expressive_content_padding_top">8.0dip</dimen>
+    <dimen name="sud_glif_expressive_footer_bar_min_height">52.0dip</dimen>
+    <dimen name="sud_glif_expressive_footer_bar_padding_end">20.0dip</dimen>
+    <dimen name="sud_glif_expressive_footer_bar_padding_start">8.0dip</dimen>
+</resources>

@@ -1,0 +1,79 @@
+package com.android.systemui.media.controls.shared.model;
+
+import com.android.internal.logging.InstanceId;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public abstract class MediaDataLoadingModel {
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class Loaded extends MediaDataLoadingModel {
+        public final InstanceId instanceId;
+
+        public Loaded(InstanceId instanceId) {
+            super(null);
+            this.instanceId = instanceId;
+        }
+
+        public final boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            return (obj instanceof Loaded) && Intrinsics.areEqual(this.instanceId, ((Loaded) obj).instanceId);
+        }
+
+        @Override // com.android.systemui.media.controls.shared.model.MediaDataLoadingModel
+        public final InstanceId getInstanceId() {
+            return this.instanceId;
+        }
+
+        public final int hashCode() {
+            return this.instanceId.hashCode();
+        }
+
+        public final String toString() {
+            return "Loaded(instanceId=" + this.instanceId + ")";
+        }
+    }
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public final class Removed extends MediaDataLoadingModel {
+        public final InstanceId instanceId;
+
+        public Removed(InstanceId instanceId) {
+            super(null);
+            this.instanceId = instanceId;
+        }
+
+        public final boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            return (obj instanceof Removed) && Intrinsics.areEqual(this.instanceId, ((Removed) obj).instanceId);
+        }
+
+        @Override // com.android.systemui.media.controls.shared.model.MediaDataLoadingModel
+        public final InstanceId getInstanceId() {
+            return this.instanceId;
+        }
+
+        public final int hashCode() {
+            return this.instanceId.hashCode();
+        }
+
+        public final String toString() {
+            return "Removed(instanceId=" + this.instanceId + ")";
+        }
+    }
+
+    public /* synthetic */ MediaDataLoadingModel(DefaultConstructorMarker defaultConstructorMarker) {
+        this();
+    }
+
+    public abstract InstanceId getInstanceId();
+
+    private MediaDataLoadingModel() {
+    }
+}

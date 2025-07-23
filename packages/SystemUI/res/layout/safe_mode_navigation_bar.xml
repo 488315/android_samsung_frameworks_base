@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:background="#ff000000" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:systemui="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout android:orientation="vertical" android:id="@id/nav_buttons" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <RelativeLayout android:gravity="end|center" android:layout_gravity="bottom" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent">
+            <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="horizontal" android:focusable="true" android:layout_width="100.0dip" android:layout_height="fill_parent" android:layout_alignParentStart="true" />
+            <LinearLayout android:gravity="center" android:layout_gravity="center" android:orientation="horizontal" android:id="@id/prev_btn_area" android:focusable="true" android:visibility="visible" android:layout_width="@dimen/navigation_key_width" android:layout_height="fill_parent" android:layout_marginEnd="@dimen/navigation_side_padding" android:layout_alignParentEnd="true">
+                <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="@dimen/suw_back_width" android:layout_height="fill_parent">
+                    <ImageView android:id="@id/prev_btn_arrow" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/ic_samsung_sysbar_back_dark" android:tint="@color/navbar_icon_color_light" android:contentDescription="@string/accessibility_back" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+</FrameLayout>

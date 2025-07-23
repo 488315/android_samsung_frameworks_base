@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout style="@style/InternetDialog.Network"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <FrameLayout android:layout_gravity="start|center" android:clickable="false" android:layout_width="24.0dip" android:layout_height="24.0dip">
+        <ImageView android:layout_gravity="center" android:id="@id/secondary_signal_icon" android:layout_width="wrap_content" android:layout_height="wrap_content" android:autoMirrored="true" />
+    </FrameLayout>
+    <LinearLayout android:gravity="start|center" android:orientation="vertical" android:clickable="false" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+        <TextView android:id="@id/secondary_mobile_title" android:maxLines="1" style="@style/InternetDialog.NetworkTitle" />
+        <TextView android:id="@id/secondary_mobile_summary" style="@style/InternetDialog.NetworkSummary" />
+    </LinearLayout>
+    <FrameLayout android:gravity="center" android:layout_gravity="end|center" android:clickable="false" android:layout_width="24.0dip" android:layout_height="fill_parent">
+        <ImageView android:layout_gravity="end|center" android:id="@id/secondary_settings_icon" android:layout_width="24.0dip" android:layout_height="wrap_content" android:src="@drawable/ic_settings_24dp" />
+    </FrameLayout>
+</LinearLayout>

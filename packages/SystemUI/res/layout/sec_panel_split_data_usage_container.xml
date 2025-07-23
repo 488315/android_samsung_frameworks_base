@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center" android:orientation="horizontal" android:tag="expand_anim" android:focusable="false" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.android.systemui.statusbar.phone.datausage.DataUsageLabelView android:textSize="13.0dip" android:textColor="@color/sec_qs_security_footer_tint_color" android:gravity="center" android:id="@id/data_usage_label_view" android:layout_width="fill_parent" android:layout_height="wrap_content" android:shadowColor="#40000000" android:shadowDx="0.0" android:shadowDy="0.0" android:shadowRadius="6.0" android:fontFamily="sec-400" android:textFontWeight="400" />
+</LinearLayout>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.7">
+    <AppMetaData Name="Samsung DeX Settings" TargetApi="19" TargetPackageName="com.sec.android.app.desktoplauncher" VersionCode="1">
+        <Include RefName="SESL" />
+        <Property Comment="opentheme_dex_settings_divider_color" DefaultValue="#ffd0d0d0" DestAttribName="DeX_settings_description_divider_background_color" UID="85_1-1-1" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="opentheme_dex_settings_text_description_color" DefaultValue="#ff505050" DestAttribName="dex_lab_text_description_color" UID="85_1-1-4" ValueRef="1-3-3-D" ValueType="TextColor" />
+        <Property Comment="opentheme_dex_settings_master_switch_on_background_color" DefaultValue="#0d000000" DestAttribName="settings_master_switch_on_background_color" UID="85_1-1-5" ValueRef="1-40-1" ValueType="Color" />
+        <Property Comment="opentheme_dex_settings_master_switch_off_background_color" DefaultValue="#fffcfcfc" DestAttribName="settings_master_switch_off_background_color" UID="85_1-1-6" ValueRef="1-40-2" ValueType="Color" />
+        <Property Comment="opentheme_dex_settings_master_switch_on_title_color" DefaultValue="#ff0072de" DestAttribName="settings_master_switch_on_title_color" UID="85_1-1-7" ValueRef="1-40-3" ValueType="TextColor" />
+        <Property Comment="opentheme_dex_settings_master_switch_off_title_color" DefaultValue="#ff252525" DestAttribName="settings_master_switch_off_title_color" UID="85_1-1-8" ValueRef="1-40-4" ValueType="TextColor" />
+        <Property Comment="opentheme_dex_settings_background_color" DefaultValue="#fff6f6f6" DestAttribName="dex_setting_background_color" DestQualifiers="" UID="85_1-1-9" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="opentheme_dex_settings_about_page_background_color" DefaultValue="#fffcfcfc" DestAttribName="about_page_bg_color" UID="85_1-2-1" ValueRef="1-1-1" ValueType="Color" />
+        <Property Comment="opentheme_dex_settings_about_page_title_text_color" DefaultValue="#ff010101" DestAttribName="about_page_title_text_color" UID="85_1-2-2" ValueRef="1-1-3" ValueType="Color" />
+        <Property Comment="opentheme_dex_settings_about_page_description_text_color" DefaultValue="#ff8c8c8c" DestAttribName="about_page_description_text_color" UID="85_1-2-3" ValueRef="1-1-4" ValueType="Color" />
+        <Property Comment="opentheme_dex_settings_about_page_button_background_color" DefaultValue="#fffafafa" DestAttribName="about_page_button_background_color" UID="85_1-2-6" ValueRef="1-7-1-D" ValueType="Color" />
+        <Property Comment="opentheme_dex_settings_about_page_button_text_color" DefaultValue="#ff252525" DestAttribName="about_page_button_text_color" UID="85_1-2-7" ValueRef="1-7-2-D" ValueType="Color" />
+        <Property Comment="opentheme_dex_settings_about_page_btn_app_info_color" DefaultValue="#ff010101" DestAttribName="about_page_btn_app_info_color" UID="85_1-2-8" ValueRef="1-1-3" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

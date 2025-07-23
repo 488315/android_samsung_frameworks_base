@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:gravity="center_vertical" android:orientation="vertical" android:tag="expand_anim" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout android:id="@id/tile_layout_background" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/bar_top_margin" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent">
+        <LinearLayout android:gravity="top" android:orientation="vertical" android:id="@id/tile_layout_container" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_marginTop="@dimen/sec_tile_chunk_layout_margin_top" android:layout_marginBottom="@dimen/sec_tile_chunk_layout_margin_bottom" />
+    </LinearLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout android:id="@id/scroll_indicator_touch_container" android:focusable="true" android:layout_width="@dimen/sec_tile_chunk_layout_indicator_touch_width" android:layout_height="@dimen/sec_tile_chunk_layout_indicator_touch_height" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent">
+        <LinearLayout android:layout_gravity="center|top" android:layout_width="fill_parent" android:layout_height="@dimen/sec_tile_chunk_layout_indicator_height" app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent" app:layout_constraintVertical_bias="0.0">
+            <ImageView android:layout_gravity="top" android:orientation="horizontal" android:id="@id/scroll_indicator" android:layout_width="fill_parent" android:layout_height="@dimen/sec_scroll_indicator_height" android:src="@drawable/sec_scroll_indicator_material" android:scaleType="center" android:importantForAccessibility="yes" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

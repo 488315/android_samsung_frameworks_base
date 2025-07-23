@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView android:textSize="16.0sp" android:textColor="?textColorPrimary" android:gravity="start|center" android:paddingTop="@dimen/resolver_small_margin" android:paddingBottom="@dimen/resolver_edge_margin" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/use_a_different_app" android:fontFamily="@string/config_headlineFontFamilyMedium" android:paddingStart="@dimen/resolver_edge_margin" android:paddingEnd="@dimen/resolver_edge_margin" android:elevation="1.0dip" android:layout_alwaysShow="true"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

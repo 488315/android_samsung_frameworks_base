@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.common.ui.view.SeekBarWithIconButtonsView android:layout_gravity="center" android:id="@id/font_scaling_slider" android:layout_width="fill_parent" android:layout_height="wrap_content" app:iconEndContentDescription="@string/font_scaling_larger" app:iconStartContentDescription="@string/font_scaling_smaller" app:max="6" app:progress="0"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" />

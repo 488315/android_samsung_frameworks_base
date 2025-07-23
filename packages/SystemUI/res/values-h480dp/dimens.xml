@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="dimen" name="ksh_dialog_height_ratio">79.99999%</item>
+    <dimen name="sud_glif_expressive_header_title_line_height">44.0sp</dimen>
+    <dimen name="sud_glif_expressive_header_title_size">36.0sp</dimen>
+</resources>

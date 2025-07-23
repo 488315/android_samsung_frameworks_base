@@ -1,0 +1,69 @@
+package com.android.systemui.scene.ui.composable;
+
+import com.android.compose.animation.scene.ObservableTransitionState;
+import kotlin.NoWhenBranchMatchedException;
+import kotlin.ResultKt;
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.CoroutineSingletons;
+import kotlin.coroutines.jvm.internal.SuspendLambda;
+import kotlin.jvm.functions.Function3;
+import kotlinx.coroutines.flow.Flow;
+import kotlinx.coroutines.flow.FlowCollector;
+import kotlinx.coroutines.flow.FlowKt;
+import kotlinx.coroutines.flow.FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final class SceneTransitionLayoutDataSource$special$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
+    private /* synthetic */ Object L$0;
+    /* synthetic */ Object L$1;
+    int label;
+
+    public SceneTransitionLayoutDataSource$special$$inlined$flatMapLatest$1(Continuation continuation) {
+        super(3, continuation);
+    }
+
+    @Override // kotlin.jvm.functions.Function3
+    public final Object invoke(Object obj, Object obj2, Object obj3) {
+        SceneTransitionLayoutDataSource$special$$inlined$flatMapLatest$1 sceneTransitionLayoutDataSource$special$$inlined$flatMapLatest$1 = new SceneTransitionLayoutDataSource$special$$inlined$flatMapLatest$1((Continuation) obj3);
+        sceneTransitionLayoutDataSource$special$$inlined$flatMapLatest$1.L$0 = (FlowCollector) obj;
+        sceneTransitionLayoutDataSource$special$$inlined$flatMapLatest$1.L$1 = obj2;
+        return sceneTransitionLayoutDataSource$special$$inlined$flatMapLatest$1.invokeSuspend(Unit.INSTANCE);
+    }
+
+    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+    public final Object invokeSuspend(Object obj) {
+        Flow flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2;
+        CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
+        int i = this.label;
+        if (i == 0) {
+            ResultKt.throwOnFailure(obj);
+            FlowCollector flowCollector = (FlowCollector) this.L$0;
+            ObservableTransitionState observableTransitionState = (ObservableTransitionState) this.L$1;
+            observableTransitionState.getClass();
+            if (observableTransitionState instanceof ObservableTransitionState.Idle) {
+                flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(((ObservableTransitionState.Idle) observableTransitionState).currentScene);
+            } else if (observableTransitionState instanceof ObservableTransitionState.Transition.ChangeScene) {
+                flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = ((ObservableTransitionState.Transition.ChangeScene) observableTransitionState).currentScene;
+            } else if (observableTransitionState instanceof ObservableTransitionState.Transition.ShowOrHideOverlay) {
+                flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(((ObservableTransitionState.Transition.ShowOrHideOverlay) observableTransitionState).currentScene);
+            } else {
+                if (!(observableTransitionState instanceof ObservableTransitionState.Transition.ReplaceOverlay)) {
+                    throw new NoWhenBranchMatchedException();
+                }
+                flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2 = new FlowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2(((ObservableTransitionState.Transition.ReplaceOverlay) observableTransitionState).currentScene);
+            }
+            this.label = 1;
+            if (FlowKt.emitAll(flowCollector, flowKt__BuildersKt$flowOf$$inlined$unsafeFlow$2, this) == coroutineSingletons) {
+                return coroutineSingletons;
+            }
+        } else {
+            if (i != 1) {
+                throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");
+            }
+            ResultKt.throwOnFailure(obj);
+        }
+        return Unit.INSTANCE;
+    }
+}

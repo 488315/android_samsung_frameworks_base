@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.android.systemui.qp.flashlight.SubroomFlashLightTurnOffView android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout android:background="@android:color/transparent" android:layout_width="fill_parent" android:layout_height="fill_parent">
+        <Button android:textSize="@dimen/subscreen_flashlight_turnoff_text_size" android:textColor="@color/subroom_flashlight_turn_off" android:gravity="center" android:id="@id/turn_off_view" android:background="@drawable/subroom_turnoff_background" android:layout_width="wrap_content" android:layout_height="@dimen/subscreen_turnoff_button_height" android:text="@string/subroom_flashlight_turn_off" android:layout_centerInParent="true" android:contentDescription="@string/subroom_flashlight_turn_off" android:textAllCaps="false" android:fontFamily="sans-serif-medium" android:textAlignment="center" android:paddingStart="@dimen/subscreen_turnoff_button_padding" android:paddingEnd="@dimen/subscreen_turnoff_button_padding" />
+    </RelativeLayout>
+</com.android.systemui.qp.flashlight.SubroomFlashLightTurnOffView>

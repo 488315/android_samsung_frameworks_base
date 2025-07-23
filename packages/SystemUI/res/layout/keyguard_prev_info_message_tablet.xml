@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_gravity="center_horizontal" android:orientation="vertical" android:id="@id/prev_info_message" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginBottom="@dimen/kg_prev_message_area_margin_bottom"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:sysui="http://schemas.android.com/apk/res-auto">
+    <com.android.systemui.widget.SystemUITextView android:gravity="center" android:id="@id/prev_info_text" android:focusable="true" android:scrollbars="vertical" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/kg_prev_info_message" sysui:originColor="origin_keyguard_message_area_text_color" sysui:wallpaperColorIgnorable="true" sysui:whitebgColor="whitebg_keyguard_text_color" style="@style/keyguard_prev_help_text_style_tablet" />
+    <com.android.systemui.widget.SystemUITextView android:gravity="center" android:id="@id/prev_sub_info_text" android:focusable="true" android:layout_width="fill_parent" android:layout_height="wrap_content" sysui:originColor="origin_keyguard_sub_message_area_text_color" sysui:wallpaperColorIgnorable="true" sysui:whitebgColor="whitebg_keyguard_sub_message_area_text_color" style="@style/keyguard_prev_sub_help_text_style_tablet" />
+</LinearLayout>

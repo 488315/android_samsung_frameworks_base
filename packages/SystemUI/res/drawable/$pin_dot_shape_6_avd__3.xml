@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set android:ordering="together"
+  xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt">
+    <objectAnimator android:interpolator="@drawable/$$pin_dot_shape_6_avd__3__0" android:duration="67" android:startOffset="0" android:valueFrom="0" android:valueTo="1" android:valueType="floatType" android:propertyName="scaleX" />
+    <objectAnimator android:interpolator="@drawable/$$pin_dot_shape_6_avd__3__1" android:duration="67" android:startOffset="0" android:valueFrom="0" android:valueTo="1" android:valueType="floatType" android:propertyName="scaleY" />
+    <objectAnimator android:interpolator="@drawable/$$pin_dot_shape_6_avd__3__2" android:duration="283" android:startOffset="67" android:valueFrom="1" android:valueTo="0.35" android:valueType="floatType" android:propertyName="scaleX" />
+    <objectAnimator android:interpolator="@drawable/$$pin_dot_shape_6_avd__3__3" android:duration="283" android:startOffset="67" android:valueFrom="1" android:valueTo="0.35" android:valueType="floatType" android:propertyName="scaleY" />
+</set>

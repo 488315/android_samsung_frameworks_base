@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/qs_customize_main_button" android:background="@drawable/qs_setting_edit_button_mid_ripple" android:focusable="true" android:clickable="true" android:layout_width="fill_parent" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <include layout="@layout/qs_setting_edit_content_button" />
+    <include android:id="@id/divider" layout="@layout/qs_setting_edit_list_divider" />
+</LinearLayout>

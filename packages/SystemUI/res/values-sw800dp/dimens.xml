@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="shade_panel_width">392.0dip</dimen>
+    <dimen name="sud_content_illustration_max_height">468.0dip</dimen>
+    <dimen name="sud_content_illustration_max_width">468.0dip</dimen>
+</resources>

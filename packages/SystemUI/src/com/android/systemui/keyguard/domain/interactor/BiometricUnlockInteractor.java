@@ -1,0 +1,56 @@
+package com.android.systemui.keyguard.domain.interactor;
+
+import android.support.v4.media.MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0;
+import com.android.systemui.keyguard.data.repository.KeyguardRepository;
+import com.android.systemui.keyguard.data.repository.KeyguardRepositoryImpl;
+import com.android.systemui.keyguard.shared.model.BiometricUnlockMode;
+import com.android.systemui.keyguard.shared.model.BiometricUnlockModel;
+import com.android.systemui.keyguard.shared.model.BiometricUnlockSource;
+import kotlinx.coroutines.flow.ReadonlyStateFlow;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final class BiometricUnlockInteractor {
+    public final KeyguardRepository keyguardRepository;
+    public final ReadonlyStateFlow unlockState;
+
+    public BiometricUnlockInteractor(KeyguardRepository keyguardRepository) {
+        this.keyguardRepository = keyguardRepository;
+        this.unlockState = ((KeyguardRepositoryImpl) keyguardRepository).biometricUnlockState;
+    }
+
+    public final void setBiometricUnlockState(int i, BiometricUnlockSource biometricUnlockSource) {
+        BiometricUnlockMode biometricUnlockMode;
+        switch (i) {
+            case 0:
+                biometricUnlockMode = BiometricUnlockMode.NONE;
+                break;
+            case 1:
+                biometricUnlockMode = BiometricUnlockMode.WAKE_AND_UNLOCK;
+                break;
+            case 2:
+                biometricUnlockMode = BiometricUnlockMode.WAKE_AND_UNLOCK_PULSING;
+                break;
+            case 3:
+                biometricUnlockMode = BiometricUnlockMode.SHOW_BOUNCER;
+                break;
+            case 4:
+                biometricUnlockMode = BiometricUnlockMode.ONLY_WAKE;
+                break;
+            case 5:
+                biometricUnlockMode = BiometricUnlockMode.UNLOCK_COLLAPSING;
+                break;
+            case 6:
+                biometricUnlockMode = BiometricUnlockMode.WAKE_AND_UNLOCK_FROM_DREAM;
+                break;
+            case 7:
+                biometricUnlockMode = BiometricUnlockMode.DISMISS_BOUNCER;
+                break;
+            default:
+                throw new IllegalArgumentException(MediaBrowserCompat$MediaBrowserImplBase$$ExternalSyntheticOutline0.m(i, "Invalid BiometricUnlockModel value: "));
+        }
+        KeyguardRepositoryImpl keyguardRepositoryImpl = (KeyguardRepositoryImpl) this.keyguardRepository;
+        keyguardRepositoryImpl.getClass();
+        keyguardRepositoryImpl._biometricUnlockState.updateState(null, new BiometricUnlockModel(biometricUnlockMode, biometricUnlockSource));
+    }
+}

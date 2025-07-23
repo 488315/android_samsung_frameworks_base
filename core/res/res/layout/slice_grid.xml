@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.app.slice.widget.GridView android:gravity="center_vertical" android:background="?activatedBackgroundIndicator" android:clipToPadding="false" android:layout_width="fill_parent" android:layout_height="wrap_content" android:minHeight="?listPreferredItemHeightSmall"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

@@ -1,0 +1,19 @@
+package com.android.systemui.util.kotlin;
+
+import android.content.SharedPreferences;
+import com.android.systemui.utils.coroutines.flow.FlowConflatedKt;
+import kotlinx.coroutines.flow.Flow;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class SharedPreferencesExt {
+    public static final int $stable = 0;
+    public static final SharedPreferencesExt INSTANCE = new SharedPreferencesExt();
+
+    private SharedPreferencesExt() {
+    }
+
+    public final Flow observe(SharedPreferences sharedPreferences) {
+        return FlowConflatedKt.conflatedCallbackFlow(new SharedPreferencesExt$observe$1(sharedPreferences, null));
+    }
+}

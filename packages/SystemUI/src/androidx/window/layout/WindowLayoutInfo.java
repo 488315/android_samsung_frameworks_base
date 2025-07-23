@@ -1,0 +1,33 @@
+package androidx.window.layout;
+
+import java.util.List;
+import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.jvm.internal.Intrinsics;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes.dex */
+public final class WindowLayoutInfo {
+    public final List displayFeatures;
+
+    public WindowLayoutInfo(List<? extends FoldingFeature> list) {
+        this.displayFeatures = list;
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || !WindowLayoutInfo.class.equals(obj.getClass())) {
+            return false;
+        }
+        return Intrinsics.areEqual(this.displayFeatures, ((WindowLayoutInfo) obj).displayFeatures);
+    }
+
+    public final int hashCode() {
+        return this.displayFeatures.hashCode();
+    }
+
+    public final String toString() {
+        return CollectionsKt___CollectionsKt.joinToString$default(this.displayFeatures, ", ", "WindowLayoutInfo{ DisplayFeatures[", "] }", null, 56);
+    }
+}

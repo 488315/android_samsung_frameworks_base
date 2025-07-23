@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animator android:interpolator="@interpolator/sesl_interpolator_22_25_0_1" android:duration="400"
+  xmlns:android="http://schemas.android.com/apk/res/android" />

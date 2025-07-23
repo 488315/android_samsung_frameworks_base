@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.samsung.android.sesl.visualeffect.surfaceeffects.turbulencenoise.TurbulenceNoiseView android:id="@id/turbulence_view" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <com.samsung.android.sesl.visualeffect.surfaceeffects.ripple.MultiRippleView android:id="@id/ripple_view" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+    <com.samsung.android.sesl.visualeffect.surfaceeffects.ripple.MultiRippleView android:id="@id/sparkle_view" android:layout_width="fill_parent" android:layout_height="fill_parent" />
+</FrameLayout>

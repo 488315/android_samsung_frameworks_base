@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="dimen" name="task_bar_dpi">400.0</item>
+    <dimen name="task_bar_height">40.319977dip</dimen>
+    <item type="dimen" name="task_bar_ratio">0.72</item>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <shape android:shape="rectangle">
+        <solid android:color="@null" />
+        <corners android:radius="3.0dip" />
+        <padding android:left="@dimen/bottom_bar_button_horizontal_padding" android:right="@dimen/bottom_bar_button_horizontal_padding" />
+    </shape>
+</inset>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="Clock_CN" TargetApi="19" TargetPackageName="com.sec.android.app.clockpackage" VersionCode="1" VersionName="">
+        <Property Comment="Description text color" DefaultValue="#ff505050" DestAttribName="textColorSecondary" UID="153-1-1" ValueRef="1-3-3" ValueType="TextColor" />
+        <Property Comment="Saturday text color" DefaultValue="#ff216cc8" DestAttribName="alarm_repeat_saturday_color" UID="153-1-2" ValueRef="14-2-14" ValueType="TextColor" />
+        <Property Comment="Sunday text color" DefaultValue="#ffd92442" DestAttribName="alarm_repeat_sunday_color" UID="153-1-3" ValueRef="14-2-14" ValueType="TextColor" />
+    </AppMetaData>
+</ThemeMetaData>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector android:height="@dimen/notification_close_button_size" android:width="@dimen/notification_close_button_size" android:viewportWidth="16.0" android:viewportHeight="16.0"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <path android:fillColor="#ff000000" android:pathData="M 12.6667 4.2733 L 11.7267 3.3333 L 8 7.06 L 4.2734 3.3333 L 3.3334 4.2733 L 7.06 8 L 3.3334 11.7267 L 4.2734 12.6667 L 8 8.94 L 11.7267 12.6667 L 12.6667 11.7267 L 8.94 8 L 12.6667 4.2733 Z" />
+</vector>

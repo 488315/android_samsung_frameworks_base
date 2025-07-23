@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <shape android:shape="rectangle">
+            <size android:height="@dimen/sec_brightness_detail_slider_height" />
+            <solid android:color="@color/tw_progress_color_control_normal" />
+            <corners android:radius="@dimen/sec_brightness_slider_corner_radius" />
+            <stroke android:width="@dimen/sec_brightness_slider_background_stroke_width" android:color="@color/sec_brightness_slider_background_stroke_color" />
+        </shape>
+    </item>
+    <item android:id="@android:id/progress">
+        <com.android.systemui.audio.soundcraft.view.volume.SoundCraftRoundedCornerSeekBarDrawable android:drawable="@drawable/soundcraft_seekbar_progress_drawable" />
+    </item>
+</layer-list>

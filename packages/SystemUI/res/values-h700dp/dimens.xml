@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="ambient_indication_container_margin_top">15.0dip</dimen>
+    <dimen name="large_clock_text_size">170.0dip</dimen>
+    <dimen name="volume_row_slider_height">177.0dip</dimen>
+</resources>

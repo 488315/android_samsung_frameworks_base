@@ -1,0 +1,45 @@
+package com.android.systemui.statusbar.events;
+
+import android.content.Context;
+import android.view.View;
+import android.widget.FrameLayout;
+import androidx.constraintlayout.motion.widget.MotionLayout;
+import com.android.systemui.R;
+import com.android.systemui.statusbar.phone.IndicatorScaleGardener;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes3.dex */
+public final class HeaderBatteryStatusChipController implements SystemStatusAnimationCallback {
+    public final FrameLayout batteryChipContainer;
+    public final Context context;
+    public BackgroundAnimatableView currentAnimatedView;
+
+    public HeaderBatteryStatusChipController(Context context, MotionLayout motionLayout, IndicatorScaleGardener indicatorScaleGardener) {
+        this.context = context;
+        this.batteryChipContainer = (FrameLayout) motionLayout.requireViewById(R.id.battery_chip_container);
+    }
+
+    @Override // com.android.systemui.statusbar.events.SystemStatusAnimationCallback
+    public final SpringAnimatorSet onSystemEventAnimationBegin(boolean z, boolean z2) {
+        Object obj;
+        if (!z2 || (obj = this.currentAnimatedView) == null) {
+            return null;
+        }
+        ((View) obj).setVisibility(0);
+        return null;
+    }
+
+    @Override // com.android.systemui.statusbar.events.SystemStatusAnimationCallback
+    public final SpringAnimatorSet onSystemEventAnimationFinish(boolean z, boolean z2, boolean z3) {
+        Object obj;
+        if (z3 && (obj = this.currentAnimatedView) != null) {
+            ((View) obj).setVisibility(8);
+        }
+        Object obj2 = this.currentAnimatedView;
+        if (obj2 == null) {
+            return null;
+        }
+        this.batteryChipContainer.removeView((View) obj2);
+        return null;
+    }
+}

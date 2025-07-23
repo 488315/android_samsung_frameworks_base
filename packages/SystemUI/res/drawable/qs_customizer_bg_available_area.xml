@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape android:shape="rectangle"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/qs_edit_panel_available_background_color" />
+    <corners android:topLeftRadius="@dimen/qs_edit_available_area_corner_radius" android:topRightRadius="@dimen/qs_edit_available_area_corner_radius" />
+</shape>

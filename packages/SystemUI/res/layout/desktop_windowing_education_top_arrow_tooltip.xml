@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="wrap_content" android:layout_height="wrap_content" android:elevation="1.0dip"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView android:layout_gravity="center_horizontal" android:id="@id/arrow_icon" android:layout_width="12.0dip" android:layout_height="9.0dip" android:src="@drawable/desktop_windowing_education_tooltip_top_arrow" android:elevation="2.0dip" />
+    <include layout="@layout/desktop_windowing_education_tooltip_container" />
+</LinearLayout>

@@ -1,0 +1,71 @@
+package com.android.systemui.facewidget.plugin;
+
+import com.android.systemui.plugins.keyguardstatusview.PluginLockscreenShadeTransitionController;
+import com.android.systemui.plugins.keyguardstatusview.PluginLockscreenShadeTransitionControllerCallback;
+import com.android.systemui.statusbar.LockscreenShadeTransitionController;
+import java.util.HashMap;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public class FaceWidgetLockscreenShadeTransitionControllerWrapper implements PluginLockscreenShadeTransitionController {
+    public final LockscreenShadeTransitionController mController;
+    public final HashMap mHashMap = new HashMap();
+
+    /* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+    public class CallbackWrapper implements LockscreenShadeTransitionController.Callback {
+        public final PluginLockscreenShadeTransitionControllerCallback mCallback;
+
+        public CallbackWrapper(PluginLockscreenShadeTransitionControllerCallback pluginLockscreenShadeTransitionControllerCallback) {
+            this.mCallback = pluginLockscreenShadeTransitionControllerCallback;
+        }
+
+        @Override // com.android.systemui.statusbar.LockscreenShadeTransitionController.Callback
+        public final void onExpansionFinished() {
+            this.mCallback.onExpansionFinished();
+        }
+
+        @Override // com.android.systemui.statusbar.LockscreenShadeTransitionController.Callback
+        public final void onExpansionReset() {
+            this.mCallback.onExpansionReset();
+        }
+
+        @Override // com.android.systemui.statusbar.LockscreenShadeTransitionController.Callback
+        public final void onExpansionStarted() {
+            this.mCallback.onExpansionStarted();
+        }
+
+        @Override // com.android.systemui.statusbar.LockscreenShadeTransitionController.Callback
+        public final void onPulseExpansionFinished() {
+            this.mCallback.onPulseExpansionFinished();
+        }
+
+        @Override // com.android.systemui.statusbar.LockscreenShadeTransitionController.Callback
+        public final void setTransitionToFullShadeAmount(float f, boolean z, long j) {
+            this.mCallback.setTransitionToFullShadeAmount(f, z, j);
+        }
+
+        @Override // com.android.systemui.statusbar.LockscreenShadeTransitionController.Callback
+        public final void setTransitionToFullShadeAmount(float f) {
+            this.mCallback.setTransitionToFullShadeAmount(f);
+        }
+    }
+
+    public FaceWidgetLockscreenShadeTransitionControllerWrapper(LockscreenShadeTransitionController lockscreenShadeTransitionController) {
+        this.mController = lockscreenShadeTransitionController;
+    }
+
+    @Override // com.android.systemui.plugins.keyguardstatusview.PluginLockscreenShadeTransitionController
+    public final void addCallback(PluginLockscreenShadeTransitionControllerCallback pluginLockscreenShadeTransitionControllerCallback) {
+        CallbackWrapper callbackWrapper = new CallbackWrapper(pluginLockscreenShadeTransitionControllerCallback);
+        this.mController.addCallback(callbackWrapper);
+        this.mHashMap.put(pluginLockscreenShadeTransitionControllerCallback, callbackWrapper);
+    }
+
+    @Override // com.android.systemui.plugins.keyguardstatusview.PluginLockscreenShadeTransitionController
+    public final void removeCallback(PluginLockscreenShadeTransitionControllerCallback pluginLockscreenShadeTransitionControllerCallback) {
+        CallbackWrapper callbackWrapper = (CallbackWrapper) this.mHashMap.remove(pluginLockscreenShadeTransitionControllerCallback);
+        if (callbackWrapper != null) {
+            this.mController.removeCallback(callbackWrapper);
+        }
+    }
+}

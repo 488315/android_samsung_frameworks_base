@@ -1,0 +1,63 @@
+package com.android.systemui.qs.tileimpl;
+
+import androidx.compose.animation.FlingCalculator$FlingInfo$$ExternalSyntheticOutline0;
+import androidx.compose.animation.core.CubicBezierEasing$$ExternalSyntheticOutline0;
+import defpackage.ReorderTile$$ExternalSyntheticOutline0;
+
+/* compiled from: qb/97869455 e70885ee4e20e40425471e4b47759369a50273352e1b7033cea52247075b3cbb */
+/* loaded from: classes2.dex */
+public final class QSLongPressProperties {
+    public final int backgroundColor;
+    public final int chevronColor;
+    public final float cornerRadius;
+    public float height;
+    public final int iconColor;
+    public final int labelColor;
+    public final int overlayColor;
+    public final int secondaryLabelColor;
+    public float width;
+
+    public QSLongPressProperties(float f, float f2, float f3, int i, int i2, int i3, int i4, int i5, int i6) {
+        this.height = f;
+        this.width = f2;
+        this.cornerRadius = f3;
+        this.backgroundColor = i;
+        this.labelColor = i2;
+        this.secondaryLabelColor = i3;
+        this.chevronColor = i4;
+        this.overlayColor = i5;
+        this.iconColor = i6;
+    }
+
+    public final boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof QSLongPressProperties)) {
+            return false;
+        }
+        QSLongPressProperties qSLongPressProperties = (QSLongPressProperties) obj;
+        return Float.compare(this.height, qSLongPressProperties.height) == 0 && Float.compare(this.width, qSLongPressProperties.width) == 0 && Float.compare(this.cornerRadius, qSLongPressProperties.cornerRadius) == 0 && this.backgroundColor == qSLongPressProperties.backgroundColor && this.labelColor == qSLongPressProperties.labelColor && this.secondaryLabelColor == qSLongPressProperties.secondaryLabelColor && this.chevronColor == qSLongPressProperties.chevronColor && this.overlayColor == qSLongPressProperties.overlayColor && this.iconColor == qSLongPressProperties.iconColor;
+    }
+
+    public final int hashCode() {
+        return Integer.hashCode(this.iconColor) + ReorderTile$$ExternalSyntheticOutline0.m(this.overlayColor, ReorderTile$$ExternalSyntheticOutline0.m(this.chevronColor, ReorderTile$$ExternalSyntheticOutline0.m(this.secondaryLabelColor, ReorderTile$$ExternalSyntheticOutline0.m(this.labelColor, ReorderTile$$ExternalSyntheticOutline0.m(this.backgroundColor, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.cornerRadius, FlingCalculator$FlingInfo$$ExternalSyntheticOutline0.m(this.width, Float.hashCode(this.height) * 31, 31), 31), 31), 31), 31), 31), 31);
+    }
+
+    public final String toString() {
+        StringBuilder m = CubicBezierEasing$$ExternalSyntheticOutline0.m("QSLongPressProperties(height=", this.height, ", width=", this.width, ", cornerRadius=");
+        m.append(this.cornerRadius);
+        m.append(", backgroundColor=");
+        m.append(this.backgroundColor);
+        m.append(", labelColor=");
+        m.append(this.labelColor);
+        m.append(", secondaryLabelColor=");
+        m.append(this.secondaryLabelColor);
+        m.append(", chevronColor=");
+        m.append(this.chevronColor);
+        m.append(", overlayColor=");
+        m.append(this.overlayColor);
+        m.append(", iconColor=");
+        return ReorderTile$$ExternalSyntheticOutline0.m(this.iconColor, ")", m);
+    }
+}

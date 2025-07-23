@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:gravity="center_horizontal" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <Space android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="6.0" />
+    <TextView android:textAppearance="?textAppearanceMedium" android:textSize="18.0sp" android:gravity="center" android:id="@id/text1" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="32.0sp" android:layout_marginBottom="24.0dip" android:text="@string/shutdown_progress" android:fontFamily="@string/config_headlineFontFamily" android:textDirection="locale" />
+    <TextView android:textAppearance="?textAppearanceLarge" android:textSize="24.0sp" android:gravity="center" android:id="@id/text2" android:layout_width="wrap_content" android:layout_height="32.0sp" android:layout_marginBottom="24.0dip" android:text="@string/shutdown_progress" android:fontFamily="@string/config_headlineFontFamily" android:textDirection="locale" />
+    <ProgressBar android:id="@id/progress" android:layout_width="30.0dip" android:layout_height="30.0dip" style="?progressBarStyleLarge" />
+    <Space android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="10.0" />
+</LinearLayout>

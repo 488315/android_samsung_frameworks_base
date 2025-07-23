@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set android:shareInterpolator="false"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <alpha android:interpolator="@interpolator/standard" android:duration="@integer/config_activityDefaultDur" android:fromAlpha="0.0" android:toAlpha="1.0" />
+    <translate android:interpolator="@interpolator/standard" android:duration="@integer/config_activityDefaultDur" android:fromYDelta="@dimen/popup_enter_animation_from_y_delta" android:toYDelta="0.0" />
+</set>

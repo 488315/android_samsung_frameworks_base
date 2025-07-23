@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:id="@id/clear_cover_header_layout" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginTop="@dimen/clear_cover_subscreen_noti_detail_item_back_icon_top_margin" android:layout_marginBottom="6.0dip" android:layout_marginStart="@dimen/clear_cover_subscreen_noti_list_layout_margin" android:layout_marginEnd="@dimen/clear_cover_subscreen_noti_list_layout_margin"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:gravity="center" android:id="@id/back_key" android:background="@drawable/subscreen_notification_back_button_background" android:padding="4.0dip" android:layout_width="wrap_content" android:layout_height="wrap_content">
+        <ImageView android:layout_width="@dimen/clear_cover_subscreen_noti_detail_item_back_icon_size" android:layout_height="@dimen/clear_cover_subscreen_noti_detail_item_back_icon_size" android:src="@drawable/subscreen_notification_detail_back_button_icon" />
+    </LinearLayout>
+</LinearLayout>

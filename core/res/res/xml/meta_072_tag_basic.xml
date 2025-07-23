@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="5.1">
+    <AppMetaData Name="Tag Basic" TargetApi="28" TargetPackageName="com.samsung.android.service.tagservice" VersionCode="1" VersionName="1.0">
+        <Include RefName="SESL" />
+        <Property Comment="TagEditor Background color" DefaultValue="#fffcfcfc" DestAttribName="tag_editor_background_color" UID="72-5-1" ValueRef="1-9-1" ValueType="BgColor" />
+        <Property Comment="TagEditor Title color" DefaultValue="#ff010101" DestAttribName="tag_editor_title_text_color" UID="72-5-2" ValueRef="1-9-3" ValueType="TextColor" />
+        <Property Comment="TagEditor Title save button color" DefaultValue="#ff010101" DestAttribName="tag_editor_save_btn_text_color" UID="72-5-3" ValueRef="1-A" ValueType="TextColor" />
+        <Property Comment="Tag Chip BG Selected" DefaultValue="#ff0381fe" DestAttribName="tag_editor_candidate_background_color_selected" UID="72-5-4" ValueRef="1-A" ValueType="BgColor" />
+        <Property Comment="Tag Chip Sharp Icon Selected Color" DefaultValue="#fffafafa" DestAttribName="tag_editor_candidate_icon_tint_color_selected" UID="72-5-5" ValueRef="1-E" ValueType="Color" />
+        <Property Comment="Tag Chip Text Selected Color" DefaultValue="#fffafafa" DestAttribName="tag_editor_candidate_text_color_selected" UID="72-5-6" ValueRef="1-E" ValueType="Color" />
+        <Property Comment="Tag Chip BG UnSelected" DefaultValue="#fff0f0f0" DestAttribName="tag_editor_candidate_background_color_unselected" UID="72-5-7" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Tag Chip Sharp Icon UnSelected Color" DefaultValue="#ff2f2f2f" DestAttribName="tag_editor_candidate_icon_tint_color_unselected" UID="72-5-9" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="Tag Chip Text UnSelected Color" DefaultValue="#ff2f2f2f" DestAttribName="tag_editor_candidate_text_color_unselected" UID="72-5-10" ValueRef="1-3-1" ValueType="Color" />
+        <Property Comment="TagEditor Input BG stroke color" DefaultValue="#ff252525" DestAttribName="tag_editor_input_background_stroke_color" UID="72-5-11" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="TagEditor Input Sharp icon color" DefaultValue="#ff2f2f2f" DestAttribName="tag_editor_input_sharp_color" UID="72-5-12" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="TagEditor Input Hint text color" DefaultValue="#ff8c8c8c" DestAttribName="tag_editor_input_hint_text_color" UID="72-5-13" ValueRef="24-D" ValueType="TextColor" />
+        <Property Comment="TagEditor Input text color" DefaultValue="#ff252525" DestAttribName="tag_editor_input_text_color" UID="72-5-14" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="TagEditor cursor color" DefaultValue="#ff0381fe" DestAttribName="tag_editor_input_cursor_color" UID="72-5-15" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="TagEditor Add BG circle" DefaultValue="#ff0381fe" DestAttribName="tag_editor_input_add_background_color" UID="72-5-16" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="TagEditor Add icon color" DefaultValue="#fffafafa" DestAttribName="tag_editor_input_add_btn_color" UID="72-5-17" ValueRef="1-E" ValueType="Color" />
+        <Property Comment="TagEditor Progress circle color 1" DefaultValue="#ff06b485" DestAttribName="tag_editor_progress_color_1" UID="72-5-18-1" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="TagEditor Progress circle color 2" DefaultValue="#ff0381fe" DestAttribName="tag_editor_progress_color_2" UID="72-5-18-2" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="TagEditor Suggestion matched text color" DefaultValue="#ff0072de" DestAttribName="tag_editor_input_autocomplete_item_title_highlight" UID="72-6-2" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="TagEditor Suggestion text color" DefaultValue="#ffababab" DestAttribName="tag_editor_input_autocomplete_item_title" UID="72-6-3" ValueRef="24-A" ValueType="Color" />
+        <Property Comment="TagEditor Suggestion background color" DefaultValue="#fffcfcfc" DestAttribName="tag_editor_auto_complete_background_color" UID="72-6-4" ValueRef="1-9-1" ValueType="Color" />
+        <Property Comment="TagEditor Suggestion background stroke color" DefaultValue="#26000000" DestAttribName="tag_editor_auto_complete_background_stroke_color" UID="72-6-5" ValueRef="1-C" ValueType="Color" />
+    </AppMetaData>
+</ThemeMetaData>

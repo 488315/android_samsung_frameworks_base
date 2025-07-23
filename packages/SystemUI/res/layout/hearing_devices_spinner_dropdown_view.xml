@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="@dimen/bluetooth_dialog_device_height" android:paddingStart="@dimen/hearing_devices_preset_spinner_padding" android:paddingEnd="@dimen/hearing_devices_preset_spinner_padding"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:androidprv="http://schemas.android.com/apk/prv/res/android">
+    <ImageView android:layout_gravity="center_vertical" android:id="@id/hearing_devices_spinner_check_icon" android:layout_width="@dimen/hearing_devices_preset_spinner_icon_size" android:layout_height="@dimen/hearing_devices_preset_spinner_icon_size" android:src="@drawable/ic_check" android:tint="@android:color/red" android:contentDescription="@string/hearing_devices_spinner_item_selected" android:layout_marginEnd="@dimen/hearing_devices_layout_margin" />
+    <TextView android:ellipsize="end" android:layout_gravity="center_vertical" android:id="@id/hearing_devices_spinner_text" android:layout_width="fill_parent" android:layout_height="wrap_content" android:maxLines="1" android:textDirection="locale" android:paddingStart="0.0dip" style="?android:spinnerDropDownItemStyle" />
+</LinearLayout>

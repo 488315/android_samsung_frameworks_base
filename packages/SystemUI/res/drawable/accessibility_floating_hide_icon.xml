@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:gravity="center" android:height="16.0dip" android:width="16.0dip">
+        <bitmap android:src="@drawable/accessibility_icon" android:tint="@color/accessibility_floating_menu_hide_icon" />
+    </item>
+</layer-list>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ThemeMetaData FormatVersion="1.3" GuideVersion="1.4">
+    <AppMetaData Name="SPlanner" TargetApi="21" TargetPackageName="com.samsung.android.opencalendar" VersionCode="1" VersionName="">
+        <Include RefName="SESL" />
+        <Property Comment="Primary color" DefaultValue="#ff1bbc00" DestAttribName="primary" UID="16_1-A" ValueRef="1-A" ValueType="Color" />
+        <Property Comment="Primary dark color" DefaultValue="#ff18a900" DestAttribName="primary_dark" UID="16_1-B" ValueRef="24-E" ValueType="Color" />
+        <Property Comment="Common component color" DefaultValue="#cc8f8f8f" DestAttribName="color_common_component" UID="16_1-C" ValueRef="1-C" ValueType="Color" />
+        <Property Comment="Color control activated" DefaultValue="" DestAttribName="color_control_activated" UID="16_1-D" ValueRef="1-D" ValueType="Color" />
+        <Property Comment="Linked color(Action bar background) : Common > Action bar &amp; Content area > Action bar background color. Action bar background color" DefaultValue="#fffafafa" DestAttribName="common_actionbar_background_color" UID="16_1-9-1" ValueRef="1-1-1" ValueType="BgColor" />
+        <Property Comment="Action bar back icon tint color" DefaultValue="#ff1bbc00" DestAttribName="common_back_icon_tint_color" UID="16_1-9-2" ValueRef="1-1-3" ValueType="TintColor" />
+        <Property Comment="Action bar back icon tint color" DefaultValue="#ff1bbc00" DestAttribName="common_actionbar_back_icon_tint_color" UID="16_1-14-4" ValueRef="1-11-3" ValueType="TintColor" />
+        <Property Comment="Toolbar Title" DefaultValue="#ff252525" DestAttribName="common_actionbar_toolbar_title_color" UID="16_1-9-3" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Toolbar Action Search and Notice" DefaultValue="#ff252525" DestAttribName="common_actionbar_search_icon_tint_color" UID="16_1-9-4" ValueRef="1-1-3" ValueType="BgColor" />
+        <Property Comment="Action bar back icon image" DefaultValue="" DestAttribName="actionbar_back_icon" DestQualifiers="sw360dp-xxxhdpi" UID="16_1-14-5" ValueRef="1-11-4" ValueType="Image" />
+        <Property Comment="Recommended Calendars Textview" DefaultValue="#ff858585" DestAttribName="subscription_popular_text_color" UID="16_1-12-2" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Title Populars Item Name" DefaultValue="#ff252525" DestAttribName="subscription_calendar_title_text_color" UID="16_1-13-2" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Holder Category Header" DefaultValue="#ff858585" DestAttribName="holder_category_header" UID="16_1-14-2" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Background Color Not Subscribe" DefaultValue="#ff00a884" DestAttribName="category_detail_background_not_sub_container" UID="16_1-16-1" ValueRef="1-8-1" ValueType="BgColor" />
+        <Property Comment="Background Icon Tint Color Not Subscribe" DefaultValue="#fffafafa" DestAttribName="list_calendar_sub_add_tint" UID="16_1-16-3" ValueRef="1-8-3" ValueType="BgColor" />
+        <Property Comment="Background Color stroke Subscribe" DefaultValue="#ff00a884" DestAttribName="category_detail_stroke_sub" UID="16_1-17-1" ValueRef="1-8-1" ValueType="BgColor" />
+        <Property Comment="Background Icon Tint Color Not Subscribe" DefaultValue="#ff00a884" DestAttribName="list_calendar_sub_favorite_tint" UID="16_1-17-3" ValueRef="1-8-1" ValueType="BgColor" />
+        <Property Comment="Change Tab Background color" DefaultValue="#fff6f6f6" DestAttribName="common_actionbar_tab_background_color" UID="16_1-11-1" ValueRef="1-12-1" ValueType="BgColor" />
+        <Property Comment="Text Color Of Unselected Tab" DefaultValue="#b2767676" DestAttribName="common_actionbar_tab_unselected_text_color" UID="16_1-11-3" ValueRef="1-12-3" ValueType="TextColor" />
+        <Property Comment="Text Color Of Selected Tab" DefaultValue="#ff18a900" DestAttribName="common_actionbar_tab_selected_text_color" UID="16_1-11-4" ValueRef="1-12-4" ValueType="TextColor" />
+        <Property Comment="Change Line Color Of Selected Tab" DefaultValue="#ff18a900" DestAttribName="common_actionbar_tab_indicator_selected_color" UID="16_1-11-5" ValueRef="1-12-5" ValueType="TintColor" />
+        <Property Comment="Selected Tab Image Of Selected Tab" DefaultValue="" DestAttribName="common_actionbar_tab_indicator_selected" DestQualifiers="sw360dp-xxxhdpi" POption="NinePatch" UID="16_1-11-6" ValueRef="1-12-6" ValueType="BgImage" />
+        <Property Comment="Main text color" DefaultValue="#ff252525" DestAttribName="subscription_event_title_list_color" UID="16_1-10-2" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Sub text color" DefaultValue="#ff909090" DestAttribName="subscription_category_list_item_sub_name_color" UID="16_1-10-3" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Divider" DefaultValue="#ffe6e6e6" DestAttribName="common_divider_list_item_color" UID="16_1-10-4" ValueRef="1-2" ValueType="BgColor" />
+        <Property Comment="Background Color Category List" DefaultValue="#fffafafa" DestAttribName="default_window_background_color" UID="16_1-10-1" ValueRef="1-18-1" ValueType="BgColor" />
+        <Property Comment="Powered Text Color" DefaultValue="#80252525" DestAttribName="category_detail_power_by_text_color" UID="16_1-14-3" ValueRef="1-1-4" ValueType="TextColor" />
+        <Property Comment="Color Picker Background color" DefaultValue="#fffcfcfc" DestAttribName="common_dropdown_list_background_color" UID="16_1-106-1" ValueRef="1-9-1" ValueType="BgColor" />
+        <Property Comment="Color Picker Background Stroke color" DefaultValue="#ffcccccc" DestAttribName="common_dropdown_list_stroke_color" UID="16_1-106-2" ValueRef="1-C" ValueType="BgColor" />
+        <Property Comment="Calendar detail title Color" DefaultValue="#ff333333" DestAttribName="calendar_detail_calendar_title_color" UID="16_1-20-1" ValueRef="1-1-3" ValueType="TextColor" />
+        <Property Comment="Sub Calendar detail title Color" DefaultValue="#ff666666" DestAttribName="calendar_detail_calendar_number_events_color" UID="16_1-20-2" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Background button Subscribe" DefaultValue="#ff00a884" DestAttribName="background_detail_button_sub_check" UID="16_1-20-3" ValueRef="1-8-1" ValueType="BgColor" />
+        <Property Comment="Text color button Subscribe" DefaultValue="#ffffffff" DestAttribName="detail_btn_un_sub_text_color" UID="16_1-20-4" ValueRef="1-8-3" ValueType="TextColor" />
+        <Property Comment="Icon color button Subscribe" DefaultValue="#fffafafa" DestAttribName="calendar_sub_add_tint" UID="16_1-20-8" ValueRef="1-8-3" ValueType="BgColor" />
+        <Property Comment="Subscribed Icon tint color" DefaultValue="#ff00a884" DestAttribName="calendar_sub_favorite_tint" UID="16_1-20-6" ValueRef="1-8-1" ValueType="BgColor" />
+        <Property Comment="Subscribed button text color" DefaultValue="#ff00a884" DestAttribName="detail_btn_sub_check_text_color" UID="16_1-20-7" ValueRef="1-8-1" ValueType="TextColor" />
+        <Property Comment="Time header text color" DefaultValue="#ff858585" DestAttribName="calendar_detail_sub_header_title_color" UID="16_1-21-2" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Divider line color" DefaultValue="#ff979797" DestAttribName="sub_header_divider_color" UID="16_1-21-3" ValueRef="1-3-2" ValueType="BgColor" />
+        <Property Comment="Time text color" DefaultValue="#ff909090" DestAttribName="subscription_event_time_list_color" UID="16_1-21-4" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Result Input Text color" DefaultValue="#ff252525" DestAttribName="common_list_item_main_text_color" UID="16_1-26-2" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Span Input Text color" DefaultValue="#ff009e7c" DestAttribName="list_calendar_span_text_color" UID="16_1-26-3" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="Welcome Title Color" DefaultValue="#ff00927c" DestAttribName="welcome_title_color" UID="16_1-107-3" ValueRef="24-E" ValueType="TextColor" />
+        <Property Comment="Welcome Subscription Intro Color" DefaultValue="#ff505050" DestAttribName="welcome_subscription_intro_color" UID="16_1-107-4" ValueRef="1-3-3" ValueType="TextColor" />
+        <Property Comment="Welcome Url Text Link Color" DefaultValue="#ff3b3b3b" DestAttribName="welcome_url_text_color" UID="16_1-107-5" ValueRef="1-3-4" ValueType="TextColor" />
+        <Property Comment="Common button background color" DefaultValue="#0f000000" DestAttribName="welcome_cancel_background_button_color" UID="16_1-107-6" ValueRef="1-7-1" ValueType="TextColor" />
+        <Property Comment="Welcome Cancel Text Button Color" DefaultValue="#ff252525" DestAttribName="welcome_cancel_text_button_color" UID="16_1-107-7" ValueRef="1-7-2" ValueType="TextColor" />
+        <Property Comment="Welcome Agree Background Text Button Color" DefaultValue="#ff009e7c" DestAttribName="welcome_agree_background_button_color" UID="16_1-107-8" ValueRef="1-A" ValueType="TextColor" />
+        <Property Comment="Welcome Agree Text Button Color" DefaultValue="#fffafafa" DestAttribName="welcome_agree_text_button_color" UID="16_1-107-9" ValueRef="1-E" ValueType="TextColor" />
+        <Property Comment="Welcome List Option Color" DefaultValue="#ff505050" DestAttribName="welcome_list_option_color" UID="16_1-107-11" ValueRef="1-3-1" ValueType="TextColor" />
+        <Property Comment="Welcome Optional Color" DefaultValue="#ff848383" DestAttribName="welcome_optional_text_color" UID="16_1-107-12" ValueRef="1-3-2" ValueType="TextColor" />
+        <Property Comment="badge background tint color" DefaultValue="#fff56a0d" DestAttribName="badge_background" UID="16_1-27-1" ValueRef="1-33-1" ValueType="BgColor" />
+        <Property Comment="badge background image" DefaultValue="" DestAttribName="common_badge_background" DestQualifiers="sw360dp-xxxhdpi" UID="16_1-27-2" ValueRef="1-33-2" ValueType="Image" />
+        <Property Comment="badge text color" DefaultValue="#fffafafa" DestAttribName="common_badge_text_color" UID="16_1-27-3" ValueRef="1-33-3" ValueType="TextColor" />
+        <Property Comment="No event text color" DefaultValue="#ad252525" DestAttribName="common_empty_text_color,common_no_item_text_color" UID="16_1-36-3" ValueRef="1-53-2" ValueType="TextColor" />
+    </AppMetaData>
+</ThemeMetaData>
